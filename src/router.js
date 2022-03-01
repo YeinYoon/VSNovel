@@ -10,7 +10,6 @@ import MainBoard from './components/board/MainBoard.vue';
 import Posting from './components/board/Posting.vue';
 import PostInfo from './components/board/PostInfo.vue';
 
-
 const routes = [
   {
     path:"/",
