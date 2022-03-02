@@ -14,9 +14,19 @@
 </template>
 
 <script>
-
+import axios from 'axios';
 export default {
   name: 'App',
+  created() {
+    axios.post('/api/user/test', {id:123, pw:123})
+    .then((result)=>{
+      console.log("DB접근 및 접속 성공");
+      console.log(result);
+    })
+    .catch((err)=>{
+      console.log(err);
+    })
+  },
   data() {
     return {
       isLogin : false,
