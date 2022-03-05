@@ -2,7 +2,7 @@
   <div>
 
 
-    <h1 class="text-center">대충 뭐시기 게시판</h1>
+    <h1 class="text-center">테스트 게시판</h1>
 
     <div id="mainTable">
       <table class="table table-hover table-striped text-center" style="1px solid;">
