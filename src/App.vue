@@ -4,7 +4,7 @@
     <div id="bar">
     <router-link to="/" id="main">메인으로</router-link>
     <h5 class="text-center">테스트 메인바</h5>
-    <div v-if="isLogin == true" class="userName">{{userName}}</div>
+    <div v-if="isLogin == true" class="userName">{{user.USER_NICKNAME}}</div>
     <div v-else class="userName">로그인이 필요합니다</div>
 
     </div>
