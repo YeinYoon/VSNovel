@@ -47,6 +47,7 @@ export default {
             .then((result)=>{
                 if(result.data=='ok') {
                     alert("로그아웃 되었습니다.");
+                    this.$store.commit('userLogin', null);
                 } else {
                     console.log(result);
                     alert(result.data);

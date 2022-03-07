@@ -4,9 +4,8 @@
     <div id="bar">
     <router-link to="/" id="main">메인으로</router-link>
     <h5 class="text-center">테스트 메인바</h5>
-    <div v-if="isLogin == true" class="userName">{{user.USER_NICKNAME}}</div>
+    <div v-if="$store.state.userNickname != null " class="userName">{{$store.state.userNickname}}</div>
     <div v-else class="userName">로그인이 필요합니다</div>
-
     </div>
 
     <router-view></router-view>
@@ -22,8 +21,7 @@ export default {
   },
   data() {
     return {
-      isLogin : false,
-      userName : null
+
     }
   },
   components: {

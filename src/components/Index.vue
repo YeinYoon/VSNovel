@@ -1,6 +1,6 @@
 <template>
     <div id="page">
-        VSNovel 테스트 페이지임 <br>
+        VSNovel 테스트 페이지 <br>
         <router-link to="/signup">회원가입</router-link> <br>
         <router-link to="/signin">로그인</router-link> <br>
         <router-link to="/board">게시판</router-link>
@@ -8,12 +8,18 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
   name : "Index",
-  data() {
-    return {
-      
-    }
+  created() {
+    axios.get('/api/auth/loginCheck')
+    .then((result)=>{
+      console.log(result);
+      this.$store.commit('userLogin', result.data.USER_NICKNAME);
+    })
+    .catch((err)=>{
+      console.error(err);
+    })
   }
 }
 </script>
