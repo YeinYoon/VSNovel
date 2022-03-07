@@ -1,7 +1,7 @@
 <template>
     <div class="container mt-3">
         <div class="mb-3">
-            <input type="email" class="form-control" placeholder="email" v-model="email">
+            <input type="text" class="form-control" placeholder="id" v-model="id">
         </div>
         <div class="mb-3">
             <input type="password" class="form-control" placeholder="pw" v-model="pw">
@@ -12,25 +12,49 @@
 </template>
 
 <script>
+import axios from 'axios';
 export default {
     name:"Login",
     data(){
         return {
-            email : "",
+            id : "",
             pw : ""
         }
     },
     methods : {
         login() {
-            alert(`${this.email}, ${this.pw}`);
-
-            //window.location.href = '/';
+            var loginData = {
+                id : this.id,
+                pw : this.pw
+            }
+            axios.post('/api/auth/login', loginData)
+            .then((result)=>{
+                if(result.data=='ok') {
+                    alert("로그인되었습니다.");
+                    this.$router.push('/');
+                } else {
+                    console.log(result);
+                    alert(result.data);
+                }
+            })
+            .catch((err)=>{
+                console.error(err);
+            })
         },
 
         logout(){
-            alert('로그아웃 버튼 눌림');
-
-            //window.location.href = '/';
+            axios.get('/api/auth/logout')
+            .then((result)=>{
+                if(result.data=='ok') {
+                    alert("로그아웃 되었습니다.");
+                } else {
+                    console.log(result);
+                    alert(result.data);
+                }
+            })
+            .catch((err)=>{
+                console.error(err);
+            })
         }
     }
 }
