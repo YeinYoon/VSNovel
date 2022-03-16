@@ -25,16 +25,13 @@
     <div class="mb-3">
       <input type="text" class="form-control" placeholder="phone" v-model="newPhone">
     </div>
-    <div class="mb-3">
-      <input type="text" class="form-control" placeholder="cardnum" v-model="newCardnum">
-    </div>
     
     <button class="btn btn-primary" @click="signup()">가입하기</button>
  </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from '../../axios';
 export default {
   name:"Signup",
   data() {
@@ -45,8 +42,7 @@ export default {
       newNickname : "",
       newName : "",
       newSex : "M",
-      newPhone : "",
-      newCardnum : ""
+      newPhone : ""
     }
   },
   methods : {
@@ -59,13 +55,14 @@ export default {
         newName : this.newName,
         newSex : this.newSex,
         newPhone : this.newPhone,
-        newCardnum : this.newCardnum
+        newCardnum : null
       }
 
       axios.post('/api/auth/signUp', newUser)
       .then((result)=>{
         if(result.data == 'ok') {
           alert('회원가입 완료');
+          this.$router.push('/');
         } else {
           alert(result.data);
         }

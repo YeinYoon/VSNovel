@@ -6,13 +6,12 @@
         <div class="mb-3">
             <input type="password" class="form-control" placeholder="pw" v-model="pw">
         </div>
-        <button class="btn btn-primary" @click="login()">로그인</button> <br><br>
-        <button class="btn btn-primary" @click="logout()">로그아웃</button>
+        <button class="btn btn-primary" @click="login()">로그인</button>
     </div>
 </template>
 
 <script>
-import axios from 'axios';
+import axios from '../../axios';
 export default {
     name:"Login",
     data(){
@@ -32,22 +31,6 @@ export default {
                 if(result.data=='ok') {
                     alert("로그인되었습니다.");
                     this.$router.push('/');
-                } else {
-                    console.log(result);
-                    alert(result.data);
-                }
-            })
-            .catch((err)=>{
-                console.error(err);
-            })
-        },
-
-        logout(){
-            axios.get('/api/auth/logout')
-            .then((result)=>{
-                if(result.data=='ok') {
-                    alert("로그아웃 되었습니다.");
-                    this.$store.commit('userLogin', null);
                 } else {
                     console.log(result);
                     alert(result.data);
