@@ -10,7 +10,7 @@
       </div>
       <br>
       <div v-bind:class="{'menubox':true}">
-          <img class="menubox_icon_store" src="@/assets/icons/white/shopping-cart.png">
+          <img class="menubox_icon_store" src="@/assets/icons/white/shopping-cart.png" @click="routerPush('/store')">
       </div>
       <br>
       <div v-bind:class="{ active: isActive, 'menubox':true }">
@@ -26,7 +26,7 @@
       </div>
       <br>
       <div v-bind:class="{'menubox':true}">
-        <img class="menubox_icon_mainscreen" src="@/assets/icons/white_logo.png">
+        <img class="menubox_icon_mainscreen" src="@/assets/icons/white_logo.png" @click="routerPush('/')">
       </div>
     </div>
   </div>
@@ -39,14 +39,12 @@
       return{
       }
     },
-    // methods:{
-    //   routerPush(link){
-    //     // this.$router.push(link);
-    //     this.$router.push(link).catch(()=>{});
-    //     console.log(this.$router.push('store'));
+    methods:{
+      routerPush(link){
+        this.$router.push(link);
 
-    //   }
-    // }
+      }
+    }
   }
 </script>
 

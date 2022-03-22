@@ -109,9 +109,6 @@ export default {
     transform: translateY(10%);
     border: none;
 }
-.lines{
-    margin: 10px 0 15px 0;
-}
 .community .list{
     background-color: #353535;
     border-radius: 10px;

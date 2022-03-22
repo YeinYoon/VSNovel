@@ -22,7 +22,7 @@
         <Com />
       </div>
     </div>
-    <hr>
+    <hr class="lines">
     <div class="footer">
         <span>한국장학재단 콜센터 1599-2000
         <br>ARS 기부 (한통화에 2,000원이 기부됩니다.) 060-700-1003 평일 09:00 ~ 18:00
@@ -50,6 +50,11 @@ export default {
 </script>
 
 <style>
+
+.lines{
+    margin: 10px 0 15px 0;
+    border: 1px solid white;
+}
 .main {
   width: 90%;
   position: fixed;

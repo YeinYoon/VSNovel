@@ -3,6 +3,8 @@
   <div v-bind:class="{'contentbackground':true}">
     <excomp v-bind:class="{'excomp':true}">
     </excomp>
+    
+    <router-view></router-view>
   </div>
 </div>
 

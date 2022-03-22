@@ -3,14 +3,15 @@
     <!-- <Store /> -->
     <Vsnmenu v-bind:class="{'vsnmenu':true}"></Vsnmenu>
     <!-- <vsnside v-bind:class="{'vsnside':true}"></vsnside> -->
-    <Vsncontent v-bind:class="{'vsncontent':true}"></Vsncontent>
+    <!-- <Vsncontent v-bind:class="{'vsncontent':true}"></Vsncontent> -->
+    <router-view></router-view>
   </div>
 </template>
 
 <script>
 import Vsnmenu from './components/Menu';
 // import vsnside from './components/Side';
-import Vsncontent from './components/Content';
+// import Vsncontent from './components/Content';
 export default {
   name: "App",
   components: {
@@ -18,7 +19,7 @@ export default {
     // Store,
     Vsnmenu,
     // vsnside,
-    Vsncontent,
+    // Vsncontent,
   },
 };
 </script>
