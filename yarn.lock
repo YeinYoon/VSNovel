@@ -10084,7 +10084,7 @@
   "resolved" "https://registry.npmjs.org/vue-template-es2015-compiler/-/vue-template-es2015-compiler-1.9.1.tgz"
   "version" "1.9.1"
 
-"vue@^2 || ^3.0.0-0", "vue@^3.0.0", "vue@^3.0.2", "vue@3.2.29":
+"vue@^2 || ^3.0.0-0", "vue@^3.0.0", "vue@^3.0.2", "vue@^3.2.0", "vue@3.2.29":
   "integrity" "sha512-cFIwr7LkbtCRanjNvh6r7wp2yUxfxeM2yPpDQpAfaaLIGZSrUmLbNiSze9nhBJt5MrZ68Iqt0O5scwAMEVxF+Q=="
   "resolved" "https://registry.npmjs.org/vue/-/vue-3.2.29.tgz"
   "version" "3.2.29"
@@ -10094,6 +10094,11 @@
     "@vue/runtime-dom" "3.2.29"
     "@vue/server-renderer" "3.2.29"
     "@vue/shared" "3.2.29"
+
+"vue3-carousel@^0.1.36":
+  "integrity" "sha512-e1wDM9wmzy+hFrBaoJXXRTmsiZ1Q71p646MgZ75qC3NlymbigYwqlKewj0cNWslC0Q9gXEieIwIbNJO71Ydesw=="
+  "resolved" "https://registry.npmjs.org/vue3-carousel/-/vue3-carousel-0.1.36.tgz"
+  "version" "0.1.36"
 
 "vuex@^4.0.2":
   "integrity" "sha512-M6r8uxELjZIK8kTKDGgZTYX/ahzblnzC4isU1tpmEuOIIKmV+TRdc+H4s8ds2NuZ7wpUTdGRzJRtoj+lI+pc0Q=="
