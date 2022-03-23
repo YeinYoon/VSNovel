@@ -3,10 +3,10 @@
     <div class="test">
         <div class="header">
             <div class="service">
-                <img class="icon" src="../../assets/icons/cart.png" alt="logo"/>
+                <img class="icon" src="../../assets/icons/white/shopping-cart.png" alt="logo"/>
                 <span class="title">스토어</span>
             </div>
-            <div class="price_div" v-if="num">
+            <div class="price_div">
                 <div @click="priceClick">
                     <div class="price" v-if="step == 0">
                         <span class="free">무료</span>
@@ -60,9 +60,6 @@ export default {
             dataHuman : dataHu
         }
     },
-    props:{
-        num:Boolean,
-    },
     components:{
         StoreModal,
     },
@@ -80,13 +77,12 @@ export default {
 </script>
 
 <style>
-.test{
-    /* background-color: #353535; */
-    padding: 0 0 5px 0;
-}
 /* price_div 위치 잡는 div /  price 전체 div / 
     free 무료 / price_btn 버튼 /charge 유료*/
 .price_div{
+    position:absolute;
+    left: calc(100% - 160px);
+    top: 100px;
     height: 30px;
 }
 .price{
@@ -111,7 +107,7 @@ export default {
     text-align: center;
     font-size: 18px;
     top: 50%;
-    transform : translateY(20%);
+    transform : translateY(16%);
     color: black;
 }
 /* work_list 작품 전체 div / list_img 작품 이미지 / 
@@ -122,6 +118,7 @@ export default {
     margin: 50px 10px;
     border-radius: 20px;
     height: 125px;
+    top: 80px;
     display: flex;
     flex-direction: row;
     position: relative;

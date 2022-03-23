@@ -9,8 +9,8 @@
         <img class="menubox_icon_library" src="@/assets/icons/white/library.png">
       </div>
       <br>
-      <div v-bind:class="{'menubox':true}">
-          <img class="menubox_icon_store" src="@/assets/icons/white/shopping-cart.png" @click="routerPush('/store')">
+      <div v-bind:class="{'menubox':true}"  @click="routerPush('/store')">
+          <img class="menubox_icon_store" src="@/assets/icons/white/shopping-cart.png">
       </div>
       <br>
       <div v-bind:class="{ active: isActive, 'menubox':true }">
@@ -25,8 +25,8 @@
         <img class="menubox_icon_notice" src="@/assets/icons/white/megaphone.png">
       </div>
       <br>
-      <div v-bind:class="{'menubox':true}">
-        <img class="menubox_icon_mainscreen" src="@/assets/icons/white_logo.png" @click="routerPush('/')">
+      <div v-bind:class="{'menubox':true}"  @click="routerPush('/')">
+        <img class="menubox_icon_mainscreen" src="@/assets/icons/white_logo.png">
       </div>
     </div>
   </div>
@@ -41,8 +41,7 @@
     },
     methods:{
       routerPush(link){
-        this.$router.push(link);
-
+          this.$router.push(link);
       }
     }
   }
@@ -71,6 +70,7 @@
   width: 75px;
   height: 75px;
   border-radius: 20px;
+  cursor: pointer;
 }
 .menubox:hover{
   background: #5a5a5a;

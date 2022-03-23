@@ -1,4 +1,5 @@
 <template>
+
   <!-- 로고쪽 -->
             <div class="header">
                 <div class="service">
@@ -25,7 +26,9 @@
                         </div>
                         <div class="modal_explain_down">
                             <span class="down_con">설명</span>
-                            <span class="down_data">{{datas[num].content}}</span>
+                            <div class="down_data">
+                                <span class="down_data_text">{{datas[num].content}}</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -76,7 +79,8 @@ export default {
 .carousel_div{
     padding: 10px;
     width: 100%;
-    z-index: 2;
+    position: relative;
+    height: 200px;
 }
 
 /* 모달 전체 */
@@ -85,10 +89,14 @@ export default {
     display: flex;
     flex-direction: row;
     padding: 10px 0 0 0;
+    position: absolute;
+    width: calc(100% - 50px);
+    height: calc(100% - 200px);
 }
 .left_con{
     padding-right: 15px;
     width: 100%;
+    position: relative;
 }
 /* 제목이랑 작가 */
 .modal_header{
@@ -114,13 +122,16 @@ export default {
     flex-direction: column;
     margin: 10px;
     font-size: 1.1em;
-    z-index: 1;
-    transform: translateY(-30%);
+    position: absolute;
+    width: 100%;
+    height: calc(100% - 200px);
+
 }
 /* 설명 윗부분 ( 장르 ) */
 .modal_explain_up{
     width: 50%;
     margin: 30px 0 0 0;
+    position: absolute;
 }
 /* 윗부분 고정 글 */
 /* .up_con{
@@ -133,29 +144,34 @@ export default {
     padding: 5px 10px;
     background-color: gray;
     border-radius: 20px;
+    position: absolute;
 }
 /* 설명 아래 ( 설명 ) */
 .modal_explain_down{
     width: 100%;
-    margin: 20px 0;
+    position: absolute;
+    top: 90px;
+    height: 80%;
 }
 /* 설명 부분 고정 글 */
 .down_con{
     vertical-align: top;
+    width: 10%;
 }
 /* 설명 데이터바인딩 */
 .down_data{
     font-size: 0.9em;
     flex: 9;
     margin: 0 10px;
+    width: 93.5%;
     display: inline-block;
-    width: 80%;
-    height: 150px;
     padding: 5px 10px;
     background-color: gray;
     border-radius: 20px;
-    overflow: scroll;
+    overflow: auto;
     -ms-overflow-style: none;
+    position: absolute;
+    height: 100%
 }
 .down_data::-webkit-scrollbar{ 
     display:none; 
@@ -165,14 +181,15 @@ export default {
 .right{
     padding: 0 0 0 5px;
     width: 30%;
+    height: 100%;
 }
 /* 오른쪽 사진 ( 표지 ) */
 .right_img{
     width: 100%;
-    height: 300px;
+    /* min-height: 70%; */
+    height: 70%;
     border-radius: 20px;
     padding: 0 0 5px 2px;
-    object-fit: cover;
 }
 /* 오른쪽 작은 회색 박스 */
 .right_con{
@@ -181,7 +198,7 @@ export default {
     padding: 10px 5px;
     font-size: 0.8em;
     margin: 10px 0 0 0;
-    height: 100px;
+    height: 35%;
 }
 /* 데이터 바인딩 부분 */
 .right_data{
@@ -198,11 +215,8 @@ export default {
 }
 /* 가격 버튼 */
 .price_btn{
-    margin: auto;
     background-color: #2872f9;
     border-radius: 20px;
-    flex: 1;
-    float: right;
     text-align: center;
     display: table;
 }

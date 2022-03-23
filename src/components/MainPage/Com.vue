@@ -19,7 +19,7 @@
             </div>
         </div>
         
-        <hr class="line">
+        <div class="line"> </div>
 
         <div class="size">
             <div class="notice">
@@ -40,7 +40,7 @@
         <div class="store">
             <div class="header">
                 <div class="service" style="background:${}">
-                    <img class="icon" src="../../assets/icons/white/cart.png" alt="logo"/>
+                    <img class="icon" src="../../assets/icons/white/shopping-cart.png" alt="logo"/>
                     <span class="title">스토어</span>
                 </div>
             </div>
@@ -85,12 +85,12 @@ export default {
     flex-wrap: wrap;
 }
 .size{
-    background-color: #5e5e5e;
-    padding: 5px 10px;
+    background-color: #494949;
     flex: 4;
     height: 300px;
     padding: 5px 10px;
     border-radius: 20px;
+    margin: 20px 0;
 }
 .notice, .community {
     height: 95%;
@@ -103,8 +103,8 @@ export default {
 .line {
     width: 5px;
     margin: 0 20px;
-    background-color: #5e5e5e;
-    height: 250px;
+    background-color: #494949;
+    height: 280px;
     border-radius: 20px;
     transform: translateY(10%);
     border: none;
@@ -167,10 +167,10 @@ export default {
 }
 
 .store {
-    margin: 30px 0 100px 0;
-    width: 98%;
+    margin: 30px 0 30px 0;
+    width: 100%;
     height: 300px;
-    background-color: #5e5e5e;
+    background-color: #494949;
     padding: 5px 10px;
     border-radius: 20px;
 

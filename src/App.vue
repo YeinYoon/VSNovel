@@ -1,10 +1,11 @@
 <template>
 <div class="content">
-    <!-- <Store /> -->
     <Vsnmenu v-bind:class="{'vsnmenu':true}"></Vsnmenu>
     <!-- <vsnside v-bind:class="{'vsnside':true}"></vsnside> -->
     <!-- <Vsncontent v-bind:class="{'vsncontent':true}"></Vsncontent> -->
-    <router-view></router-view>
+    <div class="vsncontainer">
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -15,8 +16,6 @@ import Vsnmenu from './components/Menu';
 export default {
   name: "App",
   components: {
-    // SwiperCarousel: SwiperCarouselVue,
-    // Store,
     Vsnmenu,
     // vsnside,
     // Vsncontent,
@@ -30,6 +29,8 @@ body{
   font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
   font-weight: 500;
   margin : 0px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 .vsnmenu {
   width: 140px;
@@ -37,9 +38,8 @@ body{
   height: 100vh;
   left: 0px;
   overflow: auto;
-  
 }
-.vsnside {
+/* .vsnside {
   position:fixed;
   width: 305px;
   left: 140px;
@@ -51,6 +51,14 @@ body{
   width: calc(100vw - 140px); 
   left: 140px;
   height: 100vh;
+  overflow: auto;
+} */
+.vsncontainer{
+  background: #353535;
+  position: fixed;
+  width: calc(100vw - 140px);
+  height: 100vh;
+  left: 140px;
   overflow: auto;
 }
 </style>

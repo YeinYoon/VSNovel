@@ -63,8 +63,8 @@ div{
     box-sizing: border-box;
 }
 .modal_background{
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
     background-color: rgba(255, 255, 255, 0.1);
     position:fixed;
     display:inline-block; 
@@ -75,8 +75,8 @@ div{
     overflow: hidden;
 }
 .modal_style{
-    width: 90%;
-    height: 90%;
+    width: 90vw;
+    height: 90vh;
     position:absolute;
     top: 50%;
     left: 50%;
