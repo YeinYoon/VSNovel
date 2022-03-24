@@ -1,6 +1,7 @@
 <template>
     <!-- logo  -->
-    <div class="test">
+    <div class="tests">
+    <Side />
         <div class="header">
             <div class="service">
                 <img class="icon" src="../../assets/icons/white/shopping-cart.png" alt="logo"/>
@@ -45,6 +46,7 @@
 </template>
 
 <script>
+import Side from '../Side';
 import StoreModal from './StoreModal';
 import data from '../../assets/data.js' // 이미지 링크
 import dataHu from '../../assets/dataHu.js' // 작품 정보
@@ -62,6 +64,7 @@ export default {
     },
     components:{
         StoreModal,
+        Side,
     },
     methods:{
         priceClick(){
@@ -77,6 +80,15 @@ export default {
 </script>
 
 <style>
+.tests{
+    /* background-color: #353535; */
+    padding: 35px 40px 10px 40px;
+    width: calc(100% - 340px);
+    height: 100%;
+    position:fixed;
+    left: 340px;
+    overflow: auto;
+}
 /* price_div 위치 잡는 div /  price 전체 div / 
     free 무료 / price_btn 버튼 /charge 유료*/
 .price_div{
@@ -114,6 +126,7 @@ export default {
     list_title 작품 제목 / list_span 글자들 묶은 div / 
     list_team 작품 팀 / list_content 작품 줄거리 / list_price 작품 가격 */
 .work_list{
+    /* width: calc(50%); */
     background-color: #2a2a2a;
     margin: 50px 10px;
     border-radius: 20px;

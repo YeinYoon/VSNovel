@@ -17,7 +17,7 @@
         <img class="menubox_icon_engine" src="@/assets/icons/white/engineering.png">
       </div>
       <br>
-      <div v-bind:class="{'menubox':true}">
+      <div v-bind:class="{'menubox':true}"  @click="routerPush('/cafe')">
         <img class="menubox_icon_community" src="@/assets/icons/white/bubble_chat.png">
       </div>
       <br>

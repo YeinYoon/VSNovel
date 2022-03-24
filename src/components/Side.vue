@@ -1,26 +1,32 @@
 <template>
   <div v-bind:class="{'sidebackground':true}">
-    <!-- <Exside v-bind:class="{'sidecontent':true}"> -->
-    <!-- </Exside> -->
+    <StoreSide/>
   </div>
 </template>
 
 <script>
-// import Exside from './exside.vue';
+import StoreSide from './StorePage/StoreSide'
   export default {
     name: 'vsnside',
-    components: {
-      // Exside,
+    data(){
+      return{
+      }
     },
+    components:{
+      StoreSide,
+    }
   }
 </script>
 
 <style>
 .sidebackground {
   background:#2c2c2c;
-  width: 100%;
+  width: 200px;
   height: 100vh;
   overflow:auto;
+  position:fixed;
+  top: 0px;
+  left: 140px;
 }
 .sidecontent {
   background:#8a8a8a;

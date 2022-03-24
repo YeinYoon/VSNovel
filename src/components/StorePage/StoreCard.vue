@@ -42,7 +42,9 @@
                 <div class="right_flex">
                     <span class="right_up_font">주문상품 정보</span>
                     <div class="right_box_data">주문상품 상자</div>
-                    <div class="right_pay" @click="$emit('next')">총가격 <br> 결제하기</div>
+                    <div class="right_pay" @click="$emit('next')">
+                        <span>총가격 <br> 결제하기</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -277,13 +279,15 @@ select:focus{
 /* 오른쪽 가격 */
 .right_pay{
     font-size: 1.2em;
-    display: table-cell;
+    display: table;
     background-color: #2872f9;
     padding: 5px 20px;
     height: 50px;
     text-align: center;
     border-radius: 10px;
+}
+.right_pay .span{
+    display: table;
     vertical-align: middle;
-
 }
 </style>

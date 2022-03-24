@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Store from './components/StorePage/Store.vue';
 import Main from './components/MainPage/Main.vue';
+import Cafe from './components/cafe/CafeMain.vue';
 
 const routes = [
   {
@@ -11,6 +12,10 @@ const routes = [
   {
     path : '/store',
     component : Store,
+  },
+  {
+    path : '/cafe',
+    component : Cafe,
   },
 ];
 

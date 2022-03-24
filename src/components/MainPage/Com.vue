@@ -153,16 +153,22 @@ export default {
     border-radius: 20px;
     padding: 10px;
     color: white;
+    display: flex;
+    flex-direction: column;
 }
 .notice .titles{
+    position: relative;
     font-size: 1.5em;
 }
 .notice .con{
+    position: relative;
+    left: -5%;
     font-size: 0.8em;
     padding: 5px 0 10px 0;
 }
 .list .date{
-    float: right;
+    position: relative;
+    left: 80%;
     font-size: 0.8em;
 }
 

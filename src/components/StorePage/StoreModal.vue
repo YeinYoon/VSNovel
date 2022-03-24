@@ -55,6 +55,9 @@ export default {
     padding: 0;
     margin: 0;
     text-align: center;
+    position: fixed;
+    right: 15px;
+    z-index: 12;
 }
 body{
     margin: 0;
