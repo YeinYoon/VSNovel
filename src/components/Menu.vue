@@ -1,82 +1,99 @@
 <template>
-  <div v-bind:class="{'mainmenu':true}">
-    <div v-bind:class="{'menus':true}">
-      <div v-bind:class="{'menubox':true}">
-        <img class="menubox_icon_mypage" src="@/assets/icons/white_logo.png" >
+  <div v-bind:class="{ mainmenu: true }">
+    <div v-bind:class="{ menus: true }">
+      <div v-bind:class="{ menubox: true }" @click="routerPush('/mypage')">
+        <img class="menubox_icon_mypage" src="@/assets/icons/white_logo.png" />
       </div>
-      <br>
-      <div v-bind:class="{'menubox':true}">
-        <img class="menubox_icon_library" src="@/assets/icons/white/library.png">
+      <br />
+      <div v-bind:class="{ menubox: true }">
+        <img
+          class="menubox_icon_library"
+          src="@/assets/icons/white/library.png"
+        />
       </div>
-      <br>
-      <div v-bind:class="{'menubox':true}"  @click="routerPush('/store')">
-          <img class="menubox_icon_store" src="@/assets/icons/white/shopping-cart.png">
+      <br />
+      <div v-bind:class="{ menubox: true }" @click="routerPush('/store')">
+        <img
+          class="menubox_icon_store"
+          src="@/assets/icons/white/shopping-cart.png"
+        />
       </div>
-      <br>
-      <div v-bind:class="{ active: isActive, 'menubox':true }">
-        <img class="menubox_icon_engine" src="@/assets/icons/white/engineering.png">
+      <br />
+      <div v-bind:class="{ active: isActive, menubox: true }">
+        <img
+          class="menubox_icon_engine"
+          src="@/assets/icons/white/engineering.png"
+        />
       </div>
-      <br>
-      <div v-bind:class="{'menubox':true}"  @click="routerPush('/cafe')">
-        <img class="menubox_icon_community" src="@/assets/icons/white/bubble_chat.png">
+      <br />
+      <div v-bind:class="{ menubox: true }" @click="routerPush('/cafe')">
+        <img
+          class="menubox_icon_community"
+          src="@/assets/icons/white/bubble_chat.png"
+        />
       </div>
-      <br>
-      <div v-bind:class="{'menubox':true}">
-        <img class="menubox_icon_notice" src="@/assets/icons/white/megaphone.png">
+      <br />
+      <div v-bind:class="{ menubox: true }">
+        <img
+          class="menubox_icon_notice"
+          src="@/assets/icons/white/megaphone.png"
+        />
       </div>
-      <br>
-      <div v-bind:class="{'menubox':true}"  @click="routerPush('/')">
-        <img class="menubox_icon_mainscreen" src="@/assets/icons/white_logo.png">
+      <br />
+      <div v-bind:class="{ menubox: true }" @click="routerPush('/')">
+        <img
+          class="menubox_icon_mainscreen"
+          src="@/assets/icons/white_logo.png"
+        />
       </div>
     </div>
   </div>
 </template>
 
 <script>
-  export default {
-    name: 'vsnmenu',
-    data() {
-      return{
-      }
+export default {
+  name: "vsnmenu",
+  data() {
+    return {};
+  },
+  methods: {
+    routerPush(link) {
+      this.$router.push(link);
     },
-    methods:{
-      routerPush(link){
-          this.$router.push(link);
-      }
-    }
-  }
+  },
+};
 </script>
 
 <style>
 .mainmenu {
-  display:table;
-  background:#262626;
+  display: table;
+  background: #262626;
   left: 45px;
   width: 100%;
   height: 100vh;
   text-align: center;
-  overflow:auto;
+  overflow: auto;
 }
-.menus{
-  display:table-cell;
-  vertical-align:middle;
+.menus {
+  display: table-cell;
+  vertical-align: middle;
   height: calc(100vh - 4vh);
-  overflow:auto;
+  overflow: auto;
 }
 .menubox {
   background: #353535;
-  display:inline-table;
+  display: inline-table;
   margin-top: 10px;
   width: 75px;
   height: 75px;
   border-radius: 20px;
   cursor: pointer;
 }
-.menubox:hover{
+.menubox:hover {
   background: #5a5a5a;
 }
-.menubox_active{
-  display:inline-table;
+.menubox_active {
+  display: inline-table;
   margin-top: 10px;
   width: 75px;
   height: 75px;

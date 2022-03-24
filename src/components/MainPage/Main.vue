@@ -22,13 +22,16 @@
         <Com />
       </div>
     </div>
-    <hr class="lines">
+    <hr class="lines" />
     <div class="footer">
-        <span>한국장학재단 콜센터 1599-2000
-        <br>ARS 기부 (한통화에 2,000원이 기부됩니다.) 060-700-1003 평일 09:00 ~ 18:00
-        <br>(우 41200) 대구광역시 동구 신암로 125 (신암동 819-1)
-        <br>본 홈페이지에 게시된 이메일 주소가 자동 수집되는 것을 거부하며, 이를 위반시 개인정보 보호법에 의해 처벌됨을 유념하시기 바랍니다.
-        <br>Copyright © 2021 Korea Student Aid Foundation. All rights reserved.</span>
+      <span
+        >한국장학재단 콜센터 1599-2000 <br />ARS 기부 (한통화에 2,000원이
+        기부됩니다.) 060-700-1003 평일 09:00 ~ 18:00 <br />(우 41200) 대구광역시
+        동구 신암로 125 (신암동 819-1) <br />본 홈페이지에 게시된 이메일 주소가
+        자동 수집되는 것을 거부하며, 이를 위반시 개인정보 보호법에 의해 처벌됨을
+        유념하시기 바랍니다. <br />Copyright © 2021 Korea Student Aid
+        Foundation. All rights reserved.</span
+      >
     </div>
   </div>
 </template>
@@ -39,8 +42,7 @@ import Com from "../MainPage/Com.vue";
 export default {
   name: "MainScreen",
   data() {
-    return {
-    };
+    return {};
   },
   components: {
     SwiperCarousel: SwiperCarouselVue,
@@ -50,13 +52,13 @@ export default {
 </script>
 
 <style>
-.test{
-    /* background-color: #353535; */
-    padding: 35px 40px 10px 40px;
+.test {
+  /* background-color: #353535; */
+  padding: 35px 40px 10px 40px;
 }
-.lines{
-    margin: 10px 0 15px 0;
-    border: 1px solid white;
+.lines {
+  margin: 10px 0 15px 0;
+  border: 1px solid white;
 }
 .main {
   width: 90%;
@@ -92,8 +94,8 @@ export default {
   border-radius: 30px;
   margin: 0 10px 0 0;
   position: absolute;
-  top:45px;
-  left:calc(100% - 190px);
+  top: 45px;
+  left: calc(100% - 190px);
 }
 .search .icon {
   position: relative;
@@ -133,12 +135,12 @@ export default {
   position: relative;
   left: 2%;
 }
-.footer{
-    width: calc(100%);
-    color: white;
-    padding: 5px 0 0 5px;
+.footer {
+  width: calc(100%);
+  color: white;
+  padding: 5px 0 0 5px;
 }
-.widget{
+.widget {
   width: 100%;
 }
 </style>
