@@ -1,5 +1,8 @@
 <template>
-  <div class="RouterView">
+    <div class="RouterView">
+        
+    <div><Modal v-if="모달창열렸니 == true"></Modal></div>
+
     <header class="header">
         <div class="service">
             <img class="icon" src="../assets/icons/white/megaphone.png" alt="community"><span class="title" id="commu_title">공지사항</span>
@@ -11,49 +14,42 @@
         </div>
     </header>  
     <section class="section">
-        <div class="strong_notice_post" @click="openModal()"> 
+        <div class="strong_notice_post"> 
             <div class="strong_notice_mark"><img src="../assets/icons/white/star.png" class="mark_star_image"></div>
-            <div class="strong_notice">
+            <div class="strong_notice" @click="모달창열렸니 = true">
                 <div class="back_title">{{커뮤니티[0].title}}</div>
                 <div class="back_content">내용 - {{커뮤니티[0].content}}</div>
                 <div class="back_info">{{커뮤니티[0].writer}} | {{커뮤니티[0].date}} | {{커뮤니티[0].good}} | {{커뮤니티[0].comment}}</div>
             </div>
         </div>
         
-        <hr class="strong_line">
+        
+        <div class="strong_line"></div>
         
 
         <div class="post" v-for = "(a,index) in 커뮤니티" :key="index">
-            <div class="back">
+            <div class="back" @click="모달창열렸니 = true">
                 <div class="back_title">{{a.title}}</div>
                 <div class="back_content">내용 - {{a.content}}</div>
                 <div class="back_info">{{a.writer}} | {{a.date}} | {{a.good}} | {{a.comment}}</div>
             </div>
         </div>
     </section>
-    
-    <Modal_Vue :isOpen="isOpen"></Modal_Vue>
   </div>
 </template>
 
 <script>
 import dummy_data from '../assets/dummydata/dummy.js'
-import Modal_Vue from '@/components/Modal_vue.vue'
+import Modal from '../components/Modal'
 export default {
     data(){
         return {
             커뮤니티 : dummy_data,
-            isOpen: false
+            모달창열렸니 : false
         }
     },
-    component : {
-        Modal_Vue
-    },
-    methods: {
-        openModal(){
-            this.isOpen = true;
-            console.log("Do it")
-        },
+    components : {
+        Modal
     }
 }
 </script>
@@ -126,6 +122,7 @@ body {
     font-size: 14px;
     border-radius: 12px;
     cursor: pointer;
+    margin-left:15px;
 }
 .btn-red:hover {opacity:0.8;}
 
@@ -144,7 +141,7 @@ display: none;
     border-radius:100px 100px;
     background-color:#2872f9;
     position: absolute;
-    z-index:13;
+    z-index:0;
     right:-30px;
     top:-30px;
 }
@@ -167,14 +164,17 @@ display: none;
     background-color: #262626;
     border-radius: 12px;
     color:white;
+    z-index:-1;
 }
 .strong_notice:hover{opacity:0.8};
 
 .strong_line{
-    /* height: 20px; */
-    border:2px solid #ddd;
+    display:flex;
+    background-color: #ddd;
+    height: 20px;
+    /* border:2px solid #ddd; */
     border-radius:10px;
-    /* width: 101%; */
+    width: 101%;
 }
 .post {
     position: relative;
