@@ -4,7 +4,7 @@ const store = createStore({
     state() {
         return {
             userNickname : null,
-            LoadingStatus: false
+            LoadingStatus: false,
         }
     },
     mutations : {
@@ -19,7 +19,7 @@ const store = createStore({
         },
         endSpinner(state){
             state.LoadingStatus = false;
-        }
+        },
     }
 })
 

@@ -6,14 +6,16 @@
       </div>
       <div>
         <div class="group"> <span>· 컨텐츠 분류</span></div>
-        <div class="fiction" id="fiction" @click="btnEvent('novel',$event)">· 웹소설</div>
-        <div class="novel" id="novel"  @click="btnEvent('fiction', $event)">· 비주얼 노벨</div>
+        <div class="fiction" id="fiction" @click="groupEvent('novel',$event)">· 웹소설</div>
+        <div class="novel" id="novel"  @click="groupEvent('fiction', $event)">· 비주얼 노벨</div>
       </div>
       <div class="side_genre_group">
           <div class="side_genre" @click="hidden"> · 장르</div>
           <div class="genre_group" v-if="hiddenData">
-            <div class="selecter" v-for="genre in data" :key="genre">
-              <button> · {{genre.genre}}</button>
+            <div class="selecter" v-for="(genre, i) in data" :key="i">
+              <div class="genre_select" @click="genreEvent(i,$event)"> 
+                <div class="select_btn">· {{genre.genre}}</div>
+              </div>
             </div>
           </div>
       </div>
@@ -29,18 +31,16 @@ import genreData from '../../assets/genreData.js'
         groupStep : '',
         data : genreData,
         hiddenData : false,
+        genreNum : 0,
       }
     },
     methods:{
-      btnEvent(step,event){
+      groupEvent(step,event){
         let id = document.getElementById(step);
         console.log(id);
         if(this.groupStep == '') {
           event.target.style.backgroundColor = '#2872f9';
           this.groupStep = step;
-        }else if(this.groupStep == 'fiction'){
-          event.target.style.backgroundColor = '#2872f9';
-          id.style.backgroundColor = "#2c2c2c";
         }else{
           event.target.style.backgroundColor = '#2872f9';
           id.style.backgroundColor = "#2c2c2c";
@@ -49,6 +49,14 @@ import genreData from '../../assets/genreData.js'
       hidden(){
         if(this.hiddenData) this.hiddenData = false;
         else this.hiddenData = true;
+      },
+      genreEvent(num, event){
+          let id =  Array.from(document.querySelectorAll('.select_btn'));
+
+          event.target.style.color = 'black';
+          // console.log(id[this.genreNum]);
+          id[this.genreNum].style.color = 'gray';
+          this.genreNum = num;
       }
     }
   }
@@ -115,7 +123,7 @@ import genreData from '../../assets/genreData.js'
   font-weight: 700;
 }
 .side_genre_group{
-  margin: 30px 0 0 0;
+  margin: 20px 0 0 0;
   font-weight: 700;
 }
 .side_genre{
@@ -137,14 +145,12 @@ import genreData from '../../assets/genreData.js'
   top: -40px;
   font-size: 0.9em;
 }
-.selecter button{
+.selecter{
   font-weight: 700;
   color: #8a8a8a;
-  background-color: white;
-  border: none;
-  outline: none;
 }
-.selecter button:focus{
-  color:  black;
+.select_btn{
+    font-weight: 700;
+    color: #8a8a8a;
 }
 </style>
