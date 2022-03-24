@@ -1,60 +1,53 @@
 <template>
-<Spinner :loading="$store.state.LoadingStatus"></Spinner>
-  <div>
-
-    <div id="bar">
-    <router-link to="/" id="main">메인으로</router-link>
-    <h5 class="text-center">테스트 메인바</h5>
-    <div v-if="$store.state.userNickname != null" class="userName">
-      {{$store.state.userNickname}}
-      <button @click="logout()">로그아웃</button>
-    </div>
-    <div v-else class="userName">로그인이 필요합니다</div>
-    </div>
-
-    <router-view></router-view>
-    
+  <div class="RouterView">
+    <!-- <Writ_e></Writ_e> -->
+    <!-- <Re_view></Re_view> -->
+    <!-- <Village_m></Village_m> -->
+    <!-- <Commu_m></Commu_m> -->
+    <!-- <Commen_t></Commen_t> -->
+    <!-- <Cafe_main></Cafe_main> -->
+    <Notic_e></Notic_e>
+    <!-- <Notice_w></Notice_w> -->
+    <!-- <Carouse_l></Carouse_l> -->
   </div>
 </template>
 
 <script>
-import axios from './axios'
-import Spinner from './components/Spinner.vue'
+// import Writ_e from './components/Writ_e'
+// import Re_view from './components/Re_view'
+// import Village_m from './components/Village_m'
+// import Commu_m from './components/Commu_m'
+// import Commen_t from './components/Commen_t'
+// import Cafe_main from './components/Cafe_main'
+import Notic_e from './components/Notic_e'
+// import Notice_w from './components/Notice_write'
+// import Carouse_l from './components/Carouse_l'
+
 export default {
   name: 'App',
   components: {
-    Spinner
-  },
-  methods : {
-    logout(){
-      axios.get('/api/auth/logout')
-      .then((result)=>{
-        if(result.data=='ok') {
-          alert("로그아웃 되었습니다.");
-          this.$store.commit('userLogin', null);
-        } else {
-          console.log(result);
-          alert(result.data);
-        }
-      })
-      .catch((err)=>{
-        console.error(err);
-      })
-    }
+    Notic_e,
+    // Commen_t
+    // Commu_m
+    // Writ_e
+    // Re_view
+    // Village_m
+    // Cafe_main
+    // Notice_w
+    // Carouse_l
   }
 }
 </script>
 
 <style>
-#bar {
-  background-color: blanchedalmond;
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+body {
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  font-weight: 500;
 }
-
-#main {
-  text-align: left;
-}
-
-.userName {
-  text-align: right;
+#app {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  color: #2c3e50;
 }
 </style>
