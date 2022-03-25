@@ -74,24 +74,11 @@ export default {
 </script>
 
 <style>
-.sideBar {
-  font-size: 1.2em;
-  display: flex;
-  flex-direction: column;
-  padding: 50px 10px 0 10px;
-  background: #2c2c2c;
-  /* width: 200px; */
-  height: 100vh;
-  /* overflow: auto; */
-  position: fixed;
-  top: 0px;
-  left: 140px;
-}
 /* -------------------------------------------------------------------- */
 
 .side_search {
   background-color: white;
-  width: 180px;
+  width: 98%;
   height: 40px;
   padding: 5px 10px;
   border: 1px solid black;
@@ -101,13 +88,13 @@ export default {
 }
 .side_search .side_icon {
   position: relative;
-  top: -0px;
+  top: -2px;
   left: -5px;
   width: 30px;
   height: 30px;
 }
 .side_search input {
-  width: 120px;
+  width: 85%;
   border: none;
   font-size: 100%;
 }
@@ -115,7 +102,7 @@ export default {
   outline: 0px;
 }
 .group {
-  width: 180px;
+  width: 98%;
   height: 40px;
   background-color: white;
   padding: 5px 10px 5px 20px;
@@ -130,7 +117,7 @@ export default {
 }
 .novel,
 .fiction {
-  width: 160px;
+  width: 90%;
   height: 40px;
   color: white;
   padding: 5px 10px 5px 20px;
@@ -150,7 +137,7 @@ export default {
   border: none;
   position: relative;
   z-index: 12;
-  box-shadow: 0 2px 5px 1px black;
+  box-shadow: 0px 3px 4px 1px rgba(65, 65, 65, 0.5);
 }
 .genre_group {
   margin: 10px 0 0 0;

@@ -1,7 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Store from './components/side/StoreSide.vue';
 import Main from './components/MainPage/Main.vue';
-import Cafe from './components/cafe/CafeMain.vue';
+import Community from './components/side/CommunitySide.vue';
 import Mypage from './components/side/MypageSide.vue';
 import Library from './components/side/LibrarySide.vue';
 
@@ -24,8 +24,8 @@ const routes = [
     component : Store,
   },
   {
-    path : '/cafe',
-    component : Cafe,
+    path : '/community',
+    component : Community,
   },
 ];
 

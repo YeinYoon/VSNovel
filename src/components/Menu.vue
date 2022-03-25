@@ -5,7 +5,7 @@
         <img class="menubox_icon_mypage" src="@/assets/icons/white_logo.png" />
       </div>
       <br />
-      <div v-bind:class="{ menubox: true }">
+      <div v-bind:class="{ menubox: true }"  @click="routerPush('/library')">
         <img
           class="menubox_icon_library"
           src="@/assets/icons/white/library.png"
@@ -26,7 +26,7 @@
         />
       </div>
       <br />
-      <div v-bind:class="{ menubox: true }" @click="routerPush('/cafe')">
+      <div v-bind:class="{ menubox: true }" @click="routerPush('/community')">
         <img
           class="menubox_icon_community"
           src="@/assets/icons/white/bubble_chat.png"

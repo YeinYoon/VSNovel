@@ -85,6 +85,17 @@ export default {
   position: relative;
   top: 0px;
 }
+.service .topic {
+  /* background-color: antiquewhite; */
+  display: block;
+  width: 150px;
+  color: white;
+  position: relative;
+  top: 30px;
+  left: calc(100% - 320px);
+  font-size: 1.2em;
+}
+
 .search {
   background-color: white;
   width: 150px;

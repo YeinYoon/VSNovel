@@ -3,9 +3,9 @@
     <!-- 헤더 -->
     <div class="header">
       <div class="service">
-        <img src="../../assets/icons/white/leaf.png" class="icon" />
+        <img  class="icon" src="../../assets/icons/white/leaf.png" />
         <span class="title">Village</span>
-        <sapn class="topic">소모임 커뮤니티</sapn>
+        <span class="topic">소모임 커뮤니티</span>
       </div>
       <div class="search">
         <img src="../../assets/icons/magnifier.png" class="icon" />
@@ -74,13 +74,6 @@ export default {
 </script>
 
 <style>
-.topic {
-  color: white;
-  position: fixed;
-  top: 95px;
-  left: 380px;
-  font-size: 1.2em;
-}
 .section {
   width: calc(100%);
   margin: 60px 0 0 0;
@@ -140,7 +133,7 @@ export default {
 }
 .con .boxs .list .dataLine {
   position: absolute;
-  right: 5px;
+  right: 10px;
   top: 30px;
 }
 </style>

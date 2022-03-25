@@ -64,7 +64,7 @@ export default {
   flex-direction: column;
   padding: 50px 10px 0 10px;
   background: #2c2c2c;
-  width: 200px;
+  width: 300px;
   height: 100vh;
   /* overflow: auto; */
   position: fixed;
@@ -73,45 +73,6 @@ export default {
 }
 /* -------------------------------------------------------------------- */
 
-.side_search {
-  background-color: white;
-  width: 180px;
-  height: 40px;
-  padding: 5px 10px;
-  border: 1px solid black;
-  border-radius: 30px;
-  margin: 0 0 25px 0;
-  top: 45px;
-}
-.side_search .side_icon {
-  position: relative;
-  top: -0px;
-  left: -5px;
-  width: 30px;
-  height: 30px;
-}
-.side_search input {
-  width: 120px;
-  border: none;
-  font-size: 100%;
-}
-.side_search input:focus {
-  outline: 0px;
-}
-.group {
-  width: 180px;
-  height: 40px;
-  background-color: white;
-  padding: 5px 10px 5px 20px;
-  border: none;
-  border-radius: 30px;
-  font-weight: 700;
-  display: table;
-}
-.group span {
-  display: table-cell;
-  vertical-align: middle;
-}
 .sel {
   width: 160px;
   height: 40px;

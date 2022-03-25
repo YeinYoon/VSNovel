@@ -28,25 +28,26 @@
         </div>
       </div>
     </div>
-    <div
-      class="work_list"
-      v-for="(data, i) in dataHuman"
-      :key="i"
-      @click="modalOpen(i)"
-    >
-      <img class="list_img" :src="`${data.titleImg}`" />
-      <div class="work_list_con">
-        <div class="list_span">
-          <span class="list_title">{{ data.title }}</span>
-          <span class="list_team">{{ data.writer }} / {{ data.team }}</span>
-          <span class="list_content">{{ data.content }}</span>
+    <div class="listView">
+      <div
+        class="work_list"
+        v-for="(data, i) in dataHuman"
+        :key="i"
+        @click="modalOpen(i)"
+      >
+        <img class="list_img" :src="`${data.titleImg}`" />
+        <div class="work_list_con">
+          <div class="list_span">
+            <span class="list_title">{{ data.title }}</span>
+            <span class="list_team">{{ data.writer }} / {{ data.team }}</span>
+            <span class="list_content">{{ data.content }}</span>
+          </div>
+        </div>
+        <div class="list_price">
+          <span> {{ data.pay }}&#8361; </span>
         </div>
       </div>
-      <div class="list_price">
-        <span> {{ data.pay }}&#8361; </span>
-      </div>
     </div>
-
     <StoreModal
       @close="modal = false"
       :datas="dataHuman"
@@ -92,10 +93,10 @@ export default {
 .tests {
   /* background-color: #353535; */
   padding: 35px 40px 10px 40px;
-  width: calc(100% - 340px);
+  width: calc(100% - 440px);
   height: 100%;
   position: fixed;
-  left: 340px;
+  left: 440px;
   overflow: auto;
 }
 /* price_div 위치 잡는 div /  price 전체 div / 
@@ -135,10 +136,14 @@ export default {
 /* work_list 작품 전체 div / list_img 작품 이미지 / 
     list_title 작품 제목 / list_span 글자들 묶은 div / 
     list_team 작품 팀 / list_content 작품 줄거리 / list_price 작품 가격 */
+.listView {
+  position: relative;
+  top: -10%;
+}
 .work_list {
   /* width: calc(50%); */
   background-color: #2a2a2a;
-  margin: 50px 10px;
+  margin: 70px 10px;
   border-radius: 20px;
   height: 125px;
   top: 80px;

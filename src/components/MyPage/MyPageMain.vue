@@ -4,7 +4,7 @@
       <div class="service">
         <img class="icon" src="../../assets/icons/white/home.png" alt="logo" />
         <span class="title">마이페이지</span>
-        <sapn class="topic">프로필 설정</sapn>
+        <span class="topic">프로필 설정</span>
       </div>
     </div>
     <section>
@@ -56,19 +56,6 @@ button {
   outline: 0;
   background-color: transparent;
   cursor: pointer;
-}
-.img {
-  max-width: 100%;
-  height: auto;
-}
-#search {
-  position: fixed;
-  top: 150px;
-  left: 147px;
-  width: 210px;
-  height: 40px;
-  background-color: white;
-  border-radius: 18px;
 }
 .side_first-title {
   position: fixed;
