@@ -1,7 +1,7 @@
 <template>
     <div class="RouterView">
         
-    <div><Modal v-if="모달창열렸니 == true"></Modal></div>
+    <div><Modal v-if="모달창열렸니 == true" :openmodal="모달창열렸니" @closemodal="모달창열렸니 = false"></Modal></div>
 
     <header class="header">
         <div class="service">
@@ -14,9 +14,9 @@
         </div>
     </header>  
     <section class="section">
-        <div class="strong_notice_post"> 
+        <div class="strong_notice_post" @click="모달창열렸니 = true"> 
             <div class="strong_notice_mark"><img src="../assets/icons/white/star.png" class="mark_star_image"></div>
-            <div class="strong_notice" @click="모달창열렸니 = true">
+            <div class="strong_notice">
                 <div class="back_title">{{커뮤니티[0].title}}</div>
                 <div class="back_content">내용 - {{커뮤니티[0].content}}</div>
                 <div class="back_info">{{커뮤니티[0].writer}} | {{커뮤니티[0].date}} | {{커뮤니티[0].good}} | {{커뮤니티[0].comment}}</div>
