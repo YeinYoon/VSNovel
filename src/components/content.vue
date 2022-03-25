@@ -8,6 +8,7 @@
 
 </template>
 <style>
+
 .contentbackground {
   position: absolute;
   background:#353535;
@@ -27,7 +28,15 @@
 }
 </style>
 <script>
-import excomp from './lib_gallery';
+// import excomp from './lib_gallery';
+// import excomp from './mypage_post';
+// import excomp from './mypage_review';
+// import excomp from './lib_list.vue';
+// import excomp from './mypage_review.vue'
+// import excomp from './mypage_prefer.vue'
+// import excomp from './mypage_profile';
+import excomp from './mypage_card';
+
 export default {
   name: 'vsncontent',
 

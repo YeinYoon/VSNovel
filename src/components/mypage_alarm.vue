@@ -1,32 +1,10 @@
 <template>
 <div>
-  <aside class="menubar">
-    <nav class="nav">
-      <div id="img_box"></div>
-      <div id="img_box"></div>
-      <div id="img_box"></div>
-      <div id="img_box"></div>
-      <div id="img_box"></div>
-      <div id="img_box"></div>
-      <div id="img_box"></div> 
-    </nav>
-  </aside>
-  <aside class="sidebar">
-    <input id="search">
-    <div class="side_first-title">
-      <p class="side_first-title-font">· 마이페이지</p>
-    </div>
-    <button id="mypage_sidebar-profile">· 프로필 설정</button>
-    <button id="mypage_sidebar-pay">· 결제정보 설정</button>
-    <button id="mypage_sidebar-post">· 내가 쓴 게시글</button>
-    <button id="mypage_sidebar-review">· 작성 리뷰 관리</button>
-    <button id="mypage_sidebar-prefer">· 선호/비선호 설정</button>
-    <button id="mypage_sidebar-alarm">· 알림 설정</button>
-    <button id="mypage_sidebar-exit">· 회원 탈퇴</button>
-  </aside>
   <section>
-    <p class="service_title">마이페이지</p>
-    <p class="service_subtitle">알림 설정</p>
+    <header>
+      <span class="service_title">마이페이지</span>
+      <span class="service_subtitle">알림 설정</span>
+    </header>
     <table class="mypage_alarm-table">
       <tr>
         <td style="width: 5%; float:left"><input type="checkbox" name="pay" value="pay" style="vertical-align: bottom;"></td>
@@ -108,175 +86,7 @@ html{
     position: relative;
     width: 200px;
     text-align: left;
-  }
-  .menubar {
-    top:0px;
-    left: 0px;
-    position: fixed;
-    width: 110px;
-    height: 100%;
-    background: #262626;
-  }
-  .sidebar {
-    top:0px;
-    left: 110px;
-    position: fixed;
-    width: 280px;
-    height: 100%;
-    background: #2C2C2C;
-  }
-  .nav::-webkit-scrollbar { 
-    width: 5px; 
-  }
-  .nav::-webkit-scrollbar-track { 
-    background-color: #e4e4e4; 
-    border-radius: 100px; 
-  } 
-  .nav::-webkit-scrollbar-thumb { 
-    background-color: #d4aa70; 
-    border-radius: 100px; 
-  } 
-  .nav { 
-    scrollbar-color: #D4AA70 #e4e4e4; 
-  } 
-  .nav::-webkit-scrollbar-thumb { 
-    background-image: linear-gradient(180deg, #D0368A 0%, #708AD4 99%);
-    box-shadow: inset 2px 2px 5px 0 rgba(#fff, 0.5);
-    border-radius: 100px;
-  }
-  .nav {
-    height: 100%;
-    position: relative;
-    margin-left: 13px;
-    top: 5%;
-    overflow: auto;
-    
-  }
-  #img_box{
-    top: 50px;
-      position: relative;
-      margin-top: 30px;
-      border:1px solid white;
-      width: 80px;
-      height: 80px;
-      border-radius: 10px;
-      background-color: #353535;
-  }
-  .img{
-      max-width: 100%;
-      height: auto;
-  }
-  #search{
-    position: fixed;
-    top: 150px;
-    left: 147px;
-    width: 210px;
-    height: 40px;
-    background-color: white;
-    border-radius: 18px;
-  }
-  .side_first-title{
-    position: fixed;
-    top: 250px;
-    left: 150px;
-    width: 210px;
-    height: 40px;
-    background-color: white;
-    border-radius: 18px;
-    
-  }
-  .side_first-title-font{
-    margin-top: 5px;
-    float: left;
-    padding-left: 20px;
-    font-size: 20px;
-    text-align: left;
-    font-weight: bolder;
-  }
-  #mypage_sidebar-profile{
-    position: fixed;
-    top: 310px;
-    left: 173px;
-    width: 190px;
-    height: 40px;
-    font-size: 20px;
-    text-align: left;
-    font-weight: bolder;
-    color: white;
-    border-radius: 18px;
-  }
-  #mypage_sidebar-pay{
-    position: fixed;
-    top: 360px;
-    left: 173px;
-    width: 190px;
-    height: 40px;
-    border-radius: 18px;
-    font-size: 20px;
-    font-weight: bolder;
-    text-align: left;
-    color: white;
-  }
-  #mypage_sidebar-post{
-    position: fixed;
-    top: 410px;
-    left: 173px;
-    width: 190px;
-    height: 40px;
-    border-radius: 18px;
-    font-size: 20px;
-    font-weight: bolder;
-    text-align: left;
-    color: white;
-  }
-  #mypage_sidebar-review{
-    position: fixed;
-    top: 460px;
-    left: 173px;
-    width: 190px;
-    height: 40px;
-    border-radius: 18px;
-    font-size: 20px;
-    font-weight: bolder;
-    text-align: left;
-    color: white;
-  }
-  #mypage_sidebar-prefer{
-    position: fixed;
-    top: 510px;
-    left: 173px;
-    width: 190px;
-    height: 40px;
-    border-radius: 18px;
-    font-size: 20px;
-    font-weight: bolder;
-    text-align: left;
-    color: white;
-  }
-  #mypage_sidebar-alarm{
-    position: fixed;
-    top: 560px;
-    left: 173px;
-    width: 190px;
-    height: 40px;
-    border-radius: 18px;
-    font-size: 20px;
-    font-weight: bolder;
-    text-align: left;
-    color: white;
-    background-color: #2872F9;
-  }
-  #mypage_sidebar-exit{
-    position: fixed;
-    top: 610px;
-    left: 173px;
-    width: 190px;
-    height: 40px;
-    border-radius: 18px;
-    font-size: 20px;
-    font-weight: bolder;
-    text-align: left;
-    color: white;
+    padding: 15px 0px 0px 15px;
   }
   .service_title{
     position: fixed;
@@ -293,9 +103,8 @@ html{
     font-size: 30px;
   }
   .mypage_alarm-table{
-    position: fixed;
-    top: 250px;
-    left: 500px;
+    display: flex;
+    transform: translate(5%, 25%);
     border: 1px;
     border: white;
     font-size: 30px;
