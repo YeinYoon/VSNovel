@@ -72,12 +72,12 @@
                 </div>
             <div class="comment_frame">
                 <div class="comment_label">
-                    <span>Comment (2)</span>
+                    <span style="color:white; font-size:25px">Comment (2)</span>
                 </div>
-                <div class="comment_input">
-                    <textarea></textarea>
+                <div class="">
+                    <textarea class="comment_input"></textarea>
                 </div>
-                <button class="btn_blue">작성하기</button>
+                <div><button class="btn_blue">작성하기</button></div>
                 <div class="comment_list">
                     <div>이미지</div>
                     <div>내용</div>
@@ -232,7 +232,7 @@ body {
     position: relative;
     width: 98%;
     min-height: 100px;
-    background-color: ;
+    /* background-color: ; */
     border-radius: 14px;
     color:white;
     z-index: 1;
@@ -278,5 +278,18 @@ body {
 
 ::-webkit-scrollbar {
 display: none;
+}
+.comment_input {
+    font-size:1.2em;
+    outline: none;
+    display: block;
+    border-radius: 14px;
+    height: 80px;
+    background-color: #5e5e5e;
+    width: 100%;
+    color:white;
+    border:none;
+    padding-left: 5px;
+    resize: none;
 }
 </style>
