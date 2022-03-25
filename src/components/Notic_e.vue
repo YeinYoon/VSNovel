@@ -40,7 +40,7 @@
 
 <script>
 import dummy_data from '../assets/dummydata/dummy.js'
-import Modal from '../components/Modal'
+import Modal from '../components/Modal_vue'
 export default {
     data(){
         return {
