@@ -62,7 +62,7 @@
       <hr class="lines" />
       <div class="div">
         <div class="list" v-for="store in storeData" :key="store">
-          <img class="img" :src="`${store.titleImg}`" />
+          <img class="img" :src="`${store.titleImg}`" @click="storeView"/>
           <div class="titles">
             {{ store.title }}
           </div>
@@ -91,6 +91,11 @@ export default {
     });
     console.log(this.noticeData);
   },
+  methods:{
+    storeView(){
+      this.$router.push('/store');
+    }
+  }
 };
 </script>
  
