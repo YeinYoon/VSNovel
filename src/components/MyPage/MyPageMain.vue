@@ -3,8 +3,8 @@
     <div class="header">
       <div class="service">
         <img class="icon" src="../../assets/icons/white/home.png" alt="logo" />
-        <span class="title">마이페이지</span>
-        <span class="topic">프로필 설정</span>
+        <span class="my_title">마이페이지</span>
+        <span class="my_topic">프로필 설정</span>
       </div>
     </div>
     <section>
@@ -57,7 +57,22 @@ button {
   background-color: transparent;
   cursor: pointer;
 }
-.side_first-title {
+.my_topic {
+  position: absolute;
+  left : 35px;
+  color: white;
+  font-size: 1.2em;
+  top: 95px;
+}
+.my_title {
+  position: absolute;
+  left: 100px;
+  color: white;
+  font-size: 2em;
+  top: 40px;
+  font-weight: 600;
+}
+/* .side_first-title {
   position: fixed;
   top: 250px;
   left: 150px;
@@ -73,7 +88,7 @@ button {
   font-size: 20px;
   text-align: left;
   font-weight: bolder;
-}
+} */
 #mypage_sidebar-profile {
   position: fixed;
   top: 310px;
@@ -159,7 +174,7 @@ button {
   text-align: left;
   color: white;
 }
-.service_title {
+/* .service_title {
   position: fixed;
   top: 10px;
   left: 550px;
@@ -172,7 +187,7 @@ button {
   left: 470px;
   color: white;
   font-size: 30px;
-}
+} */
 .mypage_profile_table {
   position: fixed;
   top: 250px;

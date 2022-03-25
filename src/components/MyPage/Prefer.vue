@@ -3,8 +3,8 @@
     <div class="header">
       <div class="service">
         <img class="icon" src="../../assets/icons/white/home.png" alt="logo" />
-        <span class="title">마이페이지</span>
-        <span class="topic">선호 / 비선호 설정</span>
+        <span class="my_title">마이페이지</span>
+        <span class="my_topic">선호 / 비선호 설정</span>
       </div>
     </div>
   <section>

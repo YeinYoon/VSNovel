@@ -6,17 +6,17 @@
       <input type="text" />
     </div>
     <div>
-      <div class="group" @click="step = 'main'"><span>· 마이페이지</span></div>
-      <div class="sel">
+      <div class="group" @click="eventStep('main', $event)"><span>· 마이페이지</span></div>
+      <div class="sel" id="pay">
         · 결제정보 설정
       </div>
-      <div class="sel"  @click="step = 'mypost'">
+      <div class="sel" id="mypost" @click="eventStep('mypost', $event)">
         · 내가 쓴 게시글
       </div>
-      <div class="sel"  @click="step = 'myReview'">
+      <div class="sel" id="myReview"  @click="eventStep('myReview', $event)">
         · 작성 리뷰 관리
       </div>
-      <div class="sel" @click="step = 'prefer'">
+      <div class="sel" id="prefer" @click="eventStep('prefer', $event)">
         · 선호 / 비선호 설정
       </div>
       <div class="sel">
@@ -46,7 +46,24 @@ export default {
     return {
       groupStep: "",
       step: 'main',
+      befStep : '',
     };
+  },
+  methods:{
+    eventStep(info, event){
+      this.step = info;
+      if (this.step == "main") {
+        event.target.style.backgroundColor = "white";
+      }else if(this.befStep != '') {
+        event.target.style.backgroundColor = "#2872f9";
+        let id = document.getElementById(this.breStep);
+        id.style.backgroundColor = "#2c2c2c";
+      }else{
+        event.target.style.backgroundColor = "#2872f9";
+      }
+      console.log(this.befStep);
+      this.befStep = document.querySelector(info);
+    }
   },
   components:{
     MyPage,
@@ -72,9 +89,8 @@ export default {
   left: 140px;
 }
 /* -------------------------------------------------------------------- */
-
 .sel {
-  width: 160px;
+  width: 90%;
   height: 40px;
   color: white;
   padding: 5px 10px 5px 20px;
@@ -82,6 +98,6 @@ export default {
   margin: 10px 0 0 20px;
   border-radius: 30px;
   font-weight: 600;
-  font-size: 0.8em;
+  font-size: 1em;
 }
 </style>
