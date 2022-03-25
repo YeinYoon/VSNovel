@@ -9,15 +9,16 @@
       <!--모달 내 메세지 및 컨텐츠인 modal_inner, 여기에 단순히 메세지만을 표시할수도 
     작은 컴포넌트를 삽입할수도 있따.-->
       <div class="modal_inner">
-        <span>필수요소를 입력하지 않았습니다.</span>
+        <span>선택한 게시물을..</span>
+        <div class="modal_content">내용 출력</div>
         <!--메세지를 출력하는 예제-->
       </div>
       <!--모달을 닫는 버튼과 버튼내 메세지(확인, 취소 등등)-->
-      <div class="modal_save_button">
-        <span class="modal_save_ok">버튼1</span>
-      </div>
-      <div class="modal_cancel_button">
-        <span class="modal_cancel_ok">버튼2</span>
+      <div class="modal_btn_position">
+        <button class="modal_btn">이동</button>
+        <button class="modal_btn">비공개</button>
+        <button class="modal_btn_red">삭제</button>
+        <button class="modal_btn" id="cancel" @click="$emit('closemodal', 모달창열렸니)">취소</button>
       </div>
     </div>
   </div>
@@ -28,9 +29,18 @@ export default {
   name: "vsn_modal_universal",
 
   components: {},
+  props: {
+    모달창열렸니 : Boolean
+  },
 };
 </script>
 <style>
+.modal_content {
+  background-color:gray;
+  border-radius: 15px;
+  height: 270px;
+  margin-top: 10px;
+}
 .modal_opacity {
   background: black;
   width: 100vw;
@@ -88,45 +98,51 @@ export default {
 .modal_inner {
   color: white;
   position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+  width: 90%;
+  margin: 0px 5% 0px 5%; 
+  top: 5%; 
 }
-.modal_save_button {
-  width: 25%;
-  height: 20%;
-  background: #2872f9;
-  border-radius: 20px;
-  z-index: 2;
-  display: table;
-  position: fixed;
-  top: 85%;
-  left: 35%;
-  transform: translate(-50%, -50%);
+.modal_btn {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    font-weight: 500;
+    position: relative;
+    width: 100px;
+    height: 30px;
+    background-color:#2872f9;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    margin:7px 5px 7px 5px;
 }
-.modal_cancel_button {
-  width: 25%;
-  height: 20%;
-  background: #2872f9;
-  border-radius: 20px;
-  z-index: 2;
-  display: table;
-  position: fixed;
-  top: 85%;
-  left: 65%;
-  transform: translate(-50%, -50%);
+.modal_btn_red {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    font-weight: 500;
+    position: relative;
+    width: 100px;
+    height: 30px;
+    background-color:red;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    margin:7px 5px 7px 5px;
 }
-.modal_save_ok {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-  color: white;
+.modal_btn_position {
+  position:relative;
+  width: 90%;
+  margin: 0px 5% 0px 5%; 
+  top: 90%;
+  transform: translateY(-50%);
 }
-.modal_cancel_ok {
-  display: table-cell;
-  vertical-align: middle;
-  text-align: center;
-  color: white;
+#cancel {
+  left: 31%;
 }
 /* 애니메이션들,*/
 /*열리는 애니메이션 opening*/

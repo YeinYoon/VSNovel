@@ -130,11 +130,13 @@ body {
 display: none;
 }
 .strong_notice_post {
+    cursor: pointer;
     position: relative;
     width: 100%;
     height: 130px;
     margin-top:10px;
 }
+.strong_notice_post:hover {opacity:0.8;}
 .strong_notice_mark {
     width:60px;
     height:60px;
