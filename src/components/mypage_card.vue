@@ -1,19 +1,28 @@
 <template>
 <div>
-  <section>
-    <div class="grid-container">
-      <div>A</div>
-      <div class="top-cont">결제시 사용할 카드정보를 등록해<br>
-      간편하게 이용할 수 있습니다.</div>
-      <div>C</div>
-      <div style="text-align:center;">카드번호</div>
-      <div><input type="text"></div>
-      <div>F</div>
-      <div>G</div>
-      <div>H</div>
-      <div>I</div>
-    </div>
-  </section>
+  <table>
+    <tr>
+      <td></td>
+      <td class="top-info">결제시 사용할 카드정보를 등록해<br>
+      간편한게 이용할 수 있습니다.</td>
+      <td></td>
+    </tr>
+    <tr>
+      <td class="card-num-name">카드번호</td>
+      <td><input type="text"></td>
+      <td class="card-num-info">16자리 숫자만 입력</td>
+    </tr>
+    <tr>
+      <td class="bottom-smallfont">저장한 정보는 안전하게 암호화 되어<br>
+      당사 DB에 보관됩니다.<br>
+      보관근거-개인정보보호정책 및 이용약관</td>
+      <td><img src="https://www.bccard.com/images/individual/card/renew/list/card_228028.png" alt=""></td>
+    </tr>
+  </table>
+  <footer>
+    <button id="mypage_card-canc">취소</button>
+    <button id="mypage_card-save">저장</button>
+  </footer>
 </div>
 </template>
 
@@ -24,22 +33,41 @@ export default {
 </script>
 
 <style>
+.top-info{
+  text-align: center;
+  font-size: 25px;
+}
+.bottom-smallfont{
+  font-size: 12px;
+  vertical-align: bottom;
+}
+.card-num-name{
+  text-align: right;
+  padding-right: 15px;
+}
+.card-num-info{
+  font-size: 12px;
+  vertical-align: bottom;
+}
 html{
     background-color: #363636;
   }
-  
-button{
-  border: 0;
-  outline: 0;
-  background-color:transparent;
-  cursor: pointer;
+table{
+  color: white;
+  margin-left: 5%;
+  margin-top: 10%;
+  border-collapse: separate;
+  border-spacing: 0 20px;
+}
+tr{
+  padding: 50px;
 }
 input{
   border: 0;
   outline: 0;
   color: white;
   width: 100%;
-  height: 50px;
+  height: 40px;
   background: #5E5E5E;
   border-radius: 20px;
 }
@@ -47,64 +75,33 @@ input::placeholder{
   color: white;
   font-size: 25px;
 }
-td{
-  position: relative;
-  width: 200px;
-}
-section{
-  display: flex;
-}
-.grid-container {     
-    display: grid;
-    color: white;
-    transform: translate(40%,40%);
-    grid-template-columns: 200px 400px 200px;     
-    grid-template-rows: 120px 50px 300px;
-    align-items: center;
-}
-.top-cont{
-  padding-top: 5%;
-  text-align: center;
-  white-space: nowrap;
-  font-size: 25px;
-}
-
 #mypage_card{
   width: 540px;
   height: 50px;
   border-radius: 10px;
   background-color: #5E5E5E;
 }
-.mypage_card-detail{
-  width: 300px;
-  font-size: 13px;
-}
-#mypage_card-img{
-  width: 540px;
-  height: 280px;
-  border-radius: 10px;
-  background-color: #5E5E5E;
-}
 #mypage_card-canc{
-  position: fixed;
-  top:850px;
-  left:1250px;
   width: 120px;
   height: 40px;
+  transform: translateX(400%);
   border-radius: 15px;
   background-color: #5E5E5E;
   color: white;
   font-size: 15px;
+  border: 0;
+  outline: 0;
+  margin-right: 30px;
 }
 #mypage_card-save{
-  position: fixed;
-  top:850px;
-  left:1400px;
   width: 120px;
   height: 40px;
   border-radius: 15px;
+  transform: translateX(390%);
   background-color: #2872F9;
   color: white;
   font-size: 15px;
+  border: 0;
+  outline: 0;
 }
 </style>

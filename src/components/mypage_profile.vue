@@ -1,161 +1,121 @@
 <template>
-  <div>
-    <section>
-      <div class="main-table">
-        <div class="cell cell-nick">
-          <span>닉네임</span>
-        </div>
-        <div class="cell input-box" style="height:10%">
-          <input id="content-box">
-        </div>
-        <div class="cell"></div>
-        <div class="row">
-          <div class="cell cell-title">
-            <span>프로필 이미지</span>
-          </div>
-          <div class="cell input-box" style="height:45%">
-          <div id="content-box"></div>
-          </div>
-          <div class="cell">
-            <button id="profile-image-button">Browse</button>
-            <span class="small-text">512x512 이상의 이미지가 가장 적합<br>
-            허용 확장자:png,jpej,jpg,gif | > 2MB</span>
-            
-          </div>
-        </div>
-        <div class="row">
-          <div class="cell cell-title">
-            <span>소개</span>
-          </div>
-          <div class="cell input-box">
-            <textarea id="content-box"></textarea>
-          </div>
-          <div class="cell" style="vertical-align: bottom;">
-            <span class="small-text">0/1024byte</span>
-          </div>
-        </div>
-      </div>
-      <button id="mypage_profile-canc">취소</button>
-      <button id="mypage_profile-save">저장</button>
-    </section>
-  </div>
+<div>
+  <table>
+    <tr>
+      <td class="col-one">닉네임</td>
+      <td><input type="text"></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td class="col-one">프로필 이미지</td>
+      <td><input class="profile-image-input" type="text"></td>
+      <td class="col-three">
+        <button id="browse">Browse</button><br>
+        <span>512x512 이상의 이미지가 가장 적합 <br>
+        허용 확장자:png,jpeg,jpg:gif | > 2MB</span>
+        </td>
+    </tr>
+    <tr>
+      <td class="col-one">소개</td>
+      <td><input class="introduce-input" type="text"></td>
+      <td class="col-three">0/1024 byte</td>
+    </tr>
+  </table>
+  <footer>
+    <button id="mypage_card-canc">취소</button>
+    <button id="mypage_card-save">저장</button>
+  </footer>
+</div>
 </template>
 
 <script>
 export default {
 
-};
+}
 </script>
 
 <style>
-section{
-  display: flex;
-  
-}
-button{
-  border: none;
-}
-span{
-  
-  text-align: left;
-}
-textarea {
-  width: 100%;
-  height: 100%;
-  margin: 0px;
-}
-td{
-  word-break: break-all;
-}
-#content-box{
+#browse{
+  width: 120px;
+  height: 40px;
+  margin-bottom: 55%;
+  border-radius: 20px;
+  background-color: #2872F9;
   color: white;
-  border:none;
-  width: 100%;
-  word-wrap:break-word;
-  padding:15px 15px;
+  font-size: 15px;
+  border: 0;
+  outline: 0;
 }
-
-.main-table {
-  display: table;
-  position: relative;
-  transform: translate(10%,20%);
-  color: white;
-  width: 1000px;
-  height: 600px;
+.col-three{
+  font-size: 10px;
+  vertical-align: bottom;
 }
-.small-text{
-  display: inline;
-  font-size: 12px;
-  
-}
-.heading {
-  display: table-row;
-  font-weight: bold;
-  text-align: center;
-}
-
-.row {
-  display: table-row;
-}
-
-.cell {
-  display: table-cell;
-  border: solid;
-  border-width: thin;
-  padding-left: 5px;
-  padding-right: 5px;
-  width: 20%;
-  overflow: hidden;
-}
-.cell-title{
-  font-size: 25px;
+.col-one{
   vertical-align: top;
+  padding-right: 40px;
+  width: 150px;
 }
-.cell-nick{
+.profile-image-input{
+  height: 160px;
+}
+.introduce-input{
+  height: 160px;
+}
+html{
+    background-color: #363636;
+  }
+table{
+  color: white;
+  margin-left: 0%;
+  margin-top: 10%;
+  border-collapse: separate;
+  border-spacing: 0 20px;
+
+}
+tr{
+  padding: 50px;
+}
+input{
+  border: 0;
+  outline: 0;
+  color: white;
+  width: 400px;
+  height: 40px;
+  background: #5E5E5E;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+input::placeholder{
+  color: white;
   font-size: 25px;
-  vertical-align: middle;
 }
-.input-box{
-  width: 50%;
-  text-overflow: clip;
+#mypage_card{
+  width: 540px;
+  height: 50px;
+  border-radius: 10px;
+  background-color: #5E5E5E;
 }
-#profile-image-button{
-  display: inline-block;
-  width: 70%;
-  height: 15%;
-  transform: translateY(-500%);
-  background: #2872f9;
-  border-radius: 20px;
-  color: white;
-}
-
-#content-box{
-  width: 100%;
-  height: 100%;
-  background: #5e5e5e;
-  border-radius: 20px;
-}
-
-#mypage_profile-canc {
-  position: fixed;
-  top: 850px;
-  left: 1250px;
+#mypage_card-canc{
   width: 120px;
   height: 40px;
-  border-radius: 15px;
-  background-color: #5e5e5e;
+  transform: translateX(400%);
+  border-radius: 20px;
+  background-color: #5E5E5E;
   color: white;
   font-size: 15px;
+  border: 0;
+  outline: 0;
+  margin-right: 30px;
 }
-#mypage_profile-save {
-  position: fixed;
-  top: 850px;
-  left: 1400px;
+#mypage_card-save{
   width: 120px;
   height: 40px;
-  border-radius: 15px;
-  background-color: #2872f9;
+  border-radius: 20px;
+  transform: translateX(390%);
+  background-color: #2872F9;
   color: white;
   font-size: 15px;
+  border: 0;
+  outline: 0;
 }
 </style>

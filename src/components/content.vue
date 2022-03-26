@@ -35,7 +35,10 @@
 // import excomp from './mypage_review.vue'
 // import excomp from './mypage_prefer.vue'
 // import excomp from './mypage_profile';
-import excomp from './mypage_card';
+// import excomp from './mypage_card';
+import excomp from './mypage_alarm';
+// import excomp from './mypage_exit.vue';
+// import excomp from './mypage_exit-first.vue';
 
 export default {
   name: 'vsncontent',
