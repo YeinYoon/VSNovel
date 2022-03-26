@@ -136,17 +136,14 @@ export default {
 /* work_list 작품 전체 div / list_img 작품 이미지 / 
     list_title 작품 제목 / list_span 글자들 묶은 div / 
     list_team 작품 팀 / list_content 작품 줄거리 / list_price 작품 가격 */
-.listView {
-  position: relative;
-  top: -10%;
-}
+
 .work_list {
   /* width: calc(50%); */
   background-color: #2a2a2a;
-  margin: 70px 10px;
+  margin: 50px 10px;
   border-radius: 20px;
   height: 125px;
-  top: 80px;
+  top: 100px;
   display: flex;
   flex-direction: row;
   position: relative;
