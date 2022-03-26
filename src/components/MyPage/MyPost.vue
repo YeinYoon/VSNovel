@@ -1,5 +1,5 @@
 <template>
-<div class="tests">
+  <div class="tests">
     <div class="header">
       <div class="service">
         <img class="icon" src="../../assets/icons/white/home.png" alt="logo" />
@@ -7,63 +7,69 @@
         <span class="topic">내가 쓴 게시글</span>
       </div>
     </div>
-  <section>
-    <div class="mypage_post-box">
-    <table class="mypage_post-table">
-      <div class="text_container">
-        <thead>
-          <tr>
-            <td>작성위치</td>
-            <td>제목</td>
-            <td>추천수</td>
-            <td>댓글수</td>
-            <td>조회수</td>
-          </tr>
-        </thead>
-        <hr align="center" style="border: solid 2px #959595; width: 99%;">
-        <tr style="transform: translateY(-10%);" v-for="(post,i) in post" :key="i">
-          <td>{{post.position}}</td>
-          <td>{{post.title}}</td>
-          <td>{{post.prefer}}</td>
-          <td>{{post.comment}}</td>
-          <td>{{post.look}}</td>
-        </tr>
+    <div class="post_section">
+      <div class="post">
+        <div class="post_place">작성위치</div>
+        <div class="post_title">제목</div>
+        <div class="post_like">추천수</div>
+        <div class="post_comment">댓글수</div>
+        <div class="post_clicks">조회수</div>
       </div>
-    </table>
+      <hr class="lines" />
+      <div class="post" v-for="(post, i) in post" :key="i">
+        <div class="post_place">{{ post.position }}</div>
+        <div class="post_title">{{ post.title }}</div>
+        <div class="post_like">{{ post.prefer }}</div>
+        <div class="post_comment">{{ post.comment }}</div>
+        <div class="post_clicks">{{ post.look }}</div>
+      </div>
+    </div>
   </div>
-  </section>
-</div>
 </template>
 
 <script>
-import post from '@/assets/post.js'
+import post from "@/assets/post.js";
 
 export default {
-  data(){
-    return{
-      post:post
+  data() {
+    return {
+      post: post,
     };
   },
-}
+};
 </script>
 
 <style>
-.mypage_post-table{
-  display: inline-block;
-  left: 450px;
-  font-size: 25px;
+.post_section {
+  margin: 0 auto;
+  padding: 5px;
+  font-size: 1.3em;
   color: white;
-  border-spacing: 20px;
-  overflow: auto;
-  text-overflow: ellipsis;
-}
-.mypage_post-box{
-  display: flex;
-  transform: translate(3%,25%);
-  border:1px;
-  width: 1060px;
-  height: 600px;
+  width: 700px;
+  height: 70%;
   background-color: #484848;
-  border-radius: 20px;
+  position: relative;
+  top: 50px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+}
+.post_section::-webkit-scrollbar {
+  display: none;
+}
+.post {
+  text-align: center;
+  display: flex;
+}
+.post_place,
+.post_like,
+.post_comment,
+.post_clicks {
+  width: 100px;
+}
+.post_title {
+  width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 </style>
