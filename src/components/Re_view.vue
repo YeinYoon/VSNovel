@@ -1,5 +1,6 @@
 <template>
   <div class="RouterView">
+      <div><ReviewModal v-if="openmodal == true" @close="openmodal = false"></ReviewModal></div>
     <header class="header">
         <div class="service">
             <img class="icon" src="../assets/icons/white/bubble_chat.png" alt="community"><span class="title" id="commu_title">커뮤니티</span>
@@ -9,7 +10,7 @@
     <section class="section">
         <div class="editer">
             <div class="editer_flex">
-                <button class="editer_topic">작품선택</button>
+                <button class="editer_topic" @click="openmodal = true">작품선택</button>
                 <input id="inp" type="text">
                 <div class="str_back">
                     <span class="str_first">★★★★★
@@ -35,6 +36,7 @@
 <script>
 import { QuillEditor } from '@vueup/vue-quill'
 import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import ReviewModal from '../components/ReviewModal'
 
 export default {
     watch: {
@@ -44,6 +46,7 @@ export default {
     },
     data() {
         return{
+            openmodal: false,
             count: 0, 
             value : 1,
             str_draw: {
@@ -64,7 +67,8 @@ export default {
 
     },
     components: {
-    QuillEditor
+    QuillEditor,
+    ReviewModal
     }
 
 }

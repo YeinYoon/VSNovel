@@ -14,54 +14,7 @@
             </div>
             <div class="content_frame">
                 <div class="content"> 
-                    <div class="content_text">
-    Duis in felis eros. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in porta velit. elis eros. Suspendos. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in porta velit. elis eros. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in os. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in porta velit. elis eros. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in isse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, os. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in poros. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in porta velit. elis eros. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in os. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in porta velit. elis eros. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in ta velit. elis eros. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in os. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in porta velit. elis eros. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in os. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in porta velit. elis eros. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in os. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in porta velit. elis eros. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in os. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in porta velit. elis eros. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in os. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in porta velit. elis eros. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    Nulla luctus gravida augue, in in pelielis eros. Suspendisse porttitor hendrerit purus, eu malesuada velit vehicula vitae. Proin vulputate felis sapien, non lacinia elit efficitur ut. Phasellus eu euismod neque. Integer nec dui sagittis, semper leo sit amet, condimentum nunc. Sed malesuada, diam eget interdum aliquam, tellus metus mattis ante, scelerisque varius nisl odio et ex. Curabitur vel arcu sem. Vestibulum et sem tincidunt urna pretium gravida ut eu urna. Mauris cursus libero quis mi convallis mollis.
-
-    t ultrices dolor vestibulum. Donec est leo, hendrerit vel sem a, porta aliquam est. In in imperdiet dolor, et mollis dolor. Aliquam aliquet, sapien eu sodales posuere, lectus metus tempor justo, vitae tempus ligula sapien quis lorem. Ut accumsan eros sit amet convallis eleifend. Sed urna justo, vulputate non ultrices a, feugiat at dui. Donec viverra tellus non neque dapibus posuere. Proin dapibus blandit facilisis.</div>
+                    <div class="content_text"></div>
                     </div>
                     <div class="content_vote">
                         <div class="vote_position">
@@ -77,19 +30,23 @@
                 <div class="">
                     <textarea class="comment_input"></textarea>
                 </div>
-                <div><button class="btn_blue">작성하기</button></div>
+                <div class="btn_area"><button class="btn_blue1">작성하기</button></div>
+                
                 <div class="comment_list">
-                    <div>이미지</div>
-                    <div>내용</div>
+                    <div class="profile"></div>
+                    <div class="comment_content">내용</div>
                 </div>
             </div>
         </div>
     </div>
     </section>
 
-    <!-- <footer class="footer">
-        <button class="save">목록으로</button>
-    </footer> -->
+    <footer class="footer">
+        <div class="btn_area2">
+            <button class="btn_blue2">목록으로</button>
+        </div>
+        
+    </footer>
   </div>
 </template>
 
@@ -167,13 +124,13 @@ body {
 .vote_up{
     font-weight: 500;
     width: 130px;
-    height: 40px;
+    height: 50px;
     background-color:#2872f9;
     border: none;
     color: white;
     text-align: center;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 25px;
     border-radius: 12px;
     margin: 10px;
     display: inline-block;
@@ -181,13 +138,13 @@ body {
 .vote_down{
     font-weight: 500;
     width: 130px;
-    height: 40px;
-    background-color:#2872f9;
+    height: 50px;
+    background-color:red;
     border: none;
     color: white;
     text-align: center;
     text-decoration: none;
-    font-size: 14px;
+    font-size: 25px;
     border-radius: 12px;
     margin: 10px;
     display: inline-block;
@@ -197,7 +154,7 @@ body {
     position: relative;
     width: 100%;
     height: 100%;
-    bottom:10px;
+    /* bottom:10px; */
     border-radius: 12px;
 }
 .editer_flex{
@@ -224,25 +181,27 @@ body {
 }
 .editer_topic:hover {opacity:0.8;}
 .editer_frame{
-    width: 100%;
+    width: 98%;
+    border-radius:15px;
+    margin: 0px 1% 10px 1%;
     background-color: #262626;
+    padding-bottom:20px;
 }
 .content {
     display: block;
     position: relative;
     width: 98%;
     min-height: 100px;
-    /* background-color: ; */
     border-radius: 14px;
     color:white;
     z-index: 1;
-    margin: 20px 1% 0px 1%;
+    margin: 30px 1% 0px 1%;
 }
 .inp {
     font-size:1.2em;
     outline: none;
     display: block;
-    flex:1;
+    /* flex:1; */
     height: 60px;
     background-color: #5e5e5e;
     border-radius: 30px;
@@ -256,12 +215,20 @@ body {
     position: absolute;
 
 }
+.btn_area {
+    /* background-color:white; */
+    position: relative;
+    width:100%;
+    height: 30px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
 
-.btn_blue {
+.btn_blue1 {
     font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
     font-weight: 500;
-    top:5px;
-    position: relative;
+    position: absolute;
+    right:0;
     width: 100px;
     height: 30px;
     background-color:#2872f9;
@@ -272,9 +239,8 @@ body {
     font-size: 14px;
     border-radius: 12px;
     cursor: pointer;
-    margin:7px 5px 7px 5px;
 }
-.save:hover {opacity: 0.8;}
+.btn_blue1:hover {opacity: 0.8;}
 
 ::-webkit-scrollbar {
 display: none;
@@ -283,13 +249,59 @@ display: none;
     font-size:1.2em;
     outline: none;
     display: block;
-    border-radius: 14px;
+    border-radius: 20px;
     height: 80px;
     background-color: #5e5e5e;
     width: 100%;
     color:white;
     border:none;
-    padding-left: 5px;
+    padding-left: 10px;
     resize: none;
+}
+.comment_list {
+    display:flex;
+}
+.profile {
+    border-radius: 20px;
+    background-color: #5e5e5e;
+    width: 70px;
+    color:white;
+    border:none;
+    margin-right: 15px;
+}
+.comment_content {
+    border-radius: 20px;
+    height: 70px;
+    background-color: #5e5e5e;
+    flex : 1;
+    color:white;
+    border:none;
+}
+.btn_blue2 {
+    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+    font-weight: 500;
+    /* position: absolute; */
+    width: 100px;
+    height: 30px;
+    background-color:#2872f9;
+    border: none;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+    font-size: 14px;
+    border-radius: 12px;
+    cursor: pointer;
+    /* margin:7px 5px 7px 5px; */
+}
+.btn_blue2:hover {opacity: 0.8;}
+
+.btn_area2 {
+    /* margin: 0px 1% 0px 1%;  */
+    background-color:white;
+    /* position: relative; */
+    /* width:98%; */
+    /* height: 30px; */
+    /* margin-top: 10px;
+    margin-bottom: 10px; */
 }
 </style>
