@@ -7,7 +7,7 @@
     </div>
     <div>
       <div class="group" @click="step = 'main'"><span>· 마이페이지</span></div>
-      <div class="sel">
+      <div class="sel"  @click="step = 'mycard'">
         · 결제정보 설정
       </div>
       <div class="sel"  @click="step = 'mypost'">
@@ -19,27 +19,32 @@
       <div class="sel" @click="step = 'prefer'">
         · 선호 / 비선호 설정
       </div>
-      <div class="sel">
+      <div class="sel" @click="step = 'myAlarm'">
         · 알림 설정
       </div>
-      <div class="sel">
+      <div class="sel" @click="step = 'myWithdrawal'">
         · 회원 탈퇴
       </div>
     </div>
   </div>
   <div v-if="step == 'main'">  <MyPage /> </div>
+  <div v-if="step == 'mycard'"> <MyCard /></div>
   <div v-if="step == 'mypost'">  <MyPost /> </div>
   <div v-if="step == 'myReview'">  <Myreview /> </div>
   <div v-if="step == 'prefer'">  <Prefer /> </div>
- 
+  <div v-if="step == 'myAlarm'">  <MyAlarm /> </div>
+  <div v-if="step == 'myWithdrawal'">  <MyWithdrawal /> </div>
 </div>
 </template>
 
 <script>
 import MyPage from '../MyPage/MyPageMain';
+import MyCard from '../MyPage/MyCard';
 import MyPost from '../MyPage/MyPost';
 import Myreview from '../MyPage/Myreview';
 import Prefer from '../MyPage/Prefer';
+import MyAlarm from '../MyPage/MyAlarm';
+import MyWithdrawal from '../MyPage/withdrawal/MyWithdrawal';
 export default {
   name: "StoreSide",
   data() {
@@ -50,9 +55,12 @@ export default {
   },
   components:{
     MyPage,
+    MyCard,
     MyPost,
     Myreview,
     Prefer,
+    MyAlarm,
+    MyWithdrawal,
   },
 };
 </script>
