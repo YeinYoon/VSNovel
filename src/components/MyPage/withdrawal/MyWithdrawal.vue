@@ -11,7 +11,7 @@
     <MyUserDropFir @next="next++"/>
   </div>
   <div v-if="next == 1">
-    <MyUserDropSec @end="this.$router.push('/')"/>
+    <MyUserDropSec @end="$emit('myMain')"/>
   </div>
 </div>
 </template>

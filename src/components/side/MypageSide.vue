@@ -33,7 +33,7 @@
   <div v-if="step == 'myReview'">  <Myreview /> </div>
   <div v-if="step == 'prefer'">  <Prefer /> </div>
   <div v-if="step == 'myAlarm'">  <MyAlarm /> </div>
-  <div v-if="step == 'myWithdrawal'">  <MyWithdrawal /> </div>
+  <div v-if="step == 'myWithdrawal'">  <MyWithdrawal @myMain="step = 'main'"/> </div>
 </div>
 </template>
 
