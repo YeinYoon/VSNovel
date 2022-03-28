@@ -17,6 +17,7 @@
         <div><img src="" alt=""><input type="text" class="inp"></div>
         <div class="book_chose_position"><span class="book_chose">작품선택</span></div>
         <div class="modal_content">사진</div>
+        <div class="modal_content">사진</div>
         
         <!--메세지를 출력하는 예제-->
       </div>
