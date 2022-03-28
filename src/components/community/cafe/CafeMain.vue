@@ -14,7 +14,7 @@
     </div>
     <div class="section">
       <div class="carousel">
-        <SwiperCarousel />
+        <SwiperCarousel/>
       </div>
       <div class="widgets">
         <div class="con">
