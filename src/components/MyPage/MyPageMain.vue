@@ -7,35 +7,34 @@
         <span class="my_topic">프로필 설정</span>
       </div>
     </div>
-    <section>
-      <table class="mypage_profile_table">
-        <tr>
-          <td>닉네임</td>
-          <td><input id="mypage_profile-nickname" type="text" /></td>
-          <td></td>
-        </tr>
-        <tr>
-          <td rowspan="2" valign="top">프로필 이미지</td>
-          <td rowspan="2"><div id="mypage_profile-img"></div></td>
-          <td valign="top">
-            <button id="mypage_profile-browse">Browse</button>
-          </td>
-        </tr>
-        <tr>
-          <td class="mypage_profile-detail">
-            512 x 512 이상의 이미지가 가장 적합<br />허용
-            확장자:png,jpeg,jpg,gif | > 2MB
-          </td>
-        </tr>
-        <tr>
-          <td valign="top">소개</td>
-          <td><input id="mypage_profile-info" type="text" /></td>
-          <td class="mypage_profile-detail" valign="bottom">0/1024</td>
-        </tr>
-      </table>
-      <button id="mypage_profile-canc">취소</button>
-      <button id="mypage_profile-save">저장</button>
-    </section>
+    <div>
+  <table>
+    <tr>
+      <td class="col-one">닉네임</td>
+      <td><input type="text"></td>
+      <td></td>
+    </tr>
+    <tr>
+      <td class="col-one">프로필 이미지</td>
+      <td><input class="profile-image-input" type="text"></td>
+      <td class="col-three">
+        <button id="browse">Browse</button><br>
+        <span>512x512 이상의 이미지가 가장 적합 <br>
+        허용 확장자:png,jpeg,jpg:gif | > 2MB</span>
+        </td>
+    </tr>
+    <tr>
+      <td class="col-one">소개</td>
+      <td><input class="introduce-input" type="text"></td>
+      <td class="col-three">0/1024 byte</td>
+    </tr>
+  </table>
+  <footer>
+    <button id="mypage_card-canc">취소</button>
+    <button id="mypage_card-save">저장</button>
+  </footer>
+</div>
+
   </div>
 </template>
 
@@ -51,207 +50,89 @@ export default {
 </script>
 
 <style>
-button {
+
+#browse{
+  width: 120px;
+  height: 40px;
+  margin-bottom: 55%;
+  border-radius: 20px;
+  background-color: #2872F9;
+  color: white;
+  font-size: 15px;
   border: 0;
   outline: 0;
-  background-color: transparent;
-  cursor: pointer;
 }
-.my_topic {
-  position: absolute;
-  left : 35px;
+.col-three{
+  font-size: 10px;
+  vertical-align: bottom;
+}
+.col-one{
+  vertical-align: top;
+  padding-right: 40px;
+  width: 150px;
+}
+.profile-image-input{
+  height: 160px;
+}
+.introduce-input{
+  height: 160px;
+}
+html{
+    background-color: #363636;
+  }
+table{
   color: white;
-  font-size: 1.2em;
-  top: 95px;
+  margin-left: 0%;
+  margin-top: 10%;
+  border-collapse: separate;
+  border-spacing: 0 20px;
+
 }
-.my_title {
-  position: absolute;
-  left: 100px;
+tr{
+  padding: 50px;
+}
+table input{
+  border: 0;
+  outline: 0;
   color: white;
-  font-size: 2em;
-  top: 40px;
-  font-weight: 600;
-}
-/* .side_first-title {
-  position: fixed;
-  top: 250px;
-  left: 150px;
-  width: 210px;
+  width: 400px;
   height: 40px;
-  background-color: white;
-  border-radius: 18px;
+  background: #5E5E5E;
+  border-radius: 20px;
+  margin-right: 10px;
 }
-.side_first-title-font {
-  margin-top: 5px;
-  float: left;
-  padding-left: 20px;
-  font-size: 20px;
-  text-align: left;
-  font-weight: bolder;
-} */
-#mypage_sidebar-profile {
-  position: fixed;
-  top: 310px;
-  left: 173px;
-  width: 190px;
-  height: 40px;
-  font-size: 20px;
-  text-align: left;
-  font-weight: bolder;
+input::placeholder{
   color: white;
-  border-radius: 18px;
-  background-color: #2872f9;
+  font-size: 25px;
 }
-#mypage_sidebar-pay {
-  position: fixed;
-  top: 360px;
-  left: 173px;
-  width: 190px;
-  height: 40px;
-  border-radius: 18px;
-  font-size: 20px;
-  font-weight: bolder;
-  text-align: left;
-  color: white;
-}
-#mypage_sidebar-post {
-  position: fixed;
-  top: 410px;
-  left: 173px;
-  width: 190px;
-  height: 40px;
-  border-radius: 18px;
-  font-size: 20px;
-  font-weight: bolder;
-  text-align: left;
-  color: white;
-}
-#mypage_sidebar-review {
-  position: fixed;
-  top: 460px;
-  left: 173px;
-  width: 190px;
-  height: 40px;
-  border-radius: 18px;
-  font-size: 20px;
-  font-weight: bolder;
-  text-align: left;
-  color: white;
-}
-#mypage_sidebar-prefer {
-  position: fixed;
-  top: 510px;
-  left: 173px;
-  width: 190px;
-  height: 40px;
-  border-radius: 18px;
-  font-size: 20px;
-  font-weight: bolder;
-  text-align: left;
-  color: white;
-}
-#mypage_sidebar-alarm {
-  position: fixed;
-  top: 560px;
-  left: 173px;
-  width: 190px;
-  height: 40px;
-  border-radius: 18px;
-  font-size: 20px;
-  font-weight: bolder;
-  text-align: left;
-  color: white;
-}
-#mypage_sidebar-exit {
-  position: fixed;
-  top: 610px;
-  left: 173px;
-  width: 190px;
-  height: 40px;
-  border-radius: 18px;
-  font-size: 20px;
-  font-weight: bolder;
-  text-align: left;
-  color: white;
-}
-/* .service_title {
-  position: fixed;
-  top: 10px;
-  left: 550px;
-  color: white;
-  font-size: 50px;
-}
-.service_subtitle {
-  position: fixed;
-  top: 110px;
-  left: 470px;
-  color: white;
-  font-size: 30px;
-} */
-.mypage_profile_table {
-  position: fixed;
-  top: 250px;
-  left: 500px;
-  border: 1px;
-  border: white;
-  font-size: 30px;
-  color: white;
-  border-spacing: 20px;
-}
-td {
-  position: relative;
-  width: 200px;
-}
-#mypage_profile-nickname {
+#mypage_card{
   width: 540px;
   height: 50px;
   border-radius: 10px;
-  background-color: #5e5e5e;
+  background-color: #5E5E5E;
 }
-#mypage_profile-img {
-  width: 540px;
-  height: 220px;
-  border-radius: 10px;
-  background-color: #5e5e5e;
-}
-#mypage_profile-browse {
+#mypage_card-canc{
   width: 120px;
   height: 40px;
-  border-radius: 15px;
-  background-color: #2872f9;
-  font-size: 18px;
-  color: white;
-}
-.mypage_profile-detail {
-  width: 300px;
-  font-size: 13px;
-}
-#mypage_profile-info {
-  width: 540px;
-  height: 220px;
-  border-radius: 10px;
-  background-color: #5e5e5e;
-}
-#mypage_profile-canc {
-  position: fixed;
-  top: 850px;
-  left: 1250px;
-  width: 120px;
-  height: 40px;
-  border-radius: 15px;
-  background-color: #5e5e5e;
+  transform: translateX(400%);
+  border-radius: 20px;
+  background-color: #5E5E5E;
   color: white;
   font-size: 15px;
+  border: 0;
+  outline: 0;
+  margin-right: 30px;
 }
-#mypage_profile-save {
-  position: fixed;
-  top: 850px;
-  left: 1400px;
+#mypage_card-save{
   width: 120px;
   height: 40px;
-  border-radius: 15px;
-  background-color: #2872f9;
+  border-radius: 20px;
+  transform: translateX(390%);
+  background-color: #2872F9;
   color: white;
   font-size: 15px;
+  border: 0;
+  outline: 0;
 }
+
 </style>
