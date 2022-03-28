@@ -19,7 +19,7 @@
 // If you are using PurgeCSS, make sure to whitelist the carousel CSS classes
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
-import data from "../../assets/data.js";
+import data from "@/assets/DataJs/data.js";
 
 export default {
   name: "App",

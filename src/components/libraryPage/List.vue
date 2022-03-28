@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import datas from "../../assets/dataHu.js";
+import datas from "@/assets/DataJs/dataHu.js";
 
 export default {
   data() {

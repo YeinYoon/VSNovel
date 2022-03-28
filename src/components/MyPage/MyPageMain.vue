@@ -3,8 +3,8 @@
     <div class="header">
       <div class="service">
         <img class="icon" src="../../assets/icons/white/home.png" alt="logo" />
-        <span class="my_title">마이페이지</span>
-        <span class="my_topic">프로필 설정</span>
+        <span class="title">마이페이지</span>
+        <span class="topic">프로필 설정</span>
       </div>
     </div>
     <div>

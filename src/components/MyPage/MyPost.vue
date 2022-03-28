@@ -3,8 +3,8 @@
     <div class="header">
       <div class="service">
         <img class="icon" src="../../assets/icons/white/home.png" alt="logo" />
-        <span class="my_title">마이페이지</span>
-        <span class="my_topic">내가 쓴 게시글</span>
+        <span class="title">마이페이지</span>
+        <span class="topic">내가 쓴 게시글</span>
       </div>
     </div>
     <div class="post_section">
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import post from "@/assets/post.js";
+import post from "@/assets/DataJs/post.js";
 
 export default {
   data() {

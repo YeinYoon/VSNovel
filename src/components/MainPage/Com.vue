@@ -73,9 +73,9 @@
 </template>
 
 <script>
-import commuData from "../../assets/commuData.js";
-import notice from "../../assets/notice.js";
-import store from "../../assets/dataHu.js";
+import commuData from "../../assets/DataJs/commuData.js";
+import notice from "../../assets/DataJs/notice.js";
+import store from "../../assets/DataJs/dataHu.js";
 export default {
   name: "Com",
   data() {

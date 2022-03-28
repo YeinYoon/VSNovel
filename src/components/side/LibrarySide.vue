@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import genreData from "../../assets/genreData.js";
+import genreData from "../../assets/DataJs/genreData.js";
 import List from '../libraryPage/List';
 export default {
   name: "StoreSide",

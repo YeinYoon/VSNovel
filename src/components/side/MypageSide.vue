@@ -1,76 +1,75 @@
 <template>
-<div>
-  <div class="sideBar">
-    <div class="side_search">
-      <img src="../../assets/icons/magnifier.png" class="side_icon" />
-      <input type="text" />
+  <div>
+    <div class="sideBar">
+      <div class="side_search">
+        <img src="../../assets/icons/magnifier.png" class="side_icon" />
+        <input type="text" />
+      </div>
+      <div>
+        <div class="group" id="main" @click="eventStep('main', $event)">
+          <span>· 마이페이지</span>
+        </div>
+        <div class="sel" id="mycard" @click="eventStep('mycard', $event)">
+          · 결제정보 설정
+        </div>
+        <div class="sel" id="mypost" @click="eventStep('mypost', $event)">
+          · 내가 쓴 게시글
+        </div>
+        <div class="sel" id="myReview" @click="eventStep('myReview', $event)">
+          · 작성 리뷰 관리
+        </div>
+        <div class="sel" id="prefer" @click="eventStep('prefer', $event)">
+          · 선호 / 비선호 설정
+        </div>
+        <div class="sel" id="myAlarm" @click="eventStep('myAlarm', $event)">
+          · 알림 설정
+        </div>
+        <div
+          class="sel"
+          id="myWithdrawal"
+          @click="eventStep('myWithdrawal', $event)"
+        >
+          · 회원 탈퇴
+        </div>
+      </div>
     </div>
-    <div>
-      <div class="group" @click="step = 'main'" ><span>· 마이페이지</span></div>
-      <div class="sel"  @click="step = 'mycard'">
-        · 결제정보 설정
-      </div>
-      <div class="sel" id="mypost" @click="eventStep('mypost', $event)">
-        · 내가 쓴 게시글
-      </div>
-      <div class="sel" id="myReview"  @click="eventStep('myReview', $event)">
-        · 작성 리뷰 관리
-      </div>
-      <div class="sel" id="prefer" @click="eventStep('prefer', $event)">
-        · 선호 / 비선호 설정
-      </div>
-      <div class="sel" @click="step = 'myAlarm'">
-        · 알림 설정
-      </div>
-      <div class="sel" @click="step = 'myWithdrawal'">
-        · 회원 탈퇴
-      </div>
-    </div>
+    <div v-if="step == 'main'"><MyPage /></div>
+    <div v-if="step == 'mycard'"><MyCard /></div>
+    <div v-if="step == 'mypost'"><MyPost /></div>
+    <div v-if="step == 'myReview'"><Myreview /></div>
+    <div v-if="step == 'prefer'"><Prefer /></div>
+    <div v-if="step == 'myAlarm'"><MyAlarm /></div>
+    <div v-if="step == 'myWithdrawal'"><MyWithdrawal /></div>
   </div>
-  <div v-if="step == 'main'">  <MyPage /> </div>
-  <div v-if="step == 'mycard'"> <MyCard /></div>
-  <div v-if="step == 'mypost'">  <MyPost /> </div>
-  <div v-if="step == 'myReview'">  <Myreview /> </div>
-  <div v-if="step == 'prefer'">  <Prefer /> </div>
-  <div v-if="step == 'myAlarm'">  <MyAlarm /> </div>
-  <div v-if="step == 'myWithdrawal'">  <MyWithdrawal /> </div>
-</div>
 </template>
 
 <script>
-import MyPage from '../MyPage/MyPageMain';
-import MyCard from '../MyPage/MyCard';
-import MyPost from '../MyPage/MyPost';
-import Myreview from '../MyPage/Myreview';
-import Prefer from '../MyPage/Prefer';
-import MyAlarm from '../MyPage/MyAlarm';
-import MyWithdrawal from '../MyPage/withdrawal/MyWithdrawal';
+import MyPage from "../MyPage/MyPageMain";
+import MyCard from "../MyPage/MyCard";
+import MyPost from "../MyPage/MyPost";
+import Myreview from "../MyPage/Myreview";
+import Prefer from "../MyPage/Prefer";
+import MyAlarm from "../MyPage/MyAlarm";
+import MyWithdrawal from "../MyPage/withdrawal/MyWithdrawal";
 export default {
   name: "StoreSide",
   data() {
     return {
       groupStep: "",
-      step: 'main',
-      befStep : '',
+      step: "main",
     };
   },
-  methods:{
-    eventStep(info, event){
+  methods: {
+    eventStep(info, event) {
       this.step = info;
       if (this.step == "main") {
         event.target.style.backgroundColor = "white";
-      }else if(this.befStep != '') {
-        event.target.style.backgroundColor = "#2872f9";
-        let id = document.getElementById(this.breStep);
-        id.style.backgroundColor = "#2c2c2c";
-      }else{
+      } else {
         event.target.style.backgroundColor = "#2872f9";
       }
-      console.log(this.befStep);
-      this.befStep = document.querySelector(info);
-    }
+    },
   },
-  components:{
+  components: {
     MyPage,
     MyCard,
     MyPost,

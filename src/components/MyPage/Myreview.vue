@@ -3,8 +3,8 @@
     <div class="header">
       <div class="service">
         <img class="icon" src="../../assets/icons/white/home.png" alt="logo" />
-        <span class="my_title">마이페이지</span>
-        <span class="my_topic">작성 리뷰 관리</span>
+        <span class="title">마이페이지</span>
+        <span class="topic">작성 리뷰 관리</span>
       </div>
     </div>
   <div class="review_section">
@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import review from '@/assets/review.js'
+import review from '@/assets/DataJs/review.js'
 
 export default {
   data(){

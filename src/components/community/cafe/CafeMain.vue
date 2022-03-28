@@ -3,12 +3,12 @@
     <!-- 헤더 -->
     <div class="header">
       <div class="service">
-        <img  class="icon" src="../../assets/icons/white/leaf.png" />
+        <img  class="icon" src="@/assets/icons/white/leaf.png" />
         <span class="title">Village</span>
         <span class="topic">소모임 커뮤니티</span>
       </div>
       <div class="search">
-        <img src="../../assets/icons/magnifier.png" class="icon" />
+        <img src="@/assets/icons/magnifier.png" class="icon" />
         <input type="text" />
       </div>
     </div>
@@ -51,7 +51,7 @@
 
 <script>
 import SwiperCarouselVue from "./CafeCarousel";
-import commuData from "../../assets/commuData.js";
+import commuData from "@/assets/DataJs/commuData.js";
 export default {
   name: "MainScreen",
   data() {
