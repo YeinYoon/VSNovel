@@ -1,16 +1,16 @@
 <template>
     <div class="tests">
         
-    <div><Modal v-if="모달창열렸니 == true" :openmodal="모달창열렸니" @closemodal="모달창열렸니 = false"></Modal></div>
+    <!-- <div><Modal v-if="모달창열렸니 == true" :openmodal="모달창열렸니" @closemodal="모달창열렸니 = false"></Modal></div> -->
 
     <header class="header">
         <div class="service">
-            <img class="icon" src="../assets/icons/white/megaphone.png" alt="community">
+            <img class="icon" src="@/assets/icons/white/megaphone.png" alt="community">
             <span class="title">공지사항</span>
             <span class="topic">TOPIC · 전체</span>
             <div class="btn-area">
                 <button class="btn-red">관리</button>
-                <button class="btn-blue">글쓰기</button>
+                <button class="btn-blue" @click="step = 'write'">글쓰기</button>
             </div>
         </div>
     </header>  
@@ -36,21 +36,22 @@
             </div>
         </div>
     </section>
+    
   </div>
 </template>
 
 <script>
-import dummy_data from '../assets/DataJs/commuData.js'
-import Modal from '../components/Modal_vue'
+import dummy_data from '@/assets/DataJs/commuData.js'
+// import Modal from '../components/Modal_vue'
 export default {
     data(){
         return {
             커뮤니티 : dummy_data,
-            모달창열렸니 : false
+            모달창열렸니 : false,
         }
     },
     components : {
-        Modal
+        // Modal,
     }
 }
 </script>

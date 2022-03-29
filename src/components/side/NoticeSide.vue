@@ -11,48 +11,48 @@
         <div @click="clickEvent(i, $event, array)" id="element">· {{array}}</div>
       </div>
     </div>
-    <div>
-      <div class="group"><span>· CAFE</span></div>
-      <div class="sel" @click="step = 'cafeMain'">
-        <div>· 카페 메인</div>
-      </div>
-      <div class="sel">
-        <div>· FPS게임 카페</div>
-      </div>
-    </div>
   </div>
-  <div v-if="step == 'cafeMain'"> <Cafe/> </div>
+    <Notice />
 </div>
 </template>
 
 <script>
-import Cafe from '../community/cafe/CafeMain';
+import Notice from '../notice/Notice';
 export default {
   name: "CommunitySide",
   data() {
     return {
-      sideArrays : ['자유', '작가', '팀원 모집', '리뷰 & 추천'],
-      step: 'main',
-      clickNum : null,
+        sideArrays : ['전체', '업데이트 내역', '이벤트', '정책'],
+        step: 'main',
+        clickNum : null,
     };
   },
   components:{
-      Cafe,
+      Notice,
   },
   methods:{
-    clickEvent(index, event, array) {
-      this.step = array;
+    clickEvent(index, event, clickSide) {
+      this.step = clickSide;
       let a = document.querySelectorAll('#element');
         event.target.style.backgroundColor = "#2872f9";
         if(this.clickNum != null){
           a[this.clickNum].style.backgroundColor = "#2c2c2c";
         }
         this.clickNum = index;
+    },
   }
-},
-}
+};
 </script>
 
 <style>
-
+.sel div{
+  width: 90%;
+  height: 40px;
+  color: white;
+  padding: 5px 10px 5px 20px;
+  text-align: left;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 1em;
+}
 </style>
