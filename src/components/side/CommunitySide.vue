@@ -7,21 +7,30 @@
     </div>
     <div>
       <div class="group" @click="step = 'community'"><span>· TOPIC</span></div>
-      <div class="sel" v-for="(array, i) in sideArrays" :key="i">
-        <div @click="clickEvent(i, $event, array)" id="element">· {{array}}</div>
+      <div class="sel">
+        · 자유
+      </div>
+      <div class="sel">
+        · 작가
+      </div>
+      <div class="sel">
+        · 팀원모집
+      </div>
+      <div class="sel">
+        · 리뷰 & 추천
       </div>
     </div>
     <div>
       <div class="group"><span>· CAFE</span></div>
-      <div class="sel" @click="step = 'cafeMain'">
-        <div>· 카페 메인</div>
+      <div class="sel">
+        · 카페 메인
       </div>
       <div class="sel">
-        <div>· FPS게임 카페</div>
+        · FPS게임 카페
       </div>
     </div>
   </div>
-  <div v-if="step == 'cafeMain'"> <Cafe/> </div>
+    <Cafe />
 </div>
 </template>
 
@@ -31,26 +40,14 @@ export default {
   name: "CommunitySide",
   data() {
     return {
-      sideArrays : ['자유', '작가', '팀원 모집', '리뷰 & 추천'],
+      groupStep: "",
       step: 'main',
-      clickNum : null,
     };
   },
   components:{
       Cafe,
   },
-  methods:{
-    clickEvent(index, event, array) {
-      this.step = array;
-      let a = document.querySelectorAll('#element');
-        event.target.style.backgroundColor = "#2872f9";
-        if(this.clickNum != null){
-          a[this.clickNum].style.backgroundColor = "#2c2c2c";
-        }
-        this.clickNum = index;
-  }
-},
-}
+};
 </script>
 
 <style>

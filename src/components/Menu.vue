@@ -33,7 +33,7 @@
         />
       </div>
       <br />
-      <div v-bind:class="{ menubox: true }" @click="routerPush('/notice')">
+      <div v-bind:class="{ menubox: true }">
         <img
           class="menubox_icon_notice"
           src="@/assets/icons/white/megaphone.png"
