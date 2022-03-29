@@ -6,22 +6,27 @@
         <input type="text" />
       </div>
       <div>
-        <div class="group" id="main" @click="eventStep('main', $event)">
+        <div class="group" id="main" @click="myStep = 'main'">
           <span>· 마이페이지</span>
         </div>
         <div class="sel" v-for="(array, i) in sideArrays" :key="i">
-          <div @click="clickEvent(i, $event, array)" id="element">· {{array}}</div>
+          <div @click="clickEvent(i, $event, array)" id="element">
+            · {{ array }}
+          </div>
         </div>
       </div>
     </div>
-  <div v-if="step == 'main'">  <MyPage /> </div>
-  <div v-if="step == '결제정보 페이지'"> <MyCard /></div>
-  <div v-if="step == '내가 쓴 게시글'">  <MyPost /> </div>
-  <div v-if="step == '작성 리뷰 관리'">  <Myreview /> </div>
-  <div v-if="step == '선호 / 비선호 설정'">  <Prefer /> </div>
-  <div v-if="step == '알림 설정'">  <MyAlarm /> </div>
-  <div v-if="step == '회원 탈퇴'">  <MyWithdrawal @myMain="step = 'main'"/> </div>
-</div>
+    <MyPage />
+      <div v-if="myStep == 'main'"><MyPage /></div>
+      <div v-if="myStep == '결제정보 페이지'"><MyCard /></div>
+      <div v-if="myStep == '내가 쓴 게시글'"><MyPost /></div>
+      <div v-if="myStep == '작성 리뷰 관리'"><Myreview /></div>
+      <div v-if="myStep == '선호 / 비선호 설정'"><Prefer /></div>
+      <div v-if="myStep == '알림 설정'"><MyAlarm /></div>
+      <div v-if="myStep == '회원 탈퇴'">
+        <MyWithdrawal @myMain="step = 'main'" />
+      </div>
+  </div>
 </template>
 
 <script>
@@ -33,34 +38,44 @@ import Prefer from "../MyPage/Prefer";
 import MyAlarm from "../MyPage/MyAlarm";
 import MyWithdrawal from "../MyPage/withdrawal/MyWithdrawal";
 export default {
-  name: "StoreSide",
+  name: "MypageSide",
   data() {
     return {
       groupStep: "",
-      step: "main",
-      sideArrays:['결제정보 페이지', '내가 쓴 게시글', '작성 리뷰 관리', '선호 / 비선호 설정', '알림 설정', '회원 탈퇴'],
+      myStep: "main",
+      sideArrays: [
+        "결제정보 페이지",
+        "내가 쓴 게시글",
+        "작성 리뷰 관리",
+        "선호 / 비선호 설정",
+        "알림 설정",
+        "회원 탈퇴",
+      ],
       clickNum: null,
     };
   },
   methods: {
     clickEvent(index, event, array) {
-      this.step = array;
-      let a = document.querySelectorAll('#element');
-        event.target.style.backgroundColor = "#2872f9";
-        if(this.clickNum != null){
+      console.log(array);
+      this.myStep = array;
+      let a = document.querySelectorAll("#element");
+      event.target.style.backgroundColor = "#2872f9";
+      if (this.clickNum != null) {
+        if (this.clickNum != index) {
           a[this.clickNum].style.backgroundColor = "#2c2c2c";
         }
-        this.clickNum = index;
+      }
+      this.clickNum = index;
     },
-  },
-  components: {
-    MyPage,
-    MyCard,
-    MyPost,
-    Myreview,
-    Prefer,
-    MyAlarm,
-    MyWithdrawal,
+    components: {
+      MyPage,
+      MyCard,
+      MyPost,
+      Myreview,
+      Prefer,
+      MyAlarm,
+      MyWithdrawal,
+    },
   },
 };
 </script>
@@ -80,7 +95,7 @@ export default {
   left: 140px;
 }
 /* -------------------------------------------------------------------- */
-.sel{
+.sel div {
   width: 90%;
   height: 40px;
   color: white;

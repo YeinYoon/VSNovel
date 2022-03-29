@@ -17,16 +17,16 @@ const routes = [
     component : Mypage,
   },
   {
-    path : '/store',
-    component : Store,
+    path : '/notice',
+    component : Notice,
   },
   {
     path : '/library',
     component : Library,
   },
   {
-    path:"/notice",
-    component : Notice
+    path : '/store',
+    component : Store,
   },
   {
     path : '/community',

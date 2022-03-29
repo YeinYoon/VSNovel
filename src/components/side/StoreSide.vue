@@ -105,11 +105,11 @@ export default {
   height: 40px;
   background-color: white;
   padding: 5px 10px 5px 20px;
-  margin: 20px 0 0 0;
   border: none;
   border-radius: 30px;
   font-weight: 700;
   display: table;
+  margin: 20px 0 0 0;
 }
 .group span {
   display: table-cell;

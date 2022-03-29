@@ -2,7 +2,7 @@
 <div>
   <div class="sideBar">
     <div class="side_search">
-      <img src="../../assets/icons/magnifier.png" class="side_icon" />
+      <img src="@/assets/icons/magnifier.png" class="side_icon" />
       <input type="text" />
     </div>
     <div>

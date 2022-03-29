@@ -7,21 +7,17 @@
         @closemodal="모달창열렸니 = false"
       ></Modal>
     </div>
-    <header class="header">
+    <div class="header">
       <div class="service">
-        <img
-          class="icon"
-          src="@/assets/icons/white/bubble_chat.png"
-          alt="logo"
-        />
+        <img class="icon" src="@/assets/icons/white/bubble_chat.png" alt="logo" />
         <span class="title">커뮤니티</span>
         <span class="topic">TOPIC · 자유</span>
+      </div>
+    </div>
         <div class="btn-area">
           <button class="btn-red">관리</button>
           <button class="btn-blue">글쓰기</button>
         </div>
-      </div>
-    </header>
 
     <section class="section">
       <div
@@ -43,8 +39,8 @@
 </template>
 
 <script>
-import dummy_data from "../assets/dummydata/dummy.js";
-import Modal from "../components/Modal_vue";
+import dummy_data from "@/assets/DataJs/commuData.js";
+import Modal from "./Modalvue";
 export default {
   data() {
     return {
@@ -59,8 +55,17 @@ export default {
 </script>
 
 <style>
+.service{
+  display: table;
+}
+.service .title{
+  display: table-cell;
+  vertical-align: middle;
+}
 .btn-area {
-  float: right;
+  position: relative;
+  top:50px;
+  right: 0px;
 }
 .btn-blue {
   font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,

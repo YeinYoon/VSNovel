@@ -70,20 +70,20 @@ export default {
   width: calc(100%);
 }
 .service {
-  float: left;
-  height: 50px;
+  display: table;
 }
 .service .icon {
+  display: table-cell;
   width: 50px;
   height: 50px;
   margin-right: 10px;
 }
 .service .title {
+  display: flex;
+  justify-content: center;
   color: white;
   font-weight: 600;
   font-size: 2em;
-  position: relative;
-  top: 0px;
 }
 .service .topic {
   /* background-color: antiquewhite; */

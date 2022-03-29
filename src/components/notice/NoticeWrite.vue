@@ -15,7 +15,7 @@
                 <input id="inp" type="text">
             </div>
             <div class="content">
-                <!-- <QuillEditor theme="snow"/> -->
+                <QuillEditor theme="snow"/>
             </div>
             <div class="editer_info">
                 주의! 당신은 현재 공지사항 게시판에서 작성중입니다.
@@ -36,12 +36,12 @@
 </template>
 
 <script>
-// import { QuillEditor } from '@vueup/vue-quill'
-// import '@vueup/vue-quill/dist/vue-quill.snow.css';
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 export default {
     components: {
-    // QuillEditor
+    QuillEditor
     }
 
 }

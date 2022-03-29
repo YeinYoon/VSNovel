@@ -59,9 +59,6 @@ export default {
   right: 15px;
   z-index: 12;
 }
-body {
-  margin: 0;
-}
 div {
   box-sizing: border-box;
 }
@@ -90,20 +87,4 @@ div {
   box-shadow: 0 0 100px 50px black;
 }
 
-.service {
-  display: table;
-}
-.service .icon {
-  display: table-cell;
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
-}
-.service .title {
-  display: table-cell;
-  vertical-align: middle;
-  color: white;
-  font-weight: 900;
-  font-size: 2em;
-}
 </style>

@@ -10,7 +10,7 @@
             <span class="topic">TOPIC · 전체</span>
             <div class="btn-area">
                 <button class="btn-red">관리</button>
-                <button class="btn-blue" @click="step = 'write'">글쓰기</button>
+                <button class="btn-blue">글쓰기</button>
             </div>
         </div>
     </header>  
@@ -36,22 +36,21 @@
             </div>
         </div>
     </section>
-    
   </div>
 </template>
 
 <script>
 import dummy_data from '@/assets/DataJs/commuData.js'
-// import Modal from '../components/Modal_vue'
+// import Modal from '@/components/Modal_vue'
 export default {
     data(){
         return {
             커뮤니티 : dummy_data,
-            모달창열렸니 : false,
+            모달창열렸니 : false
         }
     },
     components : {
-        // Modal,
+        // Modal
     }
 }
 </script>
