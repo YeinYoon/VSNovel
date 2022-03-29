@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import review from '@/assets/review.js'
+import review from '@/assets/DataJs/review.js'
 
 export default {
   data(){

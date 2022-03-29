@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import post from "@/assets/post.js";
+import post from "@/assets/DataJs/post.js";
 
 export default {
   data() {

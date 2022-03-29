@@ -62,7 +62,7 @@
       <hr class="lines" />
       <div class="div">
         <div class="list" v-for="store in storeData" :key="store">
-          <img class="img" :src="`${store.titleImg}`" />
+          <img class="img" :src="`${store.titleImg}`" @click="storeView"/>
           <div class="titles">
             {{ store.title }}
           </div>
@@ -73,9 +73,9 @@
 </template>
 
 <script>
-import commuData from "../../assets/commuData.js";
-import notice from "../../assets/notice.js";
-import store from "../../assets/dataHu.js";
+import commuData from "../../assets/DataJs/commuData.js";
+import notice from "../../assets/DataJs/notice.js";
+import store from "../../assets/DataJs/dataHu.js";
 export default {
   name: "Com",
   data() {
@@ -91,6 +91,11 @@ export default {
     });
     console.log(this.noticeData);
   },
+  methods:{
+    storeView(){
+      this.$router.push('/store');
+    }
+  }
 };
 </script>
  

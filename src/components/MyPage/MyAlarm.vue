@@ -2,7 +2,7 @@
 <div class="tests">
     <div class="header">
       <div class="service">
-        <img class="icon" src="../../assets/icons/white/home.png" alt="logo" />
+        <img class="icon" src="@/assets/icons/white/home.png" alt="logo" />
         <span class="title">마이페이지</span>
         <span class="topic">알림 설정</span>
       </div>
@@ -27,7 +27,7 @@
 </template>
 
 <script>
-import alarm from '@/assets/alarmdata.js'
+import alarm from '@/assets/DataJs/alarmdata.js'
 
 export default {
   data(){

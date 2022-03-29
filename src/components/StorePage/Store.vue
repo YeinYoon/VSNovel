@@ -59,8 +59,8 @@
 
 <script>
 import StoreModal from "./StoreModal";
-import data from "../../assets/data.js"; // 이미지 링크
-import dataHu from "../../assets/dataHu.js"; // 작품 정보
+import data from "../../assets/DataJs/data.js"; // 이미지 링크
+import dataHu from "../../assets/DataJs/dataHu.js"; // 작품 정보
 
 export default {
   name: "Store",

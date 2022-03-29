@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import genre from "../../assets/preferdata.js";
+import genre from "../../assets/DataJs/preferdata.js";
 
 export default {
   data() {
