@@ -6,7 +6,7 @@
       <span class="title">상세 페이지</span>
     </div>
   </div>
-  <div class="modal_content">
+  <div class="modal_contents">
     <!-- 제목이랑 작가 -->
     <div class="left_con">
       <div class="modal_header">
@@ -78,7 +78,7 @@ export default {
 }
 
 /* 모달 전체 */
-.modal_content {
+.modal_contents {
   color: white;
   display: flex;
   flex-direction: row;
