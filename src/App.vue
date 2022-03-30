@@ -1,60 +1,64 @@
 <template>
-<Spinner :loading="$store.state.LoadingStatus"></Spinner>
-  <div>
-
-    <div id="bar">
-    <router-link to="/" id="main">메인으로</router-link>
-    <h5 class="text-center">테스트 메인바</h5>
-    <div v-if="$store.state.userNickname != null" class="userName">
-      {{$store.state.userNickname}}
-      <button @click="logout()">로그아웃</button>
+<div class="content">
+    <Vsnmenu v-bind:class="{'vsnmenu':true}"></Vsnmenu>
+    <!-- <vsnside v-bind:class="{'vsnside':true}"></vsnside> -->
+    <!-- <Vsncontent v-bind:class="{'vsncontent':true}"></Vsncontent> -->
+    <div class="vsncontainer">
+      <router-view></router-view>
     </div>
-    <div v-else class="userName">로그인이 필요합니다</div>
-    </div>
-
-    <router-view></router-view>
-    
   </div>
 </template>
 
 <script>
-import axios from './axios'
-import Spinner from './components/Spinner.vue'
+import Vsnmenu from './components/Menu';
+// import vsnside from './components/Side';
+// import Vsncontent from './components/Content';
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    Spinner
+    Vsnmenu,
+    // vsnside,
+    // Vsncontent,
   },
-  methods : {
-    logout(){
-      axios.get('/api/auth/logout')
-      .then((result)=>{
-        if(result.data=='ok') {
-          alert("로그아웃 되었습니다.");
-          this.$store.commit('userLogin', null);
-        } else {
-          console.log(result);
-          alert(result.data);
-        }
-      })
-      .catch((err)=>{
-        console.error(err);
-      })
-    }
-  }
-}
+};
 </script>
 
 <style>
-#bar {
-  background-color: blanchedalmond;
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+body{
+  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
+  font-weight: 500;
+  margin : 0px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
-
-#main {
-  text-align: left;
+.vsnmenu {
+  width: 140px;
+  position:fixed;
+  height: 100vh;
+  left: 0px;
+  overflow: auto;
 }
-
-.userName {
-  text-align: right;
+/* .vsnside {
+  position:fixed;
+  width: 305px;
+  left: 140px;
+  height: 100vh;
+  overflow: auto;
+}
+.vsncontent {
+  position:fixed;
+  width: calc(100vw - 140px); 
+  left: 140px;
+  height: 100vh;
+  overflow: auto;
+} */
+.vsncontainer{
+  background: #353535;
+  position: fixed;
+  width: calc(100vw - 140px);
+  height: 100vh;
+  left: 140px;
+  overflow: auto;
 }
 </style>
