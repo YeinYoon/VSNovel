@@ -11,7 +11,7 @@
       <div class="service">
         <img class="icon" src="@/assets/icons/white/bubble_chat.png" alt="logo" />
         <span class="title">커뮤니티</span>
-        <span class="topic">TOPIC · 자유</span>
+        <span class="topic">작가</span>
       </div>
     </div>
         <div class="btn-area">
@@ -26,7 +26,7 @@
         :key="index"
         @click="모달창열렸니 = true"
       >
-        <img class="thumb" :src="`${a.img}`" />
+        <img class="thumb" :src="`${a.titleImg}`" />
         <div class="back">
           <div class="back_title">{{ a.title }}</div>
           <div class="back_info">

@@ -7,22 +7,20 @@
         <span class="topic">알림 설정</span>
       </div>
     </div>
-  <table>
+    <div class="alarm-section">
     <div v-for="(alarm,i) in alarmdata" :key="i">
-      <tr>
-        <td><input type="checkbox"></td>
-        <td class="cont-title"><span>{{alarmdata[i].title}}</span></td>
-      </tr>
-      <tr>
-        <td></td>
-        <td class="cont-info">{{alarmdata[i].content}}</td>
-      </tr>
+      <div class="alarm-flex">
+        <input class="alarm-check" type="checkbox">
+        <span class="cont-title">{{alarmdata[i].title}}</span><br>
+      </div>
+        <span class="cont-info">{{alarmdata[i].content}}</span>
     </div>
-  </table>
-  <footer>
-    <button id="mypage_card-canc">취소</button>
-    <button id="mypage_card-save">저장</button>
+  </div>
+  <footer class="button-position">
+      <button id="mypage_alarm-canc">취소</button>
+      <button id="mypage_alarm-save">저장</button>
   </footer>
+
 </div>
 </template>
 
@@ -39,61 +37,76 @@ export default {
 </script>
 
 <style>
+.button-position{
+  width: 350px;
+  height: 45px;
+  position: absolute;
+  top: 90%;
+  left: 55%;
+  
+}
+.alarm-flex{
+  display: flex;
+}
+input[type="checkbox"]{
+  width: 40px; /*Desired width*/
+  height: 40px; /*Desired height*/
+  cursor: pointer;
+  -webkit-appearance: none;
+  appearance: none;
+  background-color: #929292;
+  border-radius: 5px;
+  }
+  input[type='checkbox']:checked{
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      -o-appearance: none;
+      appearance:none;
+      box-shadow: none;
+      background-color: #2872F9;
+  }
 .cont-info{
-  padding-bottom: 0%;
-  transform: translateY(-20%);
+  margin-left: 60px;
+  padding-top: 40px;
+
 }
 .cont-title{
   font-size: 30px;
-  transform: translateY(-20%);
+  margin-left: 20px;
 }
-td{
-  padding: 0;
-}
-table{
+.alarm-section{
   color: white;
-  margin-right: 0%;
-  margin-top: 10%;
-  width: 72%;
+  margin: 0 auto;
+  position: fixed;
+  top: 180px;
+  left: 550px;
+  width: 700px;
+  height: 950px;
+  /* background: #2872F9; */
 }
-table input{
-  width: 77px;
-  height: 50px;
+#mypage_alarm-canc {
+  left: 60%;
+  background-color: #5e5e5e;
+  color: white;
+  width: 150px;
+  padding: 10px;
+  margin: 5px;
   border-radius: 20px;
-}
-input::placeholder{
-  color: white;
-  font-size: 25px;
-}
-#mypage_card{
-  width: 540px;
-  height: 50px;
-  border-radius: 10px;
-  background-color: #5E5E5E;
-}
-#mypage_card-canc{
-  margin-top: 25px;
-  width: 120px;
-  height: 40px;
-  transform: translateX(400%);
-  border-radius: 20px;
-  background-color: #5E5E5E;
-  color: white;
-  font-size: 15px;
-  border: 0;
-  outline: 0;
-  margin-right: 30px;
-}
-#mypage_card-save{
-  margin-top: 25px;
-  width: 120px;
-  height: 40px;
-  border-radius: 20px;
-  transform: translateX(390%);
-  background-color: #2872F9;
-  color: white;
-  font-size: 15px;
   border: 0;
   outline: 0;
 }
+#mypage_alarm-save {
+  
+  left: 60%;
+  background-color: #2872f9;
+  color: white;
+  width: 150px;
+  padding: 10px;
+  margin: 5px;
+  border-radius: 20px;
+  border: 0;
+  outline: 0;
+  
+}
+
 </style>

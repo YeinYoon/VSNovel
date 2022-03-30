@@ -22,16 +22,19 @@
   </div>
 </div>
     <div v-if="step == '자유'"> <Community/> </div>
-    <div v-if="step == '작가'"> <Community/> </div>
-    <div v-if="step == '팀원 모집'"> <Community/> </div>
-    <div v-if="step == '리뷰 & 추천'"> <Community/> </div>
+    <div v-if="step == '작가'"> <Writer/> </div>
+    <div v-if="step == '팀원 모집'"> <Team/> </div>
+    <div v-if="step == '리뷰 & 추천'"> <Review/> </div>
     <div v-if="step == 'cafeMain'"> <Cafe/> </div>
 </div>
 </template>
 
 <script>
+import Community from '../community/free/CommuFree';
+import Writer from '../community/WriterCommu';
+import Team from '../community/TeamCommu';
+import Review from '../community/ReviewCommu';
 import Cafe from '../community/cafe/CafeMain';
-import Community from '../community/CommuManage';
 export default {
   name: "CommunitySide",
   data() {
@@ -42,8 +45,11 @@ export default {
     };
   },
   components:{
-      Cafe,
       Community,
+      Writer,
+      Team,
+      Review,
+      Cafe,
   },
   methods:{
     clickEvent(index, event, array) {

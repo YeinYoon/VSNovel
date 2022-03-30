@@ -93,10 +93,10 @@ export default {
 .tests {
   /* background-color: #353535; */
   padding: 35px 40px 10px 40px;
-  width: calc(100% - 440px);
+  width: calc(100% - 390px);
   height: 100%;
   position: fixed;
-  left: 440px;
+  left: 390px;
   overflow: auto;
 }
 /* price_div 위치 잡는 div /  price 전체 div / 

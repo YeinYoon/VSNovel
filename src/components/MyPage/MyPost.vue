@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="post_section">
-      <div class="post">
+      <div class="post_line">
         <div class="post_place">작성위치</div>
         <div class="post_title">제목</div>
         <div class="post_like">추천수</div>
@@ -16,7 +16,7 @@
         <div class="post_clicks">조회수</div>
       </div>
       <hr class="lines" />
-      <div class="post" v-for="(post, i) in post" :key="i">
+      <div class="post_line" v-for="(post, i) in post" :key="i">
         <div class="post_place">{{ post.position }}</div>
         <div class="post_title">{{ post.title }}</div>
         <div class="post_like">{{ post.prefer }}</div>
@@ -56,9 +56,10 @@ export default {
 .post_section::-webkit-scrollbar {
   display: none;
 }
-.post {
+.post_line {
   text-align: center;
   display: flex;
+  height: 30px;
 }
 .post_place,
 .post_like,

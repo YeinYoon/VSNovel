@@ -16,7 +16,6 @@
         </div>
       </div>
     </div>
-    <MyPage />
       <div v-if="myStep == 'main'"><MyPage /></div>
       <div v-if="myStep == '결제정보 페이지'"><MyCard /></div>
       <div v-if="myStep == '내가 쓴 게시글'"><MyPost /></div>
@@ -24,7 +23,7 @@
       <div v-if="myStep == '선호 / 비선호 설정'"><Prefer /></div>
       <div v-if="myStep == '알림 설정'"><MyAlarm /></div>
       <div v-if="myStep == '회원 탈퇴'">
-        <MyWithdrawal @myMain="step = 'main'" />
+        <MyWithdrawal @myMain="$router.push('/')" />
       </div>
   </div>
 </template>
@@ -41,7 +40,6 @@ export default {
   name: "MypageSide",
   data() {
     return {
-      groupStep: "",
       myStep: "main",
       sideArrays: [
         "결제정보 페이지",
@@ -67,6 +65,7 @@ export default {
       }
       this.clickNum = index;
     },
+  },
     components: {
       MyPage,
       MyCard,
@@ -76,7 +75,6 @@ export default {
       MyAlarm,
       MyWithdrawal,
     },
-  },
 };
 </script>
 
@@ -87,7 +85,7 @@ export default {
   flex-direction: column;
   padding: 50px 10px 0 10px;
   background: #2c2c2c;
-  width: 300px;
+  width: 250px;
   height: 100vh;
   /* overflow: auto; */
   position: fixed;

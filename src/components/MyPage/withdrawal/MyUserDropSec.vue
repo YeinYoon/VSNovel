@@ -1,5 +1,6 @@
 <template>
-  <table>
+<div class="drop-sec-container">
+  <table class="drop-sec-table">
     <tr>
       <td colspan="2" class="exit-title">회원탈퇴를 위해 본인인증을 해야합니다.</td>
     </tr>
@@ -23,6 +24,7 @@
       <td colspan="2"><button id="mypage_exit-pass" @click="$emit('end')">PASS 실행</button></td>
     </tr>
   </table>
+</div>
 </template>
 
 <script>
@@ -32,6 +34,13 @@ export default {
 </script>
 
 <style>
+.drop-sec-container{
+  width: 700px;
+  height: 450px;
+  position: relative;
+  top: 70px;
+  margin: 0 auto;
+}
 .exit-title{
   font-size: 30px;
   text-align: center;
@@ -41,10 +50,9 @@ export default {
   padding-right: 20px;
   font-size: 30px;
 }
-table{
+.drop-sec-table{
   color: white;
-  margin-left: 10%;
-  margin-top: 20%;
+  margin: 0 auto;
   border-collapse: separate;
   border-spacing: 0 20px;
 
