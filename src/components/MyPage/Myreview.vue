@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import review from '@/assets/review.js'
+import review from '@/assets/DataJs/review.js'
 
 export default {
   data(){
@@ -37,22 +37,14 @@ export default {
 </script>
 
 <style>
-
 .review_section{
   margin: 0 auto;
-  top: 5%;
   width: 700px;
-  height: 80%;
   position: relative;
+  top: -5%;
   font-size: 1.3em;
   color: white;
-  overflow-y: scroll;
-  -ms-overflow-style: none;
 }
-.review_section::-webkit-scrollbar {
-  display: none;
-}
-
 .review_section .review_list{
   width: 100%;
 }
@@ -60,12 +52,10 @@ export default {
   width: 130px;
   height: 40px;
   position: relative;
-  top: 75px;
+  top: 105px;
   right: 10px;
   background: #2872F9;
   border-radius: 20px;
   color: white;
-  outline: 0;
-  border: 0;
 }
 </style>

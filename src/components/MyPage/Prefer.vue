@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import genre from "../../assets/preferdata.js";
+import genre from "../../assets/DataJs/preferdata.js";
 
 export default {
   data() {
@@ -81,8 +81,6 @@ export default {
   margin: 5px;
   padding: 5px;
   border-radius: 20px;
-  border: 0;
-  outline: 0;
 }
 
 .mypage_cate-canc {
@@ -92,8 +90,6 @@ export default {
   padding: 10px;
   margin: 5px;
   border-radius: 20px;
-  border: 0;
-  outline: 0;
 }
 .mypage_cate-save {
   background-color: #2872f9;
@@ -102,7 +98,5 @@ export default {
   padding: 10px;
   margin: 5px;
   border-radius: 20px;
-  border: 0;
-  outline: 0;
 }
 </style>

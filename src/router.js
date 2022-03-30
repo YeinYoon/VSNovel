@@ -1,45 +1,42 @@
-// import { createWebHistory, createRouter } from "vue-router";
+import { createWebHistory, createRouter } from "vue-router";
+import Store from './components/side/StoreSide.vue';
+import Main from './components/MainPage/Main.vue';
+import Community from './components/side/CommunitySide.vue';
+import Mypage from './components/side/MypageSide.vue';
+import Library from './components/side/LibrarySide.vue';
+import Notice from './components/side/NoticeSide.vue';
 
-// // 메인페이지
-// import Index from './components/Index.vue';
-// // 유저(auth)
-// import Signup from './components/auth/Signup.vue';
-// import Login from './components/auth/Login.vue';
-// // 게시판(board)
-// import MainBoard from './components/board/MainBoard.vue';
-// import Posting from './components/board/Posting.vue';
-// import PostInfo from './components/board/PostInfo.vue';
+const routes = [
+  {
+    path:"/",
+    name: 'Main',
+    component : Main
+  },
+  {
+    path : '/mypage',
+    component : Mypage,
+  },
+  {
+    path : '/notice',
+    component : Notice,
+  },
+  {
+    path : '/library',
+    component : Library,
+  },
+  {
+    path : '/store',
+    component : Store,
+  },
+  {
+    path : '/community',
+    component : Community,
+  },
+];
 
-// const routes = [
-//   {
-//     path:"/",
-//     component : Index
-//   },
-//   {
-//     path: "/signup",
-//     component: Signup,
-//   },
-//   {
-//     path : "/signin",
-//     component : Login
-//   },
-//   {
-//     path : "/board",
-//     component : MainBoard,
-//   },
-//   {
-//     path: "/posting",
-//     component : Posting
-//   },
-//   {
-//    path:"/post/:id",
-//    component : PostInfo
-//   }
-// ];
+const router = createRouter({
+  history: createWebHistory(),
+  routes,
+});
 
-// const router = createRouter({
-//   history: createWebHistory(),
-//   routes,
-// });
-
-// export default router; 
+export default router; 
