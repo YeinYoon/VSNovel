@@ -25,13 +25,13 @@
       </div>
     </div>
   </div>
-  <List />
+  <Library />
 </div>
 </template>
 
 <script>
 import genreData from "../../assets/DataJs/genreData.js";
-import List from '../libraryPage/List';
+import Library from '../libraryPage/LibraryView';
 export default {
   name: "StoreSide",
   data() {
@@ -43,7 +43,7 @@ export default {
     };
   },
   components:{
-    List,
+    Library,
   },
   methods: {
     groupEvent(step, event) {

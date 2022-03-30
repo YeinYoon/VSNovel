@@ -18,7 +18,7 @@
               <span class="list_content">{{review.content}}</span>
           </div>
       </div>
-      <button id="review_edit">리뷰수정</button>
+      <button class="review_edit">리뷰수정</button>
     </div>
   </div>
 </div>
@@ -48,7 +48,7 @@ export default {
 .review_section .review_list{
   width: 100%;
 }
-#review_edit{
+.review_edit{
   width: 130px;
   height: 40px;
   position: relative;

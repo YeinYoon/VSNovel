@@ -1,16 +1,5 @@
 <template>
-  <div class="tests">
-    <div class="header">
-      <div class="service">
-        <img
-          class="icon"
-          src="../../assets/icons/white/library.png"
-          alt="logo"
-        />
-        <span class="title">라이브러리</span>
-      </div>
-    </div>
-    <div class="listView">
+    <div class="list_section">
     <div
       class="work_list"
       v-for="data in datas"
@@ -29,8 +18,6 @@
       </div>
     </div>
     </div>
-
-  </div>
 </template>
 
 <script>
@@ -46,4 +33,19 @@ export default {
 </script>
 
 <style>
+.list_section{
+  margin: 0 auto;
+  padding: 5px;
+  font-size: 1.3em;
+  color: white;
+  width: 800px;
+  height: 80%;
+  position: relative;
+  top: 20px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+}
+.list_section::-webkit-scrollbar {
+  display: none;
+}
 </style>
