@@ -16,6 +16,7 @@
     </div>
     <div v-if="freeStep == 1">
       <OnWrite @end="freeStep=0"/>
+      <!-- <Write @end="freeStep=0"/> -->
     </div>
   </div>
 </template>
@@ -23,6 +24,7 @@
 <script>
 import CommuManage from "./CommuManage";
 import OnWrite from "./OnWrite";
+// import Write from '../Write'
 export default {
   name: "CommuFree",
   data() {
@@ -33,6 +35,7 @@ export default {
   components: {
     CommuManage,
     OnWrite,
+    // Write
   },
 };
 </script>
