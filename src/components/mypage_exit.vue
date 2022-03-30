@@ -1,6 +1,11 @@
 <template>
+<<<<<<< Updated upstream:src/components/mypage_exit.vue
 <div>
   <table>
+=======
+<div class="drop-sec-container">
+  <table class="drop-sec-table">
+>>>>>>> Stashed changes:src/components/MyPage/withdrawal/MyUserDropSec.vue
     <tr>
       <td colspan="2" class="exit-title">회원탈퇴를 위해 본인인증을 해야합니다.</td>
     </tr>
@@ -34,6 +39,13 @@ export default {
 </script>
 
 <style>
+.drop-sec-container{
+  width: 700px;
+  height: 450px;
+  position: relative;
+  top: 70px;
+  margin: 0 auto;
+}
 .exit-title{
   font-size: 30px;
   text-align: center;
@@ -43,13 +55,16 @@ export default {
   padding-right: 20px;
   font-size: 30px;
 }
+<<<<<<< Updated upstream:src/components/mypage_exit.vue
 html{
     background-color: #363636;
   }
 table{
+=======
+.drop-sec-table{
+>>>>>>> Stashed changes:src/components/MyPage/withdrawal/MyUserDropSec.vue
   color: white;
-  margin-left: 10%;
-  margin-top: 20%;
+  margin: 0 auto;
   border-collapse: separate;
   border-spacing: 0 20px;
 
