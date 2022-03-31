@@ -3,7 +3,7 @@
     <div class="modal_style">
       <div class="close" @click="send_event">X</div>
       <div v-if="modal_step == 0">
-        <StoreVue :datas="datas" :num="num" @next="modal_step++" />
+        <StoreVue :modalData="modalData" @next="modal_step++" />
       </div>
       <div v-if="modal_step == 1">
         <StoreCard @next="modal_step++" />
@@ -27,9 +27,8 @@ export default {
     };
   },
   props: {
-    datas: Object,
     modal: Boolean,
-    num: Number,
+    modalData: Object,
   },
   methods: {
     send_event() {

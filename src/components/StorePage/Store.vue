@@ -31,9 +31,9 @@
     <div class="store_section">
       <div
         class="work_list"
-        v-for="(data, i) in dataHuman"
-        :key="i"
-        @click="modalOpen(i)"
+        v-for="data in dataHuman"
+        :key="data"
+        @click="modalOpen(data)"
       >
         <img class="list_img" :src="`${data.titleImg}`" />
         <div class="work_list_con">
@@ -51,17 +51,15 @@
     <div>
       <StoreModal
       @close="modal = false"
-      :datas="dataHuman"
+      :modalData="modalData"
       :modal="modal"
-      :num="clickNum"
     />
     </div>
   </div>
 </template>
 
 <script>
-import StoreModal from "./StoreModal";
-import data from "../../assets/DataJs/data.js"; // 이미지 링크
+import StoreModal from "./StoreModal"; 
 import dataHu from "../../assets/DataJs/dataHu.js"; // 작품 정보
 
 export default {
@@ -70,9 +68,8 @@ export default {
     return {
       step: 0,
       modal: false,
-      datas: data,
-      clickNum: 0,
       dataHuman: dataHu,
+      modalData : {},
     };
   },
   components: {
@@ -83,8 +80,8 @@ export default {
       this.step++;
       if (this.step > 2) this.step = 0;
     },
-    modalOpen(i) {
-      this.clickNum = i;
+    modalOpen(data) {
+      this.modalData = data;
       this.modal = true;
     },
   },

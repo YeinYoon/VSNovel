@@ -3,7 +3,7 @@
     :items-to-show="1"
     :wrap-around="true"
     :autoplay="sec"
-    :pauseAutoplayOnHover="status"
+    :pauseAutoplayOnHover="true"
   >
     <slide v-for="slide in datas" :key="slide">
       <img :src="`${slide.link}`" class="carousel_img" />

@@ -11,12 +11,12 @@
     <!-- 제목이랑 작가 -->
     <div class="left_con">
       <div class="modal_header">
-        <span class="modal_title">{{ datas[num].title }}</span>
-        <span class="modal_writer">{{ datas[num].writer }}</span>
+        <span class="modal_title">{{ modalData.title }}</span>
+        <span class="modal_writer">{{ modalData.writer }}</span>
       </div>
       <!-- 상세 이미지 -->
       <div class="carousel_div">
-        <SwiperCarousel />
+        <SwiperCarousel/>
       </div>
       <!-- 상세 내용 -->
       <div class="modal_explain">
@@ -27,26 +27,26 @@
         <div class="modal_explain_down">
           <span class="down_con">설명</span>
           <div class="down_data">
-            <span class="down_data_text">{{ datas[num].content }}</span>
+            <span class="down_data_text">{{ modalData.content }}</span>
           </div>
         </div>
       </div>
     </div>
     <!-- 오른쪽 사진 및, 짧은 내용 -->
     <div class="right">
-      <img class="right_img" :src="`${datas[num].titleImg}`" />
+      <img class="right_img" :src="`${modalData.titleImg}`" />
       <div class="right_con">
         <div>별점</div>
         <div class="right_data">
-          <span>제목 : {{ datas[num].title }}</span>
-          <span>제작자 : {{ datas[num].writer }}</span>
-          <span>제작팀 : {{ datas[num].team }}</span>
-          <span>발매년도 : {{ datas[num].saleDate }}</span>
+          <span>제목 : {{ modalData.title }}</span>
+          <span>제작자 : {{ modalData.writer }}</span>
+          <span>제작팀 : {{ modalData.team }}</span>
+          <span>발매년도 : {{ modalData.saleDate }}</span>
         </div>
       </div>
       <div class="btn_div">
         <div class="price_btn" @click="$emit('next')">
-          <span> {{ datas[num].pay }}&#8361; </span>
+          <span> {{ modalData.pay }}&#8361; </span>
         </div>
       </div>
     </div>
@@ -62,8 +62,7 @@ export default {
     return {};
   },
   props: {
-    datas: Object,
-    num: Number,
+    modalData: Object,
   },
   components: {
     SwiperCarousel: SwiperCarouselVue,
