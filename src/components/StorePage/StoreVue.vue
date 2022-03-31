@@ -1,4 +1,5 @@
 <template>
+<div>
   <!-- 로고쪽 -->
   <div class="header">
     <div class="service">
@@ -50,6 +51,7 @@
       </div>
     </div>
   </div>
+</div>
 </template>
 
 <script>

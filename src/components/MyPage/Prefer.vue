@@ -14,7 +14,6 @@
       </p>
       <div class="mypage_cate-box">
         <button
-          :style="buttonStyles"
           class="mypage_cate-genre"
           v-for="(genre, i) in predata"
           :key="i"
@@ -53,6 +52,10 @@ export default {
 </script>
 
 <style>
+button{
+  border: none;
+  outline: none;
+}
 .prefer_section {
   margin: 0 auto;
   /* background-color: antiquewhite; */

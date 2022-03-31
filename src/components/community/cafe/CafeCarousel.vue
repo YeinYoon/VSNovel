@@ -4,8 +4,8 @@
   <carousel
     :items-to-show="1"
     :wrap-around="true"
-    autoplay="5000"
-    pauseAutoplayOnHover="true"
+    :autoplay="sec"
+    :pauseAutoplayOnHover="status"
   >
     <slide v-for="(slide,i) in datas" :key="i" @click="sendData(i)" >
       <img :src="`${slide.link}`" class="carousel_img" />
@@ -29,7 +29,9 @@ export default {
     return {
       datas: data,
       openModal : false,
-      dataNum : 0
+      dataNum : 0,
+      status: true,
+      sec : 1500,
     };
   },
   components: {

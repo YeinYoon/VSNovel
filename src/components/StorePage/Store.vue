@@ -48,12 +48,14 @@
         </div>
       </div>
     </div>
-    <StoreModal
+    <div>
+      <StoreModal
       @close="modal = false"
       :datas="dataHuman"
       :modal="modal"
       :num="clickNum"
     />
+    </div>
   </div>
 </template>
 
