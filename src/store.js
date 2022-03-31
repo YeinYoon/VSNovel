@@ -25,6 +25,12 @@ const store = createStore({
         },
         //사이드 카페 가입 배열 추가
         addCafe(state, title){
+            for(let i = 0; i < state.cafeSide.length; i++){
+                if(state.cafeSide[i] == title){
+                    console.log('아니야~');
+                    return
+                }
+            }
             state.cafeSide.push(title);
         }
     },

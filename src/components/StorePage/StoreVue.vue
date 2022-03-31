@@ -3,7 +3,7 @@
   <!-- 로고쪽 -->
   <div class="header">
     <div class="service">
-      <img class="icon" src="../../assets/icons/cart.png" alt="logo" />
+      <img class="icon" src="../../assets/icons/white/cart.png" alt="logo" />
       <span class="title">상세 페이지</span>
     </div>
   </div>

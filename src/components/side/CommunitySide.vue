@@ -12,8 +12,8 @@
     </div>
     <div>
       <div class="group"><span>· CAFE</span></div>
-      <div class="sel" v-for="(arrays, i) in sideCafe" :key="i" @click="step = 'cafeMain'">
-        <div @click="clickEvent(i, $event, array)" id="element">· {{arrays}}</div>
+      <div class="sel" v-for="(array, i) in sideCafe" :key="i">
+        <div @click="clickEvent(i, $event, array)" id="element">· {{array}}</div>
       </div>
     </div>
   </div>
@@ -22,7 +22,7 @@
     <div v-if="step == '작가'"> <Writer/> </div>
     <div v-if="step == '팀원 모집'"> <Team/> </div>
     <div v-if="step == '리뷰 & 추천'"> <Review/> </div>
-    <div v-if="step == 'cafeMain'"> <Cafe /> </div>
+    <div v-if="step == '카페 메인'"> <Cafe /> </div>
 </div>
 </template>
 
@@ -53,6 +53,7 @@ export default {
     clickEvent(index, event, array) {
       this.step = array;
       let a = document.querySelectorAll("#element");
+      console.log(a);
       event.target.style.backgroundColor = "#2872f9";
       if (this.clickNum != null) {
         if (this.clickNum != index) {
