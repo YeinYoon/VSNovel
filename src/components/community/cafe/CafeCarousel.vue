@@ -1,6 +1,6 @@
 <template>
   <!--  autoplay=2000 -->
-  <div><CafeModal v-if="openModal == true" @close="openModal = false" :dataNum = "dataNum" :datas ="datas"></CafeModal></div>
+  <div><CafeModal  v-if="openModal == true" @close="openModal = false" :dataNum = "dataNum" :datas ="datas"></CafeModal></div>
   <carousel
     :items-to-show="1"
     :wrap-around="true"
@@ -8,7 +8,7 @@
     :pauseAutoplayOnHover="status"
   >
     <slide v-for="(slide,i) in datas" :key="i" @click="sendData(i)" >
-      <img :src="`${slide.link}`" class="carousel_img" />
+      <img :src="`${slide.link}`" class="carousel_img"/>
     </slide>
     <template #addons>
       <navigation />

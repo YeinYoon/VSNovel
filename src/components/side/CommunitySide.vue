@@ -12,11 +12,8 @@
     </div>
     <div>
       <div class="group"><span>· CAFE</span></div>
-      <div class="sel" @click="step = 'cafeMain'">
-        <div>· 카페 메인</div>
-      </div>
-      <div class="sel">
-        <div>· FPS게임 카페</div>
+      <div class="sel" v-for="(arrays, i) in sideCafe" :key="i" @click="step = 'cafeMain'">
+        <div @click="clickEvent(i, $event, array)" id="element">· {{arrays}}</div>
       </div>
     </div>
   </div>
@@ -25,7 +22,7 @@
     <div v-if="step == '작가'"> <Writer/> </div>
     <div v-if="step == '팀원 모집'"> <Team/> </div>
     <div v-if="step == '리뷰 & 추천'"> <Review/> </div>
-    <div v-if="step == 'cafeMain'"> <Cafe/> </div>
+    <div v-if="step == 'cafeMain'"> <Cafe /> </div>
 </div>
 </template>
 
@@ -40,6 +37,7 @@ export default {
   data() {
     return {
       sideArrays : ['자유', '작가', '팀원 모집', '리뷰 & 추천'],
+      sideCafe : this.$store.state.cafeSide,
       step: '자유',
       clickNum : null,
     };
@@ -54,13 +52,15 @@ export default {
   methods:{
     clickEvent(index, event, array) {
       this.step = array;
-      let a = document.querySelectorAll('#element');
-        event.target.style.backgroundColor = "#2872f9";
-        if(this.clickNum != null){
+      let a = document.querySelectorAll("#element");
+      event.target.style.backgroundColor = "#2872f9";
+      if (this.clickNum != null) {
+        if (this.clickNum != index) {
           a[this.clickNum].style.backgroundColor = "#2c2c2c";
         }
-        this.clickNum = index;
-  }
+      }
+      this.clickNum = index;
+    },
 },
 }
 </script>

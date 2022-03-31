@@ -6,7 +6,7 @@
         <input type="text" />
       </div>
       <div>
-        <div class="group" id="main" @click="myStep = 'main'">
+        <div class="group" id="main">
           <span>· 마이페이지</span>
         </div>
         <div class="sel" v-for="(array, i) in sideArrays" :key="i">
@@ -16,7 +16,7 @@
         </div>
       </div>
     </div>
-      <div v-if="myStep == 'main'"><MyPage /></div>
+      <div v-if="myStep == '프로필 설정'"><MyPage /></div>
       <div v-if="myStep == '결제정보 페이지'"><MyCard /></div>
       <div v-if="myStep == '내가 쓴 게시글'"><MyPost /></div>
       <div v-if="myStep == '작성 리뷰 관리'"><Myreview /></div>
@@ -40,8 +40,9 @@ export default {
   name: "MypageSide",
   data() {
     return {
-      myStep: "main",
+      myStep: "프로필 설정",
       sideArrays: [
+        "프로필 설정",
         "결제정보 페이지",
         "내가 쓴 게시글",
         "작성 리뷰 관리",
@@ -54,7 +55,6 @@ export default {
   },
   methods: {
     clickEvent(index, event, array) {
-      console.log(array);
       this.myStep = array;
       let a = document.querySelectorAll("#element");
       event.target.style.backgroundColor = "#2872f9";
