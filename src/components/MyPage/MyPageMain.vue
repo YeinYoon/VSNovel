@@ -104,7 +104,15 @@ export default {
 </script>
 
 <style>
-
+.my_topic{
+  display: block;
+  width: 150px;
+  color: white;
+  position: relative;
+  top: 30px;
+  left: calc(100% - 350px);
+  font-size: 1.2em;
+}
 /* 한줄씩 정렬 */
 .profile-nick-line,
 .profile-image-line,
