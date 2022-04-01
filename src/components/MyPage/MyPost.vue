@@ -50,6 +50,7 @@ export default {
   background-color: #484848;
   position: relative;
   top: 50px;
+  border-radius: 20px;
   overflow-y: scroll;
   -ms-overflow-style: none;
 }
