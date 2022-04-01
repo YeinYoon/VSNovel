@@ -3,7 +3,7 @@
     <!-- 로고쪽 -->
     <div class="header">
       <div class="service">
-        <img class="icon" src="../../assets/icons/cart.png" alt="logo" />
+        <img class="icon" src="../../assets/icons/white/cart.png" alt="logo" />
         <span class="title">결제 페이지</span>
       </div>
     </div>
@@ -26,17 +26,17 @@
           </div>
           <div class="card_info_num">
             <span class="card_num">카드번호</span>
-            <div class="card_box">카드번호 상자</div>
+            <input type="text" class="card_box" maxlength="16">
           </div>
           <div class="date_info">
             <span class="date_info_id">유효기간</span>
-            <div class="date_info_box">유효기간 상자</div>
+            <input type="date" class="date_info_box">
             <span class="date_cvc">CVC</span>
-            <div class="date_cvc_box">CVC 상자</div>
+            <input type="text" class="date_cvc_box">
           </div>
           <div class="name_info">
             <span class="name_id">회원이름</span>
-            <div class="name_box">성명 상자</div>
+            <input type="text" class="name_box">
           </div>
         </div>
         <div class="right_flex">

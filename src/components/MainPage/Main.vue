@@ -121,10 +121,12 @@ button{
 .search input {
   width: 75%;
   height: 95%;
-  border: none;
   font-size: 100%;
 }
-.search input:focus {
+input{
+  border: none;
+}
+.input:focus {
   outline: 0px;
 }
 .section {
