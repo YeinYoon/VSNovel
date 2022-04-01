@@ -2,7 +2,7 @@
   <div>
     <!-- 모달창이 나올떄 뒷 배경을 흐리게 만드는 녀석
   이걸 안쓰고 싶을땐 단순히 modal_opacity만을 주석처리하면 된다.-->
-    <div class="modal_opacity"></div>
+    <!-- <div class="modal_opacity"></div> -->
     <!-- 모달창의 크기를 결정하는 modal_frame,
   모달창의 크기 또한 파라미터로 받아서 나오게 할수도 있겠다. 쓰는사람 마음대로-->
     <div v-bind:class="{ modal_frame_big: true }">
@@ -38,20 +38,8 @@ export default {
 .modal_content {
   background-color:gray;
   border-radius: 15px;
-  height: 270px;
+  height: 230px;
   margin-top: 10px;
-}
-.modal_opacity {
-  background: black;
-  width: 100vw;
-  height: 100vh;
-  opacity: 0;
-  z-index: 100;
-  position: fixed;
-  animation-duration: 0.3s;
-  animation-name: backgrounding_on;
-  animation-fill-mode: forwards;
-  z-index: 1;
 }
 .modal_frame_normal {
   position: fixed;
@@ -135,14 +123,16 @@ export default {
     margin:7px 5px 7px 5px;
 }
 .modal_btn_position {
+  /* display:flex; */
+  background-color:pink;
   position:relative;
   width: 90%;
-  margin: 0px 5% 0px 5%; 
+  margin: 0 auto; 
   top: 90%;
   transform: translateY(-50%);
 }
 #cancel {
-  left: 31%;
+  float:right;
 }
 /* 애니메이션들,*/
 /*열리는 애니메이션 opening*/
