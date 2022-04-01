@@ -1,41 +1,6 @@
 /* /* eslint-disable vue/no-duplicate-attributes */
 <template>
   <div>
-    <!-- <aside class="menubar">
-    <nav class="nav">
-      <div id="img_box"></div>
-      <div id="img_box"></div>
-      <div id="img_box"></div>
-      <div id="img_box"></div>
-      <div id="img_box"></div>
-      <div id="img_box"></div>
-      <div id="img_box"></div> 
-    </nav>
-  </aside> -->
-  <aside>
-    <input id="search">
-    <div class="side_first-title">
-      <span class="contents">· 컨텐츠분류</span>
-    </div>
-    <span class="contents-web">· 웹 소설</span>
-    <span class="contents-vsn">· 비주얼 노벨</span>
-    
-    <select class="lib_cate">
-      <option>· 장르</option>
-      <option value="추리">· 추리</option>
-      <option value="스릴러">· 스릴러</option>
-      <option value="공포">· 공포</option>
-      <option value="과학">· 과학</option>
-      <option value="판타지">· 판타지</option>
-      <option value="무협">· 무협</option>
-      <option value="게임">· 게임</option>
-      <option value="로맨스">· 로맨스</option>
-      <option value="드라마">· 드라마</option>
-      <option value="서브컬쳐">· 서브컬쳐</option>
-      <option value="동화">· 동화</option>
-      <option value="기타">· 기타</option>
-    </select>
-  </aside>
     <section>
       <div class="container">
         <div class="header">
@@ -118,59 +83,6 @@ img {
   float:left;
 }
 
-.side_first-title{
-    position: fixed;
-    top: 250px;
-    left: 150px;
-    width: 210px;
-    height: 40px;
-    background-color: white;
-    border-radius: 18px;
-  }
-  .side_first-title-font{
-    margin-top: 5px;
-    float: left;
-    padding-left: 20px;
-    font-size: 20px;
-    text-align: center;
-    font-weight: bolder;
-    color: black;
-  }
-  .side-second-title-webnovel{
-    position: fixed;
-    top: 310px;
-    left: 173px;
-    width: 190px;
-    height: 40px;
-    background-color: #2872F9;
-    border-radius: 18px;
-  }
-  .side-second-title-webnovel-font{
-    margin-top: 5px;
-    float: left;
-    padding-left: 5px;
-    font-size: 20px;
-    text-align: center;
-    font-weight: bolder;
-    color: white;
-  }
-  .side-second-title-visualnovel{
-    position: fixed;
-    top: 360px;
-    left: 173px;
-    width: 190px;
-    height: 40px;
-    border-radius: 18px;
-  }
-  .side-second-title-visualnovel-font{
-    margin-top: 5px;
-    float: left;
-    padding-left: 5px;
-    font-size: 20px;
-    font-weight: bolder;
-    text-align: center;
-    color: white;
-  }
   .lib_cate{
     position: fixed;
     top: 480px;

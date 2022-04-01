@@ -95,7 +95,10 @@ export default {
   left: calc(100% - 320px);
   font-size: 1.2em;
 }
-
+button{
+  border: none;
+  outline: none;
+}
 .search {
   background-color: white;
   width: 150px;

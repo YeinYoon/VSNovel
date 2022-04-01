@@ -1,29 +1,32 @@
 <template>
 <div class="drop-sec-container">
-  <table class="drop-sec-table">
-    <tr>
-      <td colspan="2" class="exit-title">회원탈퇴를 위해 본인인증을 해야합니다.</td>
-    </tr>
-    <tr>
-      <td class="exit-info">아이디</td>
-      <td><input type="text"></td>
-    </tr>
-    <tr>
-      <td class="exit-info">패스워드</td>
-      <td><input type="text"></td>
-    </tr>
-    <tr>
-      <td class="exit-info">이름</td>
-      <td><input type="text"></td>
-    </tr>
-    <tr>
-      <td class="exit-info">전화번호</td>
-      <td><input type="text"></td>
-    </tr>
-    <tr>
-      <td colspan="2"><button id="mypage_exit-pass" @click="$emit('end')">PASS 실행</button></td>
-    </tr>
-  </table>
+
+    <div class="drop-sec-title">
+      <div class="exit-title">회원탈퇴를 위해 본인인증을 해야합니다.</div>
+    </div>
+
+    <div class="drop-sec-row">
+      <div class="exit-info-position">아이디</div>
+      <input type="text" class="drop-input-cont">
+    </div>
+
+    <div class="drop-sec-row">
+      <div class="exit-info-position">패스워드</div>
+      <input type="password" class="drop-input-cont">
+    </div>
+
+    <div class="drop-sec-row">
+      <div class="exit-info-position">이름</div>
+      <input type="text" class="drop-input-cont">
+    </div>
+
+    <div class="drop-sec-row">
+      <div class="exit-info-position">전화번호</div>
+      <input type="text" class="drop-input-cont">
+    </div>
+
+    <button id="mypage_exit-pass" @click="$emit('end')">PASS 실행</button>
+
 </div>
 </template>
 
@@ -34,30 +37,47 @@ export default {
 </script>
 
 <style>
+/* 전체위치 조정 */
 .drop-sec-container{
-  width: 700px;
+  padding:10px;
+  color: white;
+  width: 600px;
   height: 450px;
   position: relative;
   top: 70px;
   margin: 0 auto;
-}
-.exit-title{
-  font-size: 30px;
   text-align: center;
 }
-.exit-info{
-  text-align: right;
-  padding-right: 20px;
-  font-size: 30px;
-}
-.drop-sec-table{
-  color: white;
-  margin: 0 auto;
-  border-collapse: separate;
-  border-spacing: 0 20px;
 
+/* 각행의 정렬 */
+.drop-sec-row{
+  display: flex;
+  padding-bottom: 3%;
+  width: 100%;
 }
-table input{
+
+/* 페이지 설명(맨윗부분) */
+.drop-sec-title{
+  margin-left: 5%;
+  margin-bottom: 5%;
+}
+
+/* 페이지 설명 글자 */
+.exit-title{
+  font-size: 1.8em;
+  text-align: center;
+}
+
+/* 아이디,패스워드 등의 글자 정렬 */
+.exit-info-position{
+  flex: 2;
+  font-size: 1.3em;
+}
+
+/* 내용입력 부분 */
+.drop-input-cont{
+  flex: 8;
+  background:green;
   border: 0;
   outline: 0;
   color: white;
@@ -66,26 +86,16 @@ table input{
   background: #5E5E5E;
   border-radius: 20px;
   margin-right: 10px;
+  padding: 15px;
 }
-input::placeholder{
-  color: white;
-  font-size: 25px;
-}
-#mypage_card{
-  width: 540px;
-  height: 50px;
-  border-radius: 10px;
-  background-color: #5E5E5E;
-}
+
+/* PASS 실행버튼 */
 #mypage_exit-pass{
   width: 120px;
   height: 40px;
-  transform: translateX(250px);
   border-radius: 20px;
   background-color: #FF4C4D;
   color: white;
-  font-size: 15px;
-  border: 0;
-  outline: 0;
+  font-size: 1em;
 }
 </style>
