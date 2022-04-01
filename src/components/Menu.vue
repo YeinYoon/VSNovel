@@ -58,6 +58,7 @@ export default {
   },
   methods: {
     routerPush(link) {
+      // 메뉴 이동 라우터 함수
       this.$router.push(link);
     },
   },

@@ -32,6 +32,7 @@ export default {
   },
   methods: {
     send_event() {
+    // 모달 닫을 때 쓰는 함수
       this.modal_step = 0;
       this.$emit("close");
     },

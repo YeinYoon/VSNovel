@@ -14,7 +14,7 @@
             </div>
         </div>
     </header>  
-    <section class="section">
+    <section class="notice_section">
         <div class="strong_notice_post" @click="모달창열렸니 = true"> 
             <div class="strong_notice_mark"><img src="@/assets/icons/white/star.png" class="mark_star_image"></div>
             <div class="strong_notice">
@@ -56,10 +56,22 @@ export default {
 </script>
 
 <style>
+.notice_section{
+    width: 800px;
+    height: 70%;
+    margin: 0 auto;
+    position: relative;
+    top: 70px;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+}
+.notice_section::-webkit-scrollbar {
+  display: none;
+}
 .btn-area {
     float:right;
 }
-.btn-blue {
+.btn-blue, .btn_red {
     font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
     font-weight: 500;
     position: relative;
@@ -67,7 +79,6 @@ export default {
     width: 100px;
     height: 30px;
     background-color:#2872f9;
-    border: none;
     color: white;
     text-align: center;
     text-decoration: none;
@@ -76,26 +87,7 @@ export default {
     cursor: pointer;
     margin-left:15px;
 }
-.btn-blue:hover {opacity:0.8;}
-
-.btn-red {
-    font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
-    font-weight: 500;
-    position: relative;
-    bottom: 34px;
-    width: 100px;
-    height: 30px;
-    background-color:rgb(255, 71, 71);
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    font-size: 14px;
-    border-radius: 12px;
-    cursor: pointer;
-    margin-left:15px;
-}
-.btn-red:hover {opacity:0.8;}
+.btn-blue:hover, .btn_red:hover {opacity:0.8;}
 
 ::-webkit-scrollbar {
 display: none;
@@ -103,9 +95,10 @@ display: none;
 .strong_notice_post {
     cursor: pointer;
     position: relative;
-    width: 100%;
+    width: 90%;
     height: 130px;
     margin-top:10px;
+    margin: 0 auto;
 }
 .strong_notice_post:hover {opacity:0.8;}
 .strong_notice_mark {
@@ -145,15 +138,15 @@ display: none;
     display:flex;
     background-color: #ddd;
     height: 20px;
-    /* border:2px solid #ddd; */
     border-radius:10px;
     width: 101%;
 }
 .post {
     position: relative;
-    width: 100%;
+    width: 90%;
     margin-top: 10px;
     height: 130px; 
+    margin: 0 auto;
 } 
 .post:hover {
     opacity: 0.7;

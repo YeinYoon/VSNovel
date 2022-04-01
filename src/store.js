@@ -27,7 +27,7 @@ const store = createStore({
         addCafe(state, title){
             for(let i = 0; i < state.cafeSide.length; i++){
                 if(state.cafeSide[i] == title){
-                    console.log('아니야~');
+                    alert('이미 가입됐슈');
                     return
                 }
             }

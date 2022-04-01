@@ -34,8 +34,8 @@ export default {
   },
   methods:{
       clickEvent(name){
+      // 갤러리, 리스트 형식 보기 위한 함수
           this.clickView = name;
-          console.log(this.clickView);
       }
   }
 };

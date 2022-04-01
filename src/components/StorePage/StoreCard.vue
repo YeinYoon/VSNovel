@@ -3,7 +3,7 @@
     <!-- 로고쪽 -->
     <div class="header">
       <div class="service">
-        <img class="icon" src="../../assets/icons/white/cart.png" alt="logo" />
+        <img class="icon" src="@/assets/icons/white/cart.png" alt="logo" />
         <span class="title">결제 페이지</span>
       </div>
     </div>
@@ -39,14 +39,13 @@
             <input type="text" class="name_box">
           </div>
         </div>
-        <div class="right_flex">
-          <span class="right_up_font">주문상품 정보</span>
-          <div class="right_box_data">주문상품 상자</div>
-          <div class="right_pay" @click="$emit('next')">
-            <span
-              >총가격 <br />
-              결제하기</span
-            >
+        <div class="add_flex">
+          <span class="add_text">주문상품 정보</span>
+          <div class="add_box_data">주문상품 상자</div>
+          <div class="add_pay" @click="$emit('next')">
+            <span>총가격 <br />
+              결제하기
+            </span>
           </div>
         </div>
       </div>
@@ -69,7 +68,13 @@ export default {
   color: white;
 }
 .modal_in {
-  transform: translateY(10%);
+  width:95%;
+  height: 90%;
+  position:absolute;
+  top: 70%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* background-color: antiquewhite; */
 }
 /* 주문자 id div */
 .order {
@@ -90,13 +95,8 @@ export default {
 .order_box {
   background-color: #5e5e5e;
   border-radius: 15px;
-  border: none;
   height: 40px;
   flex: 8;
-}
-/* 클릭시 생기는 테두리 없애기 */
-input:focus {
-  outline: none;
 }
 /* 아래 전체 */
 .info_flex {
@@ -161,7 +161,6 @@ select:focus {
 .card_num {
   font-size: 1.2em;
   font-weight: 800;
-  width: 70px;
   text-align: center;
   flex: 2;
 }
@@ -170,7 +169,6 @@ select:focus {
   flex: 8;
   background-color: white;
   color: black;
-  /* width: 400px; */
   height: 40px;
   line-height: 40px;
   padding: 0 5px;
@@ -187,7 +185,6 @@ select:focus {
   flex: 2;
   font-size: 1.2em;
   font-weight: 800;
-  width: 70px;
   text-align: center;
   height: 40px;
   line-height: 40px;
@@ -198,7 +195,6 @@ select:focus {
   background-color: white;
   color: black;
   display: table-cell;
-  width: 150px;
   height: 30px;
   padding: 0 5px;
   border-radius: 10px;
@@ -210,7 +206,6 @@ select:focus {
   flex: 2;
   font-size: 1.2em;
   font-weight: 800;
-  width: 70px;
   text-align: center;
 }
 /* cvc 박스 */
@@ -218,7 +213,6 @@ select:focus {
   flex: 3;
   background-color: white;
   color: black;
-  width: 150px;
   height: 30px;
   padding: 0 5px;
   border-radius: 10px;
@@ -236,7 +230,6 @@ select:focus {
   flex: 2;
   font-size: 1.2em;
   font-weight: 800;
-  width: 70px;
   text-align: center;
 }
 /* 이름 박스 */
@@ -245,7 +238,6 @@ select:focus {
   background-color: white;
   color: black;
   display: table-cell;
-  width: 150px;
   height: 30px;
   padding: 0 5px;
   border-radius: 10px;
@@ -253,7 +245,7 @@ select:focus {
   line-height: 40px;
 }
 /* 오른쪽 플렉스 설정 */
-.right_flex {
+.add_flex {
   display: flex;
   flex-direction: column;
   float: right;
@@ -262,14 +254,14 @@ select:focus {
   transform: translateY(-5%);
 }
 /* 오른쪽 위 글자*/
-.right_up_font {
+.add_text {
   font-size: 1.1em;
   margin: 0 0 5px 0;
   font-weight: 800;
   transform: translateX(38%);
 }
 /* 오른쪽 박스 */
-.right_box_data {
+.add_box_data {
   background-color: #6e6e6e;
   border-radius: 10px;
   padding: 10px;
@@ -277,7 +269,7 @@ select:focus {
   margin: 5px 0;
 }
 /* 오른쪽 가격 */
-.right_pay {
+.add_pay {
   font-size: 1.2em;
   display: table;
   background-color: #2872f9;
@@ -286,7 +278,7 @@ select:focus {
   text-align: center;
   border-radius: 10px;
 }
-.right_pay .span {
+.add_pay .span {
   display: table;
   vertical-align: middle;
 }

@@ -4,7 +4,7 @@
       <div class="service">
         <img class="icon" src="../../assets/icons/white/home.png" alt="logo" />
         <span class="title">마이페이지</span>
-        <span class="topic">프로필 설정</span>
+        <span class="my_topic">프로필 설정</span>
       </div>
     </div>
     <div>
@@ -64,13 +64,21 @@ export default {
 </script>
 
 <style>
+.my_topic{
+  display: block;
+  width: 150px;
+  color: white;
+  position: relative;
+  top: 30px;
+  left: calc(100% - 350px);
+  font-size: 1.2em;
+}
 .input-file-button{
   width: 120px;
   height: 40px;
   padding-top: 10px;
   margin-bottom: 55%;
   background-color:#2872F9;
-  border-radius: 4px;
   color: white;
   cursor: pointer;
   border-radius: 20px;
@@ -111,8 +119,6 @@ export default {
   height: 160px;
   border-radius: 20px;
   background-color: #5E5E5E;
-  border: none;
-  outline: none;
   resize: none;
   color: white;
   font-size: 15px;
@@ -128,8 +134,6 @@ export default {
   background-color: #5E5E5E;
   color: white;
   font-size: 15px;
-  border: 0;
-  outline: 0;
   margin-right: 30px;
   margin-top:0;
 }
@@ -141,7 +145,5 @@ export default {
   background-color: #2872F9;
   color: white;
   font-size: 15px;
-  border: 0;
-  outline: 0;
 }
 </style>

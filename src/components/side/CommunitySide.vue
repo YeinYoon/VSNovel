@@ -51,13 +51,15 @@ export default {
   },
   methods:{
     clickEvent(index, event, array) {
+    // 메인 화면 이동 함수
       this.step = array;
-      let a = document.querySelectorAll("#element");
-      console.log(a);
+    // 사이드바 강조효과
+      let id = document.querySelectorAll("#element");
+      console.log(id);
       event.target.style.backgroundColor = "#2872f9";
       if (this.clickNum != null) {
         if (this.clickNum != index) {
-          a[this.clickNum].style.backgroundColor = "#2c2c2c";
+          id[this.clickNum].style.backgroundColor = "#2c2c2c";
         }
       }
       this.clickNum = index;

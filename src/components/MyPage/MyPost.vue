@@ -4,7 +4,7 @@
       <div class="service">
         <img class="icon" src="../../assets/icons/white/home.png" alt="logo" />
         <span class="title">마이페이지</span>
-        <span class="topic">내가 쓴 게시글</span>
+        <span class="my_topic">내가 쓴 게시글</span>
       </div>
     </div>
     <div class="post_section">
@@ -45,8 +45,8 @@ export default {
   padding: 5px;
   font-size: 1.3em;
   color: white;
-  width: 700px;
-  height: 70%;
+  width: 800px;
+  height: 80%;
   background-color: #484848;
   position: relative;
   top: 50px;
@@ -65,10 +65,10 @@ export default {
 .post_like,
 .post_comment,
 .post_clicks {
-  width: 100px;
+  width: 15%;
 }
 .post_title {
-  width: 300px;
+  width: 40%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

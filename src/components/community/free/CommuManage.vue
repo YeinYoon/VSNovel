@@ -48,13 +48,6 @@ export default {
 </script>
 
 <style>
-.service{
-  display: table;
-}
-.service .title{
-  display: table-cell;
-  vertical-align: middle;
-}
 .btn-area {
   position: absolute;
   top:20px;

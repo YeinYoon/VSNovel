@@ -45,7 +45,7 @@ export default {};
   height: 40px;
   border-radius: 20px;
 }
-.btn_areas .btn_1 span {
+.btn_areas .btn_1 span, .btn_areas .btn_store span{
   display: table-cell;
   vertical-align: middle;
 }
@@ -57,9 +57,5 @@ export default {};
   width: 100px;
   height: 40px;
   border-radius: 20px;
-}
-.btn_areas .btn_store span {
-  display: table-cell;
-  vertical-align: middle;
 }
 </style>

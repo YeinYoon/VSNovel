@@ -79,14 +79,13 @@ export default {
   margin-right: 10px;
 }
 .service .title {
-  display: flex;
-  justify-content: center;
+  display: table-cell;
+  vertical-align: middle;
   color: white;
   font-weight: 600;
   font-size: 2em;
 }
 .service .topic {
-  /* background-color: antiquewhite; */
   display: block;
   width: 150px;
   color: white;
@@ -122,9 +121,14 @@ export default {
 }
 input{
   border: none;
+  outline: none;
 }
 .input:focus {
   outline: 0px;
+}
+button{
+  border: none;
+  outline: none;
 }
 .section {
   width: calc(100%);
@@ -141,7 +145,6 @@ input{
   background-color: #5e5e5e;
   height: 150px;
   top: 25px;
-  /* border-radius: 20px; */
 }
 .section .banner .carousel {
   width: 90%;

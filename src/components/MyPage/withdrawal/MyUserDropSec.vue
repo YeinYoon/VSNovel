@@ -85,7 +85,5 @@ input::placeholder{
   background-color: #FF4C4D;
   color: white;
   font-size: 15px;
-  border: 0;
-  outline: 0;
 }
 </style>

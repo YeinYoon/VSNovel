@@ -42,10 +42,6 @@ export default {
 </script>
 
 <style>
-body {
-    margin: 0; padding: 0; height: 100%;
-    background-color: #353535;;
-}
 .icon {
     margin-top: 10px;
     width:35px; height:35px;

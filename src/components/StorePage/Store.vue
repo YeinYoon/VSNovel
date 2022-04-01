@@ -3,11 +3,7 @@
   <div class="tests">
     <div class="header">
       <div class="service">
-        <img
-          class="icon"
-          src="../../assets/icons/white/shopping-cart.png"
-          alt="logo"
-        />
+        <img class="icon" src="@/assets/icons/white/shopping-cart.png" alt="logo"/>
         <span class="title">스토어</span>
       </div>
       <div class="price_div">
@@ -77,10 +73,12 @@ export default {
   },
   methods: {
     priceClick() {
+    // 유무료 버튼 이벤트
       this.step++;
       if (this.step > 2) this.step = 0;
     },
     modalOpen(data) {
+    // 모달 오픈 함수
       this.modalData = data;
       this.modal = true;
     },

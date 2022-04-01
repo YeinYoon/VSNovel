@@ -2,9 +2,9 @@
 <div class="tests">
     <div class="header">
       <div class="service">
-        <img class="icon" src="../../assets/icons/white/home.png" alt="logo" />
+        <img class="icon" src="@/assets/icons/white/home.png" alt="logo" />
         <span class="title">마이페이지</span>
-        <span class="topic">결제정보 설정</span>
+        <span class="my_topic">결제정보 설정</span>
       </div>
     </div>
   <div class="card-position-container">
@@ -79,8 +79,6 @@ export default {
 }
 
 .card-input{
-  border: 0;
-  outline: 0;
   text-align: center;
   color: white;
   width: 100%;
@@ -100,8 +98,6 @@ export default {
   background-color: #5E5E5E;
   color: white;
   font-size: 15px;
-  border: 0;
-  outline: 0;
   margin-right: 30px;
   margin-top:0;
 }
@@ -113,8 +109,6 @@ export default {
   background-color: #2872F9;
   color: white;
   font-size: 15px;
-  border: 0;
-  outline: 0;
 }
 
 </style>

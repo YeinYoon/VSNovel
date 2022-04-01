@@ -4,7 +4,7 @@
       <div class="service">
         <img class="icon" src="@/assets/icons/white/home.png" alt="logo" />
         <span class="title">마이페이지</span>
-        <span class="topic">알림 설정</span>
+        <span class="my_topic">알림 설정</span>
       </div>
     </div>
     <div class="alarm-section">
@@ -92,8 +92,6 @@ input[type="checkbox"]{
   padding: 10px;
   margin: 5px;
   border-radius: 20px;
-  border: 0;
-  outline: 0;
 }
 #mypage_alarm-save {
   
@@ -104,8 +102,6 @@ input[type="checkbox"]{
   padding: 10px;
   margin: 5px;
   border-radius: 20px;
-  border: 0;
-  outline: 0;
   
 }
 

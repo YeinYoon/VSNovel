@@ -64,11 +64,11 @@ export default {
     SwiperCarousel: SwiperCarouselVue,
   },
   mounted() {
+    // 추천 순으로 정렬 후 10위까지만 자르기
     this.villageData = this.commuData.sort(function (a, b) {
       return b.likes - a.likes;
     });
     this.villageData = this.villageData.slice(0, 10);
-    console.log(this.villageData);
   },
 };
 </script>

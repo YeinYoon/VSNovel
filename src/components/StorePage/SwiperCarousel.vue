@@ -40,18 +40,9 @@ export default {
 };
 </script>
 <style>
-/* .img_class{
-  width: 60%;
-  margin: 0 auto;
-} */
-/* .carousel__prev--in-active,
-.carousel__next--in-active {
-  display: none;
-} */
 .carousel_img {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  /* border-radius: 20px; */
 }
 </style>

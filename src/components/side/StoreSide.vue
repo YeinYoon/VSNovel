@@ -47,8 +47,8 @@ export default {
   },
   methods: {
     groupEvent(step, event) {
+    // 사이드바 강조효과
       let id = document.getElementById(step);
-      console.log(id);
       if (this.groupStep == "") {
         event.target.style.backgroundColor = "#2872f9";
         this.groupStep = step;
@@ -58,14 +58,15 @@ export default {
       }
     },
     hidden() {
+    // 장르 열고 닫기
       if (this.hiddenData) this.hiddenData = false;
       else this.hiddenData = true;
     },
     genreEvent(num, event) {
+    // 장르 강조효과
       let id = Array.from(document.querySelectorAll(".select_btn"));
 
       event.target.style.color = "black";
-      // console.log(id[this.genreNum]);
       id[this.genreNum].style.color = "gray";
       this.genreNum = num;
     },
@@ -94,7 +95,6 @@ export default {
 }
 .side_search input {
   width: 85%;
-  border: none;
   font-size: 100%;
 }
 .side_search input:focus {
@@ -105,7 +105,6 @@ export default {
   height: 40px;
   background-color: white;
   padding: 5px 10px 5px 20px;
-  border: none;
   border-radius: 30px;
   font-weight: 700;
   display: table;
@@ -134,7 +133,6 @@ export default {
   background-color: white;
   padding: 5px 10px 5px 20px;
   border-radius: 30px;
-  border: none;
   position: relative;
   z-index: 12;
   box-shadow: 0px 3px 4px 1px rgba(65, 65, 65, 0.5);

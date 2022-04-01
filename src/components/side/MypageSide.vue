@@ -55,12 +55,13 @@ export default {
   },
   methods: {
     clickEvent(index, event, array) {
+    // 강조효과 및 메인 화면 변경
       this.myStep = array;
-      let a = document.querySelectorAll("#element");
+      let id = document.querySelectorAll("#element");
       event.target.style.backgroundColor = "#2872f9";
       if (this.clickNum != null) {
         if (this.clickNum != index) {
-          a[this.clickNum].style.backgroundColor = "#2c2c2c";
+          id[this.clickNum].style.backgroundColor = "#2c2c2c";
         }
       }
       this.clickNum = index;

@@ -48,6 +48,7 @@ export default {
   },
   methods:{
     clickEvent(){
+      // 카페 가입 함수
       this.$store.commit('addCafe',this.datas[this.dataNum].title);
       this.$emit('close', this.openModal);
     }

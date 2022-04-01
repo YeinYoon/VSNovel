@@ -32,11 +32,12 @@ export default {
   },
   methods:{
     clickEvent(index, event, clickSide) {
+    // 장르 강조 효과
       this.step = clickSide;
-      let a = document.querySelectorAll('#element');
+      let id = document.querySelectorAll('#element');
         event.target.style.backgroundColor = "#2872f9";
         if(this.clickNum != null){
-          a[this.clickNum].style.backgroundColor = "#2c2c2c";
+          id[this.clickNum].style.backgroundColor = "#2c2c2c";
         }
         this.clickNum = index;
     },
