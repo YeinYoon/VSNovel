@@ -1,40 +1,37 @@
 import { createWebHistory, createRouter } from "vue-router";
-
-// 메인페이지
-import Index from './components/Index.vue';
-// 유저(auth)
-import Signup from './components/auth/Signup.vue';
-import Login from './components/auth/Login.vue';
-// 게시판(board)
-import MainBoard from './components/board/MainBoard.vue';
-import Posting from './components/board/Posting.vue';
-import PostInfo from './components/board/PostInfo.vue';
+import Store from './components/side/StoreSide.vue';
+import Main from './components/MainPage/Main.vue';
+import Community from './components/side/CommunitySide.vue';
+import Mypage from './components/side/MypageSide.vue';
+import Library from './components/side/LibrarySide.vue';
+import Notice from './components/side/NoticeSide.vue';
 
 const routes = [
   {
     path:"/",
-    component : Index
+    name: 'Main',
+    component : Main
   },
   {
-    path: "/signup",
-    component: Signup,
+    path : '/mypage',
+    component : Mypage,
   },
   {
-    path : "/signin",
-    component : Login
+    path : '/notice',
+    component : Notice,
   },
   {
-    path : "/board",
-    component : MainBoard,
+    path : '/library',
+    component : Library,
   },
   {
-    path: "/posting",
-    component : Posting
+    path : '/store',
+    component : Store,
   },
   {
-   path:"/post/:id",
-   component : PostInfo
-  }
+    path : '/community',
+    component : Community,
+  },
 ];
 
 const router = createRouter({
