@@ -87,11 +87,11 @@ export default {
 }
 .service .topic {
   display: block;
-  width: 150px;
+  width: 200px;
   color: white;
   position: relative;
   top: 30px;
-  left: calc(100% - 320px);
+  left: calc(100% - 370px);
   font-size: 1.2em;
 }
 button{

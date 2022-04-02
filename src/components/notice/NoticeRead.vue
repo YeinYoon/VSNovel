@@ -4,38 +4,42 @@
         <div class="service">
             <img class="icon" src="@/assets/icons/white/megaphone.png" alt="community">
             <span class="title">공지사항</span>
-            <span class="topic">전체 - 글쓰기</span>
+            <span class="topic">전체 - {{noticeData.title}}</span>
         </div>
     </header>  
     <div class="write_section">
-      <div class="write_title"><input type="text" /></div>
-      <div class="write_content">
-        <Editor />
+      <div class="write_title">{{noticeData.title}}</div>
+      <div class="write_contents">
+          {{noticeData.content}}
       </div>
-      <div class="editer_info">
-        주의! 당신은 현재 공지사항 게시판에서 작성중입니다.
-        <br>강조로 발행 버튼을 누르면 '강조공지'로 상단에 우선 노출됩니다.
-        <br>공지사항의 말머리를 선택하여 '해당 TOPIC' 에 맞게 작성하세요.
-    </div>
     </div>
     <div class="notice_btn_area">
-      <div class="strong_btn">강조로 발행</div>
-      <div class="write_btn">글쓰기</div>
-      <div class="cancle_btn" @click="$emit('write_cancle')">취소</div>
+        <div class="strong_btn" v-if="noticeData.emphasis == 0" @click="noticeBtnEvent('cancle')">강조 취소</div>
+        <div class="strong_btn" v-if="noticeData.emphasis == 1" @click="noticeBtnEvent('updata')">강조로 발행</div>
+        <div class="write_btn">수정</div>
+        <div class="write_btn">삭제</div>
+        <div class="cancle_btn" @click="$emit('cancle')">취소</div>
     </div>
   </div>
 </template>
 
 <script>
-import Editor from './NoticeEditor'
 export default {
   name: "OnWrite",
   data() {
     return {}
   },
-  components: {
-      Editor
+  props:{
+      noticeData:Object,
   },
+  methods:{
+      noticeBtnEvent(step){
+        //강조 발행 / 취소 이벤트
+        if(step == 1)
+            this.$emit('updata');
+        else this.$emit('notice_cancle');
+      }
+  }
 };
 </script>
 
@@ -49,6 +53,7 @@ export default {
   border-radius: 20px;
   position: relative;
   top: 50px;
+  color: white;
 }
 .write_title {
   margin: 5px auto;
@@ -57,6 +62,7 @@ export default {
   background-color: #5e5e5e;
   border-radius: 20px;
   padding: 0 10px;
+  font-size: 1.2em;
 }
 .write_title input {
   position: relative;
@@ -66,12 +72,13 @@ export default {
   border: none;
   background: none;
 }
-.write_content {
+.write_contents {
   margin: 0 auto;
   width: 100%;
-  height: 77%;
+  height: 89%;
   background-color: #5e5e5e;
   border-radius: 20px;
+  font-size: 1.4em;
 }
 .write_content textarea {
   background: none;
