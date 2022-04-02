@@ -183,8 +183,8 @@ export default {
   font-size: 1.5em;
 }
 .notice .con {
+  text-align: left;
   position: relative;
-  left: -5%;
   font-size: 0.8em;
   padding: 5px 0 10px 0;
 }
