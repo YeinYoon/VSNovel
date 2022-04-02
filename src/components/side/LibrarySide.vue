@@ -25,13 +25,13 @@
       </div>
     </div>
   </div>
-  <List />
+  <Library />
 </div>
 </template>
 
 <script>
 import genreData from "../../assets/DataJs/genreData.js";
-import List from '../libraryPage/List';
+import Library from '../libraryPage/LibraryView';
 export default {
   name: "StoreSide",
   data() {
@@ -43,12 +43,12 @@ export default {
     };
   },
   components:{
-    List,
+    Library,
   },
   methods: {
     groupEvent(step, event) {
+    // 강조효과
       let id = document.getElementById(step);
-      console.log(id);
       if (this.groupStep == "") {
         event.target.style.backgroundColor = "#2872f9";
         this.groupStep = step;
@@ -58,14 +58,15 @@ export default {
       }
     },
     hidden() {
+    // 장르 열고 닫기
       if (this.hiddenData) this.hiddenData = false;
       else this.hiddenData = true;
     },
     genreEvent(num, event) {
+    // 장르 강조 효과
       let id = Array.from(document.querySelectorAll(".select_btn"));
 
       event.target.style.color = "black";
-      // console.log(id[this.genreNum]);
       id[this.genreNum].style.color = "gray";
       this.genreNum = num;
     },

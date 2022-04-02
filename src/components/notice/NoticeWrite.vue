@@ -98,7 +98,6 @@ body {
     height:33px;
     flex:0.58;
     background-color:#2872f9;
-    border: none;
     color: white;
     text-align: center;
     text-decoration: none;
@@ -130,7 +129,6 @@ body {
     background-color: #5e5e5e;
     border-radius: 30px;
     color:white;
-    border:none;
     margin-left:10px;
 }
 .editer_info {
@@ -152,7 +150,6 @@ body {
     width: 100px;
     height: 30px;
     background-color:rgb(255, 71, 71);
-    border: none;
     color: white;
     text-align: center;
     text-decoration: none;
@@ -171,7 +168,6 @@ body {
     width: 100px;
     height: 30px;
     background-color:#2872f9;
-    border: none;
     color: white;
     text-align: center;
     text-decoration: none;
@@ -190,7 +186,6 @@ body {
     width: 100px;
     height: 30px;
     background-color:#5e5e5e;
-    border: none;
     color: white;
     text-align: center;
     text-decoration: none;

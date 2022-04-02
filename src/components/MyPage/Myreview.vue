@@ -4,7 +4,7 @@
       <div class="service">
         <img class="icon" src="../../assets/icons/white/home.png" alt="logo" />
         <span class="title">마이페이지</span>
-        <span class="topic">작성 리뷰 관리</span>
+        <span class="my_topic">작성 리뷰 관리</span>
       </div>
     </div>
   <div class="review_section">
@@ -18,7 +18,7 @@
               <span class="list_content">{{review.content}}</span>
           </div>
       </div>
-      <button id="review_edit">리뷰수정</button>
+      <button class="review_edit">리뷰수정</button>
     </div>
   </div>
 </div>
@@ -39,15 +39,22 @@ export default {
 <style>
 .review_section{
   margin: 0 auto;
-  width: 700px;
+  width: 800px;
+  height: 80%;
   position: relative;
+  top: 5%;
   font-size: 1.3em;
   color: white;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+}
+.review_section::-webkit-scrollbar {
+  display: none;
 }
 .review_section .review_list{
   width: 100%;
 }
-#review_edit{
+.review_edit{
   width: 130px;
   height: 40px;
   position: relative;

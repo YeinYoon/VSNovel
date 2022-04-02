@@ -86,12 +86,13 @@ export default {
     };
   },
   mounted() {
+    // 공지사항 날짜 순으로 정렬
     this.noticeData.sort(function (a, b) {
       return new Date(a.date) - new Date(b.date);
     });
-    console.log(this.noticeData);
   },
   methods:{
+    // 스토어 게시물 이동 함수
     storeView(){
       this.$router.push('/store');
     }
@@ -129,7 +130,6 @@ export default {
   height: 280px;
   border-radius: 20px;
   transform: translateY(10%);
-  border: none;
 }
 .community .list {
   background-color: #353535;
@@ -208,10 +208,6 @@ export default {
   overflow-x: scroll;
   white-space: nowrap;
 }
-/* .store .div::-webkit-scrollbar-thumb {
-    background-color: blue;
-    border-radius: 20px;
-} */
 .store .list {
   margin: 0 10px 10px 10px;
 }

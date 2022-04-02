@@ -25,7 +25,7 @@
             <div>
                 <span class="cafe_qna">이 카페에 가입하시겠습니까?</span>
             </div>
-            <button class="modal_btn">확인</button>
+            <button class="modal_btn" @click="clickEvent()">확인</button>
             <button class="modal_btn"  @click="$emit('close', openModal)">취소</button>
       </div>
     </div>
@@ -46,6 +46,13 @@ export default {
     dataNum : Number,
 
   },
+  methods:{
+    clickEvent(){
+      // 카페 가입 함수
+      this.$store.commit('addCafe',this.datas[this.dataNum].title);
+      this.$emit('close', this.openModal);
+    }
+  }
 };
 </script>
 <style>

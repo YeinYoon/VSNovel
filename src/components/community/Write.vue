@@ -1,23 +1,11 @@
 <template>
   <div class="tests">
-    <header class="header">
-      <div class="service">
-        <img
-          class="icon"
-          src="../assets/icons/white/bubble_chat.png"
-          alt="community"
-        />
-        <span class="title">커뮤니티</span>
-        <span class="topic">TOPIC · 자유</span>
-      </div>
-    </header>
     <section class="section">
       <div class="editer">
         <div class="editer_flex">
           <input id="inp" type="text" />
         </div>
         <div class="content">
-          <QuillEditor theme="snow" />
         </div>
       </div>
     </section>
@@ -30,12 +18,8 @@
 </template>
 
 <script>
-import { QuillEditor } from "@vueup/vue-quill";
-import "@vueup/vue-quill/dist/vue-quill.snow.css";
-
 export default {
   components: {
-    QuillEditor,
   },
 };
 </script>
@@ -133,13 +117,4 @@ export default {
   display: none;
 }
 
-.ql-toolbar.ql-snow {
-  border-radius: 10px;
-  background-color: #868686;
-  border: none;
-}
-.ql-container.ql-snow {
-  border: none;
-  height: Calc(100% - 40px);
-}
 </style>

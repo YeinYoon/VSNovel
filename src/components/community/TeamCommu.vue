@@ -7,21 +7,17 @@
         @closemodal="모달창열렸니 = false"
       ></Modal>
     </div>
-    <header class="header">
+    <div class="header">
       <div class="service">
-        <img
-          class="icon"
-          src="@/assets/icons/white/bubble_chat.png"
-          alt="logo"
-        />
+        <img class="icon" src="@/assets/icons/white/bubble_chat.png" alt="logo" />
         <span class="title">커뮤니티</span>
-        <span class="topic">TOPIC · 자유</span>
+        <span class="topic">팀원모집</span>
+      </div>
+    </div>
         <div class="btn-area">
           <button class="btn-red">관리</button>
           <button class="btn-blue">글쓰기</button>
         </div>
-      </div>
-    </header>
 
     <section class="section">
       <div
@@ -30,7 +26,7 @@
         :key="index"
         @click="모달창열렸니 = true"
       >
-        <img class="thumb" :src="`${a.img}`" />
+        <img class="thumb" :src="`${a.titleImg}`" />
         <div class="back">
           <div class="back_title">{{ a.title }}</div>
           <div class="back_info">
@@ -43,8 +39,8 @@
 </template>
 
 <script>
-import dummy_data from "../assets/dummydata/dummy.js";
-import Modal from "../components/Modal_vue";
+import dummy_data from "@/assets/DataJs/commuData.js";
+import Modal from "./Modalvue";
 export default {
   data() {
     return {
@@ -60,7 +56,9 @@ export default {
 
 <style>
 .btn-area {
-  float: right;
+  position: relative;
+  top:50px;
+  right: 0px;
 }
 .btn-blue {
   font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,

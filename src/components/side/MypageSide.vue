@@ -6,41 +6,26 @@
         <input type="text" />
       </div>
       <div>
-        <div class="group" id="main" @click="eventStep('main', $event)">
+        <div class="group" id="main">
           <span>· 마이페이지</span>
         </div>
-        <div class="sel" id="mycard" @click="eventStep('mycard', $event)">
-          · 결제정보 설정
-        </div>
-        <div class="sel" id="mypost" @click="eventStep('mypost', $event)">
-          · 내가 쓴 게시글
-        </div>
-        <div class="sel" id="myReview" @click="eventStep('myReview', $event)">
-          · 작성 리뷰 관리
-        </div>
-        <div class="sel" id="prefer" @click="eventStep('prefer', $event)">
-          · 선호 / 비선호 설정
-        </div>
-        <div class="sel" id="myAlarm" @click="eventStep('myAlarm', $event)">
-          · 알림 설정
-        </div>
-        <div
-          class="sel"
-          id="myWithdrawal"
-          @click="eventStep('myWithdrawal', $event)"
-        >
-          · 회원 탈퇴
+        <div class="sel" v-for="(array, i) in sideArrays" :key="i">
+          <div @click="clickEvent(i, $event, array)" id="element">
+            · {{ array }}
+          </div>
         </div>
       </div>
     </div>
-  <div v-if="step == 'main'">  <MyPage /> </div>
-  <div v-if="step == 'mycard'"> <MyCard /></div>
-  <div v-if="step == 'mypost'">  <MyPost /> </div>
-  <div v-if="step == 'myReview'">  <Myreview /> </div>
-  <div v-if="step == 'prefer'">  <Prefer /> </div>
-  <div v-if="step == 'myAlarm'">  <MyAlarm /> </div>
-  <div v-if="step == 'myWithdrawal'">  <MyWithdrawal @myMain="step = 'main'"/> </div>
-</div>
+      <div v-if="myStep == '프로필 설정'"><MyPage /></div>
+      <div v-if="myStep == '결제정보 페이지'"><MyCard /></div>
+      <div v-if="myStep == '내가 쓴 게시글'"><MyPost /></div>
+      <div v-if="myStep == '작성 리뷰 관리'"><Myreview /></div>
+      <div v-if="myStep == '선호 / 비선호 설정'"><Prefer /></div>
+      <div v-if="myStep == '알림 설정'"><MyAlarm /></div>
+      <div v-if="myStep == '회원 탈퇴'">
+        <MyWithdrawal @myMain="$router.push('/')" />
+      </div>
+  </div>
 </template>
 
 <script>
@@ -52,32 +37,45 @@ import Prefer from "../MyPage/Prefer";
 import MyAlarm from "../MyPage/MyAlarm";
 import MyWithdrawal from "../MyPage/withdrawal/MyWithdrawal";
 export default {
-  name: "StoreSide",
+  name: "MypageSide",
   data() {
     return {
-      groupStep: "",
-      step: "main",
+      myStep: "프로필 설정",
+      sideArrays: [
+        "프로필 설정",
+        "결제정보 페이지",
+        "내가 쓴 게시글",
+        "작성 리뷰 관리",
+        "선호 / 비선호 설정",
+        "알림 설정",
+        "회원 탈퇴",
+      ],
+      clickNum: null,
     };
   },
   methods: {
-    eventStep(info, event) {
-      this.step = info;
-      if (this.step == "main") {
-        event.target.style.backgroundColor = "white";
-      } else {
-        event.target.style.backgroundColor = "#2872f9";
+    clickEvent(index, event, array) {
+    // 강조효과 및 메인 화면 변경
+      this.myStep = array;
+      let id = document.querySelectorAll("#element");
+      event.target.style.backgroundColor = "#2872f9";
+      if (this.clickNum != null) {
+        if (this.clickNum != index) {
+          id[this.clickNum].style.backgroundColor = "#2c2c2c";
+        }
       }
+      this.clickNum = index;
     },
   },
-  components: {
-    MyPage,
-    MyCard,
-    MyPost,
-    Myreview,
-    Prefer,
-    MyAlarm,
-    MyWithdrawal,
-  },
+    components: {
+      MyPage,
+      MyCard,
+      MyPost,
+      Myreview,
+      Prefer,
+      MyAlarm,
+      MyWithdrawal,
+    },
 };
 </script>
 
@@ -88,7 +86,7 @@ export default {
   flex-direction: column;
   padding: 50px 10px 0 10px;
   background: #2c2c2c;
-  width: 300px;
+  width: 250px;
   height: 100vh;
   /* overflow: auto; */
   position: fixed;
@@ -96,7 +94,7 @@ export default {
   left: 140px;
 }
 /* -------------------------------------------------------------------- */
-.sel {
+.sel div {
   width: 90%;
   height: 40px;
   color: white;

@@ -4,7 +4,7 @@
       <div class="service">
         <img class="icon" src="../../assets/icons/white/home.png" alt="logo" />
         <span class="title">마이페이지</span>
-        <span class="topic">선호 / 비선호 설정</span>
+        <span class="my_topic">선호 / 비선호 설정</span>
       </div>
     </div>
     <div class="prefer_section">
@@ -14,7 +14,6 @@
       </p>
       <div class="mypage_cate-box">
         <button
-          :style="buttonStyles"
           class="mypage_cate-genre"
           v-for="(genre, i) in predata"
           :key="i"
@@ -55,8 +54,7 @@ export default {
 <style>
 .prefer_section {
   margin: 0 auto;
-  /* background-color: antiquewhite; */
-  width: 700px;
+  width: 800px;
   position: relative;
   top: 15%;
   text-align: center;
@@ -76,7 +74,7 @@ export default {
 .mypage_cate-genre {
   background-color: #5e5e5e;
   color: white;
-  width: 150px;
+  width: 23%;
   height: 50px;
   margin: 5px;
   padding: 5px;

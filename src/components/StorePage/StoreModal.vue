@@ -3,7 +3,7 @@
     <div class="modal_style">
       <div class="close" @click="send_event">X</div>
       <div v-if="modal_step == 0">
-        <StoreVue :datas="datas" :num="num" @next="modal_step++" />
+        <StoreVue :modalData="modalData" @next="modal_step++" />
       </div>
       <div v-if="modal_step == 1">
         <StoreCard @next="modal_step++" />
@@ -27,12 +27,12 @@ export default {
     };
   },
   props: {
-    datas: Object,
     modal: Boolean,
-    num: Number,
+    modalData: Object,
   },
   methods: {
     send_event() {
+    // 모달 닫을 때 쓰는 함수
       this.modal_step = 0;
       this.$emit("close");
     },
@@ -58,9 +58,6 @@ export default {
   position: fixed;
   right: 15px;
   z-index: 12;
-}
-body {
-  margin: 0;
 }
 div {
   box-sizing: border-box;
@@ -90,20 +87,4 @@ div {
   box-shadow: 0 0 100px 50px black;
 }
 
-.service {
-  display: table;
-}
-.service .icon {
-  display: table-cell;
-  width: 50px;
-  height: 50px;
-  margin-right: 10px;
-}
-.service .title {
-  display: table-cell;
-  vertical-align: middle;
-  color: white;
-  font-weight: 900;
-  font-size: 2em;
-}
 </style>

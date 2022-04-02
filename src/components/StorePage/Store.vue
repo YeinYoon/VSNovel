@@ -3,11 +3,7 @@
   <div class="tests">
     <div class="header">
       <div class="service">
-        <img
-          class="icon"
-          src="../../assets/icons/white/shopping-cart.png"
-          alt="logo"
-        />
+        <img class="icon" src="@/assets/icons/white/shopping-cart.png" alt="logo"/>
         <span class="title">스토어</span>
       </div>
       <div class="price_div">
@@ -28,12 +24,12 @@
         </div>
       </div>
     </div>
-    <div class="listView">
+    <div class="store_section">
       <div
         class="work_list"
-        v-for="(data, i) in dataHuman"
-        :key="i"
-        @click="modalOpen(i)"
+        v-for="data in dataHuman"
+        :key="data"
+        @click="modalOpen(data)"
       >
         <img class="list_img" :src="`${data.titleImg}`" />
         <div class="work_list_con">
@@ -48,18 +44,18 @@
         </div>
       </div>
     </div>
-    <StoreModal
+    <div>
+      <StoreModal
       @close="modal = false"
-      :datas="dataHuman"
+      :modalData="modalData"
       :modal="modal"
-      :num="clickNum"
     />
+    </div>
   </div>
 </template>
 
 <script>
-import StoreModal from "./StoreModal";
-import data from "../../assets/DataJs/data.js"; // 이미지 링크
+import StoreModal from "./StoreModal"; 
 import dataHu from "../../assets/DataJs/dataHu.js"; // 작품 정보
 
 export default {
@@ -68,9 +64,8 @@ export default {
     return {
       step: 0,
       modal: false,
-      datas: data,
-      clickNum: 0,
       dataHuman: dataHu,
+      modalData : {},
     };
   },
   components: {
@@ -78,11 +73,13 @@ export default {
   },
   methods: {
     priceClick() {
+    // 유무료 버튼 이벤트
       this.step++;
       if (this.step > 2) this.step = 0;
     },
-    modalOpen(i) {
-      this.clickNum = i;
+    modalOpen(data) {
+    // 모달 오픈 함수
+      this.modalData = data;
       this.modal = true;
     },
   },
@@ -92,11 +89,11 @@ export default {
 <style>
 .tests {
   /* background-color: #353535; */
-  padding: 35px 40px 10px 40px;
-  width: calc(100% - 440px);
+  padding: 35px 40px 30px 40px;
+  width: calc(100% - 390px);
   height: 100%;
   position: fixed;
-  left: 440px;
+  left: 390px;
   overflow: auto;
 }
 /* price_div 위치 잡는 div /  price 전체 div / 
@@ -136,14 +133,28 @@ export default {
 /* work_list 작품 전체 div / list_img 작품 이미지 / 
     list_title 작품 제목 / list_span 글자들 묶은 div / 
     list_team 작품 팀 / list_content 작품 줄거리 / list_price 작품 가격 */
-
+.store_section{
+  margin: 0 auto;
+  padding: 5px;
+  font-size: 1.3em;
+  color: white;
+  width: 800px;
+  height: 80%;
+  position: relative;
+  top: 70px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+}
+.store_section::-webkit-scrollbar {
+  display: none;
+}
 .work_list {
   /* width: calc(50%); */
   background-color: #2a2a2a;
   margin: 50px 10px;
   border-radius: 20px;
   height: 125px;
-  top: 100px;
+  /* top: 100px; */
   display: flex;
   flex-direction: row;
   position: relative;

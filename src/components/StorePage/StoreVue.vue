@@ -2,20 +2,20 @@
   <!-- 로고쪽 -->
   <div class="header">
     <div class="service">
-      <img class="icon" src="../../assets/icons/cart.png" alt="logo" />
+      <img class="icon" src="@/assets/icons/white/cart.png" alt="logo" />
       <span class="title">상세 페이지</span>
     </div>
   </div>
-  <div class="modal_content">
+  <div class="modal_contents">
     <!-- 제목이랑 작가 -->
-    <div class="left_con">
+    <div class="modal_con">
       <div class="modal_header">
-        <span class="modal_title">{{ datas[num].title }}</span>
-        <span class="modal_writer">{{ datas[num].writer }}</span>
+        <span class="modal_title">{{ modalData.title }}</span>
+        <span class="modal_writer">{{ modalData.writer }}</span>
       </div>
       <!-- 상세 이미지 -->
       <div class="carousel_div">
-        <SwiperCarousel />
+        <SwiperCarousel/>
       </div>
       <!-- 상세 내용 -->
       <div class="modal_explain">
@@ -26,26 +26,26 @@
         <div class="modal_explain_down">
           <span class="down_con">설명</span>
           <div class="down_data">
-            <span class="down_data_text">{{ datas[num].content }}</span>
+            <span class="down_data_text">{{ modalData.content }}</span>
           </div>
         </div>
       </div>
     </div>
     <!-- 오른쪽 사진 및, 짧은 내용 -->
-    <div class="right">
-      <img class="right_img" :src="`${datas[num].titleImg}`" />
-      <div class="right_con">
+    <div class="add_content">
+      <img class="add_content_img" :src="`${modalData.titleImg}`" />
+      <div class="add_content_box">
         <div>별점</div>
-        <div class="right_data">
-          <span>제목 : {{ datas[num].title }}</span>
-          <span>제작자 : {{ datas[num].writer }}</span>
-          <span>제작팀 : {{ datas[num].team }}</span>
-          <span>발매년도 : {{ datas[num].saleDate }}</span>
+        <div class="add_content_data">
+          <span>제목 : {{ modalData.title }}</span>
+          <span>제작자 : {{ modalData.writer }}</span>
+          <span>제작팀 : {{ modalData.team }}</span>
+          <span>발매년도 : {{ modalData.saleDate }}</span>
         </div>
       </div>
       <div class="btn_div">
         <div class="price_btn" @click="$emit('next')">
-          <span> {{ datas[num].pay }}&#8361; </span>
+          <span> {{ modalData.pay }}&#8361; </span>
         </div>
       </div>
     </div>
@@ -60,8 +60,7 @@ export default {
     return {};
   },
   props: {
-    datas: Object,
-    num: Number,
+    modalData: Object,
   },
   components: {
     SwiperCarousel: SwiperCarouselVue,
@@ -78,16 +77,18 @@ export default {
 }
 
 /* 모달 전체 */
-.modal_content {
+.modal_contents {
   color: white;
   display: flex;
   flex-direction: row;
   padding: 10px 0 0 0;
-  position: absolute;
   width: calc(100% - 50px);
-  height: calc(100% - 200px);
+  /* height: calc(100% - 200px); */
+  height: 80%;
+  position: absolute;
+  top: 15%;
 }
-.left_con {
+.modal_con {
   padding-right: 15px;
   width: 100%;
   position: relative;
@@ -164,37 +165,36 @@ export default {
   overflow: auto;
   -ms-overflow-style: none;
   position: absolute;
-  height: 100%;
+  height: 50%;
 }
 .down_data::-webkit-scrollbar {
   display: none;
 }
 
 /* 오른쪽 전체 */
-.right {
+.add_content {
   padding: 0 0 0 5px;
   width: 30%;
   height: 100%;
 }
 /* 오른쪽 사진 ( 표지 ) */
-.right_img {
+.add_content_img {
   width: 100%;
-  /* min-height: 70%; */
-  height: 70%;
+  height: 40%;
   border-radius: 20px;
   padding: 0 0 5px 2px;
 }
 /* 오른쪽 작은 회색 박스 */
-.right_con {
+.add_content_box {
   background-color: gray;
   border-radius: 20px;
   padding: 10px 5px;
   font-size: 0.8em;
   margin: 10px 0 0 0;
-  height: 35%;
+  height: 190px;
 }
 /* 데이터 바인딩 부분 */
-.right_data {
+.add_content_data {
   display: flex;
   flex-direction: column;
 }

@@ -1,10 +1,11 @@
 <template>
   <!--  autoplay=2000 -->
-  <carousel
+  <div>
+<carousel
     :items-to-show="1"
     :wrap-around="true"
-    autoplay="5000"
-    pauseAutoplayOnHover="true"
+    :autoplay="sec"
+    :pauseAutoplayOnHover="status"
   >
     <slide v-for="slide in datas" :key="slide">
       <img :src="`${slide.link}`" class="carousel_img" />
@@ -14,6 +15,8 @@
       <pagination />
     </template>
   </carousel>
+  </div>
+  
 </template>
 <script>
 // If you are using PurgeCSS, make sure to whitelist the carousel CSS classes
@@ -26,6 +29,8 @@ export default {
   data() {
     return {
       datas: data,
+      status : true, // 마우스 가져다 댔을 경우 사진이 안넘어가요
+      sec : 1500, //사진 넘어가는 시간
     };
   },
   components: {

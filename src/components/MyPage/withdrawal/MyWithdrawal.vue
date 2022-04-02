@@ -4,7 +4,7 @@
       <div class="service">
         <img class="icon" src="../../../assets/icons/white/home.png" alt="logo" />
         <span class="title">마이페이지</span>
-        <span class="topic">회원탈퇴</span>
+        <span class="my_topic">회원탈퇴</span>
       </div>
     </div>
   <div v-if="next == 0">

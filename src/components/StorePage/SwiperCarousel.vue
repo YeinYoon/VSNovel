@@ -2,8 +2,8 @@
   <carousel
     :items-to-show="1"
     :wrap-around="true"
-    autoplay="1000"
-    pauseAutoplayOnHover="true"
+    :autoplay="sec"
+    :pauseAutoplayOnHover="true"
   >
     <slide v-for="slide in datas" :key="slide">
       <img :src="`${slide.link}`" class="carousel_img" />
@@ -27,6 +27,8 @@ export default {
   data() {
     return {
       datas: data,
+      sec: 1500,
+      status : true,
     };
   },
   components: {
@@ -38,18 +40,9 @@ export default {
 };
 </script>
 <style>
-/* .img_class{
-  width: 60%;
-  margin: 0 auto;
-} */
-/* .carousel__prev--in-active,
-.carousel__next--in-active {
-  display: none;
-} */
 .carousel_img {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  /* border-radius: 20px; */
 }
 </style>

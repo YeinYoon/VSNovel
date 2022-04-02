@@ -5,6 +5,9 @@ const store = createStore({
         return {
             userNickname : null,
             LoadingStatus: false,
+
+            //커뮤니티 사이드 
+            cafeSide : ['카페 메인'] // 커뮤니티 사이드 가입카페목록
         }
     },
     mutations : {
@@ -20,7 +23,17 @@ const store = createStore({
         endSpinner(state){
             state.LoadingStatus = false;
         },
-    }
+        //사이드 카페 가입 배열 추가
+        addCafe(state, title){
+            for(let i = 0; i < state.cafeSide.length; i++){
+                if(state.cafeSide[i] == title){
+                    alert('이미 가입됐슈');
+                    return
+                }
+            }
+            state.cafeSide.push(title);
+        }
+    },
 })
 
 export default store;

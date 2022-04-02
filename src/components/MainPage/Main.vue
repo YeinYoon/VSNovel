@@ -70,23 +70,22 @@ export default {
   width: calc(100%);
 }
 .service {
-  float: left;
-  height: 50px;
+  display: table;
 }
 .service .icon {
+  display: table-cell;
   width: 50px;
   height: 50px;
   margin-right: 10px;
 }
 .service .title {
+  display: table-cell;
+  vertical-align: middle;
   color: white;
   font-weight: 600;
   font-size: 2em;
-  position: relative;
-  top: 0px;
 }
 .service .topic {
-  /* background-color: antiquewhite; */
   display: block;
   width: 150px;
   color: white;
@@ -95,7 +94,10 @@ export default {
   left: calc(100% - 320px);
   font-size: 1.2em;
 }
-
+button{
+  border: none;
+  outline: none;
+}
 .search {
   background-color: white;
   width: 150px;
@@ -118,11 +120,18 @@ export default {
 .search input {
   width: 75%;
   height: 95%;
-  border: none;
   font-size: 100%;
 }
-.search input:focus {
+input{
+  border: none;
+  outline: none;
+}
+.input:focus {
   outline: 0px;
+}
+button{
+  border: none;
+  outline: none;
 }
 .section {
   width: calc(100%);
@@ -139,7 +148,6 @@ export default {
   background-color: #5e5e5e;
   height: 150px;
   top: 25px;
-  /* border-radius: 20px; */
 }
 .section .banner .carousel {
   width: 90%;
