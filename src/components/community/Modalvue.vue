@@ -8,17 +8,17 @@
     <div v-bind:class="{ modal_frame_big: true }">
       <!--모달 내 메세지 및 컨텐츠인 modal_inner, 여기에 단순히 메세지만을 표시할수도 
     작은 컴포넌트를 삽입할수도 있따.-->
-      <div class="modal_inner">
+      <div class="post_modal_inner">
         <span>선택한 게시물을..</span>
-        <div class="modal_content">내용 출력</div>
+        <div class="post_modal_content">내용 출력</div>
         <!--메세지를 출력하는 예제-->
       </div>
       <!--모달을 닫는 버튼과 버튼내 메세지(확인, 취소 등등)-->
-      <div class="modal_btn_position">
-        <button class="modal_btn">이동</button>
-        <button class="modal_btn">비공개</button>
-        <button class="modal_btn_red">삭제</button>
-        <button class="modal_btn" id="cancel" @click="$emit('closemodal', 모달창열렸니)">취소</button>
+      <div class="post_modal_btn_position">
+        <button class="post_modal_btn">이동</button>
+        <button class="post_modal_btn">비공개</button>
+        <button class="post_modal_btn_red">삭제</button>
+        <button class="post_modal_btn" id="cancel" @click="$emit('closemodal', open)">취소</button>
       </div>
     </div>
   </div>
@@ -30,18 +30,18 @@ export default {
 
   components: {},
   props: {
-    모달창열렸니 : Boolean
+    open : Boolean
   },
 };
 </script>
 <style>
-.modal_content {
+.post_modal_content {
   background-color:gray;
   border-radius: 15px;
-  height: 230px;
+  height: 200px;
   margin-top: 10px;
 }
-.modal_frame_normal {
+.post_modal_frame_normal {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -55,7 +55,7 @@ export default {
   z-index: 2;
   opacity: 1;
 }
-.modal_frame_small {
+.post_modal_frame_small {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -69,7 +69,7 @@ export default {
   z-index: 1;
   opacity: 1;
 }
-.modal_frame_big {
+.post_modal_frame_big {
   position: fixed;
   top: 50%;
   left: 50%;
@@ -83,14 +83,14 @@ export default {
   z-index: 1;
   opacity: 1;
 }
-.modal_inner {
+.post_modal_inner {
   color: white;
   position: fixed;
   width: 90%;
   margin: 0px 5% 0px 5%; 
   top: 5%; 
 }
-.modal_btn {
+.post_modal_btn {
     font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
     font-weight: 500;
     position: relative;
@@ -106,7 +106,7 @@ export default {
     cursor: pointer;
     margin:7px 5px 7px 5px;
 }
-.modal_btn_red {
+.post_modal_btn_red {
     font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
     font-weight: 500;
     position: relative;
@@ -122,9 +122,7 @@ export default {
     cursor: pointer;
     margin:7px 5px 7px 5px;
 }
-.modal_btn_position {
-  /* display:flex; */
-  background-color:pink;
+.post_modal_btn_position {
   position:relative;
   width: 90%;
   margin: 0 auto; 

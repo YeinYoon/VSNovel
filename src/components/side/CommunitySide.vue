@@ -32,7 +32,7 @@
 <script>
 import Community from '../community/free/CommuFree';
 import Writer from '../community/WriterCommu';
-import Team from '../community/TeamCommu';
+import Team from '../community/Team/Teamone';
 import Review from '../community/ReviewCommu';
 import Cafe from '../community/cafe/CafeMain';
 export default {

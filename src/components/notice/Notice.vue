@@ -41,7 +41,8 @@
 
 <script>
 import dummy_data from '@/assets/DataJs/commuData.js'
-// import Modal from '@/components/Modal_vue'
+// src\components\community\Modalvue.vue
+// import Modal from '../community/Modal_vue'
 export default {
     data(){
         return {
