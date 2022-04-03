@@ -22,11 +22,19 @@ export default {
   components: {
     quillEditor,
   },
+  props:{
+    noticeData:Object,
+    writeModify:Boolean,
+  },
+  mounted(){
+    if(this.writeModify)
+      this.state.content = this.noticeData.content;
+  },
   setup() {
     const state = reactive({
     //   dynamicComponent: null,
-    //   content: "<p>2333</p>",
-    //   _content: "",
+      content: "<p>이곳에 글을 쓰세요</p>",
+      _content: "",
       editorOption: {
         placeholder: "core",
         modules: {
@@ -52,7 +60,7 @@ export default {
       },
       disabled: false,
     });
-
+    
     const onEditorBlur = (quill) => {
       console.log("editor blur!", quill);
     };
@@ -66,7 +74,6 @@ export default {
       console.log("editor change!", quill, html, text);
       state._content = html;
     };
-
     return {
       state,
       onEditorBlur,

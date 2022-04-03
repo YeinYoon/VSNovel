@@ -8,7 +8,8 @@
     :pauseAutoplayOnHover="status"
   >
     <slide v-for="slide in datas" :key="slide">
-      <img :src="`${slide.link}`" class="carousel_img" />
+      <img :src="`${slide.link}`" class="carousel_imga"/>
+      <img :src="`${slide.link}`" class="carousel_img"/>
     </slide>
     <template #addons>
       <navigation />
@@ -42,17 +43,24 @@ export default {
 };
 </script>
 <style>
-.carousel_img {
+.carousel_imga{
   width: 100%;
+  position: absolute;
+  filter: blur(5px);
+}
+.carousel_img {
+  position: relative;
+  /* left: -20%; */
+  width: 60%;
   height: 200px;
-  object-fit: cover;
+  object-fit: contain;
 }
 .carousel__prev {
-  transform: translate(25%, -100%);
+  transform: translate(25%, -70%);
   /* transform: translate(-120%, -100%); */
 }
 .carousel__next {
-  transform: translate(-25%, -100%);
+  transform: translate(-25%, -70%);
   /* transform: translate(120%, -100%); */
 }
 </style>

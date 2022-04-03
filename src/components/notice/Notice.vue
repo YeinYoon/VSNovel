@@ -4,10 +4,10 @@
     <header class="header">
         <div class="service">
             <img class="icon" src="@/assets/icons/white/megaphone.png" alt="community">
-            <span class="title">공지사항</span>
+            <span class="title" @click="adminEvent">공지사항</span>
             <span class="topic">TOPIC · 전체</span>
             <div class="noticeMain_btn_area">
-                <button class="btn_red">관리</button>
+                <button class="btn_red" v-if="admin">관리</button>
                 <button class="btn_blue" @click="noticeStep++">글쓰기</button>
             </div>
         </div>
@@ -16,7 +16,7 @@
         <div class="strong_notice_post"> 
             <div v-for="(notice, i) in noticeData" :key="i">
                 <div class="line" v-if="noticeNum == i"></div>
-                <div class="strong_notice" @click="noticeEvent(notice)">
+                <div class="strong_notice" @click="noticeEvent(notice, i)">
                 <img class="strong_notice_mark" v-if="notice.emphasis == 0" src="@/assets/icons/white/star.png">
                     <div class="back_title">{{notice.title}}</div>
                     <div class="back_content">내용 - {{notice.content}}</div>
@@ -27,10 +27,10 @@
     </section>
   </div>
     <div v-if="noticeStep == 1">
-        <NoticeWrite @write_cancle="noticeStep = 0"/>
+        <NoticeWrite :writeModify="writeModify" :noticeData="clickNotice" @write_cancle="noticeBtnEvent($event)"/>
     </div>
     <div v-if="noticeStep == 2">
-        <NoticeRead :noticeData="clickNotice" @cancle="noticeStep = 0" @updata="noticeBtnEvent('up')" @notice_cancle="noticeBtnEvent('cancle')"/>
+        <NoticeRead :admin="admin" :noticeData="clickNotice" @btnEvent="noticeBtnEvent($event)"/>
     </div>
 </div>
 </template>
@@ -47,6 +47,8 @@ export default {
             noticeStep : 0,
             clickNotice : {},
             clickNoticeNum : 0,
+            writeModify : false,
+            admin : false,
         }
     },
     components:{
@@ -64,17 +66,37 @@ export default {
     }
     },
     methods:{
-        noticeEvent(data){
+        adminEvent(){
+            if(this.admin) this.admin = false;
+            else this.admin = true;
+        },
+        noticeEvent(data, i){
         //글보기 화면 이동
             this.noticeStep = 2;
             this.clickNotice = data;
+            this.clickNoticeNum = i;
+            this.writeModify = true;
         },
-        noticeBtnEvent(noticeStep){
+        noticeBtnEvent(event){
         // 글 목록 화면 이동
-            this.noticeStep = 0;
-            if(noticeStep == 'up')
+            //강조 발행일 때
+            if(event == 'updata')
                 this.clickNotice.emphasis = 0;
-            else this.clickNotice.emphasis = 1;
+            //강조 취소일 때
+            else if(event == 'notice_cancle') 
+                this.clickNotice.emphasis = 1;
+            //삭제일 때
+            else if(event == 'delete') 
+                this.noticeData.splice(this.clickNoticeNum, 1);
+            //수정일 때
+            else if(event == 'modify') {
+                this.noticeStep = 1;
+                this.writeModify = true;
+                return
+            }
+            //아닐 때
+            this.writeModify = false;
+            this.noticeStep = 0;
         }
     },
 }
@@ -124,7 +146,6 @@ export default {
     margin-top:10px;
     margin: 20px auto;
 }
-.strong_notice_post:hover {opacity:0.8;}
 .strong_notice_mark {
     width:60px;
     height:60px;

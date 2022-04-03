@@ -1,24 +1,42 @@
 <template>
   <div class="tests">
     <header class="header">
-        <div class="service">
-            <img class="icon" src="@/assets/icons/white/megaphone.png" alt="community">
-            <span class="title">공지사항</span>
-            <span class="topic">전체 - {{noticeData.title}}</span>
-        </div>
-    </header>  
-    <div class="write_section">
-      <div class="write_title">{{noticeData.title}}</div>
-      <div class="write_contents">
-          {{noticeData.content}}
+      <div class="service">
+        <img
+          class="icon"
+          src="@/assets/icons/white/megaphone.png"
+          alt="community"
+        />
+        <span class="title">공지사항</span>
+        <span class="topic">전체 - {{ noticeData.title }}</span>
+      </div>
+    </header>
+    <div class="notice_write_section">
+      <div class="notice_write_title">
+        <span>{{ noticeData.title }}</span>
+      </div>
+      <div class="notice_write_contents">
+        {{ noticeData.content }}
       </div>
     </div>
     <div class="notice_btn_area">
-        <div class="strong_btn" v-if="noticeData.emphasis == 0" @click="noticeBtnEvent('cancle')">강조 취소</div>
-        <div class="strong_btn" v-if="noticeData.emphasis == 1" @click="noticeBtnEvent('updata')">강조로 발행</div>
-        <div class="write_btn">수정</div>
-        <div class="write_btn">삭제</div>
-        <div class="cancle_btn" @click="$emit('cancle')">취소</div>
+      <div
+        class="strong_btn"
+        v-if="noticeAdmin == 0"
+        @click="noticeBtnEvent('notice_cancle')"
+      >
+        강조 취소
+      </div>
+      <div
+        class="strong_btn"
+        v-if="noticeAdmin == 1"
+        @click="noticeBtnEvent('updata')"
+      >
+        강조로 발행
+      </div>
+      <div class="write_btn" v-if="admin" @click="noticeBtnEvent('modify')">수정</div>
+      <div class="write_btn" v-if="admin" @click="noticeBtnEvent('delete')">삭제</div>
+      <div class="cancle_btn" @click="noticeBtnEvent('cancle')">취소</div>
     </div>
   </div>
 </template>
@@ -27,24 +45,43 @@
 export default {
   name: "OnWrite",
   data() {
-    return {}
+    return {
+      noticeAdmin : 0,
+    };
   },
-  props:{
-      noticeData:Object,
+  props: {
+    noticeData: Object,
+    admin : Boolean,
   },
-  methods:{
-      noticeBtnEvent(step){
-        //강조 발행 / 취소 이벤트
-        if(step == 1)
-            this.$emit('updata');
-        else this.$emit('notice_cancle');
-      }
-  }
+  mounted(){
+    if(this.admin){
+        if(this.noticeData.emphasis == 1)
+          this.noticeAdmin = 1;
+    }
+  },
+  methods: {
+    noticeBtnEvent(step) {
+      //강조 발행
+      if (step == 'updata') 
+        this.$emit('btnEvent','updata');
+      //강조 취소
+      else if(step == 'notice_cancle')
+        this.$emit('btnEvent','notice_cancle');
+      //게시물 삭제
+      else if(step == 'delete')
+        this.$emit('btnEvent', 'delete');
+      //게시물 수정
+      else if(step == 'modify')
+        this.$emit('btnEvent', 'modify');
+      //뒤로 가기
+      else this.$emit('btnEvent', 'cancle');
+    },
+  },
 };
 </script>
 
 <style>
-.write_section {
+.notice_write_section {
   margin: 0 auto;
   padding: 10px 15px;
   width: 800px;
@@ -55,7 +92,7 @@ export default {
   top: 50px;
   color: white;
 }
-.write_title {
+.notice_write_title {
   margin: 5px auto;
   width: 100%;
   height: 7%;
@@ -63,33 +100,22 @@ export default {
   border-radius: 20px;
   padding: 0 10px;
   font-size: 1.2em;
+  display: table;
 }
-.write_title input {
-  position: relative;
-  left: 5px;
-  width: 99%;
-  height: 100%;
-  border: none;
-  background: none;
+.notice_write_title span{
+  display: table-cell;
+  vertical-align: middle;
 }
-.write_contents {
+.notice_write_contents {
   margin: 0 auto;
   width: 100%;
   height: 89%;
   background-color: #5e5e5e;
   border-radius: 20px;
   font-size: 1.4em;
+  padding: 5px 10px;
 }
-.write_content textarea {
-  background: none;
-  border: none;
-  position: relative;
-  top: 5px;
-  resize: none;
-  width: 100%;
-  height: 95%;
-}
-.editer_info{
+.editer_info {
   color: white;
   margin: 5px 0 0 0;
   font-size: 0.8em;
