@@ -20,7 +20,7 @@
           </div>
           <div class="post_list">
               
-            <div class="size">
+            <div class="register_notice_box">
               <div class="notice">
                 <div class="header">
                   <div class="service">
@@ -39,7 +39,7 @@
                 </div>
               </div>
             </div>
-            <div class="size">
+            <div class="register_community_box">
               <div class="community">
                 <div class="header">
                   <div class="service">
@@ -95,7 +95,6 @@ export default {
   font-size: 1.3em;
   color: white;
   width: 800px;
-  /* height: 80%; */
   position: relative;
   top: 70px;
   overflow-y: scroll;
@@ -139,5 +138,22 @@ export default {
 }
 .post_list{
     flex: 7;
+}
+.register_notice_box, .register_community_box{
+  flex: 7;
+  background-color: #494949;
+  padding: 10px;
+  border-radius: 20px;
+  margin: 20px 0 0 0;
+  height: 20%;
+}
+.register_notice_box .notice .header .title, 
+.register_community_box .community .header .title{
+  font-size: 1em;
+}
+.register_notice_box .notice .header .icon,
+.register_community_box .community .header .icon{
+  width: 30px;
+  height: 30px;
 }
 </style>

@@ -26,7 +26,7 @@
           </div>
           <div class="card_info_num">
             <span class="card_num">카드번호</span>
-            <input type="text" class="card_box" maxlength="16">
+            <input type="text" class="card_box" maxlength="16" @change="console.log(value)">
           </div>
           <div class="date_info">
             <span class="date_info_id">유효기간</span>
@@ -166,12 +166,13 @@ select:focus {
 }
 /* 카드 번호 상자 */
 .card_box {
+  text-align: center;
   flex: 8;
   background-color: white;
   color: black;
   height: 40px;
   line-height: 40px;
-  padding: 0 5px;
+  padding: 0 10px;
   border-radius: 10px;
 }
 /* 유효기간 라인 */

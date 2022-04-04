@@ -22,14 +22,14 @@
     <div class="notice_btn_area">
       <div
         class="strong_btn"
-        v-if="noticeAdmin == 0"
+        v-if="admin && this.noticeData.emphasis == 0"
         @click="noticeBtnEvent('notice_cancle')"
       >
         강조 취소
       </div>
       <div
         class="strong_btn"
-        v-if="noticeAdmin == 1"
+        v-if="admin && this.noticeData.emphasis == 1"
         @click="noticeBtnEvent('updata')"
       >
         강조로 발행
@@ -52,12 +52,6 @@ export default {
   props: {
     noticeData: Object,
     admin : Boolean,
-  },
-  mounted(){
-    if(this.admin){
-        if(this.noticeData.emphasis == 1)
-          this.noticeAdmin = 1;
-    }
   },
   methods: {
     noticeBtnEvent(step) {

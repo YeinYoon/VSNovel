@@ -15,7 +15,7 @@
     <section class="notice_section">
         <div class="strong_notice_post"> 
             <div v-for="(notice, i) in noticeData" :key="i">
-                <div class="line" v-if="noticeNum == i"></div>
+                <div class="notice_line" v-if="noticeNum == i"></div>
                 <div class="strong_notice" @click="noticeEvent(notice, i)">
                 <img class="strong_notice_mark" v-if="notice.emphasis == 0" src="@/assets/icons/white/star.png">
                     <div class="back_title">{{notice.title}}</div>
@@ -227,7 +227,7 @@ export default {
     left: 600px;
     z-index: 12;
 }
-.line{
+.notice_line{
     margin: 5px auto;
     width: 100%;
     height: 3px;

@@ -50,8 +50,12 @@ export default {
         "알림 설정",
         "회원 탈퇴",
       ],
-      clickNum: null,
+      clickNum: 0,
     };
+  },
+  mounted(){
+    let id = document.querySelectorAll("#element")
+    id[this.clickNum].style.backgroundColor = "#2872f9"
   },
   methods: {
     clickEvent(index, event, array) {
