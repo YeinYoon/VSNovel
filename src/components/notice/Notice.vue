@@ -231,6 +231,7 @@ export default {
     margin: 5px auto;
     width: 100%;
     height: 3px;
-    border: 2px solid rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    border: 2px solid #262626;
 }
 </style>
