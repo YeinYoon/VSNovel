@@ -1,10 +1,12 @@
 <template>
-  <div>
+  <div class="team_box">
       <div>
       <Modal
         v-if="open == true"
         :openmodal="open"
         @closemodal="open = false"
+        :modaldatasend="(modaldata, datasend)"
+        @deletemodal="deletepost"
       ></Modal>
     </div>
 
@@ -19,7 +21,7 @@
         class="commu_post"
         v-for="(a, index) in datasend"
         :key="index"
-        @click="decision(a,manage,open)"
+        @click="decision(a,manage)"
       >
         <img class="commu_thumb" :src="`${a.titleImg}`" />
         <div class="commu_back">
@@ -40,19 +42,22 @@ export default {
     return {
       manage : false,
       open: false,
+      modaldata : {}
     };
   },
   components: {
      Modal,
   },
   methods : {
-    decision(a,manage,open){
+    decision(a,manage){
       if(manage==false){
         this.$emit('first', a);
-      }else{
-        open=true
+      }else {
+        this.open = true;
+        this.modaldata = a;
       }
-      
+    },
+    deletepost(index){
       
     }
   },
@@ -63,19 +68,15 @@ export default {
 </script>
 
 <style>
-.service{
-  display: table;
-}
-.service .title{
-  display: table-cell;
-  vertical-align: middle;
+.team_box {
+  height: 100vh;
 }
 .commu_btn_area{
   display:flex;
   justify-content: flex-end;
 }
 .commu_btn_red{
-  top:1px;
+  top:40px;
   position:relative;
   cursor: pointer;
   width: 100px;
@@ -85,6 +86,7 @@ export default {
   display: table;
 }
 .commu_btn_blue{
+  top:40px;
   position:relative;
   cursor: pointer;
   margin-left: 20px;
@@ -108,12 +110,15 @@ export default {
 }
 .commu_section {
   position:relative;
-  top:15px;
+  top:7%;
   width: 800px;
-  /* height: 80%; */
+  height: 70%;
   margin: 0 auto;
-  /* overflow-y:scroll;
-  -ms-overflow-style:none; */
+  overflow-y:scroll;
+  -ms-overflow-style:none;
+}
+.commu_section::-webkit-scrollbar {
+  display: none;
 }
 .commu_post {
   position: relative;

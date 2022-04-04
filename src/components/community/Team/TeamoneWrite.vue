@@ -23,9 +23,6 @@ export default {
     }
   },
   methods : {
-    inputdata(a){
-      console.log(a);
-    }
   },
   components: {
       Editor

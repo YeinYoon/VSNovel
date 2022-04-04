@@ -10,14 +10,14 @@
     작은 컴포넌트를 삽입할수도 있따.-->
       <div class="post_modal_inner">
         <span>선택한 게시물을..</span>
-        <div class="post_modal_content">내용 출력</div>
+        <div class="post_modal_content">{{modaldatasend.content}}</div>
         <!--메세지를 출력하는 예제-->
       </div>
       <!--모달을 닫는 버튼과 버튼내 메세지(확인, 취소 등등)-->
       <div class="post_modal_btn_position">
         <button class="post_modal_btn">이동</button>
         <button class="post_modal_btn">비공개</button>
-        <button class="post_modal_btn_red">삭제</button>
+        <button class="post_modal_btn_red" @click="$emit('deletemodal', datasend)">삭제</button>
         <button class="post_modal_btn" id="cancel" @click="$emit('closemodal', open)">취소</button>
       </div>
     </div>
@@ -30,7 +30,9 @@ export default {
 
   components: {},
   props: {
-    open : Boolean
+    open : Boolean,
+    modaldatasend : Object,
+    datasend : Object
   },
 };
 </script>
