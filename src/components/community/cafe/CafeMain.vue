@@ -12,7 +12,7 @@
         <input type="text" />
       </div>
     </div>
-    <div class="section">
+    <div class="cafe_section">
       <div class="carousel">
         <SwiperCarousel/>
       </div>
@@ -74,11 +74,13 @@ export default {
 </script>
 
 <style>
-.section {
-  width: calc(100%);
-  margin: 60px 0 0 0;
+.cafe_section {
+  width: 800px;
+  margin: 0 auto;
+  position: relative;
+  top: 70px;
 }
-.section .carousel {
+.cafe_section .carousel {
   width: 100%;
 }
 .widgets {

@@ -84,7 +84,7 @@ export default {
 .menubox {
   background: #353535;
   display: inline-table;
-  margin-top: 10px;
+  margin: 5% 0;
   width: 75px;
   height: 75px;
   border-radius: 20px;

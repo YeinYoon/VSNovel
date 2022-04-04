@@ -132,6 +132,9 @@ button{
 }
 .section {
   width: 1000px;
+  position: relative;
+  top: 30px;
+  margin: 0 auto;
   /* margin: 20px 0 0 0; */
 }
 .section .banner {
