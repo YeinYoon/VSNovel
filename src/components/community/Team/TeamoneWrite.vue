@@ -3,7 +3,7 @@
     <div class="write_section">
       <div class="write_title"><input type="text"/></div>
       <div class="write_content">
-        <Editor />
+        <TeamEditor />
       </div>
     </div>
     <div class="btn_area">
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Editor from '../free/Editor'
+import TeamEditor from './TeamEditor'
 export default {
   name: "TeamoneWrite",
   data() {
@@ -25,7 +25,7 @@ export default {
   methods : {
   },
   components: {
-      Editor
+      TeamEditor
   },
   props : {
     datasend:Object

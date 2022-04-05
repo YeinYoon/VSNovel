@@ -17,7 +17,7 @@
       <div class="post_modal_btn_position">
         <button class="post_modal_btn">이동</button>
         <button class="post_modal_btn">비공개</button>
-        <button class="post_modal_btn_red" @click="$emit('deletemodal', datasend)">삭제</button>
+        <button class="post_modal_btn_red" @click="modalremove">삭제</button>
         <button class="post_modal_btn" id="cancel" @click="$emit('closemodal', open)">취소</button>
       </div>
     </div>
@@ -32,8 +32,14 @@ export default {
   props: {
     open : Boolean,
     modaldatasend : Object,
-    datasend : Object
+    datasend : Object,
   },
+  methods: {
+    modalremove() {
+      this.$emit('deletedata');
+      this.$emit('closemodal', open);
+    }
+  }
 };
 </script>
 <style>

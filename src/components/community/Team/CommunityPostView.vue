@@ -44,6 +44,7 @@ export default {
   top: 50px;
 }
 .postview_title {
+  color:white;
   margin: 5px auto;
   width: 100%;
   height: 50px;
@@ -61,6 +62,7 @@ export default {
   background: none;
 }
 .postview_frame {
+  color:white;
   margin: 0 auto;
   width: 100%;
   background-color: #5e5e5e;

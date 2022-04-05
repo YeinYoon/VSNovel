@@ -8,7 +8,7 @@
       </div>
     </div>
     <div v-if="teamonedata == 0">
-      <TeamCommu @first="teamadd($event)"  @third="teamonedata = 2" :datasend="community"/>
+      <TeamCommu @first="teamadd($event)"  @third="teamonedata = 2" :datasend="community" @deletepost="remove($event)"/>
     </div>
     <div v-if="teamonedata == 1">
       <CommunityPostView @second="teamonedata=0" :teamobject="teamobject"/>
@@ -38,6 +38,9 @@ export default {
     teamadd(event){
       this.teamonedata = 1;
       this.teamobject = event;
+    },
+    remove(a){
+      this.community.splice(a,1);
     }
 
   },

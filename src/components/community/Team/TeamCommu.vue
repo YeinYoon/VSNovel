@@ -5,8 +5,9 @@
         v-if="open == true"
         :openmodal="open"
         @closemodal="open = false"
-        :modaldatasend="(modaldata, datasend)"
-        @deletemodal="deletepost"
+        :modaldatasend="modaldata"
+        :datasend="datasend"
+        @deletedata="deletepost(modalindex)"
       ></Modal>
     </div>
 
@@ -21,7 +22,7 @@
         class="commu_post"
         v-for="(a, index) in datasend"
         :key="index"
-        @click="decision(a,manage)"
+        @click="decision(a,manage,index)"
       >
         <img class="commu_thumb" :src="`${a.titleImg}`" />
         <div class="commu_back">
@@ -42,23 +43,25 @@ export default {
     return {
       manage : false,
       open: false,
-      modaldata : {}
+      modaldata : {},
+      modalindex: ''
     };
   },
   components: {
      Modal,
   },
   methods : {
-    decision(a,manage){
+    decision(a,manage,index){
       if(manage==false){
         this.$emit('first', a);
       }else {
         this.open = true;
         this.modaldata = a;
+        this.modalindex = index;
       }
     },
-    deletepost(index){
-      
+    deletepost(modalindex){
+      this.$emit('deletepost',modalindex);
     }
   },
   props : {
@@ -69,7 +72,7 @@ export default {
 
 <style>
 .team_box {
-  height: 100vh;
+  height: 80vh;
 }
 .commu_btn_area{
   display:flex;
@@ -110,9 +113,9 @@ export default {
 }
 .commu_section {
   position:relative;
-  top:7%;
+  top:10%;
   width: 800px;
-  height: 70%;
+  height: 90%;
   margin: 0 auto;
   overflow-y:scroll;
   -ms-overflow-style:none;
