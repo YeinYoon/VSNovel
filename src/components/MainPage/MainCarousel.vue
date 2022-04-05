@@ -28,7 +28,7 @@ export default {
     return {
       datas: data,
       status : true, // 마우스 가져다 댔을 경우 사진이 안넘어가요
-      sec : 150777770, //사진 넘어가는 시간,
+      sec : 153333300, //사진 넘어가는 시간,
     };
   },
   components: {
@@ -40,6 +40,7 @@ export default {
 };
 </script>
 <style>
+/* 메인 carousel */
 .main_carousel_img {
   width: 110%;
   height: 200px;
@@ -47,7 +48,7 @@ export default {
   z-index: 11;
   box-shadow: 0px 0px 18px 10px rgba(0, 0, 0, 0.7);
 }
-/* 메인 페이지를 제외한 캐러셀 이미지 스타일 */
+/* 메인 페이지를 제외한 carousel img style */
 .carousel_img {
   position: relative;
   width: 60%;

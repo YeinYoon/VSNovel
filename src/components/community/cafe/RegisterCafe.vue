@@ -9,7 +9,6 @@
     </div>
     <div class="register_cafe_section">
       <img class="register_img" :src="`${registerCafeData.link}`" />
-      <div>
         <div class="register_content">
           <div class="resigster_title">
             <img :src="`${registerCafeData.link}`" />
@@ -19,7 +18,6 @@
             </div>
           </div>
           <div class="post_list">
-              
             <div class="register_notice_box">
               <div class="notice">
                 <div class="header">
@@ -65,7 +63,6 @@
               </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   </div>
@@ -95,13 +92,9 @@ export default {
   font-size: 1.3em;
   color: white;
   width: 800px;
+  height: 88%;
   position: relative;
-  top: 70px;
-  overflow-y: scroll;
-  -ms-overflow-style: none;
-}
-.register_cafe_section::-webkit-scrollbar {
-  display: none;
+  top: 7%;
 }
 .register_img {
   width: 100%;
@@ -110,7 +103,13 @@ export default {
 }
 .register_content{
     display: flex;
-    margin: 5px 0 0 0;
+    margin: 25px 0 0 0;
+    height: 65%;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+}
+.register_content::-webkit-scrollbar {
+  display: none;
 }
 .resigster_title{
     flex: 3;
@@ -118,7 +117,7 @@ export default {
     font-size: 0.7em;
     background-color: #494949;
     border-radius: 20px;
-    margin: 20px 10px 0 0;
+    margin: 0 10px 0 0;
     padding: 10px;
     display: flex;
 }
@@ -144,8 +143,10 @@ export default {
   background-color: #494949;
   padding: 10px;
   border-radius: 20px;
-  margin: 20px 0 0 0;
-  height: 20%;
+  height: 300px;
+}
+.register_community_box{
+  margin: 10px 0 0 0;
 }
 .register_notice_box .notice .header .title, 
 .register_community_box .community .header .title{

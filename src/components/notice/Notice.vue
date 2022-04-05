@@ -8,7 +8,7 @@
             <span class="topic">TOPIC · 전체</span>
             <div class="noticeMain_btn_area">
                 <button class="btn_red" v-if="admin">관리</button>
-                <button class="btn_blue" @click="noticeStep++">글쓰기</button>
+                <button class="btn_blue" v-if="admin" @click="noticeStep++">글쓰기</button>
             </div>
         </div>
     </header>  

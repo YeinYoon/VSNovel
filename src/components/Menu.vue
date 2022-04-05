@@ -1,46 +1,46 @@
 <template>
   <div v-bind:class="{ mainmenu: true }">
     <div v-bind:class="{ menus: true }">
-      <div v-bind:class="{ menubox: true }" @click="routerPush('/mypage')">
+      <div v-bind:class="{ menubox: true }" id="mypage" @click="routerPush('/mypage', 'mypage')">
         <img class="menubox_icon_mypage" src="@/assets/icons/white_logo.png" />
       </div>
       <br />
-      <div v-bind:class="{ menubox: true }"  @click="routerPush('/library')">
+      <div v-bind:class="{ menubox: true }" id="library"  @click="routerPush('/library', 'library')">
         <img
           class="menubox_icon_library"
           src="@/assets/icons/white/library.png"
         />
       </div>
       <br />
-      <div v-bind:class="{ menubox: true }" @click="routerPush('/store')">
+      <div v-bind:class="{ menubox: true }" id="store" @click="routerPush('/store', 'store')">
         <img
           class="menubox_icon_store"
           src="@/assets/icons/white/shopping-cart.png"
         />
       </div>
       <br />
-      <div v-bind:class="{ active: isActive, menubox: true }">
+      <div v-bind:class="{ menubox: true }" id="engine"  @click="routerPush('/engine', 'engine')">
         <img
           class="menubox_icon_engine"
           src="@/assets/icons/white/engineering.png"
         />
       </div>
       <br />
-      <div v-bind:class="{ menubox: true }" @click="routerPush('/community')">
+      <div v-bind:class="{ menubox: true }" id="community" @click="routerPush('/community', 'community')">
         <img
           class="menubox_icon_community"
           src="@/assets/icons/white/bubble_chat.png"
         />
       </div>
       <br />
-      <div v-bind:class="{ menubox: true }" @click="routerPush('/notice')">
+      <div v-bind:class="{ menubox: true }" id="notice" @click="routerPush('/notice', 'notice')">
         <img
           class="menubox_icon_notice"
           src="@/assets/icons/white/megaphone.png"
         />
       </div>
       <br />
-      <div v-bind:class="{ menubox: true }" @click="routerPush('/')">
+      <div v-bind:class="{ menubox: true }" id="main" @click="routerPush('/', 'main')">
         <img
           class="menubox_icon_mainscreen"
           src="@/assets/icons/white_logo.png"
@@ -54,10 +54,16 @@
 export default {
   name: "vsnmenu",
   data() {
-    return {};
+    return {
+      state : '',
+    };
   },
   methods: {
-    routerPush(link) {
+    routerPush(link, id) { 
+      document.getElementById(id).style.background = "#2872f9";
+      if(this.state != '' && this.state != id)
+        document.getElementById(this.state).style.background = "#353535";
+      this.state = id;
       // 메뉴 이동 라우터 함수
       this.$router.push(link);
     },
@@ -93,7 +99,8 @@ export default {
 .menubox:hover {
   background: #5a5a5a;
 }
-.menubox_active {
+
+.menubox:focus {
   display: inline-table;
   margin-top: 10px;
   width: 75px;

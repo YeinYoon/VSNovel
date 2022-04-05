@@ -117,6 +117,7 @@ export default {
   margin: 20px 0;
 }
 .notice_box {
+  flex: 4;
   width: 450px;
   background-color: #494949;
   height: 300px;
