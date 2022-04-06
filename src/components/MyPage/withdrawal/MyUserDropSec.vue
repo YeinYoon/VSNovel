@@ -78,8 +78,6 @@ export default {
 .drop-input-cont{
   flex: 8;
   background:green;
-  border: 0;
-  outline: 0;
   color: white;
   width: 400px;
   height: 40px;

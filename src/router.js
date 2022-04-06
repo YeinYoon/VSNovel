@@ -4,7 +4,7 @@ import Main from './components/MainPage/Main.vue';
 import Community from './components/side/CommunitySide.vue';
 import Mypage from './components/side/MypageSide.vue';
 import Library from './components/side/LibrarySide.vue';
-import Notice from './components/side/NoticeSide.vue';
+import Notice from './components/side/NoticeSide.vue'
 
 const routes = [
   {

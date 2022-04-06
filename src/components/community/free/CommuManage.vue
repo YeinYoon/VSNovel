@@ -1,10 +1,10 @@
 <template>
-  <div class="tests">
+  <div>
     <div>
       <Modal
-        v-if="모달창열렸니 == true"
-        :openmodal="모달창열렸니"
-        @closemodal="모달창열렸니 = false"
+        v-if="open == true"
+        :openmodal="open"
+        @closemodal="open = false"
       ></Modal>
     </div>
         <div class="btn-area">
@@ -15,9 +15,9 @@
     <section class="section">
       <div
         class="post"
-        v-for="(a, index) in 커뮤니티"
+        v-for="(a, index) in community"
         :key="index"
-        @click="모달창열렸니 = true"
+        @click="open = true"
       >
         <img class="thumb" :src="`${a.titleImg}`" />
         <div class="back">
@@ -37,8 +37,8 @@ import Modal from "../Modalvue";
 export default {
   data() {
     return {
-      커뮤니티: dummy_data,
-      모달창열렸니: false,
+      community: dummy_data,
+      open: false,
     };
   },
   components: {

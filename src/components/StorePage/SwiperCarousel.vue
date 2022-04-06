@@ -6,7 +6,8 @@
     :pauseAutoplayOnHover="true"
   >
     <slide v-for="slide in datas" :key="slide">
-      <img :src="`${slide.link}`" class="carousel_img" />
+      <img :src="`${slide.link}`" class="carousel_imga"/>
+      <img :src="`${slide.link}`" class="carousel_img"/>
     </slide>
 
     <template #addons>

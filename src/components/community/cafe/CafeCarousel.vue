@@ -8,6 +8,7 @@
     :pauseAutoplayOnHover="status"
   >
     <slide v-for="(slide,i) in datas" :key="i" @click="sendData(i)" >
+      <img :src="`${slide.link}`" class="carousel_imga"/>
       <img :src="`${slide.link}`" class="carousel_img"/>
     </slide>
     <template #addons>
@@ -50,19 +51,12 @@ export default {
 };
 </script>
 <style>
-.carousel_img {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-}
-.carousel__prev {
+/* .carousel__prev {
   transform: translate(25%, -50%);
-  /* transform: translate(-120%, -100%); */
 }
 .carousel__next {
   transform: translate(-25%, -50%);
-  /* transform: translate(120%, -100%); */
-}
+} */
 .carousel__pagination-button {
   display: none;
 }

@@ -3,7 +3,7 @@
     <div class="modal_style">
       <div class="close" @click="send_event">X</div>
       <div v-if="modal_step == 0">
-        <StoreVue :modalData="modalData" @next="modal_step++" />
+        <StoreVue :modalData="modalData" @next="modal_step++" @onchange="console.log('aaa')"/>
       </div>
       <div v-if="modal_step == 1">
         <StoreCard @next="modal_step++" />

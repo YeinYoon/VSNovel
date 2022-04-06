@@ -65,9 +65,9 @@ export default {
     genreEvent(num, event) {
     // 장르 강조효과
       let id = Array.from(document.querySelectorAll(".select_btn"));
-
-      event.target.style.color = "black";
       id[this.genreNum].style.color = "gray";
+      event.target.style.color = "black";
+      // if(this.genreNum)
       this.genreNum = num;
     },
   },
@@ -84,6 +84,7 @@ export default {
   padding: 5px 10px;
   border: 1px solid black;
   border-radius: 30px;
+  margin: 0 0 25px 0;
   top: 45px;
 }
 .side_search .side_icon {

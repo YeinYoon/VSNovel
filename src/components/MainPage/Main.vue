@@ -13,10 +13,7 @@
     </div>
     <div class="section">
       <div class="banner">
-        <div class="background"></div>
-        <div class="carousel">
           <SwiperCarousel />
-        </div>
       </div>
       <div class="widget">
         <Com />
@@ -87,11 +84,11 @@ export default {
 }
 .service .topic {
   display: block;
-  width: 150px;
+  width: 200px;
   color: white;
   position: relative;
   top: 30px;
-  left: calc(100% - 320px);
+  left: calc(100% - 370px);
   font-size: 1.2em;
 }
 button{
@@ -134,28 +131,18 @@ button{
   outline: none;
 }
 .section {
-  width: calc(100%);
-  margin: 20px 0 0 0;
+  width: 1000px;
+  position: relative;
+  top: 30px;
+  margin: 0 auto;
+  /* margin: 20px 0 0 0; */
 }
 .section .banner {
-  position: relative;
-  display: flex;
-  justify-content: center;
-}
-.section .banner .background {
-  position: absolute;
-  width: 100%;
-  background-color: #5e5e5e;
-  height: 150px;
-  top: 25px;
-}
-.section .banner .carousel {
-  width: 90%;
-  position: relative;
-  left: 2%;
+  margin: 0 auto;
+  width: 1000px;
 }
 .footer {
-  width: calc(100%);
+  width: 100%;
   color: white;
   padding: 5px 0 0 5px;
 }

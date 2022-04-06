@@ -1,5 +1,5 @@
 <template>
-  <div class="tests">
+  <div>
     <div><Modal v-if="모달창열렸니 == true" :openmodal="모달창열렸니" @closemodal="모달창열렸니 = false"></Modal></div>
     <header class="header">
         <div class="service">

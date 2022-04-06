@@ -5,9 +5,8 @@ const store = createStore({
         return {
             userNickname : null,
             LoadingStatus: false,
-
             //커뮤니티 사이드 
-            cafeSide : ['카페 메인'] // 커뮤니티 사이드 가입카페목록
+            cafeSide : [{title : '자유'},{title:'작가'}, {title : '팀원 모집'}, {title : '리뷰 & 추천'}, {title:'카페 메인'}] // 커뮤니티 사이드 
         }
     },
     mutations : {
@@ -24,15 +23,16 @@ const store = createStore({
             state.LoadingStatus = false;
         },
         //사이드 카페 가입 배열 추가
-        addCafe(state, title){
+        addCafe(state, cafeData){
             for(let i = 0; i < state.cafeSide.length; i++){
-                if(state.cafeSide[i] == title){
+                if(state.cafeSide[i] == cafeData.title){
                     alert('이미 가입됐슈');
                     return
                 }
             }
-            state.cafeSide.push(title);
-        }
+            state.cafeSide.push(cafeData);
+            console.log(state.cafeSide);
+        },
     },
 })
 

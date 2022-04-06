@@ -197,7 +197,7 @@ export default {
   background-color: #2872f9;
   padding: 0 20px;
   height: 30px;
-  width: 120px;
+  width: 130px;
   text-align: center;
   border-radius: 20px;
   display: table;
@@ -209,6 +209,6 @@ export default {
   color: white;
   display: table-cell;
   vertical-align: middle;
-  font-size: 1.1em;
+  font-size: 1em;
 }
 </style>

@@ -1,51 +1,53 @@
 <template>
   <!-- 로고쪽 -->
-  <div class="header">
-    <div class="service">
-      <img class="icon" src="@/assets/icons/white/cart.png" alt="logo" />
-      <span class="title">상세 페이지</span>
+  <div>
+    <div class="header">
+      <div class="service">
+        <img class="icon" src="@/assets/icons/white/cart.png" alt="logo" />
+        <span class="title">상세 페이지</span>
+      </div>
     </div>
-  </div>
-  <div class="modal_contents">
-    <!-- 제목이랑 작가 -->
-    <div class="modal_con">
-      <div class="modal_header">
-        <span class="modal_title">{{ modalData.title }}</span>
-        <span class="modal_writer">{{ modalData.writer }}</span>
-      </div>
-      <!-- 상세 이미지 -->
-      <div class="carousel_div">
-        <SwiperCarousel/>
-      </div>
-      <!-- 상세 내용 -->
-      <div class="modal_explain">
-        <div class="modal_explain_up">
-          <span class="up_con">장르</span>
-          <span class="up_data">서브컬쳐</span>
+    <div class="modal_contents">
+      <!-- 제목이랑 작가 -->
+      <div class="modal_con">
+        <div class="modal_header">
+          <span class="modal_title">{{ modalData.title }}</span>
+          <span class="modal_writer">{{ modalData.writer }}</span>
         </div>
-        <div class="modal_explain_down">
-          <span class="down_con">설명</span>
-          <div class="down_data">
-            <span class="down_data_text">{{ modalData.content }}</span>
+        <!-- 상세 이미지 -->
+        <div class="carousel_div">
+          <SwiperCarousel />
+        </div>
+        <!-- 상세 내용 -->
+        <div class="modal_explain">
+          <div class="modal_explain_up">
+            <span class="up_con">장르</span>
+            <span class="up_data">서브컬쳐</span>
+          </div>
+          <div class="modal_explain_down">
+            <span class="down_con">설명</span>
+            <div class="down_data">
+              <span class="down_data_text">{{ modalData.content }}</span>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    <!-- 오른쪽 사진 및, 짧은 내용 -->
-    <div class="add_content">
-      <img class="add_content_img" :src="`${modalData.titleImg}`" />
-      <div class="add_content_box">
-        <div>별점</div>
-        <div class="add_content_data">
-          <span>제목 : {{ modalData.title }}</span>
-          <span>제작자 : {{ modalData.writer }}</span>
-          <span>제작팀 : {{ modalData.team }}</span>
-          <span>발매년도 : {{ modalData.saleDate }}</span>
+      <!-- 오른쪽 사진 및, 짧은 내용 -->
+      <div class="add_content">
+        <img class="add_content_img" :src="`${modalData.titleImg}`" />
+        <div class="add_content_box">
+          <div>별점</div>
+          <div class="add_content_data">
+            <span>제목 : {{ modalData.title }}</span>
+            <span>제작자 : {{ modalData.writer }}</span>
+            <span>제작팀 : {{ modalData.team }}</span>
+            <span>발매년도 : {{ modalData.saleDate }}</span>
+          </div>
         </div>
-      </div>
-      <div class="btn_div">
-        <div class="price_btn" @click="$emit('next')">
-          <span> {{ modalData.pay }}&#8361; </span>
+        <div class="btn_div">
+          <div class="price_btn" @click="$emit('next')">
+            <span> {{ modalData.pay }}&#8361; </span>
+          </div>
         </div>
       </div>
     </div>

@@ -1,6 +1,6 @@
 <template>
   <div class="box">
-    <div class="size">
+    <div class="community_box">
       <div class="community">
         <div class="header">
           <div class="service">
@@ -28,7 +28,7 @@
 
     <div class="line"></div>
 
-    <div class="size">
+    <div class="notice_box">
       <div class="notice">
         <div class="header">
           <div class="service">
@@ -102,12 +102,24 @@ export default {
  
 <style>
 .box {
+  width: 1000px;
+  margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
 }
-.size {
-  background-color: #494949;
+.community_box{
   flex: 4;
+  width: 450px;
+  background-color: #494949;
+  height: 300px;
+  padding: 5px 10px;
+  border-radius: 20px;
+  margin: 20px 0;
+}
+.notice_box {
+  flex: 4;
+  width: 450px;
+  background-color: #494949;
   height: 300px;
   padding: 5px 10px;
   border-radius: 20px;
@@ -183,8 +195,8 @@ export default {
   font-size: 1.5em;
 }
 .notice .con {
+  text-align: left;
   position: relative;
-  left: -5%;
   font-size: 0.8em;
   padding: 5px 0 10px 0;
 }

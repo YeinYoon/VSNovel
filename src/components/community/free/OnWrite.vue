@@ -62,18 +62,6 @@ export default {
   border-radius: 20px;
   padding: 0 10px;
 }
-.write_content textarea {
-  background: none;
-  border: none;
-  position: relative;
-  top: 5px;
-  resize: none;
-  width: 100%;
-  height: 95%;
-}
-textarea:focus {
-  outline: none;
-}
 .btn_area {
   position: relative;
   top: 70px;
