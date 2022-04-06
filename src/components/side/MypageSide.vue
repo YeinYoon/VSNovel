@@ -20,10 +20,10 @@
       <div v-if="myStep == '결제정보 페이지'"><MyCard /></div>
       <div v-if="myStep == '내가 쓴 게시글'"><MyPost /></div>
       <div v-if="myStep == '작성 리뷰 관리'"><Myreview /></div>
-      <div v-if="myStep == '선호 / 비선호 설정'"><Prefer /></div>
+      <div v-if="myStep == '선호 / 비선호 설정'" @save="myStep = '프로필 설정'"><Prefer /></div>
       <div v-if="myStep == '알림 설정'"><MyAlarm /></div>
       <div v-if="myStep == '회원 탈퇴'">
-        <MyWithdrawal @myMain="$router.push('/')" />
+        <MyWithdrawal @myMain="myStep = '프로필 설정'" />
       </div>
   </div>
 </template>
@@ -54,6 +54,7 @@ export default {
     };
   },
   mounted(){
+    // 기본 강조 효과
     let id = document.querySelectorAll("#element")
     id[this.clickNum].style.backgroundColor = "#2872f9"
   },

@@ -12,7 +12,7 @@
           <button class="btn-blue" @click="$emit('next')">글쓰기</button>
         </div>
 
-    <section class="section">
+    <section class="free_section">
       <div
         class="post"
         v-for="(a, index) in community"
@@ -48,10 +48,22 @@ export default {
 </script>
 
 <style>
+.free_section{
+  margin: 0 auto;
+  width: 800px;
+  height: 70%;
+  position: relative;
+  top: 50px;
+  overflow-y: scroll;
+  -ms-overflow-style: none;
+}
+.free_section::-webkit-scrollbar {
+  display: none;
+}
 .btn-area {
   position: absolute;
-  top:20px;
-  right: 0px;
+  top:130px;
+  right: 15px;
 }
 .btn-blue {
   font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,

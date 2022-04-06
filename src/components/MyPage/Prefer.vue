@@ -22,8 +22,8 @@
           {{ genre.name }}
         </button>
       </div>
-      <button class="mypage_cate-canc" @click="colorcanc">취소</button>
-      <button class="mypage_cate-save" @click="routerPush('/')">저장</button>
+      <button class="mypage_cate-canc" @click="$emit('save')">취소</button>
+      <button class="mypage_cate-save" @click="$emit('save')">저장</button>
     </div>
   </div>
 </template>
@@ -50,10 +50,6 @@ export default {
     routerPush(link){
       this.$router.push(link);
     },
-    colorcanc(){
-      document.getElementById('color').style.backgroundColor='#5e5e5e';
-      this.$router.push('/');
-    }
   },
 };
 </script>

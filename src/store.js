@@ -25,8 +25,8 @@ const store = createStore({
         //사이드 카페 가입 배열 추가
         addCafe(state, cafeData){
             for(let i = 0; i < state.cafeSide.length; i++){
-                if(state.cafeSide[i] == cafeData.title){
-                    alert('이미 가입됐슈');
+                if(state.cafeSide[i].title == cafeData.title){
+                    alert('이미 가입된 카페입니다.');
                     return
                 }
             }
