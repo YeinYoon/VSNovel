@@ -16,9 +16,9 @@
   </div>
 </div>
     <div v-if="step == '자유'"> <Community/> </div>
-    <div v-else-if="step == '작가'"> <Writer/> </div>
+    <div v-else-if="step == '작가'"> <Team/> </div>
     <div v-else-if="step == '팀원 모집'"> <Team/> </div>
-    <div v-else-if="step == '리뷰 & 추천'"> <Review/> </div>
+    <div v-else-if="step == '리뷰 & 추천'"> <Team/> </div>
     <div v-else-if="step == '카페 메인'"> <Cafe /> </div>
     <div v-else> <RegisterCafe :registerCafeData="registerCafeData"/> </div>
 </div>
@@ -26,9 +26,7 @@
 
 <script>
 import Community from '../community/free/CommuFree';
-import Writer from '../community/WriterCommu';
 import Team from '../community/Team/Teamone';
-import Review from '../community/ReviewCommu';
 import Cafe from '../community/cafe/CafeMain';
 import RegisterCafe from '../community/cafe/RegisterCafe';
 export default {
@@ -44,9 +42,7 @@ export default {
   },
   components:{
       Community,
-      Writer,
       Team,
-      Review,
       Cafe,
       RegisterCafe,
   },
