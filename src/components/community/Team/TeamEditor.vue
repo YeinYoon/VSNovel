@@ -4,7 +4,7 @@
     v-model:value="state.content"
     :options="state.editorOption"
     :disabled="state.disabled"
-    @blur="onEditorBlur($event)"
+    @blur="$emit('registerdata',state._content)"
     @focus="onEditorFocus($event)"
     @ready="onEditorReady($event)"
     @change="onEditorChange($event)"
@@ -20,6 +20,10 @@ export default {
   name: "App",
   components: {
     quillEditor,
+  },
+  data() {
+    return {
+    }
   },
   setup() {
     const state = reactive({
@@ -73,6 +77,8 @@ export default {
       onEditorReady,
       onEditorChange,
     };
+  },
+  methods: {
   },
 };
 </script>
