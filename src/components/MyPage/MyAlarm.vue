@@ -20,7 +20,7 @@
     
     <footer class="button-position">
         <button id="mypage_alarm-canc">취소</button>
-        <button id="mypage_alarm-save">저장</button>
+        <button id="mypage_alarm-save" @click="routerPush('/')">저장</button>
     </footer>
 
 </div>
@@ -34,7 +34,12 @@ export default {
     return{
       alarmdata:alarm
     }
-  }
+  },
+  methods:{
+    routerPush(link){
+      this.$router.push(link);
+    }
+  },
 }
 </script>
 

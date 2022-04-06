@@ -13,7 +13,7 @@
         해당 장르는 추천에서 제외됩니다.
       </p>
       <div class="mypage_cate-box">
-        <button
+        <button id="color"
           class="mypage_cate-genre"
           v-for="(genre, i) in predata"
           :key="i"
@@ -22,8 +22,8 @@
           {{ genre.name }}
         </button>
       </div>
-      <button class="mypage_cate-canc">취소</button>
-      <button class="mypage_cate-save">저장</button>
+      <button class="mypage_cate-canc" @click="colorcanc">취소</button>
+      <button class="mypage_cate-save" @click="routerPush('/')">저장</button>
     </div>
   </div>
 </template>
@@ -47,6 +47,13 @@ export default {
       event.target.style.backgroundColor =
         this.status == 0 ? "#5E5E5E" : this.status == 1 ? "#0078FF" : "#EA4235";
     },
+    routerPush(link){
+      this.$router.push(link);
+    },
+    colorcanc(){
+      document.getElementById('color').style.backgroundColor='#5e5e5e';
+      this.$router.push('/');
+    }
   },
 };
 </script>

@@ -18,7 +18,7 @@
       <hr class="lines" />
       <div class="post_line" v-for="(post, i) in post" :key="i">
         <div class="post_place">{{ post.position }}</div>
-        <div class="post_title">{{ post.title }}</div>
+        <div class="post_title" style="cursor:pointer">{{ post.title }}</div>
         <div class="post_like">{{ post.prefer }}</div>
         <div class="post_comment">{{ post.comment }}</div>
         <div class="post_clicks">{{ post.look }}</div>
@@ -61,6 +61,7 @@ export default {
   text-align: center;
   display: flex;
   height: 30px;
+  margin-bottom: 10px;
 }
 .post_place,
 .post_like,

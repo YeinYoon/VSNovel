@@ -137,9 +137,11 @@ export default {
 
 /* 제목,부제목을 제외한 모든 태그들 */
 .main-position-container{
+  padding: 20px;
+  position: relative;
+  top: 15%;
   width: 800px;
   height: 450px;
-  transform: translate(5%,10%);
   margin: 0 auto;
 }
 
@@ -154,7 +156,7 @@ export default {
 .col-three{
   position: absolute;
   font-size: 0.8em;
-  left: 70%;
+  left: 73%;
 }
 
 /* 왼쪽 부분에 있는 텍스트 스타일 */

@@ -1,20 +1,18 @@
 
 <template>
   <div class="gall_section">
-    <section>
       <div class="container">
         <div class="lib_first_line">
           <div class="lib_gallery">
             <div class="section_box">
               <div class="list" v-for="Gallery in image" :key="Gallery">
                 <img class="img" :src="`${Gallery.link}`" />
-                <div class="titles"></div>
+                <div class="longbar"></div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    </section>
   </div>
 </template>
 
@@ -37,6 +35,8 @@ export default {
   color: white;
   position:relative;
   top: 50px;
+  margin: 0 auto;
+  
 }
 .container {
   width: 100%;
@@ -54,25 +54,28 @@ export default {
   flex-wrap: wrap;
   justify-content: center;
   margin: 5px;
+  width: 90%;
+  margin: 0 auto;
 }
 .lib_gallery .list .img {
   position: relative;
-  top: 10px;
+  top: 20px;
+  left: 0.5%;
   width: 150px;
   height: 200px;
-  margin: 0 10px;
+  margin: 0 30px;
   z-index: 11;
 }
-.lib_gallery .list .titles {
-  width: 100%;
+.lib_gallery .list .longbar{
   height: 50px;
-  margin: 0px 0 20px 0;
+  margin: 0px 0 30px 0;
   background-color: #2c2c2c;
   color: white;
   text-align: center;
   padding: 15px 0 0 0;
   font-weight: 500;
 }
+
 .lib_image:hover {
   opacity: 0.8;
   cursor: pointer;

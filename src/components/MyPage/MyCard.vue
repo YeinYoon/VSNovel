@@ -19,7 +19,7 @@
       <!-- 2행 카드번호 입력 -->
       <div class="card-container2">
         <div class="card-num-name">카드번호</div>
-        <input class="card-input" type="text" maxlength="16">
+        <input class="card-input" type="number" oninput="if(value.length>11)value=value.slice(0,19)" onkeyup="cardnum"/>
         <div class="card-num-info">16자리 숫자만 입력</div>
       </div>
 
@@ -34,7 +34,7 @@
     <!-- 취소,저장버튼 -->
     <footer class="card-footer">
       <button id="mypage_card-canc">취소</button>
-      <button id="mypage_card-save">저장</button>
+      <button id="mypage_card-save" @click="routerPush('/')">저장</button>
     </footer>
 
   </div>
@@ -44,17 +44,29 @@
 
 <script>
 export default {
-
+  methods:{
+    routerPush(link){
+      this.$router.push(link);
+    }
+  }
 }
 </script>
 
 <style>
+
+/* input type="number" 증감버튼 삭제 */
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 /* 제목,부제목을 제외한 전체적인 위치 */
 .card-position-container{
   width: 800px;
   height: 450px;
   position: relative;
-  top: 7%;
+  top: 15%;
   margin: 0 auto;
   
 }
@@ -103,6 +115,7 @@ export default {
   height: 40px;
   background: #5E5E5E;
   border-radius: 20px;
+  padding: 15px;
 }
 
 /* 16자리 숫자입력 공지 */
