@@ -99,15 +99,6 @@ export default {
 .menubox:hover {
   background: #5a5a5a;
 }
-
-.menubox:focus {
-  display: inline-table;
-  margin-top: 10px;
-  width: 75px;
-  height: 75px;
-  border-radius: 20px;
-  background: #2872f9;
-}
 .menubox_icon_mypage {
   position: relative;
   top: 2px;
