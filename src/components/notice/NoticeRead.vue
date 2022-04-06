@@ -15,7 +15,7 @@
       <div class="notice_write_title">
         <span>{{ noticeData.title }}</span>
       </div>
-      <div class="notice_write_contents">
+      <div class="notice_write_contents" >
         {{ noticeData.content }}
       </div>
     </div>
