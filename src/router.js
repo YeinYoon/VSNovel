@@ -7,7 +7,7 @@ import Library from './components/side/LibrarySide.vue';
 import Notice from './components/side/NoticeSide.vue'
 import Login from './components/auth/Login.vue';
 import SignUp from './components/auth/SignUp.vue';
-import FindAcc from './components/auth/SignUp.vue';
+import FindAcc from './components/auth/FindAcc.vue';
 
 const routes = [
   {

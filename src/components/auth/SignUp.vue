@@ -1,79 +1,98 @@
 <template>
   <div class="FullView">
-    <!--컴포넌트 전체영역-->
-    <img class="background_img" src="@/assets/imgs/background.png" alt="">
-    <div class="sign_box"><!--전체 로그인 화면-->
-      <div class="sign_title"> <!--로그인 타이틀-->
-        <span>SIGN UP</span>
-      </div>
-      <div class="sign_inner_box"> <!--로그인 타이틀 아래, 기능부의 전체를 감싸는 검은박스-->
-      
-      <div class="input_box">
+      <!--컴포넌트 전체영역-->
+      <img class="background_img" src="@/assets/imgs/background.png" alt="">
+        <div class="SignUp_Anime">
+          <div class="sign_box"><!--전체 로그인 화면-->
+            <div class="sign_title"> <!--로그인 타이틀-->
+              <span>SIGN UP</span>
+            </div>
+            <div class="sign_inner_box"> <!--로그인 타이틀 아래, 기능부의 전체를 감싸는 검은박스-->
+            
+            <div class="input_box">
 
-        <!--1페이지-->
-        <div v-if="stepCount == 1">
-          <p class="use_info_label">사용할 ID</p>
-          <input class="use_info_input" type="text">
+              <!--1페이지-->
+              <div class="Pagenation" v-if="stepCount == 1">
+                <p class="use_info_label">사용할 ID</p>
+                <input class="use_info_input" type="text">
 
-          <p class="use_info_label">비밀번호</p>
-          <input class="use_info_input" type="password">
+                <p class="use_info_label">비밀번호</p>
+                <input class="use_info_input" type="password">
 
-          <p class="use_info_label">비밀번호 확인</p>
-          <input class="use_info_input" type="password">
-        </div>
+                <p class="use_info_label">비밀번호 확인</p>
+                <input class="use_info_input" type="password">
+              </div>
 
-        <!--2페이지-->
-        <div v-if="stepCount == 2">
-          <p class="use_info_label">이름</p>
-          <input class="use_info_input" type="text">
+              <!--2페이지-->
+              <div v-if="stepCount == 2">
+                <p class="use_info_label">이름</p>
+                <input class="use_info_input" type="text">
 
-          <p class="use_info_label">성별</p>
-          <div class="use_info_select">
-            <label class="use_info_name" name="sex">
-              남자
-              <input class="use_info_radio" name="sex" type="radio">        
-            </label>
-            <label class="use_info_name" name="sex">
-              여자
-              <input class="use_info_radio" name="sex" type="radio">        
-            </label>
+                <p class="use_info_label">성별</p>
+                <div class="use_info_select">
+                  <label class="use_info_name" name="sex">
+                    남자
+                    <input class="use_info_radio" name="sex" type="radio">        
+                  </label>
+                  <label class="use_info_name" name="sex">
+                    여자
+                    <input class="use_info_radio" name="sex" type="radio">        
+                  </label>
+                </div>
+
+                <!-- <p class="use_info_label">생년월일</p>
+                <input class="use_info_input" type="password"> -->
+                <p class="use_info_label">전화번호</p>
+                <input class="use_info_input" type="password">
+              </div>
+
+              <!--3페이지-->
+              <div v-if="stepCount == 3">
+                <p class="use_info_label">닉네임</p>
+                <input class="use_info_input" type="text">
+                <!-- <p class="use_info_label">프로필 사진</p>
+                <input class="use_info_input" type="password"><div class="img_browse_button"><span class="button_label">Browse</span></div> -->
+                <p class="use_info_label">이메일</p>
+                <input class="use_info_input" type="password">
+              </div>
+
+            </div>
+
+            <p class="cancel_label" @click="this.$router.push('/signin')">다음에 가입하기</p>
+            
+            <div class="next_button">
+              <span class="button_label">다음 단계로</span>
+            </div>
+
+            <!-- 패스 구현됐을때 쓸것 -->
+            <!-- <div class="next_button">
+              <span class="button_label">PASS 인증</span>
+            </div> -->
+
+            <!-- 마지막 페이지에 쓸것 -->
+            <!-- <div class="next_button">
+              <span class="button_label">가입완료</span>
+            </div> -->
+            </div>
           </div>
-
-          <!-- <p class="use_info_label">생년월일</p>
-          <input class="use_info_input" type="password"> -->
-          <p class="use_info_label">전화번호</p>
-          <input class="use_info_input" type="password">
         </div>
-
-        <!--3페이지-->
-        <div v-if="stepCount == 3">
-          <p class="use_info_label">닉네임</p>
-          <input class="use_info_input" type="text">
-          <!-- <p class="use_info_label">프로필 사진</p>
-          <input class="use_info_input" type="password"><div class="img_browse_button"><span class="button_label">Browse</span></div> -->
-          <p class="use_info_label">이메일</p>
-          <input class="use_info_input" type="password">
-        </div>
-
-      </div>
-
-      <div class="next_button">
-        <span class="button_label">다음 단계로</span>
-      </div>
-
-      <!-- 패스 구현됐을때 쓸것 -->
-      <!-- <div class="next_button">
-        <span class="button_label">PASS 인증</span>
-      </div> -->
-
-      <!-- 가입완료에 쓸것 -->
-      <!-- <div class="next_button">
-        <span class="button_label">가입완료</span>
-      </div> -->
-      </div>
-    </div>
   </div>
 </template>
+
+<script>
+export default {
+  name: 'SignUp',
+  data() {
+    return {
+      stepCount : 1,
+    }
+  },
+
+  components: {
+  },
+}
+  
+</script>
 
 <style>
 .contentbackground {
@@ -187,6 +206,16 @@
   vertical-align: middle;
   color: white;
 }
+
+.cancel_label{
+  position: absolute;
+  left: 30px;
+  top: 90%;
+  color: rgb(122, 122, 122);
+  cursor: pointer;
+  font-weight: 800;
+}
+
 .img_browse_button{
   position: absolute;
   background: #2872f9;
@@ -200,19 +229,35 @@
   display: table;
 }
 
-</style>
-<script>
-export default {
-  name: 'SignUp',
-  data() {
-    return {
-      stepCount : 3,
-    }
-  },
-
-  components: {
-  },
+.SignUp_Anime{
+  animation-name: SignUp;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
 }
-  
-</script>
+
+.Pagenation {
+  animation-name: PageUp;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes SignUp {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes PageUp {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+</style>
+
 
