@@ -25,6 +25,7 @@
       <div v-if="myStep == '회원 탈퇴'">
         <MyWithdrawal @myMain="myStep = '프로필 설정'" />
       </div>
+      <div class="Temp_LogoutButton"><button class="mypage_logout">로그아웃</button></div>
   </div>
 </template>
 
@@ -110,4 +111,19 @@ export default {
   font-weight: 600;
   font-size: 1em;
 }
+
+.Temp_LogoutButton{
+  position: absolute;
+  left: 160px;
+  top: 90%;
+}
+
+.mypage_logout {
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  background: #2872f9;
+  color: white;
+}
+
 </style>
