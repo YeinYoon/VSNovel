@@ -2,24 +2,25 @@
   <div class="FullView">
     <!--컴포넌트 전체영역-->
     <img class="background_img" src="@/assets/imgs/background.png" alt="">
-    <div class="sign_box"><!--전체 로그인 화면-->
-      <div class="sign_title"> <!--로그인 타이틀-->
+    <div class="sign_box SignUp_Anime"><!--전체 로그인 화면-->
+      <div class="sign_title "> <!--로그인 타이틀-->
         <span>SIGN UP</span>
       </div>
       <div class="sign_inner_box"> <!--로그인 타이틀 아래, 기능부의 전체를 감싸는 검은박스-->
       
       <div class="input_box">
           <!--약관동의-->
-        <div v-if="stepCount == 0">
+        <div class="Pagenation" v-if="stepCount == 0">
+          <div class="terms_title_position"> <p class="terms_title">이용약관</p> </div>
           <div class="terms_frame">
             <div class="terms_inner">
-
+              <p>내용</p>
             </div>
           </div>
         </div>
 
         <!--1페이지-->
-        <div v-if="stepCount == 1">
+        <div class="Pagenation" v-if="stepCount == 1">
           <p class="use_info_label">사용할 ID</p>
           <input class="use_info_input" type="text"> <div class="id_Check_button"><span class="button_label">니가쓰셈</span></div>
 
@@ -31,7 +32,7 @@
         </div>
 
         <!--2페이지-->
-        <div v-if="stepCount == 2">
+        <div class="Pagenation" v-if="stepCount == 2">
           <p class="use_info_label">이름</p>
           <input class="use_info_input" type="text">
 
@@ -58,7 +59,7 @@
         </div>
 
         <!--3페이지-->
-        <div v-if="stepCount == 3">
+        <div class="Pagenation" v-if="stepCount == 3">
           <p class="use_info_label">닉네임</p>
           <input class="use_info_input" type="text">
           <div class="nick_Check_button"><span class="button_label">니가쓰셈</span></div>
@@ -68,27 +69,32 @@
           <input class="use_info_input" type="email">
         </div>
 
-      </div>
 
-      <div class="next_button">
-        <span class="button_label">다음</span>
-      </div>
 
-      <div class="next_button">
-        <span class="button_label">동의합니다</span>
-      </div>
+          </div>
 
-      <!-- 패스 구현됐을때 쓸것 -->
-      <!-- <div class="next_button">
-        <span class="button_label">PASS 인증</span>
-      </div> -->
+            <p class="cancel_label" @click="this.$router.push('/signin')">다음에 가입하기</p>
+            
+            <div class="next_button">
+              <span class="button_label">다음 단계로</span>
+            </div>
 
-      <!-- 가입완료에 쓸것 -->
-      <!-- <div class="next_button">
-        <span class="button_label">가입완료</span>
-      </div> -->
-      </div>
-    </div>
+            <div class="next_button">
+              <span class="button_label" @click="agree()">동의합니다</span>
+            </div>
+
+            <!-- 패스 구현됐을때 쓸것 -->
+            <!-- <div class="next_button">
+              <span class="button_label">PASS 인증</span>
+            </div> -->
+
+            <!-- 마지막 페이지에 쓸것 -->
+            <!-- <div class="next_button">
+              <span class="button_label">가입완료</span>
+            </div> -->
+            </div>
+          </div>
+ 
   </div>
 </template>
 
@@ -110,6 +116,12 @@ export default {
     }
   },
   methods : {
+
+    //약관동의
+    agree(){
+      this.stepCount = 1;
+    },
+
     signup() {
       var newUser = {
         newId : this.newId,
@@ -206,11 +218,36 @@ export default {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -45%);
   width: 850px;
-  height: 300px;
-  background: rgb(185, 185, 185);
+  height: 280px;
+  background: #5e5e5e;
   border-radius: 25px;
+  overflow: auto;
+}
+
+.terms_title_position {
+  width: 200px;
+  height: 300px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -48%);
+}
+
+.terms_inner{
+  padding: 10px;
+  color: white;
+  word-break: break-all;
+}
+
+.terms_title {
+  font-size: 1.2em;
+  position: absolute;
+  top: -5%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
 }
 
 .use_info_label{
@@ -265,6 +302,16 @@ export default {
   vertical-align: middle;
   color: white;
 }
+
+.cancel_label{
+  position: absolute;
+  left: 30px;
+  top: 90%;
+  color: rgb(122, 122, 122);
+  cursor: pointer;
+  font-weight: 800;
+}
+
 .img_browse_button{
   position: absolute;
   background: #2872f9;
@@ -302,6 +349,35 @@ export default {
   display: table;
 }
 
+.SignUp_Anime{
+  animation-name: SignUp;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+.Pagenation {
+  animation-name: PageUp;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes SignUp {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes PageUp {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 </style>
 
 

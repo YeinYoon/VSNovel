@@ -33,6 +33,7 @@
         <div class="signupNpasswd"> <!-- 최하단 회원가입 및 패스워드 찾기 -->
           <span class="signup_button" @click="this.$router.push('/signup')">회원가입</span>
           <span class="where_my_account" @click="this.$router.push('/findAcc')">로그인에 문제가 있나요?</span>
+          <p class="return_button" @click="this.$router.push('/')">기존 페이지로 돌아가기</p>
         </div> <!-- 최하단 회원가입 및 패스워드 찾기 끝 -->
         <div class="partion_block"> <!-- 로그인 및 광고영역간 공간분리 -->
         </div>
@@ -225,6 +226,7 @@
   vertical-align:middle;
   color: white;
 }
+
 .signup_button{
   position: absolute;
   left: 80px;
@@ -235,6 +237,7 @@
   font-size: 1.2em;
   cursor: pointer;
 }
+
 .where_my_account
 {
   position: absolute;
@@ -244,6 +247,16 @@
   color: white;
   text-decoration: underline;
   font-size: 1.2em;
+  cursor: pointer;
+}
+
+.return_button{
+  position: absolute;
+  left: 88%;
+  top: 430px;
+  transform: translate(-50%, -50%);
+  color: rgb(168, 168, 168);
+  font-size: 0.8em;
   cursor: pointer;
 }
 
