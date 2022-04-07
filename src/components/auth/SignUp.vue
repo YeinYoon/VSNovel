@@ -9,11 +9,19 @@
       <div class="sign_inner_box"> <!--로그인 타이틀 아래, 기능부의 전체를 감싸는 검은박스-->
       
       <div class="input_box">
+          <!--약관동의-->
+        <div v-if="stepCount == 0">
+          <div class="terms_frame">
+            <div class="terms_inner">
+
+            </div>
+          </div>
+        </div>
 
         <!--1페이지-->
         <div v-if="stepCount == 1">
           <p class="use_info_label">사용할 ID</p>
-          <input class="use_info_input" type="text">
+          <input class="use_info_input" type="text"> <div class="id_Check_button"><span class="button_label">니가쓰셈</span></div>
 
           <p class="use_info_label">비밀번호</p>
           <input class="use_info_input" type="password">
@@ -29,36 +37,45 @@
 
           <p class="use_info_label">성별</p>
           <div class="use_info_select">
-            <label class="use_info_name" name="sex">
+            <label class="use_info_name" >
               남자
-              <input class="use_info_radio" name="sex" type="radio">        
+              <input class="use_info_radio" name="sex" value="M" type="radio">        
             </label>
-            <label class="use_info_name" name="sex">
+            <label class="use_info_name" >
               여자
-              <input class="use_info_radio" name="sex" type="radio">        
+              <input class="use_info_radio" name="sex" value="F" type="radio">        
+            </label>
+            <label class="use_info_name" >
+              비공개
+              <input class="use_info_radio" name="sex" value="null" type="radio">        
             </label>
           </div>
 
           <!-- <p class="use_info_label">생년월일</p>
           <input class="use_info_input" type="password"> -->
           <p class="use_info_label">전화번호</p>
-          <input class="use_info_input" type="password">
+          <input class="use_info_input" type="text">
         </div>
 
         <!--3페이지-->
         <div v-if="stepCount == 3">
           <p class="use_info_label">닉네임</p>
           <input class="use_info_input" type="text">
+          <div class="nick_Check_button"><span class="button_label">니가쓰셈</span></div>
           <!-- <p class="use_info_label">프로필 사진</p>
           <input class="use_info_input" type="password"><div class="img_browse_button"><span class="button_label">Browse</span></div> -->
           <p class="use_info_label">이메일</p>
-          <input class="use_info_input" type="password">
+          <input class="use_info_input" type="email">
         </div>
 
       </div>
 
       <div class="next_button">
-        <span class="button_label">다음 단계로</span>
+        <span class="button_label">다음</span>
+      </div>
+
+      <div class="next_button">
+        <span class="button_label">동의합니다</span>
       </div>
 
       <!-- 패스 구현됐을때 쓸것 -->
@@ -74,6 +91,56 @@
     </div>
   </div>
 </template>
+
+<script>
+import axios from '../../axios';
+export default {
+  name: 'SignUp',
+  data() {
+    return {
+      stepCount : 0,
+
+      newId : "",
+      newPw: "",
+      newEmail : "",
+      newNickname : "",
+      newName : "",
+      newSex : "M",
+      newPhone : ""
+    }
+  },
+  methods : {
+    signup() {
+      var newUser = {
+        newId : this.newId,
+        newPw : this.newPw,
+        newEmail : this.newEmail,
+        newNickname : this.newNickname,
+        newName : this.newName,
+        newSex : this.newSex,
+        newPhone : this.newPhone,
+        newCardnum : null
+      }
+
+      axios.post('/api/auth/signUp', newUser)
+      .then((result)=>{
+        if(result.data == 'ok') {
+          alert('회원가입 완료');
+          this.$router.push('/');
+        } else {
+          alert(result.data);
+        }
+      })
+      .catch((err)=>{
+        console.error(err);
+      })
+    }
+  },
+  components: {
+  },
+}
+  
+</script>
 
 <style>
 .contentbackground {
@@ -135,6 +202,17 @@
   transform: translate(-50%, -55%);
   font-size: 1.2em;
 }
+.terms_frame{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 850px;
+  height: 300px;
+  background: rgb(185, 185, 185);
+  border-radius: 25px;
+}
+
 .use_info_label{
   margin-top: 30px;
   margin-bottom: 0px;
@@ -199,20 +277,31 @@
   text-align: center;
   display: table;
 }
+.id_Check_button{
+  position: absolute;
+  background: #2872f9;
+  left: 120%;
+  top: 83px;
+  width: 120px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  text-align: center;
+  display: table;
+}
+.nick_Check_button{
+  position: absolute;
+  background: #2872f9;
+  left: 120%;
+  top: 83px;
+  width: 120px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  text-align: center;
+  display: table;
+}
 
 </style>
-<script>
-export default {
-  name: 'SignUp',
-  data() {
-    return {
-      stepCount : 3,
-    }
-  },
 
-  components: {
-  },
-}
-  
-</script>
 
