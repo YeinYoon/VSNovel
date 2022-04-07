@@ -1,4 +1,5 @@
 <template>
+<ConfirmModal ref="confirmModal"></ConfirmModal>
   <div class="FullView">
     <!--컴포넌트 전체영역-->
     <img class="background_img" src="@/assets/imgs/background.png" alt="">
@@ -23,7 +24,7 @@
         <!--1페이지-->
         <div class="Pagenation" v-if="stepCount == 1">
           <p class="use_info_label">사용할 ID</p>
-          <input class="use_info_input" type="text" v-model="newId">
+          <input class="use_info_input" type="text" v-model="newId" :disabled="newIdCheck == true">
           <div class="id_Check_button" @click="existIdCheck()" v-if="newIdCheck == false">
             <span class="button_label">중복체크</span>
           </div>
@@ -62,16 +63,16 @@
             </label>
             <label class="use_info_name" >
               비공개
-              <input class="use_info_radio" name="sex" value="null" type="radio" @change="radioChange($event)">        
+              <input class="use_info_radio" name="sex" value="" type="radio" @change="radioChange($event)">        
             </label>
         </div>
 
           <!-- <p class="use_info_label">생년월일</p>
           <input class="use_info_input" type="password"> -->
         <p class="use_info_label">전화번호</p>
-        <input class="use_info_input" type="text">
+        <input class="use_info_input" type="text" v-model="newPhone" maxlength="11">
           
-        <div class="next_button">
+        <div class="next_button" @click="step2()">
           <span class="button_label">다음 단계로</span>
         </div>
 
@@ -80,14 +81,19 @@
         <!--3페이지-->
         <div class="Pagenation" v-if="stepCount == 3">
           <p class="use_info_label">닉네임</p>
-          <input class="use_info_input" type="text">
-          <div class="nick_Check_button"><span class="button_label">니가쓰셈</span></div>
+          <input class="use_info_input" type="text" v-model="newNickname" :disabled="newNickCheck == true">
+          <div class="nick_Check_button" @click="newNicknameCheck()" v-if="newNickCheck == false">
+            <span class="button_label">중복체크</span>
+          </div>
+          <div class="nick_Check_button" v-else>
+            <span class="button_label">완료</span>
+          </div>
           <!-- <p class="use_info_label">프로필 사진</p>
           <input class="use_info_input" type="password"><div class="img_browse_button"><span class="button_label">Browse</span></div> -->
           <p class="use_info_label">이메일</p>
-          <input class="use_info_input" type="email">
+          <input class="use_info_input" type="email" v-model="newEmail">
 
-          <div class="finish_button">
+          <div class="finish_button" @click="signup()">
             <span class="button_label">가입완료</span>
           </div>
         </div>
@@ -114,6 +120,7 @@
 
 <script>
 import axios from '../../axios';
+import ConfirmModal from '../modal/ConfirmModal.vue'
 export default {
   name: 'SignUp',
   data() {
@@ -124,6 +131,7 @@ export default {
       newIdCheck : false,
       newPwCheck : "",
       pwMatch : false,
+      newNickCheck : false,
 
       // 최종가입 데이터
       newId : "",
@@ -131,7 +139,7 @@ export default {
       newEmail : "",
       newNickname : "",
       newName : "",
-      newSex : "M",
+      newSex : null,
       newPhone : ""
     }
   },
@@ -156,14 +164,26 @@ export default {
       axios.post('/api/auth/existIdCheck', {newId : this.newId})
       .then((result)=>{
         if(result.data == "exist") {
-          console.log("exist do")
           this.newIdCheck = false
           this.$store.commit('gModalOn', {msg : "이미 존재하는 아이디입니다.", size : "normal"});
         } else {
           this.$store.commit('gModalOn', {msg : "사용가능한 아이디입니다.", size : "normal"});
-          this.newIdCheck - true;
+          this.newIdCheck = true;
         }
       })
+      .catch((err)=>{
+        console.error(err);
+      })
+    },
+
+    step1() {
+      if(this.newIdCheck == false) {
+        this.$store.commit('gModalOn', {msg:"아이디 중복체크를 진행해주세요.", size:"normal"});
+      } else if(this.newPw != this.newPwCheck) {
+        this.$store.commit('gModalOn', {msg:"비밀번호 확인이 이루어지지 않았습니다.", size:"normal"});
+      } else {
+        this.stepCount = 2;
+      }
     },
 
     // 성별 radio값 체크
@@ -171,33 +191,84 @@ export default {
       this.newSex = event.target.value;
     },
 
+    step2() {
+      if(this.newName == "" || this.newSex == null || this.newPhone == "") {
+        this.$store.commit('gModalOn', {msg : "모든 항목을 빠짐없이 입력해주세요.", size : "normal"});
+      } else if(this.newPhone.length < 11) {
+        this.$store.commit('gModalOn', {msg : "전화번호를 올바르게 입력해주세요.", size : "normal"});
+      } else {
+        this.stepCount = 3;
+      }
+    },
+
+    newNicknameCheck() { // 닉네임 중복검사
+      if(this.newNickname == "") {
+        this.$store.commit('gModalOn', {msg : "닉네임을 입력해주세요.", size : "normal"});
+      } else {
+
+        axios.post('/api/auth/existNicknameCheck', {newNickname : this.newNickname})
+        .then(async (result)=>{
+          if(result.data == "exist") {
+            this.$store.commit('gModalOn', {msg : "이미 존재하는 닉네임입니다.", size : "normal"});
+            console.log("이미 존재하는 닉네임");
+            this.newNickCheck = false;
+          } else {
+            console.log("사용가능한 닉네임")
+            var confirm = await this.$refs.confirmModal.show({
+              msg : `닉네임 [${this.newNickname}]을(를) 사용하시겠습니까?`,
+              size : "normal",
+              btn1 : "확인",
+              btn2 : "취소"
+            });
+            if(confirm) {
+              this.newNickCheck = true;
+            } else {
+              this.newNickCheck = false;
+            }
+          }
+        })
+        .catch((err)=>{
+          console.error(err);
+        })
+
+      }
+    },
+
     // 최종 가입 진행
     signup() {
-      var newUser = {
-        newId : this.newId,
-        newPw : this.newPw,
-        newEmail : this.newEmail,
-        newNickname : this.newNickname,
-        newName : this.newName,
-        newSex : this.newSex,
-        newPhone : this.newPhone,
-        newCardnum : null
-      }
-
-      axios.post('/api/auth/signUp', newUser)
-      .then((result)=>{
-        if(result.data == 'ok') {
-          this.$router.push('/');
-        } else {
-          alert(result.data);
+      if(this.newEmail == "") {
+        this.$store.commit('gModalOn', {msg : "이메일을 입력해주세요.", size : "normal"});
+      } else if(this.newNickCheck == false) {
+        this.$store.commit('gModalOn', {msg : "닉네임 중복검사를 진행해주세요.", size : "normal"});
+      } else {
+        var newUser = {
+          newId : this.newId,
+          newPw : this.newPw,
+          newEmail : this.newEmail,
+          newNickname : this.newNickname,
+          newName : this.newName,
+          newSex : this.newSex,
+          newPhone : this.newPhone,
+          newCardnum : null
         }
-      })
-      .catch((err)=>{
-        console.error(err);
-      })
+        axios.post('/api/auth/signUp', newUser)
+        .then((result)=>{
+          if(result.data == 'ok') {
+            this.$store.commit('gModalOn', {msg : "가입이 완료되었습니다. 로그인해주세요!", size : "normal"});
+            this.$router.push('/signin');
+          } else {
+            alert(result.data);
+          }
+        })
+        .catch((err)=>{
+          console.error(err);
+        })
+      }
+      
     }
   },
   components: {
+    ConfirmModal
   },
 }
   

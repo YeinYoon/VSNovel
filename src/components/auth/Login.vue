@@ -314,7 +314,7 @@ export default {
                 id : this.id,
                 pw : this.pw
             }
-            axios.post('/engine/auth/login', loginData)
+            axios.post('/api/auth/login', loginData)
             .then((result)=>{
                 if(result.data=='ok') {
                     this.$store.commit('gModalOn', {msg : "로그인되었습니다.", size : "small"});

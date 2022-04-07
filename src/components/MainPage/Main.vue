@@ -36,10 +36,21 @@
 </template>
 
 <script>
+import axios from '../../axios'
 import SwiperCarouselVue from "./MainCarousel";
 import Com from "../MainPage/Com.vue";
 export default {
   name: "MainScreen",
+  created() {
+    axios.get('/api/auth/loginCheck')
+    .then((result)=>{
+      if(result.data != "") {
+        console.log(result.data);
+        this.$store.commit('userLogin', result.data.USER_NICKNAME);
+        console.log("현재 접속 유저 : " + this.$store.state.userNickname);
+      }
+    })
+  },
   data() {
     return {};
   },
