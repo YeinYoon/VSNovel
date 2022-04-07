@@ -27,7 +27,7 @@
     </section>
   </div>
     <div v-if="noticeStep == 1">
-        <NoticeWrite :writeModify="writeModify" :noticeData="clickNotice" @write_cancle="noticeBtnEvent($event)" @arrUp="a($event)"/>
+        <NoticeWrite :writeModify="writeModify" :noticeData="clickNotice" @write_cancle="noticeBtnEvent($event)" @arrUp="writePushEvent($event)"/>
     </div>
     <div v-if="noticeStep == 2">
         <NoticeRead :admin="admin" :noticeData="clickNotice" @btnEvent="noticeBtnEvent($event)"/>
@@ -98,8 +98,8 @@ export default {
             this.writeModify = false;
             this.noticeStep = 0;
         },
-        a(a){
-            this.noticeData.push(a);
+        writePushEvent(data){
+            this.noticeData.push(data);
             console.log(this.noticeData);
             this.noticeStep = 0;
         }

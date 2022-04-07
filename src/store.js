@@ -6,7 +6,7 @@ const store = createStore({
             userNickname : null,
             LoadingStatus: false,
             //커뮤니티 사이드 
-            cafeSide : [{title : '자유'},{title:'작가'}, {title : '팀원 모집'}, {title : '리뷰 & 추천'}, {title:'카페 메인'}] // 커뮤니티 사이드 
+            cafeSide : [{title:'Village Main'}] // 커뮤니티 사이드 
         }
     },
     mutations : {
