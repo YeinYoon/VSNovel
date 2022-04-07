@@ -5,8 +5,15 @@ const store = createStore({
         return {
             userNickname : null,
             LoadingStatus: false,
+
             //커뮤니티 사이드 
-            cafeSide : [{title : '자유'},{title:'작가'}, {title : '팀원 모집'}, {title : '리뷰 & 추천'}, {title:'카페 메인'}] // 커뮤니티 사이드 
+            cafeSide : [{title : '자유'},{title:'작가'}, {title : '팀원 모집'}, {title : '리뷰 & 추천'}, {title:'카페 메인'}], // 커뮤니티 사이드 
+             //전역(Global) 모달
+            gModalState : false,
+            gModalMsg : "",
+            gModalSize : "",
+            gModalBg : ""
+ 
         }
     },
     mutations : {
@@ -14,7 +21,7 @@ const store = createStore({
         userLogin(state, name) {
             state.userNickname = name;
         },
-
+        
         //로딩
         startSpinner(state){
             state.LoadingStatus = true;
@@ -32,6 +39,16 @@ const store = createStore({
             }
             state.cafeSide.push(cafeData);
             console.log(state.cafeSide);
+        },
+        // Modal
+        gModalOn(state, info){
+            state.gModalSize = info.size;
+            state.gModalMsg = info.msg;
+            state.gModalBg = info.bg;
+            state.gModalState = true;
+        },
+        gModalOff(state){
+            state.gModalState = false;
         },
     },
 })

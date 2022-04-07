@@ -83,12 +83,19 @@ export default {
       this.modal = true;
     },
   },
+  created(){
+    console.log(this.$route.params.novelID);
+    if(this.$route.params.novelID!=undefined){
+      this.modalData = this.$route.params.novelID;
+      this.modal = true;
+    }
+  }
 };
 </script>
 
 <style>
 .tests {
-  /* background-color: #353535; */
+  background-color: #353535;
   padding: 35px 40px 30px 40px;
   width: calc(100% - 390px);
   height: 100%;

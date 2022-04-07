@@ -7,30 +7,33 @@ const {isNotLogin, isLogin} = require('./middlewares/loginCheck');
 
 const db = require('../database/db');
 
-//회원가입
-router.post('/signUp', async (req,res)=>{
+
+router.post('/existIdCheck', async (req, res)=>{
   var result = await db.execute(`SELECT * FROM tbl_user WHERE user_id = '${req.body.newId}'`);
   if(result == "err") {
     console.log("DB쿼리 실패");
   } else {
-
     if(result.rows.length != 0) { //동일한 아이디가 존재할 경우
       console.log(result.rows);
-      res.send("이미 존재하는 아이디입니다.");
+      res.send("exist");
     } else {
-
-      var cryptPw = await bcrypt.hash(req.body.newPw, 12);
-
-      var insertUser = await db.execute(`INSERT INTO tbl_user(user_id, user_pwd, user_email, user_nickname, user_name, user_sex, user_phone, user_cardnum)
-      VALUES('${req.body.newId}','${cryptPw}','${req.body.newEmail}','${req.body.newNickname}','${req.body.newName}','${req.body.newSex}',${req.body.newPhone},${req.body.newCardnum})`)
-      if(insertUser == "err") {
-        console.log('DB쿼리 실패');
-      } else {
-        res.send("ok");
-      }
-
+      res.send("ok");
     }
+  }
+})
 
+
+//회원가입
+router.post('/signUp', async (req,res)=>{
+
+  var cryptPw = await bcrypt.hash(req.body.newPw, 12);
+
+  var insertUser = await db.execute(`INSERT INTO tbl_user(user_id, user_pwd, user_email, user_nickname, user_name, user_sex, user_phone, user_cardnum)
+    VALUES('${req.body.newId}','${cryptPw}','${req.body.newEmail}','${req.body.newNickname}','${req.body.newName}','${req.body.newSex}',${req.body.newPhone},${req.body.newCardnum})`)
+  if(insertUser == "err") {
+    console.log('DB쿼리 실패');
+  } else {
+    res.send("ok");
   }
 })
 
