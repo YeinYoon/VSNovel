@@ -1,7 +1,7 @@
 <template>
   <div v-bind:class="{ mainmenu: true }">
     <div v-bind:class="{ menus: true }">
-      <div v-bind:class="{ menubox: true }" id="mypage" @click="routerPush('/mypage', 'mypage')">
+      <div v-bind:class="{ menubox: true }" id="mypage" @click="this.$router.push('/signin')">
         <img class="menubox_icon_mypage" src="@/assets/icons/white/login_req.png" />
       </div>
       <br />

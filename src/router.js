@@ -5,12 +5,17 @@ import Community from './components/side/CommunitySide.vue';
 import Mypage from './components/side/MypageSide.vue';
 import Library from './components/side/LibrarySide.vue';
 import Notice from './components/side/NoticeSide.vue'
+import Login from './components/auth/Login.vue';
 
 const routes = [
   {
     path:"/",
     name: 'Main',
     component : Main
+  },
+  {
+    path : "/signin",
+    component : Login
   },
   {
     path : '/mypage',
