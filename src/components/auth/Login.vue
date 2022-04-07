@@ -31,8 +31,8 @@
           <div class="logins_deco_platform"><span class="platform_label">platform</span></div>
         </div> <!--로그인 버튼 아래에 꾸며주는 블럭 끝 -->
         <div class="signupNpasswd"> <!-- 최하단 회원가입 및 패스워드 찾기 -->
-          <span class="signup_button">회원가입</span>
-          <span class="where_my_account">로그인에 문제가 있나요?</span>
+          <span class="signup_button" @click="this.$router.push('/signup')">회원가입</span>
+          <span class="where_my_account" @click="this.$router.push('/findAcc')">로그인에 문제가 있나요?</span>
         </div> <!-- 최하단 회원가입 및 패스워드 찾기 끝 -->
         <div class="partion_block"> <!-- 로그인 및 광고영역간 공간분리 -->
         </div>
@@ -233,16 +233,18 @@
   color: white;
   text-decoration: underline;
   font-size: 1.2em;
+  cursor: pointer;
 }
 .where_my_account
 {
   position: absolute;
-  left: 220px;
+  left: 240px;
   top: 410px;
   transform: translate(-50%, -50%);
   color: white;
   text-decoration: underline;
   font-size: 1.2em;
+  cursor: pointer;
 }
 
 .partion_block{
