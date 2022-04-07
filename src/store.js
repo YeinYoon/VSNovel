@@ -5,13 +5,14 @@ const store = createStore({
         return {
             userNickname : null,
             LoadingStatus: false,
+
             //커뮤니티 사이드 
             cafeSide : [{title : '자유'},{title:'작가'}, {title : '팀원 모집'}, {title : '리뷰 & 추천'}, {title:'카페 메인'}], // 커뮤니티 사이드 
              //전역(Global) 모달
-             gModalState : false,
-             gModalMsg : "",
-             gModalSize : "",
-             gModalBg : ""
+            gModalState : false,
+            gModalMsg : "",
+            gModalSize : "",
+            gModalBg : ""
  
         }
     },

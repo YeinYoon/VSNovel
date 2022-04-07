@@ -1,5 +1,6 @@
 <template>
-<GlobalModalVue :gModalState="$store.state.gModalState"></GlobalModalVue>
+<!-- <Spinner :loading="$store.state.LoadingStatus"></Spinner> -->
+<GlobalModal :gModalState="$store.state.gModalState"></GlobalModal>
 <div class="content">
     <Vsnmenu v-bind:class="{'vsnmenu':true}"></Vsnmenu>
     <!-- <vsnside v-bind:class="{'vsnside':true}"></vsnside> -->
@@ -7,19 +8,19 @@
     <!-- <div class="vsncontainer"> -->
       <router-view></router-view>
     <!-- </div> -->
-  </div>
+</div>
 </template>
 
 <script>
 import Vsnmenu from './components/Menu';
-import GlobalModalVue from './components/modal/GlobalModal.vue';
+import GlobalModal from './components/modal/GlobalModal.vue';
 // import vsnside from './components/Side';
 // import Vsncontent from './components/Content';
 export default {
   name: "App",
   components: {
     Vsnmenu,
-    GlobalModalVue
+    GlobalModal
     // vsnside,
     // Vsncontent,
   },

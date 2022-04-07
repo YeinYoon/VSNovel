@@ -153,7 +153,17 @@ export default {
 
     //ID 중복검사
     existIdCheck() {
-
+      axios.post('/api/auth/existIdCheck', {newId : this.newId})
+      .then((result)=>{
+        if(result.data == "exist") {
+          console.log("exist do")
+          this.newIdCheck = false
+          this.$store.commit('gModalOn', {msg : "이미 존재하는 아이디입니다.", size : "normal"});
+        } else {
+          this.$store.commit('gModalOn', {msg : "사용가능한 아이디입니다.", size : "normal"});
+          this.newIdCheck - true;
+        }
+      })
     },
 
     // 성별 radio값 체크
