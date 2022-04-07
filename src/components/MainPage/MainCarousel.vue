@@ -7,7 +7,7 @@
     :pauseAutoplayOnHover="status"
   >
     <slide v-for="slide in datas" :key="slide">
-      <img :src="`${slide.link}`" class="main_carousel_img"/>
+      <img :src="`${slide.link}`" class="main_carousel_img" @click="openSlide(slide.link)"/>
     </slide>
     <template #addons>
       <navigation />
@@ -37,6 +37,11 @@ export default {
     Pagination,
     Navigation,
   },
+  methods:{
+    openSlide(link){
+      this.$store.commit('gModalOn', {msg:"hi", bg : link, size : "ad"});
+    }
+  }
 };
 </script>
 <style>

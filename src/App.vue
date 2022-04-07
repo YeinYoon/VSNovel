@@ -1,4 +1,5 @@
 <template>
+<GlobalModalVue :gModalState="$store.state.gModalState"></GlobalModalVue>
 <div class="content">
     <Vsnmenu v-bind:class="{'vsnmenu':true}"></Vsnmenu>
     <!-- <vsnside v-bind:class="{'vsnside':true}"></vsnside> -->
@@ -11,12 +12,14 @@
 
 <script>
 import Vsnmenu from './components/Menu';
+import GlobalModalVue from './components/modal/GlobalModal.vue';
 // import vsnside from './components/Side';
 // import Vsncontent from './components/Content';
 export default {
   name: "App",
   components: {
     Vsnmenu,
+    GlobalModalVue
     // vsnside,
     // Vsncontent,
   },

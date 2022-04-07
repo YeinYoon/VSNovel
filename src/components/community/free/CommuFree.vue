@@ -37,6 +37,9 @@ export default {
     OnWrite,
     // Write
   },
+  created(){
+    console.log(this.$route.params)
+  }
 };
 </script>
 
