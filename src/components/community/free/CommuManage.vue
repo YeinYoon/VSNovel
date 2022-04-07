@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="team_box">
     <div>
       <Modal
         v-if="open == true"
@@ -7,22 +7,23 @@
         @closemodal="open = false"
       ></Modal>
     </div>
-        <div class="btn-area">
-          <button class="btn-red">관리</button>
-          <button class="btn-blue" @click="$emit('next')">글쓰기</button>
+        <div class="free_btn_area">
+          <div class="free_btn_red" @click="manage=true"><span class="free_btn_manage" >관리자 시점</span></div>
+          <div class="free_btn_red" @click="manage=false" v-if="manage==true"><span class="free_btn_manage">관리</span></div>
+          <div class="free_btn_blue"><span class="free_btn_write" @click="$emit('next')">글쓰기</span></div>
         </div>
 
     <section class="free_section">
       <div
-        class="post"
+        class="free_post"
         v-for="(a, index) in community"
-        :key="index"
-        @click="open = true"
+        :key="a"
+        @click="decision(a,manage,index)"
       >
-        <img class="thumb" :src="`${a.titleImg}`" />
-        <div class="back">
-          <div class="back_title">{{ a.title }}</div>
-          <div class="back_info">
+        <img class="free_thumb" :src="`${a.titleImg}`" />
+        <div class="free_back">
+          <div class="free_back_title">{{ a.title }}</div>
+          <div class="free_back_info">
             {{ a.writer }} | {{ a.date }} | {{ a.like }} | {{ a.coment }}
           </div>
         </div>
@@ -37,9 +38,13 @@ import Modal from "../Modalvue";
 export default {
   data() {
     return {
+      manage : false,
       community: dummy_data,
       open: false,
     };
+  },
+  methods: {
+    
   },
   components: {
     Modal,
@@ -49,80 +54,68 @@ export default {
 
 <style>
 .free_section{
-  margin: 0 auto;
+ position:relative;
+  top:10%;
   width: 800px;
-  height: 70%;
-  position: relative;
-  top: 50px;
-  overflow-y: scroll;
-  -ms-overflow-style: none;
+  height: 90%;
+  margin: 0 auto;
+  overflow-y:scroll;
+  -ms-overflow-style:none;
 }
 .free_section::-webkit-scrollbar {
   display: none;
 }
-.btn-area {
-  position: absolute;
-  top:130px;
-  right: 15px;
+.free_btn_area{
+  display:flex;
+  justify-content: flex-end;
 }
-.btn-blue {
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
-    "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
-    "Malgun Gothic", sans-serif;
-  font-weight: 500;
-  position: relative;
-  bottom: 35px;
+.free_btn_red{
+  top:20px;
+  position:relative;
+  cursor: pointer;
+  font-size: 0.9em;
   width: 100px;
   height: 30px;
-  background-color: #2872f9;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  font-size: 14px;
-  border-radius: 12px;
+  background: rgb(255, 71, 71);
+  border-radius: 14px;
+  display: table;
+  margin-left: 20px;
+}
+.free_btn_blue{
+  top:20px;
+  position:relative;
   cursor: pointer;
-  margin-left: 15px;
-}
-.btn-blue:hover {
-  opacity: 0.8;
-}
-
-.btn-red {
-  font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto,
-    "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo", "Noto Sans KR",
-    "Malgun Gothic", sans-serif;
-  font-weight: 500;
-  position: relative;
-  bottom: 34px;
+  font-size: 0.9em;
+  margin-left: 20px;
   width: 100px;
   height: 30px;
-  background-color: rgb(255, 71, 71);
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  font-size: 14px;
-  border-radius: 12px;
-  cursor: pointer;
+  background: #2872f9;
+  border-radius: 14px;
+  display:table;
 }
-.btn-red:hover {
-  opacity: 0.8;
+.free_btn_manage{
+  display: table-cell;
+  vertical-align:middle;
+  text-align:center;
+  color:white;
+}
+.free_btn_write{
+  display:table-cell;
+  vertical-align: middle;
+  text-align: center;
+  color:white;
 }
 
-::-webkit-scrollbar {
-  display: none;
-}
-.post {
+
+.free_post {
   position: relative;
   width: 100%;
-  margin-top: 10px;
   height: 130px;
 }
-.post:hover {
+.free_post:hover {
   opacity: 0.7;
 }
-.thumb {
+.free_thumb {
   width: 80px;
   height: 80px;
   cursor: pointer;
@@ -130,7 +123,7 @@ export default {
   z-index: 1;
   top: 10px;
 }
-.back {
+.free_back {
   cursor: pointer;
   display: block;
   position: absolute;
@@ -142,14 +135,14 @@ export default {
   z-index: 0;
   top: 30px;
 }
-.back_title {
+.free_back_title {
   position: absolute;
   font-size: 20px;
   top: 10px;
   float: left;
   left: 90px;
 }
-.back_info {
+.free_back_info {
   position: absolute;
   float: right;
   font-size: 17px;

@@ -13,7 +13,7 @@
 
         <div class="commu_btn_area">
           <div class="commu_btn_red" @click="manage=true"><span class="commu_btn_manage" >관리자 시점</span></div>
-          <div class="commu_btn_red" v-if="manage==true"><span class="commu_btn_manage">관리</span></div>
+          <div class="commu_btn_red" @click="manage=false" v-if="manage==true"><span class="commu_btn_manage">관리</span></div>
           <div class="commu_btn_blue"><span class="commu_btn_write" @click="$emit('third')">글쓰기</span></div>
         </div>
 
@@ -21,7 +21,7 @@
       <div
         class="commu_post"
         v-for="(a, index) in datasend"
-        :key="index"
+        :key="a"
         @click="decision(a,manage,index)"
       >
         <img class="commu_thumb" :src="`${a.titleImg}`" />
@@ -44,7 +44,7 @@ export default {
       manage : false,
       open: false,
       modaldata : {},
-      modalindex: ''
+      modalindex: '',
     };
   },
   components: {
@@ -79,24 +79,27 @@ export default {
   justify-content: flex-end;
 }
 .commu_btn_red{
-  top:40px;
+  top:20px;
   position:relative;
   cursor: pointer;
+  font-size: 0.9em;
   width: 100px;
   height: 30px;
-  background: red;
-  border-radius: 20px;
+  background: rgb(255, 71, 71);
+  border-radius: 14px;
   display: table;
+  margin-left: 20px;
 }
 .commu_btn_blue{
-  top:40px;
+  top:20px;
   position:relative;
   cursor: pointer;
+  font-size: 0.9em;
   margin-left: 20px;
   width: 100px;
   height: 30px;
   background: #2872f9;
-  border-radius: 20px;
+  border-radius: 14px;
   display:table;
 }
 .commu_btn_manage{
@@ -126,7 +129,7 @@ export default {
 .commu_post {
   position: relative;
   width: 100%;
-  margin-top: 20px;
+  /* margin-top: 20px; */
   height: 130px;
 }
 .commu_post:hover {

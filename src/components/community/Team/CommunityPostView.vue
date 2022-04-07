@@ -3,7 +3,7 @@
     <div class="postview_section">
       <div class="postview_title"><div class="postview">{{teamobject.title}}</div></div>
       <div class="postview_frame">
-        <div class="postview_content">{{teamobject.content}}</div>
+        <div class="postview_content" id="addpostdata">{{teamobject.content}}</div>
         <div class="content_vote">
           <div><span class="vote_btn_ok">추천</span></div>
           <div><span class="vote_btn_no">비추천</span></div>
@@ -19,12 +19,18 @@
 <script>
 export default {
   name: "CommunityPostView",
+  create() {
+    window.addEventListener("load", this.onWindowLoad);
+  },
   data() {
     return {}
   },
   components: {
   },
   methods : {
+    onWindowLoad() {
+      console.log("window load event");
+    }
   },
   props:{
     teamobject : Object,
@@ -113,6 +119,7 @@ export default {
   margin: 0 10px;
   background-color: #2872f9;
   width: 100px;
-  border-radius: 20px;
+  border-radius: 14px;
+  cursor:pointer;
 }
 </style>

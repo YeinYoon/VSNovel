@@ -83,4 +83,19 @@ export default {
 };
 </script>
 <style>
+.editor{
+    width: 100%;
+     background-color: #868686;
+     border-radius: 10px;
+     height: 100%;
+  
+}
+.ql-toolbar.ql-snow {
+    background-color: antiquewhite;
+  border-radius: 10px;
+  border: none;
+}
+.ql-container.ql-snow {
+  border: none;
+}
 </style>

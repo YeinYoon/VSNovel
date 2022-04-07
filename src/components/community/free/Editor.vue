@@ -1,6 +1,5 @@
 <template>
 <div class="editor">
-  <!-- <component v-if="dynamicComponent" :is="dynamicComponent"></component> -->
   <quill-editor
     v-model:value="state.content"
     :options="state.editorOption"
@@ -78,19 +77,4 @@ export default {
 };
 </script>
 <style>
-.editor{
-    width: 100%;
-     background-color: #868686;
-  height: 95%;
-  
-}
-.ql-toolbar.ql-snow {
-    background-color: antiquewhite;
-  border-radius: 10px;
-  border: none;
-}
-.ql-container.ql-snow {
-  border: none;
-  height: calc(100% - 70px);
-}
 </style>

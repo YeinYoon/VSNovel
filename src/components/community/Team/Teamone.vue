@@ -4,11 +4,14 @@
       <div class="service">
         <img class="icon" src="@/assets/icons/white/bubble_chat.png" alt="logo" />
         <span class="title">커뮤니티</span>
-        <span class="topic">팀원모집</span>
+        <span class="topic" v-if="step=='자유'">TOPIC · 자유</span>
+        <span class="topic" v-if="step=='작가'">TOPIC · 작가</span>
+        <span class="topic" v-if="step=='팀원 모집'">TOPIC · 팀원 모집</span>
+        <span class="topic" v-if="step=='리뷰 & 추천'">TOPIC · 리뷰 & 추천</span>
       </div>
     </div>
     <div v-if="teamonedata == 0">
-      <TeamCommu @first="teamadd($event)"  @third="teamonedata = 2" :datasend="community" @deletepost="remove($event)"/>
+      <TeamCommu @first="teamadd($event)"  @third="teamonedata = 2" :datasend="originaldata" @deletepost="remove($event)"/>
     </div>
     <div v-if="teamonedata == 1">
       <CommunityPostView @second="teamonedata=0" :teamobject="teamobject"/>
@@ -29,7 +32,8 @@ export default {
   name: "Teamone",
   data() {
     return {
-      community: dummy_data,
+      community: [...dummy_data],
+      originaldata: [...dummy_data],
       teamonedata : 0,
       teamobject : {},
     };
@@ -44,7 +48,6 @@ export default {
     },
     addpost(addData) {
       this.community.push(addData);
-      console.log(this.community);
     }
 
   },
@@ -53,6 +56,9 @@ export default {
     CommunityPostView,
     TeamoneWrite
   },
+  props : {
+    step : String
+  }
 };
 </script>
 
