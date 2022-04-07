@@ -14,7 +14,7 @@
       <CommunityPostView @second="teamonedata=0" :teamobject="teamobject"/>
     </div>
     <div v-if="teamonedata == 2">
-      <TeamoneWrite @add="teamonedata=0" :datasend="community"/>
+      <TeamoneWrite @add="teamonedata=0" :datasend="community" @contentdata="addpost($event)"/>
     </div>
   </div>
 </template>
@@ -39,8 +39,12 @@ export default {
       this.teamonedata = 1;
       this.teamobject = event;
     },
-    remove(a){
-      this.community.splice(a,1);
+    remove(removedata){
+      this.community.splice(removedata,1);
+    },
+    addpost(addData) {
+      this.community.push(addData);
+      console.log(this.community);
     }
 
   },
