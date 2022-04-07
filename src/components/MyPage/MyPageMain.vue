@@ -23,7 +23,7 @@
           <div class="col-one">프로필 이미지</div>
           <div id="profile-image" class="profile-image-input" type="file" :style="`background-image:url(${uploadimg})`" value="newProfile"></div>
           <div class="col-three">
-            <input @change="upload" type="file" id="input-file" style="display:none" />
+            <input @change="upload" type="file" id="input-file" style="display:none" v-on="newImage" />
             <label class="input-file-button" for="input-file">Browse</label><br>
             <span>512x512 이상의 이미지가 가장 적합 <br>
             허용 확장자:png,jpeg,jpg,gif | > 2MB</span>
@@ -41,7 +41,7 @@
       <!-- 취소,수정 버튼 -->
       <footer>
         <button id="mypage_main-canc" @click="cancel">취소</button>
-        <button id="mypage_main-save" @click="profiledit">수정</button>
+        <button id="mypage_main-save" @click="profiledit()">수정</button>
       </footer>
       
     </div>
@@ -77,7 +77,7 @@ export default {
     },
 
     // 프로필 수정버튼을 눌렀을 때 동작하는 함수
-    profiledit(){
+    profiledit(newNickname,newImage,newIntro){
       const nick = document.getElementById('profilenick');
       const intro = document.getElementById('profileintro');
       const browse = document.getElementById('input-file');
@@ -86,6 +86,10 @@ export default {
       nick.disabled = false;
       intro.disabled = false;
       browse.disabled = false;
+      this.newNickname = newNickname;
+      this.newImage = newImage;
+      this.newIntro = newIntro;
+      this.content()
     },
 
     // 취소 버튼을 눌렀을 때 동작하는 함수
@@ -105,11 +109,13 @@ export default {
     content() {
       var newContent = {
         newNickname : this.newNickname,
-        profileImage : document.body.getElementById("profile-image").getAttribute("value"),
+        // profileImage : document.body.getElementById("profile-image").getAttribute("value"),
+        newImage : this.newImage,
         newIntro : this.newIntro
       }
       axios.post('/api/mypage/mypagemain', newContent)
       .then((result) => {
+        console.log('hi')
         if(result.data.length != 0) {
           console.log('complete')
           console.log(result.data)
