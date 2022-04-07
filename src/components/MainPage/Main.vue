@@ -1,4 +1,5 @@
 <template>
+<div class="RouterView">
   <div class="test">
     <!-- 헤더 -->
     <div class="header">
@@ -31,6 +32,7 @@
       >
     </div>
   </div>
+</div>
 </template>
 
 <script>
@@ -50,7 +52,7 @@ export default {
 
 <style>
 .test {
-  /* background-color: #353535; */
+  background-color: #353535;
   padding: 35px 40px 10px 40px;
 }
 .lines {

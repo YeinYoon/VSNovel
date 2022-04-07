@@ -88,7 +88,7 @@ export default {
 
 <style>
 .tests {
-  /* background-color: #353535; */
+  background-color: #353535;
   padding: 35px 40px 30px 40px;
   width: calc(100% - 390px);
   height: 100%;

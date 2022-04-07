@@ -3,9 +3,9 @@
     <Vsnmenu v-bind:class="{'vsnmenu':true}"></Vsnmenu>
     <!-- <vsnside v-bind:class="{'vsnside':true}"></vsnside> -->
     <!-- <Vsncontent v-bind:class="{'vsncontent':true}"></Vsncontent> -->
-    <div class="vsncontainer">
+    <!-- <div class="vsncontainer"> -->
       <router-view></router-view>
-    </div>
+    <!-- </div> -->
   </div>
 </template>
 
@@ -60,5 +60,25 @@ body{
   height: 100vh;
   left: 140px;
   overflow: auto;
+}
+
+.FullView {
+  position: fixed;
+  top: 0px;
+  width: 100vw;
+  height: 100vh;
+  z-index: 4;
+}
+
+.RouterView {
+  position: fixed;
+  left: 140px;
+  width: calc(100vw - 140px);
+  height: 100vh;
+  background: #353535;
+}
+
+.ContentView {
+  background: #353535;
 }
 </style>
