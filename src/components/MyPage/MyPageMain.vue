@@ -16,14 +16,14 @@
 
         <div class="profile-nick-line">
           <div class="col-one">닉네임</div>
-          <input id="profilenick" type="text" class="profile-nick-input" disabled>
+          <input id="profilenick" type="text" class="profile-nick-input" v-model="newNickname">
         </div>
 
         <div class="profile-image-line">
           <div class="col-one">프로필 이미지</div>
-          <div id="profile-image" class="profile-image-input" type="file" :style="`background-image:url(${uploadimg})`"></div>
+          <div id="profile-image" class="profile-image-input" type="file" :style="`background-image:url(${uploadimg})`" value="newProfile"></div>
           <div class="col-three">
-            <input @change="upload" type="file" id="input-file" style="display:none" disabled/>
+            <input @change="upload" type="file" id="input-file" style="display:none" />
             <label class="input-file-button" for="input-file">Browse</label><br>
             <span>512x512 이상의 이미지가 가장 적합 <br>
             허용 확장자:png,jpeg,jpg,gif | > 2MB</span>
@@ -32,7 +32,7 @@
 
         <div class="profile-intro-line">
           <div class="col-one">소개</div>
-          <textarea id="profileintro" class="profile-introduce-input" type="text" disabled></textarea>
+          <textarea id="profileintro" class="profile-introduce-input" type="text" v-model="newIntro"></textarea>
           <div class="intro-cont-align"><span>0/1024 byte</span></div>
         </div>
 
@@ -51,10 +51,13 @@
 </template>
 
 <script>
+import axios from '../../axios';
 export default {
   data(){
     return{
-      uploadimg:''
+      uploadimg:'',
+      newNickname: "",
+      newIntro: "",
     }
   },
   methods:{
@@ -98,6 +101,23 @@ export default {
       document.getElementById('profile-image').classList.remove('profile-image-change');
       document.getElementById('profile-image').classList.add('profile-image-input');
       
+    },
+    content() {
+      var newContent = {
+        newNickname : this.newNickname,
+        profileImage : document.body.getElementById("profile-image").getAttribute("value"),
+        newIntro : this.newIntro
+      }
+      axios.post('/api/mypage/mypagemain', newContent)
+      .then((result) => {
+        if(result.data.length != 0) {
+          console.log('complete')
+          console.log(result.data)
+          console.log(result);
+        }
+      }).catch((err) => {
+        console.log(err);
+      })
     }
   }
 };
