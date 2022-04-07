@@ -8,10 +8,11 @@
       </div>
       <div class="sign_inner_box"> <!--로그인 타이틀 아래, 기능부의 전체를 감싸는 검은박스-->
       
-      <div class="input_box">
+        <div class="input_box">
           <!--약관동의-->
-        <div class="Pagenation" v-if="stepCount == 0">
-          <div class="terms_title_position"> <p class="terms_title">이용약관</p> </div>
+          <div class="Pagenation" v-if="stepCount == 0">
+            <div class="terms_title_position"> <p class="terms_title">이용약관</p>
+          </div>
           <div class="terms_frame">
             <div class="terms_inner">
               <p>내용</p>
@@ -22,41 +23,59 @@
         <!--1페이지-->
         <div class="Pagenation" v-if="stepCount == 1">
           <p class="use_info_label">사용할 ID</p>
-          <input class="use_info_input" type="text"> <div class="id_Check_button"><span class="button_label">니가쓰셈</span></div>
+          <input class="use_info_input" type="text" v-model="newId">
+          <div class="id_Check_button" @click="existIdCheck()" v-if="newIdCheck == false">
+            <span class="button_label">중복체크</span>
+          </div>
+          <div class="id_Check_button" v-else>
+            <span class="button_label">완료</span>
+          </div>
 
           <p class="use_info_label">비밀번호</p>
-          <input class="use_info_input" type="password">
+          <input class="use_info_input" type="password" v-model="newPw">
 
           <p class="use_info_label">비밀번호 확인</p>
-          <input class="use_info_input" type="password">
+          <input class="use_info_input" type="password" v-model="newPwCheck">
+          <div v-if="pwMatch == false">
+            <span>비밀번호를 동일하게 입력해주세요.</span>
+          </div>
+
+          <div class="next_button" @click="step1()">
+            <span class="button_label">다음 단계로</span>
+          </div>
         </div>
 
         <!--2페이지-->
         <div class="Pagenation" v-if="stepCount == 2">
           <p class="use_info_label">이름</p>
-          <input class="use_info_input" type="text">
+          <input class="use_info_input" type="text" v-model="newName">
 
           <p class="use_info_label">성별</p>
           <div class="use_info_select">
             <label class="use_info_name" >
               남자
-              <input class="use_info_radio" name="sex" value="M" type="radio">        
+              <input class="use_info_radio" name="sex" value="M" type="radio" @change="radioChange($event)">        
             </label>
             <label class="use_info_name" >
               여자
-              <input class="use_info_radio" name="sex" value="F" type="radio">        
+              <input class="use_info_radio" name="sex" value="F" type="radio" @change="radioChange($event)">        
             </label>
             <label class="use_info_name" >
               비공개
-              <input class="use_info_radio" name="sex" value="null" type="radio">        
+              <input class="use_info_radio" name="sex" value="null" type="radio" @change="radioChange($event)">        
             </label>
-          </div>
+        </div>
 
           <!-- <p class="use_info_label">생년월일</p>
           <input class="use_info_input" type="password"> -->
-          <p class="use_info_label">전화번호</p>
-          <input class="use_info_input" type="text">
+        <p class="use_info_label">전화번호</p>
+        <input class="use_info_input" type="text">
+          
+        <div class="next_button">
+          <span class="button_label">다음 단계로</span>
         </div>
+
+      </div>
 
         <!--3페이지-->
         <div class="Pagenation" v-if="stepCount == 3">
@@ -67,33 +86,28 @@
           <input class="use_info_input" type="password"><div class="img_browse_button"><span class="button_label">Browse</span></div> -->
           <p class="use_info_label">이메일</p>
           <input class="use_info_input" type="email">
+
+          <div class="finish_button">
+            <span class="button_label">가입완료</span>
+          </div>
         </div>
 
 
 
-          </div>
-
-            <p class="cancel_label" @click="this.$router.push('/signin')">다음에 가입하기</p>
+        </div>
+          <p class="cancel_label" @click="this.$router.push('/signin')">다음에 가입하기</p>
             
-            <div class="next_button">
-              <span class="button_label">다음 단계로</span>
-            </div>
-
-            <div class="next_button">
-              <span class="button_label" @click="agree()">동의합니다</span>
-            </div>
-
-            <!-- 패스 구현됐을때 쓸것 -->
-            <!-- <div class="next_button">
-              <span class="button_label">PASS 인증</span>
-            </div> -->
-
-            <!-- 마지막 페이지에 쓸것 -->
-            <!-- <div class="next_button">
-              <span class="button_label">가입완료</span>
-            </div> -->
-            </div>
+          <div class="agree_button" v-if="stepCount == 0">
+            <span class="button_label" @click="agree()">동의합니다</span>
           </div>
+
+          <!-- 패스 구현됐을때 쓸것 -->
+          <!-- <div class="next_button">
+            <span class="button_label">PASS 인증</span>
+          </div> -->
+
+        </div>
+    </div>
  
   </div>
 </template>
@@ -104,8 +118,14 @@ export default {
   name: 'SignUp',
   data() {
     return {
-      stepCount : 0,
+      stepCount : 1, //가입절차 상태
 
+      //입력값 매치 관련
+      newIdCheck : false,
+      newPwCheck : "",
+      pwMatch : false,
+
+      // 최종가입 데이터
       newId : "",
       newPw: "",
       newEmail : "",
@@ -115,6 +135,15 @@ export default {
       newPhone : ""
     }
   },
+  watch : {
+    newPwCheck(input) {
+      if(input != this.newPw) {
+        this.pwMatch = false;
+      } else {
+        this.pwMatch = true;
+      }
+    }
+  },
   methods : {
 
     //약관동의
@@ -122,6 +151,17 @@ export default {
       this.stepCount = 1;
     },
 
+    //ID 중복검사
+    existIdCheck() {
+
+    },
+
+    // 성별 radio값 체크
+    radioChange(event){ 
+      this.newSex = event.target.value;
+    },
+
+    // 최종 가입 진행
     signup() {
       var newUser = {
         newId : this.newId,
@@ -137,7 +177,6 @@ export default {
       axios.post('/api/auth/signUp', newUser)
       .then((result)=>{
         if(result.data == 'ok') {
-          alert('회원가입 완료');
           this.$router.push('/');
         } else {
           alert(result.data);
@@ -289,6 +328,32 @@ export default {
   position: absolute;
   background: #2872f9;
   left: 50%;
+  top: 118%;
+  width: 300px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  text-align: center;
+  display: table;
+}
+
+.finish_button {
+  position: absolute;
+  background: #2872f9;
+  left: 50%;
+  top: 150%;
+  width: 300px;
+  height: 40px;
+  transform: translate(-50%, -50%);
+  border-radius: 20px;
+  text-align: center;
+  display: table;
+}
+
+.agree_button{
+  position: absolute;
+  background: #2872f9;
+  left: 50%;
   top: 90%;
   width: 300px;
   height: 40px;
@@ -297,6 +362,7 @@ export default {
   text-align: center;
   display: table;
 }
+
 .button_label{
   display: table-cell;
   vertical-align: middle;
