@@ -83,6 +83,13 @@ export default {
       this.modal = true;
     },
   },
+  created(){
+    console.log(this.$route.params.novelID);
+    if(this.$route.params.novelID!=undefined){
+      this.modalData = this.$route.params.novelID;
+      this.modal = true;
+    }
+  }
 };
 </script>
 
