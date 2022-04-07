@@ -2,7 +2,7 @@
   <div v-bind:class="{ mainmenu: true }">
     <div v-bind:class="{ menus: true }">
       <div v-bind:class="{ menubox: true }" id="mypage" @click="routerPush('/mypage', 'mypage')">
-        <img class="menubox_icon_mypage" src="@/assets/icons/white_logo.png" />
+        <img class="menubox_icon_mypage" src="@/assets/icons/white/login_req.png" />
       </div>
       <br />
       <div v-bind:class="{ menubox: true }" id="library"  @click="routerPush('/library', 'library')">
@@ -101,10 +101,10 @@ export default {
 }
 .menubox_icon_mypage {
   position: relative;
-  top: 2px;
+  top: 12px;
   left: 1px;
-  width: 75px;
-  height: 75px;
+  width: 50px;
+  height: 50px;
 }
 .menubox_icon_library {
   position: relative;
