@@ -3,7 +3,7 @@
     <div class="commu_write_section">
       <div class="commu_write_title"><input type="text" v-model="writetitle"/></div>
       <div class="commu_write_content">
-        <TeamEditor @registerdata="writecontent = $event"/>
+        <Editor @registerdata="writecontent = $event"/>
       </div>
     </div>
     <div class="write_btn_area">
@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import TeamEditor from './TeamEditor'
+import Editor from './Editor'
 export default {
   name: "TeamoneWrite",
   data() {
@@ -54,7 +54,7 @@ export default {
     }
   },
   components: {
-      TeamEditor
+      Editor
   },
   props : {
     datasend:Object

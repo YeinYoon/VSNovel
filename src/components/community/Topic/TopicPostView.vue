@@ -1,9 +1,9 @@
 <template>
   <div>
     <div class="postview_section">
-      <div class="postview_title"><div class="postview">{{teamobject.title}}</div></div>
+      <div class="postview_title"><div class="postview">{{topicObject.title}}</div></div>
       <div class="postview_frame">
-        <div class="postview_content" id="addpostdata">{{teamobject.content}}</div>
+        <div class="postview_content" id="addpostdata">{{topicObject.content}}</div>
         <div class="content_vote">
           <div><span class="vote_btn_ok">추천</span></div>
           <div><span class="vote_btn_no">비추천</span></div>
@@ -33,7 +33,7 @@ export default {
     }
   },
   props:{
-    teamobject : Object,
+    topicObject : Object,
 
   }
 };

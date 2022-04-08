@@ -10,38 +10,37 @@
         <span class="topic" v-if="step=='리뷰 & 추천'">TOPIC · 리뷰 & 추천</span>
       </div>
     </div>
-    <div v-if="teamonedata == 0">
-      <TeamCommu @first="teamadd($event)"  @third="teamonedata = 2" :datasend="originaldata" @deletepost="remove($event)"/>
+    <div v-if="topicData == 0">
+      <TopicCommu @first="topicadd($event)"  @third="topicData = 2" :datasend="community" @deletepost="remove($event)"/>
     </div>
-    <div v-if="teamonedata == 1">
-      <CommunityPostView @second="teamonedata=0" :teamobject="teamobject"/>
+    <div v-if="topicData == 1">
+      <TopicPostView @second="topicData=0" :topicObject="topicObject"/>
     </div>
-    <div v-if="teamonedata == 2">
-      <TeamoneWrite @add="teamonedata=0" :datasend="community" @contentdata="addpost($event)"/>
+    <div v-if="topicData == 2">
+      <TopicWrite @add="topicData=0" :datasend="community" @contentdata="addpost($event)"/>
     </div>
   </div>
 </template>
 
 <script>
 import dummy_data from "@/assets/DataJs/commuData.js";
-import TeamCommu from "../Team/TeamCommu";
-import CommunityPostView from "../Team/CommunityPostView";
-import TeamoneWrite from "../Team/TeamoneWrite";
+import TopicCommu from "../Topic/TopicCommu";
+import TopicPostView from "../Topic/TopicPostView";
+import TopicWrite from "../Topic/TopicWrite";
 
 export default {
-  name: "Teamone",
+  name: "TopicFrame",
   data() {
     return {
-      community: [...dummy_data],
-      originaldata: [...dummy_data],
-      teamonedata : 0,
-      teamobject : {},
+      community: dummy_data,
+      topicData : 0,
+      topicObject : {},
     };
   },
   methods : {
-    teamadd(event){
-      this.teamonedata = 1;
-      this.teamobject = event;
+    topicadd(event){
+      this.topicData = 1;
+      this.topicObject = event;
     },
     remove(removedata){
       this.community.splice(removedata,1);
@@ -52,9 +51,9 @@ export default {
 
   },
   components: {
-    TeamCommu,
-    CommunityPostView,
-    TeamoneWrite
+    TopicCommu,
+    TopicPostView,
+    TopicWrite
   },
   props : {
     step : String
