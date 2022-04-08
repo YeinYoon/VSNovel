@@ -209,6 +209,18 @@ export default {
   background-color: #494949;
   padding: 5px 10px;
   border-radius: 20px;
+  overflow-y: scroll;
+}
+.store ::-webkit-scrollbar{
+  display: block;
+  height: 10px;
+  background: none;
+}
+
+.store ::-webkit-scrollbar-thumb {
+  background: #353535;
+  border-radius: 25px;
+
 }
 .store .div {
   display: flex;
@@ -217,7 +229,7 @@ export default {
   white-space: nowrap;
 }
 .store .list {
-  margin: 0 10px 10px 10px;
+  margin: 0 10px 15px 10px;
 }
 .store .list .img {
   position: relative;
