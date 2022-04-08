@@ -5,12 +5,27 @@ import Community from './components/side/CommunitySide.vue';
 import MyPage from './components/side/MypageSide.vue';
 import Library from './components/side/LibrarySide.vue';
 import Notice from './components/side/NoticeSide.vue'
+import Login from './components/auth/Login.vue';
+import SignUp from './components/auth/SignUp.vue';
+import FindAcc from './components/auth/FindAcc.vue';
 
 const routes = [
   {
     path:"/",
     name: 'Main',
     component : Main
+  },
+  {
+    path : "/signin",
+    component : Login
+  },
+  { 
+    path : "/signup",
+    component : SignUp
+  },
+  { 
+    path : "/findAcc",
+    component : FindAcc
   },
   {
     path : '/mypage',
