@@ -2,7 +2,7 @@
 <Spinner :loading="$store.state.LoadingStatus"></Spinner>
 <GlobalModal :gModalState="$store.state.gModalState"></GlobalModal>
 <div class="content">
-    <Vsnmenu v-bind:class="{'vsnmenu':true}"></Vsnmenu>
+    <Menu v-bind:class="{'vsnmenu':true}"></Menu>
     <!-- <vsnside v-bind:class="{'vsnside':true}"></vsnside> -->
     <!-- <Vsncontent v-bind:class="{'vsncontent':true}"></Vsncontent> -->
     <!-- <div class="vsncontainer"> -->
@@ -13,14 +13,14 @@
 
 <script>
 import Spinner from './components/Spinner.vue'
-import Vsnmenu from './components/Menu';
+import Menu from './components/Menu';
 import GlobalModal from './components/modal/GlobalModal.vue';
 // import vsnside from './components/Side';
 // import Vsncontent from './components/Content';
 export default {
   name: "App",
   components: {
-    Vsnmenu,
+    Menu,
     GlobalModal,
     Spinner
     // vsnside,

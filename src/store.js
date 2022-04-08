@@ -3,6 +3,7 @@ import { createStore } from 'vuex';
 const store = createStore({
     state() {
         return {
+            userId : null,
             userNickname : null,
             LoadingStatus: false,
 
@@ -18,8 +19,9 @@ const store = createStore({
     },
     mutations : {
         //유저 로그인
-        userLogin(state, name) {
-            state.userNickname = name;
+        userLogin(state, user) {
+            state.userNickname = user.nickname;
+            state.userId = user.id;
         },
         
         //로딩
