@@ -12,9 +12,11 @@
     </div>
 
         <div class="commu_btn_area">
-          <div class="commu_btn_red" @click="manage=true"><span class="commu_btn_manage" >관리자 시점</span></div>
-          <div class="commu_btn_red" @click="manage=false" v-if="manage==true"><span class="commu_btn_manage">관리</span></div>
-          <div class="commu_btn_blue"><span class="commu_btn_write" @click="$emit('third')">글쓰기</span></div>
+          <div class="commu_btn_red" >
+            <span class="commu_btn_manage" @click="manage=true" v-if="manage==false">관리자 시점</span>
+            <span class="commu_btn_manage" @click="manage=false" v-if="manage==true">관리</span>
+          </div>
+          <div class="commu_btn_blue" v-if="manage==false"><span class="commu_btn_write" @click="$emit('third')">글쓰기</span></div>
         </div>
 
     <section class="commu_section">
@@ -126,7 +128,7 @@ export default {
 .commu_post {
   position: relative;
   width: 100%;
-  height: 130px;
+  height: 120px;
 }
 .commu_post:hover {
   opacity: 0.7;

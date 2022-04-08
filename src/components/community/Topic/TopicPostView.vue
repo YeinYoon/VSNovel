@@ -3,7 +3,7 @@
     <div class="postview_section">
       <div class="postview_title"><div class="postview">{{topicObject.title}}</div></div>
       <div class="postview_frame">
-        <div class="postview_content" id="addpostdata">{{topicObject.content}}</div>
+        <div class="postview_content" id="addpostdata"><span v-html="topicObject.content"></span></div>
         <div class="content_vote">
           <div><span class="vote_btn_ok">추천</span></div>
           <div><span class="vote_btn_no">비추천</span></div>
@@ -81,6 +81,7 @@ export default {
   background-color: #5e5e5e;
   border-radius: 20px;
   padding: 0 10px;
+  overflow-y:scroll;
 }
 .content_vote {
     display:flex;
