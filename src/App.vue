@@ -38,6 +38,7 @@ body{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 .vsnmenu {
   width: 140px;
   position:fixed;
