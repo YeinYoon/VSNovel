@@ -123,13 +123,9 @@ export default {
   overflow-y:scroll;
   -ms-overflow-style:none;
 }
-.commu_section::-webkit-scrollbar {
-  display: none;
-}
 .commu_post {
   position: relative;
   width: 100%;
-  /* margin-top: 20px; */
   height: 130px;
 }
 .commu_post:hover {
