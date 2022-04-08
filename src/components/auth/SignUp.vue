@@ -37,8 +37,8 @@
 
           <p class="use_info_label">비밀번호 확인</p>
           <input class="use_info_input" type="password" v-model="newPwCheck">
-          <div v-if="pwMatch == false">
-            <span>비밀번호를 동일하게 입력해주세요.</span>
+          <div class="use_pass_correct" v-if="pwMatch == false">
+            <span>불일치</span>
           </div>
 
           <div class="next_button" @click="step1()">
@@ -282,13 +282,12 @@ export default {
 </script>
 
 <style>
-.contentbackground {
+/* .contentbackground {
   background:#353535;
   width: 100vw;
   height: 100vh;
-  z-index: -100;
   overflow: auto;
-}
+} */
 .sign_box{
   position:absolute;
   width: 70%;
@@ -301,6 +300,7 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
 }
+
 .background_img {
   position:absolute;
   top: 50%;
@@ -318,7 +318,7 @@ export default {
   font-size: 3em;
   font-weight: 700;
   color:white;
-  z-index: 1;
+  /* z-index: 1; */
 }
 .sign_inner_box{
   position:absolute;
@@ -402,6 +402,24 @@ export default {
   height: 50px;
   color: white;
   /* text-align: center; */
+}
+
+.use_pass_correct {
+  position: fixed;
+  width: 80px;
+  left: 420px;
+  color: white;
+  top: 285px;
+  height: 30px;
+  background: #ff4c4c;
+  border-radius: 20px;
+  display: table;
+}
+
+.use_pass_correct span{
+  display: table-cell;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .use_info_input{
