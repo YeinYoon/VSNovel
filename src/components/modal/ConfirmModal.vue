@@ -77,7 +77,7 @@ export default {
   animation-duration: 0.3s;
   animation-name: backgrounding_on;
   animation-fill-mode: forwards;
-  z-index: 1;
+  z-index: 99;
 }
 .modal_frame_normal{
   position: fixed;

@@ -1,8 +1,8 @@
 <template>
 <div class="FullView">
   <div><!--컴포넌트 전체영역-->
-    <img class="background_img" src="../../assets/imgs/background.png" alt=""><!--백그라운드 이미지-->
-    <div class="sign_box"><!--전체 로그인 화면-->
+    <img class="background_img " src="../../assets/imgs/background.png" alt=""><!--백그라운드 이미지-->
+    <div class="sign_box Login_Anime"><!--전체 로그인 화면-->
       <div class="sign_title"> <!--로그인 타이틀-->
         <span>LOGIN</span>
       </div>
@@ -295,6 +295,21 @@
   width: 100%;
   height: 350px;
   object-fit: cover;
+}
+
+.Login_Anime{
+  animation-name: LoginUp;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes LoginUp {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 </style>
