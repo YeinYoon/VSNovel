@@ -17,7 +17,7 @@
             <SwiperCarousel />
         </div>
       <div class="widget">
-        <Com />
+        <Widget />
       </div>
     </div>
     <hr class="lines" />
@@ -36,7 +36,7 @@
 
 <script>
 import SwiperCarouselVue from "./MainCarousel";
-import Com from "../MainPage/Com.vue";
+import Widget from "./Widget";
 export default {
   name: "MainScreen",
   data() {
@@ -44,7 +44,7 @@ export default {
   },
   components: {
     SwiperCarousel: SwiperCarouselVue,
-    Com,
+    Widget,
   },
 };
 </script>

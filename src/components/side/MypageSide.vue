@@ -29,13 +29,13 @@
 </template>
 
 <script>
-import MyPage from "../MyPage/MyPageMain";
-import MyCard from "../MyPage/MyCard";
-import MyPost from "../MyPage/MyPost";
-import Myreview from "../MyPage/Myreview";
-import Prefer from "../MyPage/Prefer";
-import MyAlarm from "../MyPage/MyAlarm";
-import MyWithdrawal from "../MyPage/withdrawal/MyWithdrawal";
+import MyPage from "../mypage/MyPageMain";
+import MyCard from "../mypage/MyCard";
+import MyPost from "../mypage/MyPost";
+import Myreview from "../mypage/Myreview";
+import Prefer from "../mypage/Prefer";
+import MyAlarm from "../mypage/MyAlarm";
+import MyWithdrawal from "../mypage/withdrawal/MyWithdrawal";
 export default {
   name: "MypageSide",
   data() {

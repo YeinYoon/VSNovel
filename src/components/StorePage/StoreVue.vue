@@ -169,6 +169,7 @@ export default {
   -ms-overflow-style: none;
   position: absolute;
   height: 50%;
+  
 }
 /* 오른쪽 전체 */
 .add_content {
@@ -190,7 +191,7 @@ export default {
   padding: 10px 5px;
   font-size: 0.8em;
   margin: 10px 0 0 0;
-  height: 190px;
+  height: 195px;
 }
 /* 데이터 바인딩 부분 */
 .add_content_data {

@@ -24,9 +24,9 @@
 
 <script>
 import dummy_data from "@/assets/DataJs/commuData.js";
-import TopicCommu from "../Topic/TopicCommu";
-import TopicPostView from "../Topic/TopicPostView";
-import TopicWrite from "../Topic/TopicWrite";
+import TopicCommu from "../topic/TopicCommu";
+import TopicPostView from "../topic/TopicPostView";
+import TopicWrite from "../topic/TopicWrite";
 
 export default {
   name: "TopicFrame",

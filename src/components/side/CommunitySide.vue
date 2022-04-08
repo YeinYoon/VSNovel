@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import Topic from '../community/Topic/TopicFrame';
+import Topic from '../community/topic/TopicFrame';
 import Cafe from '../community/cafe/CafeMain';
 import RegisterCafe from '../community/cafe/RegisterCafe';
 export default {

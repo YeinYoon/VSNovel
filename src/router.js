@@ -1,6 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
 import Store from './components/side/StoreSide.vue';
-import Main from './components/MainPage/Main.vue';
+import Main from './components/mainpage/Main.vue';
 import Community from './components/side/CommunitySide.vue';
 import Mypage from './components/side/MypageSide.vue';
 import Library from './components/side/LibrarySide.vue';

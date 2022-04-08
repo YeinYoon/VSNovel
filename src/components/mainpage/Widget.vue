@@ -34,7 +34,7 @@
           <div class="service">
             <img
               class="icon"
-              src="../../assets/icons/white/propaganda.png"
+              src="@/assets/icons/white/propaganda.png"
               alt="logo"
             />
             <span class="title">공지사항</span>
@@ -43,7 +43,7 @@
         <hr class="lines" />
         <div class="list" v-for="notice in noticeData" :key="notice">
           <span class="titles">{{ notice.title }}</span>
-          <span class="con">내용 - {{ notice.content }}</span>
+          <span class="con">{{ notice.content }}</span>
           <span class="date">{{ notice.date }}</span>
         </div>
       </div>
@@ -53,7 +53,7 @@
         <div class="service" style="background: $ {}">
           <img
             class="icon"
-            src="../../assets/icons/white/shopping-cart.png"
+            src="@/assets/icons/white/shopping-cart.png"
             alt="logo"
           />
           <span class="title">스토어</span>
@@ -107,18 +107,9 @@ export default {
   display: flex;
   flex-wrap: wrap;
 }
-.community_box{
-  flex: 4;
-  width: 450px;
-  background-color: #494949;
-  height: 300px;
-  padding: 5px 10px;
-  border-radius: 20px;
-  margin: 20px 0;
-}
+.community_box,
 .notice_box {
   flex: 4;
-  width: 450px;
   background-color: #494949;
   height: 300px;
   padding: 5px 10px;
@@ -128,7 +119,8 @@ export default {
 .notice,
 .community {
   height: 95%;
-  overflow: scroll;
+  width: 100%;
+  overflow-y: scroll;
   -ms-overflow-style: none;
 }
 .line {
@@ -150,8 +142,10 @@ export default {
   margin: 10px 0;
   display: table;
   width: 98%;
+  height: 20px;
   color: white;
   position: relative;
+  text-overflow:ellipsis;
 }
 .list .img {
   width: 35px;
@@ -195,10 +189,14 @@ export default {
   position: relative;
   font-size: 0.8em;
   padding: 5px 0 10px 0;
+  width: 90%;
+  height: 70px;
+  text-overflow:ellipsis;
+  overflow: hidden;
 }
 .list .date {
   position: relative;
-  left: 80%;
+  text-align: right;
   font-size: 0.8em;
 }
 
@@ -207,7 +205,7 @@ export default {
   width: 100%;
   height: 300px;
   background-color: #494949;
-  padding: 5px 10px;
+  padding: 5px 10px 0 10px;
   border-radius: 20px;
   overflow-y: scroll;
 }
@@ -229,7 +227,7 @@ export default {
   white-space: nowrap;
 }
 .store .list {
-  margin: 0 10px 15px 10px;
+  margin: 0 10px 10px 10px;
 }
 .store .list .img {
   position: relative;

@@ -18,9 +18,9 @@
                 <div class="notice_line" v-if="noticeNum == i"></div>
                 <div class="strong_notice" @click="noticeEvent(notice, i)">
                 <img class="strong_notice_mark" v-if="notice.emphasis == 0" src="@/assets/icons/white/star.png">
-                    <div class="back_title">{{notice.title}}</div>
-                    <div class="back_content">내용 - {{notice.content}}</div>
-                    <div class="back_date">{{notice.date}}</div>    
+                    <div class="back_title">{{notice.title}}</div>      <!-- 제목 -->
+                    <div class="back_content">{{notice.content}}</div>  <!-- 내용 -->
+                    <div class="back_date">{{notice.date}}</div>        <!-- 날짜 -->
                 </div>
             </div>
         </div>
@@ -196,7 +196,7 @@ export default {
     background-color: #262626;
     border-radius: 12px;
     color:white;
-    z-index: 0;
+    z-index: 11;
     top: 30px;
 }
 .back_title {
@@ -210,6 +210,7 @@ export default {
     position:absolute;
     font-size:19px;
     width:98%;
+    height: 100px;
     text-overflow:ellipsis;
     white-space:nowrap;
     overflow:hidden;
