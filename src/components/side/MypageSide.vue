@@ -25,10 +25,12 @@
       <div v-if="myStep == '회원 탈퇴'">
         <MyWithdrawal @myMain="myStep = '프로필 설정'" />
       </div>
+      <div class="Temp_LogoutButton" @click="logout()"><button class="mypage_logout">로그아웃</button></div>
   </div>
 </template>
 
 <script>
+import axios from '../../axios'
 import MyPage from "../MyPage/MyPageMain";
 import MyCard from "../MyPage/MyCard";
 import MyPost from "../MyPage/MyPost";
@@ -71,6 +73,18 @@ export default {
       }
       this.clickNum = index;
     },
+
+    logout() {
+      axios.get('/api/auth/logout')
+      .then((result)=>{
+        if(result.data == "ok") {
+          this.$store.commit('userLogin', null);
+          this.$router.push('/');
+        } else {
+          this.$store.commit('gModalOn', {msg : "ERR : 로그아웃 실패", size : "normal"});
+        }
+      })
+    }
   },
     components: {
       MyPage,
@@ -110,4 +124,19 @@ export default {
   font-weight: 600;
   font-size: 1em;
 }
+
+.Temp_LogoutButton{
+  position: absolute;
+  left: 160px;
+  top: 90%;
+}
+
+.mypage_logout {
+  width: 100px;
+  height: 50px;
+  border-radius: 10px;
+  background: #2872f9;
+  color: white;
+}
+
 </style>

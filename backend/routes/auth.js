@@ -22,6 +22,21 @@ router.post('/existIdCheck', async (req, res)=>{
   }
 })
 
+router.post('/existNicknameCheck', async (req, res)=>{
+  var result = await db.execute(`SELECT * FROM tbl_user WHERE user_nickname = '${req.body.newNickname}'`);
+  if(result == "err") {
+    console.log("DB쿼리 실패");
+  } else {
+    if(result.rows.length != 0) { // 동일한 닉네임이 존재할 경우
+      console.log(result.rows);
+      res.send("exist")
+    } else {
+      res.send("ok")
+    } 
+ 
+  }
+})
+
 
 //회원가입
 router.post('/signUp', async (req,res)=>{
