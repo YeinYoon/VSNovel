@@ -14,11 +14,27 @@ router.post('/mypagemain', async(req,res)=>{
         console.log("good");
         res.send(result.rows);
     }
-    if(req.isAuthenticated()) {
-        res.send(req.user);
-      } else {
-        res.send(null);
-      }
+})
+
+router.post('/mycard', async(req,res)=>{
+    const result = await db.execute(`INSERT INTO tbl_user values (${req.body.newCard}, user_id)`)
+    console.log(req.body.newCard);
+    if(result == 'err') {
+        console.log('sry');
+    } else {
+        console.log('good');
+        res.send(result.rows);
+    }
+})
+
+module.exports = router;
+
+    
+    // if(req.isAuthenticated()) {
+    //     res.send(req.user);
+    //   } else {
+    //     res.send(null);
+    //   }
     
     // UPDATE tbl_user a 
     // SET a.user_nickname = (
@@ -27,6 +43,3 @@ router.post('/mypagemain', async(req,res)=>{
     // WHERE 
 
     // )
-})
-
-module.exports = router;

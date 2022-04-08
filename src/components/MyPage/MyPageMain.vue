@@ -41,7 +41,7 @@
       <!-- 취소,수정 버튼 -->
       <footer>
         <button id="mypage_main-canc" @click="cancel">취소</button>
-        <button id="mypage_main-save" @click="profiledit()">수정</button>
+        <button id="mypage_main-save" @click="profiledit">수정</button>
       </footer>
       
     </div>
@@ -58,6 +58,7 @@ export default {
       uploadimg:'',
       newNickname: "",
       newIntro: "",
+      newImage: ""
     }
   },
   methods:{

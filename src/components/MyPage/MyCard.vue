@@ -19,7 +19,7 @@
       <!-- 2행 카드번호 입력 -->
       <div class="card-container2">
         <div class="card-num-name">카드번호</div>
-        <input class="card-input" type="number" oninput="if(value.length>11)value=value.slice(0,19)" onkeyup="cardnum"/>
+        <input class="card-input" type="number" oninput="if(value.length>11)value=value.slice(0,16)" v-model="newCard" onkeyup="cardnum"/>
         <div class="card-num-info">16자리 숫자만 입력</div>
       </div>
 
@@ -34,7 +34,7 @@
     <!-- 취소,저장버튼 -->
     <footer class="card-footer">
       <button id="mypage_card-canc">취소</button>
-      <button id="mypage_card-save" @click="routerPush('/')">저장</button>
+      <button id="mypage_card-save" @click="routerPush(myCard)">저장</button>
     </footer>
 
   </div>
@@ -43,10 +43,32 @@
 </template>
 
 <script>
+import axios from '../../axios';
 export default {
+  name: "MyCard",
+  data() {
+    return {
+      myCard : "",
+      myUser : ""
+    }
+  },
   methods:{
-    routerPush(link){
-      this.$router.push(link);
+    routerPush(myCard){
+      this.myCard = myCard;
+      this.register();
+    },
+    register() {
+      var newInfo = {
+        newCard : this.newCard
+      }
+      axios.post('/api/mypage/mycard', newInfo)
+      .then((result) => {
+        if(result.data.length != 0) {
+          console.log(result)
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
     }
   }
 }
