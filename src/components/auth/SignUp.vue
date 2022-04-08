@@ -37,8 +37,8 @@
 
           <p class="use_info_label">비밀번호 확인</p>
           <input class="use_info_input" type="password" v-model="newPwCheck">
-          <div class="use_pass_correct" v-if="pwMatch == false">
-            <span>불일치</span>
+          <div class="use_pass_correct" v-if="pwMatch == true">
+            <span>일치</span>
           </div>
 
           <div class="next_button" @click="step1()">

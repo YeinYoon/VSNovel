@@ -66,7 +66,7 @@ body{
   width: calc(100vw - 140px);
   height: 100vh;
   left: 140px;
-  overflow: auto;
+  
 }
 
 .FullView {
@@ -83,6 +83,7 @@ body{
   width: calc(100vw - 140px);
   height: 100vh;
   background: #353535;
+  overflow: auto;
 }
 
 .ContentView {
