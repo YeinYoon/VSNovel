@@ -18,17 +18,17 @@
       </div>
   </div>
 </div>
-    <div v-if="step == '자유'"> <Team :step="step"/> </div>
-    <div v-else-if="step == '작가'"> <Team :step="step"/> </div>
-    <div v-else-if="step == '팀원 모집'"> <Team :step="step"/> </div>
-    <div v-else-if="step == '리뷰 & 추천'"> <Team :step="step"/> </div>
+    <div v-if="step == '자유'"> <Topic :step="step"/> </div>
+    <div v-else-if="step == '작가'"> <Topic :step="step"/> </div>
+    <div v-else-if="step == '팀원 모집'"> <Topic :step="step"/> </div>
+    <div v-else-if="step == '리뷰 & 추천'"> <Topic :step="step"/> </div>
     <div v-else-if="step == 'Village Main'"> <Cafe /> </div>
     <div v-else> <RegisterCafe :registerCafeData="registerCafeData"/> </div>
 </div>
 </template>
 
 <script>
-import Team from '../community/Team/Teamone';
+import Topic from '../community/Topic/TopicFrame';
 import Cafe from '../community/cafe/CafeMain';
 import RegisterCafe from '../community/cafe/RegisterCafe';
 export default {
@@ -44,7 +44,8 @@ export default {
     };
   },
   components:{
-      Team,
+      // Community,
+      Topic,
       Cafe,
       RegisterCafe,
   },
