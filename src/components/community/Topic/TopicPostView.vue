@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="postview_section">
-      <div class="postview_title"><div class="postview">{{topicObject.title}}</div></div>
+      <div class="postview_title"><div class="postview"><span>{{topicObject.title}}</span></div></div>
       <div class="postview_frame">
         <div class="postview_content" id="addpostdata"><span v-html="topicObject.content"></span></div>
         <div class="content_vote">
@@ -19,18 +19,12 @@
 <script>
 export default {
   name: "CommunityPostView",
-  create() {
-    window.addEventListener("load", this.onWindowLoad);
-  },
   data() {
     return {}
   },
   components: {
   },
   methods : {
-    onWindowLoad() {
-      console.log("window load event");
-    }
   },
   props:{
     topicObject : Object,
@@ -53,11 +47,16 @@ export default {
   color:white;
   margin: 5px auto;
   width: 100%;
-  height: 50px;
-  
   background-color: #5e5e5e;
   border-radius: 20px;
-  padding: 0 10px;
+  padding: 0px 10px;
+  display: table;
+  
+}
+.postview_title span {
+  display: table-cell; 
+  vertical-align:middle; 
+  /* height: 50px;  px로 주면 안된다?*/
 }
 .postview {
   position: relative;
@@ -80,7 +79,7 @@ export default {
   min-height: 100px;
   background-color: #5e5e5e;
   border-radius: 20px;
-  padding: 0 10px;
+  padding: 10px 10px;
   overflow-y:scroll;
 }
 .content_vote {
