@@ -14,7 +14,7 @@
                 1234567
               
               
-              </div>
+              </div> <!--기능 요까지-->
 
             <p class="cancel_label" @click="this.$router.push('/signin')">기존 페이지로 돌아가기</p>
             </div>
@@ -81,7 +81,7 @@ export default {
   position:absolute;
   background: #2e2e2e;
   width: 1100px;
-  height: 500px;
+  height: 450px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -40%);

@@ -57,7 +57,6 @@
 <script>
 import StoreModal from "./StoreModal"; 
 import dataHu from "../../assets/DataJs/dataHu.js"; // 작품 정보
-
 export default {
   name: "Store",
   data() {
@@ -78,7 +77,7 @@ export default {
       if (this.step > 2) this.step = 0;
     },
     modalOpen(data) {
-    // 모달 오픈 함수
+      // 모달 오픈 함수
       this.modalData = data;
       this.modal = true;
     },

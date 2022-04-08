@@ -1,8 +1,8 @@
 <template>
 <div class="FullView">
   <div><!--컴포넌트 전체영역-->
-    <img class="background_img" src="../../assets/imgs/background.png" alt=""><!--백그라운드 이미지-->
-    <div class="sign_box"><!--전체 로그인 화면-->
+    <img class="background_img " src="../../assets/imgs/background.png" alt=""><!--백그라운드 이미지-->
+    <div class="sign_box Login_Anime"><!--전체 로그인 화면-->
       <div class="sign_title"> <!--로그인 타이틀-->
         <span>LOGIN</span>
       </div>
@@ -33,7 +33,7 @@
         <div class="signupNpasswd"> <!-- 최하단 회원가입 및 패스워드 찾기 -->
           <span class="signup_button" @click="this.$router.push('/signup')">회원가입</span>
           <span class="where_my_account" @click="this.$router.push('/findAcc')">로그인에 문제가 있나요?</span>
-          <p class="return_button" @click="this.$router.push('/')">기존 페이지로 돌아가기</p>
+          <p class="return_button" @click="this.$router.push('/')">이전 페이지로 돌아가기</p>
         </div> <!-- 최하단 회원가입 및 패스워드 찾기 끝 -->
         <div class="partion_block"> <!-- 로그인 및 광고영역간 공간분리 -->
         </div>
@@ -252,11 +252,12 @@
 
 .return_button{
   position: absolute;
-  left: 88%;
+  left: 940px;
   top: 430px;
   transform: translate(-50%, -50%);
   color: rgb(168, 168, 168);
   font-size: 0.8em;
+  width: 200px;
   cursor: pointer;
 }
 
@@ -295,6 +296,21 @@
   width: 100%;
   height: 350px;
   object-fit: cover;
+}
+
+.Login_Anime{
+  animation-name: LoginUp;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes LoginUp {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
 }
 
 </style>

@@ -28,7 +28,7 @@ export default {
     return {
       datas: data,
       status : true, // 마우스 가져다 댔을 경우 사진이 안넘어가요
-      sec : 153333300, //사진 넘어가는 시간,
+      sec : 2500, //사진 넘어가는 시간,
     };
   },
   components: {
