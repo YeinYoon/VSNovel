@@ -65,7 +65,7 @@ body{
   width: calc(100vw - 140px);
   height: 100vh;
   left: 140px;
-  overflow: auto;
+  overflow: scroll;
 }
 
 .FullView {

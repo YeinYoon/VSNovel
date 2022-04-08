@@ -32,7 +32,7 @@ export default {
   name: "CommunitySide",
   data() {
     return {
-      // sideArrays : ['자유', '작가', '팀원 모집', '리뷰 & 추천'],
+      sideArrays : ['자유', '작가', '팀원 모집', '리뷰 & 추천'],
       sideCafe : this.$store.state.cafeSide,
       step: '자유',
       clickNum : 0,

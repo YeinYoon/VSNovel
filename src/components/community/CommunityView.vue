@@ -7,14 +7,14 @@
         <span class="topic">TOPIC · {{step}}</span>
       </div>
     </div>
-    <div v-if="teamonedata == 0">
-      <TeamCommu @first="teamadd($event)"  @third="teamonedata = 2" :datasend="community" @deletepost="remove($event)"/>
+    <div v-if="pageStatus == 0">
+      <TeamCommu @first="teamadd($event)"  @third="pageStatus = 2" :datasend="community" @deletepost="remove($event)"/>
     </div>
-    <div v-if="teamonedata == 1">
-      <CommunityPostView @second="teamonedata=0" :teamobject="teamobject"/>
+    <div v-if="pageStatus == 1">
+      <CommunityPostView @second="pageStatus=0" :teamobject="teamobject"/>
     </div>
-    <div v-if="teamonedata == 2">
-      <TeamoneWrite @add="teamonedata=0" :datasend="community" @contentdata="addpost($event)"/>
+    <div v-if="pageStatus == 2">
+      <TeamoneWrite @add="pageStatus=0" :datasend="community" @contentdata="addpost($event)"/>
     </div>
   </div>
 </template>
@@ -33,13 +33,13 @@ export default {
   data() {
     return {
       community: dummy_data,
-      teamonedata : 0,
+      pageStatus : 0,
       teamobject : {},
     };
   },
   methods : {
     teamadd(event){
-      this.teamonedata = 1;
+      this.pageStatus = 1;
       this.teamobject = event;
     },
     remove(removedata){
@@ -56,6 +56,11 @@ export default {
     CommunityPostView,
     TeamoneWrite
   },
+  created(){
+    if(this.$route.params.comm_id!=undefined){
+      this.pageStatus=1;
+    }
+  }
 };
 </script>
 
