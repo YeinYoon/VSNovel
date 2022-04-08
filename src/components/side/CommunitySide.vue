@@ -15,10 +15,10 @@
     </div>
   </div>
 </div>
-    <div v-if="step == '자유'"> <Community/> </div>
-    <div v-else-if="step == '작가'"> <Community/> </div>
-    <div v-else-if="step == '팀원 모집'"> <Community/> </div>
-    <div v-else-if="step == '리뷰 & 추천'"> <Community/> </div>
+    <div v-if="step == '자유'"> <Community :step="step"/> </div>
+    <div v-else-if="step == '작가'"> <Community :step="step"/> </div>
+    <div v-else-if="step == '팀원 모집'"> <Community :step="step"/> </div>
+    <div v-else-if="step == '리뷰 & 추천'"> <Community :step="step"/> </div>
     <div v-else-if="step == '카페 메인'"> <Cafe /> </div>
     <div v-else> <RegisterCafe :registerCafeData="registerCafeData"/> </div>
 </div>

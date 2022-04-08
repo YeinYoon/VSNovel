@@ -27,12 +27,11 @@
   width: 100vw;
   height: 100vh;
   opacity:0;
-  z-index: 100;
+  z-index: 97;
   position: fixed;
   animation-duration: 0.3s;
   animation-name: backgrounding_on;
   animation-fill-mode: forwards;
-  z-index: 1;
 }
 .modal_frame_normal{
   position: fixed;
@@ -45,7 +44,7 @@
   background: #2a2a2a;
   animation-duration: 0.7s;
   animation-name: opening;
-  z-index: 1;
+  z-index: 98;
   opacity: 1;
 }
 .modal_frame_small{
@@ -59,7 +58,7 @@
   background: #2a2a2a;
   animation-duration: 0.7s;
   animation-name: opening;
-  z-index: 1;
+  z-index: 98;
   opacity: 1;
 }
 .modal_frame_big{
@@ -73,7 +72,7 @@
   background: #2a2a2a;
   animation-duration: 0.7s;
   animation-name: opening;
-  z-index: 1;
+  z-index: 98;
   opacity: 1;
 }
 .modal_frame_ad{
@@ -88,7 +87,7 @@
   background-size:contain;
   animation-duration: 0.7s;
   animation-name: opening;
-  z-index: 1;
+  z-index: 98;
   opacity: 1;
 }
 .modal_inner{
