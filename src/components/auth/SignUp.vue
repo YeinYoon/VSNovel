@@ -162,13 +162,22 @@ export default {
     //ID 중복검사
     existIdCheck() {
       axios.post('/api/auth/existIdCheck', {newId : this.newId})
-      .then((result)=>{
+      .then(async (result)=>{
         if(result.data == "exist") {
           this.newIdCheck = false
           this.$store.commit('gModalOn', {msg : "이미 존재하는 아이디입니다.", size : "normal"});
         } else {
-          this.$store.commit('gModalOn', {msg : "사용가능한 아이디입니다.", size : "normal"});
-          this.newIdCheck = true;
+          var confirm = await this.$refs.confirmModal.show({
+            msg : `아이디 [${this.newId}]을(를) 사용하시겠습니까?`,
+            size : "normal",
+            btn1 : "확인",
+            btn2 : "취소"
+          });
+          if(confirm) {
+            this.newIdCheck = true;
+          } else {
+            this.newIdCheck = false;
+          }
         }
       })
       .catch((err)=>{
@@ -210,10 +219,8 @@ export default {
         .then(async (result)=>{
           if(result.data == "exist") {
             this.$store.commit('gModalOn', {msg : "이미 존재하는 닉네임입니다.", size : "normal"});
-            console.log("이미 존재하는 닉네임");
             this.newNickCheck = false;
           } else {
-            console.log("사용가능한 닉네임")
             var confirm = await this.$refs.confirmModal.show({
               msg : `닉네임 [${this.newNickname}]을(를) 사용하시겠습니까?`,
               size : "normal",
