@@ -43,8 +43,8 @@ router.post('/signUp', async (req,res)=>{
 
   var cryptPw = await bcrypt.hash(req.body.newPw, 12);
 
-  var insertUser = await db.execute(`INSERT INTO tbl_user(user_id, user_pwd, user_email, user_nickname, user_name, user_sex, user_phone, user_cardnum)
-    VALUES('${req.body.newId}','${cryptPw}','${req.body.newEmail}','${req.body.newNickname}','${req.body.newName}','${req.body.newSex}',${req.body.newPhone},${req.body.newCardnum})`)
+  var insertUser = await db.execute(`INSERT INTO tbl_user(user_id, user_pwd, user_email, user_nickname, user_name, user_sex, user_phone)
+    VALUES('${req.body.newId}','${cryptPw}','${req.body.newEmail}','${req.body.newNickname}','${req.body.newName}','${req.body.newSex}',${req.body.newPhone})`)
   if(insertUser == "err") {
     console.log('DB쿼리 실패');
   } else {

@@ -57,7 +57,6 @@
 <script>
 import StoreModal from "./StoreModal"; 
 import dataHu from "../../assets/DataJs/dataHu.js"; // 작품 정보
-
 export default {
   name: "Store",
   data() {
