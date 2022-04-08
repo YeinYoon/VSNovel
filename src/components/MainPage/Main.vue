@@ -12,9 +12,10 @@
       </div>
     </div>
     <div class="section">
-      <div class="banner">
-          <SwiperCarousel />
-      </div>
+      <div class="banner_div_carousel"></div>
+        <div class="banner">
+            <SwiperCarousel />
+        </div>
       <div class="widget">
         <Com />
       </div>
@@ -137,9 +138,21 @@ button{
   margin: 0 auto;
   /* margin: 20px 0 0 0; */
 }
+.banner_div_carousel{
+  width: 1000px;
+  height: 150px;
+  border-radius: 25px;
+  background-color: rgb(75, 75, 75);
+  position: absolute;
+  top: 30px;
+}
 .section .banner {
   margin: 0 auto;
-  width: 1000px;
+  width: 920px;
+  height: 204px;
+  border-radius: 25px;
+  border: 2px solid rgb(73, 73, 73);
+  overflow: hidden;
 }
 .footer {
   width: 100%;

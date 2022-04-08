@@ -117,9 +117,6 @@ export default {
     overflow-y: scroll;
     -ms-overflow-style: none;
 }
-.notice_section::-webkit-scrollbar {
-  display: none;
-}
 .noticeMain_btn_area {
     /* float:right; */
     position: fixed;

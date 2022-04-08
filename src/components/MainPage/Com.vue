@@ -131,10 +131,6 @@ export default {
   overflow: scroll;
   -ms-overflow-style: none;
 }
-.notice::-webkit-scrollbar,
-.community::-webkit-scrollbar {
-  display: none;
-}
 .line {
   width: 5px;
   margin: 0 20px;

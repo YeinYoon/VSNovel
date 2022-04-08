@@ -4,7 +4,7 @@
       <div class="service">
         <img class="icon" src="@/assets/icons/white/bubble_chat.png" alt="logo" />
         <span class="title">커뮤니티</span>
-        <span class="topic">팀원모집</span>
+        <span class="topic">{{step}}</span>
       </div>
     </div>
     <div v-if="teamonedata == 0">
@@ -33,6 +33,9 @@ export default {
       teamonedata : 0,
       teamobject : {},
     };
+  },
+  props:{
+    step:String,
   },
   methods : {
     teamadd(event){

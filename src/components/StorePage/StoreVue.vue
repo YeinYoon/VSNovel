@@ -72,10 +72,11 @@ export default {
 
 <style>
 .carousel_div {
-  padding: 10px;
   width: 100%;
-  position: relative;
-  height: 200px;
+  height: 204px;
+  border-radius: 25px;
+  border: 2px solid rgb(73, 73, 73);
+  overflow: hidden;
 }
 
 /* 모달 전체 */
@@ -169,10 +170,6 @@ export default {
   position: absolute;
   height: 50%;
 }
-.down_data::-webkit-scrollbar {
-  display: none;
-}
-
 /* 오른쪽 전체 */
 .add_content {
   padding: 0 0 0 5px;

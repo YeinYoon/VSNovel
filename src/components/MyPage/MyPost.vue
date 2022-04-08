@@ -54,9 +54,6 @@ export default {
   overflow-y: scroll;
   -ms-overflow-style: none;
 }
-.post_section::-webkit-scrollbar {
-  display: none;
-}
 .post_line {
   text-align: center;
   display: flex;

@@ -28,7 +28,7 @@ export default {
     return {
       datas: data,
       status : true, // 마우스 가져다 댔을 경우 사진이 안넘어가요
-      sec : 153333300, //사진 넘어가는 시간,
+      sec : 1500, //사진 넘어가는 시간,
     };
   },
   components: {
@@ -73,11 +73,13 @@ export default {
 }
 /* ------------------------------------------ */
 .carousel__prev {
-  transform: translate(25%, -70%);
+  transform: translate(25%, -50%);
+  background-color: #2872f9;
   /* transform: translate(-120%, -100%); */
 }
 .carousel__next {
-  transform: translate(-25%, -70%);
+  transform: translate(-25%, -50%);
+  background-color: #2872f9;
   /* transform: translate(120%, -100%); */
 }
 

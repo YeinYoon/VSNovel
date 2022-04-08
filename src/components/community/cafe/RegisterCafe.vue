@@ -108,9 +108,6 @@ export default {
     overflow-y: scroll;
     -ms-overflow-style: none;
 }
-.register_content::-webkit-scrollbar {
-  display: none;
-}
 .resigster_title{
     flex: 3;
     height: 130px;
