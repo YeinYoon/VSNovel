@@ -24,7 +24,7 @@
           </div>
 
           <div class="Promo_Info">
-            123
+            1234
           </div>
         </div>
       </div>
