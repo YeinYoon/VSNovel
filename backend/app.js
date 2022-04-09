@@ -42,8 +42,10 @@ app.use(passport.session());
 
 //API 라우터
 var authRouter = require('./routes/auth');
+var storeRouter = require('./routes/store');
 
 app.use('/api/auth', authRouter);
+app.use('/api/store', storeRouter);
 
 
 

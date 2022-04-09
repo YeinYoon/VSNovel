@@ -3,25 +3,35 @@ import { createStore } from 'vuex';
 const store = createStore({
     state() {
         return {
+            // 로그인 및 로딩 관련
             userId : null,
             userNickname : null,
             LoadingStatus: false,
 
             //커뮤니티 사이드 
             cafeSide : [{title : '자유'},{title:'작가'}, {title : '팀원 모집'}, {title : '리뷰 & 추천'}, {title:'카페 메인'}], // 커뮤니티 사이드 
-             //전역(Global) 모달
+
+            //전역(Global) 모달
             gModalState : false,
             gModalMsg : "",
             gModalSize : "",
-            gModalBg : ""
- 
+            gModalBg : "",
+
+            //스토어 관련
+            novelList : [],
         }
     },
     mutations : {
         //유저 로그인
         userLogin(state, user) {
-            state.userNickname = user.nickname;
-            state.userId = user.id;
+            if(user == null) {
+                state.userNickname = null;
+                state.userId = null;
+            } else {
+                state.userNickname = user.nickname;
+                state.userId = user.id;
+            }
+            
         },
         
         //로딩
@@ -31,6 +41,8 @@ const store = createStore({
         endSpinner(state){
             state.LoadingStatus = false;
         },
+
+
         //사이드 카페 가입 배열 추가
         addCafe(state, cafeData){
             for(let i = 0; i < state.cafeSide.length; i++){
@@ -42,6 +54,7 @@ const store = createStore({
             state.cafeSide.push(cafeData);
             console.log(state.cafeSide);
         },
+
         // Modal
         gModalOn(state, info){
             state.gModalSize = info.size;
@@ -52,6 +65,11 @@ const store = createStore({
         gModalOff(state){
             state.gModalState = false;
         },
+
+        // 스토어 관련
+        setNovelList(state, data) {
+            state.novelList = data;
+        }
     },
 })
 
