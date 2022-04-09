@@ -8,7 +8,7 @@
 
         <div class="Promo_Setup">
           <div class="Promo_Setup_Button">
-            <button>설치</button>
+            <button @click="engineDownload()">설치</button>
             <!-- <button>실행</button> -->
             <!-- <button>업데이트</button> -->
             </div>
@@ -39,9 +39,21 @@ export default {
       stepCount : 1,
     }
   },
-
   components: {
   },
+  methods:{
+      engineDownload(){
+          try {
+              let downloadFileLink = '';//download 경로
+              let element = document.createElement('a');
+              element.setAttribute('href', downloadFileLink);
+              element.setAttribute('download', '');
+              element.click()
+          }catch(e){
+              console.log(e)
+          }
+      }
+  }
 }
   
 </script>
@@ -170,5 +182,4 @@ export default {
   }
 }
 </style>
-
 
