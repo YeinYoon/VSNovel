@@ -8,7 +8,7 @@ import Notice from './components/side/NoticeSide.vue'
 import Login from './components/auth/Login.vue';
 import SignUp from './components/auth/SignUp.vue';
 import FindAcc from './components/auth/FindAcc.vue';
-import Engine from './components/Engine/Engine.vue';
+import Engine from './components/engine/Engine.vue';
 
 const routes = [
   {
@@ -60,6 +60,12 @@ const routes = [
     path : '/community',
     name: 'Community',
     component : Community,
+    props:true
+  },
+  {
+    path : '/engine',
+    name: 'Engine',
+    component : Engine,
     props:true
   },
 ];

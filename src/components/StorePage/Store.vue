@@ -83,9 +83,10 @@ export default {
     },
   },
   created(){
-    console.log(this.$route.params.novelID);
-    if(this.$route.params.novelID!=undefined){
-      this.modalData = this.$route.params.novelID;
+    console.log(this.$route.params.nove_id);
+    if(this.$route.params.nove_id!=undefined){
+      console.log("MO")
+      this.modalData = this.$route.params.nove_id;
       this.modal = true;
     }
   }
