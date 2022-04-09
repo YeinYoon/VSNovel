@@ -42,9 +42,9 @@ app.use(passport.session());
 
 //API 라우터
 var authRouter = require('./routes/auth');
-
+var mainRouter = require('./routes/mainPage');
 app.use('/api/auth', authRouter);
-
+app.use('/api/main', mainRouter);
 
 
 // catch 404 and forward to error handler

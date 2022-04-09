@@ -54,6 +54,9 @@ export default {
   data() {
     return {};
   },
+  methods(){
+
+  },
   components: {
     SwiperCarousel: SwiperCarouselVue,
     Com,

@@ -24,7 +24,7 @@
           </div>
 
           <div class="Promo_Info">
-            1234
+            Visual Studio Novel의 엔진을 이용해 웹 소설과 비주얼 노벨을 마음껏 만들어보세요!!
           </div>
         </div>
       </div>
@@ -158,12 +158,16 @@ export default {
 }
 
 .Promo_Info {
+  text-align: center;
   position: absolute;
+  color: white;
+  font-size: 1.5em;
   top: 320px;
   width: 100%;
   height: 900px;
   background: rgb(73, 73, 73);
   border-radius: 25px;
+  overflow: auto;
 }
 
 
