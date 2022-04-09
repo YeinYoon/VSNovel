@@ -103,6 +103,13 @@
   left: 50%;
   transform: translate(-50%, -50%);
 }
+.modal_inner span{
+  position: absolute;
+  top: 50%;
+  left: 48%;
+  transform: translate(-50%, -50%);
+}
+
 .modal_close_button{
   width: 40%;
   height: 15%;
