@@ -411,7 +411,7 @@ export default {
   color: white;
   top: 285px;
   height: 30px;
-  background: #ff4c4c;
+  background: #41af62;
   border-radius: 20px;
   display: table;
 }

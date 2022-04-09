@@ -73,6 +73,7 @@ export default {
 .sideBar{
   overflow: auto;
 }
+
 #element{
   width: 90%;
   height: 40px;
