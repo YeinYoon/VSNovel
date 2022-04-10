@@ -406,12 +406,12 @@ export default {
   white-space: nowrap;
 }
 
-::-webkit-scrollbar {
+.Promo_Book_Shelf::-webkit-scrollbar {
   display: block;
   width: 10px;
 }
 
-::-webkit-scrollbar-thumb {
+.Promo_Book_Shelf::-webkit-scrollbar-thumb {
   background: #5e5e5e;
   border-radius: 25px;
 }

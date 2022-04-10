@@ -107,13 +107,9 @@ export default {
   background: #2c2c2c;
   width: 250px;
   height: 100vh;
-  overflow: auto;
   position: fixed;
   top: 0px;
   left: 140px;
-}
-::-webkit-scrollbar{
-  display: none;
 }
 
 /* -------------------------------------------------------------------- */
