@@ -31,7 +31,7 @@
         :key="novel.NOVE_CODE"
         @click="modalOpen(novel)"
       >
-        <img class="list_img" :src="''" alt="소설표지" />
+        <img class="list_img" src="@/assets/imgs/noimage.png" alt="소설표지" />
         <div class="work_list_con">
           <div class="list_span">
             <span class="list_title">{{ novel.NOVE_TITLE }}</span>

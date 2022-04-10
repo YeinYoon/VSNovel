@@ -34,7 +34,7 @@
       </div>
       <!-- 오른쪽 사진 및, 짧은 내용 -->
       <div class="add_content">
-        <img class="add_content_img" :src="``" alt="소설표지" />
+        <img class="add_content_img" src="@/assets/imgs/noimage.png" alt="소설표지" />
         <div class="add_content_box">
           <div>별점</div>
           <div class="add_content_data">
