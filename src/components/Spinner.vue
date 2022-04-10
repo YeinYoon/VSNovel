@@ -35,7 +35,7 @@ export default {
   border-radius: 250px;
   background: #2872f9;
   box-shadow: 0px 0px 10px 2px rgba(24, 53, 113, 0.7);
-  animation: lds-facebook 1.2s cubic-bezier(0, 0.5, 0.5, 1) infinite;
+  animation: lds-facebook 1.3s cubic-bezier(0, 0.5, 0.5, 1) infinite;
 }
 .lds-facebook div:nth-child(1) {
   left: 0px;
@@ -47,12 +47,13 @@ export default {
 }
 .lds-facebook div:nth-child(3) {
   left: 60px;
-  animation-delay: 0;
+  animation-delay: 0s;
 }
 @keyframes lds-facebook {
   0% {
-    top: -28px;
-    transform: scale(0);
+    opacity: 0.5;
+    top: -50px;
+    transform: scale(0.1);
     height: 10px;
   }
   50%,
