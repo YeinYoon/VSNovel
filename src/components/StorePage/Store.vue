@@ -164,6 +164,7 @@ export default {
   display: flex;
   flex-direction: row;
   position: relative;
+  cursor: pointer;
 }
 .list_img {
   width: 100px;
