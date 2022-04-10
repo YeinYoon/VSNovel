@@ -11,9 +11,12 @@ require('dotenv').config();
 var session = require('express-session');
 const passport = require('passport');
 const passportConfig = require('./passport/index');
+var connectHistory = require('connect-history-api-fallback');
 
 var app = express();
 passportConfig();
+
+app.use(connectHistory()); // Vue 라우터와 express 라우터 연동 (직접 주소 입력 접근 가능하도록)
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
