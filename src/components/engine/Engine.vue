@@ -200,7 +200,7 @@ export default {
   methods:{
       engineDownload(){
           try {
-              let downloadFileLink = '';//download 경로
+              let downloadFileLink = '/engine_install/VSNovel-Engine_Setup_0.1.0.exe';//download 경로
               let element = document.createElement('a');
               element.setAttribute('href', downloadFileLink);
               element.setAttribute('download', '');
