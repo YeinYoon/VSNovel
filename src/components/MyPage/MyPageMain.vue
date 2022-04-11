@@ -21,9 +21,9 @@
 
         <div class="profile-image-line">
           <div class="col-one">프로필 이미지</div>
-          <div id="profile-image" class="profile-image-input" type="file" :style="`background-image:url(${uploadimg})`" value="newProfile"></div>
+          <div id="profile-image" class="profile-image-input" type="file" :style="`background-image:url(${uploadimg})`" value="newProfile" v-bind:src="newImage"></div>
           <div class="col-three">
-            <input @change="upload" type="file" id="input-file" style="display:none" v-on="newImage" />
+            <input @change="upload" type="file" id="input-file" style="display:none" />
             <label class="input-file-button" for="input-file">Browse</label><br>
             <span>512x512 이상의 이미지가 가장 적합 <br>
             허용 확장자:png,jpeg,jpg,gif | > 2MB</span>
@@ -111,6 +111,7 @@ export default {
       var newContent = {
         newNickname : this.newNickname,
         // profileImage : document.body.getElementById("profile-image").getAttribute("value"),
+        // uploadimg: document.body.getElementById("profile-image").getAttribute("value"),
         newImage : this.newImage,
         newIntro : this.newIntro
       }
@@ -118,9 +119,7 @@ export default {
       .then((result) => {
         console.log('hi')
         if(result.data.length != 0) {
-          console.log('complete')
           console.log(result.data)
-          console.log(result);
         }
       }).catch((err) => {
         console.log(err);

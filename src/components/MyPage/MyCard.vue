@@ -19,7 +19,7 @@
       <!-- 2행 카드번호 입력 -->
       <div class="card-container2">
         <div class="card-num-name">카드번호</div>
-        <input class="card-input" type="number" oninput="if(value.length>11)value=value.slice(0,16)" v-model="newCard" onkeyup="cardnum"/>
+        <input class="card-input" type="number" oninput="if(value.length>11)value=value.slice(0,15)" v-model="newCard" />
         <div class="card-num-info">16자리 숫자만 입력</div>
       </div>
 
@@ -49,7 +49,8 @@ export default {
   data() {
     return {
       myCard : "",
-      myUser : ""
+      myUser : "",
+      newCard :""
     }
   },
   methods:{
