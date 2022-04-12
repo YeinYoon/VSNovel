@@ -19,8 +19,8 @@
     </div>
     
     <footer class="button-position">
-        <button id="mypage_alarm-canc">취소</button>
-        <button id="mypage_alarm-save" @click="routerPush('/')">저장</button>
+        <div id="mypage_alarm-canc">취소</div>
+        <div id="mypage_alarm-save" @click="routerPush('/')">저장</div>
     </footer>
 
 </div>
@@ -48,8 +48,11 @@ export default {
   width: 350px;
   height: 45px;
   position: absolute;
+  display: flex;
   top: 90%;
   left: 55%;
+  text-align: center;
+  line-height: 18px;
   
 }
 .alarm-flex{
@@ -96,9 +99,11 @@ input[type="checkbox"]{
   background-color: #5e5e5e;
   color: white;
   width: 150px;
+  height: 40px;
   padding: 10px;
   margin: 5px;
   border-radius: 20px;
+  cursor: pointer;
 }
 #mypage_alarm-save {
   
@@ -106,10 +111,11 @@ input[type="checkbox"]{
   background-color: #2872f9;
   color: white;
   width: 150px;
+  height: 40px;
   padding: 10px;
   margin: 5px;
   border-radius: 20px;
-  
+  cursor: pointer;
 }
 
 </style>

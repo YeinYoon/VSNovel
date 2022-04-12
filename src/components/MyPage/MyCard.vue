@@ -33,8 +33,8 @@
 
     <!-- 취소,저장버튼 -->
     <footer class="card-footer">
-      <button id="mypage_card-canc">취소</button>
-      <button id="mypage_card-save" @click="routerPush('/')">저장</button>
+      <div id="mypage_card-canc">취소</div>
+      <div id="mypage_card-save" @click="routerPush('/')">저장</div>
     </footer>
 
   </div>
@@ -144,8 +144,11 @@ input[type="number"]::-webkit-inner-spin-button {
 
 /* footer부분 */
 .card-footer{
+  display: flex;
   background: none;
   border: 0px;
+  text-align: center;
+  line-height: 42px;
 }
 
 /* 취소버튼 */
@@ -159,6 +162,7 @@ input[type="number"]::-webkit-inner-spin-button {
   font-size: 15px;
   margin-right: 30px;
   margin-top:0;
+  cursor: pointer;
 }
 
 /* 저장버튼 */
@@ -170,6 +174,7 @@ input[type="number"]::-webkit-inner-spin-button {
   background-color: #2872F9;
   color: white;
   font-size: 15px;
+  cursor: pointer;
 }
 
 </style>

@@ -39,9 +39,9 @@
       </div>
 
       <!-- 취소,수정 버튼 -->
-      <footer>
-        <button id="mypage_main-canc" @click="cancel">취소</button>
-        <button id="mypage_main-save" @click="profiledit">수정</button>
+      <footer class="mainBtnArea">
+        <div id="mypage_main-canc" @click="cancel">취소</div>
+        <div id="mypage_main-save" @click="profiledit">수정</div>
       </footer>
       
     </div>
@@ -74,6 +74,7 @@ export default {
     },
 
     // 프로필 수정버튼을 눌렀을 때 동작하는 함수
+    // 비활성이었던 입력박스가 활성화상태로 변경
     profiledit(){
       const nick = document.getElementById('profilenick');
       const intro = document.getElementById('profileintro');
@@ -86,6 +87,7 @@ export default {
     },
 
     // 취소 버튼을 눌렀을 때 동작하는 함수
+    // 기존에 입력되었던 텍스트들을 null값으로 변경하고 입력박스들을 비활성화 상태로 변경
     cancel(){
       const nick = document.getElementById('profilenick');
       const intro = document.getElementById('profileintro');
@@ -104,6 +106,13 @@ export default {
 </script>
 
 <style>
+.mainBtnArea{
+  display: flex;
+  text-align: center;
+  margin-top: 2%;
+  line-height: 42px;
+}
+
 .my_topic{
   display: block;
   width: 150px;
@@ -241,6 +250,7 @@ export default {
   font-size: 1.0em;
   margin-right: 30px;
   margin-top:0;
+  cursor: pointer;
 }
 
 /* 저장 버튼 */
@@ -252,5 +262,6 @@ export default {
   background-color: #2872F9;
   color: white;
   font-size: 1.0em;
+  cursor: pointer;
 }
 </style>

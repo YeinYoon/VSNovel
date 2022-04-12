@@ -18,7 +18,7 @@
               <span class="list_content">{{review.content}}</span>
           </div>
       </div>
-      <button class="review_edit">리뷰수정</button>
+      <div class="review_edit">리뷰수정</div>
     </div>
   </div>
 </div>
@@ -63,5 +63,8 @@ export default {
   background: #2872F9;
   border-radius: 20px;
   color: white;
+  text-align: center;
+  line-height: 42px;
+  cursor: pointer;
 }
 </style>
