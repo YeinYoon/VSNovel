@@ -161,28 +161,32 @@ export default {
 
     //ID 중복검사
     existIdCheck() {
-      axios.post('/api/auth/existIdCheck', {newId : this.newId})
-      .then(async (result)=>{
-        if(result.data == "exist") {
-          this.newIdCheck = false
-          this.$store.commit('gModalOn', {msg : "이미 존재하는 아이디입니다.", size : "normal"});
-        } else {
-          var confirm = await this.$refs.confirmModal.show({
-            msg : `아이디 [${this.newId}]을(를) 사용하시겠습니까?`,
-            size : "normal",
-            btn1 : "확인",
-            btn2 : "취소"
-          });
-          if(confirm) {
-            this.newIdCheck = true;
+      if(this.newId.length == 0) {
+        this.$store.commit('gModalOn', {msg : "아이디를 입력해주세요.", size : "normal"});
+      } else {
+        axios.post('/api/auth/existIdCheck', {newId : this.newId})
+        .then(async (result)=>{
+          if(result.data == "exist") {
+            this.newIdCheck = false
+            this.$store.commit('gModalOn', {msg : "이미 존재하는 아이디입니다.", size : "normal"});
           } else {
-            this.newIdCheck = false;
+            var confirm = await this.$refs.confirmModal.show({
+              msg : `아이디 [${this.newId}]을(를) 사용하시겠습니까?`,
+              size : "normal",
+              btn1 : "확인",
+              btn2 : "취소"
+            });
+            if(confirm) {
+              this.newIdCheck = true;
+            } else {
+              this.newIdCheck = false;
+            }
           }
-        }
-      })
-      .catch((err)=>{
-        console.error(err);
-      })
+        })
+        .catch((err)=>{
+          console.error(err);
+        })
+      }
     },
 
     step1() {
@@ -411,7 +415,7 @@ export default {
   color: white;
   top: 285px;
   height: 30px;
-  background: #ff4c4c;
+  background: #41af62;
   border-radius: 20px;
   display: table;
 }

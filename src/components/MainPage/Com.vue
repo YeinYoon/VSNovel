@@ -137,7 +137,7 @@ export default {
 .notice,
 .community {
   height: 95%;
-  overflow: scroll;
+  overflow-y: scroll;
   -ms-overflow-style: none;
 }
 .notice::-webkit-scrollbar,
@@ -211,7 +211,7 @@ export default {
 }
 .list .date {
   position: relative;
-  left: 80%;
+  text-align: right;
   font-size: 0.8em;
 }
 

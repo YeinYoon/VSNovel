@@ -47,7 +47,6 @@ export default {
       if(result.data != "") {
         console.log(result.data);
         this.$store.commit('userLogin', {nickname : result.data.USER_NICKNAME, id : result.data.USER_ID});
-        console.log("현재 접속 유저 : " + this.$store.state.userNickname);
         console.log(this.$store.state.userId)
       }
     })

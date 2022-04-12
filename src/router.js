@@ -62,6 +62,12 @@ const routes = [
     component : Community,
     props:true
   },
+  {
+    path : '/engine',
+    name: 'Engine',
+    component : Engine,
+    props:true
+  },
 ];
 
 const router = createRouter({

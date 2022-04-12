@@ -8,16 +8,16 @@
       </div>
       <div class="price_div">
         <div @click="priceClick">
-          <div class="price" v-if="step == 0">
+          <div class="price" v-if="priceType == 0">
             <span class="free">무료</span>
             <div class="price_btn"></div>
             <span class="charge">유료</span>
           </div>
-          <div class="price" v-if="step == 1">
+          <div class="price" v-if="priceType == 1">
             <div class="price_btn"></div>
             <span class="charge">유료</span>
           </div>
-          <div class="price" v-if="step == 2">
+          <div class="price" v-if="priceType == 2">
             <span class="free">무료</span>
             <div class="price_btn"></div>
           </div>
@@ -27,20 +27,20 @@
     <div class="store_section">
       <div
         class="work_list"
-        v-for="data in dataHuman"
-        :key="data"
-        @click="modalOpen(data)"
+        v-for="novel in $store.state.novelList"
+        :key="novel.NOVE_CODE"
+        @click="modalOpen(novel)"
       >
-        <img class="list_img" :src="`${data.titleImg}`" />
+        <img class="list_img" src="@/assets/imgs/noimage.png" alt="소설표지" />
         <div class="work_list_con">
           <div class="list_span">
-            <span class="list_title">{{ data.title }}</span>
-            <span class="list_team">{{ data.writer }} / {{ data.team }}</span>
-            <span class="list_content">{{ data.content }}</span>
+            <span class="list_title">{{ novel.NOVE_TITLE }}</span>
+            <span class="list_team">{{ novel.writer }} / {{ novel.NOVE_TEAMNAME }}</span>
+            <span class="list_content">{{ novel.NOVE_SYNOPSIS }}</span>
           </div>
         </div>
         <div class="list_price">
-          <span> {{ data.pay }}&#8361; </span>
+          <span> {{ novel.NOVE_PRICE }}&#8361; </span>
         </div>
       </div>
     </div>
@@ -55,15 +55,14 @@
 </template>
 
 <script>
+// import axios from '../../axios'
 import StoreModal from "./StoreModal"; 
-import dataHu from "../../assets/DataJs/dataHu.js"; // 작품 정보
 export default {
   name: "Store",
   data() {
     return {
-      step: 0,
+      priceType: 0,
       modal: false,
-      dataHuman: dataHu,
       modalData : {},
     };
   },
@@ -73,8 +72,8 @@ export default {
   methods: {
     priceClick() {
     // 유무료 버튼 이벤트
-      this.step++;
-      if (this.step > 2) this.step = 0;
+      this.priceType++;
+      if (this.priceType > 2) this.priceType = 0;
     },
     modalOpen(data) {
       // 모달 오픈 함수
@@ -165,6 +164,7 @@ export default {
   display: flex;
   flex-direction: row;
   position: relative;
+  cursor: pointer;
 }
 .list_img {
   width: 100px;
