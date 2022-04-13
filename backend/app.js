@@ -48,9 +48,11 @@ var indexRouter = require('./routes/index');
 var authRouter = require('./routes/auth');
 var storeRouter = require('./routes/store');
 
+var mainRouter = require('./routes/mainPage');
 app.use('/', indexRouter);
-app.use('/api/auth', authRouter);
 app.use('/api/store', storeRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/main', mainRouter);
 
 
 // catch 404 and forward to error handler
