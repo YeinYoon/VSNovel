@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import SwiperCarouselVue from "./SwiperCarousel.vue";
+import SwiperCarouselVue from "./SwiperCarousel";
 export default {
   name: "StoreVue",
   data() {
