@@ -11,8 +11,8 @@
       <!-- 제목이랑 작가 -->
       <div class="modal_con">
         <div class="modal_header">
-          <span class="modal_title">{{ modalData.title }}</span>
-          <span class="modal_writer">{{ modalData.writer }}</span>
+          <span class="modal_title">{{ modalData.NOVE_TITLE }}</span>
+          <span class="modal_writer">???</span>
         </div>
         <!-- 상세 이미지 -->
         <div class="carousel_div">
@@ -22,31 +22,31 @@
         <div class="modal_explain">
           <div class="modal_explain_up">
             <span class="up_con">장르</span>
-            <span class="up_data">서브컬쳐</span>
+            <span class="up_data">{{modalData.CATE_CODE}}</span>
           </div>
           <div class="modal_explain_down">
             <span class="down_con">설명</span>
             <div class="down_data">
-              <span class="down_data_text">{{ modalData.content }}</span>
+              <span class="down_data_text">{{ modalData.NOVE_SYNOPSIS }}</span>
             </div>
           </div>
         </div>
       </div>
       <!-- 오른쪽 사진 및, 짧은 내용 -->
       <div class="add_content">
-        <img class="add_content_img" :src="`${modalData.titleImg}`" />
+        <img class="add_content_img" src="@/assets/imgs/noimage.png" alt="소설표지" />
         <div class="add_content_box">
           <div>별점</div>
           <div class="add_content_data">
-            <span>제목 : {{ modalData.title }}</span>
-            <span>제작자 : {{ modalData.writer }}</span>
-            <span>제작팀 : {{ modalData.team }}</span>
-            <span>발매년도 : {{ modalData.saleDate }}</span>
+            <span>제목 : {{ modalData.NOVE_TITLE }}</span>
+            <span>제작자 : ???</span>
+            <span>제작팀 : {{ modalData.NOVE_TEAMNAME }}</span>
+            <span>발매년도 : ???</span>
           </div>
         </div>
         <div class="btn_div">
           <div class="price_btn" @click="$emit('next')">
-            <span> {{ modalData.pay }}&#8361; </span>
+            <span> {{ modalData.NOVE_PRICE }}&#8361; </span>
           </div>
         </div>
       </div>
@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import SwiperCarouselVue from "./SwiperCarousel.vue";
+import SwiperCarouselVue from "./SwiperCarousel";
 export default {
   name: "StoreVue",
   data() {
@@ -169,6 +169,7 @@ export default {
   -ms-overflow-style: none;
   position: absolute;
   height: 50%;
+  
 }
 /* 오른쪽 전체 */
 .add_content {
@@ -190,7 +191,7 @@ export default {
   padding: 10px 5px;
   font-size: 0.8em;
   margin: 10px 0 0 0;
-  height: 190px;
+  height: 195px;
 }
 /* 데이터 바인딩 부분 */
 .add_content_data {

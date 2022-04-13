@@ -4,10 +4,7 @@
       <div class="service">
         <img class="icon" src="@/assets/icons/white/bubble_chat.png" alt="logo" />
         <span class="title">커뮤니티</span>
-        <span class="topic" v-if="step=='자유'">TOPIC · 자유</span>
-        <span class="topic" v-if="step=='작가'">TOPIC · 작가</span>
-        <span class="topic" v-if="step=='팀원 모집'">TOPIC · 팀원 모집</span>
-        <span class="topic" v-if="step=='리뷰 & 추천'">TOPIC · 리뷰 & 추천</span>
+        <span class="topic">TOPIC · {{step}}</span>
       </div>
     </div>
     <div v-if="topicData == 0">
@@ -24,9 +21,9 @@
 
 <script>
 import dummy_data from "@/assets/DataJs/commuData.js";
-import TopicCommu from "../Topic/TopicCommu";
-import TopicPostView from "../Topic/TopicPostView";
-import TopicWrite from "../Topic/TopicWrite";
+import TopicCommu from "../topic/TopicCommu";
+import TopicPostView from "../topic/TopicPostView";
+import TopicWrite from "../topic/TopicWrite";
 
 export default {
   name: "TopicFrame",

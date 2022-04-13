@@ -15,8 +15,9 @@
       <div class="notice_write_title">
         <span>{{ noticeData.title }}</span>
       </div>
-      <div class="notice_write_contents" >
-        {{ noticeData.content }}
+      <div class="notice_write_contents">
+        <span v-html="noticeData.content">
+        </span>
       </div>
     </div>
     <div class="notice_btn_area">
@@ -108,6 +109,10 @@ export default {
   border-radius: 20px;
   font-size: 1.4em;
   padding: 5px 10px;
+  overflow-y: scroll;
+}
+.notice_write_contents span{
+  word-wrap: break-word;
 }
 .editer_info {
   color: white;
