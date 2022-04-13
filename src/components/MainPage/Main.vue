@@ -1,4 +1,5 @@
 <template>
+<div class="RouterView">
   <div class="test">
     <!-- 헤더 -->
     <div class="header">
@@ -31,13 +32,25 @@
       >
     </div>
   </div>
+</div>
 </template>
 
 <script>
+import axios from '../../axios'
 import SwiperCarouselVue from "./MainCarousel";
 import Com from "../MainPage/Com.vue";
 export default {
   name: "MainScreen",
+  created() {
+    axios.get('/api/auth/loginCheck')
+    .then((result)=>{
+      if(result.data != "") {
+        console.log(result.data);
+        this.$store.commit('userLogin', {nickname : result.data.USER_NICKNAME, id : result.data.USER_ID});
+        console.log(this.$store.state.userId)
+      }
+    })
+  },
   data() {
     return {};
   },
@@ -50,7 +63,7 @@ export default {
 
 <style>
 .test {
-  /* background-color: #353535; */
+  background-color: #353535;
   padding: 35px 40px 10px 40px;
 }
 .lines {

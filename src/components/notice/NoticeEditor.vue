@@ -5,7 +5,7 @@
     v-model:value="state.content"
     :options="state.editorOption"
     :disabled="state.disabled"
-    @blur="onEditorBlur($event)"
+    @blur="$emit('up', state._content)"
     @focus="onEditorFocus($event)"
     @ready="onEditorReady($event)"
     @change="onEditorChange($event)"
@@ -19,6 +19,10 @@ import { quillEditor } from "vue3-quill";
 
 export default {
   name: "App",
+  data(){
+    return{
+    }
+  },
   components: {
     quillEditor,
   },
@@ -60,16 +64,19 @@ export default {
       },
       disabled: false,
     });
-    
+    // 다른 곳을 클릭할 때
     const onEditorBlur = (quill) => {
       console.log("editor blur!", quill);
     };
+    // 에디터를 클릭할 때
     const onEditorFocus = (quill) => {
       console.log("editor focus!", quill);
     };
+    // 에디터 준비 완료
     const onEditorReady = (quill) => {
       console.log("editor ready!", quill);
     };
+    // 에디터 내용이 바뀔 때
     const onEditorChange = ({ quill, html, text }) => {
       console.log("editor change!", quill, html, text);
       state._content = html;

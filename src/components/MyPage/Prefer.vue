@@ -53,9 +53,6 @@ export default {
     routerPush(link){
       this.$router.push(link);
     },
-    colorcanc(){  // 취소 버튼 클릭 시 페이지 이동
-      this.$router.push('/');
-    }
   },
 };
 </script>

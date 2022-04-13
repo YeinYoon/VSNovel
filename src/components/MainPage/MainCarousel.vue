@@ -7,7 +7,7 @@
     :pauseAutoplayOnHover="status"
   >
     <slide v-for="slide in datas" :key="slide">
-      <img :src="`${slide.link}`" class="main_carousel_img"/>
+      <img :src="`${slide.link}`" class="main_carousel_img" @click="openSlide(slide.link)"/>
     </slide>
     <template #addons>
       <navigation />
@@ -28,7 +28,7 @@ export default {
     return {
       datas: data,
       status : true, // 마우스 가져다 댔을 경우 사진이 안넘어가요
-      sec : 153333300, //사진 넘어가는 시간,
+      sec : 2500, //사진 넘어가는 시간,
     };
   },
   components: {
@@ -37,6 +37,11 @@ export default {
     Pagination,
     Navigation,
   },
+  methods:{
+    openSlide(link){
+      this.$store.commit('gModalOn', {msg:"hi", bg : link, size : "ad"});
+    }
+  }
 };
 </script>
 <style>

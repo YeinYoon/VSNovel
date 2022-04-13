@@ -27,7 +27,7 @@
     </section>
   </div>
     <div v-if="noticeStep == 1">
-        <NoticeWrite :writeModify="writeModify" :noticeData="clickNotice" @write_cancle="noticeBtnEvent($event)"/>
+        <NoticeWrite :writeModify="writeModify" :noticeData="clickNotice" @write_cancle="noticeBtnEvent($event)" @arrUp="a($event)"/>
     </div>
     <div v-if="noticeStep == 2">
         <NoticeRead :admin="admin" :noticeData="clickNotice" @btnEvent="noticeBtnEvent($event)"/>
@@ -56,14 +56,14 @@ export default {
         NoticeRead,
     },
     mounted() {
-    // 공지사항 날짜 순으로 정렬
-    this.noticeData.sort(function (a, b) {
-      return a.emphasis - b.emphasis;
-    });
-    // 강조 갯수 세기
-    for(let i = 0; i < this.noticeData.length; i++){
-        if(this.noticeData[i].emphasis == 0) this.noticeNum++;
-    }
+        // 공지사항 날짜 순으로 정렬
+        this.noticeData.sort(function (a, b) {
+            return a.emphasis - b.emphasis;
+        });
+        // 강조 갯수 세기
+        for(let i = 0; i < this.noticeData.length; i++){
+            if(this.noticeData[i].emphasis == 0) this.noticeNum++;
+        }
     },
     methods:{
         adminEvent(){
@@ -97,8 +97,22 @@ export default {
             //아닐 때
             this.writeModify = false;
             this.noticeStep = 0;
+        },
+        a(a){
+            this.noticeData.push(a);
+            console.log(this.noticeData);
+            this.noticeStep = 0;
         }
     },
+    created(){
+        console.log(this.$route)
+        if(this.$route.params.noti_id!=undefined){
+            this.noticeStep = 2;
+            this.clickNotice = this.$route.params.noti_id;
+            this.clickNoticeNum = 0;
+            this.writeModify = true;
+        }
+    }
 }
 </script>
 

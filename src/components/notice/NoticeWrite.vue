@@ -9,12 +9,12 @@
         </div>
     </header>  
     <div class="write_section">
-      <div class="write_title">
-        <input type="text" :value="`${noticeData.title}`" v-if="writeModify"/>
-        <input type="text" v-if="writeModify == false"/>
+      <div class="write_title" @change="titlePush">
+        <input id="input" type="text" :value="`${noticeData.title}`" v-if="writeModify"/>
+        <input id="input" type="text" v-if="writeModify == false"/>
       </div>
       <div class="write_content">
-        <Editor :noticeData="noticeData" :writeModify="writeModify"/>
+        <Editor :noticeData="noticeData" :writeModify="writeModify" @up="upEvent($event)"/>
       </div>
       <div class="editer_info">
         주의! 당신은 현재 공지사항 게시판에서 작성중입니다.
@@ -23,8 +23,8 @@
     </div>
     </div>
     <div class="notice_btn_area">
-      <div class="strong_btn">강조로 발행</div>
-      <div class="write_btn">글쓰기</div>
+      <div class="strong_btn" @click="pushEvent(0)">강조로 발행</div>
+      <div class="write_btn" @click="pushEvent(1)">글쓰기</div>
       <div class="cancle_btn" @click="$emit('write_cancle', 'cancle')">취소</div>
     </div>
   </div>
@@ -35,7 +35,14 @@ import Editor from './NoticeEditor'
 export default {
   name: "OnWrite",
   data() {
-    return {}
+    return {
+      writeData : {
+        emphasis : 0,
+        title: '',
+        content: '',
+        date : '',
+      },
+    }
   },
   components: {
       Editor
@@ -44,6 +51,21 @@ export default {
     noticeData:Object,
     writeModify:Boolean,
   },
+  methods:{
+    titlePush(){
+      this.writeData.title = document.getElementById('input').value;
+    },
+    upEvent(event){
+      this.writeData.content = event;
+      console.log(event);
+    },
+    pushEvent(emphasis){
+      var today = new Date().toISOString().substring(0,10);
+      this.writeData.date = today;
+      this.writeData.emphasis = emphasis;
+      this.$emit('arrUp', this.writeData);
+    }
+  }
 };
 </script>
 

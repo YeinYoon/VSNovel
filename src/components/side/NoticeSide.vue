@@ -31,6 +31,7 @@ export default {
       Notice,
   },
   mounted(){
+    // 기본 강조효과
     let id = document.querySelectorAll("#element")
     id[this.clickNum].style.backgroundColor = "#2872f9"
   },

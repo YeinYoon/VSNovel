@@ -13,7 +13,7 @@
           </div>
         </div>
         <hr class="lines" />
-        <div class="list" v-for="commu in commuData" :key="commu">
+        <div class="list" v-for="commu in commuData" :key="commu" @click="communityView(commu)">
           <div class="content">
             <img class="img" :src="`${commu.titleImg}`" />
             <span class="title">{{ commu.title }}</span>
@@ -41,7 +41,7 @@
           </div>
         </div>
         <hr class="lines" />
-        <div class="list" v-for="notice in noticeData" :key="notice">
+        <div class="list" v-for="notice in noticeData" :key="notice" @click="noticeView(notice)">
           <span class="titles">{{ notice.title }}</span>
           <span class="con">내용 - {{ notice.content }}</span>
           <span class="date">{{ notice.date }}</span>
@@ -62,7 +62,7 @@
       <hr class="lines" />
       <div class="div">
         <div class="list" v-for="store in storeData" :key="store">
-          <img class="img" :src="`${store.titleImg}`" @click="storeView"/>
+          <img class="img" :src="`${store.titleImg}`" @click="storeView(store)"/>
           <div class="titles">
             {{ store.title }}
           </div>
@@ -93,8 +93,17 @@ export default {
   },
   methods:{
     // 스토어 게시물 이동 함수
-    storeView(){
-      this.$router.push('/store');
+    storeView(data){
+      console.log(data.title);
+      this.$router.push({path:'/store',name:'Store', params:{ nove_id: data.title}});
+    },
+    communityView(data){
+      console.log(data.title);
+      this.$router.push({path:'/community',name:'Community', params:{ comm_id: data.title}});
+    },
+    noticeView(data){
+      console.log(data.title);
+      this.$router.push({path:'/notice',name:'Notice', params:{ noti_id: data.title}});
     }
   }
 };
@@ -128,7 +137,7 @@ export default {
 .notice,
 .community {
   height: 95%;
-  overflow: scroll;
+  overflow-y: scroll;
   -ms-overflow-style: none;
 }
 .notice::-webkit-scrollbar,
@@ -202,7 +211,7 @@ export default {
 }
 .list .date {
   position: relative;
-  left: 80%;
+  text-align: right;
   font-size: 0.8em;
 }
 
