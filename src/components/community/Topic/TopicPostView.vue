@@ -9,6 +9,11 @@
           <div class="vote_btn_no"><span>비추천</span></div>
         </div>
       </div>
+      <div class="postview_comment"><span>Comment({{topicObject.coment}})</span></div>
+      <div class="postview_comment_area">
+          <div class="postview_comment_img"><img src="" alt=""></div>
+          <div class="postview_comment_content"></div>
+      </div>
     </div>
     <div class="postview_btn_area">
       <div class="postview_cancle_btn" @click="$emit('second')">목록으로</div>
@@ -127,11 +132,7 @@ export default {
   text-align: center;
 }
 .postview_btn_area {
-  /* margin: 0 auto; */
-  /* margin: 10px; */
   display: flex;
-  /* background-color:white; */
-  /* height: 10px; */
   position: relative;
   top: 50px;
   width: 100%;
@@ -146,5 +147,16 @@ export default {
   width: 100px;
   border-radius: 14px;
   cursor:pointer;
+}
+.postview_comment {
+  color:white;
+  font-size: 1.2em;
+}
+.postview_comment_area{
+  background-color: #5e5e5e;
+  display:flex;
+}
+.postview_comment_img{
+  background-color: pink;
 }
 </style>
