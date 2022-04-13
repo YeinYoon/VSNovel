@@ -18,17 +18,17 @@
       </div>
   </div>
 </div>
-    <div v-if="step == '자유'"> <Topic :step="step"/> </div>
-    <div v-else-if="step == '작가'"> <Topic :step="step"/> </div>
-    <div v-else-if="step == '팀원 모집'"> <Topic :step="step"/> </div>
-    <div v-else-if="step == '리뷰 & 추천'"> <Topic :step="step"/> </div>
-    <div v-else-if="step == 'Village Main'"> <Cafe /> </div>
+    <div v-if="step == '자유'"> <Community :step="step"/> </div>
+    <div v-else-if="step == '작가'"> <Community :step="step"/> </div>
+    <div v-else-if="step == '팀원 모집'"> <Community :step="step"/> </div>
+    <div v-else-if="step == '리뷰 & 추천'"> <Community :step="step"/> </div>
+    <div v-else-if="step == '카페 메인'"> <Cafe /> </div>
     <div v-else> <RegisterCafe :registerCafeData="registerCafeData"/> </div>
 </div>
 </template>
 
 <script>
-import Topic from '../community/topic/TopicFrame';
+import Community from '../community/topic/TopicFrame';
 import Cafe from '../community/cafe/CafeMain';
 import RegisterCafe from '../community/cafe/RegisterCafe';
 export default {
@@ -44,8 +44,7 @@ export default {
     };
   },
   components:{
-      // Community,
-      Topic,
+      Community,
       Cafe,
       RegisterCafe,
   },
@@ -95,6 +94,8 @@ export default {
 .sideBar{
   overflow: auto;
 }
+
+
 #communityElement, #cafeElement{
   width: 90%;
   height: 40px;
@@ -105,5 +106,6 @@ export default {
   border-radius: 30px;
   font-weight: 600;
   font-size: 1em;
+  cursor: pointer;
 }
 </style>

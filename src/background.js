@@ -33,7 +33,7 @@ async function createWindow() {
   } else {
     createProtocol('app')
     // Load the index.html when not in development
-    win.loadURL('app://./index.html')
+    win.loadURL('http://52.79.121.208:2020/')
   }
 }
 

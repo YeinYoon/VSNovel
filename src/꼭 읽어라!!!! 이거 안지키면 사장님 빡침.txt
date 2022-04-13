@@ -1,6 +1,0 @@
-src/components/Spinner.vue 삭제금지
-src/axios.js 삭제금지
-store.js 삭제금지
-backend 폴더 삭제금지
-
-걍 뭐 모르는거 있는데 이거 머지 삭제 ㄴㄴㄴㄴㄴㄴㄴ
