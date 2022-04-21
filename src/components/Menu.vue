@@ -4,7 +4,7 @@
       <div v-bind:class="{ menubox: true }" id="mypage" @click="this.$router.push('/signin')" v-if="this.$store.state.userId == null">
         <img class="menubox_icon_mypage" src="@/assets/icons/white/login_req.png" />
       </div>
-      <div v-bind:class="{ menubox: true }" id="mypage" @click="this.$router.push('/mypage')" v-else>
+      <div v-bind:class="{ menubox: true }" id="mypage" @click="this.$router.push('/mymain')" v-else>
         <img class="menubox_icon_mypage" src="@/assets/imgs/noprofile.png" />
       </div>
       <br />

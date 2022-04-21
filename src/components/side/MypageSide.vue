@@ -9,48 +9,33 @@
         <div class="group" id="main">
           <span>· 마이페이지</span>
         </div>
-        <div class="sel" v-for="(array, i) in sideArrays" :key="i">
-          <div @click="clickEvent(i, $event, array)" id="element">
-            · {{ array }}
+        <div class="sel" v-for="(item, i) in sideArrays" :key="i">
+          <div @click="clickEvent(i, $event, item)" id="element">
+            · {{ item.name }}
           </div>
         </div>
       </div>
     </div>
-      <div v-if="myStep == '프로필 설정'"><MyPage /></div>
-      <div v-if="myStep == '결제정보 페이지'"><MyCard /></div>
-      <div v-if="myStep == '내가 쓴 게시글'"><MyPost /></div>
-      <div v-if="myStep == '작성 리뷰 관리'"><Myreview /></div>
-      <div v-if="myStep == '선호 / 비선호 설정'" @save="myStep = '프로필 설정'"><Prefer /></div>
-      <div v-if="myStep == '알림 설정'"><MyAlarm /></div>
-      <div v-if="myStep == '회원 탈퇴'">
-        <MyWithdrawal @myMain="myStep = '프로필 설정'" />
-      </div>
-      <div class="Temp_LogoutButton" @click="logout()"><button class="mypage_logout">로그아웃</button></div>
+    <router-view />
+    <div class="Temp_LogoutButton" @click="logout()"><button class="mypage_logout">로그아웃</button></div>
   </div>
 </template>
 
 <script>
-import axios from '../../axios'
-import MyPage from "../mypage/MyPageMain";
-import MyCard from "../mypage/MyCard";
-import MyPost from "../mypage/MyPost";
-import Myreview from "../mypage/Myreview";
-import Prefer from "../mypage/Prefer";
-import MyAlarm from "../mypage/MyAlarm";
-import MyWithdrawal from "../mypage/withdrawal/MyWithdrawal";
+import axios from '../../axios';
 export default {
   name: "MypageSide",
   data() {
     return {
       myStep: "프로필 설정",
       sideArrays: [
-        "프로필 설정",
-        "결제정보 페이지",
-        "내가 쓴 게시글",
-        "작성 리뷰 관리",
-        "선호 / 비선호 설정",
-        "알림 설정",
-        "회원 탈퇴",
+        {name : "프로필 설정",        url:"mymain"},
+        {name : "결제정보 페이지",    url:"mycard"},
+        {name : "내가 쓴 게시글",     url:"mypost"},
+        {name : "작성 리뷰 관리",     url:"myreview"},
+        {name : "선호 / 비선호 설정", url:"prefer"},
+        {name : "알림 설정",          url:"myalarm"},
+        {name : "회원 탈퇴",          url:"mywithdrawal"},
       ],
       clickNum: 0,
     };
@@ -59,11 +44,13 @@ export default {
     // 기본 강조 효과
     let id = document.querySelectorAll("#element")
     id[this.clickNum].style.backgroundColor = "#2872f9"
+      // 라우터 이동
+    this.$router.push('mymain');
   },
   methods: {
-    clickEvent(index, event, array) {
+    clickEvent(index, event, item) {
     // 강조효과 및 메인 화면 변경
-      this.myStep = array;
+      this.myStep = item.name;
       let id = document.querySelectorAll("#element");
       event.target.style.backgroundColor = "#2872f9";
       if (this.clickNum != null) {
@@ -72,6 +59,8 @@ export default {
         }
       }
       this.clickNum = index;
+      // 라우터 이동
+      this.$router.push(item.url);
     },
 
     logout() {
@@ -86,15 +75,6 @@ export default {
       })
     }
   },
-    components: {
-      MyPage,
-      MyCard,
-      MyPost,
-      Myreview,
-      Prefer,
-      MyAlarm,
-      MyWithdrawal,
-    },
 };
 </script>
 

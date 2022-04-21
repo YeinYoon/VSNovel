@@ -94,8 +94,6 @@ export default {
 .sideBar{
   overflow: auto;
 }
-
-
 #communityElement, #cafeElement{
   width: 90%;
   height: 40px;

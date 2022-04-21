@@ -53,14 +53,4 @@ export default {
 </script>
 
 <style>
-.sel div{
-  width: 90%;
-  height: 40px;
-  color: white;
-  padding: 5px 10px 5px 20px;
-  text-align: left;
-  border-radius: 30px;
-  font-weight: 600;
-  font-size: 1em;
-}
 </style>

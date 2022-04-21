@@ -2,7 +2,16 @@ import { createWebHistory, createRouter } from "vue-router";
 import Store from './components/side/StoreSide.vue';
 import Main from './components/mainpage/Main.vue';
 import Community from './components/side/CommunitySide.vue';
+// 마이페이지 링크들
 import MyPage from './components/side/MypageSide.vue';
+import MyPageMain from './components/mypage/MyPageMain.vue';
+import MyCard from "./components/mypage/MyCard";
+import MyPost from "./components/mypage/MyPost";
+import Myreview from "./components/mypage/Myreview";
+import Prefer from "./components/mypage/Prefer";
+import MyAlarm from "./components/mypage/MyAlarm";
+import MyWithdrawal from "./components/mypage/withdrawal/MyWithdrawal";
+// 
 import Library from './components/side/LibrarySide.vue';
 import Notice from './components/side/NoticeSide.vue'
 import Login from './components/auth/Login.vue';
@@ -32,6 +41,15 @@ const routes = [
     path : '/mypage',
     name: 'MyPage',
     component : MyPage,
+    children:  [
+      { path : '/mymain',       name: 'MyPageMain',   component : MyPageMain, },
+      { path : '/mycard',       name: 'MyCard',       component : MyCard, },
+      { path : '/mypost',       name: 'MyPost',       component : MyPost, },
+      { path : '/myreview',     name: 'Myreview',     component : Myreview, },
+      { path : '/prefer',       name: 'Prefer',       component : Prefer, },
+      { path : '/myalarm',      name: 'MyAlarm',      component : MyAlarm, },
+      { path : '/mywithdrawal', name: 'MyWithdrawal', component : MyWithdrawal, },
+    ]
   },
   {
     path : '/notice',
