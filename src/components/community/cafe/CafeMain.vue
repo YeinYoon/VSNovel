@@ -13,7 +13,7 @@
       </div>
     </div>
     <div class="cafe_section">
-      <div class="carousel">
+      <div class="cafe_carousel">
         <SwiperCarousel/>
       </div>
       <div class="widgets">
@@ -80,8 +80,12 @@ export default {
   position: relative;
   top: 70px;
 }
-.cafe_section .carousel {
+.cafe_section .cafe_carousel {
   width: 100%;
+  height: 204px;
+  border-radius: 25px;
+  border: 2px solid rgb(73, 73, 73);
+  overflow: hidden;
 }
 .widgets {
   width: 100%;
@@ -105,9 +109,6 @@ export default {
   height: 550px;
   overflow-y: scroll;
   -ms-overflow-style: none;
-}
-.widgets .con .boxs::-webkit-scrollbar {
-  display: none;
 }
 .widgets .cafeTitle {
   border-radius: 10px;

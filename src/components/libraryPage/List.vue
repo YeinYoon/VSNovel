@@ -38,7 +38,4 @@ export default {
   overflow-y: scroll;
   -ms-overflow-style: none;
 }
-.list_section::-webkit-scrollbar {
-  display: none;
-}
 </style>

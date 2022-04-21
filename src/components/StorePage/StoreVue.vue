@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import SwiperCarouselVue from "./SwiperCarousel.vue";
+import SwiperCarouselVue from "./SwiperCarousel";
 export default {
   name: "StoreVue",
   data() {
@@ -72,10 +72,11 @@ export default {
 
 <style>
 .carousel_div {
-  padding: 10px;
   width: 100%;
-  position: relative;
-  height: 200px;
+  height: 204px;
+  border-radius: 25px;
+  border: 2px solid rgb(73, 73, 73);
+  overflow: hidden;
 }
 
 /* 모달 전체 */
@@ -168,11 +169,8 @@ export default {
   -ms-overflow-style: none;
   position: absolute;
   height: 50%;
+  
 }
-.down_data::-webkit-scrollbar {
-  display: none;
-}
-
 /* 오른쪽 전체 */
 .add_content {
   padding: 0 0 0 5px;
@@ -193,7 +191,7 @@ export default {
   padding: 10px 5px;
   font-size: 0.8em;
   margin: 10px 0 0 0;
-  height: 190px;
+  height: 195px;
 }
 /* 데이터 바인딩 부분 */
 .add_content_data {

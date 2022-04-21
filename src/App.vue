@@ -38,8 +38,9 @@ body{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-
+::-webkit-scrollbar{
+  display: none;
+}
 .vsnmenu {
   width: 140px;
   position:fixed;

@@ -25,18 +25,18 @@
       </div>
     </div>
   </div>
-  <Store />
+  <router-view />
 </div>
 </template>
 
 <script>
 import axios from '../../axios'
-import Store from '../StorePage/Store';
 export default {
   name: "StoreSide",
   created() {
     this.getCateList();
     this.getNovelList();
+    this.$router.push('storemain');
   },
   data() {
     return {
@@ -48,9 +48,6 @@ export default {
       novelType : "",
       cateCode : ""
     };
-  },
-  components:{
-    Store,
   },
   methods: {
     groupEvent(step, event, type) {
@@ -75,9 +72,9 @@ export default {
     categoryEvent(num, event, cateCode) {
     // 장르 강조효과
       let id = Array.from(document.querySelectorAll(".select_btn"));
-      id[this.genreNum].style.color = "gray";
       event.target.style.color = "black";
-      // if(this.genreNum)
+      if(this.genreNum == num) 
+        id[this.genreNum].style.color = "gray";
       this.genreNum = num;
       this.cateCode = cateCode;
       this.getNovelList();
@@ -170,6 +167,7 @@ export default {
   margin: 10px 0 0 20px;
   border-radius: 30px;
   font-weight: 700;
+  cursor: pointer;
 }
 .side_genre_group {
   margin: 20px 0 0 0;
@@ -182,6 +180,7 @@ export default {
   position: relative;
   z-index: 12;
   box-shadow: 0px 3px 4px 1px rgba(65, 65, 65, 0.5);
+  cursor: pointer;
 }
 .genre_group {
   margin: 10px 0 0 0;
@@ -196,9 +195,11 @@ export default {
 .selecter {
   font-weight: 700;
   color: #8a8a8a;
+  cursor: pointer;
 }
 .select_btn {
   font-weight: 700;
   color: #8a8a8a;
+  cursor: pointer;
 }
 </style>

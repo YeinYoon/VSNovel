@@ -90,11 +90,13 @@ export default {
 }
 /* ------------------------------------------ */
 .carousel__prev {
-  transform: translate(25%, -70%);
+  transform: translate(25%, -50%);
+  background-color: #2872f9;
   /* transform: translate(-120%, -100%); */
 }
 .carousel__next {
-  transform: translate(-25%, -70%);
+  transform: translate(-25%, -50%);
+  background-color: #2872f9;
   /* transform: translate(120%, -100%); */
 }
 

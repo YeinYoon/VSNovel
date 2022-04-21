@@ -7,11 +7,30 @@
         </div>
 
         <div class="Promo_Setup">
+
+
+
           <div class="Promo_Setup_Button">
-            <button @click="engineDownload()">설치</button>
+            <button @click="setupMenu()">설치</button>
             <!-- <button>실행</button> -->
             <!-- <button>업데이트</button> -->
+          </div>
+
+          <div class="Promo_Setup_Dropdown" v-if="DropDownOn == true">
+            <div @click="engineDownloadWin()" class="Promo_Setup_Choice">
+              <img src="@/assets/imgs/windows.png">
+              <p>Windows</p>
             </div>
+            <div @click="engineDownloadMac()" class="Promo_Setup_Choice">
+              <img src="@/assets/imgs/mac.png">
+              <p>OS X</p>
+            </div>
+            <div @click="engineDownloadLinux()" class="Promo_Setup_Choice">
+              <img src="@/assets/imgs/linux.png">
+              <p>Linux</p>
+            </div>
+          </div>
+
           <div class="Promo_Setup_Info">
             <p>최신 릴리즈 - 2022-04-08</p>
             <p>빌드버전 - 0180</p>
@@ -193,12 +212,13 @@ export default {
   data() {
     return {
       stepCount : 1,
+      DropDownOn : false,
     }
   },
   components: {
   },
   methods:{
-      engineDownload(){
+      engineDownloadWin(){
           try {
               let downloadFileLink = '/engine_install/VSNovel-Engine_Setup_0.1.0.exe';//download 경로
               let element = document.createElement('a');
@@ -208,6 +228,34 @@ export default {
           }catch(e){
               console.log(e)
           }
+      },
+
+      engineDownloadMac(){
+          try {
+              let downloadFileLink = '/engine_install/VSNovel-Engine_Setup_0.1.0.exe';//download 경로
+              let element = document.createElement('a');
+              element.setAttribute('href', downloadFileLink);
+              element.setAttribute('download', '');
+              element.click()
+          }catch(e){
+              console.log(e)
+          }
+      },
+
+      engineDownloadLinux(){
+          try {
+              let downloadFileLink = '/engine_install/VSNovel-Engine_Setup_0.1.0.exe';//download 경로
+              let element = document.createElement('a');
+              element.setAttribute('href', downloadFileLink);
+              element.setAttribute('download', '');
+              element.click()
+          }catch(e){
+              console.log(e)
+          }
+      },
+
+      setupMenu() {
+        this.DropDownOn = !this.DropDownOn;
       }
   }
 }
@@ -258,6 +306,7 @@ export default {
   transform: translate(-50%, -50%);
   text-align: center;
   color: white;
+  z-index: 4;
 }
 
 .Promo_Setup_Button {
@@ -265,6 +314,7 @@ export default {
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
+  z-index: 5;
 }
 
 .Promo_Setup_Button Button{
@@ -288,6 +338,42 @@ export default {
   line-height: 2px;
   border-radius: 0px 15px 0px 15px;
   padding-top: 16px;
+}
+
+.Promo_Setup_Dropdown{
+  position: absolute;
+  left: 50%;
+  top: 220px;
+  transform: translate(-50%, -50%);
+  width: 160px;
+  height: 240px;
+  background: rgb(77, 77, 77);
+  padding-top: 40px;
+  border-radius: 15px;
+  /* animation-name: DropDownOn;
+  animation-duration: 0.5;
+  animation-fill-mode: forwards; */
+}
+
+.Promo_Setup_Choice{
+  width: 160px;
+  height: 40px;
+  display: inline-block;
+  cursor: pointer;
+  
+}
+
+.Promo_Setup_Choice:hover{
+  opacity: 0.9;
+}
+
+.Promo_Setup_Choice img{
+  height: 40px;
+  padding: 5px;
+}
+
+.Promo_Setup_Choice p{
+  font-size: 0.8em;
 }
 
 .Promo_Content{

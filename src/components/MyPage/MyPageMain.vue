@@ -251,11 +251,6 @@ export default {
   padding: 15px;
 }
 
-/* 스크롤바 삭제 */
-.introduce-input::-webkit-scrollbar {
-  display: none;
-}
-
 /* 취소버튼 */
 #mypage_main-canc{
   transform: translate(350%,0%);

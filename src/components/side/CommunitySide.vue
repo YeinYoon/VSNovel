@@ -7,12 +7,15 @@
     </div>
     <div>
       <div class="group"><span>· TOPIC</span></div>
-    <div>
-      <div v-for="(array, i) in sideCafe" :key="i">
-        <div class="group" v-if="i == 4"><span>· CAFE</span></div>
-        <div @click="clickEvent(i, $event, array.title, array)" id="element">· {{array.title}}</div>
+      <div v-for="(array, i) in sideArrays" :key="i">
+        <div @click="clickCommunityEvent(i, $event, array)" id="communityElement">· {{array}}</div>
       </div>
     </div>
+    <div>
+        <div class="group"><span>· Village</span></div>
+      <div v-for="(array, i) in sideCafe" :key="i">
+        <div @click="clickCafeEvent(i, $event, array.title, array)" id="cafeElement">· {{array.title}}</div>
+      </div>
   </div>
 </div>
     <div v-if="step == '자유'"> <Community :step="step"/> </div>
@@ -25,7 +28,7 @@
 </template>
 
 <script>
-import Community from '../community/CommunityView';
+import Community from '../community/topic/TopicFrame';
 import Cafe from '../community/cafe/CafeMain';
 import RegisterCafe from '../community/cafe/RegisterCafe';
 export default {
@@ -37,6 +40,7 @@ export default {
       step: '자유',
       clickNum : 0,
       registerCafeData : {},
+      clickId : [],
     };
   },
   components:{
@@ -46,25 +50,42 @@ export default {
   },
   mounted(){
     // 기본 강조 효과
-    let id = document.querySelectorAll("#element")
-    id[this.clickNum].style.backgroundColor = "#2872f9"
+    this.clickId = document.querySelectorAll("#communityElement")
+    this.clickId[this.clickNum].style.backgroundColor = "#2872f9"
   },
   methods:{
-    clickEvent(index, event, title, array) {
-    //가입된 카페 정보
-    this.registerCafeData = array;
-    // 메인 화면 이동 함수
-    this.step = title;
-    // 사이드바 강조효과
-      let id = document.querySelectorAll("#element");
-      // console.log("과거 : " + id[this.clickNum].innerHTML);
-      // console.log("현재 : " + event.target.innerHTML)
-      event.target.style.backgroundColor = "#2872f9";
-      if (this.clickNum != null && this.clickNum != index) {
-         id[this.clickNum].style.backgroundColor = "#2c2c2c";
+    clickCommunityEvent(index, event, array) {
+      if(this.clickId[this.clickNum].id == 'cafeElement'){
+        this.clickId[this.clickNum].style.backgroundColor = "#2c2c2c";
       }
-      this.clickNum = index;
+      else if (this.clickNum != null && this.clickNum != index) {
+          this.clickId[this.clickNum].style.backgroundColor = "#2c2c2c";
+      }
+      // 메인 화면 이동 함수
+      this.step = array;
+      // 사이드바 강조효과
+        this.clickId = document.querySelectorAll("#communityElement");
+        event.target.style.backgroundColor = "#2872f9";
+        
+        this.clickNum = index;
     },
+    clickCafeEvent(index, event, title, array) {
+      if(this.clickId[this.clickNum].id == 'communityElement'){
+        this.clickId[this.clickNum].style.backgroundColor = "#2c2c2c";
+      }
+      else if (this.clickNum != null && this.clickNum != index) {
+          this.clickId[this.clickNum].style.backgroundColor = "#2c2c2c";
+      }
+      //가입된 카페 정보
+      this.registerCafeData = array;
+      // 메인 화면 이동 함수
+      this.step = title;
+      // 사이드바 강조효과
+        this.clickId = document.querySelectorAll("#cafeElement");
+        event.target.style.backgroundColor = "#2872f9";
+        
+        this.clickNum = index;
+      },
 },
 }
 </script>
@@ -73,9 +94,7 @@ export default {
 .sideBar{
   overflow: auto;
 }
-
-
-#element{
+#communityElement, #cafeElement{
   width: 90%;
   height: 40px;
   color: white;
@@ -85,5 +104,6 @@ export default {
   border-radius: 30px;
   font-weight: 600;
   font-size: 1em;
+  cursor: pointer;
 }
 </style>
