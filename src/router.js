@@ -1,6 +1,10 @@
 import { createWebHistory, createRouter } from "vue-router";
+// 스토어 
 import Store from './components/side/StoreSide.vue';
+import StoreMain from './components/storepage/Store.vue';
+// 메인페이지
 import Main from './components/mainpage/Main.vue';
+// 커뮤니티
 import Community from './components/side/CommunitySide.vue';
 // 마이페이지 링크들
 import MyPage from './components/side/MypageSide.vue';
@@ -11,9 +15,11 @@ import Myreview from "./components/mypage/Myreview";
 import Prefer from "./components/mypage/Prefer";
 import MyAlarm from "./components/mypage/MyAlarm";
 import MyWithdrawal from "./components/mypage/withdrawal/MyWithdrawal";
-// 
+// 라이브러리
 import Library from './components/side/LibrarySide.vue';
-import Notice from './components/side/NoticeSide.vue'
+// 공지사항
+import Notice from './components/side/NoticeSide.vue';
+
 import Login from './components/auth/Login.vue';
 import SignUp from './components/auth/SignUp.vue';
 import FindAcc from './components/auth/FindAcc.vue';
@@ -42,13 +48,13 @@ const routes = [
     name: 'MyPage',
     component : MyPage,
     children:  [
-      { path : '/mymain',       name: 'MyPageMain',   component : MyPageMain, },
-      { path : '/mycard',       name: 'MyCard',       component : MyCard, },
-      { path : '/mypost',       name: 'MyPost',       component : MyPost, },
-      { path : '/myreview',     name: 'Myreview',     component : Myreview, },
-      { path : '/prefer',       name: 'Prefer',       component : Prefer, },
-      { path : '/myalarm',      name: 'MyAlarm',      component : MyAlarm, },
-      { path : '/mywithdrawal', name: 'MyWithdrawal', component : MyWithdrawal, },
+      { path : '/mymain',       name: 'MyPageMain',   component : MyPageMain },
+      { path : '/mycard',       name: 'MyCard',       component : MyCard },
+      { path : '/mypost',       name: 'MyPost',       component : MyPost },
+      { path : '/myreview',     name: 'Myreview',     component : Myreview },
+      { path : '/prefer',       name: 'Prefer',       component : Prefer },
+      { path : '/myalarm',      name: 'MyAlarm',      component : MyAlarm },
+      { path : '/mywithdrawal', name: 'MyWithdrawal', component : MyWithdrawal },
     ]
   },
   {
@@ -66,7 +72,10 @@ const routes = [
     path : '/store',
     name: 'Store',
     component : Store,
-    props:true
+    props:true,
+    children:[
+      { path : '/storemain', name : 'storeMain', component : StoreMain }
+    ]
   },
   {
     path : '/engine',
