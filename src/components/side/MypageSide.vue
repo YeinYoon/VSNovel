@@ -40,7 +40,7 @@ export default {
       clickNum: 0,
     };
   },
-  mounted(){
+  mounted() {
     // 기본 강조 효과
     let id = document.querySelectorAll("#element")
     id[this.clickNum].style.backgroundColor = "#2872f9"
@@ -64,13 +64,15 @@ export default {
     },
 
     logout() {
-      axios.get('/api/auth/logout')
-      .then((result)=>{
-        if(result.data == "ok") {
-          this.$store.commit('userLogin', null);
-          this.$router.push('/');
+      axios.get("/api/auth/logout").then((result) => {
+        if (result.data == "ok") {
+          this.$store.commit("userLogin", null);
+          this.$router.push("/");
         } else {
-          this.$store.commit('gModalOn', {msg : "ERR : 로그아웃 실패", size : "normal"});
+          this.$store.commit("gModalOn", {
+            msg: "ERR : 로그아웃 실패",
+            size: "normal",
+          });
         }
       })
     }
@@ -91,7 +93,7 @@ export default {
   top: 0px;
   left: 140px;
 }
-.group{
+.group {
   cursor: pointer;
 }
 /* -------------------------------------------------------------------- */
@@ -108,7 +110,7 @@ export default {
   cursor: pointer;
 }
 
-.Temp_LogoutButton{
+.Temp_LogoutButton {
   position: absolute;
   left: 160px;
   top: 90%;
@@ -121,5 +123,4 @@ export default {
   background: #2872f9;
   color: white;
 }
-
 </style>
