@@ -19,7 +19,7 @@
       <!-- 2행 카드번호 입력 -->
       <div class="card-container2">
         <div class="card-num-name">카드번호</div>
-        <input class="card-input" type="number" oninput="if(value.length>11)value=value.slice(0,15)" v-model="newCard" />
+        <input class="card-input" type="number" oninput="if(value.length>11)value=value.slice(0,16)" v-model="newCard" />
         <div class="card-num-info">16자리 숫자만 입력</div>
       </div>
 
@@ -34,7 +34,7 @@
     <!-- 취소,저장버튼 -->
     <footer class="card-footer">
       <button id="mypage_card-canc">취소</button>
-      <button id="mypage_card-save" @click="routerPush(myCard)">저장</button>
+      <button id="mypage_card-save" @click="routerPush(newCard)">저장</button>
     </footer>
 
   </div>
@@ -45,20 +45,22 @@
 <script>
 import axios from '../../axios';
 export default {
+  created() {
+    this.getRegister()
+  },
   name: "MyCard",
   data() {
     return {
-      myCard : "",
       myUser : "",
       newCard :""
     }
   },
   methods:{
-    routerPush(myCard){
-      this.myCard = myCard;
-      this.register();
+    routerPush(newCard){
+      this.newCard = newCard;
+      this.postRegister();
     },
-    register() {
+    postRegister() {
       var newInfo = {
         newCard : this.newCard
       }
@@ -70,6 +72,16 @@ export default {
       }).catch((err) => {
         console.log(err);
       });
+    },
+    getRegister() {
+      axios.get('/api/mypage/mycard')
+      .then((result) => {
+        if(result.data == 'err') {
+          console.log('카드 정보 불러오기 실패')
+        } else {
+          this.newCard = result.data.rows[0].USER_CARDNUM
+        }
+      })
     }
   }
 }

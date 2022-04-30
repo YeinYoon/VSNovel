@@ -3,12 +3,23 @@ var router = express.Router();
 
 const db = require('../database/db');
 
+// 마이페이지 프로필 불러오기
+router.get('/mypagemain', async(req, res) => {
+    console.log(req.user.USER_ID)
+    const result = await db.execute(`SELECT * from tbl_user WHERE user_id = '${req.user.USER_ID}'`)
+    if(result == 'err') {
+        console.log("sry");
+    } else {
+        console.log(result)
+        res.send(result.rows);
+        console.log(result.rows);
+    }
+})
+
+// 마이페이지 프로필 설정
 router.post('/mypagemain', async(req,res)=>{
-    // const pastRow = ; 
-    // console.log(req.body)
-    // const result = await db.execute(`UPDATE tbl_user SET (user_nickname, user_img)= ('${req.body.newNickname}','${req.body.newImage}') WHERE user_id='${req.user.USER_ID}'`) //프로필 이미지, 소개 없음
-    const result = await db.execute(`UPDATE tbl_user SET (user_nickname, user_img)= (SELECT '${req.body.newNickname}','${req.body.newImage}' FROM tbl_user WHERE user_id = '${req.user.USER_ID}')`)
-    console.log(req.body.newNickname);
+
+    const result = await db.execute(`UPDATE tbl_user SET user_nickname = '${req.body.newNickname}', user_img = '${req.body.newImage}' WHERE user_id = '${req.user.USER_ID}'`)
     if(result == 'err') {
         console.log("sry");
     } else {
@@ -17,6 +28,18 @@ router.post('/mypagemain', async(req,res)=>{
     }
 })
 
+// 결제정보 불러오기
+router.get('/mycard', async (req,res) => {
+    const result = await db.execute(`SELECT * from tbl_user WHERE user_id = '${req.user.USER_ID}'`)
+    if(result == 'err') {
+        console.log('sry');
+    } else {
+        res.send(result);
+        console.log(result);
+    }
+})
+
+// 결제정보 설정
 router.post('/mycard', async(req,res)=>{
 
     const result = await db.execute(`UPDATE tbl_user SET user_cardnum = '${req.body.newCard}' WHERE user_id='${req.user.USER_ID}'`)

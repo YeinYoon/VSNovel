@@ -13,5 +13,4 @@ router.get('/carousel', async (req, res)=>{
   }
 })
 
-
 module.exports = router;
