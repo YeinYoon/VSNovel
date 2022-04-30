@@ -48,13 +48,13 @@ const routes = [
     name: 'MyPage',
     component : MyPage,
     children:  [
-      { path : '/mymain',       name: 'MyPageMain',   component : MyPageMain },
-      { path : '/mycard',       name: 'MyCard',       component : MyCard },
-      { path : '/mypost',       name: 'MyPost',       component : MyPost },
-      { path : '/myreview',     name: 'Myreview',     component : Myreview },
-      { path : '/prefer',       name: 'Prefer',       component : Prefer },
-      { path : '/myalarm',      name: 'MyAlarm',      component : MyAlarm },
-      { path : '/mywithdrawal', name: 'MyWithdrawal', component : MyWithdrawal },
+      { path : 'mymain',        component : MyPageMain },
+      { path : 'mycard',        component : MyCard },
+      { path : 'mypost',        component : MyPost },
+      { path : 'myreview',      component : Myreview },
+      { path : 'prefer',        component : Prefer },
+      { path : 'myalarm',       component : MyAlarm },
+      { path : 'mywithdrawal',  component : MyWithdrawal },
     ]
   },
   {
@@ -74,7 +74,7 @@ const routes = [
     component : Store,
     props:true,
     children:[
-      { path : '/storemain', name : 'storeMain', component : StoreMain }
+      { path : 'storemain', component : StoreMain },
     ]
   },
   {

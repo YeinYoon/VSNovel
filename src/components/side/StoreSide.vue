@@ -36,7 +36,7 @@ export default {
   created() {
     this.getCateList();
     this.getNovelList();
-    this.$router.push('storemain');
+    this.$router.push('/store/storemain');
   },
   data() {
     return {

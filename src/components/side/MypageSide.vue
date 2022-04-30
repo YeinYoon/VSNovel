@@ -45,7 +45,8 @@ export default {
     let id = document.querySelectorAll("#element")
     id[this.clickNum].style.backgroundColor = "#2872f9"
       // 라우터 이동
-    this.$router.push('mymain');
+    this.$router.push('/mypage/mymain');
+    console.log('asd')
   },
   methods: {
     clickEvent(index, event, item) {
@@ -60,7 +61,7 @@ export default {
       }
       this.clickNum = index;
       // 라우터 이동
-      this.$router.push(item.url);
+      this.$router.push('/mypage/' + item.url);
     },
 
     logout() {
