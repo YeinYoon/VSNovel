@@ -1,11 +1,8 @@
 <template>
   <div>
-    <!-- 모달창이 나올떄 뒷 배경을 흐리게 만드는 녀석
-  이걸 안쓰고 싶을땐 단순히 modal_opacity만을 주석처리하면 된다.-->
-    <!-- <div class="modal_opacity"></div> -->
     <!-- 모달창의 크기를 결정하는 modal_frame,
   모달창의 크기 또한 파라미터로 받아서 나오게 할수도 있겠다. 쓰는사람 마음대로-->
-    <div v-bind:class="{ modal_frame_big: true }">
+    <div v-bind:class="{ post_modal_frame_big: true }">
       <!--모달 내 메세지 및 컨텐츠인 modal_inner, 여기에 단순히 메세지만을 표시할수도 
     작은 컴포넌트를 삽입할수도 있따.-->
       <div class="post_modal_inner">
@@ -44,40 +41,21 @@ export default {
 </script>
 <style>
 .post_modal_content {
+  position:relative;
   background-color:gray;
   border-radius: 15px;
   height: 200px;
-  padding: 10px;
   margin-top: 10px;
   overflow-y:scroll;
+  word-wrap: break-word;
+  
 }
-.post_modal_frame_normal {
-  position: fixed;
-  top: 50%;
+.post_modal_content span {
+  position: absolute;
+  margin-top: 10px;
+  width: 95%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  width: 500px;
-  height: 200px;
-  border-radius: 25px;
-  background: #2a2a2a;
-  animation-duration: 0.7s;
-  animation-name: opening;
-  z-index: 2;
-  opacity: 1;
-}
-.post_modal_frame_small {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 300px;
-  height: 125px;
-  border-radius: 25px;
-  background: #2a2a2a;
-  animation-duration: 0.7s;
-  animation-name: opening;
-  z-index: 1;
-  opacity: 1;
+  transform: translateX(-50%);
 }
 .post_modal_frame_big {
   position: fixed;
@@ -85,12 +63,12 @@ export default {
   left: 50%;
   transform: translate(-50%, -50%);
   width: 700px;
-  height: 400px;
+  height: 310px;
   border-radius: 25px;
   background: #2a2a2a;
   animation-duration: 0.7s;
   animation-name: opening;
-  z-index: 1;
+  z-index: 2;
   opacity: 1;
 }
 .post_modal_inner {
@@ -134,7 +112,7 @@ export default {
   transform: translateY(-50%);
 }
 #cancel{
-  left: 33%;
+  left: 33.5%;
 }
 /* 애니메이션들,*/
 /*열리는 애니메이션 opening*/
@@ -147,15 +125,6 @@ export default {
   to {
     top: 50%;
     opacity: 1;
-  }
-}
-/*배경을 만드는 backgrounding_on*/
-@keyframes backgrounding_on {
-  from {
-  }
-
-  to {
-    opacity: 0.3;
   }
 }
 </style>

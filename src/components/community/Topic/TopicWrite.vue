@@ -16,7 +16,7 @@
 <script>
 import Editor from './Editor'
 export default {
-  name: "TeamoneWrite",
+  name: "TopicWrite",
   data() {
     return {
       writecontent : '',
@@ -29,8 +29,8 @@ export default {
         content : '',
         titleImg : '',
         date : '',
-        likes    : '',
-        coment  : '',
+        likes    : '0',
+        coment  : '0',
       }
     }
   },

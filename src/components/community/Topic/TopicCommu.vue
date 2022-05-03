@@ -26,7 +26,7 @@
         :key="a"
         @click="decision(a,manage,index)"
       >
-        <img class="commu_thumb" :src="`${a.titleImg}`" />
+        <img class="commu_thumb" :src="`${a.titleImg}`" @error="replaceimg"/>
         <div class="commu_back">
           <div class="commu_back_title">{{ a.title }}</div>
           <div class="commu_back_info">
@@ -40,6 +40,7 @@
 
 <script>
 import Modal from "../Modalvue";
+import img from "@/assets/imgs/noimage.png";
 export default {
   data() {
     return {
@@ -64,6 +65,9 @@ export default {
     },
     deletepost(modalindex){
       this.$emit('deletepost',modalindex);
+    },
+    replaceimg(e){
+      e.target.src=img
     }
   },
   props : {
