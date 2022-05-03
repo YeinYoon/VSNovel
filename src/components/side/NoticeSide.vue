@@ -12,12 +12,11 @@
       </div>
     </div>
   </div>
-    <Notice />
+  <router-view/>
 </div>
 </template>
 
 <script>
-import Notice from '../notice/Notice';
 export default {
   name: "NoticeSide",
   data() {
@@ -27,18 +26,17 @@ export default {
         clickNum : 0,
     };
   },
-  components:{
-      Notice,
-  },
   mounted(){
     // 기본 강조효과
-    let id = document.querySelectorAll("#element")
-    id[this.clickNum].style.backgroundColor = "#2872f9"
+    let id = document.querySelectorAll("#element");
+    id[this.clickNum].style.backgroundColor = "#2872f9";
+    this.$router.push({name : 'NoticeMain', params : {id : this.myStep}});
   },
   methods:{
     clickEvent(index, event, array) {
     // 강조효과 및 메인 화면 변경
       this.myStep = array;
+      this.$router.push({name : 'NoticeMain', params : {id : this.myStep}});
       let id = document.querySelectorAll("#element");
       event.target.style.backgroundColor = "#2872f9";
       if (this.clickNum != null) {

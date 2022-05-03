@@ -1,10 +1,10 @@
 <template>
   <div v-bind:class="{ mainmenu: true }">
     <div v-bind:class="{ menus: true }">
-      <div v-bind:class="{ menubox: true }" id="mypage" @click="this.$router.push('/signin')" v-if="this.$store.state.userId == null">
+      <div v-bind:class="{ menubox: true }" id="mypage/mymain" @click="$router.push('/signin')" v-if="this.$store.state.userId == null">
         <img class="menubox_icon_mypage" src="@/assets/icons/white/login_req.png" />
       </div>
-      <div v-bind:class="{ menubox: true }" id="mypage" @click="this.$router.push('/mymain')" v-else>
+      <div v-bind:class="{ menubox: true }" id="mypage/" @click="routerPush('/mypage/mymain')" v-else>
         <img class="menubox_icon_mypage" src="@/assets/imgs/noprofile.png" />
       </div>
       <br />
@@ -29,14 +29,14 @@
         />
       </div>
       <br />
-      <div v-bind:class="{ menubox: true }" id="community" @click="routerPush('/community')">
+      <div v-bind:class="{ menubox: true }" id="communi" @click="routerPush('/community/communitytopic')">
         <img
           class="menubox_icon_community"
           src="@/assets/icons/white/bubble_chat.png"
         />
       </div>
       <br />
-      <div v-bind:class="{ menubox: true }" id="notice" @click="routerPush('/notice')">
+      <div v-bind:class="{ menubox: true }" id="notice/" @click="routerPush('/notice/')">
         <img
           class="menubox_icon_notice"
           src="@/assets/icons/white/megaphone.png"
@@ -58,21 +58,33 @@ export default {
   name: "vsnmenu",
   data() {
     return {
-      state : '',
+      state : (this.$route.path=='/')?'main':this.$route.path.substr(1,7),
+      link : (this.$route.path=='/')?'main':this.$route.path.substr(1,7),
     };
   },
   methods: {
     routerPush(link) { 
-      let id = link.substr(1);
-      id = (id!="")?id:"main";
-      document.getElementById(id).style.background = "#2872f9";
-      if(this.state != '' && this.state != id)
-        document.getElementById(this.state).style.background = "#353535";
-      this.state = id;
-      // 메뉴 이동 라우터 함수
+      this.link = (link=='/')?'main':link.substr(1,7);
+      this.state = (this.$route.path=='/')?'main':this.$route.path.substr(1,7);
       this.$router.push(link);
     },
   },
+  watch:{
+    $route(){
+      // 버튼클릭 링크 이동시 if문
+      let pathLink = (this.$route.path=='/')?'main':this.$route.path.substr(1,7);
+      if(this.link != pathLink && pathLink != 'signin'){
+        this.state = this.link;
+        this.link = (this.$route.path=='/')?'main':this.$route.path.substr(1,7);
+        document.getElementById(this.link).style.background = "#2872f9";
+        document.getElementById(this.state).style.background = "#353535";
+      }
+      if(this.state != this.link){
+          document.getElementById(this.state).style.background = "#353535";
+        }
+        document.getElementById(this.link).style.background = "#2872f9";
+    }
+  }
 };
 </script>
 
@@ -106,12 +118,13 @@ export default {
 }
 .menubox_icon_mypage {
   position: relative;
-  top: 12px;
-  left: 1px;
-  width: 50px;
-  height: 50px;
+  top: 7.5px;
+  /* left: 0px; */
+  width: 60px;
+  height: 60px;
+  border-radius: 10px;
 }
-.menubox_icon_library {
+.menubox_icon_library { 
   position: relative;
   top: 12px;
   left: 1px;

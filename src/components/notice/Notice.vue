@@ -5,7 +5,7 @@
         <div class="service">
             <img class="icon" src="@/assets/icons/white/megaphone.png" alt="community">
             <span class="title" @click="adminEvent">공지사항</span>
-            <span class="topic">TOPIC · 전체</span>
+            <span class="topic">TOPIC · {{$route.params.id}}</span>
             <div class="noticeMain_btn_area">
                 <button class="btn_red" v-if="admin">관리</button>
                 <button class="btn_blue" v-if="admin" @click="noticeStep++">글쓰기</button>
@@ -56,7 +56,7 @@ export default {
         NoticeRead,
     },
     mounted() {
-        // 공지사항 날짜 순으로 정렬
+        // 공지사항 강조 순으로 정렬
         this.noticeData.sort(function (a, b) {
             return a.emphasis - b.emphasis;
         });
@@ -100,12 +100,12 @@ export default {
         },
         writePushEvent(data){
             this.noticeData.push(data);
-            console.log(this.noticeData);
+            // console.log(this.noticeData);
             this.noticeStep = 0;
         }
     },
     created(){
-        console.log(this.$route)
+        // console.log(this.$route)
         if(this.$route.params.noti_id!=undefined){
             this.noticeStep = 2;
             this.clickNotice = this.$route.params.noti_id;

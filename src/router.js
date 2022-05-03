@@ -1,11 +1,15 @@
 import { createWebHistory, createRouter } from "vue-router";
 // 스토어 
 import Store from './components/side/StoreSide.vue';
-import StoreMain from './components/storepage/Store.vue';
 // 메인페이지
 import Main from './components/mainpage/Main.vue';
 // 커뮤니티
 import Community from './components/side/CommunitySide.vue';
+import Topic from './components/community/topic/TopicFrame.vue';
+//카페
+import CafeMain from './components/community/cafe/CafeMain.vue';
+import Register from './components/community/cafe/RegisterCafe.vue';
+
 // 마이페이지 링크들
 import MyPage from './components/side/MypageSide.vue';
 import MyPageMain from './components/mypage/MyPageMain.vue';
@@ -19,6 +23,7 @@ import MyWithdrawal from "./components/mypage/withdrawal/MyWithdrawal";
 import Library from './components/side/LibrarySide.vue';
 // 공지사항
 import Notice from './components/side/NoticeSide.vue';
+import NoticeMain from './components/notice/Notice.vue';
 
 import Login from './components/auth/Login.vue';
 import SignUp from './components/auth/SignUp.vue';
@@ -61,21 +66,22 @@ const routes = [
     path : '/notice',
     name: 'Notice',
     component : Notice,
-    props:true
+    props:true,
+    children:[
+      {path : 'noticetopic',  name:'NoticeMain',  component : NoticeMain},
+    ]
   },
   {
     path : '/library',
     name: 'Library',
     component : Library,
+    props:true,
   },
   {
     path : '/store',
     name: 'Store',
     component : Store,
     props:true,
-    children:[
-      { path : 'storemain', component : StoreMain },
-    ]
   },
   {
     path : '/engine',
@@ -87,7 +93,12 @@ const routes = [
     path : '/community',
     name: 'Community',
     component : Community,
-    props:true
+    props:true,
+    children:[
+      {path : 'communitytopic', name:'topic',  component : Topic},
+      {path : 'cafemain', name:'CafeMain', component : CafeMain},
+      {path : 'register', name:'Register', component : Register}
+    ]
   },
   {
     path : '/engine',

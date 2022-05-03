@@ -7,8 +7,8 @@
     </div>
     <div>
       <div class="group"><span>· TOPIC</span></div>
-      <div v-for="(array, i) in sideArrays" :key="i">
-        <div @click="clickCommunityEvent(i, $event, array)" id="communityElement">· {{array}}</div>
+      <div v-for="(item, i) in sideArrays" :key="i">
+        <div @click="clickCommunityEvent(i, $event,item)" id="communityElement">· {{item}}</div>
       </div>
     </div>
     <div>
@@ -18,43 +18,33 @@
       </div>
   </div>
 </div>
-    <div v-if="step == '자유'"> <Community :step="step"/> </div>
-    <div v-else-if="step == '작가'"> <Community :step="step"/> </div>
-    <div v-else-if="step == '팀원 모집'"> <Community :step="step"/> </div>
-    <div v-else-if="step == '리뷰 & 추천'"> <Community :step="step"/> </div>
-    <div v-else-if="step == '카페 메인'"> <Cafe /> </div>
-    <div v-else> <RegisterCafe :registerCafeData="registerCafeData"/> </div>
+    <router-view/>
 </div>
 </template>
 
 <script>
-import Community from '../community/topic/TopicFrame';
-import Cafe from '../community/cafe/CafeMain';
-import RegisterCafe from '../community/cafe/RegisterCafe';
 export default {
   name: "CommunitySide",
   data() {
     return {
       sideArrays : ['자유', '작가', '팀원 모집', '리뷰 & 추천'],
       sideCafe : this.$store.state.cafeSide,
-      step: '자유',
       clickNum : 0,
+      step: '자유',
       registerCafeData : {},
       clickId : [],
     };
   },
   components:{
-      Community,
-      Cafe,
-      RegisterCafe,
   },
   mounted(){
     // 기본 강조 효과
     this.clickId = document.querySelectorAll("#communityElement")
     this.clickId[this.clickNum].style.backgroundColor = "#2872f9"
+    this.$router.push({name : 'topic', params : {id : this.step}});
   },
   methods:{
-    clickCommunityEvent(index, event, array) {
+    clickCommunityEvent(index, event, item) {
       if(this.clickId[this.clickNum].id == 'cafeElement'){
         this.clickId[this.clickNum].style.backgroundColor = "#2c2c2c";
       }
@@ -62,13 +52,15 @@ export default {
           this.clickId[this.clickNum].style.backgroundColor = "#2c2c2c";
       }
       // 메인 화면 이동 함수
-      this.step = array;
+      this.step = item;
+      this.$router.push({name : 'topic', params : {id : this.step}});
       // 사이드바 강조효과
         this.clickId = document.querySelectorAll("#communityElement");
         event.target.style.backgroundColor = "#2872f9";
         
         this.clickNum = index;
     },
+    // ----------------------------------------------------------------------
     clickCafeEvent(index, event, title, array) {
       if(this.clickId[this.clickNum].id == 'communityElement'){
         this.clickId[this.clickNum].style.backgroundColor = "#2c2c2c";
@@ -79,7 +71,10 @@ export default {
       //가입된 카페 정보
       this.registerCafeData = array;
       // 메인 화면 이동 함수
-      this.step = title;
+      if(title == 'Village Main')
+        this.$router.push('/community/cafemain')
+      else 
+        this.$router.push({name : 'Register', params: this.registerCafeData});
       // 사이드바 강조효과
         this.clickId = document.querySelectorAll("#cafeElement");
         event.target.style.backgroundColor = "#2872f9";

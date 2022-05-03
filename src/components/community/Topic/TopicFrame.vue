@@ -4,7 +4,7 @@
       <div class="service">
         <img class="icon" src="@/assets/icons/white/bubble_chat.png" alt="logo" />
         <span class="title">커뮤니티</span>
-        <span class="topic">TOPIC · {{step}}</span>
+        <span class="topic">TOPIC · {{$route.params.id}}</span>
       </div>
     </div>
     <div v-if="topicData == 0">
@@ -52,9 +52,6 @@ export default {
     TopicPostView,
     TopicWrite
   },
-  props : {
-    step : String
-  }
 };
 </script>
 

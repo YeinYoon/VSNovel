@@ -9,7 +9,7 @@ const store = createStore({
             LoadingStatus: false,
 
             //커뮤니티 사이드 
-            cafeSide : [{title:'카페 메인'}], // 커뮤니티 사이드 
+            cafeSide : [{title:'Village Main'}], // 커뮤니티 사이드 
 
             //전역(Global) 모달
             gModalState : false,
@@ -19,6 +19,7 @@ const store = createStore({
 
             //스토어 관련
             novelList : [],
+
         }
     },
     mutations : {
@@ -52,7 +53,6 @@ const store = createStore({
                 }
             }
             state.cafeSide.push(cafeData);
-            console.log(state.cafeSide);
         },
 
         // Modal
@@ -69,7 +69,7 @@ const store = createStore({
         // 스토어 관련
         setNovelList(state, data) {
             state.novelList = data;
-        }
+        },
     },
 })
 

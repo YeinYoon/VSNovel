@@ -2,7 +2,7 @@
 <Spinner :loading="$store.state.LoadingStatus"></Spinner>
 <GlobalModal :gModalState="$store.state.gModalState"></GlobalModal>
 <div class="content">
-    <Menu v-bind:class="{'vsnmenu':true}"></Menu>
+    <Menu v-bind:class="{'vsnmenu':true}" ref="MenuBar"></Menu>
     <!-- <vsnside v-bind:class="{'vsnside':true}"></vsnside> -->
     <!-- <Vsncontent v-bind:class="{'vsncontent':true}"></Vsncontent> -->
     <!-- <div class="vsncontainer"> -->
