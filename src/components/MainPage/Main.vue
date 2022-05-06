@@ -169,8 +169,7 @@ export default {
     communityView(data) {
       console.log(data.title);
       this.$router.push({
-        path: "/community",
-        name: "Community",
+        path: "/community/",
         params: { comm_id: data.title },
       });
     },
@@ -178,7 +177,6 @@ export default {
       console.log(data.title);
       this.$router.push({
         path: "/notice",
-        name: "Notice",
         params: { noti_id: data.title, },
       });
     },

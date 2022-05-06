@@ -29,14 +29,14 @@
         />
       </div>
       <br />
-      <div v-bind:class="{ menubox: true }" id="communi" @click="routerPush('/community/communitytopic')">
+      <div v-bind:class="{ menubox: true }" id="communi" @click="routerPush('/community/')">
         <img
           class="menubox_icon_community"
           src="@/assets/icons/white/bubble_chat.png"
         />
       </div>
       <br />
-      <div v-bind:class="{ menubox: true }" id="notice/" @click="routerPush('/notice/')">
+      <div v-bind:class="{ menubox: true }" id="notice" @click="routerPush('/notice')">
         <img
           class="menubox_icon_notice"
           src="@/assets/icons/white/megaphone.png"
@@ -72,6 +72,7 @@ export default {
   watch:{
     $route(){
       // 버튼클릭 링크 이동시 if문
+
       let pathLink = (this.$route.path=='/')?'main':this.$route.path.substr(1,7);
       if(this.link != pathLink && pathLink != 'signin'){
         this.state = this.link;

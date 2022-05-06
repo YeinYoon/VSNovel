@@ -5,9 +5,8 @@ import Store from './components/side/StoreSide.vue';
 import Main from './components/mainpage/Main.vue';
 // 커뮤니티
 import Community from './components/side/CommunitySide.vue';
-import Topic from './components/community/topic/TopicFrame.vue';
 //카페
-import CafeMain from './components/community/cafe/CafeMain.vue';
+import VillageMain from './components/community/cafe/CafeMain.vue';
 import Register from './components/community/cafe/RegisterCafe.vue';
 
 // 마이페이지 링크들
@@ -23,7 +22,6 @@ import MyWithdrawal from "./components/mypage/withdrawal/MyWithdrawal";
 import Library from './components/side/LibrarySide.vue';
 // 공지사항
 import Notice from './components/side/NoticeSide.vue';
-import NoticeMain from './components/notice/Notice.vue';
 
 import Login from './components/auth/Login.vue';
 import SignUp from './components/auth/SignUp.vue';
@@ -67,9 +65,6 @@ const routes = [
     name: 'Notice',
     component : Notice,
     props:true,
-    children:[
-      {path : 'noticetopic',  name:'NoticeMain',  component : NoticeMain},
-    ]
   },
   {
     path : '/library',
@@ -95,8 +90,7 @@ const routes = [
     component : Community,
     props:true,
     children:[
-      {path : 'communitytopic', name:'topic',  component : Topic},
-      {path : 'cafemain', name:'CafeMain', component : CafeMain},
+      {path : 'villagemain', name:'VillageMain', component : VillageMain},
       {path : 'register', name:'Register', component : Register}
     ]
   },

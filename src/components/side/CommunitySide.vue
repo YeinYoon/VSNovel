@@ -14,15 +14,41 @@
     <div>
         <div class="group"><span>· Village</span></div>
       <div v-for="(array, i) in sideCafe" :key="i">
-        <div @click="clickCafeEvent(i, $event, array.title, array)" id="cafeElement">· {{array.title}}</div>
+        <div @click="clickCafeEvent(i, $event, array.title, array)" id="villageElement">· {{array.title}}</div>
       </div>
   </div>
 </div>
+<div v-if="$route.path.substr(1) == 'community/'">
+  <div class="tests">
+    <div class="header">
+      <div class="service">
+        <img class="icon" src="@/assets/icons/white/bubble_chat.png" alt="logo" />
+        <span class="title">커뮤니티</span>
+        <span class="topic">TOPIC · {{step}}</span>
+      </div>
+    </div>
+    <div v-if="topicData == 0">
+      <TopicCommu @first="topicadd($event)"  @third="topicData = 2" :datasend="community" @deletepost="remove($event)"/>
+    </div>
+    <div v-if="topicData == 1">
+      <TopicPostView @second="topicData=0" :topicObject="topicObject"/>
+    </div>
+    <div v-if="topicData == 2">
+      <TopicWrite @add="topicData=0" :datasend="community" @contentdata="addpost($event)"/>
+    </div>
+  </div>
+</div>
+<div v-else>
     <router-view/>
+</div>
 </div>
 </template>
 
 <script>
+import dummy_data from "@/assets/DataJs/commuData.js";
+import TopicCommu from "../community/topic/TopicCommu";
+import TopicPostView from "../community/topic/TopicPostView";
+import TopicWrite from "../community/topic/TopicWrite";
 export default {
   name: "CommunitySide",
   data() {
@@ -33,19 +59,41 @@ export default {
       step: '자유',
       registerCafeData : {},
       clickId : [],
+      community: dummy_data,
+      topicData : 0,
+      topicObject : {},
     };
   },
   components:{
+    TopicCommu,
+    TopicPostView,
+    TopicWrite
   },
   mounted(){
     // 기본 강조 효과
     this.clickId = document.querySelectorAll("#communityElement")
     this.clickId[this.clickNum].style.backgroundColor = "#2872f9"
-    this.$router.push({name : 'topic', params : {id : this.step}});
+
+    
+    if(this.$route.params.comm_id != null)
+      this.topicData = 1;
+    console.log(this.topicData);
+    console.log(this.$route.params)
   },
   methods:{
+    topicadd(event){
+      this.topicData = 1;
+      this.topicObject = event;
+    },
+    remove(removedata){
+      this.community.splice(removedata,1);
+    },
+    addpost(addData) {
+      this.community.push(addData);
+    },
+
     clickCommunityEvent(index, event, item) {
-      if(this.clickId[this.clickNum].id == 'cafeElement'){
+      if(this.clickId[this.clickNum].id == 'villageElement'){
         this.clickId[this.clickNum].style.backgroundColor = "#2c2c2c";
       }
       else if (this.clickNum != null && this.clickNum != index) {
@@ -53,7 +101,7 @@ export default {
       }
       // 메인 화면 이동 함수
       this.step = item;
-      this.$router.push({name : 'topic', params : {id : this.step}});
+      this.$router.push('/community/')
       // 사이드바 강조효과
         this.clickId = document.querySelectorAll("#communityElement");
         event.target.style.backgroundColor = "#2872f9";
@@ -72,11 +120,11 @@ export default {
       this.registerCafeData = array;
       // 메인 화면 이동 함수
       if(title == 'Village Main')
-        this.$router.push('/community/cafemain')
+        this.$router.push('/community/villagemain')
       else 
         this.$router.push({name : 'Register', params: this.registerCafeData});
       // 사이드바 강조효과
-        this.clickId = document.querySelectorAll("#cafeElement");
+        this.clickId = document.querySelectorAll("#villageElement");
         event.target.style.backgroundColor = "#2872f9";
         
         this.clickNum = index;
@@ -89,7 +137,7 @@ export default {
 .sideBar{
   overflow: auto;
 }
-#communityElement, #cafeElement{
+#communityElement, #villageElement{
   width: 90%;
   height: 40px;
   color: white;
