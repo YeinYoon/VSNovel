@@ -28,15 +28,17 @@
             <textarea v-model="writecoment"></textarea>
             <div class="postview_comment_register"><span @click="comentwrite(writecoment)">작성하기</span></div>
         </div>
+    
         <!-- 댓글이 달리는 부분 1 -->
-        <div class="postview_view_area" v-for="(a) in commentcount" :key="a">
-            <div><img class="postview_img" src="" @error="reimg"></div>
-            <div class="postview_view_content"><span>{{writeresult.content}}</span></div>
-        </div>
-        <!-- 댓글이 달리는 부분 2 -->
         <div class="postview_view_area" v-for="(a) in Number(topicObject.coment)" :key="a">
             <div><img class="postview_img" src="" @error="reimg"></div>
             <div class="postview_view_content"><span></span></div>
+        </div>
+
+        <!-- 댓글이 달리는 부분 2 -->
+        <div class="postview_view_area" v-for="(a,index) in writecoments" :key="index">
+            <div><img class="postview_img" src="" @error="reimg"></div>
+            <div class="postview_view_content"><span>{{writecoments[index]}}</span></div>
         </div>
       </div>
 
@@ -60,9 +62,7 @@ export default {
     return {
       open: false,
       writecoment: '',
-      writeresult: [{
-        content: ''
-      }],
+      writecoments: [],
       commentcount: 0,
     }
   },
@@ -73,12 +73,14 @@ export default {
     comentwrite(writecoment){
       if(writecoment == ''){
         this.open = true;
-        this.writecoment = ''
+        this.writecoment = '';
       }else {
+        this.writecoments.push(this.writecoment);
         this.commentcount += 1;
-        this.writecoment = ''
+        this.writecoment = '';
       }
       console.log(this.commentcount);
+      console.log(this.writecoments)
     },
     reimg(e){
       e.target.src=img
