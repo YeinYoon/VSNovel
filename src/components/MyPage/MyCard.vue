@@ -19,7 +19,13 @@
       <!-- 2행 카드번호 입력 -->
       <div class="card-container2">
         <div class="card-num-name">카드번호</div>
-        <input class="card-input" type="number" oninput="if(value.length>11)value=value.slice(0,19)" onkeyup="cardnum"/>
+        <input class="card-input" type="text" maxlength="4"/>
+          <span class="hyphen">-</span>
+        <input class="card-input" type="text" maxlength="4"/>
+          <span class="hyphen">-</span>
+        <input class="card-input" type="text" maxlength="4"/>
+          <span class="hyphen">-</span>
+        <input class="card-input" type="text" maxlength="4"/>
         <div class="card-num-info">16자리 숫자만 입력</div>
       </div>
 
@@ -47,7 +53,15 @@ export default {
   methods:{
     routerPush(link){
       this.$router.push(link);
-    }
+    },
+    cardNum(value) {
+      value = value.replace(/[^0-9]/g, "");
+      return value.replace(
+        /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,
+        "$1-$2-$3"
+      );
+    },
+    
   }
 }
 </script>
@@ -79,7 +93,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 /* 2행(카드번호 입력부분) 전체정렬 */
 .card-container2{
-  transform: translateX(3%);
+  transform: translateX(5%);
   display: flex;
 }
 
@@ -98,6 +112,12 @@ input[type="number"]::-webkit-inner-spin-button {
   margin-bottom: 2%;
 }
 
+.hyphen{
+  color: white;
+  margin-right: 12px;
+  
+}
+
 /* 카드번호 글자 */
 .card-num-name{
   width: 100px;
@@ -109,13 +129,15 @@ input[type="number"]::-webkit-inner-spin-button {
 
 /* 카드번호 입력내용 */
 .card-input{
+  display: flex;
   text-align: center;
   color: white;
-  width: 500px;
-  height: 40px;
+  width: 100px;
+  height: 4px;
   background: #5E5E5E;
   border-radius: 20px;
   padding: 15px;
+  margin-right: 15px;
 }
 
 /* 16자리 숫자입력 공지 */
