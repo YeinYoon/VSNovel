@@ -7,64 +7,128 @@
     </div>
     <div>
       <div class="group"><span>· TOPIC</span></div>
-    <div>
-      <div v-for="(array, i) in sideCafe" :key="i">
-        <div class="group" v-if="i == 4"><span>· CAFE</span></div>
-        <div @click="clickEvent(i, $event, array.title, array)" id="element">· {{array.title}}</div>
+      <div v-for="(item, i) in sideArrays" :key="i">
+        <div @click="clickCommunityEvent(i, $event,item)" id="communityElement">· {{item}}</div>
       </div>
+    </div>
+    <div>
+        <div class="group"><span>· Village</span></div>
+      <div v-for="(array, i) in sideCafe" :key="i">
+        <div @click="clickCafeEvent(i, $event, array.title, array)" id="villageElement">· {{array.title}}</div>
+      </div>
+  </div>
+</div>
+<div v-if="$route.path.substr(1) == 'community/'">
+  <div class="tests">
+    <div class="header">
+      <div class="service">
+        <img class="icon" src="@/assets/icons/white/bubble_chat.png" alt="logo" />
+        <span class="title">커뮤니티</span>
+        <span class="topic">TOPIC · {{step}}</span>
+      </div>
+    </div>
+    <div v-if="topicData == 0">
+      <TopicCommu @first="topicadd($event)"  @third="topicData = 2" :datasend="community" @deletepost="remove($event)"/>
+    </div>
+    <div v-if="topicData == 1">
+      <TopicPostView @second="topicData=0" :topicObject="topicObject"/>
+    </div>
+    <div v-if="topicData == 2">
+      <TopicWrite @add="topicData=0" :datasend="community" @contentdata="addpost($event)"/>
     </div>
   </div>
 </div>
-    <div v-if="step == '자유'"> <Community :step="step"/> </div>
-    <div v-else-if="step == '작가'"> <Community :step="step"/> </div>
-    <div v-else-if="step == '팀원 모집'"> <Community :step="step"/> </div>
-    <div v-else-if="step == '리뷰 & 추천'"> <Community :step="step"/> </div>
-    <div v-else-if="step == '카페 메인'"> <Cafe /> </div>
-    <div v-else> <RegisterCafe :registerCafeData="registerCafeData"/> </div>
+<div v-else>
+    <router-view/>
+</div>
 </div>
 </template>
 
 <script>
-import Community from '../community/CommunityView';
-import Cafe from '../community/cafe/CafeMain';
-import RegisterCafe from '../community/cafe/RegisterCafe';
+import dummy_data from "@/assets/DataJs/commuData.js";
+import TopicCommu from "../community/topic/TopicCommu";
+import TopicPostView from "../community/topic/TopicPostView";
+import TopicWrite from "../community/topic/TopicWrite";
 export default {
   name: "CommunitySide",
   data() {
     return {
       sideArrays : ['자유', '작가', '팀원 모집', '리뷰 & 추천'],
       sideCafe : this.$store.state.cafeSide,
-      step: '자유',
       clickNum : 0,
+      step: '자유',
       registerCafeData : {},
+      clickId : [],
+      community: dummy_data,
+      topicData : 0,
+      topicObject : {},
     };
   },
   components:{
-      Community,
-      Cafe,
-      RegisterCafe,
+    TopicCommu,
+    TopicPostView,
+    TopicWrite
   },
   mounted(){
     // 기본 강조 효과
-    let id = document.querySelectorAll("#element")
-    id[this.clickNum].style.backgroundColor = "#2872f9"
+    this.clickId = document.querySelectorAll("#communityElement")
+    this.clickId[this.clickNum].style.backgroundColor = "#2872f9"
+
+    
+    if(this.$route.params.comm_id != null)
+      this.topicData = 1;
+    console.log(this.topicData);
+    console.log(this.$route.params)
   },
   methods:{
-    clickEvent(index, event, title, array) {
-    //가입된 카페 정보
-    this.registerCafeData = array;
-    // 메인 화면 이동 함수
-    this.step = title;
-    // 사이드바 강조효과
-      let id = document.querySelectorAll("#element");
-      // console.log("과거 : " + id[this.clickNum].innerHTML);
-      // console.log("현재 : " + event.target.innerHTML)
-      event.target.style.backgroundColor = "#2872f9";
-      if (this.clickNum != null && this.clickNum != index) {
-         id[this.clickNum].style.backgroundColor = "#2c2c2c";
-      }
-      this.clickNum = index;
+    topicadd(event){
+      this.topicData = 1;
+      this.topicObject = event;
     },
+    remove(removedata){
+      this.community.splice(removedata,1);
+    },
+    addpost(addData) {
+      this.community.push(addData);
+    },
+
+    clickCommunityEvent(index, event, item) {
+      if(this.clickId[this.clickNum].id == 'villageElement'){
+        this.clickId[this.clickNum].style.backgroundColor = "#2c2c2c";
+      }
+      else if (this.clickNum != null && this.clickNum != index) {
+          this.clickId[this.clickNum].style.backgroundColor = "#2c2c2c";
+      }
+      // 메인 화면 이동 함수
+      this.step = item;
+      this.$router.push('/community/')
+      // 사이드바 강조효과
+        this.clickId = document.querySelectorAll("#communityElement");
+        event.target.style.backgroundColor = "#2872f9";
+        
+        this.clickNum = index;
+    },
+    // ----------------------------------------------------------------------
+    clickCafeEvent(index, event, title, array) {
+      if(this.clickId[this.clickNum].id == 'communityElement'){
+        this.clickId[this.clickNum].style.backgroundColor = "#2c2c2c";
+      }
+      else if (this.clickNum != null && this.clickNum != index) {
+          this.clickId[this.clickNum].style.backgroundColor = "#2c2c2c";
+      }
+      //가입된 카페 정보
+      this.registerCafeData = array;
+      // 메인 화면 이동 함수
+      if(title == 'Village Main')
+        this.$router.push('/community/villagemain')
+      else 
+        this.$router.push({name : 'Register', params: this.registerCafeData});
+      // 사이드바 강조효과
+        this.clickId = document.querySelectorAll("#villageElement");
+        event.target.style.backgroundColor = "#2872f9";
+        
+        this.clickNum = index;
+      },
 },
 }
 </script>
@@ -73,9 +137,7 @@ export default {
 .sideBar{
   overflow: auto;
 }
-
-
-#element{
+#communityElement, #villageElement{
   width: 90%;
   height: 40px;
   color: white;
@@ -85,5 +147,6 @@ export default {
   border-radius: 30px;
   font-weight: 600;
   font-size: 1em;
+  cursor: pointer;
 }
 </style>

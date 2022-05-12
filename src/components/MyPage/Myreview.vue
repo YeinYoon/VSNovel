@@ -48,9 +48,6 @@ export default {
   overflow-y: scroll;
   -ms-overflow-style: none;
 }
-.review_section::-webkit-scrollbar {
-  display: none;
-}
 .review_section .review_list{
   width: 100%;
 }

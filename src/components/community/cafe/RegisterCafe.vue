@@ -4,17 +4,17 @@
     <div class="header">
       <div class="service">
         <img class="icon" src="@/assets/icons/white/leaf.png" alt="logo" />
-        <span class="title">{{registerCafeData.title}}</span>
+        <span class="title">{{registerData.title}}</span>
       </div>
     </div>
     <div class="register_cafe_section">
-      <img class="register_img" :src="`${registerCafeData.link}`" />
+      <img class="register_img" :src="`${registerData.link}`" />
         <div class="register_content">
           <div class="resigster_title">
-            <img :src="`${registerCafeData.link}`" />
+            <img :src="`${registerData.link}`" />
             <div class="register_info">
-                <span>개설자 : {{ registerCafeData.title }}</span>
-                <span>가입자 : {{ registerCafeData.unitNum }}</span>
+                <span>개설자 : {{ registerData.title }}</span>
+                <span>가입자 : {{ registerData.unitNum }}</span>
             </div>
           </div>
           <div class="post_list">
@@ -77,10 +77,8 @@ export default {
     return {
       commuData: commuData,
       noticeData: notice,
+      registerData : this.$route.params,
     };
-  },
-  props: {
-    registerCafeData: Object,
   },
 };
 </script>
@@ -107,9 +105,6 @@ export default {
     height: 65%;
     overflow-y: scroll;
     -ms-overflow-style: none;
-}
-.register_content::-webkit-scrollbar {
-  display: none;
 }
 .resigster_title{
     flex: 3;

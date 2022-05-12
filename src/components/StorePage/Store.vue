@@ -82,7 +82,7 @@ export default {
     },
   },
   created(){
-    console.log(this.$route.params.nove_id);
+    // console.log(this.$route.params.nove_id);
     if(this.$route.params.nove_id!=undefined){
       console.log("MO")
       this.modalData = this.$route.params.nove_id;
@@ -151,9 +151,6 @@ export default {
   overflow-y: scroll;
   -ms-overflow-style: none;
 }
-.store_section::-webkit-scrollbar {
-  display: none;
-}
 .work_list {
   /* width: calc(50%); */
   background-color: #2a2a2a;
@@ -180,9 +177,6 @@ export default {
 .work_list_con {
   color: white;
   width: 70%;
-}
-.work_list_con::-webkit-scrollbar {
-  display: none;
 }
 .list_title {
   font-size: 1.3em;

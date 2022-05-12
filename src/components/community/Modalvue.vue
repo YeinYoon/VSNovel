@@ -48,6 +48,7 @@ export default {
   border-radius: 15px;
   height: 200px;
   margin-top: 10px;
+  overflow-y:scroll;
 }
 .post_modal_frame_normal {
   position: fixed;
