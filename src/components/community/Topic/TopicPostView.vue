@@ -30,15 +30,15 @@
         </div>
     
         <!-- 댓글이 달리는 부분 1 -->
-        <div class="postview_view_area" v-for="(a) in Number(topicObject.coment)" :key="a">
+        <!-- <div class="postview_view_area" v-for="(a) in Number(topicObject.coment)" :key="a">
             <div><img class="postview_img" src="" @error="reimg"></div>
             <div class="postview_view_content"><span></span></div>
-        </div>
+        </div> -->
 
         <!-- 댓글이 달리는 부분 2 -->
-        <div class="postview_view_area" v-for="(a,index) in writecoments" :key="index">
+        <div class="postview_view_area" v-for="(a,index) in topicObject.comentcontents" :key="index">
             <div><img class="postview_img" src="" @error="reimg"></div>
-            <div class="postview_view_content"><span>{{writecoments[index]}}</span></div>
+            <div class="postview_view_content"><span>{{topicObject.comentcontents[index]}}</span></div>
         </div>
       </div>
 
@@ -62,8 +62,8 @@ export default {
     return {
       open: false,
       writecoment: '',
-      writecoments: [],
-      commentcount: 0,
+      //writecoments: [],
+      // commentcount: 0,
     }
   },
   components: {
@@ -75,12 +75,14 @@ export default {
         this.open = true;
         this.writecoment = '';
       }else {
-        this.writecoments.push(this.writecoment);
-        this.commentcount += 1;
+        //this.writecoments.push(this.writecoment);
+        // this.commentcount += 1;
+        this.$emit('reloaddata',this.writecoment);
         this.writecoment = '';
       }
-      console.log(this.commentcount);
-      console.log(this.writecoments)
+      // console.log(this.topicObject);
+      // console.log(this.writecoments);
+      //console.log(this.writecoment);
     },
     reimg(e){
       e.target.src=img

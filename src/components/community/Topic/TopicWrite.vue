@@ -36,7 +36,7 @@ export default {
   },
   methods : {
     registerpost(){
-      //TeamCommu로 이동
+      //TopicCommu로 이동
       this.$emit('add');
 
       //제목과 내용 가지고 와서 content객체에 넣어준다
@@ -45,10 +45,11 @@ export default {
 
       //날짜 데이터 가지고 오기
       this.datedata = new Date();
-      this.writedate = this.datedata.toLocaleString();
+      this.writedate = this.datedata.toISOString().substr(0,10);
       this.content.date = this.writedate;
 
-      //this.content를 Teamone으로 보내기
+
+      //this.content를 TopicFrame으로 보내기
       this.$emit('contentdata' , this.content);
 
     }

@@ -7,7 +7,7 @@
         @closemodal="open = false"
         :modaldatasend="modaldata"
         :datasend="datasend"
-        @deletedata="deletepost(modalindex)"
+        @deletedata="deletepost(indexdata)"
       ></Modal>
     </div>
 
@@ -47,7 +47,7 @@ export default {
       manage : false,
       open: false,
       modaldata : {},
-      modalindex: '',
+      indexdata: '',
     };
   },
   components: {
@@ -57,14 +57,18 @@ export default {
     decision(a,manage,index){
       if(manage==false){
         this.$emit('first', a);
+
+        //topicpostviewdata 댓글을 위한 인덱스데이터
+        this.indexdata = index;
+        this.$emit('indexdata', this.indexdata);
       }else {
         this.open = true;
         this.modaldata = a;
-        this.modalindex = index;
+        this.indexdata = index;
       }
     },
-    deletepost(modalindex){
-      this.$emit('deletepost',modalindex);
+    deletepost(indexdata){
+      this.$emit('deletepost',indexdata);
     },
     replaceimg(e){
       e.target.src=img

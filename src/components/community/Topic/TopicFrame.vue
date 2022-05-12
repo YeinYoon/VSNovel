@@ -8,10 +8,10 @@
       </div>
     </div>
     <div v-if="topicData == 0">
-      <TopicCommu @first="topicadd($event)"  @third="topicData = 2" :datasend="community" @deletepost="remove($event)"/>
+      <TopicCommu @first="topicadd($event)"  @third="topicData = 2" :datasend="community" @deletepost="remove($event)" @indexdata="indexdata = $event"/>
     </div>
     <div v-if="topicData == 1">
-      <TopicPostView @second="topicData=0" :topicObject="topicObject"/>
+      <TopicPostView @second="second()" :topicObject="topicObject" @reloaddata="reload($event)"/>
     </div>
     <div v-if="topicData == 2">
       <TopicWrite @add="topicData=0" :datasend="community" @contentdata="addpost($event)"/>
@@ -32,6 +32,8 @@ export default {
       community: dummy_data,
       topicData : 0,
       topicObject : {},
+      indexdata: 0,
+      writecoments: [],
     };
   },
   methods : {
@@ -44,6 +46,20 @@ export default {
     },
     addpost(addData) {
       this.community.push(addData);
+    },
+    reload(writecoment) {
+      // console.log(writecoments);
+      console.log(this.indexdata);
+      this.writecoments.push(writecoment);
+      this.community[this.indexdata].comentcontents = this.writecoments;
+      //this.topicObject.comentcontents = this.writecoments;
+      // this.community[this.indexdata].coment += writecoments.length; 
+      //console.log(writecoment);
+    },
+    second() {
+      this.topicData=0
+      //this.writecoments.length = 0;
+      //console.log(this.laterindexdata);
     }
 
   },
