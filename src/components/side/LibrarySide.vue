@@ -31,7 +31,7 @@
 
 <script>
 import genreData from "../../assets/DataJs/genreData.js";
-import Library from '../librarypage/LibraryView';
+import Library from '../libraryPage/LibraryView';
 export default {
   name: "StoreSide",
   data() {
