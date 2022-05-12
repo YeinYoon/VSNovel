@@ -7,7 +7,7 @@ export default[
         postNum : 70, 
     },
     {
-        link:'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxODA3MTJfMzQg%2FMDAxNTMxMzc2MTUwNzYw.WhMXGDPBe4Usz2z-ci6sEIVVvzZ6yrxAo0YFWMIwEo8g.QZosJSiUt2le5BJ8SWZycTkp6q1Uxbxv7hRVeKzP7oAg.JPEG.doctorshain%2Fnaver_com_20180712_151538.jpg&type=a340',
+        link:'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAxOTA5MTRfMTY2%2FMDAxNTY4NDQ2MDk3OTY1.aMxCETqJXOJMveEsEGjBBB1akSNvOk_35Me4B2k8Q0Ig.Sszyi8smWxcAqql4yDUxSqHA819B4dUj_5egt9Nf9G8g.PNG.jindo4885%2F%25BB%25E7%25BF%25EB%25C0%25DA_%25C1%25F6%25C1%25A4_213.png&type=a340',
         title: '컨저링',
         content: '1971년 로드 아일랜드, 해리스빌. 페론 가족은 꿈에 그리던 새 집으로 이사를 간다. 물론 1863년에 그 집에서 일어난 끔찍한 살인 사건을 전혀 몰랐다. 또한 그 이후에 일어난 많은 무서운 사건에 대해서도 알지 못했다. 이 가족은 그 집에서 겪은 일이 너무 무서워서 한 마디라도 외부에 언급하는 것을 거절했었다. 지금까지는… [스페셜 영상 1] 영화 속 숨겨진 뒷이야기 (00:08:02) [스페셜 영상 2] 악마의 생활 (00:15:38) 유명한 귀신연구자와 초자연적인것의 전문가 로렌 워렌과 함께하는 여행, 그녀가 주최하는 묘지투어와 수천개의 위험한 유물들이 모여있는 악마의 집, 오컬트 셀러를 방문한다 [스페셜 영상 3] 공포와 대면 (00:06:37) 그들이 대략 십년 동안 악마의 영혼과 같이 살았던 불가사의한 농가에서 페론 가족들은 되돌아 왔고 그들은 그 기억을 떠올릴 때마다 그 공포를 다시 체험한다.',
         unitNum : 120,

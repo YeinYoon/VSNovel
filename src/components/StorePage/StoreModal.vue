@@ -3,13 +3,19 @@
     <div class="modal_style">
       <div class="close" @click="send_event">X</div>
       <div v-if="modal_step == 0">
-        <StoreVue :modalData="modalData" @next="modal_step++" @onchange="console.log('aaa')"/>
+        <StoreVue :modalData="modalData" @next="modal_step++" />
       </div>
       <div v-if="modal_step == 1">
         <StoreCard @next="modal_step++" />
       </div>
       <div v-if="modal_step == 2">
-        <ModalEnd @close="send_event" />
+        <div class="con">
+          <div class="font">결제 완료</div>
+          <div class="btn_areas">
+            <div class="btn_1" @click="$router.push('/library')"><span>보관함</span></div>
+            <div class="btn_store" @click="send_event"><span>스토어</span></div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -17,7 +23,6 @@
 <script>
 import StoreCard from "./StoreCard.vue";
 import StoreVue from "./StoreVue.vue";
-import ModalEnd from "./ModalEnd.vue";
 
 export default {
   name: "StoreModal",
@@ -32,7 +37,7 @@ export default {
   },
   methods: {
     send_event() {
-    // 모달 닫을 때 쓰는 함수
+      // 모달 닫을 때 쓰는 함수
       this.modal_step = 0;
       this.$emit("close");
     },
@@ -40,7 +45,6 @@ export default {
   components: {
     StoreCard,
     StoreVue,
-    ModalEnd,
   },
 };
 </script>
@@ -87,4 +91,50 @@ div {
   box-shadow: 0 0 100px 50px black;
 }
 
+.con {
+  text-align: center;
+  width: 97%;
+  height: 93%;
+  position: absolute;
+  color: white;
+  z-index: 11;
+}
+.font {
+  font-size: 2em;
+  width: 100%;
+  text-align: center;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  top: 40%;
+}
+.btn_areas {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  width: 100%;
+  height: 93%;
+}
+.btn_areas .btn_1 {
+  display: table;
+  background-color: #2872f9;
+  padding: 0 10px;
+  width: 100px;
+  height: 40px;
+  border-radius: 20px;
+}
+.btn_areas .btn_1 span,
+.btn_areas .btn_store span {
+  display: table-cell;
+  vertical-align: middle;
+}
+.btn_areas .btn_store {
+  display: table;
+  background-color: red;
+  padding: 0 10px;
+  margin: 0 0 0 20px;
+  width: 100px;
+  height: 40px;
+  border-radius: 20px;
+}
 </style>

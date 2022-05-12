@@ -34,9 +34,13 @@ import axios from '../../axios'
 import Store from '../storepage/Store';
 export default {
   name: "StoreSide",
+  components:{
+    Store,
+  },
   created() {
     this.getCateList();
     this.getNovelList();
+    this.$router.push('/store');
   },
   data() {
     return {
@@ -48,9 +52,6 @@ export default {
       novelType : "",
       cateCode : ""
     };
-  },
-  components:{
-    Store,
   },
   methods: {
     groupEvent(step, event, type) {
