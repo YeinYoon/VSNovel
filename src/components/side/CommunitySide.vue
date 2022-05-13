@@ -22,7 +22,7 @@
   <div class="tests">
     <div class="header">
       <div class="service">
-        <img class="icon" src="@/assets/icons/white/bubble_chat.png" alt="logo" />
+        <img class="icon" src="@/assets/icons/white/bubble_chat.png" alt="logo" />m
         <span class="title">커뮤니티</span>
         <span class="topic">TOPIC · {{step}}</span>
       </div>
@@ -31,7 +31,7 @@
       <TopicCommu @first="topicadd($event)"  @third="topicData = 2" :datasend="community" @deletepost="remove($event)"/>
     </div>
     <div v-if="topicData == 1">
-      <TopicPostView @second="topicData=0" :topicObject="topicObject"/>
+      <TopicPostView @second="topicData=0" :topicObject="topicObject" @reloaddata="reload($event)"/>
     </div>
     <div v-if="topicData == 2">
       <TopicWrite @add="topicData=0" :datasend="community" @contentdata="addpost($event)"/>
@@ -90,6 +90,9 @@ export default {
     },
     addpost(addData) {
       this.community.push(addData);
+    },
+    reload(writecoments) {
+      this.topicObject.comentcontents = writecoments;
     },
 
     clickCommunityEvent(index, event, item) {

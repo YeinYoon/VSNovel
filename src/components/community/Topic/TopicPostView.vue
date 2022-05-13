@@ -62,7 +62,7 @@ export default {
     return {
       open: false,
       writecoment: '',
-      //writecoments: [],
+      writecoments: [],
       // commentcount: 0,
     }
   },
@@ -75,9 +75,9 @@ export default {
         this.open = true;
         this.writecoment = '';
       }else {
-        //this.writecoments.push(this.writecoment);
+        this.writecoments.push(this.writecoment);
         // this.commentcount += 1;
-        this.$emit('reloaddata',this.writecoment);
+        this.$emit('reloaddata',this.writecoments);
         this.writecoment = '';
       }
       // console.log(this.topicObject);
