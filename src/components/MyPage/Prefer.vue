@@ -42,11 +42,11 @@ export default {
   },
   methods: {
     // 카테고리 버튼 클릭 시 이벤트 실행 - 한번 클릭 시 파란색, 두번 클릭 시 빨간색, 세번 클릭 시 처음색으로 돌아감
-    prefer: function (genre, event) { 
-      genre = genre.genre;
-      genre.count++;
-      genre.count %= 3;
-      this.status = genre.count;
+    prefer: function (item, event) { 
+      item = item.genre;
+      item.count++;
+      item.count %= 3;
+      this.status = item.count;
       event.target.style.backgroundColor =
         this.status == 0 ? "#5E5E5E" : this.status == 1 ? "#0078FF" : "#EA4235";
     },

@@ -59,17 +59,15 @@ export default {
       maxlength:500
     }
   },
-  watch:{
-    
-
-  },
   methods:{
     // browse버튼을 눌러 이미지를 불러오는 함수
     upload(e){
       let uploadfile = e.target.files
       console.log(uploadfile[0].type);
+      
       let url = URL.createObjectURL(uploadfile[0]);
       console.log(url);
+
       this.uploadimg=url;
       this.uploadimgfile();
     },
@@ -77,6 +75,9 @@ export default {
     // 불러온 이미지를 프로필 이미지 상에 출력해주는 함수
     uploadimgfile(){
       document.getElementById('profile-image').classList.replace('profile-image-input','profile-image-change');
+      if(document.getElementById('profile-image').style.backgroundImage==null){
+          document.getElementById('profile-image').style.backgroundImage=this.uploadimg;
+      }
     },
 
     // 프로필 수정버튼을 눌렀을 때 동작하는 함수
@@ -97,15 +98,21 @@ export default {
     cancel(){
       const nick = document.getElementById('profilenick');
       const intro = document.getElementById('profileintro');
+      const browse = document.getElementById('input-file');
       const btn = document.querySelector("#mypage_main-save");
+      
       btn.innerText='수정';
       nick.disabled = true;
       intro.disabled = true;
+      browse.disabled = true;
+      
       nick.value='';
       intro.value='';
       this.areaText = '';
-      document.getElementById('profile-image').classList.remove('profile-image-change');
-      document.getElementById('profile-image').classList.add('profile-image-input');
+      
+      document.getElementById('profile-image').classList.replace('profile-image-change','profile-image-input');
+      document.getElementById('profile-image').style.backgroundImage= "url('')";
+      
     },
     
   }
@@ -191,12 +198,24 @@ export default {
   font-size: 0.8em;
 }
 
+/* 프로필 이미지가 들어가기전 공간 */
+.profile-image-input{
+  height: 160px;
+  width: 400px;
+  background:#5E5E5E;
+  border-radius: 20px;
+  z-index: 11;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
 /* 프로필 이미지가 들어왔을 때 변하는 스타일 */
 .profile-image-change{
   height: 200px;
   width: 200px;
   background: no-repeat;
   margin-left: 110px;
+  margin-bottom: 15px;
   background-size:cover;
   border-radius: 20px;
   z-index: 13;
@@ -218,17 +237,6 @@ export default {
   padding: 15px;
 }
 
-/* 프로필 이미지가 들어가기전 공간 */
-.profile-image-input{
-  height: 160px;
-  width: 400px;
-  background:#5E5E5E;
-  border-radius: 20px;
-  z-index: 11;
-  margin-right: 15px;
-  margin-bottom: 15px;
-}
-
 /* 소개 내용이 들어가는 공간 */
 .profile-introduce-input{
   width: 400px;
@@ -241,6 +249,7 @@ export default {
   margin-bottom: 15px;
   margin-right: 15px;
   padding: 15px;
+  outline: none;
 }
 
 /* 취소버튼 */
