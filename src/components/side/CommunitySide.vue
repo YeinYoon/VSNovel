@@ -18,7 +18,7 @@
       </div>
   </div>
 </div>
-<div v-if="$route.path.substr(1) == 'community/'">
+<div v-if="$route.path.substr(1) == 'community'">
   <div class="tests">
     <div class="header">
       <div class="service">
@@ -74,11 +74,11 @@ export default {
     this.clickId = document.querySelectorAll("#communityElement")
     this.clickId[this.clickNum].style.backgroundColor = "#2872f9"
 
-    
-    if(this.$route.params.comm_id != null)
+    if(this.$route.params.comm_id!=undefined){
       this.topicData = 1;
-    console.log(this.topicData);
-    console.log(this.$route.params)
+      this.topicObject = { title : this.$route.params.comm_id, 
+                           content : this.$route.params.comm_content}    
+    }
   },
   methods:{
     topicadd(event){

@@ -29,7 +29,7 @@
         />
       </div>
       <br />
-      <div v-bind:class="{ menubox: true }" id="communi" @click="routerPush('/community/')">
+      <div v-bind:class="{ menubox: true }" id="communi" @click="routerPush('/community')">
         <img
           class="menubox_icon_community"
           src="@/assets/icons/white/bubble_chat.png"

@@ -83,9 +83,14 @@ export default {
   },
   created(){
     // console.log(this.$route.params.nove_id);
-    if(this.$route.params.nove_id!=undefined){
-      console.log("MO")
-      this.modalData = this.$route.params.nove_id;
+    if(this.$route.params.NOVE_TITLE!=undefined){
+      this.modalData = {
+        NOVE_TITLE : this.$route.params.NOVE_TITLE,
+        NOVE_SYNOPSIS: this.$route.params.NOVE_SYNOPSIS,
+        NOVE_PRICE: this.$route.params.NOVE_PRICE,
+        NOVE_TEAMNAME: this.$route.params.NOVE_TEAMNAME,
+        CATE_CODE : '이 더미엔 장르 데이터 존재 X'
+      };
       this.modal = true;
     }
   }

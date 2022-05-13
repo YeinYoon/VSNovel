@@ -25,8 +25,6 @@ export default {
   data() {
     return {}
   },
-  components: {
-  },
   methods : {
     onWindowLoad() {
       console.log("window load event");
@@ -34,8 +32,7 @@ export default {
   },
   props:{
     topicObject : Object,
-
-  }
+  },
 };
 </script>
 

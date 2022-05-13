@@ -158,26 +158,28 @@ export default {
     // 스토어 게시물 이동 함수
     storeView(data) {
       this.$router.push({
-        path: "/store",
         name: "Store",
-        params: { nove_id: data.title,
-                  nove_synopsis: data.content,
-                  nove_price: data.pay,
-                  nove_teamname: data.team },
+        params: { NOVE_TITLE: data.title,
+                  NOVE_SYNOPSIS: data.content,
+                  NOVE_PRICE: data.pay,
+                  NOVE_TEAMNAME: data.team,
+                  },
       });
     },
     communityView(data) {
       console.log(data.title);
       this.$router.push({
-        path: "/community/",
-        params: { comm_id: data.title },
+        name: 'Community',
+        params: { comm_id: data.title,
+                  comm_content : data.content },
       });
     },
     noticeView(data) {
       console.log(data.title);
       this.$router.push({
-        path: "/notice",
-        params: { noti_id: data.title, },
+        name: 'Notice',
+        params: { noti_id: data.title,
+                  noti_content: data.content },
       });
     },
   },
