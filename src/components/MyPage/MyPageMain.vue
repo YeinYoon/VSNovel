@@ -179,14 +179,17 @@ export default {
 
 /* 오른쪽 부분에 있는 텍스트 스타일 */
 .col-three{
+  position: absolute;
   font-size: 0.8em;
+  left: 73%;
 }
 
 /* 왼쪽 부분에 있는 텍스트 스타일 */
 .col-one{
-  width: 20%;
   vertical-align: top;
-  background-color: bisque;
+  padding-right: 40px;
+  width: 150px;
+  font-size: 1.0em;
 }
 
 /* 소개 글자용량 표시 */
@@ -198,7 +201,7 @@ export default {
 /* 프로필 이미지가 들어가기전 공간 */
 .profile-image-input{
   height: 160px;
-  width: 60%;
+  width: 50%;
   background:#5E5E5E;
   border-radius: 20px;
   z-index: 11;
@@ -209,7 +212,7 @@ export default {
 /* 프로필 이미지가 들어왔을 때 변하는 스타일 */
 .profile-image-change{
   height: 200px;
-  width: 60%;
+  width: 50%;
   background: no-repeat;
   margin-left: 110px;
   margin-bottom: 15px;
@@ -220,7 +223,7 @@ export default {
 
 /* 닉네임을 적는 공간 */
 .profile-nick-input{
-  width: 60%;
+  width: 50%;
   height: 50px;
   border-radius: 20px;
   background-color: #5E5E5E;
@@ -236,7 +239,7 @@ export default {
 
 /* 소개 내용이 들어가는 공간 */
 .profile-introduce-input{
-  width: 60%;
+  width: 50%;
   height: 100px;
   border-radius: 20px;
   background-color: #5E5E5E;
