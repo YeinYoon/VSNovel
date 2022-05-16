@@ -101,6 +101,13 @@ router.post('/postalarm', async(req, res) => {
     res.send(result)
 })
 
+router.post('/postconfirm', async(req, res) => {
+    const result = await db.execute(`DELETE FROM tbl_user WHERE user_id = '${req.user.USER_ID}'`)
+    req.logout();
+    req.session.destroy()
+    res.send(result)
+})
+
 
 module.exports = router;
 
