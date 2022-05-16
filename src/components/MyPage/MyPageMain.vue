@@ -32,8 +32,8 @@
 
         <div class="profile-intro-line">
           <div class="col-one">소개</div>
-          <textarea id="profileintro" class="profile-introduce-input" type="text" v-model="newIntro"></textarea>
-          <div class="intro-cont-align"><span>0/1024 byte</span></div>
+          <textarea id="profileintro" class="profile-introduce-input" type="text" @keydown="count()" maxlength="1024" v-model="newIntro"></textarea>
+          <div class="intro-cont-align"><span>{{introNum}}/1024 byte</span></div>
         </div>
 
       </div>
@@ -63,6 +63,7 @@ export default {
       newNickname: "",
       newImage: "",
       newIntro: "",
+      introNum: 0,
       isSave : true
     }
   },
@@ -94,6 +95,9 @@ export default {
       })
       this.isSave=true
     },
+    count() {
+      this.introNum++
+    },
     // 데이터 불러오기
     getProfile() {
       axios.get('/api/mypage/mypagemain')
@@ -104,7 +108,7 @@ export default {
           console.log(result.data);
           this.newImage = result.data[0].USER_IMG
           this.newNickname = result.data[0].USER_NICKNAME
-          // this.newIntro = result.data[0].USER_INTRO
+          this.newIntro = result.data[0].USER_INTRO
         }
       })
     },
@@ -119,8 +123,8 @@ export default {
       const intro = document.getElementById('profileintro');
       const browse = document.getElementById('input-file');
       this.isSave = false;
-      nick.disabled = false;
-      intro.disabled = false;
+      nick.disabled = true;
+      intro.disabled = true;
       browse.disabled = false;
       this.newNickname = newNickname;
       this.newImage = newImage;

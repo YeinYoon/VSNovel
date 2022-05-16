@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import Community from '../community/topic/TopicFrame';
+import Community from '../community/topic/TopicFrame.vue';
 import Cafe from '../community/cafe/CafeMain';
 import RegisterCafe from '../community/cafe/RegisterCafe';
 export default {
