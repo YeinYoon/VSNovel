@@ -196,7 +196,7 @@ export default {
   border: 1px solid white;
 }
 .main {
-  width: 90%;
+  width: 100%;
   position: absolute;
   left: 5%;
 }
@@ -269,23 +269,24 @@ button {
   outline: none;
 }
 .section {
-  width: 1000px;
+  width: 100%;
   position: relative;
   top: 30px;
   margin: 0 auto;
   /* margin: 20px 0 0 0; */
 }
 .banner_div_carousel {
-  width: 1000px;
-  height: 150px;
+  width: 95%;
+  height: 180px;
   border-radius: 25px;
   background-color: rgb(75, 75, 75);
   position: absolute;
-  top: 30px;
+  left: 2.5%;
+  top: 13px;
 }
 .section .banner {
   margin: 0 auto;
-  width: 920px;
+  width: 90%;
   height: 204px;
   border-radius: 25px;
   border: 2px solid rgb(73, 73, 73);
@@ -300,7 +301,7 @@ button {
   width: 100%;
 }
 .box {
-  width: 1000px;
+  width: 90%;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;

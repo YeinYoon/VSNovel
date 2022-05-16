@@ -67,7 +67,7 @@ export default {
 .commu_write_section {
   margin: 0 auto;
   padding: 10px 15px;
-  width: 800px;
+  width: 95%;
   height: 65vh;
   background-color: #2c2c2c;
   border-radius: 20px;

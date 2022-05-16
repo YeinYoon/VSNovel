@@ -97,7 +97,7 @@ export default {
 <style>
 .postview_wrap {
   margin: 0 auto;
-  width: 800px;
+  width: 95%;
 }
 .postview_section {
   padding: 10px 15px;

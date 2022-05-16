@@ -152,7 +152,7 @@ export default {
 
 <style>
 .notice_section{
-    width: 800px;
+    width: 95%;
     height: 70%;
     margin: 0 auto;
     position: relative;

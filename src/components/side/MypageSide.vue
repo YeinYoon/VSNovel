@@ -88,7 +88,7 @@ export default {
   flex-direction: column;
   padding: 50px 10px 0 10px;
   background: #2c2c2c;
-  width: 250px;
+  width: 300px;
   height: 100vh;
   position: fixed;
   top: 0px;
@@ -99,12 +99,12 @@ export default {
 }
 /* -------------------------------------------------------------------- */
 .sel div {
-  width: 90%;
+  width: 73%;
   height: 40px;
   color: white;
   padding: 5px 10px 5px 20px;
   text-align: left;
-  margin: 10px 0 0 20px;
+  margin: 10px 0 0 50px;
   border-radius: 30px;
   font-weight: 600;
   font-size: 1em;

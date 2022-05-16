@@ -32,16 +32,16 @@
 
         <div class="profile-intro-line">
           <div class="col-one">소개</div>
-          <textarea id="profileintro" class="profile-introduce-input" type="text" disabled></textarea>
-          <div class="intro-cont-align"><span>0/1024 byte</span></div>
+          <textarea id="profileintro" class="profile-introduce-input contents" type="text"  v-model="areaText" :maxlength="500" disabled></textarea>
+          <div class="intro-cont-align"><span>{{areaText.length}}</span>/500자</div>
         </div>
 
       </div>
 
       <!-- 취소,수정 버튼 -->
-      <footer>
-        <button id="mypage_main-canc" @click="cancel">취소</button>
-        <button id="mypage_main-save" @click="profiledit">수정</button>
+      <footer class="mainBtnArea">
+        <div id="mypage_main-canc" @click="cancel">취소</div>
+        <div id="mypage_main-save" @click="profiledit">수정</div>
       </footer>
       
     </div>
@@ -54,7 +54,9 @@
 export default {
   data(){
     return{
-      uploadimg:''
+      uploadimg:'',
+      areaText:'',
+      maxlength:500
     }
   },
   methods:{
@@ -62,8 +64,10 @@ export default {
     upload(e){
       let uploadfile = e.target.files
       console.log(uploadfile[0].type);
+      
       let url = URL.createObjectURL(uploadfile[0]);
       console.log(url);
+
       this.uploadimg=url;
       this.uploadimgfile();
     },
@@ -71,9 +75,13 @@ export default {
     // 불러온 이미지를 프로필 이미지 상에 출력해주는 함수
     uploadimgfile(){
       document.getElementById('profile-image').classList.replace('profile-image-input','profile-image-change');
+      if(document.getElementById('profile-image').style.backgroundImage==null){
+          document.getElementById('profile-image').style.backgroundImage=this.uploadimg;
+      }
     },
 
     // 프로필 수정버튼을 눌렀을 때 동작하는 함수
+    // 비활성이었던 입력박스가 활성화상태로 변경
     profiledit(){
       const nick = document.getElementById('profilenick');
       const intro = document.getElementById('profileintro');
@@ -86,24 +94,41 @@ export default {
     },
 
     // 취소 버튼을 눌렀을 때 동작하는 함수
+    // 기존에 입력되었던 텍스트들을 null값으로 변경하고 입력박스들을 비활성화 상태로 변경
     cancel(){
       const nick = document.getElementById('profilenick');
       const intro = document.getElementById('profileintro');
+      const browse = document.getElementById('input-file');
       const btn = document.querySelector("#mypage_main-save");
+      
       btn.innerText='수정';
       nick.disabled = true;
       intro.disabled = true;
+      browse.disabled = true;
+      
       nick.value='';
       intro.value='';
-      document.getElementById('profile-image').classList.remove('profile-image-change');
-      document.getElementById('profile-image').classList.add('profile-image-input');
+      this.areaText = '';
       
-    }
+      document.getElementById('profile-image').classList.replace('profile-image-change','profile-image-input');
+      document.getElementById('profile-image').style.backgroundImage= "url('')";
+      
+    },
+    
   }
-};
+}
+
 </script>
 
 <style>
+
+.mainBtnArea{
+  display: flex;
+  text-align: center;
+  margin-top: 2%;
+  line-height: 42px;
+}
+
 .my_topic{
   display: block;
   width: 150px;
@@ -140,7 +165,7 @@ export default {
   padding: 20px;
   position: relative;
   top: 15%;
-  width: 800px;
+  width: 95%;
   height: 450px;
   margin: 0 auto;
 }
@@ -154,17 +179,14 @@ export default {
 
 /* 오른쪽 부분에 있는 텍스트 스타일 */
 .col-three{
-  position: absolute;
   font-size: 0.8em;
-  left: 73%;
 }
 
 /* 왼쪽 부분에 있는 텍스트 스타일 */
 .col-one{
+  width: 20%;
   vertical-align: top;
-  padding-right: 40px;
-  width: 150px;
-  font-size: 1.0em;
+  background-color: bisque;
 }
 
 /* 소개 글자용량 표시 */
@@ -173,12 +195,24 @@ export default {
   font-size: 0.8em;
 }
 
+/* 프로필 이미지가 들어가기전 공간 */
+.profile-image-input{
+  height: 160px;
+  width: 60%;
+  background:#5E5E5E;
+  border-radius: 20px;
+  z-index: 11;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
 /* 프로필 이미지가 들어왔을 때 변하는 스타일 */
 .profile-image-change{
   height: 200px;
-  width: 200px;
+  width: 60%;
   background: no-repeat;
   margin-left: 110px;
+  margin-bottom: 15px;
   background-size:cover;
   border-radius: 20px;
   z-index: 13;
@@ -186,7 +220,7 @@ export default {
 
 /* 닉네임을 적는 공간 */
 .profile-nick-input{
-  width: 400px;
+  width: 60%;
   height: 50px;
   border-radius: 20px;
   background-color: #5E5E5E;
@@ -200,20 +234,9 @@ export default {
   padding: 15px;
 }
 
-/* 프로필 이미지가 들어가기전 공간 */
-.profile-image-input{
-  height: 160px;
-  width: 400px;
-  background:#5E5E5E;
-  border-radius: 20px;
-  z-index: 11;
-  margin-right: 15px;
-  margin-bottom: 15px;
-}
-
 /* 소개 내용이 들어가는 공간 */
 .profile-introduce-input{
-  width: 400px;
+  width: 60%;
   height: 100px;
   border-radius: 20px;
   background-color: #5E5E5E;
@@ -223,6 +246,7 @@ export default {
   margin-bottom: 15px;
   margin-right: 15px;
   padding: 15px;
+  outline: none;
 }
 
 /* 취소버튼 */
@@ -236,6 +260,7 @@ export default {
   font-size: 1.0em;
   margin-right: 30px;
   margin-top:0;
+  cursor: pointer;
 }
 
 /* 저장 버튼 */
@@ -247,5 +272,6 @@ export default {
   background-color: #2872F9;
   color: white;
   font-size: 1.0em;
+  cursor: pointer;
 }
 </style>

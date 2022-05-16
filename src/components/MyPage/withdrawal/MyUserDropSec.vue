@@ -41,36 +41,37 @@ export default {
 .drop-sec-container{
   padding:10px;
   color: white;
-  width: 600px;
+  width: 95%;
   height: 450px;
   position: relative;
   top: 70px;
   margin: 0 auto;
   text-align: center;
+
 }
 
 /* 각행의 정렬 */
 .drop-sec-row{
   display: flex;
-  padding-bottom: 3%;
+  padding-bottom: 20px;
   width: 100%;
 }
 
 /* 페이지 설명(맨윗부분) */
 .drop-sec-title{
   margin-left: 5%;
-  margin-bottom: 5%;
+  margin-bottom: 20px;
 }
 
 /* 페이지 설명 글자 */
 .exit-title{
-  font-size: 1.8em;
+  font-size: 1.4em;
   text-align: center;
 }
 
 /* 아이디,패스워드 등의 글자 정렬 */
 .exit-info-position{
-  flex: 2;
+  flex: 3;
   font-size: 1.3em;
 }
 

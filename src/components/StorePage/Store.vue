@@ -101,10 +101,10 @@ export default {
 .tests {
   background-color: #353535;
   padding: 35px 40px 30px 40px;
-  width: calc(100% - 390px);
+  width: calc(100% - 440px);
   height: 100%;
   position: fixed;
-  left: 390px;
+  left: 440px;
   overflow: auto;
 }
 /* price_div 위치 잡는 div /  price 전체 div / 
@@ -149,7 +149,7 @@ export default {
   padding: 5px;
   font-size: 1.3em;
   color: white;
-  width: 800px;
+  width: 90%;
   height: 80%;
   position: relative;
   top: 70px;

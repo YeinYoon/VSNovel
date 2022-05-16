@@ -39,7 +39,7 @@ export default {
 <style>
 .review_section{
   margin: 0 auto;
-  width: 800px;
+  width: 95%;
   height: 80%;
   position: relative;
   top: 5%;

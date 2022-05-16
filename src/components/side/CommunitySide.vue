@@ -101,7 +101,7 @@ export default {
       }
       // 메인 화면 이동 함수
       this.step = item;
-      this.$router.push('/community/')
+      this.$router.push('/community')
       // 사이드바 강조효과
         this.clickId = document.querySelectorAll("#communityElement");
         event.target.style.backgroundColor = "#2872f9";
@@ -138,12 +138,12 @@ export default {
   overflow: auto;
 }
 #communityElement, #villageElement{
-  width: 90%;
+  width: 73%;
   height: 40px;
   color: white;
   padding: 5px 10px 5px 20px;
   text-align: left;
-  margin: 10px 0 0 20px;
+  margin: 10px 0 0 50px;
   border-radius: 30px;
   font-weight: 600;
   font-size: 1em;
