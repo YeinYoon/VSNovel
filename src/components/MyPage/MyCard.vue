@@ -54,13 +54,7 @@ export default {
     routerPush(link){
       this.$router.push(link);
     },
-    cardNum(value) {
-      value = value.replace(/[^0-9]/g, "");
-      return value.replace(
-        /(^02.{0}|^01.{1}|[0-9]{3})([0-9]+)([0-9]{4})/,
-        "$1-$2-$3"
-      );
-    },
+    
     
   }
 }
@@ -183,7 +177,7 @@ input[type="number"]::-webkit-inner-spin-button {
   color: white;
   font-size: 15px;
   margin-right: 30px;
-  margin-top:0;
+  margin-top:15px;
   cursor: pointer;
 }
 
@@ -196,6 +190,7 @@ input[type="number"]::-webkit-inner-spin-button {
   background-color: #2872F9;
   color: white;
   font-size: 15px;
+  margin-top:15px;
   cursor: pointer;
 }
 
