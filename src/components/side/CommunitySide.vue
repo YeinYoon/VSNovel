@@ -22,13 +22,13 @@
   <div class="tests">
     <div class="header">
       <div class="service">
-        <img class="icon" src="@/assets/icons/white/bubble_chat.png" alt="logo" />m
+        <img class="icon" src="@/assets/icons/white/bubble_chat.png" alt="logo" />
         <span class="title">커뮤니티</span>
         <span class="topic">TOPIC · {{step}}</span>
       </div>
     </div>
     <div v-if="topicData == 0">
-      <TopicCommu @first="topicadd($event)"  @third="topicData = 2" :datasend="community" @deletepost="remove($event)"/>
+      <TopicCommu @first="topicadd($event)"  @btnEvent="communityevent($event)" :datasend="community" @deletepost="remove($event)"/>
     </div>
     <div v-if="topicData == 1">
       <TopicPostView @second="topicData=0" :topicObject="topicObject" @reloaddata="reload($event)"/>
@@ -81,6 +81,12 @@ export default {
     console.log(this.$route.params)
   },
   methods:{
+    communityevent(event){
+      //TopicPostView로 감
+      if(event == 'third'){
+        this.topicData = 2
+      }
+    },
     topicadd(event){
       this.topicData = 1;
       this.topicObject = event;

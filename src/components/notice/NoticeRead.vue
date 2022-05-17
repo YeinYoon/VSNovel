@@ -44,7 +44,7 @@
 
 <script>
 export default {
-  name: "OnWrite",
+  name: "NoticeRead",
   data() {
     return {
       noticeAdmin : 0,

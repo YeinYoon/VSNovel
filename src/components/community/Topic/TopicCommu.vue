@@ -16,7 +16,7 @@
             <span class="commu_btn_manage" @click="manage=true" v-if="manage==false">관리자 시점</span>
             <span class="commu_btn_manage" @click="manage=false" v-if="manage==true">관리</span>
           </div>
-          <div class="commu_btn_blue" v-if="manage==false"><span class="commu_btn_write" @click="$emit('third')">글쓰기</span></div>
+          <div class="commu_btn_blue" v-if="manage==false"><span class="commu_btn_write" @click="communitybtn('third')">글쓰기</span></div>
         </div>
 
     <section class="commu_section">
@@ -54,13 +54,14 @@ export default {
      Modal,
   },
   methods : {
+    communitybtn(step){
+      if(step == 'third'){
+        this.$emit('btnEvent','third');
+      }
+    },
     decision(a,manage,index){
       if(manage==false){
         this.$emit('first', a);
-
-        //topicpostviewdata 댓글을 위한 인덱스데이터
-        this.indexdata = index;
-        this.$emit('indexdata', this.indexdata);
       }else {
         this.open = true;
         this.modaldata = a;
