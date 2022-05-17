@@ -40,6 +40,7 @@
 
 <script>
 import Modal from "../Modalvue";
+import axios from '../../../axios'
 import img from "@/assets/imgs/noimage.png";
 export default {
   data() {
@@ -52,6 +53,12 @@ export default {
   },
   components: {
      Modal,
+  },
+  props : {
+    datasend:Object
+  },
+  created(){
+    this.getcommulist();
   },
   methods : {
     decision(a,manage,index){
@@ -72,10 +79,19 @@ export default {
     },
     replaceimg(e){
       e.target.src=img
-    }
-  },
-  props : {
-    datasend:Object
+    },
+    
+    //커뮤 리스트 조회
+    getcommulist() {
+      axios.get('/api/community/getcommulist')
+      .then((result)=>{
+        if(result.data == "err") {
+          console.log("커뮤니티 데이터 불러오기 실패");
+        } else {
+        //  console.log(result.data);
+        }
+      })
+    },
   }
 };
 </script>

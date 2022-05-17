@@ -12,7 +12,7 @@
             <div class="cafe_modal_inner">
                 <div class="cafe_modal_title_inner"><span class="modal_title">가입하기</span></div>
                 <div>
-                    <div class="cafe_banner"><img :src="datas[dataNum].link"></div>
+                    <div class="cafe_banner"><img :src="datas[dataNum].VILL_PRO_IMG"></div>
                 </div>
                 
             </div>

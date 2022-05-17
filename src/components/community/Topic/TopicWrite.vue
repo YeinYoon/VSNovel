@@ -24,12 +24,12 @@ export default {
       writedate:'',
       datedata:'',
       content:{
-        title:'',
+        post_title:'',
         writer : '',
-        content : '',
+        post_content : '',
         titleImg : '',
         date : '',
-        likes    : '0',
+        post_vote    : '0',
         coment  : '0',
       }
     }
@@ -51,8 +51,8 @@ export default {
 
       //this.content를 TopicFrame으로 보내기
       this.$emit('contentdata' , this.content);
-
-    }
+      
+    },
   },
   components: {
       Editor

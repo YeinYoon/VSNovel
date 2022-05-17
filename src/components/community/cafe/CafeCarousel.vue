@@ -8,8 +8,8 @@
     :pauseAutoplayOnHover="status"
   >
     <slide v-for="(slide,i) in datas" :key="i" @click="sendData(i)" >
-      <img :src="`${slide.link}`" class="carousel_imga"/>
-      <img :src="`${slide.link}`" class="carousel_img"/>
+      <img :src="`${slide.VILL_PRO_IMG}`" class="carousel_imga"/>
+      <img :src="`${slide.VILL_PRO_IMG}`" class="carousel_img"/>
     </slide>
     <template #addons>
       <navigation />
@@ -21,14 +21,14 @@
 // If you are using PurgeCSS, make sure to whitelist the carousel CSS classes
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
-import data from "@/assets/DataJs/data.js";
 import CafeModal from "./CafeModal.vue";
+import axios from '../../../axios'
 
 export default {
   name: "App",
   data() {
     return {
-      datas: data,
+      datas: [],
       openModal : false,
       dataNum : 0,
       status: true,
@@ -42,11 +42,25 @@ export default {
     Navigation,
     CafeModal
   },
+  created(){
+    this.getvillagelist();
+  },
   methods: {
     sendData(i) {
       this.dataNum = i;
       this.openModal = true;
-    }
+    },
+    //카페 리스트 조회
+    getvillagelist() {
+      axios.get('/api/village/getvillagelist')
+      .then((result)=>{
+        if(result.data == "err") {
+          console.log("커뮤니티 데이터 불러오기 실패");
+        } else {
+          this.datas = result.data;
+        }
+      })
+    },
   }
 };
 </script>

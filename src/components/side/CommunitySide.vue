@@ -13,8 +13,9 @@
     </div>
     <div>
         <div class="group"><span>· Village</span></div>
+        <div  id="villageElement"  @click="clickCafeEvent(0, $event, 'Village Main')">· Village Main</div>
       <div v-for="(array, i) in sideCafe" :key="i">
-        <div @click="clickCafeEvent(i, $event, array.title, array)" id="villageElement">· {{array.title}}</div>
+        <div @click="clickCafeEvent(i, $event, array.VILL_NAME, array+1)" id="villageElement">· {{array.VILL_NAME}}</div>
       </div>
   </div>
 </div>
@@ -49,12 +50,13 @@ import dummy_data from "@/assets/DataJs/commuData.js";
 import TopicCommu from "../community/topic/TopicCommu";
 import TopicPostView from "../community/topic/TopicPostView";
 import TopicWrite from "../community/topic/TopicWrite";
+import axios from '../../axios'
 export default {
   name: "CommunitySide",
   data() {
     return {
       sideArrays : ['자유', '작가', '팀원 모집', '리뷰 & 추천'],
-      sideCafe : this.$store.state.cafeSide,
+      sideCafe : [],
       clickNum : 0,
       step: '자유',
       registerCafeData : {},
@@ -69,6 +71,9 @@ export default {
     TopicPostView,
     TopicWrite
   },
+  created(){
+    this.resvillagelist();
+  },
   mounted(){
     // 기본 강조 효과
     this.clickId = document.querySelectorAll("#communityElement")
@@ -81,6 +86,18 @@ export default {
     }
   },
   methods:{
+    // 가입한 카페 리스트
+    resvillagelist() {
+      axios.post('/api/village/resvillagelist', { id : this.$store.state.userId })
+      .then((result)=>{
+        if(result.data == "err") {
+          console.log("가입한 카페 리스트 불러오기 실패");
+        } else {
+          this.sideCafe = result.data;
+          console.log(this.sideCafe);
+        }
+      })
+    },
     topicadd(event){
       this.topicData = 1;
       this.topicObject = event;
@@ -116,13 +133,15 @@ export default {
       else if (this.clickNum != null && this.clickNum != index) {
           this.clickId[this.clickNum].style.backgroundColor = "#2c2c2c";
       }
-      //가입된 카페 정보
-      this.registerCafeData = array;
+      
       // 메인 화면 이동 함수
       if(title == 'Village Main')
         this.$router.push('/community/villagemain')
-      else 
+      else {
         this.$router.push({name : 'Register', params: this.registerCafeData});
+        //가입된 카페 정보
+        this.registerCafeData = array;
+      }
       // 사이드바 강조효과
         this.clickId = document.querySelectorAll("#villageElement");
         event.target.style.backgroundColor = "#2872f9";
