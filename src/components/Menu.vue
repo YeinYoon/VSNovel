@@ -1,7 +1,7 @@
 <template>
   <div v-bind:class="{ mainmenu: true }">
     <div v-bind:class="{ menus: true }">
-      <div v-bind:class="{ menubox: true }" id="mypage/mymain" @click="$router.push('/signin')" v-if="this.$store.state.userId == null">
+      <div v-bind:class="{ menubox: true }" id="mypage/" @click="$router.push('/signin')" v-if="this.$store.state.userId == null">
         <img class="menubox_icon_mypage" src="@/assets/icons/white/login_req.png" />
       </div>
       <div v-bind:class="{ menubox: true }" id="mypage/" @click="routerPush('/mypage/mymain')" v-else>
@@ -54,6 +54,7 @@
 </template>
 
 <script>
+import axios from '../axios'
 export default {
   name: "vsnmenu",
   data() {
@@ -71,14 +72,23 @@ export default {
   },
   watch:{
     $route(){
-      // 버튼클릭 링크 이동시 if문
+      axios.get("/api/auth/loginCheck").then((result) => {
+        if (result.data != "") {
+          this.$store.commit("userLogin", {
+            nickname: result.data.USER_NICKNAME,
+            id: result.data.USER_ID,
+          });
+        }
+      });
 
+
+      // 버튼클릭 링크 이동시 if문
       let pathLink = (this.$route.path=='/')?'main':this.$route.path.substr(1,7);
       if(this.link != pathLink && pathLink != 'signin'){
         this.state = this.link;
-        this.link = (this.$route.path=='/')?'main':this.$route.path.substr(1,7);
-        document.getElementById(this.link).style.background = "#2872f9";
+        this.link = pathLink;
         document.getElementById(this.state).style.background = "#353535";
+        document.getElementById(this.link).style.background = "#2872f9";
       }
       if(this.state != this.link){
           document.getElementById(this.state).style.background = "#353535";

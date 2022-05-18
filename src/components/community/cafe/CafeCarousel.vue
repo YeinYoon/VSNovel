@@ -1,6 +1,6 @@
 <template>
   <!--  autoplay=2000 -->
-  <div><CafeModal  v-if="openModal == true" @close="openModal = false" :dataNum = "dataNum" :datas ="datas"></CafeModal></div>
+  <div><CafeModal  v-if="openModal == true" @close="openModal = false" :modalData="modalData"></CafeModal></div>
   <carousel
     :items-to-show="1"
     :wrap-around="true"
@@ -30,9 +30,9 @@ export default {
     return {
       datas: [],
       openModal : false,
-      dataNum : 0,
       status: true,
       sec : 1500,
+      modalData : {},
     };
   },
   components: {
@@ -43,16 +43,16 @@ export default {
     CafeModal
   },
   created(){
-    this.getvillagelist();
+    this.getVillageList();
   },
   methods: {
     sendData(i) {
-      this.dataNum = i;
+      this.modalData = this.datas[i];
       this.openModal = true;
     },
     //카페 리스트 조회
-    getvillagelist() {
-      axios.get('/api/village/getvillagelist')
+    getVillageList() {
+      axios.get('/api/village/getVillageList')
       .then((result)=>{
         if(result.data == "err") {
           console.log("커뮤니티 데이터 불러오기 실패");
