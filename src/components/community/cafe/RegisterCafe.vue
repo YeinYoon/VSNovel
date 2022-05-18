@@ -110,7 +110,7 @@ export default {
   padding: 5px;
   font-size: 1.3em;
   color: white;
-  width: 800px;
+  width: 90%;
   height: 88%;
   position: relative;
   top: 7%;
@@ -155,8 +155,8 @@ export default {
     display: flex;
     flex-direction: column;
 }
-.bard_title{
-  text-align: left;
+.board_title{
+  cursor:pointer;
 }
 .board_list_box{
   flex: 3;

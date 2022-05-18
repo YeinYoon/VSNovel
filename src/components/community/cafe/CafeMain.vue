@@ -75,7 +75,7 @@ export default {
 
 <style>
 .cafe_section {
-  width: 800px;
+  width: 90%;
   margin: 0 auto;
   position: relative;
   top: 70px;
