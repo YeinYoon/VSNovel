@@ -44,7 +44,7 @@
 
       <!-- 목록으로 나타내는 부분 -->
       <div class="postview_btn_area">
-        <div class="postview_btn_list" @click="$emit('second')">
+        <div class="postview_btn_list" @click="postBtn('second')">
           <span>목록으로</span>
         </div>
       </div>
@@ -70,6 +70,11 @@ export default {
     alertmodal
   },
   methods : {
+    postBtn(step){
+      if(step == 'second') {
+        this.$emit('second');
+      }
+    },
     comentwrite(writecoment){
       if(writecoment == ''){
         this.open = true;

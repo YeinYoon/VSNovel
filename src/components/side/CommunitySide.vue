@@ -28,7 +28,7 @@
       </div>
     </div>
     <div v-if="topicData == 0">
-      <TopicCommu @first="topicadd($event)"  @btnEvent="communityevent($event)" :datasend="community" @deletepost="remove($event)"/>
+      <TopicCommu  @btnEvent="communityevent($event)" :datasend="community" />
     </div>
     <div v-if="topicData == 1">
       <TopicPostView @second="topicData=0" :topicObject="topicObject" @reloaddata="reload($event)"/>
@@ -82,18 +82,30 @@ export default {
   },
   methods:{
     communityevent(event){
+      //console.log(event);
+      //글쓰기 저장
+      if(event.type == 'first'){
+        this.topicData = 1;
+        this.topicObject = event.item;
+      }else 
       //TopicPostView로 감
       if(event == 'third'){
         this.topicData = 2
+        //console.log(event);
+      }else 
+      //글쓰기 삭제
+      if(event.type == 'deletepost'){
+        console.log(event);
+        this.community.splice(event.index,1);
       }
     },
-    topicadd(event){
-      this.topicData = 1;
-      this.topicObject = event;
-    },
-    remove(removedata){
-      this.community.splice(removedata,1);
-    },
+    // topicadd(event){
+    //   this.topicData = 1;
+    //   this.topicObject = event;
+    // },
+    // remove(removedata){
+    //   this.community.splice(removedata,1);
+    // },
     addpost(addData) {
       this.community.push(addData);
     },
