@@ -91,6 +91,7 @@ export default {
       nick.disabled = false;
       intro.disabled = false;
       browse.disabled = false;
+      
     },
 
     // 취소 버튼을 눌렀을 때 동작하는 함수
@@ -113,6 +114,10 @@ export default {
       document.getElementById('profile-image').classList.replace('profile-image-change','profile-image-input');
       document.getElementById('profile-image').style.backgroundImage= "url('')";
       
+    },
+
+    routerPush(link){
+      this.$router.push(link);
     },
     
   }
@@ -181,7 +186,8 @@ export default {
 .col-three{
   position: absolute;
   font-size: 0.8em;
-  left: 73%;
+  /* left: 73%; */
+  position: relative;
 }
 
 /* 왼쪽 부분에 있는 텍스트 스타일 */
@@ -201,7 +207,7 @@ export default {
 /* 프로필 이미지가 들어가기전 공간 */
 .profile-image-input{
   height: 160px;
-  width: 50%;
+  width: 380px;
   background:#5E5E5E;
   border-radius: 20px;
   z-index: 11;
@@ -212,10 +218,12 @@ export default {
 /* 프로필 이미지가 들어왔을 때 변하는 스타일 */
 .profile-image-change{
   height: 200px;
-  width: 50%;
+  width: 30%;
   background: no-repeat;
-  margin-left: 110px;
-  margin-bottom: 15px;
+  /* margin-left: 80px;
+  margin-right: 75px;
+  margin-bottom: 15px; */
+  margin: 0 75px 15px 80px;
   background-size:cover;
   border-radius: 20px;
   z-index: 13;
@@ -223,7 +231,7 @@ export default {
 
 /* 닉네임을 적는 공간 */
 .profile-nick-input{
-  width: 50%;
+  width: 380px;
   height: 50px;
   border-radius: 20px;
   background-color: #5E5E5E;
@@ -239,7 +247,7 @@ export default {
 
 /* 소개 내용이 들어가는 공간 */
 .profile-introduce-input{
-  width: 50%;
+  width: 380px;
   height: 100px;
   border-radius: 20px;
   background-color: #5E5E5E;

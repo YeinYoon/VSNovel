@@ -12,7 +12,7 @@
 
   <!-- 탈퇴버튼 -->
   <div>
-    <button id="mypage_exit-pass-btn" @click="$emit('next')">탈퇴</button>
+    <div id="mypage_exit-pass-btn" @click="$emit('next')">탈퇴</div>
   </div>
 
 </div>
@@ -52,5 +52,8 @@ export default {
   background-color: #FF4C4D;
   color: white;
   font-size: 15px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 42px;
 }
 </style>

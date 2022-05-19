@@ -31,7 +31,7 @@
 
 <script>
 import axios from '../../axios'
-import Store from '../storepage/Store';
+import Store from '../StorePage/Store';
 export default {
   name: "StoreSide",
   components:{

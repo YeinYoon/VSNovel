@@ -13,17 +13,19 @@
         해당 장르는 추천에서 제외됩니다.
       </p>
       <div class="mypage_cate-box">
-        <button id="color"
+        <div
           class="mypage_cate-genre"
           v-for="(genre, i) in predata"
           :key="i"
           @click="prefer({ genre }, $event)"
         >
           {{ genre.name }}
-        </button>
+        </div>
       </div>
-      <button class="mypage_cate-canc" @click="$emit('save')">취소</button>
-      <button class="mypage_cate-save" @click="$emit('save')">저장</button>
+      <div class="preferBtnArea">
+        <div class="mypage_cate-canc" @click="colorcanc">취소</div>
+        <div class="mypage_cate-save" @click="routerPush('/')">저장</div>
+      </div>
     </div>
   </div>
 </template>
@@ -39,11 +41,12 @@ export default {
     };
   },
   methods: {
-    prefer: function (genre, event) {
-      genre = genre.genre;
-      genre.count++;
-      genre.count %= 3;
-      this.status = genre.count;
+    // 카테고리 버튼 클릭 시 이벤트 실행 - 한번 클릭 시 파란색, 두번 클릭 시 빨간색, 세번 클릭 시 처음색으로 돌아감
+    prefer: function (item, event) { 
+      item = item.genre;
+      item.count++;
+      item.count %= 3;
+      this.status = item.count;
       event.target.style.backgroundColor =
         this.status == 0 ? "#5E5E5E" : this.status == 1 ? "#0078FF" : "#EA4235";
     },
@@ -55,6 +58,11 @@ export default {
 </script>
 
 <style>
+.preferBtnArea{
+  display: flex;
+  margin-left: 30%;
+}
+
 .prefer_section {
   margin: 0 auto;
   width: 95%;
@@ -82,6 +90,7 @@ export default {
   margin: 5px;
   padding: 5px;
   border-radius: 20px;
+  cursor: pointer;
 }
 
 .mypage_cate-canc {
@@ -91,6 +100,7 @@ export default {
   padding: 10px;
   margin: 5px;
   border-radius: 20px;
+  cursor: pointer;
 }
 .mypage_cate-save {
   background-color: #2872f9;
@@ -99,5 +109,6 @@ export default {
   padding: 10px;
   margin: 5px;
   border-radius: 20px;
+  cursor: pointer;
 }
 </style>

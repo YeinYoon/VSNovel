@@ -123,6 +123,7 @@ export default {
     border-radius: 12px;
     cursor: pointer;
     margin:5px 5px 5px 20px;
+    left: 31%;
 }
 .cafe_modal_btn_position {
   position:relative;
@@ -133,6 +134,7 @@ export default {
 }
 .cafe_qna {
     color:white;
+    margin-left: 38%;
 }
 /* 애니메이션들,*/
 /*열리는 애니메이션 opening*/
