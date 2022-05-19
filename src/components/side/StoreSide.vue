@@ -75,10 +75,11 @@ export default {
     },
     categoryEvent(num, event, cateCode) {
     // 장르 강조효과
+    
       let id = Array.from(document.querySelectorAll(".select_btn"));
+
       event.target.style.color = "black";
-      if(this.genreNum == num) 
-        id[this.genreNum].style.color = "gray";
+      id[this.genreNum].style.color = "gray";
       this.genreNum = num;
       this.cateCode = cateCode;
       this.getNovelList();
