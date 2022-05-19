@@ -12,7 +12,7 @@
             @click="clickCommunityEvent(i, $event, item)"
             id="communityElement"
           >
-            {{i}} · {{ item }}
+            · {{ item }}
           </div>
         </div>
       </div>

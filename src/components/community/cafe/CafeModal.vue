@@ -55,9 +55,11 @@ export default {
     joinVillageList(){
       axios.post('/api/village/joinVillageList', {code : this.modalData.VILL_CODE})
       .then((result)=>{
-        if(result.data == "err") {
-          console.log("가입 실패");
+        if(typeof result.data == String) {
+          console.log(result.data);
         } else {
+          console.log(typeof result.data);
+          alert(result.data);
           this.registerData = result.data[0];
         }
       })
