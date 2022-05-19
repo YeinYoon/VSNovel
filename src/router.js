@@ -10,14 +10,14 @@ import VillageMain from './components/community/cafe/CafeMain.vue';
 import Register from './components/community/cafe/RegisterCafe.vue';
 
 // 마이페이지 링크들
-import MyPage from '@/components/side/MypageSide.vue';
-import MyPageMain from '@/components/mypage/MyPageMain.vue';
-import MyCard from "@/components/mypage/MyCard";
-import MyPost from "@/components/mypage/MyPost";
-import Myreview from "@/components/mypage/Myreview";
-import Prefer from "@/components/mypage/Prefer";
-import MyAlarm from "@/components/mypage/MyAlarm";
-import MyWithdrawal from "@/components/mypage/withdrawal/MyWithdrawal";
+import MyPage from './components/side/MypageSide.vue';
+import MyPageMain from './components/mypage/MyPageMain.vue';
+import MyCard from "./components/mypage/MyCard";
+import MyPost from "./components/mypage/MyPost";
+import Myreview from "./components/mypage/Myreview";
+import Prefer from "./components/mypage/Prefer";
+import MyAlarm from "./components/mypage/MyAlarm";
+import MyWithdrawal from "./components/mypage/withdrawal/MyWithdrawal";
 // 라이브러리
 import Library from './components/side/LibrarySide.vue';
 // 공지사항
