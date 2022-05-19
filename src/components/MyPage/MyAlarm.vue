@@ -11,7 +11,7 @@
     <div class="alarm-section">
       <div v-for="(alarm,i) in alarmdata" :key="i">
         <div class="alarm-flex">
-          <input class="alarm-check" type="checkbox">
+          <input class="alarm-check" type="checkbox" @click="noticeChkBox(i)">
           <span class="cont-title">{{alarmdata[i].title}}</span><br>
         </div>
           <span class="cont-info">{{alarmdata[i].content}}</span>
@@ -19,8 +19,9 @@
     </div>
     
     <footer class="button-position">
-        <div id="mypage_alarm-canc">취소</div>
-        <div id="mypage_alarm-save" @click="routerPush('/')">저장</div>
+        <button id="mypage_alarm-canc" @click="cancelBtn()">취소</button>
+        <button id="mypage_alarm-save" @click="saveBtn()">저장</button>
+
     </footer>
 
 </div>
@@ -28,17 +29,56 @@
 
 <script>
 import alarm from '@/assets/DataJs/alarmdata.js'
+import axios from '../../axios'
 
 export default {
   data(){
     return{
-      alarmdata:alarm
+      alarmdata:alarm,
+      noticeChk:[],
+      pastCheck: null
     }
   },
   methods:{
     routerPush(link){
       this.$router.push(link);
-    }
+    },
+    noticeChkBox(i) {
+      // console.log(this.alarmdata[i].title)
+      this.noticeChk = this.alarmdata[i].title
+      console.log(this.noticeChk)
+    },
+    getAlarm() {
+      console.log('getAlarm')
+      axios.get('api/mypage/getalarm')
+      .then((result) => {
+        if(result.data == 'err') {
+          console.log('load fail')
+        } else {
+          console.log(result)
+        }
+      })
+    },
+    saveBtn() {
+      let data= {
+        noticeChk : this.noticeChk
+      }
+      axios.post('/api/mypage/postalarm', data)
+      .then((result) => {
+        if(result.data == 'err') {
+          console.log('err')
+        } else {
+          console.log(result)
+          this.noticeChkBox
+        }
+      })
+    },
+    cancelBtn() {
+      this.check = this.pastCheck
+    },
+    async created() {
+    this.getAlarm()
+  },
   },
 }
 </script>

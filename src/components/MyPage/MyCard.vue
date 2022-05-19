@@ -19,13 +19,13 @@
       <!-- 2행 카드번호 입력 -->
       <div class="card-container2">
         <div class="card-num-name">카드번호</div>
-        <input class="card-input" type="text" maxlength="4"/>
+        <input class="card-input" type="text" maxlength="4" v-model="newCard"/>
           <span class="hyphen">-</span>
-        <input class="card-input" type="text" maxlength="4"/>
+        <input class="card-input" type="text" maxlength="4" v-model="newCard"/>
           <span class="hyphen">-</span>
-        <input class="card-input" type="text" maxlength="4"/>
+        <input class="card-input" type="text" maxlength="4" v-model="newCard"/>
           <span class="hyphen">-</span>
-        <input class="card-input" type="text" maxlength="4"/>
+        <input class="card-input" type="text" maxlength="4" v-model="newCard"/>
         <div class="card-num-info">16자리 숫자만 입력</div>
       </div>
 
@@ -39,8 +39,8 @@
 
     <!-- 취소,저장버튼 -->
     <footer class="card-footer">
-      <div id="mypage_card-canc">취소</div>
-      <div id="mypage_card-save" @click="routerPush('/')">저장</div>
+      <button id="mypage_card-canc">취소</button>
+      <button id="mypage_card-save" @click="routerPush(newCard)">저장</button>
     </footer>
 
   </div>
@@ -49,13 +49,46 @@
 </template>
 
 <script>
+import axios from '../../axios';
 export default {
+  created() {
+    this.getRegister()
+  },
+  name: "MyCard",
+  data() {
+    return {
+      myUser : "",
+      newCard :""
+    }
+  },
   methods:{
-    routerPush(link){
-      this.$router.push(link);
+    routerPush(newCard){
+      this.newCard = newCard;
+      this.postRegister();
     },
-    
-    
+    postRegister() {
+      var newInfo = {
+        newCard : this.newCard
+      }
+      axios.post('/api/mypage/mycard', newInfo)
+      .then((result) => {
+        if(result.data.length != 0) {
+          console.log(result)
+        }
+      }).catch((err) => {
+        console.log(err);
+      });
+    },
+    getRegister() {
+      axios.get('/api/mypage/mycard')
+      .then((result) => {
+        if(result.data == 'err') {
+          console.log('카드 정보 불러오기 실패')
+        } else {
+          this.newCard = result.data.rows[0].USER_CARDNUM
+        }
+      })
+    }
   }
 }
 </script>
