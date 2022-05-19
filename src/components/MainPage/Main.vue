@@ -151,9 +151,7 @@ export default {
       storeData: store,
     };
   },
-  methods(){
 
-  },
   components: {
     SwiperCarousel: SwiperCarouselVue,
   },
