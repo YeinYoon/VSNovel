@@ -87,7 +87,7 @@ export default {
   methods:{
     communityevent(event){
       //console.log(event);
-      //글쓰기 저장
+      //포스트 클릭
       if(event.type == 'first'){
         this.topicData = 1;
         this.topicObject = event.item;
@@ -104,16 +104,20 @@ export default {
       }
     },
     btnpostview(event) {
+      //목록으로
       if(event == 'second'){
         this.topicData = 0
-      }else if(event.type == 'reloaddata'){
+      }else if(event.type == 'reloaddata'){ //댓글 작업
+      //댓글 몇개인지 띄우기
+        this.topicObject.coment = 1*event.content.length;
         this.topicObject.comentcontents = event.content;
       }
     },
     addpost(event) {
+      //취소
       if(event == 'add') {
         this.topicData=0;
-      }else if(event.type == 'contentdata'){
+      }else if(event.type == 'contentdata'){ //글쓰기 저장 작업
         this.community.push(event.content);
       }
     },

@@ -29,8 +29,8 @@ export default {
         content : '',
         titleImg : '',
         date : '',
-        likes    : '0',
-        coment  : '0',
+        likes    : 0,
+        coment  : 0,
       }
     }
   },
