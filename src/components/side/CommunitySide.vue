@@ -31,10 +31,10 @@
       <TopicCommu  @btnEvent="communityevent($event)" :datasend="community" />
     </div>
     <div v-if="topicData == 1">
-      <TopicPostView @second="topicData=0" :topicObject="topicObject" @reloaddata="reload($event)"/>
+      <TopicPostView @btnpostview="btnpostview($event)" :topicObject="topicObject"/>
     </div>
     <div v-if="topicData == 2">
-      <TopicWrite @add="topicData=0" :datasend="community" @contentdata="addpost($event)"/>
+      <TopicWrite @add="addpost($event)" :datasend="community"/>
     </div>
   </div>
 </div>
@@ -45,7 +45,11 @@
 </template>
 
 <script>
-import dummy_data from "@/assets/DataJs/commuData.js";
+//import dummy_data from "@/assets/DataJs/commuData.js";
+import commuFree from "@/assets/DataJs/commuFree.js"; //자유커뮤니티데이터
+import commujoin from "@/assets/DataJs/commujoin.js"; //팀원모집커뮤니티데이터
+import commuRe from "@/assets/DataJs/commuRe.js"; //리뷰&추천커뮤니티데이터
+import commuWriter from "@/assets/DataJs/commuWriter.js"; //작가커뮤니티데이터
 import TopicCommu from "../community/topic/TopicCommu";
 import TopicPostView from "../community/topic/TopicPostView";
 import TopicWrite from "../community/topic/TopicWrite";
@@ -59,7 +63,7 @@ export default {
       step: '자유',
       registerCafeData : {},
       clickId : [],
-      community: dummy_data,
+      community: commuFree,
       topicData : 0,
       topicObject : {},
     };
@@ -99,20 +103,20 @@ export default {
         this.community.splice(event.index,1);
       }
     },
-    // topicadd(event){
-    //   this.topicData = 1;
-    //   this.topicObject = event;
-    // },
-    // remove(removedata){
-    //   this.community.splice(removedata,1);
-    // },
-    addpost(addData) {
-      this.community.push(addData);
+    btnpostview(event) {
+      if(event == 'second'){
+        this.topicData = 0
+      }else if(event.type == 'reloaddata'){
+        this.topicObject.comentcontents = event.content;
+      }
     },
-    reload(writecoments) {
-      this.topicObject.comentcontents = writecoments;
+    addpost(event) {
+      if(event == 'add') {
+        this.topicData=0;
+      }else if(event.type == 'contentdata'){
+        this.community.push(event.content);
+      }
     },
-
     clickCommunityEvent(index, event, item) {
       if(this.clickId[this.clickNum].id == 'villageElement'){
         this.clickId[this.clickNum].style.backgroundColor = "#2c2c2c";
@@ -128,6 +132,16 @@ export default {
         event.target.style.backgroundColor = "#2872f9";
         
         this.clickNum = index;
+
+      if(this.step == '자유') {
+        this.community = commuFree;
+      }else if(this.step == '작가') {
+        this.community = commuWriter;
+      }else if(this.step == '팀원 모집') {
+        this.community = commujoin;
+      }else if(this.step == '리뷰 & 추천') {
+        this.community = commuRe;
+      }
     },
     // ----------------------------------------------------------------------
     clickCafeEvent(index, event, title, array) {

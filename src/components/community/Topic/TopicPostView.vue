@@ -26,7 +26,7 @@
         <!-- 댓글을 적는 부분 -->
         <div class="postview_comment_area">
             <textarea v-model="writecoment"></textarea>
-            <div class="postview_comment_register"><span @click="comentwrite(writecoment)">작성하기</span></div>
+            <div class="postview_comment_register"><span @click="postBtn({type:'comentwrite', content: writecoment})">작성하기</span></div>
         </div>
     
         <!-- 댓글이 달리는 부분 1 -->
@@ -44,7 +44,7 @@
 
       <!-- 목록으로 나타내는 부분 -->
       <div class="postview_btn_area">
-        <div class="postview_btn_list" @click="postBtn('second')">
+        <div class="postview_btn_list" @click="postBtn({type:'second'})">
           <span>목록으로</span>
         </div>
       </div>
@@ -70,25 +70,43 @@ export default {
     alertmodal
   },
   methods : {
-    postBtn(step){
-      if(step == 'second') {
-        this.$emit('second');
+    postBtn(step={}){
+      //step의 길이가 1일때 Topicwrite로 이동
+      if(Object.keys(step).length == 1) {
+        if(step.type == 'second'){
+          this.$emit('btnpostview', 'second');
+        }
+      }else if(Object.keys(step).length == 2){ //step의 길이가 2일때, 댓글 작성 부분
+        if(step.type == 'comentwrite'){
+          if(step.content == ''){
+            this.open = true;
+            this.writecoment = '';
+          }else {
+            this.writecoments.push(this.writecoment);
+            const writebtn = {type: 'reloaddata', content : this.writecoments};
+            this.$emit('btnpostview', writebtn);
+            this.writecoment = '';
+          }
+        }
+        
       }
     },
-    comentwrite(writecoment){
-      if(writecoment == ''){
-        this.open = true;
-        this.writecoment = '';
-      }else {
-        this.writecoments.push(this.writecoment);
-        // this.commentcount += 1;
-        this.$emit('reloaddata',this.writecoments);
-        this.writecoment = '';
-      }
-      // console.log(this.topicObject);
-      // console.log(this.writecoments);
-      //console.log(this.writecoment);
-    },
+    // comentwrite(writecoment){
+    //   if(writecoment == ''){
+    //     this.open = true;
+    //     this.writecoment = '';
+    //   }else {
+    //     this.writecoments.push(this.writecoment);
+    //     // this.commentcount += 1;
+    //     this.$emit('reloaddata',this.writecoments);
+    //     this.writecoment = '';
+    //   }
+    //   // console.log(this.topicObject);
+    //   // console.log(this.writecoments);
+    //   //console.log(this.writecoment);
+    // },
+
+    //이미지가 나타나지 않을 때
     reimg(e){
       e.target.src=img
     },
