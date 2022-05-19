@@ -73,7 +73,7 @@ export default {
 .write_section {
   margin: 0 auto;
   padding: 10px 15px;
-  width: 800px;
+  width: 95%;
   height: 75%;
   background-color: #2c2c2c;
   border-radius: 20px;

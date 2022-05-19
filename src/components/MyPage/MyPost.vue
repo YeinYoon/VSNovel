@@ -45,7 +45,7 @@ export default {
   padding: 5px;
   font-size: 1.3em;
   color: white;
-  width: 800px;
+  width: 95%;
   height: 80%;
   background-color: #484848;
   position: relative;

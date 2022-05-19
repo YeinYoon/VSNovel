@@ -8,7 +8,7 @@
     </div>
     <div class="write_btn_area">
       <div class="write_btn" @click="registerpost">글쓰기</div>
-      <div class="write_cancle_btn" @click="$emit('add')">취소</div>
+      <div class="write_cancle_btn" @click="$emit('add','add')">취소</div>
     </div>
   </div>
 </template>
@@ -16,7 +16,7 @@
 <script>
 import Editor from './Editor'
 export default {
-  name: "TeamoneWrite",
+  name: "TopicWrite",
   data() {
     return {
       writecontent : '',
@@ -24,20 +24,20 @@ export default {
       writedate:'',
       datedata:'',
       content:{
-        title:'',
+        post_title:'',
         writer : '',
-        content : '',
+        post_content : '',
         titleImg : '',
         date : '',
-        likes    : '',
-        coment  : '',
+        likes    : 0,
+        coment  : 0,
       }
     }
   },
   methods : {
     registerpost(){
-      //TeamCommu로 이동
-      this.$emit('add');
+      //TopicCommu로 이동
+      this.$emit('add','add');
 
       //제목과 내용 가지고 와서 content객체에 넣어준다
       this.content.title = this.writetitle;
@@ -45,11 +45,13 @@ export default {
 
       //날짜 데이터 가지고 오기
       this.datedata = new Date();
-      this.writedate = this.datedata.toLocaleString();
+      this.writedate = this.datedata.toISOString().substr(0,10);
       this.content.date = this.writedate;
 
-      //this.content를 Teamone으로 보내기
-      this.$emit('contentdata' , this.content);
+
+      //this.content를 TopicFrame으로 보내기
+      const contentdata = {type:'contentdata', content : this.content}
+      this.$emit('add' , contentdata);
 
     }
   },
@@ -66,7 +68,7 @@ export default {
 .commu_write_section {
   margin: 0 auto;
   padding: 10px 15px;
-  width: 800px;
+  width: 95%;
   height: 65vh;
   background-color: #2c2c2c;
   border-radius: 20px;

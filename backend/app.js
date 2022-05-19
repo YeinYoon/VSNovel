@@ -47,10 +47,14 @@ var indexRouter = require('./routes/index');
 //API 라우터
 var authRouter = require('./routes/auth');
 var storeRouter = require('./routes/store');
+var communityRouter = require('./routes/community');
+var villageRouter = require('./routes/village');
 
 app.use('/', indexRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/store', storeRouter);
+app.use('/api/community', communityRouter);
+app.use('/api/village', villageRouter);
 
 
 

@@ -12,7 +12,7 @@
 
   <!-- 탈퇴버튼 -->
   <div>
-    <button id="mypage_exit-pass-btn" @click="$emit('next')">탈퇴</button>
+    <div id="mypage_exit-pass-btn" @click="$emit('next')">탈퇴</div>
   </div>
 
 </div>
@@ -28,7 +28,7 @@ export default {
 /* 내용과 버튼의 위치,크기조정 */
 .drop-position-container{
   padding-top: 12%;
-  width: 800px;
+  width: 95%;
   height: 450px;
   position: relative;
   top: 80px;
@@ -47,10 +47,13 @@ export default {
 #mypage_exit-pass-btn{
   width: 120px;
   height: 40px;
-  transform: translateX(350px);
+  transform: translateX(300px);
   border-radius: 20px;
   background-color: #FF4C4D;
   color: white;
   font-size: 15px;
+  cursor: pointer;
+  text-align: center;
+  line-height: 42px;
 }
 </style>

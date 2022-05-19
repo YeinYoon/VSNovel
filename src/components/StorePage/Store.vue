@@ -82,10 +82,15 @@ export default {
     },
   },
   created(){
-    console.log(this.$route.params.nove_id);
-    if(this.$route.params.nove_id!=undefined){
-      console.log("MO")
-      this.modalData = this.$route.params.nove_id;
+    // console.log(this.$route.params.nove_id);
+    if(this.$route.params.NOVE_TITLE!=undefined){
+      this.modalData = {
+        NOVE_TITLE : this.$route.params.NOVE_TITLE,
+        NOVE_SYNOPSIS: this.$route.params.NOVE_SYNOPSIS,
+        NOVE_PRICE: this.$route.params.NOVE_PRICE,
+        NOVE_TEAMNAME: this.$route.params.NOVE_TEAMNAME,
+        CATE_CODE : '이 더미엔 장르 데이터 존재 X'
+      };
       this.modal = true;
     }
   }
@@ -96,10 +101,10 @@ export default {
 .tests {
   background-color: #353535;
   padding: 35px 40px 30px 40px;
-  width: calc(100% - 390px);
+  width: calc(100% - 440px);
   height: 100%;
   position: fixed;
-  left: 390px;
+  left: 440px;
   overflow: auto;
 }
 /* price_div 위치 잡는 div /  price 전체 div / 
@@ -144,7 +149,7 @@ export default {
   padding: 5px;
   font-size: 1.3em;
   color: white;
-  width: 800px;
+  width: 90%;
   height: 80%;
   position: relative;
   top: 70px;

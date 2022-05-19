@@ -1,20 +1,23 @@
 import { createWebHistory, createRouter } from "vue-router";
 // 스토어 
 import Store from './components/side/StoreSide.vue';
-import StoreMain from './components/storepage/Store.vue';
 // 메인페이지
 import Main from './components/mainpage/Main.vue';
 // 커뮤니티
 import Community from './components/side/CommunitySide.vue';
+//카페
+import VillageMain from './components/community/cafe/CafeMain.vue';
+import Register from './components/community/cafe/RegisterCafe.vue';
+
 // 마이페이지 링크들
-import MyPage from './components/side/MypageSide.vue';
-import MyPageMain from './components/mypage/MyPageMain.vue';
-import MyCard from "./components/mypage/MyCard";
-import MyPost from "./components/mypage/MyPost";
-import Myreview from "./components/mypage/Myreview";
-import Prefer from "./components/mypage/Prefer";
-import MyAlarm from "./components/mypage/MyAlarm";
-import MyWithdrawal from "./components/mypage/withdrawal/MyWithdrawal";
+import MyPage from '@/components/side/MypageSide.vue';
+import MyPageMain from '@/components/mypage/MyPageMain.vue';
+import MyCard from "@/components/mypage/MyCard";
+import MyPost from "@/components/mypage/MyPost";
+import Myreview from "@/components/mypage/Myreview";
+import Prefer from "@/components/mypage/Prefer";
+import MyAlarm from "@/components/mypage/MyAlarm";
+import MyWithdrawal from "@/components/mypage/withdrawal/MyWithdrawal";
 // 라이브러리
 import Library from './components/side/LibrarySide.vue';
 // 공지사항
@@ -48,34 +51,32 @@ const routes = [
     name: 'MyPage',
     component : MyPage,
     children:  [
-      { path : '/mymain',       name: 'MyPageMain',   component : MyPageMain },
-      { path : '/mycard',       name: 'MyCard',       component : MyCard },
-      { path : '/mypost',       name: 'MyPost',       component : MyPost },
-      { path : '/myreview',     name: 'Myreview',     component : Myreview },
-      { path : '/prefer',       name: 'Prefer',       component : Prefer },
-      { path : '/myalarm',      name: 'MyAlarm',      component : MyAlarm },
-      { path : '/mywithdrawal', name: 'MyWithdrawal', component : MyWithdrawal },
+      { path : 'mymain',        component : MyPageMain },
+      { path : 'mycard',        component : MyCard },
+      { path : 'mypost',        component : MyPost },
+      { path : 'myreview',      component : Myreview },
+      { path : 'prefer',        component : Prefer },
+      { path : 'myalarm',       component : MyAlarm },
+      { path : 'mywithdrawal',  component : MyWithdrawal },
     ]
   },
   {
     path : '/notice',
     name: 'Notice',
     component : Notice,
-    props:true
+    props:true,
   },
   {
     path : '/library',
     name: 'Library',
     component : Library,
+    props:true,
   },
   {
     path : '/store',
     name: 'Store',
     component : Store,
     props:true,
-    children:[
-      { path : '/storemain', name : 'storeMain', component : StoreMain }
-    ]
   },
   {
     path : '/engine',
@@ -87,7 +88,11 @@ const routes = [
     path : '/community',
     name: 'Community',
     component : Community,
-    props:true
+    props:true,
+    children:[
+      {path : 'villagemain', name:'VillageMain', component : VillageMain},
+      {path : 'register', name:'Register', component : Register}
+    ]
   },
   {
     path : '/engine',

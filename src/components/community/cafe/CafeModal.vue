@@ -12,7 +12,7 @@
             <div class="cafe_modal_inner">
                 <div class="cafe_modal_title_inner"><span class="modal_title">가입하기</span></div>
                 <div>
-                    <div class="cafe_banner"><img :src="datas[dataNum].link"></div>
+                    <div class="cafe_banner"><img :src="modalData.VILL_PRO_IMG"></div>
                 </div>
                 
             </div>
@@ -33,24 +33,36 @@
 </template>
 
 <script>
+import axios from '../../../axios.js';
 export default {
   name: "vsn_modal_universal",
   data() {
       return{
       }
   },
-  components: {},
   props: {
     openModal : Boolean,
-    datas: Array,
-    dataNum : Number,
+    modalData : Object,
 
   },
   methods:{
     clickEvent(){
+      console.log(this.modalData);
       // 카페 가입 함수
-      this.$store.commit('addCafe',this.datas[this.dataNum]);
+      this.joinVillageList();
       this.$emit('close', this.openModal);
+    },
+    joinVillageList(){
+      axios.post('/api/village/joinVillageList', {code : this.modalData.VILL_CODE})
+      .then((result)=>{
+        if(typeof result.data == String) {
+          console.log(result.data);
+        } else {
+          console.log(typeof result.data);
+          alert(result.data);
+          this.registerData = result.data[0];
+        }
+      })
     }
   }
 };
@@ -111,6 +123,7 @@ export default {
     border-radius: 12px;
     cursor: pointer;
     margin:5px 5px 5px 20px;
+    left: 31%;
 }
 .cafe_modal_btn_position {
   position:relative;
@@ -121,6 +134,7 @@ export default {
 }
 .cafe_qna {
     color:white;
+    margin-left: 38%;
 }
 /* 애니메이션들,*/
 /*열리는 애니메이션 opening*/

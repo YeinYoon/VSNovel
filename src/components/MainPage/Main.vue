@@ -119,25 +119,12 @@
 </template>
 
 <script>
-import axios from "../../axios";
 import SwiperCarouselVue from "./MainCarousel";
 import commuData from "../../assets/DataJs/commuData.js";
 import notice from "../../assets/DataJs/notice.js";
 import store from "../../assets/DataJs/dataHu.js";
 export default {
   name: "MainScreen",
-  created() {
-    axios.get("/api/auth/loginCheck").then((result) => {
-      if (result.data != "") {
-        console.log(result.data);
-        this.$store.commit("userLogin", {
-          nickname: result.data.USER_NICKNAME,
-          id: result.data.USER_ID,
-        });
-        console.log(this.$store.state.userId);
-      }
-    });
-  },
   mounted() {
     // 공지사항 날짜 순으로 정렬
     this.noticeData.sort(function (a, b) {
@@ -157,27 +144,29 @@ export default {
   methods: {
     // 스토어 게시물 이동 함수
     storeView(data) {
-      console.log(data.title);
       this.$router.push({
-        path: "/store",
         name: "Store",
-        params: { nove_id: data.title },
+        params: { NOVE_TITLE: data.title,
+                  NOVE_SYNOPSIS: data.content,
+                  NOVE_PRICE: data.pay,
+                  NOVE_TEAMNAME: data.team,
+                  },
       });
     },
     communityView(data) {
       console.log(data.title);
       this.$router.push({
-        path: "/community",
-        name: "Community",
-        params: { comm_id: data.title },
+        name: 'Community',
+        params: { comm_id: data.title,
+                  comm_content : data.content },
       });
     },
     noticeView(data) {
       console.log(data.title);
       this.$router.push({
-        path: "/notice",
-        name: "Notice",
-        params: { noti_id: data.title },
+        name: 'Notice',
+        params: { noti_id: data.title,
+                  noti_content: data.content },
       });
     },
   },
@@ -194,7 +183,7 @@ export default {
   border: 1px solid white;
 }
 .main {
-  width: 90%;
+  width: 100%;
   position: absolute;
   left: 5%;
 }
@@ -267,23 +256,24 @@ button {
   outline: none;
 }
 .section {
-  width: 1000px;
+  width: 100%;
   position: relative;
   top: 30px;
   margin: 0 auto;
   /* margin: 20px 0 0 0; */
 }
 .banner_div_carousel {
-  width: 1000px;
-  height: 150px;
+  width: 95%;
+  height: 180px;
   border-radius: 25px;
   background-color: rgb(75, 75, 75);
   position: absolute;
-  top: 30px;
+  left: 2.5%;
+  top: 13px;
 }
 .section .banner {
   margin: 0 auto;
-  width: 920px;
+  width: 90%;
   height: 204px;
   border-radius: 25px;
   border: 2px solid rgb(73, 73, 73);
@@ -298,7 +288,7 @@ button {
   width: 100%;
 }
 .box {
-  width: 1000px;
+  width: 90%;
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
