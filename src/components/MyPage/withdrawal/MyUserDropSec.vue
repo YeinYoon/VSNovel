@@ -43,13 +43,6 @@ export default {
   },
   methods: {
     destroyBtn() {
-      console.log('btn')
-      // let data = {
-      // newId : this.newId,
-      // newPw : this.newPw,
-      // newName : this.newName,
-      // newNumber : this.newNumber,
-      // }
       axios.post('/api/mypage/postconfirm')
       .then((result) => {
         if(result.data == 'err') {

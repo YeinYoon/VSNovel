@@ -11,7 +11,7 @@
     <div class="alarm-section">
       <div v-for="(alarm,i) in alarmdata" :key="i">
         <div class="alarm-flex">
-          <input class="alarm-check" type="checkbox" @click="noticeChk(i)">
+          <input class="alarm-check" type="checkbox" v-model="noticeChk">
           <span class="cont-title">{{alarmdata[i].title}}</span><br>
         </div>
           <span class="cont-info">{{alarmdata[i].content}}</span>
@@ -19,7 +19,7 @@
     </div>
     
     <footer class="button-position">
-        <button id="mypage_alarm-canc">취소</button>
+        <button id="mypage_alarm-canc" @click="cancelBtn()">취소</button>
         <button id="mypage_alarm-save" @click="saveBtn()">저장</button>
     </footer>
 
@@ -34,17 +34,17 @@ export default {
   data(){
     return{
       alarmdata:alarm,
-      check:false,
-
+      noticeChk:[],
+      pastCheck: null
     }
   },
   methods:{
     routerPush(link){
       this.$router.push(link);
     },
-    noticeChk(i) {
-      this.alarmdata[i] = true;
-    },
+    // noticeChk(i) {
+    //   this.check[i] = true;
+    // },
     getAlarm() {
       console.log('getAlarm')
       axios.get('api/mypage/getalarm')
@@ -68,7 +68,13 @@ export default {
           console.log(result)
         }
       })
-    }
+    },
+    cancelBtn() {
+      this.check = this.pastCheck
+    },
+    async created() {
+    this.getAlarm()
+  },
   },
 }
 </script>
