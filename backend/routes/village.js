@@ -18,7 +18,7 @@ router.get('/getVillageList', async (req,res)=>{
 // 가입한 카페 리스트
 router.post('/resVillageList', async (req,res)=>{
     console.log(req.body.id);
-    var resVillage = await db.execute(`SELECT DISTINCT tbl_village.VILL_NAME FROM tbl_village_join, tbl_village WHERE tbl_village_join.USER_ID = '${req.body.id}'`);
+    var resVillage = await db.execute(`SELECT DISTINCT tbl_village.VILL_NAME FROM tbl_village_join, tbl_village WHERE tbl_village_join.USER_ID = '${req.body.id}' and tbl_village.vill_code = tbl_village_join.vill_code`);
     if(resVillage=="err") {
         res.send("err");
     } else {
