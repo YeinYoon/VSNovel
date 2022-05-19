@@ -11,7 +11,7 @@
     <div class="alarm-section">
       <div v-for="(alarm,i) in alarmdata" :key="i">
         <div class="alarm-flex">
-          <input class="alarm-check" type="checkbox" v-model="noticeChk">
+          <input class="alarm-check" type="checkbox" @click="noticeChkBox(i)">
           <span class="cont-title">{{alarmdata[i].title}}</span><br>
         </div>
           <span class="cont-info">{{alarmdata[i].content}}</span>
@@ -43,9 +43,11 @@ export default {
     routerPush(link){
       this.$router.push(link);
     },
-    // noticeChk(i) {
-    //   this.check[i] = true;
-    // },
+    noticeChkBox(i) {
+      // console.log(this.alarmdata[i].title)
+      this.noticeChk = this.alarmdata[i].title
+      console.log(this.noticeChk)
+    },
     getAlarm() {
       console.log('getAlarm')
       axios.get('api/mypage/getalarm')
@@ -59,7 +61,7 @@ export default {
     },
     saveBtn() {
       let data= {
-        check : this.check
+        noticeChk : this.noticeChk
       }
       axios.post('/api/mypage/postalarm', data)
       .then((result) => {
@@ -67,6 +69,7 @@ export default {
           console.log('err')
         } else {
           console.log(result)
+          this.noticeChkBox
         }
       })
     },
