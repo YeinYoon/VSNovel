@@ -7,6 +7,8 @@ export default[
         date : '2021년 3월',
         likes    : 6,
         coment  : 0,
+        nolike : 0,
+        
     },
     {
         title:'슬롯 9',
@@ -16,6 +18,7 @@ export default[
         date : '2023년 11월',
         likes    : 6,
         coment  : 0,
+        nolike : 0,
     },
     
 ]
