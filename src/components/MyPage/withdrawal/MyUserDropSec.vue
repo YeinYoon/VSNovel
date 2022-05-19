@@ -60,7 +60,7 @@ export default {
 <style>
 /* 전체위치 조정 */
 .drop-sec-container{
-  padding:10px;
+  padding-top:6%;
   color: white;
   width: 600px;
   height: 450px;
@@ -116,5 +116,9 @@ export default {
   background-color: #FF4C4D;
   color: white;
   font-size: 1em;
+  text-align: center;
+  line-height: 42px;
+  cursor: pointer;
+  margin-left: 40%;
 }
 </style>

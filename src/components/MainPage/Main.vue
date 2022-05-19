@@ -160,18 +160,19 @@ export default {
   methods: {
     // 스토어 게시물 이동 함수
     storeView(data) {
-      console.log(data.title);
       this.$router.push({
         path: "/store",
         name: "Store",
-        params: { nove_id: data.title },
+        params: { nove_id: data.title,
+                  nove_synopsis: data.content,
+                  nove_price: data.pay,
+                  nove_teamname: data.team },
       });
     },
     communityView(data) {
       console.log(data.title);
       this.$router.push({
-        path: "/community",
-        name: "Community",
+        path: "/community/",
         params: { comm_id: data.title },
       });
     },
@@ -179,8 +180,7 @@ export default {
       console.log(data.title);
       this.$router.push({
         path: "/notice",
-        name: "Notice",
-        params: { noti_id: data.title },
+        params: { noti_id: data.title, },
       });
     },
   },

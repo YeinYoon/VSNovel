@@ -25,18 +25,22 @@
       </div>
     </div>
   </div>
-  <router-view />
+  <Store />
 </div>
 </template>
 
 <script>
 import axios from '../../axios'
+import Store from '../StorePage/Store';
 export default {
   name: "StoreSide",
+  components:{
+    Store,
+  },
   created() {
     this.getCateList();
     this.getNovelList();
-    this.$router.push('storemain');
+    this.$router.push('/store');
   },
   data() {
     return {

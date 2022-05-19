@@ -19,7 +19,13 @@
       <!-- 2행 카드번호 입력 -->
       <div class="card-container2">
         <div class="card-num-name">카드번호</div>
-        <input class="card-input" type="number" oninput="if(value.length>11)value=value.slice(0,16)" v-model="newCard" />
+        <input class="card-input" type="text" maxlength="4" v-model="newCard"/>
+          <span class="hyphen">-</span>
+        <input class="card-input" type="text" maxlength="4" v-model="newCard"/>
+          <span class="hyphen">-</span>
+        <input class="card-input" type="text" maxlength="4" v-model="newCard"/>
+          <span class="hyphen">-</span>
+        <input class="card-input" type="text" maxlength="4" v-model="newCard"/>
         <div class="card-num-info">16자리 숫자만 입력</div>
       </div>
 
@@ -114,7 +120,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 /* 2행(카드번호 입력부분) 전체정렬 */
 .card-container2{
-  transform: translateX(3%);
+  transform: translateX(5%);
   display: flex;
 }
 
@@ -133,6 +139,12 @@ input[type="number"]::-webkit-inner-spin-button {
   margin-bottom: 2%;
 }
 
+.hyphen{
+  color: white;
+  margin-right: 12px;
+  
+}
+
 /* 카드번호 글자 */
 .card-num-name{
   width: 100px;
@@ -144,13 +156,15 @@ input[type="number"]::-webkit-inner-spin-button {
 
 /* 카드번호 입력내용 */
 .card-input{
+  display: flex;
   text-align: center;
   color: white;
-  width: 500px;
-  height: 40px;
+  width: 100px;
+  height: 4px;
   background: #5E5E5E;
   border-radius: 20px;
   padding: 15px;
+  margin-right: 15px;
 }
 
 /* 16자리 숫자입력 공지 */
@@ -179,8 +193,11 @@ input[type="number"]::-webkit-inner-spin-button {
 
 /* footer부분 */
 .card-footer{
+  display: flex;
   background: none;
   border: 0px;
+  text-align: center;
+  line-height: 42px;
 }
 
 /* 취소버튼 */
@@ -193,7 +210,8 @@ input[type="number"]::-webkit-inner-spin-button {
   color: white;
   font-size: 15px;
   margin-right: 30px;
-  margin-top:0;
+  margin-top:15px;
+  cursor: pointer;
 }
 
 /* 저장버튼 */
@@ -205,6 +223,8 @@ input[type="number"]::-webkit-inner-spin-button {
   background-color: #2872F9;
   color: white;
   font-size: 15px;
+  margin-top:15px;
+  cursor: pointer;
 }
 
 </style>

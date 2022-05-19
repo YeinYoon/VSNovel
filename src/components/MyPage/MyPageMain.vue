@@ -32,8 +32,8 @@
 
         <div class="profile-intro-line">
           <div class="col-one">소개</div>
-          <textarea id="profileintro" class="profile-introduce-input" type="text" @keydown="count()" maxlength="1024" v-model="newIntro"></textarea>
-          <div class="intro-cont-align"><span>{{introNum}}/1024 byte</span></div>
+          <textarea id="profileintro" class="profile-introduce-input" type="text" @keydown="count()" :maxlength="500" disabled v-model="newIntro"></textarea>
+          <div class="intro-cont-align"><span>{{newIntro.length}}/500자</span></div>
         </div>
 
       </div>
@@ -43,6 +43,7 @@
         <button id="mypage_main-canc" @click="cancelBtn">취소</button>
         <button v-if="isSave" id="mypage_main-save" @click="editBtn(newNickname, newImage, newIntro)">수정</button>
         <button v-else id="mypage_main-save" @click="saveBtn()">저장</button>
+
       </footer>
       
     </div>
@@ -64,7 +65,8 @@ export default {
       newImage: "",
       newIntro: "",
       introNum: 0,
-      isSave : true
+      isSave : true,
+      maxlength:500
     }
   },
   methods:{
@@ -72,6 +74,7 @@ export default {
     upload(e){
       let uploadfile = e.target.files
       console.log(uploadfile[0].type);
+      
       let url = URL.createObjectURL(uploadfile[0]);
       console.log(url);
       this.newImage=url;
@@ -133,23 +136,44 @@ export default {
 
     // 취소 버튼을 눌렀을 때 동작하는 함수
     cancelBtn(){
+
       const nick = document.getElementById('profilenick');
       const intro = document.getElementById('profileintro');
+      const browse = document.getElementById('input-file');
       const btn = document.querySelector("#mypage_main-save");
+      
       btn.innerText='수정';
       nick.disabled = true;
       intro.disabled = true;
+      browse.disabled = true;
+      
       nick.value='';
       intro.value='';
-      document.getElementById('profile-image').classList.remove('profile-image-change');
-      document.getElementById('profile-image').classList.add('profile-image-input');
+      this.areaText = '';
       
-    }
+      document.getElementById('profile-image').classList.replace('profile-image-change','profile-image-input');
+      document.getElementById('profile-image').style.backgroundImage= "url('')";
+      
+    },
+
+    routerPush(link){
+      this.$router.push(link);
+    },
+    
   }
-};
+}
+
 </script>
 
 <style>
+
+.mainBtnArea{
+  display: flex;
+  text-align: center;
+  margin-top: 2%;
+  line-height: 42px;
+}
+
 .my_topic{
   display: block;
   width: 150px;
@@ -202,7 +226,8 @@ export default {
 .col-three{
   position: absolute;
   font-size: 0.8em;
-  left: 73%;
+  /* left: 73%; */
+  position: relative;
 }
 
 /* 왼쪽 부분에 있는 텍스트 스타일 */
@@ -219,12 +244,26 @@ export default {
   font-size: 0.8em;
 }
 
+/* 프로필 이미지가 들어가기전 공간 */
+.profile-image-input{
+  height: 160px;
+  width: 380px;
+  background:#5E5E5E;
+  border-radius: 20px;
+  z-index: 11;
+  margin-right: 15px;
+  margin-bottom: 15px;
+}
+
 /* 프로필 이미지가 들어왔을 때 변하는 스타일 */
 .profile-image-change{
   height: 200px;
-  width: 200px;
+  width: 30%;
   background: no-repeat;
-  margin-left: 110px;
+  /* margin-left: 80px;
+  margin-right: 75px;
+  margin-bottom: 15px; */
+  margin: 0 75px 15px 80px;
   background-size:cover;
   border-radius: 20px;
   z-index: 13;
@@ -232,7 +271,7 @@ export default {
 
 /* 닉네임을 적는 공간 */
 .profile-nick-input{
-  width: 400px;
+  width: 380px;
   height: 50px;
   border-radius: 20px;
   background-color: #5E5E5E;
@@ -246,20 +285,9 @@ export default {
   padding: 15px;
 }
 
-/* 프로필 이미지가 들어가기전 공간 */
-.profile-image-input{
-  height: 160px;
-  width: 400px;
-  background:#5E5E5E;
-  border-radius: 20px;
-  z-index: 11;
-  margin-right: 15px;
-  margin-bottom: 15px;
-}
-
 /* 소개 내용이 들어가는 공간 */
 .profile-introduce-input{
-  width: 400px;
+  width: 380px;
   height: 100px;
   border-radius: 20px;
   background-color: #5E5E5E;
@@ -269,6 +297,7 @@ export default {
   margin-bottom: 15px;
   margin-right: 15px;
   padding: 15px;
+  outline: none;
 }
 
 /* 취소버튼 */
@@ -282,6 +311,7 @@ export default {
   font-size: 1.0em;
   margin-right: 30px;
   margin-top:0;
+  cursor: pointer;
 }
 
 /* 저장 버튼 */
@@ -293,5 +323,6 @@ export default {
   background-color: #2872F9;
   color: white;
   font-size: 1.0em;
+  cursor: pointer;
 }
 </style>

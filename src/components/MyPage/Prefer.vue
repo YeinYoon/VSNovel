@@ -13,17 +13,19 @@
         해당 장르는 추천에서 제외됩니다.
       </p>
       <div class="mypage_cate-box">
-        <button id="color"
+        <div
           class="mypage_cate-genre"
           :class="{normal:genre.count==0, blue:genre.count==1, red:genre.count==2}"
           v-for="(genre, i) in predata" :key="i"
           @click="prefer(i)"
         >
+        <button>
           {{ genre.CATE_NAME }}
         </button>
       </div>
       <button class="mypage_cate-canc" @click="cancelBtn()">취소</button>
       <button class="mypage_cate-save" @click="saveBtn()">저장</button>
+
     </div>
   </div>
 </template>
@@ -133,6 +135,11 @@ export default {
 </script>
 
 <style>
+.preferBtnArea{
+  display: flex;
+  margin-left: 30%;
+}
+
 .prefer_section {
   margin: 0 auto;
   width: 800px;
@@ -160,6 +167,7 @@ export default {
   margin: 5px;
   padding: 5px;
   border-radius: 20px;
+  cursor: pointer;
 }
 .mypage_cate-genre.blue {
   background-color: #0078FF;
@@ -189,6 +197,7 @@ export default {
   padding: 10px;
   margin: 5px;
   border-radius: 20px;
+  cursor: pointer;
 }
 .mypage_cate-save {
   background-color: #2872f9;
@@ -197,5 +206,6 @@ export default {
   padding: 10px;
   margin: 5px;
   border-radius: 20px;
+  cursor: pointer;
 }
 </style>
