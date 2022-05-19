@@ -13,19 +13,17 @@
         해당 장르는 추천에서 제외됩니다.
       </p>
       <div class="mypage_cate-box">
-        <div
+        <button id="color"
           class="mypage_cate-genre"
           :class="{normal:genre.count==0, blue:genre.count==1, red:genre.count==2}"
           v-for="(genre, i) in predata" :key="i"
           @click="prefer(i)"
         >
-        <button>
           {{ genre.CATE_NAME }}
         </button>
       </div>
       <button class="mypage_cate-canc" @click="cancelBtn()">취소</button>
       <button class="mypage_cate-save" @click="saveBtn()">저장</button>
-
     </div>
   </div>
 </template>
@@ -40,7 +38,6 @@ export default {
       predata: null,
       status: 0,
       count: 0,
-      // genreNum: 0,
       cateCode: "",
       favorite:null,
       hate:null,
@@ -123,7 +120,6 @@ export default {
         } else {
           console.log(result)
           console.log(result.data)
-          console.log('asb')
         }
       })
     },

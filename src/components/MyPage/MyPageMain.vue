@@ -32,8 +32,9 @@
 
         <div class="profile-intro-line">
           <div class="col-one">소개</div>
-          <textarea id="profileintro" class="profile-introduce-input" type="text" @keydown="count()" :maxlength="500" disabled v-model="newIntro"></textarea>
-          <div class="intro-cont-align"><span>{{newIntro.length}}/500자</span></div>
+          <textarea id="profileintro" class="profile-introduce-input" type="text" maxlength="500" v-model="newIntro"></textarea>
+          <div class="intro-cont-align"><span>{{newIntro.length}}</span>/500자</div>
+
         </div>
 
       </div>
@@ -43,7 +44,6 @@
         <button id="mypage_main-canc" @click="cancelBtn">취소</button>
         <button v-if="isSave" id="mypage_main-save" @click="editBtn(newNickname, newImage, newIntro)">수정</button>
         <button v-else id="mypage_main-save" @click="saveBtn()">저장</button>
-
       </footer>
       
     </div>
@@ -61,10 +61,11 @@ export default {
   data(){
     return{
       uploadimg:'',
+
       newNickname: "",
       newImage: "",
       newIntro: "",
-      introNum: 0,
+
       isSave : true,
       maxlength:500
     }
@@ -78,6 +79,7 @@ export default {
       let url = URL.createObjectURL(uploadfile[0]);
       console.log(url);
       this.newImage=url;
+      // this.uploadimg=url;
       this.uploadimgfile();
     },
     saveBtn() {
@@ -97,9 +99,6 @@ export default {
         console.log(err);
       })
       this.isSave=true
-    },
-    count() {
-      this.introNum++
     },
     // 데이터 불러오기
     getProfile() {
@@ -136,7 +135,6 @@ export default {
 
     // 취소 버튼을 눌렀을 때 동작하는 함수
     cancelBtn(){
-
       const nick = document.getElementById('profilenick');
       const intro = document.getElementById('profileintro');
       const browse = document.getElementById('input-file');

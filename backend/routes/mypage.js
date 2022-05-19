@@ -41,7 +41,6 @@ router.get('/mycard', async (req,res) => {
 
 // 결제정보 설정
 router.post('/mycard', async(req,res)=>{
-
     const result = await db.execute(`UPDATE tbl_user SET user_cardnum = '${req.body.newCard}' WHERE user_id='${req.user.USER_ID}'`)
     console.log(req.body.newCard);
     if(result == 'err') {
