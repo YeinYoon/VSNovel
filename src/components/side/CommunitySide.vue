@@ -46,25 +46,16 @@
             <span class="title">커뮤니티</span>
             <span class="topic">TOPIC · {{ step }}</span>
           </div>
-        </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
-        <div v-if="topicData == 0">
-          <TopicCommu
-            @first="topicadd($event)"
-            @third="topicData = 2"
-            :datasend="community"
-            @deletepost="remove($event)"
-          />
         </div>
-        <div v-if="topicData == 1">
-          <TopicPostView @second="topicData = 0" :topicObject="topicObject" />
-        </div>
-        <div v-if="topicData == 2">
-          <TopicWrite
-            @add="topicData = 0"
-            :datasend="community"
-            @contentdata="addpost($event)"
-          />
-        </div>
+      </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               
+      <div v-if="topicData == 0">
+        <TopicCommu  @btnEvent="communityevent($event)" :datasend="community" />
+      </div>
+      <div v-if="topicData == 1">
+        <TopicPostView @btnpostview="btnpostview($event)" :topicObject="topicObject"/>
+      </div>
+      <div v-if="topicData == 2">
+        <TopicWrite @add="addpost($event)" :datasend="community"/>
       </div>
     </div>
     <div v-else>
@@ -74,7 +65,11 @@
 </template>
 
 <script>
-import dummy_data from "@/assets/DataJs/commuData.js";
+//import dummy_data from "@/assets/DataJs/commuData.js";
+import commuFree from "@/assets/DataJs/commuFree.js"; //자유커뮤니티데이터
+import commujoin from "@/assets/DataJs/commujoin.js"; //팀원모집커뮤니티데이터
+import commuRe from "@/assets/DataJs/commuRe.js"; //리뷰&추천커뮤니티데이터
+import commuWriter from "@/assets/DataJs/commuWriter.js"; //작가커뮤니티데이터
 import TopicCommu from "../community/topic/TopicCommu";
 import TopicPostView from "../community/topic/TopicPostView";
 import TopicWrite from "../community/topic/TopicWrite";
@@ -88,7 +83,7 @@ export default {
       clickNum: 0,
       step: "자유",
       clickId: [],
-      community: dummy_data,
+      community: commuFree,
       topicData: 0,
       topicObject: {},
     };
@@ -133,10 +128,42 @@ export default {
     remove(removedata) {
       this.community.splice(removedata, 1);
     },
-    addpost(addData) {
-      this.community.push(addData);
+    communityevent(event){
+      //console.log(event);
+      //포스트 클릭
+      if(event.type == 'first'){
+        this.topicData = 1;
+        this.topicObject = event.item;
+      }else 
+      //TopicPostView로 감
+      if(event == 'third'){
+        this.topicData = 2
+        //console.log(event);
+      }else 
+      //글쓰기 삭제
+      if(event.type == 'deletepost'){
+        console.log(event);
+        this.community.splice(event.index,1);
+      }
     },
-
+    btnpostview(event) {
+      //목록으로
+      if(event == 'second'){
+        this.topicData = 0
+      }else if(event.type == 'reloaddata'){ //댓글 작업
+      //댓글 몇개인지 띄우기
+        this.topicObject.coment = 1*event.content.length;
+        this.topicObject.comentcontents = event.content;
+      }
+    },
+    addpost(event) {
+      //취소
+      if(event == 'add') {
+        this.topicData=0;
+      }else if(event.type == 'contentdata'){ //글쓰기 저장 작업
+        this.community.push(event.content);
+      }
+    },
     clickCommunityEvent(index, event, item) {
       if(this.clickId[this.clickNum].id == 'villageElement'){
         this.clickId[this.clickNum].style.backgroundColor = "#2c2c2c";
@@ -148,10 +175,21 @@ export default {
       this.step = item;
       this.$router.push("/community");
       // 사이드바 강조효과
-      this.clickId = document.querySelectorAll("#communityElement");
-      event.target.style.backgroundColor = "#2872f9";
-
-      this.clickNum = index;
+        this.clickId = document.querySelectorAll("#communityElement");
+        event.target.style.backgroundColor = "#2872f9";
+        
+        this.clickNum = index;
+      
+      //게시판별 데이터 다르게 띄우기
+      if(this.step == '자유') {
+        this.community = commuFree;
+      }else if(this.step == '작가') {
+        this.community = commuWriter;
+      }else if(this.step == '팀원 모집') {
+        this.community = commujoin;
+      }else if(this.step == '리뷰 & 추천') {
+        this.community = commuRe;
+      }
     },
     // ----------------------------------------------------------------------
     clickVillageEvent(index, event, title) {
