@@ -132,7 +132,8 @@ export default {
         event.target.style.backgroundColor = "#2872f9";
         
         this.clickNum = index;
-
+      
+      //게시판별 데이터 다르게 띄우기
       if(this.step == '자유') {
         this.community = commuFree;
       }else if(this.step == '작가') {
