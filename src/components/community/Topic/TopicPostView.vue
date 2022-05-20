@@ -14,8 +14,8 @@
           <div class="postview_content"><span v-html="topicObject.content"></span></div>
           <!-- 추천, 비추천 영역 -->
           <div class="content_vote">
-            <div class="vote_btn_ok"><span>추천</span></div>
-            <div class="vote_btn_no"><span>비추천</span></div>
+            <div class="vote_btn_ok" @click="postBtn({type: 'likevote'})"><span>추천</span></div>
+            <div class="vote_btn_no" @click="postBtn({type:'nolikevote'})"><span>비추천</span></div>
           </div>
         </div>
 
