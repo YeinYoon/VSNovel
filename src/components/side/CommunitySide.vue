@@ -56,7 +56,10 @@
       <div v-if="topicData == 2">
         <TopicWrite @add="addpost($event)" :datasend="community"/>
       </div>
-      </div>    
+      <div v-if="topicData == 3">
+        <TopicReview/>
+      </div>
+    </div>    
     </div>
     <div v-else>
       <router-view />
@@ -73,6 +76,7 @@ import commuWriter from "@/assets/DataJs/commuWriter.js"; //작가커뮤니티�
 import TopicCommu from "../community/topic/TopicCommu";
 import TopicPostView from "../community/topic/TopicPostView";
 import TopicWrite from "../community/topic/TopicWrite";
+import TopicReview from "../community/topic/TopicReview";
 import axios from "../../axios";
 export default {
   name: "CommunitySide",
@@ -93,6 +97,7 @@ export default {
     TopicCommu,
     TopicPostView,
     TopicWrite,
+    TopicReview
   },
   mounted() {
     // 기본 강조 효과
@@ -200,7 +205,7 @@ export default {
         this.topicData = 0;
       }else if(this.step == '리뷰 & 추천') {
         this.community = commuRe;
-        this.topicData = 0;
+        this.topicData = 3;
       }
     },
     // ----------------------------------------------------------------------
