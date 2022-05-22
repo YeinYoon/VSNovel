@@ -63,7 +63,7 @@ export default {
       open: false,
       writecoment: '',
       writecoments: [],
-      // commentcount: 0,
+      novotecount : 0
     }
   },
   components: {
@@ -75,6 +75,10 @@ export default {
       if(Object.keys(step).length == 1) {
         if(step.type == 'second'){
           this.$emit('btnpostview', 'second');
+        }else if(step.type == 'likevote'){ //추천수 올리기
+          this.$emit('btnpostview', 'likevote' );
+        }else if(step.type == 'nolikevote'){ //비추천 올리기
+          this.$emit('btnpostview', 'nolikevote');
         }
       }else if(Object.keys(step).length == 2){ //step의 길이가 2일때, 댓글 작성 부분
         if(step.type == 'comentwrite'){
@@ -196,6 +200,9 @@ export default {
   vertical-align:middle; 
   text-align: center;
 }
+.vote_btn_ok:hover {
+  opacity: 0.7;
+}
 .vote_btn_no {
   display: table;
   width : 100px;
@@ -211,6 +218,9 @@ export default {
   display: table-cell; 
   vertical-align:middle; 
   text-align: center;
+}
+.vote_btn_no:hover {
+  opacity: 0.7;
 }
 .postview_btn_area {
   position: relative;

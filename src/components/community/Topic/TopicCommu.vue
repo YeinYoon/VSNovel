@@ -30,7 +30,7 @@
         <div class="commu_back">
           <div class="commu_back_title">{{ a.title }}</div>
           <div class="commu_back_info">
-            {{ a.writer }} | {{ a.date }} | {{ a.like }} | {{ a.coment }}
+            {{ a.writer }} | {{ a.date }} | {{ a.likes }} | {{ a.coment }}
           </div>
         </div>
       </div>
@@ -65,7 +65,7 @@ export default {
       //step의 길이가 3일때, 글쓰기 저장
       if(Object.keys(step).length == 3) {
         if(step.manage == false) {
-          const eventBtn = {type:'first', item:step.item};
+          const eventBtn = {type:'first', item:step.item , index:step.index};
           this.$emit('btnEvent', eventBtn)
         }else {
           //모달창 인덱스정보와 내용 받아내기

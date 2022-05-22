@@ -86,6 +86,7 @@ export default {
       community: commuFree,
       topicData: 0,
       topicObject: {},
+      index : 0
     };
   },
   components: {
@@ -121,19 +122,20 @@ export default {
           }
         });
     },
-    topicadd(event) {
-      this.topicData = 1;
-      this.topicObject = event;
-    },
-    remove(removedata) {
-      this.community.splice(removedata, 1);
-    },
+    // topicadd(event) {
+    //   this.topicData = 1;
+    //   this.topicObject = event;
+    // },
+    // remove(removedata) {
+    //   this.community.splice(removedata, 1);
+    // },
     communityevent(event){
       //console.log(event);
       //포스트 클릭
       if(event.type == 'first'){
         this.topicData = 1;
         this.topicObject = event.item;
+        this.index = event.index;
       }else 
       //TopicPostView로 감
       if(event == 'third'){
@@ -154,6 +156,12 @@ export default {
       //댓글 몇개인지 띄우기
         this.topicObject.coment = 1*event.content.length;
         this.topicObject.comentcontents = event.content;
+      }else if(event == 'likevote'){ //추천수 올리기
+        this.community[this.index].likes += 1;
+        //console.log(this.topicObject);
+      }else if(event == 'nolikevote'){ //비추천수 올리기
+        this.community[this.index].nolike += 1;
+        //console.log(this.topicObject);
       }
     },
     addpost(event) {
@@ -183,12 +191,16 @@ export default {
       //게시판별 데이터 다르게 띄우기
       if(this.step == '자유') {
         this.community = commuFree;
+        this.topicData = 0;
       }else if(this.step == '작가') {
         this.community = commuWriter;
+        this.topicData = 0;
       }else if(this.step == '팀원 모집') {
         this.community = commujoin;
+        this.topicData = 0;
       }else if(this.step == '리뷰 & 추천') {
         this.community = commuRe;
+        this.topicData = 0;
       }
     },
     // ----------------------------------------------------------------------
