@@ -54,7 +54,7 @@
         <TopicPostView @btnpostview="btnpostview($event)" :topicObject="topicObject"/>
       </div>
       <div v-if="topicData == 2">
-        <TopicWrite @add="addpost($event)" :datasend="community"/>
+        <TopicWrite @add="addpost($event)" :topicObject="topicObject"/>
       </div>
       <div v-if="topicData == 3">
         <TopicReview/>
@@ -167,6 +167,11 @@ export default {
       }else if(event == 'nolikevote'){ //비추천수 올리기
         this.community[this.index].nolike += 1;
         //console.log(this.topicObject);
+      }else if(event == 'retouch'){ //글 수정 버튼 클릭
+        this.topicData = 2;
+      }else if(event == 'deletewrite'){ //글 삭제 버튼 클릭
+        this.topicData = 0;
+        this.community.splice(this.index,1);
       }
     },
     addpost(event) {

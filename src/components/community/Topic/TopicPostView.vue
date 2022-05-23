@@ -10,8 +10,8 @@
 
         <!-- 수정, 삭제 버튼 -->
       <div class="topic_postview_btn_area">
-        <div class="topic_postview_btn_red"><span>수정</span></div>
-        <div class="topic_postview_btn_blue"><span>삭제</span></div>
+        <div class="topic_postview_btn_red" @click="postBtn({type:'retouch'})"><span>수정</span></div>
+        <div class="topic_postview_btn_blue" @click="postBtn({type:'deletewrite'})"><span>삭제</span></div>
       </div>
 
         <!-- 제목을 나타내는 영역-->
@@ -88,6 +88,10 @@ export default {
           this.$emit('btnpostview', 'likevote' );
         }else if(step.type == 'nolikevote'){ //비추천 올리기
           this.$emit('btnpostview', 'nolikevote');
+        }else if(step.type == 'retouch'){ //글 수정
+          this.$emit('btnpostview', 'retouch');
+        }else if(step.type == 'deletewrite'){
+          this.$emit('btnpostview', 'deletewrite');
         }
       }else if(Object.keys(step).length == 2){ //step의 길이가 2일때, 댓글 작성 부분
         if(step.type == 'comentwrite'){

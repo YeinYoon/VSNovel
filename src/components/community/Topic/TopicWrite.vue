@@ -7,8 +7,8 @@
       </div>
     </div>
     <div class="write_btn_area">
-      <div class="write_btn" @click="registerpost">글쓰기</div>
-      <div class="write_cancle_btn" @click="$emit('add','add')">취소</div>
+      <div class="write_btn" @click="registerpost"><span>글쓰기</span></div>
+      <div class="write_cancle_btn" @click="$emit('add','add')"><span>취소</span></div>
     </div>
   </div>
 </template>
@@ -59,7 +59,7 @@ export default {
       Editor
   },
   props : {
-    datasend:Object
+    topicObject : Object,
   }
 };
 </script>
