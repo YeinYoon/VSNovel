@@ -1,7 +1,12 @@
 <template>
   <div>
     <div class="commu_review_section">
-      <div class="commu_review_title"><input type="text" v-model="writetitle"/></div>
+      <div class="commu_review_frame">
+        <div class="commu_novel_choice"><span>작품선택</span></div>
+        <div class="commu_review_title"><input type="text" v-model="writetitle"/></div>
+        <div class="commu_str_back"><span>★★★★★</span></div>
+      </div>
+      
       <div class="commu_review_content">
         <Editor/>
       </div>
@@ -75,10 +80,32 @@ export default {
   position: relative;
   top: 50px;
 }
+.commu_review_frame{
+  display:flex;
+  justify-content: space-between;
+  height: 7%;
+}
+.commu_novel_choice {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin: 5px auto;
+  flex:1;
+  /* height: 7%; */
+  background-color:#2872f9;
+  border-radius: 20px;
+  padding: 0 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.commu_novel_choice span {
+  color:white;
+}
 .commu_review_title {
   margin: 5px auto;
-  width: 100%;
-  height: 7%;
+  flex: 3;
+  /* width: 50%; */
+  /* height: 7%; */
   background-color: #5e5e5e;
   border-radius: 20px;
   padding: 0 10px;
@@ -91,6 +118,18 @@ export default {
   border: none;
   background: none;
   color:white;
+}
+.commu_str_back {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  margin: 5px auto;
+  flex:1;
+  /* height: 7%; */
+  background-color: #5e5e5e;
+  border-radius: 20px;
+  padding: 0 10px;
+  margin-left: 10px;
 }
 .commu_review_content {
   margin: 0 auto;

@@ -124,7 +124,7 @@ export default {
   font-size: 0.9em;
   width: 100px;
   height: 30px;
-  background: rgb(255, 71, 71);
+  background: #ff4c4c;
   border-radius: 14px;
   display: table;
   margin-left: 20px;
