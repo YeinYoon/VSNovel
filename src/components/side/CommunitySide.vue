@@ -215,7 +215,7 @@ export default {
         this.topicData = 0;
       }else if(this.step == '리뷰 & 추천') {
         this.community = commuRe;
-        this.topicData = 3;
+        this.topicData = 0;
       }
     },
     // ----------------------------------------------------------------------
