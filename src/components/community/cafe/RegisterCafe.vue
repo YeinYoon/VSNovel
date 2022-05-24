@@ -91,7 +91,7 @@
 import commuData from "@/assets/DataJs/commuData.js";
 import notice from "@/assets/DataJs/notice.js";
 import axios from '../../../axios.js';
-// import board from "@/assets/DataJs/board.js";
+import board from "@/assets/DataJs/board.js";
 export default {
   name: "Register",
   data() {
@@ -99,6 +99,7 @@ export default {
       commuData: commuData,
       noticeData: notice,
       registerData : {},
+      boardData : board,
     };
   },
   mounted(){
