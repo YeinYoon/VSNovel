@@ -8,7 +8,7 @@
     </div>
     <div class="write_btn_area">
       <div class="write_btn" @click="registerpost">글쓰기</div>
-      <div class="write_cancle_btn" @click="$emit('add')">취소</div>
+      <div class="write_cancle_btn" @click="$emit('add','add')">취소</div>
     </div>
   </div>
 </template>
@@ -29,15 +29,15 @@ export default {
         post_content : '',
         titleImg : '',
         date : '',
-        post_vote    : '0',
-        coment  : '0',
+        likes    : 0,
+        coment  : 0,
       }
     }
   },
   methods : {
     registerpost(){
       //TopicCommu로 이동
-      this.$emit('add');
+      this.$emit('add','add');
 
       //제목과 내용 가지고 와서 content객체에 넣어준다
       this.content.title = this.writetitle;
@@ -50,9 +50,10 @@ export default {
 
 
       //this.content를 TopicFrame으로 보내기
-      this.$emit('contentdata' , this.content);
-      
-    },
+      const contentdata = {type:'contentdata', content : this.content}
+      this.$emit('add' , contentdata);
+
+    }
   },
   components: {
       Editor

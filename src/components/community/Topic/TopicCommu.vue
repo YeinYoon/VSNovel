@@ -7,7 +7,7 @@
         @closemodal="open = false"
         :modaldatasend="modaldata"
         :datasend="datasend"
-        @deletedata="deletepost(indexdata)"
+        @deletedata="communitybtn({type : 'modal',indexdata : indexdata})"
       ></Modal>
     </div>
 
@@ -16,7 +16,7 @@
             <span class="commu_btn_manage" @click="manage=true" v-if="manage==false">관리자 시점</span>
             <span class="commu_btn_manage" @click="manage=false" v-if="manage==true">관리</span>
           </div>
-          <div class="commu_btn_blue" v-if="manage==false"><span class="commu_btn_write" @click="$emit('third')">글쓰기</span></div>
+          <div class="commu_btn_blue" v-if="manage==false"><span class="commu_btn_write" @click="communitybtn({type:'third'})">글쓰기</span></div>
         </div>
 
     <section class="commu_section">
@@ -24,7 +24,7 @@
         class="commu_post"
         v-for="(a, index) in datasend"
         :key="a"
-        @click="decision(a,manage,index)"
+        @click="communitybtn({manage : manage, index : index , item : a})"
       >
         <img class="commu_thumb" :src="`${a.titleImg}`" @error="replaceimg"/>
         <div class="commu_back">
@@ -61,21 +61,34 @@ export default {
     this.getcommulist();
   },
   methods : {
-    decision(a,manage,index){
-      if(manage==false){
-        this.$emit('first', a);
-
-        //topicpostviewdata 댓글을 위한 인덱스데이터
-        this.indexdata = index;
-        this.$emit('indexdata', this.indexdata);
-      }else {
-        this.open = true;
-        this.modaldata = a;
-        this.indexdata = index;
+    communitybtn(step = {}){
+      //step의 길이가 3일때, 글쓰기 저장
+      if(Object.keys(step).length == 3) {
+        if(step.manage == false) {
+          const eventBtn = {type:'first', item:step.item};
+          this.$emit('btnEvent', eventBtn)
+        }else {
+          //모달창 인덱스정보와 내용 받아내기
+          this.open = true;
+          this.modaldata = step.item;
+          this.indexdata = step.index;
+          console.log(this.indexdata);
+        }
       }
-    },
-    deletepost(indexdata){
-      this.$emit('deletepost',indexdata);
+      //step의 길이가 2일때, 모달창으로 글쓰기 삭제
+      else if(Object.keys(step).length == 2) {
+        if(step.type == 'modal'){
+          const modal = {type: 'deletepost' , index:step.indexdata}
+          console.log(modal);
+          this.$emit('btnEvent', modal)
+        }
+      }
+      //step의 길이가 1일때, post로 나타내기
+      if(Object.keys(step).length == 1) {
+        if(step.type == 'third') {
+          this.$emit('btnEvent', 'third')
+        }
+      }
     },
     replaceimg(e){
       e.target.src=img
