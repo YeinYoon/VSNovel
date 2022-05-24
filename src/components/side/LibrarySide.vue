@@ -9,16 +9,10 @@
       <div class="group"><span>· 컨텐츠 분류</span></div>
       <div class="novel_div">
         <div class="novel" id="novel" @click="novelEvent($event, 'novel')">
-          기본
-        </div>
-        <div class="newNovel" id="newNovel" @click="novelEvent($event, 'newNovel')">
-          신작
+          최근 플레이
         </div>
         <div class="payNovel" id="payNovel" @click="novelEvent($event, 'payNovel')">
-          구매↑
-        </div>
-        <div class="starNovel" id="starNovel" @click="novelEvent($event, 'starNovel')">
-          별점↑
+          {{play}}
         </div>
       </div>
     </div>
@@ -49,6 +43,7 @@ export default {
       hiddenData: false,
       genreNum: 0,
       clickNovel : 'novel',
+      play : '구매일자↑'
     };
   },
   components:{
@@ -63,7 +58,11 @@ export default {
       // 사이드바 강조효과
       let id = document.getElementById(this.clickNovel);
       if (className != this.clickNovel) {
-        id.style.backgroundColor = "#8a8a8a";
+        id.style.backgroundColor = "#494949";
+      }
+      else if(this.clickNovel == 'payNovel'){
+        if(this.play == '구매일자↑') this.play = '구매일자↓';
+        else this.play = '구매일자↑';
       }
         event.target.style.backgroundColor = "#2872f9";
         this.clickNovel = className;

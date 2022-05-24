@@ -18,7 +18,7 @@
           구매↑
         </div>
         <div class="starNovel" id="starNovel" @click="novelEvent($event, 'starNovel')">
-          별점↑
+          리뷰↑
         </div>
       </div>
     </div>
@@ -70,7 +70,7 @@ export default {
       // 사이드바 강조효과
       let id = document.getElementById(this.clickNovel);
       if (className != this.clickNovel) {
-        id.style.backgroundColor = "#8a8a8a";
+        id.style.backgroundColor = "#494949";
       }
         event.target.style.backgroundColor = "#2872f9";
         this.clickNovel = className;
@@ -172,7 +172,7 @@ export default {
   margin: 0 auto;
   display: grid;
   width: 80%;
-  background-color: #8a8a8a;
+  background-color: #494949;
   border-radius: 15px;
   overflow: hidden;
 }
