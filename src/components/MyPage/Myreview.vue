@@ -25,7 +25,7 @@
 </template>
 
 <script>
-import review from '@/assets/DataJs/review.js'
+import review from '@/assets/DataJs/review.js';
 
 export default {
   data(){
@@ -35,9 +35,9 @@ export default {
   },
   methods:{
     reviewEdit(){
-      this.$router.push('/mypage/');
+      this.$router.push('/community');
     }
-  }
+  },
 }
 </script>
 
