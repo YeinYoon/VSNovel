@@ -19,14 +19,14 @@
       <div>
         <div class="group"><span>· Village</span></div>
           <div
-            @click="clickVillageEvent(0, $event, 'Village Main')"
+            @click="clickVillageEvent(0, $event, null)"
             id="villageElement"
           >
           · Village Main
           </div>
         <div v-for="(array, i) in sideCafe" :key="i">
           <div
-            @click="clickVillageEvent(i+1, $event, array.VILL_NAME)"
+            @click="clickVillageEvent(i+1, $event, array.VILL_CODE)"
             id="villageElement"
           >
           · {{ array.VILL_NAME }}
@@ -110,11 +110,13 @@ export default {
         content: this.$route.params.comm_content,
       };
     }
+    this.$router.push('/community');
     this.resVillageList();
   },
   methods: {
     // 가입한 카페 리스트
-    resVillageList() {
+    async resVillageList() {
+      await this.getUserInfo();
       axios
         .post("/api/village/resVillageList", { id: this.$store.state.userId })
         .then((result) => {
@@ -154,7 +156,7 @@ export default {
       this.clickNum = index;
     },
     // ----------------------------------------------------------------------
-    clickVillageEvent(index, event, title) {
+    clickVillageEvent(index, event, code) {
       if(this.clickId[this.clickNum].id == 'communityElement'){
         this.clickId[this.clickNum].style.backgroundColor = "#2c2c2c";
       }
@@ -167,12 +169,24 @@ export default {
 
       this.clickNum = index;
       // 메인 화면 이동 함수
-      if (title == "Village Main") {
+      if (code == null) {
         this.$router.push("/community/villagemain");
       }else {
-        this.$router.push({ name: "Register", params:{ id: title }});
+        this.$router.push(`/community/register/${code}`);
       }
     },
+    async getUserInfo() {
+      await axios.get("/api/auth/loginCheck").then((result) => {
+      if (result.data != "") {
+        console.log(result.data);
+        this.$store.commit("userLogin", {
+          nickname: result.data.USER_NICKNAME,
+          id: result.data.USER_ID,
+        });
+        console.log(this.$store.state.userId);
+      }
+      });
+    }
   },
 };
 </script>

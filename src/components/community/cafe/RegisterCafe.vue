@@ -73,23 +73,26 @@ import commuData from "@/assets/DataJs/commuData.js";
 import notice from "@/assets/DataJs/notice.js";
 import axios from '../../../axios.js';
 export default {
-  name: "RegisterCafe",
+  name: "Register",
   data() {
     return {
       commuData: commuData,
       noticeData: notice,
       registerData : {},
-      paramsTitle : this.$route.params.id,
     };
   },
   mounted(){
     this.infoVillageList();
-    console.log(this.paramsTitle);
+  },
+  watch:{
+    $route(){
+      this.infoVillageList();
+    }
   },
   methods:{
     // 가입한 카페 정보
     infoVillageList() {
-      axios.post('/api/village/infoVillageList', { name : this.paramsTitle })
+      axios.post('/api/village/infoVillageList', { code : this.$route.fullPath.split('/')[3] })
       .then((result)=>{
         if(result.data == "err") {
           console.log("가입한 카페 정보 불러오기 실패");

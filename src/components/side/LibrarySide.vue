@@ -7,11 +7,19 @@
     </div>
     <div>
       <div class="group"><span>· 컨텐츠 분류</span></div>
-      <div class="fiction" id="fiction" @click="groupEvent('novel', $event)">
-        · 웹소설
-      </div>
-      <div class="novel" id="novel" @click="groupEvent('fiction', $event)">
-        · 비주얼 노벨
+      <div class="novel_div">
+        <div class="novel" id="novel" @click="novelEvent($event, 'novel')">
+          기본
+        </div>
+        <div class="newNovel" id="newNovel" @click="novelEvent($event, 'newNovel')">
+          신작
+        </div>
+        <div class="payNovel" id="payNovel" @click="novelEvent($event, 'payNovel')">
+          구매↑
+        </div>
+        <div class="starNovel" id="starNovel" @click="novelEvent($event, 'starNovel')">
+          별점↑
+        </div>
       </div>
     </div>
     <div class="side_genre_group">
@@ -40,22 +48,25 @@ export default {
       data: genreData,
       hiddenData: false,
       genreNum: 0,
+      clickNovel : 'novel',
     };
   },
   components:{
     Library,
   },
+  mounted(){
+    let id = document.getElementById('novel');
+    id.style.backgroundColor = "#2872f9";
+  },
   methods: {
-    groupEvent(step, event) {
-    // 강조효과
-      let id = document.getElementById(step);
-      if (this.groupStep == "") {
-        event.target.style.backgroundColor = "#2872f9";
-        this.groupStep = step;
-      } else {
-        event.target.style.backgroundColor = "#2872f9";
-        id.style.backgroundColor = "#2c2c2c";
+    novelEvent(event, className) {
+      // 사이드바 강조효과
+      let id = document.getElementById(this.clickNovel);
+      if (className != this.clickNovel) {
+        id.style.backgroundColor = "#8a8a8a";
       }
+        event.target.style.backgroundColor = "#2872f9";
+        this.clickNovel = className;
     },
     hidden() {
     // 장르 열고 닫기
@@ -66,8 +77,8 @@ export default {
     // 장르 강조 효과
       let id = Array.from(document.querySelectorAll(".select_btn"));
 
-      event.target.style.color = "black";
       id[this.genreNum].style.color = "gray";
+      event.target.style.color = "black";
       this.genreNum = num;
     },
   },

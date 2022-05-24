@@ -18,7 +18,7 @@ router.get('/getVillageList', async (req,res)=>{
 // 가입한 카페 리스트
 router.post('/resVillageList', async (req,res)=>{
     console.log(req.body.id);
-    var resVillage = await db.execute(`SELECT DISTINCT tbl_village.VILL_NAME FROM tbl_village_join, tbl_village WHERE tbl_village_join.USER_ID = '${req.body.id}' and tbl_village.vill_code = tbl_village_join.vill_code`);
+    var resVillage = await db.execute(`SELECT DISTINCT tbl_village.VILL_NAME, tbl_village.VILL_CODE FROM tbl_village_join, tbl_village WHERE tbl_village_join.USER_ID = '${req.body.id}' and tbl_village.vill_code = tbl_village_join.vill_code`);
     if(resVillage=="err") {
         res.send("err");
     } else {
@@ -29,7 +29,7 @@ router.post('/resVillageList', async (req,res)=>{
 })
 // 가입한 카페 정보
 router.post('/infoVillageList', async (req,res)=>{
-    var resInfoVillage = await db.execute(`select * from tbl_village where vill_name = '${req.body.name}'`);
+    var resInfoVillage = await db.execute(`select * from tbl_village where vill_code = '${req.body.code}'`);
     if(resInfoVillage=="err") {
         res.send("err");
     } else {
@@ -40,7 +40,8 @@ router.post('/infoVillageList', async (req,res)=>{
 })
 // 유저가 카페 가입할 때
 router.post('/joinVillageList', async (req,res)=>{
-    console.log(req.body.code);
+    if(req.user.USER_ID == null)
+        res.send("로그인 해주세요.");
     var userVillageCheck = await db.execute(`select * from tbl_village_join where VILL_CODE = ${req.body.code} and USER_ID='${req.user.USER_ID}'`);
     console.log(userVillageCheck.rows.length);
     console.log(userVillageCheck.rows.length==0);
@@ -49,15 +50,12 @@ router.post('/joinVillageList', async (req,res)=>{
         VALUES ('${req.user.USER_ID}', ${req.body.code},'d')`);
         //에러가 안뜰대
         if(joinVillage!="err") {
-            console.log('에러가 안 뜰 때');
             joinVillage = joinVillage.rows;
             var addVillageUnit = await db.execute(`UPDATE tbl_village SET VILL_USER_COUNT = VILL_USER_COUNT+1 WHERE VILL_CODE=${req.body.code}`);
             if(addVillageUnit != "err"){
-                console.log("가입 완료 : " + joinVillage);
                 res.send("가입 완료");
             }
         } else {
-            console.log('끝');
             res.send(joinVillage);
         }
     }else{

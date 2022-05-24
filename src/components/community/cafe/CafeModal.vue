@@ -7,68 +7,64 @@
     <div v-bind:class="{ cafe_modal_frame_big: true }">
       <!--모달 내 메세지 및 컨텐츠인 modal_inner, 여기에 단순히 메세지만을 표시할수도 
     작은 컴포넌트를 삽입할수도 있따.-->
-    
-        
-            <div class="cafe_modal_inner">
-                <div class="cafe_modal_title_inner"><span class="modal_title">가입하기</span></div>
-                <div>
-                    <div class="cafe_banner"><img :src="modalData.VILL_PRO_IMG"></div>
-                </div>
-                
-            </div>
-            <!-- <div class="modal_content">내용 출력</div> -->
-        <!--메세지를 출력하는 예제-->
-      
-      
+      <div class="cafe_modal_inner">
+        <div class="cafe_modal_title_inner">
+          <span class="modal_title">가입하기</span>
+        </div>
+        <div>
+          <div class="cafe_banner"><img :src="modalData.VILL_PRO_IMG" /></div>
+        </div>
+      </div>
+      <!-- <div class="modal_content">내용 출력</div> -->
+      <!--메세지를 출력하는 예제-->
       <!--모달을 닫는 버튼과 버튼내 메세지(확인, 취소 등등)-->
       <div class="cafe_modal_btn_position">
-            <div>
-                <span class="cafe_qna">이 카페에 가입하시겠습니까?</span>
-            </div>
-            <button class="cafe_modal_btn" @click="clickEvent()">확인</button>
-            <button class="cafe_modal_btn"  @click="$emit('close', openModal)">취소</button>
+        <div>
+          <span class="cafe_qna">이 카페에 가입하시겠습니까?</span>
+        </div>
+        <button  class="cafe_modal_btn" @click="clickEvent()">확인</button>
+        <button class="cafe_modal_btn" @click="$emit('close', openModal)">
+          취소
+        </button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from '../../../axios.js';
+import axios from "../../../axios.js";
 export default {
   name: "vsn_modal_universal",
   data() {
-      return{
-      }
+    return {
+    };
   },
   props: {
-    openModal : Boolean,
-    modalData : Object,
-
+    openModal: Boolean,
+    modalData: Object,
   },
-  methods:{
-    clickEvent(){
+  methods: {
+    clickEvent() {
       console.log(this.modalData);
       // 카페 가입 함수
       this.joinVillageList();
-      this.$emit('close', this.openModal);
+      this.$emit("close", this.openModal);
     },
-    joinVillageList(){
-      axios.post('/api/village/joinVillageList', {code : this.modalData.VILL_CODE})
-      .then((result)=>{
-        if(typeof result.data == String) {
-          console.log(result.data);
-        } else {
-          console.log(typeof result.data);
-          alert(result.data);
-          this.registerData = result.data[0];
-        }
-      })
-    }
-  }
+    joinVillageList() {
+      axios
+        .post("/api/village/joinVillageList", {
+          code: this.modalData.VILL_CODE,
+        })
+        .then((result) => {
+            console.log(typeof(result.data));
+            alert(result.data);
+            this.registerData = result.data[0];
+        });
+    },
+  },
 };
 </script>
-<style>
-.cafe_banner img {
+<style>.cafe_banner img {
     width: 100%;
     height: 150px;
     border-radius: 15px;
@@ -123,6 +119,7 @@ export default {
     border-radius: 12px;
     cursor: pointer;
     margin:5px 5px 5px 20px;
+    left: 31%;
 }
 .cafe_modal_btn_position {
   position:relative;
@@ -133,6 +130,7 @@ export default {
 }
 .cafe_qna {
     color:white;
+    margin-left: 38%;
 }
 /* 애니메이션들,*/
 /*열리는 애니메이션 opening*/

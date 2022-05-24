@@ -12,7 +12,7 @@
 
     <!-- 모달창 내용 -->
     <div class="alert_modal_inner">
-      <span>내용을 입력해 주세요</span> <!--메세지를 출력하는 예제-->
+      <span>{{retrunText}}</span> <!--메세지를 출력하는 예제-->
     </div>
       <!--모달을 닫는 버튼과 버튼내 메세지(확인, 취소 등등)-->
     <div class="alert_modal_save_button">

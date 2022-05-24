@@ -300,7 +300,7 @@ button {
   height: 300px;
   padding: 5px 10px;
   border-radius: 20px;
-  margin: 20px 0;
+  margin: 30px 0 0 0;
 }
 .notice,
 .community {

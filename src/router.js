@@ -26,7 +26,7 @@ import Notice from './components/side/NoticeSide.vue';
 import Login from './components/auth/Login.vue';
 import SignUp from './components/auth/SignUp.vue';
 import FindAcc from './components/auth/FindAcc.vue';
-import Engine from './components/Engine/Engine.vue';
+import Engine from './components/engine/Engine.vue';
 
 const routes = [
   {
@@ -91,7 +91,7 @@ const routes = [
     props:true,
     children:[
       {path : 'villagemain', name:'VillageMain', component : VillageMain},
-      {path : 'register', name:'Register', component : Register}
+      {path : 'register/:id', name:'Register', component : Register, props: true}
     ]
   },
   {
