@@ -25,6 +25,10 @@ export default {
     return {
     }
   },
+  mounted() {
+    if(this.update==true)
+      this.state.content = this.topicObject.content;
+  },
   setup() {
     const state = reactive({
     //   dynamicComponent: null,
@@ -80,6 +84,10 @@ export default {
   },
   methods: {
   },
+  props: {
+    topicObject : Object,
+    update: Boolean
+  }
 };
 </script>
 <style>

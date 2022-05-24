@@ -1,13 +1,17 @@
 <template>
   <div>
     <div class="commu_write_section">
-      <div class="commu_write_title"><input type="text" v-model="writetitle"/></div>
+      <div class="commu_write_title" v-if="update==false"><input type="text" v-model="writetitle"/></div>
+      <div class="commu_write_title" v-if="update==true"><input type="text" :value="`${topicObject.title}`" id="updatetitle"/></div>
       <div class="commu_write_content">
-        <Editor @registerdata="writecontent = $event"/>
+        <Editor @registerdata="writecontent = $event" :topicObject="topicObject" :update="update"/>
       </div>
     </div>
     <div class="write_btn_area">
-      <div class="write_btn" @click="registerpost"><span>글쓰기</span></div>
+      <div class="write_btn" @click="registerpost">
+        <span v-if="update==false">글쓰기</span>
+        <span v-if="update==true">수정</span>
+      </div>
       <div class="write_cancle_btn" @click="$emit('add','add')"><span>취소</span></div>
     </div>
   </div>
@@ -31,7 +35,7 @@ export default {
         date : '',
         likes    : 0,
         coment  : 0,
-      }
+      },
     }
   },
   methods : {
@@ -40,7 +44,14 @@ export default {
       this.$emit('add','add');
 
       //제목과 내용 가지고 와서 content객체에 넣어준다
-      this.content.title = this.writetitle;
+      //제목 가져오기
+      if(this.update == false){
+        this.content.title = this.writetitle;
+      }else {
+        this.content.title = document.getElementById('updatetitle').value;
+      }
+
+      //내용 or 수정한 내용 가져오기
       this.content.content = this.writecontent;
 
       //날짜 데이터 가지고 오기
@@ -48,18 +59,24 @@ export default {
       this.writedate = this.datedata.toISOString().substr(0,10);
       this.content.date = this.writedate;
 
-
       //this.content를 TopicFrame으로 보내기
       const contentdata = {type:'contentdata', content : this.content}
-      this.$emit('add' , contentdata);
+      const updatedata = {type:'updatedata', content : this.content}
+      if(this.update == false){
+        this.$emit('add' , contentdata);
+      }else {
+        this.$emit('add', updatedata);
+      }
+      
 
-    }
+    },
   },
   components: {
       Editor
   },
   props : {
     topicObject : Object,
+    update: Boolean
   }
 };
 </script>

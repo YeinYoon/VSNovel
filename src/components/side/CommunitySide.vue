@@ -54,7 +54,7 @@
         <TopicPostView @btnpostview="btnpostview($event)" :topicObject="topicObject"/>
       </div>
       <div v-if="topicData == 2">
-        <TopicWrite @add="addpost($event)" :topicObject="topicObject"/>
+        <TopicWrite @add="addpost($event)" :topicObject="topicObject" :update="update"/>
       </div>
       <div v-if="topicData == 3">
         <TopicReview/>
@@ -90,7 +90,8 @@ export default {
       community: commuFree,
       topicData: 0,
       topicObject: {},
-      index : 0
+      index : 0,
+      update: false
     };
   },
   components: {
@@ -145,9 +146,10 @@ export default {
       //TopicPostView로 감
       if(event == 'third'){
         this.topicData = 2
+        this.update = false;
         //console.log(event);
       }else 
-      //글쓰기 삭제
+      //관리자 글쓰기 삭제
       if(event.type == 'deletepost'){
         console.log(event);
         this.community.splice(event.index,1);
@@ -169,6 +171,7 @@ export default {
         //console.log(this.topicObject);
       }else if(event == 'retouch'){ //글 수정 버튼 클릭
         this.topicData = 2;
+        this.update = true;
       }else if(event == 'deletewrite'){ //글 삭제 버튼 클릭
         this.topicData = 0;
         this.community.splice(this.index,1);
@@ -180,6 +183,8 @@ export default {
         this.topicData=0;
       }else if(event.type == 'contentdata'){ //글쓰기 저장 작업
         this.community.push(event.content);
+      }else if(event.type == 'updatedata'){ //글쓰기 수정 작업
+        this.community.splice(this.index,1,event.content);
       }
     },
     clickCommunityEvent(index, event, item) {
