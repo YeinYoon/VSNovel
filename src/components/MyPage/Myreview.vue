@@ -18,7 +18,7 @@
               <span class="list_content">{{review.content}}</span>
           </div>
       </div>
-      <div class="review_edit">리뷰수정</div>
+      <div class="review_edit" @click="reviewEdit">리뷰수정</div>
     </div>
   </div>
 </div>
@@ -33,6 +33,11 @@ export default {
       reviews :review,
     };
   },
+  methods:{
+    reviewEdit(){
+      this.$router.push('/mypage/');
+    }
+  }
 }
 </script>
 
@@ -63,5 +68,8 @@ export default {
   text-align: center;
   line-height: 42px;
   cursor: pointer;
+}
+.review_edit:hover{
+  background: #0084ff;
 }
 </style>

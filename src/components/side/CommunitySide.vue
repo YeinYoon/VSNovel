@@ -46,9 +46,9 @@
 
 <script>
 import dummy_data from "@/assets/DataJs/commuData.js";
-import TopicCommu from "../community/Topic/TopicCommu";
-import TopicPostView from "../community/Topic/TopicPostView";
-import TopicWrite from "../community/Topic/TopicWrite";
+import TopicCommu from "../community/topic/TopicCommu";
+import TopicPostView from "../community/topic/TopicPostView";
+import TopicWrite from "../community/topic/TopicWrite";
 export default {
   name: "CommunitySide",
   data() {

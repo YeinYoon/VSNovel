@@ -2,7 +2,7 @@ import { createWebHistory, createRouter } from "vue-router";
 // 스토어 
 import Store from './components/side/StoreSide.vue';
 // 메인페이지
-import Main from './components/MainPage/Main.vue';
+import Main from './components/mainpage/Main.vue';
 // 커뮤니티
 import Community from './components/side/CommunitySide.vue';
 //카페
@@ -11,13 +11,13 @@ import Register from './components/community/cafe/RegisterCafe.vue';
 
 // 마이페이지 링크들
 import MyPage from './components/side/MypageSide.vue';
-import MyPageMain from './components/MyPage/MyPageMain.vue';
-import MyCard from "./components/MyPage/MyCard";
-import MyPost from "./components/MyPage/MyPost";
-import Myreview from "./components/MyPage/Myreview";
-import Prefer from "./components/MyPage/Prefer";
-import MyAlarm from "./components/MyPage/MyAlarm";
-import MyWithdrawal from "./components/MyPage/withdrawal/MyWithdrawal";
+import MyPageMain from './components/mypage/MyPageMain.vue';
+import MyCard from "./components/mypage/MyCard";
+import MyPost from "./components/mypage/MyPost";
+import Myreview from "./components/mypage/Myreview";
+import Prefer from "./components/mypage/Prefer";
+import MyAlarm from "./components/mypage/MyAlarm";
+import MyWithdrawal from "./components/mypage/withdrawal/MyWithdrawal";
 // 라이브러리
 import Library from './components/side/LibrarySide.vue';
 // 공지사항
@@ -26,7 +26,7 @@ import Notice from './components/side/NoticeSide.vue';
 import Login from './components/auth/Login.vue';
 import SignUp from './components/auth/SignUp.vue';
 import FindAcc from './components/auth/FindAcc.vue';
-import Engine from './components/Engine/Engine.vue';
+import Engine from './components/engine/Engine.vue';
 
 const routes = [
   {

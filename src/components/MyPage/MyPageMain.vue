@@ -161,6 +161,9 @@ export default {
   font-size: 1.0em;
   text-align: center;
 }
+.input-file-button:hover{
+  background: #0084ff;
+}
 
 /* 제목,부제목을 제외한 모든 태그들 */
 .main-position-container{
@@ -281,5 +284,8 @@ export default {
   color: white;
   font-size: 1.0em;
   cursor: pointer;
+}
+#mypage_main-save:hover{
+  background: #0084ff;
 }
 </style>

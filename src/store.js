@@ -70,6 +70,7 @@ const store = createStore({
         setNovelList(state, data) {
             state.novelList = data;
         },
+
     },
 })
 
