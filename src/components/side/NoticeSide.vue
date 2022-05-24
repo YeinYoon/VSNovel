@@ -12,6 +12,7 @@
       </div>
     </div>
   </div>
+  <!-- 공지사항 메인 -->
   <div class="tests" v-if="noticeStep == 0">
     <header class="header">
         <div class="service">
@@ -63,13 +64,11 @@ export default {
             noticeNum : 0,
             noticeStep : 0,
             clickNotice : {},
-            clickNoticeNum : 0,
             writeModify : false,
             admin : false,
     };
   },
   components:{
-
         NoticeWrite,
         NoticeRead,
   },
@@ -91,8 +90,8 @@ export default {
         // console.log(this.$route)
         if(this.$route.params.noti_id!=undefined){
             this.noticeStep = 2;
-            this.clickNotice = this.$route.params.noti_id;
-            this.clickNoticeNum = 0;
+            this.clickNotice = { title : this.$route.params.noti_id,
+                                 content : this.$route.params.noti_content};
             this.writeModify = true;
         }
     },
@@ -109,6 +108,7 @@ export default {
       }
       this.clickNum = index;
     },
+    // 공지사항 메인 함수
         adminEvent(){
             if(this.admin) this.admin = false;
             else this.admin = true;
@@ -152,7 +152,7 @@ export default {
 
 <style>
 .notice_section{
-    width: 800px;
+    width: 95%;
     height: 70%;
     margin: 0 auto;
     position: relative;

@@ -7,7 +7,7 @@ export default[
         pay : '57900',
         titleImg : 'https://search.pstatic.net/sunny/?src=https%3A%2F%2Fi.pinimg.com%2F736x%2Fff%2F75%2F6a%2Fff756ad4108b518c644b46711bb54eb3.jpg&type=a340',
         saleDate : '2021년 10월'
-
+        
     },
     {
         title:'영진전문대',

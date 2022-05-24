@@ -8,8 +8,6 @@ const store = createStore({
             userNickname : null,
             LoadingStatus: false,
 
-            //커뮤니티 사이드 
-            cafeSide : [{title:'Village Main'}], // 커뮤니티 사이드 
 
             //전역(Global) 모달
             gModalState : false,
@@ -43,17 +41,6 @@ const store = createStore({
             state.LoadingStatus = false;
         },
 
-
-        //사이드 카페 가입 배열 추가
-        addCafe(state, cafeData){
-            for(let i = 0; i < state.cafeSide.length; i++){
-                if(state.cafeSide[i].title == cafeData.title){
-                    alert('이미 가입된 카페입니다.');
-                    return
-                }
-            }
-            state.cafeSide.push(cafeData);
-        },
 
         // Modal
         gModalOn(state, info){

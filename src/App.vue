@@ -17,8 +17,21 @@ import Menu from './components/Menu';
 import GlobalModal from './components/modal/GlobalModal.vue';
 // import vsnside from './components/Side';
 // import Vsncontent from './components/Content';
+import axios from './axios'
 export default {
   name: "App",
+  created() {
+    axios.get("/api/auth/loginCheck").then((result) => {
+      if (result.data != "") {
+        console.log(result.data);
+        this.$store.commit("userLogin", {
+          nickname: result.data.USER_NICKNAME,
+          id: result.data.USER_ID,
+        });
+        console.log(this.$store.state.userId);
+      }
+    });
+  },
   components: {
     Menu,
     GlobalModal,

@@ -57,16 +57,16 @@ export default {
     });
 
     const onEditorBlur = (quill) => {
-      console.log("editor blur!", quill);
+      // console.log("editor blur!", quill);
     };
     const onEditorFocus = (quill) => {
-      console.log("editor focus!", quill);
+      // console.log("editor focus!", quill);
     };
     const onEditorReady = (quill) => {
-      console.log("editor ready!", quill);
+      // console.log("editor ready!", quill);
     };
     const onEditorChange = ({ quill, html, text }) => {
-      console.log("editor change!", quill, html, text);
+      // console.log("editor change!", quill, html, text);
       state._content = html;
     };
 

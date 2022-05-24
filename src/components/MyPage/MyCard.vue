@@ -70,7 +70,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 /* 제목,부제목을 제외한 전체적인 위치 */
 .card-position-container{
-  width: 800px;
+  width: 95%;
   height: 450px;
   position: relative;
   top: 15%;
