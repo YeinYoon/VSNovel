@@ -12,7 +12,7 @@
           최근 플레이
         </div>
         <div class="payNovel" id="payNovel" @click="novelEvent($event, 'payNovel')">
-          {{play}}
+          {{payDate}}
         </div>
       </div>
     </div>
@@ -43,7 +43,7 @@ export default {
       hiddenData: false,
       genreNum: 0,
       clickNovel : 'novel',
-      play : '구매일자↑'
+      payDate : '구매일자↑'
     };
   },
   components:{
@@ -61,8 +61,8 @@ export default {
         id.style.backgroundColor = "#494949";
       }
       else if(this.clickNovel == 'payNovel'){
-        if(this.play == '구매일자↑') this.play = '구매일자↓';
-        else this.play = '구매일자↑';
+        if(this.payDate == '구매일자↑') this.payDate = '구매일자↓';
+        else this.payDate = '구매일자↑';
       }
         event.target.style.backgroundColor = "#2872f9";
         this.clickNovel = className;

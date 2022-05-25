@@ -18,7 +18,7 @@
               <span class="list_content">{{review.content}}</span>
           </div>
       </div>
-      <div class="review_edit">리뷰수정</div>
+      <div class="review_edit" @click="reviewEdit()">리뷰수정</div>
     </div>
   </div>
 </div>
@@ -33,6 +33,11 @@ export default {
       reviews :review,
     };
   },
+  methods:{
+    reviewEdit(){
+      this.$router.push({name: 'Community', params:{step : '리뷰 & 추천', topicNum : 2}});
+    }
+  }
 }
 </script>
 
