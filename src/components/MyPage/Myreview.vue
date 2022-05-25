@@ -35,7 +35,7 @@ export default {
   },
   methods:{
     reviewEdit(){
-      this.$router.push('/community');
+      this.$router.push({name: 'Community', params:{step : '리뷰 & 추천', topicNum : 2}});
     }
   },
 }

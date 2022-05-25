@@ -95,6 +95,12 @@ export default {
   },
   mounted() {
     // 기본 강조 효과
+    if(this.$route.params != null){
+      this.step = this.$route.params.step; // 부제목 변수 변경
+      this.topicData = this.$route.params.topicNum; // 수정 페이지 이동
+      this.clickNum = 3; // 사이드바 강조효과
+    }
+
     this.clickId = document.querySelectorAll("#communityElement");
     this.clickId[this.clickNum].style.backgroundColor = "#2872f9";
 
