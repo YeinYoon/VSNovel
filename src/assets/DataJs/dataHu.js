@@ -6,8 +6,8 @@ export default[
         content : '현실에선 찐따인 내가 이 세계에선 왕자의 애인? 눈을 떠보니, 나는 자바 왕국의 한 가운데에 있었다. 뭐라고? 내가 이 세계에 떨어졌다고??!, 나는 자바 왕국의 한 가운데에 있었다. 뭐라고? 내가 이 세계에 떨어졌다고??! 자바 왕국에서 벌어지는 좌충우돌 스토리! 그ㄴㅇㄹ 떠보니, 나는 자바 왕국의 한 가운데에 있었다. 뭐라고? 내가 이 세계에 떨어졌다고??! 자바 왕국에서 벌어지는 좌충우돌 스토리! 그 현실에선 찐따인 내가 이 세계에선 왕자의 애인? 눈을 떠보니, 나는 자바 왕국의 한 가운데에 있었다. 뭐라고? 내가 이 세계에 떨어졌다고??!, 나는 자바 왕국의 한 가운데에 있었다. 뭐라고? 내가 이 세계에 떨어졌다고??! 자바 왕국에서 벌어지는 좌충우돌 스토리! 그ㄴㅇㄹ 떠보니, 나는 자바 왕국의 한 가운데에 있었다. 뭐라고? 내가 이 세계에 떨어졌다고??! 자바 왕국에서 벌어지는 좌충우돌 스토리! 그',
         pay : '57900',
         titleImg : 'https://search.pstatic.net/sunny/?src=https%3A%2F%2Fi.pinimg.com%2F736x%2Fff%2F75%2F6a%2Fff756ad4108b518c644b46711bb54eb3.jpg&type=a340',
-        saleDate : '2021년 10월'
-        
+        saleDate : '2021년 10월',
+        recentPlay : '2022-05-28',
     },
     {
         title:'영진전문대',
@@ -16,7 +16,8 @@ export default[
         content : '에에에엥/',
         pay : '30000',
         titleImg : 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA4MzFfMTc0%2FMDAxNjMwMzc2NjkzMzE5.e9CdNWrG7XhFKAxfGwHwmRZGly7wV0rFbwaoRtP6Fqkg.A0_gAkRS9qQ_umBzecjweuFxuBcf02_4dRIODGMMmLkg.JPEG.eggarpolar%2F764381619.jpg&type=a340',
-        saleDate : '2020년 11월'
+        saleDate : '2020년 11월',
+        recentPlay : '2022-05-27',
     },
     {
         title:'컴퓨터정보계열',
@@ -25,7 +26,8 @@ export default[
         content : '현실에선 찐따인 내가 이 세계에선 왕자의 애인? 눈을 떠보니, 나는 자바 왕국의 한 가운데에 있었다. 뭐라고? 내가 이 세계에 떨어졌다고??! 자바 왕국에서 벌어지는 좌충우돌 스토리! 그...',
         pay : '1000',
         titleImg : 'https://search.pstatic.net/sunny/?src=https%3A%2F%2Fi1.ruliweb.com%2Fimg%2F21%2F11%2F21%2F17d423150f4462f8b.jpg&type=a340',
-        saleDate : '2019년 7월'
+        saleDate : '2019년 7월',
+        recentPlay : '2022-05-25',
     },
     {
         title:'웹데이터 베이스',
@@ -33,7 +35,8 @@ export default[
         writer : '십덕영',
         content : '현실에선 찐따인 내가 이 세계에선 왕자의 애인? 눈을 떠보니, 나는 자바 왕국의 한 가운데에 있었다. 뭐라고? 내가 이 세계에 떨어졌다고??! 자바 왕국에서 벌어지는 좌충우돌 스토리! 그...현실에선 찐따인 내가 이 세계에선 왕자의 애인? 눈을 떠보니, 나는 자바 왕국의 한 가운데에 있었다. 뭐라고? 내가 이 세계에 떨어졌다고??! 자바 왕국에서 벌어지는 좌충우돌 스토리! 그...',
         pay : '57900',
-        titleImg : 'https://search.pstatic.net/common/?src=http%3A%2F%2Fshopping.phinf.naver.net%2Fmain_3057709%2F30577095950.20220117213842.jpg&type=sc960_832'
+        titleImg : 'https://search.pstatic.net/common/?src=http%3A%2F%2Fshopping.phinf.naver.net%2Fmain_3057709%2F30577095950.20220117213842.jpg&type=sc960_832',
+        recentPlay : '2022-05-30',
     },
     {
         title:'웹데이터 베이스',
@@ -41,7 +44,8 @@ export default[
         writer : '십덕영',
         content : '현실에선 찐따인 내가 이 세계에선 왕자의 애인? 눈을 떠보니, 나는 자바 왕국의 한 가운데에 있었다. 뭐라고? 내가 이 세계에 떨어졌다고??! 자바 왕국에서 벌어지는 좌충우돌 스토리! 그...현실에선 찐따인 내가 이 세계에선 왕자의 애인? 눈을 떠보니, 나는 자바 왕국의 한 가운데에 있었다. 뭐라고? 내가 이 세계에 떨어졌다고??! 자바 왕국에서 벌어지는 좌충우돌 스토리! 그...',
         pay : '57900',
-        titleImg : 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA3MjFfMjI0%2FMDAxNjI2ODQ1NjEyNjI1.jtO7p9Iu6Td1PuWv_TlUvkbeModkru38Qa7gq48JZasg.ES8faxqiQr-wcidoE3HgTbMM-fEl44WW2SKI3zduK3gg.JPEG.studio293%2F1.jpg&type=a340'
+        titleImg : 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTA3MjFfMjI0%2FMDAxNjI2ODQ1NjEyNjI1.jtO7p9Iu6Td1PuWv_TlUvkbeModkru38Qa7gq48JZasg.ES8faxqiQr-wcidoE3HgTbMM-fEl44WW2SKI3zduK3gg.JPEG.studio293%2F1.jpg&type=a340',
+        recentPlay : '2022-05-27',
     },
     {
         title:'웹데이터 베이스',
@@ -50,7 +54,7 @@ export default[
         content : '현실에선 찐따인 내가 이 세계에선 왕자의 애인? 눈을 떠보니, 나는 자바 왕국의 한 가운데에 있었다. 뭐라고? 내가 이 세계에 떨어졌다고??! 자바 왕국에서 벌어지는 좌충우돌 스토리! 그...현실에선 찐따인 내가 이 세계에선 왕자의 애인? 눈을 떠보니, 나는 자바 왕국의 한 가운데에 있었다. 뭐라고? 내가 이 세계에 떨어졌다고??! 자바 왕국에서 벌어지는 좌충우돌 스토리! 그...',
         pay : '57900',
         titleImg : 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAxMjdfMjEz%2FMDAxNjQzMjU2ODE3OTEw.5kxpQojtVGHmAhJ9kGcqZbfeM3em4Ktc9P_UBa6fE2Qg.IIsDUxvkFNsPHwfIx2cLFAlYeq8a42_0ZKBndpEU9Uog.PNG.v_vgzzz%2F16.png&type=a340',
-        saleDate : '2018년 12월'
+        recentPlay : '2022-05-28',
     },
     {
         title:'웹데이터 베이스',
@@ -59,7 +63,8 @@ export default[
         content : '현실에선 찐따인 내가 이 세계에선 왕자의 애인? 눈을 떠보니, 나는 자바 왕국의 한 가운데에 있었다. 뭐라고? 내가 이 세계에 떨어졌다고??! 자바 왕국에서 벌어지는 좌충우돌 스토리! 그...현실에선 찐따인 내가 이 세계에선 왕자의 애인? 눈을 떠보니, 나는 자바 왕국의 한 가운데에 있었다. 뭐라고? 내가 이 세계에 떨어졌다고??! 자바 왕국에서 벌어지는 좌충우돌 스토리! 그...',
         pay : '57900',
         titleImg : 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMjAyMDJfNDMg%2FMDAxNjQzNzc2MjM0MTA0.KqkCTQHG9aaAPkx5Rz_ppZMGmVIVdL7qGKc2ilKlBsUg.WG8EAcklsg8yONyA7KaCPcpGZu8F50hj4BdFY5kjO0gg.JPEG.petstarbn%2FIMG_1677.jpg&type=a340',
-        saleDate : '2000년 10월'
+        saleDate : '2000년 10월',
+        recentPlay : '2022-05-11',
     },
     {
         title:'웹데이터 베이스',
@@ -68,6 +73,7 @@ export default[
         content : '현실에선 찐따인 내가 이 세계에선 왕자의 애인? 눈을 떠보니, 나는 자바 왕국의 한 가운데에 있었다. 뭐라고? 내가 이 세계에 떨어졌다고??! 자바 왕국에서 벌어지는 좌충우돌 스토리! 그...현실에선 찐따인 내가 이 세계에선 왕자의 애인? 눈을 떠보니, 나는 자바 왕국의 한 가운데에 있었다. 뭐라고? 내가 이 세계에 떨어졌다고??! 자바 왕국에서 벌어지는 좌충우돌 스토리! 그...',
         pay : '57900',
         titleImg : 'https://search.pstatic.net/common/?src=http%3A%2F%2Fblogfiles.naver.net%2FMjAyMTEyMzBfMjA1%2FMDAxNjQwODMyNTMzMjk3.1WT2pPORnvVDgeDby4nBSp-URSdclvzg60ATlThyJgcg.81lK-mZxw8IH23_J4ReKMwi7hH653D8_RCXOqbQKmDMg.JPEG.rlen0325%2F3.jpg&type=a340',
-        saleDate : '2021년 12월'
+        saleDate : '2021년 12월',
+        recentPlay : '2022-05-19',
     }
 ]

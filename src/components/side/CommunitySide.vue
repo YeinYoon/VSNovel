@@ -97,7 +97,8 @@ export default {
   },
   mounted() {
     // 기본 강조 효과
-    if(this.$route.params != null){
+    if(this.$route.params.topicNum != null){
+      console.log(this.$route.params);
       this.step = this.$route.params.step; // 부제목 변수 변경
       this.topicData = this.$route.params.topicNum; // 수정 페이지 이동
       this.clickNum = 3; // 사이드바 강조효과
