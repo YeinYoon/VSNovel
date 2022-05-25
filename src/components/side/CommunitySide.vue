@@ -54,10 +54,7 @@
         <TopicPostView @btnpostview="btnpostview($event)" :topicObject="topicObject"/>
       </div>
       <div v-if="topicData == 2">
-        <TopicWrite @add="addpost($event)" :topicObject="topicObject" :update="update"/>
-      </div>
-      <div v-if="topicData == 3">
-        <TopicReview/>
+        <TopicWrite @add="addpost($event)" :topicObject="topicObject" :update="update" :step="step"/>
       </div>
     </div>    
     </div>
@@ -76,7 +73,6 @@ import commuWriter from "@/assets/DataJs/commuWriter.js"; //작가커뮤니티�
 import TopicCommu from "../community/topic/TopicCommu";
 import TopicPostView from "../community/topic/TopicPostView";
 import TopicWrite from "../community/topic/TopicWrite";
-import TopicReview from "../community/topic/TopicReview";
 import axios from "../../axios";
 export default {
   name: "CommunitySide",
@@ -98,7 +94,6 @@ export default {
     TopicCommu,
     TopicPostView,
     TopicWrite,
-    TopicReview
   },
   mounted() {
     // 기본 강조 효과
@@ -147,7 +142,7 @@ export default {
       if(event == 'third'){
         this.topicData = 2
         this.update = false;
-        //console.log(event);
+        console.log(this.step);
       }else 
       //관리자 글쓰기 삭제
       if(event.type == 'deletepost'){
