@@ -1,9 +1,18 @@
 <template>
   <div>
+    <!-- 내용을 입력해주세요 모달창 -->
     <div v-if="open==true"><alertmodal :openmodal="open" @closemodal="open = false"/></div>
+
     <div class="postview_wrap">
+      
       <!-- 까만배경:제목과 내용 댓글들을 감싸는 배경 -->
       <div class="postview_section">
+
+        <!-- 수정, 삭제 버튼 -->
+      <div class="topic_postview_btn_area">
+        <div class="topic_postview_btn_red" @click="postBtn({type:'retouch'})"><span>수정</span></div>
+        <div class="topic_postview_btn_blue" @click="postBtn({type:'deletewrite'})"><span>삭제</span></div>
+      </div>
 
         <!-- 제목을 나타내는 영역-->
         <div class="postview_title"><div class="postview"><span>{{topicObject.title}}</span></div></div>
@@ -14,8 +23,8 @@
           <div class="postview_content"><span v-html="topicObject.content"></span></div>
           <!-- 추천, 비추천 영역 -->
           <div class="content_vote">
-            <div class="vote_btn_ok"><span>추천</span></div>
-            <div class="vote_btn_no"><span>비추천</span></div>
+            <div class="vote_btn_ok" @click="postBtn({type: 'likevote'})"><span>추천</span></div>
+            <div class="vote_btn_no" @click="postBtn({type:'nolikevote'})"><span>비추천</span></div>
           </div>
         </div>
 
@@ -63,7 +72,7 @@ export default {
       open: false,
       writecoment: '',
       writecoments: [],
-      // commentcount: 0,
+      novotecount : 0
     }
   },
   components: {
@@ -75,6 +84,14 @@ export default {
       if(Object.keys(step).length == 1) {
         if(step.type == 'second'){
           this.$emit('btnpostview', 'second');
+        }else if(step.type == 'likevote'){ //추천수 올리기
+          this.$emit('btnpostview', 'likevote' );
+        }else if(step.type == 'nolikevote'){ //비추천 올리기
+          this.$emit('btnpostview', 'nolikevote');
+        }else if(step.type == 'retouch'){ //글 수정
+          this.$emit('btnpostview', 'retouch');
+        }else if(step.type == 'deletewrite'){
+          this.$emit('btnpostview', 'deletewrite');
         }
       }else if(Object.keys(step).length == 2){ //step의 길이가 2일때, 댓글 작성 부분
         if(step.type == 'comentwrite'){
@@ -118,6 +135,28 @@ export default {
 </script>
 
 <style>
+.topic_postview_btn_area{
+  display:flex;
+  justify-content: flex-end;
+}
+.topic_postview_btn_red, .topic_postview_btn_blue{
+  /* top:40px; */
+  position:relative;
+  cursor: pointer;
+  font-size: 0.9em;
+  width: 80px;
+  height: 30px;
+  background: #2872f9;
+  border-radius: 14px;
+  display: table;
+  margin-left: 10px;
+}
+.topic_postview_btn_red span, .topic_postview_btn_blue span {
+  display: table-cell;
+  vertical-align:middle;
+  text-align:center;
+  color:white;
+}
 .postview_wrap {
   margin: 0 auto;
   width: 95%;
@@ -196,12 +235,15 @@ export default {
   vertical-align:middle; 
   text-align: center;
 }
+.vote_btn_ok:hover {
+  background-color:#0084ff;
+}
 .vote_btn_no {
   display: table;
   width : 100px;
   height: 100%;
   margin: 0 10px;
-  background-color: red;
+  background-color: #ff4c4c;
   border-radius: 20px;
   color:white;
   font-size: 1.5em;
@@ -211,6 +253,9 @@ export default {
   display: table-cell; 
   vertical-align:middle; 
   text-align: center;
+}
+.vote_btn_no:hover {
+  background-color:#f83636;
 }
 .postview_btn_area {
   position: relative;
