@@ -94,9 +94,10 @@ export default {
     TopicWrite,
   },
   mounted() {
-    if(this.$route.params != null){
-      this.step = "리뷰 & 추천"; // 부제목 변수 지정
-      this.topicData = 2; // 수정 페이지 이동
+    if(this.$route.params.step != null){
+      console.log(this.$route.params);      
+      this.step = this.$route.params.step; // 부제목 변수 지정
+      this.topicData = this.$route.params.topicNum; // 수정 페이지 이동
       this.clickNum = 3;  // 사이드바 강조 효과 
     }
     // 기본 강조 효과

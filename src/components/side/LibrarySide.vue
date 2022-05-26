@@ -58,13 +58,13 @@ export default {
       // 사이드바 강조효과
       let id = document.getElementById(this.clickNovel);
       if (className != this.clickNovel) {
-        id.style.backgroundColor = "#494949";
+        id.style.animationName = "defaultAnimation";
       }
       else if(this.clickNovel == 'payNovel'){
         if(this.payDate == '구매일자↑') this.payDate = '구매일자↓';
         else this.payDate = '구매일자↑';
       }
-        event.target.style.backgroundColor = "#2872f9";
+        event.target.style.animationName = "newAnimation";
         this.clickNovel = className;
     },
     hidden() {
@@ -74,10 +74,10 @@ export default {
     },
     genreEvent(num, event) {
     // 장르 강조 효과
-      let id = Array.from(document.querySelectorAll(".select_btn"));
-
-      id[this.genreNum].style.color = "gray";
-      event.target.style.color = "black";
+      let id = document.querySelectorAll(".select_btn");
+      id[this.genreNum].style.color = 'gray';
+      id[this.genreNum].style.animationName = 'null';
+      event.target.style.animationName = 'clickBtn';
       this.genreNum = num;
     },
   },

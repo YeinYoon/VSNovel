@@ -70,10 +70,11 @@ export default {
       // 사이드바 강조효과
       let id = document.getElementById(this.clickNovel);
       if (className != this.clickNovel) {
-        id.style.backgroundColor = "#494949";
+        id.style.animationName = "defaultAnimation"; // 기본
       }
-        event.target.style.backgroundColor = "#2872f9";
+        event.target.style.animationName = "newAnimation"; // 바뀌는 것
         this.clickNovel = className;
+        
     },
     hidden() {
     // 장르 열고 닫기
@@ -82,10 +83,10 @@ export default {
     },
     categoryEvent(num, event, cateCode) {
     // 장르 강조효과
-    
       let id = document.querySelectorAll(".select_btn");
-      id[this.genreNum].style.color = "gray";
-      event.target.style.color = "black";
+      id[this.genreNum].style.color = 'gray';
+      id[this.genreNum].style.animationName = 'null';
+      event.target.style.animationName = 'clickBtn';
       this.genreNum = num;
       this.cateCode = cateCode;
       this.getNovelList();
@@ -199,6 +200,8 @@ export default {
   font-weight: 700;
   cursor: pointer;
   width: 100%;
+  animation-fill-mode: forwards;
+  animation-duration: 0.5s;
 }
 .side_genre_group {
   width: 80%;
@@ -233,5 +236,34 @@ export default {
   font-weight: 700;
   color: #8a8a8a;
   cursor: pointer;
+  animation-fill-mode: forwards;
+  animation-duration: 0.5s;
+}
+@keyframes clickBtn {
+  0%{
+    opacity: 0.7;
+  }
+  100%{
+    opacity: 1;
+    color: black;
+    font-weight: 800;
+  }
+}
+@keyframes defaultAnimation {
+  /* 되돌리는 것 */
+  0%{
+  }
+  100%{
+    background-color: #494949;
+  }
+}
+@keyframes newAnimation {
+  /* 클릭한 것 */
+  0%{
+    background-color: #494949;
+  }
+  100%{
+    background-color : #2872f9;
+  }
 }
 </style>
