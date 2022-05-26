@@ -56,6 +56,11 @@ import Editor from './Editor'
 import alertmodal from "../AlertModal";
 export default {
   name: "TopicWrite",
+  mounted(){
+    if(this.step == "리뷰 & 추천" && this.update == true){
+      this.str_draw.width = this.valueUp*10 + '%';
+    }
+  },
   watch: {
     value(val) {
       this.count = val * 0.5;
@@ -91,6 +96,7 @@ export default {
       },
       count: 0, 
       value : 1,
+      valueUp : (this.topicObject.str / 0.5 )
     }
   },
   methods : {
@@ -131,10 +137,10 @@ export default {
 
         //별점 보내기
         const reviewcontent = {type: 'reviewcontent', content : this.content , strcount : this.count}
-
         //this.content를 TopicFrame으로 보내기
         const contentdata = {type:'contentdata', content : this.content}
         const updatedata = {type:'updatedata', content : this.content}
+
         if(this.update == false){
           if(this.step=="리뷰 & 추천"){
             this.$emit('add', reviewcontent);
