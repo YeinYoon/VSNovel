@@ -6,11 +6,10 @@
         <div class="list_span">
           <span class="list_title">{{ data.title }}</span>
           <span class="list_all_percent">
-            <progress value="42" max="100">
-              <div class="progrees-label">전체 진행률 : 42.0%</div></progress>
+            <progress value="13" max="35"></progress>
+            <span class="progress_text">시리즈 총 편수 13/35</span>
           </span>
           <span class="list_recent">최근 플레이한 날짜 {{ data.recentPlay }}</span>
-          <span class="list_page_pro">수집한 페이지 및 엔딩 14/30</span>
         </div>
         <div class="btn_container">
           <div class="sub_btn">이 작품 리뷰 남기기</div>
@@ -81,18 +80,19 @@ progress {
   background-color: #2872F9;
   border-radius: 20px;
 }
-.list_page_pro{
+.progress_text{
   position: absolute;
-  right: 10px;
-  top: 28px;
-  font-size: 0.5em;
+  top: 5px;
+  right:10px;
+  color: white;
 }
 .btn_container{
   display: flex;
 }
 .sub_btn{
   margin: 18px 5px 0 0;
-  height: 20px;
+  padding: 3px 10px 0px 10px;
+  height: 27px;
   color: white;
   background-color: #6D6D6D;
   border-radius: 20px;
