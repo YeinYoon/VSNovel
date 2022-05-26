@@ -1,7 +1,7 @@
 <template>
   <div>
     <!-- 내용을 입력해주세요 모달창 -->
-    <div v-if="open==true"><alertmodal :openmodal="open" @closemodal="open = false"/></div>
+    <div v-if="open==true"><alertmodal :openmodal="open" @closemodal="open = false" :alertcontent="alertcontent"/></div>
 
     <div class="postview_wrap">
       
@@ -70,6 +70,7 @@ export default {
   data() {
     return {
       open: false,
+      alertcontent : '',
       writecoment: '',
       writecoments: [],
       novotecount : 0
@@ -96,6 +97,7 @@ export default {
       }else if(Object.keys(step).length == 2){ //step의 길이가 2일때, 댓글 작성 부분
         if(step.type == 'comentwrite'){
           if(step.content == ''){
+            this.alertcontent = '댓글';
             this.open = true;
             this.writecoment = '';
           }else {

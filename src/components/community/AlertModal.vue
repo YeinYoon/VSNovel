@@ -10,9 +10,15 @@
     <!--모달 내 메세지 및 컨텐츠인 modal_inner, 여기에 단순히 메세지만을 표시할수도 
     작은 컴포넌트를 삽입할수도 있따.-->
 
-    <!-- 모달창 내용 -->
-    <div class="alert_modal_inner">
-      <span>내용을 입력해 주세요</span> <!--메세지를 출력하는 예제-->
+    <!-- 모달창 내용 제목, 댓글, 내용-->
+    <div class="alert_modal_inner" v-if="alertcontent == '제목과 내용'">
+      <span>{{alertcontent}}을</span> <br><!--메세지를 출력하는 예제-->
+      <span>입력해 주세요</span>
+    </div>
+
+    <!-- 모달창 제목과 내용 -->
+    <div class="alert_modal_inner" v-else>
+      <span>{{alertcontent}}을 입력해 주세요</span> <!--메세지를 출력하는 예제-->
     </div>
       <!--모달을 닫는 버튼과 버튼내 메세지(확인, 취소 등등)-->
     <div class="alert_modal_save_button">
@@ -122,6 +128,7 @@ export default {
   },
   props: {
     open : Boolean,
+    alertcontent: String
   }
 }
   
