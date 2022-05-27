@@ -47,9 +47,9 @@ export default {
   },
   methods:{
     postMove(){
-      
+      this.$router.push({name:'Community', params:{step:'자유',topicNum:1}})
     }
-  }
+  },
 };
 </script>
 

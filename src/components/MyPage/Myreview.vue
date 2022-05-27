@@ -59,7 +59,7 @@ export default {
 .review_edit{
   width: 130px;
   height: 40px;
-  position: relative;
+  position: absolute;
   top: 105px;
   right: 10px;
   background: #2872F9;
