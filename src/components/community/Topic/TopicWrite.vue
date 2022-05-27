@@ -139,7 +139,7 @@ export default {
         const reviewcontent = {type: 'reviewcontent', content : this.content , strcount : this.count}
         //this.content를 TopicFrame으로 보내기
         const contentdata = {type:'contentdata', content : this.content}
-        const updatedata = {type:'updatedata', content : this.content}
+        const updatedata = {type:'updatedata', content : this.content , strcount: this.count}
 
         if(this.update == false){
           if(this.step=="리뷰 & 추천"){

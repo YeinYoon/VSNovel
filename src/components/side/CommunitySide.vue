@@ -180,6 +180,10 @@ export default {
         this.community.push(event.content);
       }else if(event.type == 'updatedata'){ //글쓰기 수정 작업
         this.community.splice(this.index,1,event.content);
+        //별점 수정 부분
+        if(this.step == "리뷰 & 추천"){
+          this.community[this.index].str = event.strcount;
+        }
       }else if(event.type == 'reviewcontent'){ //리뷰 & 추천 저장 작업
         this.community.push(event.content);
         this.community[this.community.length - 1].str = event.strcount;
