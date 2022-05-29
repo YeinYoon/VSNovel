@@ -72,14 +72,14 @@ export default {
           this.open = true;
           this.modaldata = step.item;
           this.indexdata = step.index;
-          console.log(this.indexdata);
+          //console.log(this.indexdata);
         }
       }
       //step의 길이가 2일때, 모달창으로 글쓰기 삭제
       else if(Object.keys(step).length == 2) {
         if(step.type == 'modal'){
           const modal = {type: 'deletepost' , index:step.indexdata}
-          console.log(modal);
+          //console.log(modal);
           this.$emit('btnEvent', modal)
         }
       }
@@ -163,6 +163,7 @@ export default {
   -ms-overflow-style:none;
 }
 .commu_post {
+  /* background-color:white; */
   position: relative;
   width: 100%;
   height: 120px;
