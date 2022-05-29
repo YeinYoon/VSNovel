@@ -36,7 +36,8 @@ export default {
     return{
       alarmdata:alarm,
       noticeChk:[],
-      pastCheck: null
+      pastCheck: null,
+      BinaryNum: 0,
     }
   },
   methods:{
@@ -44,7 +45,7 @@ export default {
       this.$router.push(link);
     },
     noticeChkBox(i) {
-      // console.log(this.alarmdata[i].title)
+      // this.BinaryNum = 
       this.noticeChk = this.alarmdata[i].title
       console.log(this.noticeChk)
     },

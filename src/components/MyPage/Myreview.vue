@@ -26,13 +26,23 @@
 
 <script>
 import review from '@/assets/DataJs/review.js'
+import axios from '../../axios';
 
 export default {
+  created() {
+    this.getReview()
+  },
   data(){
     return{
       reviews :review,
+
     };
   },
+  methods: {
+    getReview() {
+      axios.get('/api/mypage/getreview')
+    }
+  }
 }
 </script>
 

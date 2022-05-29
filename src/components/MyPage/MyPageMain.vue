@@ -147,10 +147,12 @@ export default {
       
       nick.value='';
       intro.value='';
-      this.areaText = '';
+      // this.areaText = '';
       
       document.getElementById('profile-image').classList.replace('profile-image-change','profile-image-input');
       document.getElementById('profile-image').style.backgroundImage= "url('')";
+      // document.getElementById('profile-image').classList.remove('profile-image-change');
+      // document.getElementById('profile-image').classList.add('profile-image-input');
       
     },
 

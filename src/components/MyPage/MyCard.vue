@@ -19,13 +19,13 @@
       <!-- 2행 카드번호 입력 -->
       <div class="card-container2">
         <div class="card-num-name">카드번호</div>
-        <input class="card-input" type="text" maxlength="4" v-model="newCard"/>
+        <input class="card-input" type="text" maxlength="4" v-model="newCard[0]"/>
           <span class="hyphen">-</span>
-        <input class="card-input" type="text" maxlength="4" v-model="newCard"/>
+        <input class="card-input" type="text" maxlength="4" v-model="newCard[1]"/>
           <span class="hyphen">-</span>
-        <input class="card-input" type="text" maxlength="4" v-model="newCard"/>
+        <input class="card-input" type="text" maxlength="4" v-model="newCard[2]"/>
           <span class="hyphen">-</span>
-        <input class="card-input" type="text" maxlength="4" v-model="newCard"/>
+        <input class="card-input" type="text" maxlength="4" v-model="newCard[3]"/>
         <div class="card-num-info">16자리 숫자만 입력</div>
       </div>
 
@@ -58,7 +58,7 @@ export default {
   data() {
     return {
       myUser : "",
-      newCard :""
+      newCard :["","","",""]
     }
   },
   methods:{
@@ -68,7 +68,7 @@ export default {
     },
     postRegister() {
       var newInfo = {
-        newCard : this.newCard
+        newCard : ""+this.newCard[0]+this.newCard[1]+this.newCard[2]+this.newCard[3]
       }
       axios.post('/api/mypage/mycard', newInfo)
       .then((result) => {
@@ -85,7 +85,12 @@ export default {
         if(result.data == 'err') {
           console.log('카드 정보 불러오기 실패')
         } else {
-          this.newCard = result.data.rows[0].USER_CARDNUM
+          console.log(result.data)
+          let temp = ""+result.data.rows[0].USER_CARDNUM
+          this.newCard[0] = temp.substr(0,4);
+          this.newCard[1] = temp.substr(4,4);
+          this.newCard[2] = temp.substr(8,4);
+          this.newCard[3] = temp.substr(12,4);
         }
       })
     }

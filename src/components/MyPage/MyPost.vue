@@ -9,33 +9,51 @@
     </div>
     <div class="post_section">
       <div class="post_line">
-        <div class="post_place">작성위치</div>
+        <div class="post_place">번호</div>
         <div class="post_title">제목</div>
         <div class="post_like">추천수</div>
         <div class="post_comment">댓글수</div>
         <div class="post_clicks">조회수</div>
       </div>
       <hr class="lines" />
-      <div class="post_line" v-for="(post, i) in post" :key="i">
-        <div class="post_place">{{ post.position }}</div>
-        <div class="post_title" style="cursor:pointer">{{ post.title }}</div>
-        <div class="post_like">{{ post.prefer }}</div>
-        <div class="post_comment">{{ post.comment }}</div>
-        <div class="post_clicks">{{ post.look }}</div>
+      <div class="post_line" v-for="(post, i) in postData" :key="i">
+        <div class="post_place">{{ post.POST_CODE }}</div>
+        <div class="post_title" style="cursor:pointer">{{ post.POST_TITLE }}</div>
+        <div class="post_like">{{ post.POST_VOTE }}</div>
+        <div class="post_comment">{{ post.COMM_NUM }}</div>
+        <div class="post_clicks">{{ post.POST_VIEW }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import post from "@/assets/DataJs/post.js";
+import axios from 'axios';
 
 export default {
+  created() {
+    this.getPost()
+  },
   data() {
     return {
-      post: post,
-    };
-  },
+      postData : null
+    }
+  }, 
+  methods: {
+    getPost() {
+      console.log("getPost")
+      axios.get('/api/mypage/getpost')
+      .then((result) => {
+        if(result.data == 'err') {
+          console.log('load fail')
+        } else {
+          console.log(result)
+          // this.postData = result.data.rows;
+          // console.log(this.postData)
+        }
+      })
+    }
+  }
 };
 </script>
 
