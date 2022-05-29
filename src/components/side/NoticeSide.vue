@@ -42,9 +42,9 @@
                 <div class="notice_line" v-if="noticeNum == i"></div>
                 <div class="strong_notice" @click="noticeEvent(notice, i)">
                 <div class="strong_notice_mark" v-if="notice.emphasis == 0"><img src="@/assets/icons/white/star.png" class="mark_star_image"></div>
-                    <div class="back_title">{{notice.title}}</div>      <!-- 제목 -->
-                    <div class="back_content">{{notice.content}}</div>  <!-- 내용 -->
-                    <div class="back_date">{{notice.date}}</div>        <!-- 날짜 -->
+                    <div class="notice_back_title">{{notice.title}}</div>      <!-- 제목 -->
+                    <div class="notice_back_content">{{notice.content}}</div>  <!-- 내용 -->
+                    <div class="notice_back_date">{{notice.date}}</div>        <!-- 날짜 -->
                 </div>
             </div>
         </div>
@@ -273,14 +273,14 @@ export default {
     z-index: 11;
     top: 30px;
 }
-.back_title {
+.notice_back_title {
     position:absolute;
     font-size: 20px;
     top: 10px;
     float:left;
     left: 20px;
 }
-.back_content {
+.notice_back_content {
     position:absolute;
     font-size:19px;
     width:98%;
@@ -291,14 +291,14 @@ export default {
     top: 40px;
     left: 20px;
 }
-.back_info {
+.notice_back_info {
     position: absolute;
     float:right;
     font-size: 17px;
     top: 70px;
     right: 10px; 
 }
-.back_date{
+.notice_back_date{
     position: absolute;
     float:right;
     top: 75%;
@@ -310,9 +310,9 @@ export default {
 .notice_line{
     margin: 5px auto;
     width: 100%;
-    height: 3px;
+    height: 5px;
     border-radius: 5px;
+    background-color:#262626;
     border: 2px solid #262626;
-    /*padding: 3px;*/
 }
 </style>
