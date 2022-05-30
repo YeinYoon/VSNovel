@@ -138,7 +138,7 @@ export default {
 
 .prefer_section {
   margin: 0 auto;
-  width: 800px;
+  width: 95%;
   position: relative;
   top: 15%;
   text-align: center;

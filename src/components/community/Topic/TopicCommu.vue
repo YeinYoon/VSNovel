@@ -7,14 +7,16 @@
         @closemodal="open = false"
         :modaldatasend="modaldata"
         :datasend="datasend"
-        @deletedata="deletepost(modalindex)"
+        @deletedata="communitybtn({type : 'modal',indexdata : indexdata})"
       ></Modal>
     </div>
 
         <div class="commu_btn_area">
-          <div class="commu_btn_red" @click="manage=true"><span class="commu_btn_manage" >관리자 시점</span></div>
-          <div class="commu_btn_red" @click="manage=false" v-if="manage==true"><span class="commu_btn_manage">관리</span></div>
-          <div class="commu_btn_blue"><span class="commu_btn_write" @click="$emit('third')">글쓰기</span></div>
+          <div class="commu_btn_red" >
+            <span class="commu_btn_manage" @click="manage=true" v-if="manage==false">관리자 시점</span>
+            <span class="commu_btn_manage" @click="manage=false" v-if="manage==true">관리</span>
+          </div>
+          <div class="commu_btn_blue" v-if="manage==false"><span class="commu_btn_write" @click="communitybtn({type:'third'})">글쓰기</span></div>
         </div>
 
     <section class="commu_section">
@@ -22,13 +24,13 @@
         class="commu_post"
         v-for="(a, index) in datasend"
         :key="a"
-        @click="decision(a,manage,index)"
+        @click="communitybtn({manage : manage, index : index , item : a})"
       >
-        <img class="commu_thumb" :src="`${a.titleImg}`" />
+        <img class="commu_thumb" :src="`${a.titleImg}`" @error="replaceimg"/>
         <div class="commu_back">
           <div class="commu_back_title">{{ a.title }}</div>
           <div class="commu_back_info">
-            {{ a.writer }} | {{ a.date }} | {{ a.like }} | {{ a.coment }}
+            {{ a.writer }} | {{ a.date }} | {{ a.likes }} | {{ a.coment }}
           </div>
         </div>
       </div>
@@ -38,34 +40,71 @@
 
 <script>
 import Modal from "../Modalvue";
+import axios from '../../../axios'
+import img from "@/assets/imgs/noimage.png";
 export default {
   data() {
     return {
       manage : false,
       open: false,
       modaldata : {},
-      modalindex: '',
+      indexdata: '',
     };
   },
   components: {
      Modal,
   },
-  methods : {
-    decision(a,manage,index){
-      if(manage==false){
-        this.$emit('first', a);
-      }else {
-        this.open = true;
-        this.modaldata = a;
-        this.modalindex = index;
-      }
-    },
-    deletepost(modalindex){
-      this.$emit('deletepost',modalindex);
-    }
-  },
   props : {
     datasend:Object
+  },
+  created(){
+    this.getcommulist();
+  },
+  methods : {
+    communitybtn(step = {}){
+      //step의 길이가 3일때, 글쓰기 저장
+      if(Object.keys(step).length == 3) {
+        if(step.manage == false) {
+          const eventBtn = {type:'first', item:step.item , index:step.index};
+          this.$emit('btnEvent', eventBtn)
+        }else {
+          //모달창 인덱스정보와 내용 받아내기
+          this.open = true;
+          this.modaldata = step.item;
+          this.indexdata = step.index;
+          //console.log(this.indexdata);
+        }
+      }
+      //step의 길이가 2일때, 모달창으로 글쓰기 삭제
+      else if(Object.keys(step).length == 2) {
+        if(step.type == 'modal'){
+          const modal = {type: 'deletepost' , index:step.indexdata}
+          //console.log(modal);
+          this.$emit('btnEvent', modal)
+        }
+      }
+      //step의 길이가 1일때, post로 나타내기
+      if(Object.keys(step).length == 1) {
+        if(step.type == 'third') {
+          this.$emit('btnEvent', 'third')
+        }
+      }
+    },
+    replaceimg(e){
+      e.target.src=img
+    },
+    
+    //커뮤 리스트 조회
+    getcommulist() {
+      axios.get('/api/community/getcommulist')
+      .then((result)=>{
+        if(result.data == "err") {
+          console.log("커뮤니티 데이터 불러오기 실패");
+        } else {
+        //  console.log(result.data);
+        }
+      })
+    },
   }
 };
 </script>
@@ -85,7 +124,7 @@ export default {
   font-size: 0.9em;
   width: 100px;
   height: 30px;
-  background: rgb(255, 71, 71);
+  background: #ff4c4c;
   border-radius: 14px;
   display: table;
   margin-left: 20px;
@@ -117,16 +156,17 @@ export default {
 .commu_section {
   position:relative;
   top:10%;
-  width: 800px;
+  width: 95%;
   height: 90%;
   margin: 0 auto;
   overflow-y:scroll;
   -ms-overflow-style:none;
 }
 .commu_post {
+  /* background-color:white; */
   position: relative;
   width: 100%;
-  height: 130px;
+  height: 120px;
 }
 .commu_post:hover {
   opacity: 0.7;

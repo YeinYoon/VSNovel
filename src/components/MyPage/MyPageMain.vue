@@ -117,6 +117,9 @@ export default {
     // 불러온 이미지를 프로필 이미지 상에 출력해주는 함수
     uploadimgfile(){
       document.getElementById('profile-image').classList.replace('profile-image-input','profile-image-change');
+      if(document.getElementById('profile-image').style.backgroundImage==null){
+          document.getElementById('profile-image').style.backgroundImage=this.uploadimg;
+      }
     },
 
     // 프로필 수정버튼을 눌렀을 때 동작하는 함수
@@ -210,7 +213,7 @@ export default {
   padding: 20px;
   position: relative;
   top: 15%;
-  width: 800px;
+  width: 95%;
   height: 450px;
   margin: 0 auto;
 }

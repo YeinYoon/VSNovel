@@ -7,7 +7,7 @@
             <div class="section_box">
               <div class="list" v-for="Gallery in image" :key="Gallery">
                 <img class="img" :src="`${Gallery.link}`" />
-                <div class="longbar"></div>
+                <div class="titles"></div>
               </div>
             </div>
           </div>
@@ -59,8 +59,7 @@ export default {
 }
 .lib_gallery .list .img {
   position: relative;
-  top: 20px;
-  left: 0.5%;
+  top: 10px;
   width: 150px;
   height: 200px;
   margin: 0 30px;
@@ -68,7 +67,7 @@ export default {
 }
 .lib_gallery .list .longbar{
   height: 50px;
-  margin: 0px 0 30px 0;
+  margin: 0px 0 20px 0;
   background-color: #2c2c2c;
   color: white;
   text-align: center;

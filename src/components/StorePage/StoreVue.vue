@@ -67,9 +67,6 @@ export default {
   components: {
     SwiperCarousel: SwiperCarouselVue,
   },
-  mounted(){
-    console.log(this.$route.params.nove_id);
-  }
 };
 </script>
 

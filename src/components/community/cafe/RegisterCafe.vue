@@ -4,18 +4,18 @@
     <div class="header">
       <div class="service">
         <img class="icon" src="@/assets/icons/white/leaf.png" alt="logo" />
-        <span class="title">{{registerData.title}}</span>
+        <span class="title">{{registerData.VILL_NAME}}</span>
       </div>
     </div>
     <div class="register_cafe_section">
-      <img class="register_img" :src="`${registerData.link}`" />
+      <img class="register_img" :src="`${registerData.VILL_PRO_IMG}`" />
         <div class="register_content">
           <div class="info_list">
             <div class="resigster_title">
-              <img :src="`${registerData.link}`" />
-              <div class="register_info">
-                  <span>개설자 : {{ registerData.title }}</span>
-                  <span>가입자 : {{ registerData.unitNum }}</span>
+            <img :src="`${registerData.VILL_PRO_IMG}`" />
+            <div class="register_info">
+                <span>개설자 : {{ registerData.VILL_CREATER }}</span>
+                <span>가입자 : {{ registerData.VILL_USER_COUNT }}</span>
               </div>
             </div>
             <div class="board_list_box">
@@ -90,6 +90,7 @@
 <script>
 import commuData from "@/assets/DataJs/commuData.js";
 import notice from "@/assets/DataJs/notice.js";
+import axios from '../../../axios.js';
 import board from "@/assets/DataJs/board.js";
 export default {
   name: "RegisterCafe",
@@ -97,10 +98,28 @@ export default {
     return {
       commuData: commuData,
       noticeData: notice,
-      registerData : this.$route.params,
+      registerData : {},
+      paramsTitle : this.$route.params.id,
       boardData: board,
     };
   },
+  mounted(){
+    this.infoVillageList();
+    console.log(this.paramsTitle);
+  },
+  methods:{
+    // 가입한 카페 정보
+    infoVillageList() {
+      axios.post('/api/village/infoVillageList', { name : this.paramsTitle })
+      .then((result)=>{
+        if(result.data == "err") {
+          console.log("가입한 카페 정보 불러오기 실패");
+        } else {
+          this.registerData = result.data[0];
+        }
+      })
+    }
+  }
 };
 </script>
 
@@ -110,7 +129,7 @@ export default {
   padding: 5px;
   font-size: 1.3em;
   color: white;
-  width: 90%;
+  width: 95%;
   height: 88%;
   position: relative;
   top: 7%;

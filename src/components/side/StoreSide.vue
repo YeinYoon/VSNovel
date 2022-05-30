@@ -75,10 +75,11 @@ export default {
     },
     categoryEvent(num, event, cateCode) {
     // 장르 강조효과
+    
       let id = Array.from(document.querySelectorAll(".select_btn"));
+
       event.target.style.color = "black";
-      if(this.genreNum == num) 
-        id[this.genreNum].style.color = "gray";
+      id[this.genreNum].style.color = "gray";
       this.genreNum = num;
       this.cateCode = cateCode;
       this.getNovelList();
@@ -125,12 +126,12 @@ export default {
 
 .side_search {
   background-color: white;
-  width: 98%;
+  width: 80%;
   height: 40px;
   padding: 5px 10px;
   border: 1px solid black;
   border-radius: 30px;
-  margin: 0 0 25px 0;
+  margin: 0 0 25px 30px;
   top: 45px;
 }
 .side_search .side_icon {
@@ -148,14 +149,14 @@ export default {
   outline: 0px;
 }
 .group {
-  width: 98%;
+  width: 80%;
   height: 40px;
   background-color: white;
   padding: 5px 10px 5px 20px;
   border-radius: 30px;
   font-weight: 700;
   display: table;
-  margin: 20px 0 0 0;
+  margin: 20px 0 0 30px;
 }
 .group span {
   display: table-cell;
@@ -163,18 +164,19 @@ export default {
 }
 .novel,
 .fiction {
-  width: 90%;
+  width: 73%;
   height: 40px;
   color: white;
   padding: 5px 10px 5px 20px;
   text-align: left;
-  margin: 10px 0 0 20px;
+  margin: 10px 0 0 50px;
   border-radius: 30px;
   font-weight: 700;
   cursor: pointer;
 }
 .side_genre_group {
-  margin: 20px 0 0 0;
+  width: 80%;
+  margin: 20px 0 0 30px;
   font-weight: 700;
 }
 .side_genre {

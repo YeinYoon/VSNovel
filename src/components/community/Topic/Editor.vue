@@ -25,13 +25,17 @@ export default {
     return {
     }
   },
+  mounted() {
+    if(this.update==true)
+      this.state.content = this.topicObject.content;
+  },
   setup() {
     const state = reactive({
     //   dynamicComponent: null,
     //   content: "<p>2333</p>",
     //   _content: "",
       editorOption: {
-        placeholder: "core",
+        placeholder: "",
         modules: {
           toolbar: [
             ["bold", "italic", "underline", "strike"],
@@ -57,16 +61,16 @@ export default {
     });
 
     const onEditorBlur = (quill) => {
-      console.log("editor blur!", quill);
+      // console.log("editor blur!", quill);
     };
     const onEditorFocus = (quill) => {
-      console.log("editor focus!", quill);
+      // console.log("editor focus!", quill);
     };
     const onEditorReady = (quill) => {
-      console.log("editor ready!", quill);
+      // console.log("editor ready!", quill);
     };
     const onEditorChange = ({ quill, html, text }) => {
-      console.log("editor change!", quill, html, text);
+      // console.log("editor change!", quill, html, text);
       state._content = html;
     };
 
@@ -80,19 +84,22 @@ export default {
   },
   methods: {
   },
+  props: {
+    topicObject : Object,
+    update: Boolean
+  }
 };
 </script>
 <style>
 .editor{
     width: 100%;
      background-color: #868686;
-     border-radius: 10px;
+     border-radius: 18px;
      height: 100%;
   
 }
 .ql-toolbar.ql-snow {
-    background-color: antiquewhite;
-  border-radius: 10px;
+  border-radius: 18px;
   border: none;
 }
 .ql-container.ql-snow {

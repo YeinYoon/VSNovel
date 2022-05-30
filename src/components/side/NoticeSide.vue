@@ -12,31 +12,45 @@
       </div>
     </div>
   </div>
+  <!-- 공지사항 메인 -->
   <div class="tests" v-if="noticeStep == 0">
     <header class="header">
         <div class="service">
             <img class="icon" src="@/assets/icons/white/megaphone.png" alt="community">
             <span class="title" @click="adminEvent">공지사항</span>
             <span class="topic">TOPIC · {{myStep}}</span>
-            <div class="noticeMain_btn_area">
+            <!-- <div class="noticeMain_btn_area">
                 <button class="btn_red" v-if="admin">관리</button>
                 <button class="btn_blue" v-if="admin" @click="noticeStep++">글쓰기</button>
-            </div>
+            </div> -->
         </div>
     </header>  
+    
+    <div class="team_box">
+    <!-- 관리 글쓰기 부분 -->
+    <div class="noticeMain_btn_area">
+        <div class="noticeMain_btn_red">
+            <span @click="admin=true" v-if="admin==false">관리자 시점</span>
+            <span @click="admin=false" v-if="admin==true">관리</span>
+        </div>
+        <div class="noticeMain_btn_blue" v-if="admin==false" @click="noticeStep += 1"><span>글쓰기</span></div>
+     </div>
+    
+    <!-- 공지사항 강조 부분 -->
     <section class="notice_section">
         <div class="strong_notice_post"> 
             <div v-for="(notice, i) in noticeData" :key="i">
                 <div class="notice_line" v-if="noticeNum == i"></div>
                 <div class="strong_notice" @click="noticeEvent(notice, i)">
-                <img class="strong_notice_mark" v-if="notice.emphasis == 0" src="@/assets/icons/white/star.png">
-                    <div class="back_title">{{notice.title}}</div>      <!-- 제목 -->
-                    <div class="back_content">{{notice.content}}</div>  <!-- 내용 -->
-                    <div class="back_date">{{notice.date}}</div>        <!-- 날짜 -->
+                <div class="strong_notice_mark" v-if="notice.emphasis == 0"><img src="@/assets/icons/white/star.png" class="mark_star_image"></div>
+                    <div class="notice_back_title">{{notice.title}}</div>      <!-- 제목 -->
+                    <div class="notice_back_content">{{notice.content}}</div>  <!-- 내용 -->
+                    <div class="notice_back_date">{{notice.date}}</div>        <!-- 날짜 -->
                 </div>
             </div>
         </div>
     </section>
+    </div>
   </div>
     <div v-if="noticeStep == 1">
         <NoticeWrite :writeModify="writeModify" :noticeData="clickNotice" @write_cancle="noticeBtnEvent($event)" @arrUp="writePushEvent($event)"/>
@@ -63,13 +77,11 @@ export default {
             noticeNum : 0,
             noticeStep : 0,
             clickNotice : {},
-            clickNoticeNum : 0,
             writeModify : false,
             admin : false,
     };
   },
   components:{
-
         NoticeWrite,
         NoticeRead,
   },
@@ -91,8 +103,8 @@ export default {
         // console.log(this.$route)
         if(this.$route.params.noti_id!=undefined){
             this.noticeStep = 2;
-            this.clickNotice = this.$route.params.noti_id;
-            this.clickNoticeNum = 0;
+            this.clickNotice = { title : this.$route.params.noti_id,
+                                 content : this.$route.params.noti_content};
             this.writeModify = true;
         }
     },
@@ -109,6 +121,7 @@ export default {
       }
       this.clickNum = index;
     },
+    // 공지사항 메인 함수
         adminEvent(){
             if(this.admin) this.admin = false;
             else this.admin = true;
@@ -152,42 +165,61 @@ export default {
 
 <style>
 .notice_section{
-    width: 800px;
+    position:relative;
+    top:10%;
+    width: 100%;
+    height: 87%;
+    margin: 0 auto;
+    overflow-y:scroll;
+    -ms-overflow-style:none;
+    /* width: 100%;
     height: 70%;
     margin: 0 auto;
     position: relative;
-    top: 70px;
+    top: 60px;
     overflow-y: scroll;
-    -ms-overflow-style: none;
+    -ms-overflow-style: none; */
 }
 .noticeMain_btn_area {
-    /* float:right; */
-    position: fixed;
-    top:150px;
-    right: 30px;
+    display:flex;
+    justify-content: flex-end;
 }
-.btn_blue, .btn_red {
-    font-weight: 500;
-    position: relative;
-    bottom: 35px;
+.noticeMain_btn_red {
+    top:20px;
+    position:relative;
+    cursor: pointer;
+    font-size: 0.9em;
     width: 100px;
     height: 30px;
-    background-color:#2872f9;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    font-size: 14px;
-    border-radius: 12px;
-    cursor: pointer;
-    margin-left:15px;
+    background: #ff4c4c;
+    border-radius: 14px;
+    display: table;
+    margin-left: 20px;
 }
-.btn_blue:hover, .btn_red:hover {opacity:0.8;}
+.noticeMain_btn_blue {
+    top:20px;
+    position:relative;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-left: 20px;
+    width: 100px;
+    height: 30px;
+    background: #2872f9;
+    border-radius: 14px;
+    display:table;
+}
+.noticeMain_btn_red span, .noticeMain_btn_blue span {
+    display: table-cell;
+    vertical-align:middle;
+    text-align:center;
+    color:white;
+}
 
 .strong_notice_post {
     cursor: pointer;
     position: relative;
     width: 90%;
-    height: 130px;
+    height: 120px;
     margin-top:10px;
     margin: 20px auto;
 }
@@ -215,7 +247,7 @@ export default {
     display: block;
     position: relative;
     width: 100%; 
-    height: 100px;
+    height: 80px;
     background-color: #262626;
     border-radius: 12px;
     color:white;
@@ -223,61 +255,65 @@ export default {
 }
 .strong_notice:hover{opacity:0.8};
 
-.strong_line{
+/*.strong_line{
     display:flex;
     background-color: #ddd;
     height: 20px;
     border-radius:10px;
     width: 101%;
-}
+}*/
 .back {
+    /*display:flex;*/
     cursor: pointer;
-    display: block;
     position: absolute;
     width: 100%; 
-    height: 100px;
+    /*height: 100px;*/
     background-color: #262626;
     border-radius: 12px;
     color:white;
     z-index: 11;
     top: 30px;
 }
-.back_title {
+.notice_back_title {
     position:absolute;
     font-size: 20px;
     top: 10px;
     float:left;
     left: 20px;
 }
-.back_content {
+.notice_back_content {
     position:absolute;
     font-size:19px;
     width:98%;
-    height: 100px;
+    /*height: 100px;*/
     text-overflow:ellipsis;
     white-space:nowrap;
     overflow:hidden;
     top: 40px;
     left: 20px;
 }
-.back_info {
+.notice_back_info {
     position: absolute;
     float:right;
     font-size: 17px;
     top: 70px;
     right: 10px; 
 }
-.back_date{
+.notice_back_date{
     position: absolute;
+    float:right;
     top: 75%;
-    left: 600px;
+    right:10px;
+    top:50px;
+    /*left: 89%;*/
     z-index: 12;
 }
 .notice_line{
     margin: 5px auto;
     width: 100%;
-    height: 3px;
+    height: 5px;
     border-radius: 5px;
+    background-color:#262626;
     border: 2px solid #262626;
 }
 </style>
