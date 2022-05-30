@@ -230,7 +230,7 @@ export default {
     background-color:#2872f9;
     position: relative;
     top: -20px;
-    left: 95%;
+    left: 96%;
     z-index: 12;
 }
 
