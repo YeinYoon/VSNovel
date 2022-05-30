@@ -147,7 +147,18 @@ router.get('/getpost', async(req, res) => {
 
 // 리뷰 불러오기
 router.get('/getreview', async(req, res) => {
-    const result = await db.execute(null);
+    var result = await db.execute(`SELECT tbl_review.review_title, tbl_novel.nove_teamname, tbl_review.review_comment, tbl_review.review_img
+                                     FROM tbl_novel, tbl_review 
+                                     where tbl_novel.nove_code = tbl_review.nove_code and
+                                     user_id = '${req.user.USER_ID}'`);
+    if(result == "err") {
+        res.send("fail")
+    } else {
+        result = result.rows;
+        console.log(result);
+        res.send(result)
+    }
 })
+
 
 module.exports = router;

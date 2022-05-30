@@ -10,12 +10,12 @@
   <div class="review_section">
     <div class="work_list" v-for="(review, i) in reviews" :key="i">
       <div class="img_box"></div>
-      <img class="list_img" :src="`${review.img}`"/>
+      <img class="list_img" :src="`${review.REVIEW_IMG}`"/>
       <div class="work_list_con">
           <div class="list_span">
-              <span class="list_title">{{review.title}}</span>
-              <span class="list_team">{{review.producer}} / {{review.team}}</span>
-              <span class="list_content">{{review.content}}</span>
+              <span class="list_title">{{review.REVIEW_TITLE}}</span>
+              <span class="list_team">{{review.producer}} / {{review.NOVE_TEAMNAME}}</span>
+              <span class="list_content">{{review.REVIEW_COMMENT}}</span>
           </div>
       </div>
       <div class="review_edit">리뷰수정</div>
@@ -25,7 +25,6 @@
 </template>
 
 <script>
-import review from '@/assets/DataJs/review.js'
 import axios from '../../axios';
 
 export default {
@@ -34,13 +33,20 @@ export default {
   },
   data(){
     return{
-      reviews :review,
+      reviews :[],
 
     };
   },
   methods: {
     getReview() {
       axios.get('/api/mypage/getreview')
+      .then((result)=>{
+        if(result.data=="err"){
+          console.log("리뷰 데이터 불러오기 실패");
+        } else {
+          this.reviews = result.data;
+        }
+      })
     }
   }
 }
