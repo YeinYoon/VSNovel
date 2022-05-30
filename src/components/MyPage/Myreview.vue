@@ -18,7 +18,8 @@
               <span class="list_content">{{review.REVIEW_COMMENT}}</span>
           </div>
       </div>
-      <div class="review_edit">리뷰수정</div>
+      <!-- <div class="review_edit">리뷰수정</div> -->
+      <button class="review_edit" @click="reviewBtn()">리뷰수정</button>
     </div>
   </div>
 </div>
@@ -45,6 +46,7 @@ export default {
           console.log("리뷰 데이터 불러오기 실패");
         } else {
           this.reviews = result.data;
+          console.log(this.reviews)
         }
       })
     }
