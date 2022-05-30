@@ -36,6 +36,7 @@
         <div class="noticeMain_btn_blue" v-if="admin==false" @click="noticeStep += 1"><span>글쓰기</span></div>
      </div>
     
+    <!-- 공지사항 강조 부분 -->
     <section class="notice_section">
         <div class="strong_notice_post"> 
             <div v-for="(notice, i) in noticeData" :key="i">
