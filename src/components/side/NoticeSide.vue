@@ -36,19 +36,38 @@
         <div class="noticeMain_btn_blue" v-if="admin==false" @click="noticeStep += 1"><span>글쓰기</span></div>
      </div>
     
-    <!-- 공지사항 강조 부분 -->
+    <!-- 공지사항 본문 -->
     <section class="notice_section">
-        <div class="strong_notice_post"> 
+        <div class="strong_notice_post">
+            <!-- 공지사항 강조 부분 -->
+            <div>
+                <div v-for="(emphasisnotice, i) in emphasisData" :key="i">
+                    <!-- <div class="notice_line" v-if="noticeNum == i"></div> -->
+                    <div class="strong_notice">
+                    <div class="strong_notice_mark"><img src="@/assets/icons/white/star.png" class="mark_star_image"></div>
+                        <div class="notice_back_title"><span>{{emphasisnotice.title}}</span></div>       <!-- 제목 -->
+                        <div class="notice_back_content"><span v-html="emphasisnotice.content"></span></div>   <!-- 내용 -->
+                        <div class="notice_back_date"><span>{{emphasisnotice.date}}</span></div>         <!-- 날짜 -->
+                    </div>
+                </div>
+
+                <div v-if="Object.keys(emphasisData).length > 0" class="notice_line"></div>
+            </div>
+
+            
+
+            <!-- 공지사항 강조 아님 부분 -->
             <div v-for="(notice, i) in noticeData" :key="i">
-                <div class="notice_line" v-if="noticeNum == i"></div>
+                <!-- <div class="notice_line" v-if="noticeNum == i"></div> -->
                 <div class="strong_notice" @click="noticeEvent(notice, i)">
-                <div class="strong_notice_mark" v-if="notice.emphasis == 0"><img src="@/assets/icons/white/star.png" class="mark_star_image"></div>
-                    <div class="notice_back_title">{{notice.title}}</div>      <!-- 제목 -->
-                    <div class="notice_back_content">{{notice.content}}</div>  <!-- 내용 -->
-                    <div class="notice_back_date">{{notice.date}}</div>        <!-- 날짜 -->
+                <!-- <div class="strong_notice_mark" v-if="notice.emphasis == 0"><img src="@/assets/icons/white/star.png" class="mark_star_image"></div> -->
+                    <div class="notice_back_title"><span>{{notice.title}}</span></div>      <!-- 제목 -->
+                    <div class="notice_back_content"><span v-html="notice.content"></span></div>  <!-- 내용 -->
+                    <div class="notice_back_date"><span>{{notice.date}}</span></div>        <!-- 날짜 -->
                 </div>
             </div>
         </div>
+        
     </section>
     </div>
   </div>
@@ -79,6 +98,7 @@ export default {
             clickNotice : {},
             writeModify : false,
             admin : false,
+            emphasisData: {}
     };
   },
   components:{
@@ -91,13 +111,13 @@ export default {
     id[this.clickNum].style.backgroundColor = "#2872f9";
     // 공지사항 화면 부분 
         // 공지사항 강조 순으로 정렬
-        this.noticeData.sort(function (a, b) {
-            return a.emphasis - b.emphasis;
-        });
+        // this.noticeData.sort(function (a, b) {
+        //     return a.emphasis - b.emphasis;
+        // });
         // 강조 갯수 세기
-        for(let i = 0; i < this.noticeData.length; i++){
-            if(this.noticeData[i].emphasis == 0) this.noticeNum++;
-        }
+        // for(let i = 0; i < this.noticeData.length; i++){
+        //     if(this.noticeData[i].emphasis == 0) this.noticeNum++;
+        // }
   },
     created(){
         // console.log(this.$route)
@@ -122,10 +142,10 @@ export default {
       this.clickNum = index;
     },
     // 공지사항 메인 함수
-        adminEvent(){
-            if(this.admin) this.admin = false;
-            else this.admin = true;
-        },
+        // adminEvent(){
+        //     if(this.admin) this.admin = false;
+        //     else this.admin = true;
+        // },
         noticeEvent(data, i){
         //글보기 화면 이동
             this.noticeStep = 2;
