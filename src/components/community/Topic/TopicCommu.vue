@@ -29,6 +29,9 @@
         <img class="commu_thumb" :src="`${a.titleImg}`" @error="replaceimg"/>
         <div class="commu_back">
           <div class="commu_back_title">{{ a.title }}</div>
+          <span v-if="step=='리뷰 & 추천'" class="commu_str">★★★★★
+            <span class="commu_str_draw" :style="{width : a.str*20 + '%'}">★★★★★</span>
+          </span>
           <div class="commu_back_info">
             {{ a.writer }} | {{ a.date }} | {{ a.likes }} | {{ a.coment }}
           </div>
@@ -55,7 +58,8 @@ export default {
      Modal,
   },
   props : {
-    datasend:Object
+    datasend:Object,
+    step: String
   },
   created(){
     this.getcommulist();
@@ -163,7 +167,6 @@ export default {
   -ms-overflow-style:none;
 }
 .commu_post {
-  /* background-color:white; */
   position: relative;
   width: 100%;
   height: 120px;
@@ -198,6 +201,13 @@ export default {
   float: left;
   left: 90px;
 }
+.commu_str {
+  position:absolute;
+  float:right;
+  right: 10px;
+  top:10px;
+  font-size: 1.5em;
+}
 .commu_back_info {
   position: absolute;
   float: right;
@@ -205,4 +215,13 @@ export default {
   top: 50px;
   right: 10px;
 }
+.commu_str_draw {
+  position: absolute;
+  color: #2872f9;
+  left: 0;
+  overflow: hidden;
+  font-size : 1.0em;
+  -webkit-text-stroke-width:1.2px;
+  -webkit-text-stork-color:#2872f9
+  }
 </style>

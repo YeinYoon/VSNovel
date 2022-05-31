@@ -7,7 +7,7 @@ export default[
         date : '2011년 10월',
         likes    : 5,
         coment  : 0,
-        str : 0
+        str : 1.5
     },
     {
         title:'짱구 비주얼노벨',

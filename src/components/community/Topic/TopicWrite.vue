@@ -102,13 +102,13 @@ export default {
   methods : {
     registerpost(){
       //내용을 입력해주세요 모달창 
-      if(this.writetitle == '' && this.writecontent == '' && this.update == false){
+      if(this.writetitle == '' && (this.writecontent == '' || this.writecontent == null)&& this.update == false){
         this.alertcontent = '제목과 내용'
         this.open = true;
       }else if(this.writetitle == '' && this.update == false){
         this.alertcontent = '제목'
         this.open = true;
-      }else if(this.writecontent == '' && this.update == false){
+      }else if((this.writecontent == '' || this.writecontent == null) && this.update == false){
         this.alertcontent = '내용'
         this.open = true;
       }else if(this.strOpen == false && this.step=='리뷰 & 추천' && this.update == false){
