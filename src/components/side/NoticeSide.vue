@@ -40,30 +40,28 @@
     <section class="notice_section">
         <div class="strong_notice_post">
             <!-- 공지사항 강조 부분 -->
-            <div>
-                <div v-for="(emphasisnotice, i) in emphasisData" :key="i">
-                    <!-- <div class="notice_line" v-if="noticeNum == i"></div> -->
+            <div v-for="(notice, i) in noticeData" :key="i">
+                <div v-if="noticeData[i].emphasis == 1">
                     <div class="strong_notice">
                     <div class="strong_notice_mark"><img src="@/assets/icons/white/star.png" class="mark_star_image"></div>
-                        <div class="notice_back_title"><span>{{emphasisnotice.title}}</span></div>       <!-- 제목 -->
-                        <div class="notice_back_content"><span v-html="emphasisnotice.content"></span></div>   <!-- 내용 -->
-                        <div class="notice_back_date"><span>{{emphasisnotice.date}}</span></div>         <!-- 날짜 -->
+                        <div class="notice_back_title"><span>{{notice.title}}</span></div>             <!-- 제목 -->
+                        <div class="notice_back_content"><span v-html="notice.content"></span></div>   <!-- 내용 -->
+                        <div class="notice_back_date"><span>{{notice.date}}</span></div>               <!-- 날짜 -->
                     </div>
                 </div>
-
-                <div v-if="Object.keys(emphasisData).length > 0" class="notice_line"></div>
             </div>
-
+            <!-- 강조 줄 -->
+            <div class="notice_line"></div>
             
 
             <!-- 공지사항 강조 아님 부분 -->
             <div v-for="(notice, i) in noticeData" :key="i">
-                <!-- <div class="notice_line" v-if="noticeNum == i"></div> -->
-                <div class="strong_notice" @click="noticeEvent(notice, i)">
-                <!-- <div class="strong_notice_mark" v-if="notice.emphasis == 0"><img src="@/assets/icons/white/star.png" class="mark_star_image"></div> -->
-                    <div class="notice_back_title"><span>{{notice.title}}</span></div>      <!-- 제목 -->
-                    <div class="notice_back_content"><span v-html="notice.content"></span></div>  <!-- 내용 -->
-                    <div class="notice_back_date"><span>{{notice.date}}</span></div>        <!-- 날짜 -->
+                <div v-if="noticeData[i].emphasis == 0">
+                    <div class="strong_notice" @click="noticeEvent(notice, i)">
+                        <div class="notice_back_title"><span>{{notice.title}}</span></div>            <!-- 제목 -->
+                        <div class="notice_back_content"><span v-html="notice.content"></span></div>  <!-- 내용 -->
+                        <div class="notice_back_date"><span>{{notice.date}}</span></div>              <!-- 날짜 -->
+                    </div>
                 </div>
             </div>
         </div>
