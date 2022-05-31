@@ -6,6 +6,15 @@
         <img class="icon" src="@/assets/icons/white/leaf.png" alt="logo" />
         <span class="title">{{registerData.VILL_NAME}}</span>
       </div>
+      <div class="register_user_info_cont">
+        <span class="register_user_name">지존정인님 환영합니다.</span>
+        <div class="register_user_btn_cont">
+          <div class="register_user_btn_pos">카페관리</div>
+          <div class="register_user_btn_pos" @click="postmanage">게시글 관리</div>
+          <div class="register_user_btn_pos">회원관리</div>
+          <span style="position:absolute;cursor:pointer; top:40px; right:20px;">탈퇴</span>
+        </div>
+      </div>
     </div>
     <div class="register_cafe_section">
       <img class="register_img" :src="`${registerData.VILL_PRO_IMG}`" />
@@ -118,12 +127,45 @@ export default {
           this.registerData = result.data[0];
         }
       })
+    },
+    postmanage(){
+      this.$router.push({name:'MyPage',params:{path:'mypost'}});
     }
   }
 };
 </script>
 
 <style>
+.register_user_name{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.register_user_btn_cont{
+  display: flex;
+  top: 40px;
+}
+.register_user_btn_pos{
+  position: relative;
+  top: 38px;
+  left: 10px;
+  margin-right: 10px;
+  width: 60px;
+  font-size: 0.8em;
+  text-align: center;
+  cursor: pointer;
+  background: #5D5D5D;
+  border-radius: 20px;
+}
+.register_user_info_cont{
+  position: absolute;
+  right: 75px;
+  width: 300px;
+  height: 70px;
+  background: #6A6A6A;
+  border-radius: 20px;
+  color: white;
+}
 .register_cafe_section {
   margin: 0 auto;
   padding: 5px;
