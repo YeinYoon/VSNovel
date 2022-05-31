@@ -19,7 +19,7 @@
           </div>
       </div>
       <!-- <div class="review_edit">리뷰수정</div> -->
-      <button class="review_edit" @click="reviewBtn()">리뷰수정</button>
+      <button class="review_edit" @click="reviewBtn(data)">리뷰수정</button>
     </div>
   </div>
 </div>
@@ -35,7 +35,6 @@ export default {
   data(){
     return{
       reviews :[],
-
     };
   },
   methods: {
@@ -49,6 +48,14 @@ export default {
           console.log(this.reviews)
         }
       })
+    },
+    reviewBtn(data) {
+      this.$router.push({
+        name: 'REVIEW',
+        params: {
+          reviews: {data: data}
+        }
+      });
     }
   }
 }
