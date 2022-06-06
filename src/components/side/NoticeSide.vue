@@ -41,7 +41,7 @@
         <div class="strong_notice_post">
             <!-- 공지사항 강조 부분 -->
             <div v-for="(notice, i) in noticeData" :key="i">
-                <div v-if="noticeData[i].emphasis == 1">
+                <div v-if="noticeData[i].emphasis == 1" @click="noticeEvent(notice, i)">
                     <div class="strong_notice">
                     <div class="strong_notice_mark"><img src="@/assets/icons/white/star.png" class="mark_star_image"></div>
                         <div class="notice_back_title"><span>{{notice.title}}</span></div>             <!-- 제목 -->
@@ -70,7 +70,7 @@
     </div>
   </div>
     <div v-if="noticeStep == 1">
-        <NoticeWrite :writeModify="writeModify" :noticeData="clickNotice" @write_cancle="noticeBtnEvent($event)" @arrUp="writePushEvent($event)"/>
+        <NoticeWrite :writeModify="writeModify" :noticeData="clickNotice" @writebtn="noticeBtnEvent($event)"/>
     </div>
     <div v-if="noticeStep == 2">
         <NoticeRead :admin="admin" :noticeData="clickNotice" @btnEvent="noticeBtnEvent($event)"/>
@@ -91,12 +91,11 @@ export default {
         clickNum : 0,
         // 공지 화면 부분 변수
             noticeData : notice,
-            noticeNum : 0,
+            //noticeNum : 0,
             noticeStep : 0,
             clickNotice : {},
             writeModify : false,
-            admin : false,
-            emphasisData: {}
+            admin : false
     };
   },
   components:{
@@ -154,29 +153,45 @@ export default {
         noticeBtnEvent(event){
         // 글 목록 화면 이동
             //강조 발행일 때
-            if(event == 'updata')
-                this.clickNotice.emphasis = 0;
-            //강조 취소일 때
-            else if(event == 'notice_cancle') 
+            if(event == 'updata'){
                 this.clickNotice.emphasis = 1;
+                this.noticeStep = 0;
+            }
+            //강조 취소일 때
+            else if(event == 'notice_cancle'){
+                this.clickNotice.emphasis = 0;
+                this.noticeStep = 0;
+            }
             //삭제일 때
-            else if(event == 'delete') 
+            else if(event == 'delete'){
                 this.noticeData.splice(this.clickNoticeNum, 1);
+                this.noticeStep = 0;
+            }
             //수정일 때
             else if(event == 'modify') {
                 this.noticeStep = 1;
                 this.writeModify = true;
-                return
-            }
+            }else if(event == 'cancle'){
             //아닐 때
             this.writeModify = false;
             this.noticeStep = 0;
+            }else if(event.type == 'arrUp'){
+                if(this.writeModify == false){
+                    this.noticeData.push(event.content);
+                    this.noticeStep = 0; 
+                }else {
+                    this.noticeData.splice(this.clickNoticeNum,1,event.content);
+                    this.noticeStep = 0;
+                }
+                
+            }
+            
         },
-        writePushEvent(data){
-            this.noticeData.push(data);
-            // console.log(this.noticeData);
-            this.noticeStep = 0;
-        }
+        // writePushEvent(data){
+        //     this.noticeData.push(data);
+        //     // console.log(this.noticeData);
+        //     this.noticeStep = 0;
+        // }
   }
 };
 </script>

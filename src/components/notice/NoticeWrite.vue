@@ -5,12 +5,12 @@
             <img class="icon" src="@/assets/icons/white/megaphone.png" alt="community">
             <span class="title">공지사항</span>
             <span class="topic" v-if="writeModify == false">전체 - 글쓰기</span>
-            <span class="topic" v-if="writeModify">전체 - 수정하기</span>
+            <span class="topic" v-if="writeModify == true">전체 - 수정하기</span>
         </div>
     </header>  
     <div class="write_section">
       <div class="write_title" @change="titlePush">
-        <input id="input" type="text" :value="`${noticeData.title}`" v-if="writeModify"/>
+        <input id="input" type="text" :value="`${noticeData.title}`" v-if="writeModify == true"/>
         <input id="input" type="text" v-if="writeModify == false"/>
       </div>
       <div class="write_content">
@@ -23,9 +23,12 @@
     </div>
     </div>
     <div class="notice_btn_area">
-      <div class="strong_btn" @click="pushEvent(0)">강조로 발행</div>
-      <div class="write_btn" @click="pushEvent(1)">글쓰기</div>
-      <div class="cancle_btn" @click="$emit('write_cancle', 'cancle')">취소</div>
+      <div class="strong_btn" @click="pushEvent(1)"><span>강조로 발행</span></div>
+      <div class="write_btn" @click="pushEvent(0)">
+        <span v-if="writeModify == false">글쓰기</span>
+        <span v-if="writeModify == true">수정</span>
+      </div>
+      <div class="cancle_btn" @click="$emit('writebtn', 'cancle')"><span>취소</span></div>
     </div>
   </div>
 </template>
@@ -63,7 +66,9 @@ export default {
       var today = new Date().toISOString().substring(0,10);
       this.writeData.date = today;
       this.writeData.emphasis = emphasis;
-      this.$emit('arrUp', this.writeData);
+
+      const writeData = {type: 'arrUp', content : this.writeData};
+      this.$emit('writebtn', writeData);
     }
   }
 };

@@ -8,7 +8,7 @@
           alt="community"
         />
         <span class="title">공지사항</span>
-        <span class="topic">전체 - {{ noticeData.title }}</span>
+        <div><span class="topic">전체 - {{ noticeData.title }}</span></div>
       </div>
     </header>
     <div class="notice_write_section">
@@ -23,21 +23,21 @@
     <div class="notice_btn_area">
       <div
         class="strong_btn"
-        v-if="admin && this.noticeData.emphasis == 0"
+        v-if="admin && this.noticeData.emphasis == 1"
         @click="noticeBtnEvent('notice_cancle')"
       >
-        강조 취소
+        <span>강조 취소</span>
       </div>
       <div
         class="strong_btn"
-        v-if="admin && this.noticeData.emphasis == 1"
+        v-if="admin && this.noticeData.emphasis == 0"
         @click="noticeBtnEvent('updata')"
       >
         강조로 발행
       </div>
-      <div class="write_btn" v-if="admin" @click="noticeBtnEvent('modify')">수정</div>
-      <div class="write_btn" v-if="admin" @click="noticeBtnEvent('delete')">삭제</div>
-      <div class="cancle_btn" @click="noticeBtnEvent('cancle')">취소</div>
+      <div class="write_btn" v-if="admin" @click="noticeBtnEvent('modify')"><span>수정</span></div>
+      <div class="write_btn" v-if="admin" @click="noticeBtnEvent('delete')"><span>삭제</span></div>
+      <div class="cancle_btn" @click="noticeBtnEvent('cancle')"><span>취소</span></div>
     </div>
   </div>
 </template>
