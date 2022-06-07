@@ -50,8 +50,12 @@
                     </div>
                 </div>
             </div>
+
             <!-- 강조 줄 -->
-            <div class="notice_line"></div>
+            <div v-if="noticeNum > 0" class="notice_line"></div>
+
+            
+            
             
 
             <!-- 공지사항 강조 아님 부분 -->
@@ -91,11 +95,11 @@ export default {
         clickNum : 0,
         // 공지 화면 부분 변수
             noticeData : notice,
-            //noticeNum : 0,
+            noticeNum : 0,
             noticeStep : 0,
             clickNotice : {},
             writeModify : false,
-            admin : false
+            admin : false,
     };
   },
   components:{
@@ -111,10 +115,11 @@ export default {
         // this.noticeData.sort(function (a, b) {
         //     return a.emphasis - b.emphasis;
         // });
-        // 강조 갯수 세기
-        // for(let i = 0; i < this.noticeData.length; i++){
-        //     if(this.noticeData[i].emphasis == 0) this.noticeNum++;
-        // }
+        //강조 갯수 세기
+        for(let i = 0; i < this.noticeData.length; i++){
+        if(this.noticeData[i].emphasis == 1) this.noticeNum ++;
+        console.log(this.noticeNum);
+        }
   },
     created(){
         // console.log(this.$route)
@@ -249,7 +254,7 @@ export default {
 }
 
 .strong_notice_post {
-    cursor: pointer;
+    /* cursor: pointer; */
     position: relative;
     width: 90%;
     height: 120px;

@@ -9,12 +9,12 @@
         </div>
     </header>  
     <div class="write_section">
-      <div class="write_title" @change="titlePush">
+      <div class="write_title">
         <input id="input" type="text" :value="`${noticeData.title}`" v-if="writeModify == true"/>
         <input id="input" type="text" v-if="writeModify == false"/>
       </div>
       <div class="write_content">
-        <Editor :noticeData="noticeData" :writeModify="writeModify" @up="upEvent($event)"/>
+        <Editor :noticeData="noticeData" :writeModify="writeModify" @up="content = $event"/>
       </div>
       <div class="editer_info">
         주의! 당신은 현재 공지사항 게시판에서 작성중입니다.
@@ -55,16 +55,18 @@ export default {
     writeModify:Boolean,
   },
   methods:{
-    titlePush(){
-      this.writeData.title = document.getElementById('input').value;
-    },
-    upEvent(event){
-      this.writeData.content = event;
-      console.log(event);
-    },
     pushEvent(emphasis){
+      //제목 가져오기
+      this.writeData.title = document.getElementById('input').value;
+
+      //내용 가져오기
+      this.writeData.content = this.content;
+
+      //날짜 가져오기
       var today = new Date().toISOString().substring(0,10);
       this.writeData.date = today;
+
+      //강조 유무 가져오기
       this.writeData.emphasis = emphasis;
 
       const writeData = {type: 'arrUp', content : this.writeData};

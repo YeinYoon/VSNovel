@@ -14,13 +14,21 @@
     <div class="notice_write_section">
       <div class="notice_write_title">
         <span>{{ noticeData.title }}</span>
+        <div class="notice_title_info">
+          <span>작성일자 : {{noticeData.date}}</span>
+          <div class="notice_title_btn">
+            <div class="notice_update_btn"><img src="@/assets/icons/white/editing.png"></div>
+            <div class="notice_delete_btn"><span>삭제</span></div>
+          </div>
+      
+        </div>
       </div>
       <div class="notice_write_contents">
         <span v-html="noticeData.content">
         </span>
       </div>
     </div>
-    <div class="notice_btn_area">
+    <div class="notice_btn_area1">
       <div
         class="strong_btn"
         v-if="admin && this.noticeData.emphasis == 1"
@@ -37,7 +45,7 @@
       </div>
       <div class="write_btn" v-if="admin" @click="noticeBtnEvent('modify')"><span>수정</span></div>
       <div class="write_btn" v-if="admin" @click="noticeBtnEvent('delete')"><span>삭제</span></div>
-      <div class="cancle_btn" @click="noticeBtnEvent('cancle')"><span>취소</span></div>
+      <div class="cancle_btn" @click="noticeBtnEvent('cancle')"><span>목록으로</span></div>
     </div>
   </div>
 </template>
@@ -93,13 +101,37 @@ export default {
   height: 7%;
   background-color: #5e5e5e;
   border-radius: 20px;
-  padding: 0 10px;
+  padding: 10px 10px;
   font-size: 1.2em;
+  /* display:flex; */
   display: table;
 }
-.notice_write_title span{
+/* .notice_write_title span{
   display: table-cell;
   vertical-align: middle;
+} */
+.notice_title_info{
+  display: flex;
+}
+.notice_title_btn{
+  display: flex;
+  position:absolute;
+  float:right;
+  right:30px;
+}
+.notice_update_btn, .notice_delete_btn{
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  width: 60px;
+  height: 32px;
+  background-color: #2872f9;
+  border-radius: 20px;
+  margin: 0 5px;
+}
+.notice_update_btn img{
+    width:25px; 
+    height:25px;
 }
 .notice_write_contents {
   margin: 0 auto;
@@ -119,14 +151,20 @@ export default {
   margin: 5px 0 0 0;
   font-size: 0.8em;
 }
-.notice_btn_area {
-  width: 100%;
-  text-align: center;
-  color: white;
-  display: flex;
-  justify-content: center;
-  position: relative;
-  top: 70px;
+.notice_btn_area1 {
+  position:relative;
+  top: 50px;
+  height: 50px;
+  width: 100px;
+  left: 10px;
+  display: table-cell;
+  vertical-align: middle;
+  color:white;
+}
+.notice_btn_area1 span {
+  /* text-align: center; */
+  padding: 10px 10px;
+  
 }
 .strong_btn {
   padding: 5px 10px;
