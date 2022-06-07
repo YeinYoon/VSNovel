@@ -118,7 +118,7 @@ export default {
     uploadimgfile(){
       document.getElementById('profile-image').classList.replace('profile-image-input','profile-image-change');
       if(document.getElementById('profile-image').style.backgroundImage==null){
-          document.getElementById('profile-image').style.backgroundImage=this.uploadimg;
+          document.getElementById('profile-image').style.backgroundImage=this.newImage;
       }
     },
 
