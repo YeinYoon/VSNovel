@@ -64,7 +64,7 @@
                     <div class="strong_notice" @click="noticeEvent(notice, i)">
                         <div class="notice_back_title"><span>{{notice.title}}</span></div>            <!-- 제목 -->
                         <div class="notice_back_content"><span v-html="notice.content"></span></div>  <!-- 내용 -->
-                        <div class="notice_back_date"><span>{{notice.date}}</span></div>              <!-- 날짜 -->
+                        <div class="notice_back_date"><span>{{notice.date.substring(0,10)}}</span></div>              <!-- 날짜 -->
                     </div>
                 </div>
             </div>

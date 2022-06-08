@@ -8,14 +8,18 @@
       <!-- 까만배경:제목과 내용 댓글들을 감싸는 배경 -->
       <div class="postview_section">
 
-        <!-- 수정, 삭제 버튼 -->
-      <div class="topic_postview_btn_area">
-        <div class="topic_postview_btn_red" @click="postBtn({type:'retouch'})"><span>수정</span></div>
-        <div class="topic_postview_btn_blue" @click="postBtn({type:'deletewrite'})"><span>삭제</span></div>
-      </div>
+        
 
         <!-- 제목을 나타내는 영역-->
-        <div class="postview_title"><div class="postview"><span>{{topicObject.title}}</span></div></div>
+        <div class="postview_title">
+          <div class="postview"><span>{{topicObject.title}}</span></div>
+
+          <!-- 수정, 삭제 버튼 -->
+          <div class="topic_postview_btn_area">
+            <div class="topic_postview_btn_red" @click="postBtn({type:'retouch'})"><img src="@/assets/icons/white/editing.png"></div>
+          <div class="topic_postview_btn_blue" @click="postBtn({type:'deletewrite'})"><img src="@/assets/icons/white/trash_white.png"></div>
+      </div>
+        </div>
         
         <!-- 내용과 추천,비추천을 감싸는 프레임 -->
         <div class="postview_frame">
@@ -146,19 +150,21 @@ export default {
   position:relative;
   cursor: pointer;
   font-size: 0.9em;
-  width: 80px;
-  height: 30px;
+  width: 55px;
+  height: 28px;
   background: #2872f9;
   border-radius: 14px;
-  display: table;
+  /* display: table; */
+  /* display:flex; */
   margin-left: 10px;
 }
-.topic_postview_btn_red span, .topic_postview_btn_blue span {
-  display: table-cell;
-  vertical-align:middle;
-  text-align:center;
-  color:white;
+.topic_postview_btn_red img, .topic_postview_btn_blue img {
+  position:relative;
+    left:1.5px;
+    width:35%; 
+    object-fit: cover;
 }
+.topic_postview_btn_blue im
 .postview_wrap {
   margin: 0 auto;
   width: 95%;

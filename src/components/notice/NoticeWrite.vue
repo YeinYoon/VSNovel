@@ -63,7 +63,7 @@ export default {
       this.writeData.content = this.content;
 
       //날짜 가져오기
-      var today = new Date().toISOString().substring(0,10);
+      var today = new Date().toISOString();
       this.writeData.date = today;
 
       //강조 유무 가져오기
