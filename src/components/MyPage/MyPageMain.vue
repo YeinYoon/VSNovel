@@ -187,7 +187,7 @@ export default {
 
 /* 오른쪽 부분에 있는 텍스트 스타일 */
 .col-three{
-  position: absolute;
+  width: 210px;
   font-size: 0.8em;
   /* left: 73%; */
   position: relative;

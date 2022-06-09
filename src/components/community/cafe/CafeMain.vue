@@ -105,6 +105,8 @@ export default {
 }
 .cafe_main_btn_area{
   display: flex;
+  position: absolute;
+  right:170px;
 }
 .cafe_main_btn{
   position:relative;
