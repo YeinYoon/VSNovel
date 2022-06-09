@@ -1,4 +1,5 @@
 <template>
+<div><CafeCreateModal v-if="createModal == true" @close="closeCreateModal"></CafeCreateModal></div>
   <div class="tests">
     <!-- 헤더 -->
     <div class="header">
@@ -10,6 +11,10 @@
       <div class="search">
         <img src="@/assets/icons/magnifier.png" class="icon" />
         <input type="text" />
+      </div>
+      <div class="cafe_main_btn_area">
+        <div class="cafe_main_btn">가입카페 관리</div>
+        <div class="cafe_main_btn" @click="openCreateModal">개설하기</div>
       </div>
     </div>
     <div class="cafe_section">
@@ -52,16 +57,19 @@
 <script>
 import SwiperCarouselVue from "./CafeCarousel";
 import commuData from "@/assets/DataJs/commuData.js";
+import CafeCreateModal from "./CafeCreateModal.vue"
 export default {
   name: "MainScreen",
   data() {
     return {
       commuData: commuData,
       villageData: {},
+      createModal: false,
     };
   },
   components: {
     SwiperCarousel: SwiperCarouselVue,
+    CafeCreateModal,
   },
   mounted() {
     // 추천 순으로 정렬 후 10위까지만 자르기
@@ -70,6 +78,14 @@ export default {
     });
     this.villageData = this.villageData.slice(0, 10);
   },
+  methods:{
+    openCreateModal(){
+      this.createModal=true;
+    },
+    closeCreateModal(val) {
+      this.createModal=val;
+    }
+  }
 };
 </script>
 
@@ -86,6 +102,25 @@ export default {
   border-radius: 25px;
   border: 2px solid rgb(73, 73, 73);
   overflow: hidden;
+}
+.cafe_main_btn_area{
+  display: flex;
+  position: absolute;
+  right:170px;
+}
+.cafe_main_btn{
+  position:relative;
+  top: 80px;
+  right: -110px;
+  width: 120px;
+  height: 30px;
+  margin-right: 10px;
+  background-color: #2872F9;
+  border-radius: 20px;
+  text-align: center;
+  color: white;
+  padding-top: 3px;
+  cursor: pointer;
 }
 .widgets {
   width: 100%;

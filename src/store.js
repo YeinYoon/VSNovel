@@ -50,6 +50,12 @@ const store = createStore({
         gModalOff(state){
             state.gModalState = false;
         },
+
+        // 스토어 관련
+        setNovelList(state, data) {
+            state.novelList = data;
+        },
+
     },
 })
 

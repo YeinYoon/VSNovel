@@ -40,7 +40,8 @@
     <!-- 취소,저장버튼 -->
     <footer class="card-footer">
       <div id="mypage_card-canc">취소</div>
-      <div id="mypage_card-save" @click="routerPush('/')">저장</div>
+      <!-- <div id="mypage_card-save" @click="cardnum('/')">저장</div> -->
+      <div id="mypage_card-save" @click="cardnum">저장</div>
     </footer>
 
   </div>
@@ -51,13 +52,11 @@
 <script>
 export default {
   methods:{
-    routerPush(link){
-      this.$router.push(link);
-    },
-    
-    
+    // cardnum(link){
+    //   this.$router.push(link);
+    // },
+    }
   }
-}
 </script>
 
 <style>
@@ -71,7 +70,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 /* 제목,부제목을 제외한 전체적인 위치 */
 .card-position-container{
-  width: 95%;
+  width: 800px;
   height: 450px;
   position: relative;
   top: 15%;
@@ -87,7 +86,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 /* 2행(카드번호 입력부분) 전체정렬 */
 .card-container2{
-  transform: translateX(5%);
+  transform: translateX(3%);
   display: flex;
 }
 
@@ -192,6 +191,9 @@ input[type="number"]::-webkit-inner-spin-button {
   font-size: 15px;
   margin-top:15px;
   cursor: pointer;
+}
+#mypage_card-save:hover{
+  background: #0084ff;
 }
 
 </style>

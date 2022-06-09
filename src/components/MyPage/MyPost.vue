@@ -18,9 +18,9 @@
       <hr class="lines" />
       <div class="post_line" v-for="(post, i) in post" :key="i">
         <div class="post_place">{{ post.position }}</div>
-        <div class="post_title" style="cursor:pointer">{{ post.title }}</div>
-        <div class="post_like">{{ post.prefer }}</div>
-        <div class="post_comment">{{ post.comment }}</div>
+        <div class="post_title" style="cursor:pointer" @click="postMove">{{ post.title }}</div>
+        <div class="post_like">{{ post.likes }}</div>
+        <div class="post_comment">{{ post.coment }}</div>
         <div class="post_clicks">{{ post.look }}</div>
       </div>
     </div>
@@ -29,12 +29,26 @@
 
 <script>
 import post from "@/assets/DataJs/post.js";
+import writer from "@/assets/DataJs/commuWriter.js";
+import free from "@/assets/DataJs/commuFree.js";
+import join from "@/assets/DataJs/commujoin.js";
+import re from "@/assets/DataJs/commuRe.js";
+
 
 export default {
   data() {
     return {
       post: post,
+      writer: writer,
+      free: free,
+      join: join,
+      re: re,
     };
+  },
+  methods:{
+    postMove(){
+      this.$router.push({name:'Community', params:{step:'자유',topicNum:1}})
+    }
   },
 };
 </script>

@@ -111,4 +111,7 @@ export default {
   border-radius: 20px;
   cursor: pointer;
 }
+.mypage_cate-save:hover{
+  background:#0084ff;
+}
 </style>

@@ -54,9 +54,9 @@
         <TopicPostView @btnpostview="btnpostview($event)" :topicObject="topicObject"/>
       </div>
       <div v-if="topicData == 2">
-        <TopicWrite @add="addpost($event)" :datasend="community"/>
+        <TopicWrite @add="addpost($event)" :topicObject="topicObject" :update="update" :step="step"/>
       </div>
-      </div>    
+    </div>    
     </div>
     <div v-else>
       <router-view />
@@ -86,6 +86,8 @@ export default {
       community: commuFree,
       topicData: 0,
       topicObject: {},
+      index : 0,
+      update: false
     };
   },
   components: {
@@ -101,6 +103,19 @@ export default {
       this.clickNum = 3;  // 사이드바 강조 효과 
     }
     // 기본 강조 효과
+    if(this.$route.params.topicNum == 2){
+      console.log(this.$route.params);
+      this.step = this.$route.params.step; // 부제목 변수 변경
+      this.topicData = this.$route.params.topicNum; // 수정 페이지 이동
+      this.clickNum = 3; // 사이드바 강조효과
+    }
+    if(this.$route.params.topicNum == 1){
+      console.log(this.$route.params);
+      this.step = this.$route.params.step; // 부제목 변수 변경
+      this.topicData = this.$route.params.topicNum; // 수정 페이지 이동
+      this.clickNum = 0; // 사이드바 강조효과
+    }
+
     this.clickId = document.querySelectorAll("#communityElement");
     this.clickId[this.clickNum].style.backgroundColor = "#2872f9";
 
@@ -129,26 +144,28 @@ export default {
           }
         });
     },
-    topicadd(event) {
-      this.topicData = 1;
-      this.topicObject = event;
-    },
-    remove(removedata) {
-      this.community.splice(removedata, 1);
-    },
+    // topicadd(event) {
+    //   this.topicData = 1;
+    //   this.topicObject = event;
+    // },
+    // remove(removedata) {
+    //   this.community.splice(removedata, 1);
+    // },
     communityevent(event){
       //console.log(event);
       //포스트 클릭
       if(event.type == 'first'){
         this.topicData = 1;
         this.topicObject = event.item;
+        this.index = event.index;
       }else 
       //TopicPostView로 감
       if(event == 'third'){
         this.topicData = 2
-        //console.log(event);
+        this.update = false;
+        console.log(this.step);
       }else 
-      //글쓰기 삭제
+      //관리자 글쓰기 삭제
       if(event.type == 'deletepost'){
         console.log(event);
         this.community.splice(event.index,1);
@@ -162,6 +179,18 @@ export default {
       //댓글 몇개인지 띄우기
         this.topicObject.coment = 1*event.content.length;
         this.topicObject.comentcontents = event.content;
+      }else if(event == 'likevote'){ //추천수 올리기
+        this.community[this.index].likes += 1;
+        //console.log(this.topicObject);
+      }else if(event == 'nolikevote'){ //비추천수 올리기
+        this.community[this.index].nolike += 1;
+        //console.log(this.topicObject);
+      }else if(event == 'retouch'){ //글 수정 버튼 클릭
+        this.topicData = 2;
+        this.update = true;
+      }else if(event == 'deletewrite'){ //글 삭제 버튼 클릭
+        this.topicData = 0;
+        this.community.splice(this.index,1);
       }
     },
     addpost(event) {
@@ -170,6 +199,8 @@ export default {
         this.topicData=0;
       }else if(event.type == 'contentdata'){ //글쓰기 저장 작업
         this.community.push(event.content);
+      }else if(event.type == 'updatedata'){ //글쓰기 수정 작업
+        this.community.splice(this.index,1,event.content);
       }
     },
     clickCommunityEvent(index, event, item) {
@@ -191,12 +222,16 @@ export default {
       //게시판별 데이터 다르게 띄우기
       if(this.step == '자유') {
         this.community = commuFree;
+        this.topicData = 0;
       }else if(this.step == '작가') {
         this.community = commuWriter;
+        this.topicData = 0;
       }else if(this.step == '팀원 모집') {
         this.community = commujoin;
+        this.topicData = 0;
       }else if(this.step == '리뷰 & 추천') {
         this.community = commuRe;
+        this.topicData = 0;
       }
     },
     // ----------------------------------------------------------------------

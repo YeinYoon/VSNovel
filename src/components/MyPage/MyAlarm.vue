@@ -117,5 +117,8 @@ input[type="checkbox"]{
   border-radius: 20px;
   cursor: pointer;
 }
+#mypage_alarm-save:hover{
+  background: #0084ff;
+}
 
 </style>

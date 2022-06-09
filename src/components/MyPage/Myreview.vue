@@ -18,14 +18,14 @@
               <span class="list_content">{{review.content}}</span>
           </div>
       </div>
-      <div class="review_edit" @click="reviewEdit()">리뷰수정</div>
+      <div class="review_edit" @click="reviewEdit">리뷰수정</div>
     </div>
   </div>
 </div>
 </template>
 
 <script>
-import review from '@/assets/DataJs/review.js'
+import review from '@/assets/DataJs/review.js';
 
 export default {
   data(){
@@ -37,7 +37,7 @@ export default {
     reviewEdit(){
       this.$router.push({name: 'Community', params:{step : '리뷰 & 추천', topicNum : 2}});
     }
-  }
+  },
 }
 </script>
 
@@ -59,7 +59,7 @@ export default {
 .review_edit{
   width: 130px;
   height: 40px;
-  position: relative;
+  position: absolute;
   top: 105px;
   right: 10px;
   background: #2872F9;
@@ -68,5 +68,8 @@ export default {
   text-align: center;
   line-height: 42px;
   cursor: pointer;
+}
+.review_edit:hover{
+  background: #0084ff;
 }
 </style>

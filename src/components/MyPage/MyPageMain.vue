@@ -164,6 +164,9 @@ export default {
   font-size: 1.0em;
   text-align: center;
 }
+.input-file-button:hover{
+  background: #0084ff;
+}
 
 /* 제목,부제목을 제외한 모든 태그들 */
 .main-position-container{
@@ -184,7 +187,7 @@ export default {
 
 /* 오른쪽 부분에 있는 텍스트 스타일 */
 .col-three{
-  position: absolute;
+  width: 210px;
   font-size: 0.8em;
   /* left: 73%; */
   position: relative;
@@ -284,5 +287,8 @@ export default {
   color: white;
   font-size: 1.0em;
   cursor: pointer;
+}
+#mypage_main-save:hover{
+  background: #0084ff;
 }
 </style>
