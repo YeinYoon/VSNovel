@@ -19,7 +19,7 @@
           </div>
       </div>
       <!-- <div class="review_edit">리뷰수정</div> -->
-      <button class="review_edit" @click="reviewBtn(data)">리뷰수정</button>
+      <button class="review_edit" @click="reviewBtn(review.REVIEW_CODE)">리뷰수정</button>
     </div>
   </div>
 </div>
@@ -27,6 +27,7 @@
 
 <script>
 import axios from '../../axios';
+import commuRe from '../../assets/DataJs/commuRe.js'
 
 export default {
   created() {
@@ -34,7 +35,8 @@ export default {
   },
   data(){
     return{
-      reviews :[],
+      reviews :null,
+      commuRe : commuRe
     };
   },
   methods: {
@@ -44,18 +46,18 @@ export default {
         if(result.data=="err"){
           console.log("리뷰 데이터 불러오기 실패");
         } else {
-          this.reviews = result.data;
+          this.reviews = result;
           console.log(this.reviews)
         }
       })
     },
-    reviewBtn(data) {
+    reviewBtn(REVIEW_CODE) {
       this.$router.push({
-        name: 'REVIEW',
-        params: {
-          reviews: {data: data}
-        }
-      });
+        name: "Community",
+        params: { REVIEW_CODE
+                  },
+      }
+      );
     }
   }
 }

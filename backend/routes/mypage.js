@@ -114,6 +114,7 @@ router.post('/postconfirm', async(req, res) => {
 })
 
 // 게시글 불러오기
+
 router.get('/getpost', async(req, res) => {
     let data = [];
     let object = await db.execute(`SELECT vill_code, boar_code, post_code FROM tbl_post WHERE user_id = '${req.user.USER_ID}'`);

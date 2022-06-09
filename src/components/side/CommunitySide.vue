@@ -109,6 +109,19 @@ export default {
         content: this.$route.params.comm_content,
       };
     }
+    else if (this.$route.params.REVIEW_CODE != undefined) {
+      console.log('review')
+      this.step == "리뷰 & 추천";
+      this.update == true;
+      this.community = commuRe;
+      this.topicData = 2;
+      this.topicObject = {
+        title: this.$route.params.comm_id,
+        content: this.$route.params.comm_content,
+      };
+      this.clickId[3].style.backgroundColor = "#2872f9";
+      this.clickId[0].style.backgroundColor = "#2c2c2c";
+    }
     this.resVillageList();
   },
   methods: {
@@ -133,7 +146,8 @@ export default {
     //   this.community.splice(removedata, 1);
     // },
     communityevent(event){
-      //console.log(event);
+      console.log(event.item.title);
+      console.log(event.index);
       //포스트 클릭
       if(event.type == 'first'){
         this.topicData = 1;

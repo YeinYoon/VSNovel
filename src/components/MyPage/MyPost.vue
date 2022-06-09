@@ -9,7 +9,7 @@
     </div>
     <div class="post_section">
       <div class="post_line">
-        <div class="post_place">번호</div>
+        <div class="post_place">빌리지 이름</div>
         <div class="post_title">제목</div>
         <div class="post_like">추천수</div>
         <div class="post_comment">댓글수</div>
@@ -36,7 +36,7 @@ export default {
   },
   data() {
     return {
-      postData : null
+      postData : []
     }
   }, 
   methods: {
@@ -48,7 +48,7 @@ export default {
           console.log('load fail')
         } else {
           console.log(result)
-          // this.postData = result.data.rows;
+          this.postData = result.rows
           // console.log(this.postData)
         }
       })
