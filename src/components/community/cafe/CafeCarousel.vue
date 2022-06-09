@@ -58,6 +58,7 @@ export default {
           console.log("커뮤니티 데이터 불러오기 실패");
         } else {
           this.datas = result.data;
+          console.log(this.datas);
         }
       })
     },

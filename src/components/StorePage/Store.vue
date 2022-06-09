@@ -27,7 +27,7 @@
     <div class="store_section">
       <div
         class="work_list"
-        v-for="novel in $store.state.novelList"
+        v-for="novel in storeDatas"
         :key="novel.NOVE_CODE"
         @click="modalOpen(novel)"
       >
@@ -65,6 +65,9 @@ export default {
       modal: false,
       modalData : {},
     };
+  },
+  props:{
+    storeDatas : Array,
   },
   components: {
     StoreModal,

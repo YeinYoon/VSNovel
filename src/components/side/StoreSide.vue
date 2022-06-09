@@ -33,7 +33,7 @@
       </div>
     </div>
   </div>
-  <Store />
+  <Store :storeDatas = "storeDatas"/>
 </div>
 </template>
 
@@ -61,7 +61,7 @@ export default {
       genreNum: 0,
       clickNovel : 'novel',
 
-      novelType : "",
+      storeDatas : [],
       cateCode : ""
     };
   },
@@ -94,16 +94,12 @@ export default {
 
     //노벨 리스트 조회
     getNovelList() {
-      var searchData = {
-        novelType : this.novelType,
-        cateCode : this.cateCode
-      }
-      axios.post('/api/store/getNovelList', searchData)
+      axios.post('/api/store/getNovelList', {cateCode : this.cateCode})
       .then((result)=>{
         if(result.data == "err") {
           console.log("스토어 데이터 불러오기 실패");
         } else {
-          this.$store.commit('setNovelList', result.data);
+          this.storeDatas = result.data;
         }
       })
     },
