@@ -97,40 +97,34 @@ export default {
   },
   mounted() {
     // 기본 강조 효과
-    if(this.$route.params.topicNum == 2 && this.$route.params.topicNum != null){
+    //마이페이지 -> 내가 쓴 게시글
+    if(this.$route.params.topicNum == 0){
       this.step = this.$route.params.step; // 부제목 변수 변경
-      this.topicData = this.$route.params.topicNum; // 수정 페이지 이동
-      this.clickNum = 3; // 사이드바 강조효과
+      this.topicData = 1; // 수정 페이지 이동
+      this.clickNum = this.$route.params.topicNum; // 사이드바 강조효과
     }
-    else{
-      this.step = this.$route.params.step; // 부제목 변수 변경
-      this.topicData = this.$route.params.topicNum; // 수정 페이지 이동
-      this.clickNum = 1; // 사이드바 강조효과
-    }
-
-    this.clickId = document.querySelectorAll("#communityElement");
-    this.clickId[this.clickNum].style.backgroundColor = "#2872f9";
-
-    if (this.$route.params.comm_id != undefined) {
+    //메인화면에서 이동하는 경우
+    else if (this.$route.params.comm_id != undefined) {
       this.topicData = 1;
       this.topicObject = {
         title: this.$route.params.comm_id,
         content: this.$route.params.comm_content,
       };
     }
-    else if (this.$route.params.REVIEW_CODE != undefined) {
-      console.log('review')
-      this.step == "리뷰 & 추천";
-      this.update == true;
-      this.community = commuRe;
+    //마이페이지 -> 리뷰 수정 이동
+    else{
+      this.step = "리뷰 & 추천";
+      this.update = true;
       this.topicData = 2;
+      this.clickNum = 3;
       this.topicObject = {
         title: this.$route.params.comm_id,
         content: this.$route.params.comm_content,
       };
-      this.clickId[3].style.backgroundColor = "#2872f9";
-      this.clickId[0].style.backgroundColor = "#2c2c2c";
     }
+    this.clickId = document.querySelectorAll("#communityElement");
+    this.clickId[this.clickNum].style.backgroundColor = "#2872f9";
+
     this.$router.push('/community');
     this.resVillageList();
   },
@@ -163,7 +157,7 @@ export default {
         console.log(this.step);
       }else 
       //관리자 글쓰기 삭제
-      if(event.type == 'deletepost'){
+      if(event.type == 'deletepost'){  
         console.log(event);
         this.community.splice(event.index,1);
       }
