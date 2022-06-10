@@ -21,16 +21,7 @@ import axios from './axios'
 export default {
   name: "App",
   created() {
-    axios.get("/api/auth/loginCheck").then((result) => {
-      if (result.data != "") {
-        console.log(result.data);
-        this.$store.commit("userLogin", {
-          nickname: result.data.USER_NICKNAME,
-          id: result.data.USER_ID,
-        });
-        console.log(this.$store.state.userId);
-      }
-    });
+    this.getUserInfo();
   },
   components: {
     Menu,
@@ -39,6 +30,20 @@ export default {
     // vsnside,
     // Vsncontent,
   },
+  methods : {
+    getUserInfo() {
+      axios.get("/api/auth/loginCheck").then((result) => {
+      if (result.data != "") {
+        console.log(result.data);
+        this.$store.commit("userLogin", {
+          nickname: result.data.USER_NICKNAME,
+          id: result.data.USER_ID,
+        });
+        console.log(this.$store.state.userId);
+      }
+      });
+    }
+  }
 };
 </script>
 
@@ -51,9 +56,11 @@ body{
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
 ::-webkit-scrollbar{
   display: none;
 }
+
 .vsnmenu {
   width: 140px;
   position:fixed;

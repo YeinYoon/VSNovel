@@ -55,7 +55,9 @@
   height: 125px;
   border-radius: 25px;
   background: #2a2a2a;
-  animation-duration: 0.7s;
+  /* 재생시간 */
+  animation-duration: 0.7s;  
+  /* 이름 */
   animation-name: opening;
   z-index: 98;
   opacity: 1;

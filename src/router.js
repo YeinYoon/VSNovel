@@ -91,7 +91,7 @@ const routes = [
     props:true,
     children:[
       {path : 'villagemain', name:'VillageMain', component : VillageMain},
-      {path : 'register', name:'Register', component : Register}
+      {path : 'register/:id', name:'Register', component : Register, props: true}
     ]
   },
   {

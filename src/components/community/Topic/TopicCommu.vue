@@ -29,8 +29,11 @@
         <img class="commu_thumb" :src="`${a.titleImg}`" @error="replaceimg"/>
         <div class="commu_back">
           <div class="commu_back_title">{{ a.title }}</div>
+          <span v-if="step=='리뷰 & 추천'" class="commu_str">★★★★★
+            <span class="commu_str_draw" :style="{width : a.str*20 + '%'}">★★★★★</span>
+          </span>
           <div class="commu_back_info">
-            {{ a.writer }} | {{ a.date }} | {{ a.like }} | {{ a.coment }}
+            {{ a.writer }} | {{ a.date }} | {{ a.likes }} | {{ a.coment }}
           </div>
         </div>
       </div>
@@ -55,7 +58,8 @@ export default {
      Modal,
   },
   props : {
-    datasend:Object
+    datasend:Object,
+    step: String
   },
   created(){
     this.getcommulist();
@@ -65,21 +69,21 @@ export default {
       //step의 길이가 3일때, 글쓰기 저장
       if(Object.keys(step).length == 3) {
         if(step.manage == false) {
-          const eventBtn = {type:'first', item:step.item};
+          const eventBtn = {type:'first', item:step.item , index:step.index};
           this.$emit('btnEvent', eventBtn)
         }else {
           //모달창 인덱스정보와 내용 받아내기
           this.open = true;
           this.modaldata = step.item;
           this.indexdata = step.index;
-          console.log(this.indexdata);
+          //console.log(this.indexdata);
         }
       }
       //step의 길이가 2일때, 모달창으로 글쓰기 삭제
       else if(Object.keys(step).length == 2) {
         if(step.type == 'modal'){
           const modal = {type: 'deletepost' , index:step.indexdata}
-          console.log(modal);
+          //console.log(modal);
           this.$emit('btnEvent', modal)
         }
       }
@@ -124,7 +128,7 @@ export default {
   font-size: 0.9em;
   width: 100px;
   height: 30px;
-  background: rgb(255, 71, 71);
+  background: #ff4c4c;
   border-radius: 14px;
   display: table;
   margin-left: 20px;
@@ -197,6 +201,13 @@ export default {
   float: left;
   left: 90px;
 }
+.commu_str {
+  position:absolute;
+  float:right;
+  right: 10px;
+  top:10px;
+  font-size: 1.5em;
+}
 .commu_back_info {
   position: absolute;
   float: right;
@@ -204,4 +215,13 @@ export default {
   top: 50px;
   right: 10px;
 }
+.commu_str_draw {
+  position: absolute;
+  color: #2872f9;
+  left: 0;
+  overflow: hidden;
+  font-size : 1.0em;
+  -webkit-text-stroke-width:1.2px;
+  -webkit-text-stork-color:#2872f9
+  }
 </style>

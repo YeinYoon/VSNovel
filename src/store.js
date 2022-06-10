@@ -15,8 +15,6 @@ const store = createStore({
             gModalSize : "",
             gModalBg : "",
 
-            //스토어 관련
-            novelList : [],
 
         }
     },
@@ -57,6 +55,7 @@ const store = createStore({
         setNovelList(state, data) {
             state.novelList = data;
         },
+
     },
 })
 

@@ -19,28 +19,62 @@
             <img class="icon" src="@/assets/icons/white/megaphone.png" alt="community">
             <span class="title" @click="adminEvent">공지사항</span>
             <span class="topic">TOPIC · {{myStep}}</span>
-            <div class="noticeMain_btn_area">
+            <!-- <div class="noticeMain_btn_area">
                 <button class="btn_red" v-if="admin">관리</button>
                 <button class="btn_blue" v-if="admin" @click="noticeStep++">글쓰기</button>
-            </div>
+            </div> -->
         </div>
     </header>  
+    
+    <div class="team_box">
+    <!-- 관리 글쓰기 부분 -->
+    <div class="noticeMain_btn_area">
+        <div class="noticeMain_btn_red">
+            <span @click="admin=true" v-if="admin==false">관리자 시점</span>
+            <span @click="admin=false" v-if="admin==true">관리</span>
+        </div>
+        <div class="noticeMain_btn_blue" v-if="admin==false" @click="noticeStep += 1"><span>글쓰기</span></div>
+     </div>
+    
+    <!-- 공지사항 본문 -->
     <section class="notice_section">
-        <div class="strong_notice_post"> 
+        <div class="strong_notice_post">
+            <!-- 공지사항 강조 부분 -->
             <div v-for="(notice, i) in noticeData" :key="i">
-                <div class="notice_line" v-if="noticeNum == i"></div>
-                <div class="strong_notice" @click="noticeEvent(notice, i)">
-                <img class="strong_notice_mark" v-if="notice.emphasis == 0" src="@/assets/icons/white/star.png">
-                    <div class="back_title">{{notice.title}}</div>      <!-- 제목 -->
-                    <div class="back_content">{{notice.content}}</div>  <!-- 내용 -->
-                    <div class="back_date">{{notice.date}}</div>        <!-- 날짜 -->
+                <div v-if="noticeData[i].emphasis == 1" @click="noticeEvent(notice, i)">
+                    <div class="strong_notice">
+                    <div class="strong_notice_mark"><img src="@/assets/icons/white/star.png" class="mark_star_image"></div>
+                        <div class="notice_back_title"><span>{{notice.title}}</span></div>             <!-- 제목 -->
+                        <div class="notice_back_content"><span v-html="notice.content"></span></div>   <!-- 내용 -->
+                        <div class="notice_back_date"><span>{{notice.date}}</span></div>               <!-- 날짜 -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- 강조 줄 -->
+            <div v-if="noticeNum > 0" class="notice_line"></div>
+
+            
+            
+            
+
+            <!-- 공지사항 강조 아님 부분 -->
+            <div v-for="(notice, i) in noticeData" :key="i">
+                <div v-if="noticeData[i].emphasis == 0">
+                    <div class="strong_notice" @click="noticeEvent(notice, i)">
+                        <div class="notice_back_title"><span>{{notice.title}}</span></div>            <!-- 제목 -->
+                        <div class="notice_back_content"><span v-html="notice.content"></span></div>  <!-- 내용 -->
+                        <div class="notice_back_date"><span>{{notice.date.substring(0,10)}}</span></div>              <!-- 날짜 -->
+                    </div>
                 </div>
             </div>
         </div>
+        
     </section>
+    </div>
   </div>
     <div v-if="noticeStep == 1">
-        <NoticeWrite :writeModify="writeModify" :noticeData="clickNotice" @write_cancle="noticeBtnEvent($event)" @arrUp="writePushEvent($event)"/>
+        <NoticeWrite :writeModify="writeModify" :noticeData="clickNotice" @writebtn="noticeBtnEvent($event)"/>
     </div>
     <div v-if="noticeStep == 2">
         <NoticeRead :admin="admin" :noticeData="clickNotice" @btnEvent="noticeBtnEvent($event)"/>
@@ -78,12 +112,13 @@ export default {
     id[this.clickNum].style.backgroundColor = "#2872f9";
     // 공지사항 화면 부분 
         // 공지사항 강조 순으로 정렬
-        this.noticeData.sort(function (a, b) {
-            return a.emphasis - b.emphasis;
-        });
-        // 강조 갯수 세기
+        // this.noticeData.sort(function (a, b) {
+        //     return a.emphasis - b.emphasis;
+        // });
+        //강조 갯수 세기
         for(let i = 0; i < this.noticeData.length; i++){
-            if(this.noticeData[i].emphasis == 0) this.noticeNum++;
+        if(this.noticeData[i].emphasis == 1) this.noticeNum ++;
+        console.log(this.noticeNum);
         }
   },
     created(){
@@ -109,10 +144,10 @@ export default {
       this.clickNum = index;
     },
     // 공지사항 메인 함수
-        adminEvent(){
-            if(this.admin) this.admin = false;
-            else this.admin = true;
-        },
+        // adminEvent(){
+        //     if(this.admin) this.admin = false;
+        //     else this.admin = true;
+        // },
         noticeEvent(data, i){
         //글보기 화면 이동
             this.noticeStep = 2;
@@ -123,71 +158,106 @@ export default {
         noticeBtnEvent(event){
         // 글 목록 화면 이동
             //강조 발행일 때
-            if(event == 'updata')
-                this.clickNotice.emphasis = 0;
-            //강조 취소일 때
-            else if(event == 'notice_cancle') 
+            if(event == 'updata'){
                 this.clickNotice.emphasis = 1;
+                this.noticeStep = 0;
+            }
+            //강조 취소일 때
+            else if(event == 'notice_cancle'){
+                this.clickNotice.emphasis = 0;
+                this.noticeStep = 0;
+            }
             //삭제일 때
-            else if(event == 'delete') 
+            else if(event == 'delete'){
                 this.noticeData.splice(this.clickNoticeNum, 1);
+                this.noticeStep = 0;
+            }
             //수정일 때
             else if(event == 'modify') {
                 this.noticeStep = 1;
                 this.writeModify = true;
-                return
-            }
+            }else if(event == 'cancle'){
             //아닐 때
             this.writeModify = false;
             this.noticeStep = 0;
+            }else if(event.type == 'arrUp'){
+                if(this.writeModify == false){
+                    this.noticeData.push(event.content);
+                    this.noticeStep = 0; 
+                }else {
+                    this.noticeData.splice(this.clickNoticeNum,1,event.content);
+                    this.noticeStep = 0;
+                }
+                
+            }
+            
         },
-        writePushEvent(data){
-            this.noticeData.push(data);
-            // console.log(this.noticeData);
-            this.noticeStep = 0;
-        }
+        // writePushEvent(data){
+        //     this.noticeData.push(data);
+        //     // console.log(this.noticeData);
+        //     this.noticeStep = 0;
+        // }
   }
 };
 </script>
 
 <style>
 .notice_section{
-    width: 95%;
+    position:relative;
+    top:10%;
+    width: 100%;
+    height: 87%;
+    margin: 0 auto;
+    overflow-y:scroll;
+    -ms-overflow-style:none;
+    /* width: 100%;
     height: 70%;
     margin: 0 auto;
     position: relative;
-    top: 70px;
+    top: 60px;
     overflow-y: scroll;
-    -ms-overflow-style: none;
+    -ms-overflow-style: none; */
 }
 .noticeMain_btn_area {
-    /* float:right; */
-    position: fixed;
-    top:150px;
-    right: 30px;
+    display:flex;
+    justify-content: flex-end;
 }
-.btn_blue, .btn_red {
-    font-weight: 500;
-    position: relative;
-    bottom: 35px;
+.noticeMain_btn_red {
+    top:20px;
+    position:relative;
+    cursor: pointer;
+    font-size: 0.9em;
     width: 100px;
     height: 30px;
-    background-color:#2872f9;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    font-size: 14px;
-    border-radius: 12px;
-    cursor: pointer;
-    margin-left:15px;
+    background: #ff4c4c;
+    border-radius: 14px;
+    display: table;
+    margin-left: 20px;
 }
-.btn_blue:hover, .btn_red:hover {opacity:0.8;}
+.noticeMain_btn_blue {
+    top:20px;
+    position:relative;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin-left: 20px;
+    width: 100px;
+    height: 30px;
+    background: #2872f9;
+    border-radius: 14px;
+    display:table;
+}
+.noticeMain_btn_red span, .noticeMain_btn_blue span {
+    display: table-cell;
+    vertical-align:middle;
+    text-align:center;
+    color:white;
+}
 
 .strong_notice_post {
-    cursor: pointer;
+    /* cursor: pointer; */
     position: relative;
     width: 90%;
-    height: 130px;
+    height: 120px;
     margin-top:10px;
     margin: 20px auto;
 }
@@ -198,7 +268,7 @@ export default {
     background-color:#2872f9;
     position: relative;
     top: -20px;
-    left: 95%;
+    left: 96%;
     z-index: 12;
 }
 
@@ -215,7 +285,7 @@ export default {
     display: block;
     position: relative;
     width: 100%; 
-    height: 100px;
+    height: 80px;
     background-color: #262626;
     border-radius: 12px;
     color:white;
@@ -223,61 +293,65 @@ export default {
 }
 .strong_notice:hover{opacity:0.8};
 
-.strong_line{
+/*.strong_line{
     display:flex;
     background-color: #ddd;
     height: 20px;
     border-radius:10px;
     width: 101%;
-}
+}*/
 .back {
+    /*display:flex;*/
     cursor: pointer;
-    display: block;
     position: absolute;
     width: 100%; 
-    height: 100px;
+    /*height: 100px;*/
     background-color: #262626;
     border-radius: 12px;
     color:white;
     z-index: 11;
     top: 30px;
 }
-.back_title {
+.notice_back_title {
     position:absolute;
     font-size: 20px;
     top: 10px;
     float:left;
     left: 20px;
 }
-.back_content {
+.notice_back_content {
     position:absolute;
     font-size:19px;
     width:98%;
-    height: 100px;
+    /*height: 100px;*/
     text-overflow:ellipsis;
     white-space:nowrap;
     overflow:hidden;
     top: 40px;
     left: 20px;
 }
-.back_info {
+.notice_back_info {
     position: absolute;
     float:right;
     font-size: 17px;
     top: 70px;
     right: 10px; 
 }
-.back_date{
+.notice_back_date{
     position: absolute;
+    float:right;
     top: 75%;
-    left: 600px;
+    right:10px;
+    top:50px;
+    /*left: 89%;*/
     z-index: 12;
 }
 .notice_line{
     margin: 5px auto;
     width: 100%;
-    height: 3px;
+    height: 5px;
     border-radius: 5px;
+    background-color:#262626;
     border: 2px solid #262626;
 }
 </style>

@@ -19,13 +19,13 @@
       <!-- 2행 카드번호 입력 -->
       <div class="card-container2">
         <div class="card-num-name">카드번호</div>
-        <input class="card-input" type="text" maxlength="4" v-model="newCard"/>
+        <input class="card-input" type="text" maxlength="4"/>
           <span class="hyphen">-</span>
-        <input class="card-input" type="text" maxlength="4" v-model="newCard"/>
+        <input class="card-input" type="text" maxlength="4"/>
           <span class="hyphen">-</span>
-        <input class="card-input" type="text" maxlength="4" v-model="newCard"/>
+        <input class="card-input" type="text" maxlength="4"/>
           <span class="hyphen">-</span>
-        <input class="card-input" type="text" maxlength="4" v-model="newCard"/>
+        <input class="card-input" type="text" maxlength="4"/>
         <div class="card-num-info">16자리 숫자만 입력</div>
       </div>
 
@@ -39,8 +39,9 @@
 
     <!-- 취소,저장버튼 -->
     <footer class="card-footer">
-      <button id="mypage_card-canc">취소</button>
-      <button id="mypage_card-save" @click="routerPush(newCard)">저장</button>
+      <div id="mypage_card-canc">취소</div>
+      <!-- <div id="mypage_card-save" @click="cardnum('/')">저장</div> -->
+      <div id="mypage_card-save" @click="cardnum">저장</div>
     </footer>
 
   </div>
@@ -49,48 +50,13 @@
 </template>
 
 <script>
-import axios from '../../axios';
 export default {
-  created() {
-    this.getRegister()
-  },
-  name: "MyCard",
-  data() {
-    return {
-      myUser : "",
-      newCard :""
-    }
-  },
   methods:{
-    routerPush(newCard){
-      this.newCard = newCard;
-      this.postRegister();
-    },
-    postRegister() {
-      var newInfo = {
-        newCard : this.newCard
-      }
-      axios.post('/api/mypage/mycard', newInfo)
-      .then((result) => {
-        if(result.data.length != 0) {
-          console.log(result)
-        }
-      }).catch((err) => {
-        console.log(err);
-      });
-    },
-    getRegister() {
-      axios.get('/api/mypage/mycard')
-      .then((result) => {
-        if(result.data == 'err') {
-          console.log('카드 정보 불러오기 실패')
-        } else {
-          this.newCard = result.data.rows[0].USER_CARDNUM
-        }
-      })
+    // cardnum(link){
+    //   this.$router.push(link);
+    // },
     }
   }
-}
 </script>
 
 <style>
@@ -104,7 +70,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 /* 제목,부제목을 제외한 전체적인 위치 */
 .card-position-container{
-  width: 95%;
+  width: 800px;
   height: 450px;
   position: relative;
   top: 15%;
@@ -120,7 +86,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 /* 2행(카드번호 입력부분) 전체정렬 */
 .card-container2{
-  transform: translateX(5%);
+  transform: translateX(3%);
   display: flex;
 }
 
@@ -225,6 +191,9 @@ input[type="number"]::-webkit-inner-spin-button {
   font-size: 15px;
   margin-top:15px;
   cursor: pointer;
+}
+#mypage_card-save:hover{
+  background: #0084ff;
 }
 
 </style>

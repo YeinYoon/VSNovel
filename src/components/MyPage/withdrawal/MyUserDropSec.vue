@@ -122,4 +122,7 @@ export default {
   cursor: pointer;
   margin-left: 40%;
 }
+#mypage_exit-pass:hover{
+  background: #f83636;
+}
 </style>

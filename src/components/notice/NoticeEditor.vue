@@ -94,12 +94,12 @@ export default {
 <style>
 .editor{
   width: 100%;
-  height: 98%;
+  height: 99.8%;
 }
 .ql-toolbar.ql-snow {
-  background-color: antiquewhite;
+  background-color: #ffffff;
   width: 100%;
-  border-radius: 10px;
+  border-radius: 18px;
   border: none;
 }
 .ql-container.ql-snow {
