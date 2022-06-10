@@ -7,6 +7,7 @@ export default[
         date : '2011년 10월',
         likes    : 5,
         coment  : 0,
+        str : 1.5
     },
     {
         title:'짱구 비주얼노벨',
@@ -16,6 +17,7 @@ export default[
         date : '2023년 11월',
         likes    : 6,
         coment  : 0,
+        str : 0
     },
     {
         title:'역전재판',
@@ -25,6 +27,7 @@ export default[
         date : '2019년 7월',
         likes    : 7,
         coment  : 0,
+        str : 0
     },
     
 ]
