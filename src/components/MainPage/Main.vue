@@ -302,7 +302,7 @@ button {
   height: 300px;
   padding: 5px 10px;
   border-radius: 20px;
-  margin: 20px 0;
+  margin: 30px 0 0 0;
 }
 .notice,
 .community {
@@ -395,7 +395,7 @@ button {
   background-color: #494949;
   padding: 5px 10px 0 10px;
   border-radius: 20px;
-  overflow-y: scroll;
+  /* overflow-y: scroll; */
 }
 .store ::-webkit-scrollbar {
   display: block;

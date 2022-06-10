@@ -7,11 +7,19 @@
     </div>
     <div>
       <div class="group"><span>· 컨텐츠 분류</span></div>
-      <div class="fiction" id="fiction" @click="groupEvent('novel', $event, 'W')">
-        · 웹소설
-      </div>
-      <div class="novel" id="novel" @click="groupEvent('fiction', $event, 'V')">
-        · 비주얼 노벨
+      <div class="novel_div">
+        <div class="novel" id="novel" @click="novelEvent($event, 'novel')">
+          기본
+        </div>
+        <div class="newNovel" id="newNovel" @click="novelEvent($event, 'newNovel')">
+          신작
+        </div>
+        <div class="payNovel" id="payNovel" @click="novelEvent($event, 'payNovel')">
+          구매↑
+        </div>
+        <div class="starNovel" id="starNovel" @click="novelEvent($event, 'starNovel')">
+          리뷰↑
+        </div>
       </div>
     </div>
     <div class="side_genre_group">
@@ -25,7 +33,7 @@
       </div>
     </div>
   </div>
-  <Store />
+  <Store :storeDatas = "storeDatas"/>
 </div>
 </template>
 
@@ -42,31 +50,31 @@ export default {
     this.getNovelList();
     this.$router.push('/store');
   },
+  mounted(){
+    let id = document.getElementById('novel');
+    id.style.backgroundColor = "#2872f9";
+  },
   data() {
     return {
-      groupStep: "",
       categoryList : [],
       hiddenData: false,
       genreNum: 0,
+      clickNovel : 'novel',
 
-      novelType : "",
+      storeDatas : [],
       cateCode : ""
     };
   },
   methods: {
-    groupEvent(step, event, type) {
+    novelEvent(event, className) {
       // 사이드바 강조효과
-      let id = document.getElementById(step);
-      if (this.groupStep == "") {
-        event.target.style.backgroundColor = "#2872f9";
-        this.groupStep = step;
-      } else {
-        event.target.style.backgroundColor = "#2872f9";
-        id.style.backgroundColor = "#2c2c2c";
+      let id = document.getElementById(this.clickNovel);
+      if (className != this.clickNovel) {
+        id.style.animationName = "defaultAnimation"; // 기본
       }
-      this.novelType = type;
-      console.log(this.novelType);
-      this.getNovelList();
+        event.target.style.animationName = "newAnimation"; // 바뀌는 것
+        this.clickNovel = className;
+        
     },
     hidden() {
     // 장르 열고 닫기
@@ -75,11 +83,10 @@ export default {
     },
     categoryEvent(num, event, cateCode) {
     // 장르 강조효과
-    
-      let id = Array.from(document.querySelectorAll(".select_btn"));
-
-      event.target.style.color = "black";
-      id[this.genreNum].style.color = "gray";
+      let id = document.querySelectorAll(".select_btn");
+      id[this.genreNum].style.color = 'gray';
+      id[this.genreNum].style.animationName = 'null';
+      event.target.style.animationName = 'clickBtn';
       this.genreNum = num;
       this.cateCode = cateCode;
       this.getNovelList();
@@ -87,16 +94,12 @@ export default {
 
     //노벨 리스트 조회
     getNovelList() {
-      var searchData = {
-        novelType : this.novelType,
-        cateCode : this.cateCode
-      }
-      axios.post('/api/store/getNovelList', searchData)
+      axios.post('/api/store/getNovelList', {cateCode : this.cateCode})
       .then((result)=>{
         if(result.data == "err") {
           console.log("스토어 데이터 불러오기 실패");
         } else {
-          this.$store.commit('setNovelList', result.data);
+          this.storeDatas = result.data;
         }
       })
     },
@@ -119,10 +122,6 @@ export default {
 
 <style>
 /* -------------------------------------------------------------------- */
-
-::-webkit-scrollbar {
-  display: none;
-}
 
 .side_search {
   background-color: white;
@@ -156,27 +155,49 @@ export default {
   border-radius: 30px;
   font-weight: 700;
   display: table;
-  margin: 20px 0 0 30px;
+  margin: 20px 0 10px 30px;
 }
 .group span {
   display: table-cell;
   vertical-align: middle;
 }
-.novel,
-.fiction {
-  width: 73%;
-  height: 40px;
+.novel_div{
+  margin: 0 auto;
+  display: grid;
+  width: 80%;
+  background-color: #494949;
+  border-radius: 15px;
+  overflow: hidden;
+}
+.novel{
+  grid-column: 1;
+  grid-row: 1;
+}
+.newNovel{
+  grid-column: 2;
+  grid-row: 1;
+}
+.payNovel{
+  grid-column: 1;
+  grid-row: 2;
+}
+.starNovel{
+  grid-column: 2;
+  grid-row: 2;
+}
+.newNovel, .novel, .payNovel, .starNovel  {
   color: white;
-  padding: 5px 10px 5px 20px;
-  text-align: left;
-  margin: 10px 0 0 50px;
-  border-radius: 30px;
+  padding: 5px 0;
+  text-align: center;
   font-weight: 700;
   cursor: pointer;
+  width: 100%;
+  animation-fill-mode: forwards;
+  animation-duration: 0.5s;
 }
 .side_genre_group {
   width: 80%;
-  margin: 20px 0 0 30px;
+  margin: 10px 0 0 30px;
   font-weight: 700;
 }
 .side_genre {
@@ -207,5 +228,34 @@ export default {
   font-weight: 700;
   color: #8a8a8a;
   cursor: pointer;
+  animation-fill-mode: forwards;
+  animation-duration: 0.5s;
+}
+@keyframes clickBtn {
+  0%{
+    opacity: 0.7;
+  }
+  100%{
+    opacity: 1;
+    color: black;
+    font-weight: 800;
+  }
+}
+@keyframes defaultAnimation {
+  /* 되돌리는 것 */
+  0%{
+  }
+  100%{
+    background-color: #494949;
+  }
+}
+@keyframes newAnimation {
+  /* 클릭한 것 */
+  0%{
+    background-color: #494949;
+  }
+  100%{
+    background-color : #2872f9;
+  }
 }
 </style>

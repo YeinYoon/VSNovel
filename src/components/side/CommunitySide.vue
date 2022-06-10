@@ -19,14 +19,14 @@
       <div>
         <div class="group"><span>· Village</span></div>
           <div
-            @click="clickVillageEvent(0, $event, 'Village Main')"
+            @click="clickVillageEvent(0, $event, null)"
             id="villageElement"
           >
           · Village Main
           </div>
         <div v-for="(array, i) in sideCafe" :key="i">
           <div
-            @click="clickVillageEvent(i+1, $event, array.VILL_NAME)"
+            @click="clickVillageEvent(i+1, $event, array.VILL_CODE)"
             id="villageElement"
           >
           · {{ array.VILL_NAME }}
@@ -98,7 +98,26 @@ export default {
     TopicWrite,
   },
   mounted() {
+    if(this.$route.params.step != null){
+      console.log(this.$route.params);      
+      this.step = this.$route.params.step; // 부제목 변수 지정
+      this.topicData = this.$route.params.topicNum; // 수정 페이지 이동
+      this.clickNum = 3;  // 사이드바 강조 효과 
+    }
     // 기본 강조 효과
+    if(this.$route.params.topicNum == 2){
+      console.log(this.$route.params);
+      this.step = this.$route.params.step; // 부제목 변수 변경
+      this.topicData = this.$route.params.topicNum; // 수정 페이지 이동
+      this.clickNum = 3; // 사이드바 강조효과
+    }
+    if(this.$route.params.topicNum == 1){
+      console.log(this.$route.params);
+      this.step = this.$route.params.step; // 부제목 변수 변경
+      this.topicData = this.$route.params.topicNum; // 수정 페이지 이동
+      this.clickNum = 0; // 사이드바 강조효과
+    }
+
     this.clickId = document.querySelectorAll("#communityElement");
     this.clickId[this.clickNum].style.backgroundColor = "#2872f9";
 
@@ -122,11 +141,13 @@ export default {
       this.clickId[3].style.backgroundColor = "#2872f9";
       this.clickId[0].style.backgroundColor = "#2c2c2c";
     }
+    this.$router.push('/community');
     this.resVillageList();
   },
   methods: {
     // 가입한 카페 리스트
-    resVillageList() {
+    async resVillageList() {
+      await this.getUserInfo();
       axios
         .post("/api/village/resVillageList", { id: this.$store.state.userId })
         .then((result) => {
@@ -238,7 +259,7 @@ export default {
       }
     },
     // ----------------------------------------------------------------------
-    clickVillageEvent(index, event, title) {
+    clickVillageEvent(index, event, code) {
       if(this.clickId[this.clickNum].id == 'communityElement'){
         this.clickId[this.clickNum].style.backgroundColor = "#2c2c2c";
       }
@@ -251,12 +272,24 @@ export default {
 
       this.clickNum = index;
       // 메인 화면 이동 함수
-      if (title == "Village Main") {
+      if (code == null) {
         this.$router.push("/community/villagemain");
       }else {
-        this.$router.push({ name: "Register", params:{ id: title }});
+        this.$router.push(`/community/register/${code}`);
       }
     },
+    async getUserInfo() {
+      await axios.get("/api/auth/loginCheck").then((result) => {
+      if (result.data != "") {
+        console.log(result.data);
+        this.$store.commit("userLogin", {
+          nickname: result.data.USER_NICKNAME,
+          id: result.data.USER_ID,
+        });
+        console.log(this.$store.state.userId);
+      }
+      });
+    }
   },
 };
 </script>

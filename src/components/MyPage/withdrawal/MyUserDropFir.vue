@@ -56,4 +56,7 @@ export default {
   text-align: center;
   line-height: 42px;
 }
+#mypage_exit-pass-btn:hover{
+  background: #f83636;
+}
 </style>

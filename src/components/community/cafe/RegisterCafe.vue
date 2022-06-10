@@ -6,9 +6,55 @@
         <img class="icon" src="@/assets/icons/white/leaf.png" alt="logo" />
         <span class="title">{{registerData.VILL_NAME}}</span>
       </div>
+      <div class="register_user_info_cont">
+        <span class="register_user_name">지존정인님 환영합니다.</span>
+        <div class="register_user_btn_cont">
+          <div class="register_user_btn_pos">카페관리</div>
+          <div class="register_user_btn_pos" @click="postmanage">게시글 관리</div>
+          <div class="register_user_btn_pos">회원관리</div>
+          <span style="position:absolute;cursor:pointer; top:40px; right:20px;">탈퇴</span>
+        </div>
+      </div>
     </div>
-    <div class="register_cafe_section">
-      <img class="register_img" :src="`${registerData.VILL_PRO_IMG}`" />
+    
+    <img class="register_img" :src="`${registerData.VILL_PRO_IMG}`" />
+    <div class="register_cafe_container">
+      <div class="register_cafe_board_container">
+        <div class="register_cafe_board">줄거리</div>
+        <div class="register_cafe_board">줄거리</div>
+        <div class="register_cafe_board">줄거리</div>
+        <div class="register_cafe_board">줄거리</div>
+        <div class="register_cafe_board">줄거리</div>
+        <div class="register_cafe_board">줄거리</div>
+        <div class="register_cafe_board">줄거리</div>
+        <div class="register_cafe_board">줄거리</div>
+        <div class="register_cafe_board">줄거리</div>
+        <div class="register_cafe_board">줄거리</div>
+        <div class="register_cafe_board">줄거리</div>
+        <div class="register_cafe_board">줄거리</div>
+      </div>
+      
+      <div class="register_cafe_list_container">
+        <!-- <div class="vil_post_section"> -->
+          <div class="post_line">
+            <div class="post_place">작성위치</div>
+            <div class="post_title">제목</div>
+            <div class="post_like">추천수</div>
+            <div class="post_comment">댓글수</div>
+            <div class="post_clicks">조회수</div>
+          </div>
+          <hr class="lines" />
+          <div class="post_line" v-for="(post, i) in post" :key="i">
+            <div class="post_place">{{ post.position }}</div>
+            <div class="post_title" style="cursor:pointer">{{ post.title }}</div>
+            <div class="post_like">{{ post.likes }}</div>
+            <div class="post_comment">{{ post.coment }}</div>
+            <div class="post_clicks">{{ post.look }}</div>
+          </div>
+        <!-- </div> -->
+      </div>
+    </div>
+    <!-- <div class="register_cafe_section">
         <div class="register_content">
           <div class="info_list">
             <div class="resigster_title">
@@ -83,7 +129,7 @@
             </div>
           </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 
@@ -92,8 +138,9 @@ import commuData from "@/assets/DataJs/commuData.js";
 import notice from "@/assets/DataJs/notice.js";
 import axios from '../../../axios.js';
 import board from "@/assets/DataJs/board.js";
+import post from "@/assets/DataJs/post.js";
 export default {
-  name: "RegisterCafe",
+  name: "Register",
   data() {
     return {
       commuData: commuData,
@@ -101,16 +148,21 @@ export default {
       registerData : {},
       paramsTitle : this.$route.params.id,
       boardData: board,
+      post:post
     };
   },
   mounted(){
     this.infoVillageList();
-    console.log(this.paramsTitle);
+  },
+  watch:{
+    $route(){
+      this.infoVillageList();
+    }
   },
   methods:{
     // 가입한 카페 정보
     infoVillageList() {
-      axios.post('/api/village/infoVillageList', { name : this.paramsTitle })
+      axios.post('/api/village/infoVillageList', { code : this.$route.fullPath.split('/')[3] })
       .then((result)=>{
         if(result.data == "err") {
           console.log("가입한 카페 정보 불러오기 실패");
@@ -118,12 +170,124 @@ export default {
           this.registerData = result.data[0];
         }
       })
+    },
+    postmanage(){
+      this.$router.push({name:'MyPage'});
     }
   }
 };
 </script>
 
+
 <style>
+.register_cafe_list_container .post_line {
+  text-align: center;
+  display: flex;
+  height: 30px;
+  margin-bottom: 5px;
+}
+.register_cafe_list_container .post_place,
+.register_cafe_list_container .post_like,
+.register_cafe_list_container .post_comment,
+.register_cafe_list_container .post_clicks {
+  width: 15%;
+}
+.register_cafe_list_container .post_title {
+  width: 40%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.register_cafe_list_container{
+  position: relative;
+  top: 20px;
+  padding-bottom: 20px;
+  padding-top: 10px;
+  width: 95%;
+  height: 85%;
+  margin-bottom: 30px;
+  border-radius: 20px;
+  background: #5D5D5D;
+  margin: 0 auto;
+  color: white;
+  overflow: auto;
+}
+.register_cafe_board_container{
+  display: flex;
+  width: 95%;
+  height: 75px;
+  white-space: nowrap;
+  overflow-x: auto;
+  padding-bottom: 20px;
+  margin: 0 auto;
+}
+
+.register_cafe_board_container::-webkit-scrollbar {
+  display: block;
+  height: 10px;
+  background: none;
+}
+
+.register_cafe_board_container::-webkit-scrollbar-thumb {
+  background: #353535;
+  border-radius: 25px;
+}
+
+.register_cafe_board{
+  position: relative;
+  top: 15px;
+  /* left: 20px; */
+  width: 120px;
+  height: 35px;
+  border-radius: 20px;
+  text-align: center;
+  color: white;
+  background: #6A6A6A;
+  cursor: pointer;
+  margin-right: 10px;
+  padding: 5px 30px 0px 30px;
+}
+
+.register_cafe_container{
+  position: relative;
+  top: 12%;
+  width: 100%;
+  height: 80%;
+  background: #454545;
+  border-radius: 20px;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+.register_user_name{
+  position: absolute;
+  top: 10px;
+  left: 10px;
+}
+.register_user_btn_cont{
+  display: flex;
+  top: 40px;
+}
+.register_user_btn_pos{
+  position: relative;
+  top: 38px;
+  left: 10px;
+  margin-right: 10px;
+  width: 60px;
+  font-size: 0.8em;
+  text-align: center;
+  cursor: pointer;
+  background: #5D5D5D;
+  border-radius: 20px;
+}
+.register_user_info_cont{
+  position: absolute;
+  right: 75px;
+  width: 300px;
+  height: 70px;
+  background: #6A6A6A;
+  border-radius: 20px;
+  color: white;
+}
 .register_cafe_section {
   margin: 0 auto;
   padding: 5px;
@@ -135,9 +299,12 @@ export default {
   top: 7%;
 }
 .register_img {
+  position: relative;
   width: 100%;
   height: 150px;
+  top: 40px;
   border-radius: 20px;
+  /* left: -40px; */
 }
 .register_content{
     display: flex;
@@ -192,7 +359,7 @@ export default {
   width: 100%;
 }
 
-.post_list{
+.vil_post_list{
     flex: 7;
 }
 .register_notice_box, .register_community_box{

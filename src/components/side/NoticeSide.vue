@@ -40,30 +40,32 @@
     <section class="notice_section">
         <div class="strong_notice_post">
             <!-- 공지사항 강조 부분 -->
-            <div>
-                <div v-for="(emphasisnotice, i) in emphasisData" :key="i">
-                    <!-- <div class="notice_line" v-if="noticeNum == i"></div> -->
+            <div v-for="(notice, i) in noticeData" :key="i">
+                <div v-if="noticeData[i].emphasis == 1" @click="noticeEvent(notice, i)">
                     <div class="strong_notice">
                     <div class="strong_notice_mark"><img src="@/assets/icons/white/star.png" class="mark_star_image"></div>
-                        <div class="notice_back_title"><span>{{emphasisnotice.title}}</span></div>       <!-- 제목 -->
-                        <div class="notice_back_content"><span v-html="emphasisnotice.content"></span></div>   <!-- 내용 -->
-                        <div class="notice_back_date"><span>{{emphasisnotice.date}}</span></div>         <!-- 날짜 -->
+                        <div class="notice_back_title"><span>{{notice.title}}</span></div>             <!-- 제목 -->
+                        <div class="notice_back_content"><span v-html="notice.content"></span></div>   <!-- 내용 -->
+                        <div class="notice_back_date"><span>{{notice.date}}</span></div>               <!-- 날짜 -->
                     </div>
                 </div>
-
-                <div v-if="Object.keys(emphasisData).length > 0" class="notice_line"></div>
             </div>
 
+            <!-- 강조 줄 -->
+            <div v-if="noticeNum > 0" class="notice_line"></div>
+
+            
+            
             
 
             <!-- 공지사항 강조 아님 부분 -->
             <div v-for="(notice, i) in noticeData" :key="i">
-                <!-- <div class="notice_line" v-if="noticeNum == i"></div> -->
-                <div class="strong_notice" @click="noticeEvent(notice, i)">
-                <!-- <div class="strong_notice_mark" v-if="notice.emphasis == 0"><img src="@/assets/icons/white/star.png" class="mark_star_image"></div> -->
-                    <div class="notice_back_title"><span>{{notice.title}}</span></div>      <!-- 제목 -->
-                    <div class="notice_back_content"><span v-html="notice.content"></span></div>  <!-- 내용 -->
-                    <div class="notice_back_date"><span>{{notice.date}}</span></div>        <!-- 날짜 -->
+                <div v-if="noticeData[i].emphasis == 0">
+                    <div class="strong_notice" @click="noticeEvent(notice, i)">
+                        <div class="notice_back_title"><span>{{notice.title}}</span></div>            <!-- 제목 -->
+                        <div class="notice_back_content"><span v-html="notice.content"></span></div>  <!-- 내용 -->
+                        <div class="notice_back_date"><span>{{notice.date.substring(0,10)}}</span></div>              <!-- 날짜 -->
+                    </div>
                 </div>
             </div>
         </div>
@@ -72,7 +74,7 @@
     </div>
   </div>
     <div v-if="noticeStep == 1">
-        <NoticeWrite :writeModify="writeModify" :noticeData="clickNotice" @write_cancle="noticeBtnEvent($event)" @arrUp="writePushEvent($event)"/>
+        <NoticeWrite :writeModify="writeModify" :noticeData="clickNotice" @writebtn="noticeBtnEvent($event)"/>
     </div>
     <div v-if="noticeStep == 2">
         <NoticeRead :admin="admin" :noticeData="clickNotice" @btnEvent="noticeBtnEvent($event)"/>
@@ -98,7 +100,6 @@ export default {
             clickNotice : {},
             writeModify : false,
             admin : false,
-            emphasisData: {}
     };
   },
   components:{
@@ -114,10 +115,11 @@ export default {
         // this.noticeData.sort(function (a, b) {
         //     return a.emphasis - b.emphasis;
         // });
-        // 강조 갯수 세기
-        // for(let i = 0; i < this.noticeData.length; i++){
-        //     if(this.noticeData[i].emphasis == 0) this.noticeNum++;
-        // }
+        //강조 갯수 세기
+        for(let i = 0; i < this.noticeData.length; i++){
+        if(this.noticeData[i].emphasis == 1) this.noticeNum ++;
+        console.log(this.noticeNum);
+        }
   },
     created(){
         // console.log(this.$route)
@@ -156,29 +158,45 @@ export default {
         noticeBtnEvent(event){
         // 글 목록 화면 이동
             //강조 발행일 때
-            if(event == 'updata')
-                this.clickNotice.emphasis = 0;
-            //강조 취소일 때
-            else if(event == 'notice_cancle') 
+            if(event == 'updata'){
                 this.clickNotice.emphasis = 1;
+                this.noticeStep = 0;
+            }
+            //강조 취소일 때
+            else if(event == 'notice_cancle'){
+                this.clickNotice.emphasis = 0;
+                this.noticeStep = 0;
+            }
             //삭제일 때
-            else if(event == 'delete') 
+            else if(event == 'delete'){
                 this.noticeData.splice(this.clickNoticeNum, 1);
+                this.noticeStep = 0;
+            }
             //수정일 때
             else if(event == 'modify') {
                 this.noticeStep = 1;
                 this.writeModify = true;
-                return
-            }
+            }else if(event == 'cancle'){
             //아닐 때
             this.writeModify = false;
             this.noticeStep = 0;
+            }else if(event.type == 'arrUp'){
+                if(this.writeModify == false){
+                    this.noticeData.push(event.content);
+                    this.noticeStep = 0; 
+                }else {
+                    this.noticeData.splice(this.clickNoticeNum,1,event.content);
+                    this.noticeStep = 0;
+                }
+                
+            }
+            
         },
-        writePushEvent(data){
-            this.noticeData.push(data);
-            // console.log(this.noticeData);
-            this.noticeStep = 0;
-        }
+        // writePushEvent(data){
+        //     this.noticeData.push(data);
+        //     // console.log(this.noticeData);
+        //     this.noticeStep = 0;
+        // }
   }
 };
 </script>
@@ -236,7 +254,7 @@ export default {
 }
 
 .strong_notice_post {
-    cursor: pointer;
+    /* cursor: pointer; */
     position: relative;
     width: 90%;
     height: 120px;

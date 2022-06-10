@@ -89,6 +89,8 @@ div {
   border-radius: 20px;
   padding: 20px;
   box-shadow: 0 0 100px 50px black;
+  animation-duration: 0.7s;
+  animation-name: opening;
 }
 
 .con {
@@ -136,5 +138,18 @@ div {
   width: 100px;
   height: 40px;
   border-radius: 20px;
+}
+
+  /*열리는 애니메이션 opening*/
+@keyframes opening {
+  from {
+    top:150%;
+    opacity: 0;
+  }
+
+  to {
+    top:50%;
+    opacity: 1;
+  }
 }
 </style>

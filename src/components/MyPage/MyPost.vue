@@ -40,6 +40,9 @@ export default {
     }
   }, 
   methods: {
+    postMove(){
+      this.$router.push({name:'Community', params:{step:'자유',topicNum:1}})
+    },
     getPost() {
       console.log("getPost")
       axios.get('/api/mypage/getpost')
@@ -53,7 +56,7 @@ export default {
         }
       })
     }
-  }
+  },
 };
 </script>
 

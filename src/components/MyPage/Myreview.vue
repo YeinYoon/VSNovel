@@ -58,6 +58,9 @@ export default {
                   },
       }
       );
+    },
+    reviewEdit(){
+      this.$router.push({name: 'Community', params:{step : '리뷰 & 추천', topicNum : 2}});
     }
   }
 }
@@ -81,7 +84,7 @@ export default {
 .review_edit{
   width: 130px;
   height: 40px;
-  position: relative;
+  position: absolute;
   top: 105px;
   right: 10px;
   background: #2872F9;
@@ -90,5 +93,8 @@ export default {
   text-align: center;
   line-height: 42px;
   cursor: pointer;
+}
+.review_edit:hover{
+  background: #0084ff;
 }
 </style>

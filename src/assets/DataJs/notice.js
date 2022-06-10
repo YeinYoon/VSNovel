@@ -1,12 +1,12 @@
 export default[
     {
-        emphasis:0,
+        emphasis:1,
         title:'짱구',
         content:'오늘의 날씨는 ~~이고, 오늘은 몇 월 몇 일인가요',
         date : '2019-08-08'
     },
     {
-        emphasis:0,
+        emphasis:1,
         title:'코난',
         content:'오늘의 날씨는 ~~이고, 오늘은 몇 월 몇 일인가요',
         date : '2019-07-08'

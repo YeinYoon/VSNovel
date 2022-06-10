@@ -14,12 +14,12 @@
             <span class="charge">유료</span>
           </div>
           <div class="price" v-if="priceType == 1">
-            <div class="price_btn"></div>
+            <div class="price_btn_left"></div>
             <span class="charge">유료</span>
           </div>
           <div class="price" v-if="priceType == 2">
             <span class="free">무료</span>
-            <div class="price_btn"></div>
+            <div class="price_btn_right"></div>
           </div>
         </div>
       </div>
@@ -27,7 +27,7 @@
     <div class="store_section">
       <div
         class="work_list"
-        v-for="novel in $store.state.novelList"
+        v-for="novel in storeDatas"
         :key="novel.NOVE_CODE"
         @click="modalOpen(novel)"
       >
@@ -65,6 +65,9 @@ export default {
       modal: false,
       modalData : {},
     };
+  },
+  props:{
+    storeDatas : Array,
   },
   components: {
     StoreModal,
@@ -124,13 +127,56 @@ export default {
   height: 40px;
 }
 .price_btn {
-  flex: 1;
+  flex: 2;
   width: 40px;
   height: 40px;
   background-color: #2872f9;
   border-radius: 100px;
   top: 50%;
+  animation-name: price_btn;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
   /* transform : translateY(5%); */
+}
+.price_btn_left {
+  flex: 2;
+  width: 40px;
+  height: 40px;
+  background-color: #2872f9;
+  border-radius: 100px;
+  top: 50%;
+  animation-name: price_btn_left;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+  /* transform : translateY(5%); */
+}
+.price_btn_right {
+  flex: 2;
+  width: 40px;
+  height: 40px;
+  background-color: #2872f9;
+  border-radius: 100px;
+  top: 50%;
+  animation-name: price_btn_right;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
+  /* transform : translateY(5%); */
+}
+
+@keyframes price_btn{
+  100%{
+    flex: 1;
+  }
+}
+@keyframes price_btn_left{
+  100%{
+    flex: 1;
+  }
+}
+@keyframes price_btn_right{
+  100%{
+    flex: 1;
+  }
 }
 .free,
 .charge {
