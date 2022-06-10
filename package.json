@@ -10,11 +10,12 @@
     "electron:serve": "vue-cli-service electron:serve",
     "postinstall": "electron-builder install-app-deps",
     "postuninstall": "electron-builder install-app-deps",
-    "e" : "vue-cli-service electron:serve"
+    "e": "vue-cli-service electron:serve"
   },
   "main": "background.js",
   "dependencies": {
     "@vueup/vue-quill": "^1.0.0-alpha.1",
+    "aws-sdk": "^2.1152.0",
     "axios": "^0.26.0",
     "core-js": "^3.6.5",
     "express": "^4.17.3",

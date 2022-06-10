@@ -4,8 +4,11 @@
       <div v-bind:class="{ menubox: true }" id="mypage/" @click="$router.push('/signin')" v-if="this.$store.state.userId == null">
         <img class="menubox_icon_mypage" src="@/assets/icons/white/login_req.png" />
       </div>
-      <div v-bind:class="{ menubox: true }" id="mypage/" @click="routerPush('/mypage/mymain')" v-else>
+      <div v-bind:class="{ menubox: true }" id="mypage/" @click="routerPush('/mypage/mymain')" v-else-if="this.$store.state.profileImg=='none'">
         <img class="menubox_icon_mypage" src="@/assets/imgs/noprofile.png" />
+      </div>
+      <div v-bind:class="{ menubox: true }" id="mypage/" @click="routerPush('/mypage/mymain')" v-else>
+        <img class="menubox_icon_mypage" :src="this.$store.state.profileImg" />
       </div>
       <br />
       <div v-bind:class="{ menubox: true }" id="library"  @click="routerPush('/library')">
@@ -54,13 +57,16 @@
 </template>
 
 <script>
-import axios from '../axios'
+// import axios from '../axios'
+// import storage from '../aws'
 export default {
   name: "vsnmenu",
   data() {
     return {
       state : (this.$route.path=='/')?'main':this.$route.path.substr(1,7),
       link : (this.$route.path=='/')?'main':this.$route.path.substr(1,7),
+
+      userProfileImg : ""
     };
   },
   methods: {
@@ -72,16 +78,6 @@ export default {
   },
   watch:{
     $route(){
-      axios.get("/api/auth/loginCheck").then((result) => {
-        if (result.data != "") {
-          this.$store.commit("userLogin", {
-            nickname: result.data.USER_NICKNAME,
-            id: result.data.USER_ID,
-          });
-        }
-      });
-
-
       // 버튼클릭 링크 이동시 if문
       let pathLink = (this.$route.path=='/')?'main':this.$route.path.substr(1,7);
       if(this.link != pathLink && pathLink != 'signin'){

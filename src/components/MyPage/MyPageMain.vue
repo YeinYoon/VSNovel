@@ -21,7 +21,7 @@
 
         <div class="profile-image-line">
           <div class="col-one">프로필 이미지</div>
-          <div id="profile-image" class="profile-image-input" type="file" :style="`background-image:url(${newImage})`" value="newProfile"></div>
+          <div id="profile-image" class="profile-image-input" type="file" :style="`background-image:url()`" value="newProfile"></div>
           <div class="col-three">
             <input @change="upload" type="file" id="input-file" style="display:none" />
             <label class="input-file-button" for="input-file">Browse</label><br>
@@ -63,7 +63,8 @@ export default {
       uploadimg:'',
 
       newNickname: "",
-      newImage: "",
+
+      // newImage: "", 프로필 이미지
       newIntro: "",
 
       isSave : true,
@@ -108,7 +109,7 @@ export default {
           console.log("프로필 데이터 불러오기 실패");
         } else {
           console.log(result.data);
-          this.newImage = result.data[0].USER_IMG
+          // this.newImage = result.data[0].USER_IMG 프로필 이미지
           this.newNickname = result.data[0].USER_NICKNAME
           this.newIntro = result.data[0].USER_INTRO
         }

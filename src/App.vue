@@ -15,6 +15,7 @@
 import Spinner from './components/Spinner.vue'
 import Menu from './components/Menu';
 import GlobalModal from './components/modal/GlobalModal.vue';
+import storage from './aws'
 // import vsnside from './components/Side';
 // import Vsncontent from './components/Content';
 import axios from './axios'
@@ -32,15 +33,14 @@ export default {
   },
   methods : {
     getUserInfo() {
-      axios.get("/api/auth/loginCheck").then((result) => {
-      if (result.data != "") {
-        console.log(result.data);
-        this.$store.commit("userLogin", {
-          nickname: result.data.USER_NICKNAME,
-          id: result.data.USER_ID,
-        });
-        console.log(this.$store.state.userId);
-      }
+      axios.get("/api/auth/loginCheck").then(async (result) => {
+        if (result.data != "") {
+          this.$store.commit("userLogin", {
+            nickname: result.data.USER_NICKNAME,
+            id: result.data.USER_ID,
+            profileImg : await storage.getUserProfileImg(result.data.USER_ID)
+          });
+        }
       });
     }
   }

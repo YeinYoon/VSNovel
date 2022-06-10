@@ -65,6 +65,7 @@
 </template>
 
 <script>
+//import dummy_data from "@/assets/DataJs/commuData.js";
 import commuFree from "@/assets/DataJs/commuFree.js"; //자유커뮤니티데이터
 import commujoin from "@/assets/DataJs/commujoin.js"; //팀원모집커뮤니티데이터
 import commuRe from "@/assets/DataJs/commuRe.js"; //리뷰&추천커뮤니티데이터
@@ -73,7 +74,6 @@ import TopicCommu from "../community/topic/TopicCommu";
 import TopicPostView from "../community/topic/TopicPostView";
 import TopicWrite from "../community/topic/TopicWrite";
 import axios from "../../axios";
-
 export default {
   name: "CommunitySide",
   data() {
@@ -131,7 +131,6 @@ export default {
   methods: {
     // 가입한 카페 리스트
     async resVillageList() {
-      await this.getUserInfo();
       axios
         .post("/api/village/resVillageList", { id: this.$store.state.userId })
         .then((result) => {
@@ -252,18 +251,6 @@ export default {
         this.$router.push(`/community/register/${code}`);
       }
     },
-    async getUserInfo() {
-      await axios.get("/api/auth/loginCheck").then((result) => {
-      if (result.data != "") {
-        console.log(result.data);
-        this.$store.commit("userLogin", {
-          nickname: result.data.USER_NICKNAME,
-          id: result.data.USER_ID,
-        });
-        console.log(this.$store.state.userId);
-      }
-      });
-    }
   },
 };
 </script>
