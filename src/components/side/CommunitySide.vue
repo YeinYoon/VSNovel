@@ -112,7 +112,7 @@ export default {
       };
     }
     //마이페이지 -> 리뷰 수정 이동
-    else{
+    else if(this.$route.params.title != undefined){
       this.step = "리뷰 & 추천";
       this.update = true;
       this.topicData = 2;
