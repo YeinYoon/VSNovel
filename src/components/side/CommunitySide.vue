@@ -65,8 +65,6 @@
 </template>
 
 <script>
-
-//import dummy_data from "@/assets/DataJs/commuData.js";
 import commuFree from "@/assets/DataJs/commuFree.js"; //자유커뮤니티데이터
 import commujoin from "@/assets/DataJs/commujoin.js"; //팀원모집커뮤니티데이터
 import commuRe from "@/assets/DataJs/commuRe.js"; //리뷰&추천커뮤니티데이터
@@ -98,49 +96,35 @@ export default {
     TopicWrite,
   },
   mounted() {
-    if(this.$route.params.step != null){
-      console.log(this.$route.params);      
-      this.step = this.$route.params.step; // 부제목 변수 지정
-      this.topicData = this.$route.params.topicNum; // 수정 페이지 이동
-      this.clickNum = 3;  // 사이드바 강조 효과 
-    }
     // 기본 강조 효과
-    if(this.$route.params.topicNum == 2){
-      console.log(this.$route.params);
+    //마이페이지 -> 내가 쓴 게시글
+    if(this.$route.params.topicNum == 0){
       this.step = this.$route.params.step; // 부제목 변수 변경
-      this.topicData = this.$route.params.topicNum; // 수정 페이지 이동
-      this.clickNum = 3; // 사이드바 강조효과
+      this.topicData = 1; // 수정 페이지 이동
+      this.clickNum = this.$route.params.topicNum; // 사이드바 강조효과
     }
-    if(this.$route.params.topicNum == 1){
-      console.log(this.$route.params);
-      this.step = this.$route.params.step; // 부제목 변수 변경
-      this.topicData = this.$route.params.topicNum; // 수정 페이지 이동
-      this.clickNum = 0; // 사이드바 강조효과
-    }
-
-    this.clickId = document.querySelectorAll("#communityElement");
-    this.clickId[this.clickNum].style.backgroundColor = "#2872f9";
-
-    if (this.$route.params.comm_id != undefined) {
+    //메인화면에서 이동하는 경우
+    else if (this.$route.params.comm_id != undefined) {
       this.topicData = 1;
       this.topicObject = {
         title: this.$route.params.comm_id,
         content: this.$route.params.comm_content,
       };
     }
-    else if (this.$route.params.REVIEW_CODE != undefined) {
-      console.log('review')
-      this.step == "리뷰 & 추천";
-      this.update == true;
-      this.community = commuRe;
+    //마이페이지 -> 리뷰 수정 이동
+    else{
+      this.step = "리뷰 & 추천";
+      this.update = true;
       this.topicData = 2;
+      this.clickNum = 3;
       this.topicObject = {
         title: this.$route.params.comm_id,
         content: this.$route.params.comm_content,
       };
-      this.clickId[3].style.backgroundColor = "#2872f9";
-      this.clickId[0].style.backgroundColor = "#2c2c2c";
     }
+    this.clickId = document.querySelectorAll("#communityElement");
+    this.clickId[this.clickNum].style.backgroundColor = "#2872f9";
+
     this.$router.push('/community');
     this.resVillageList();
   },
@@ -159,16 +143,7 @@ export default {
           }
         });
     },
-    // topicadd(event) {
-    //   this.topicData = 1;
-    //   this.topicObject = event;
-    // },
-    // remove(removedata) {
-    //   this.community.splice(removedata, 1);
-    // },
     communityevent(event){
-      console.log(event.item.title);
-      console.log(event.index);
       //포스트 클릭
       if(event.type == 'first'){
         this.topicData = 1;
@@ -182,7 +157,7 @@ export default {
         console.log(this.step);
       }else 
       //관리자 글쓰기 삭제
-      if(event.type == 'deletepost'){
+      if(event.type == 'deletepost'){  
         console.log(event);
         this.community.splice(event.index,1);
       }
@@ -224,7 +199,6 @@ export default {
       }else if(event.type == 'reviewcontent'){ //리뷰 & 추천 저장 작업
         this.community.push(event.content);
         this.community[this.community.length - 1].str = event.strcount;
-        //console.log(this.community);
       }
     },
     clickCommunityEvent(index, event, item) {

@@ -16,7 +16,7 @@
         <div class="post_clicks">조회수</div>
       </div>
       <hr class="lines" />
-      <div class="post_line" v-for="(post, i) in postData" :key="i">
+      <div class="post_line" v-for="(post, i) in postData" :key="i" @click="postMove()">
         <div class="post_place">{{ post.POST_CODE }}</div>
         <div class="post_title" style="cursor:pointer">{{ post.POST_TITLE }}</div>
         <div class="post_like">{{ post.POST_VOTE }}</div>
@@ -41,7 +41,7 @@ export default {
   }, 
   methods: {
     postMove(){
-      this.$router.push({name:'Community', params:{step:'자유',topicNum:1}})
+      this.$router.push({name:'Community', params:{step:'자유',topicNum:0}})
     },
     getPost() {
       console.log("getPost")

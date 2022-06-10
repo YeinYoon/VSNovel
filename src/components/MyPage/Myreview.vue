@@ -19,7 +19,7 @@
           </div>
       </div>
       <!-- <div class="review_edit">리뷰수정</div> -->
-      <button class="review_edit" @click="reviewBtn(review.REVIEW_CODE)">리뷰수정</button>
+      <button class="review_edit" @click="reviewBtn(i)">리뷰수정</button>
     </div>
   </div>
 </div>
@@ -51,17 +51,17 @@ export default {
         }
       })
     },
-    reviewBtn(REVIEW_CODE) {
+    reviewBtn(i) {
+      console.log(this.reviews[i].title);
       this.$router.push({
         name: "Community",
-        params: { REVIEW_CODE : REVIEW_CODE
+        // params: { REVIEW_CODE : REVIEW_CODE
+        params: { 
+          title : this.reviews[i].REVIEW_TITLE,
+          content : this.reviews[i].REVIEW_COMMENT
                   },
-      }
-      );
+      });
     },
-    // reviewEdit(){
-    //   this.$router.push({name: 'Community', params:{step : '리뷰 & 추천', topicNum : 2}});
-    // }
   }
 }
 </script>
