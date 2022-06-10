@@ -33,8 +33,9 @@
         <div class="register_cafe_board">줄거리</div>
         <div class="register_cafe_board">줄거리</div>
       </div>
+      
       <div class="register_cafe_list_container">
-        <div class="post_section">
+        <!-- <div class="vil_post_section"> -->
           <div class="post_line">
             <div class="post_place">작성위치</div>
             <div class="post_title">제목</div>
@@ -50,7 +51,7 @@
             <div class="post_comment">{{ post.coment }}</div>
             <div class="post_clicks">{{ post.look }}</div>
           </div>
-        </div>
+        <!-- </div> -->
       </div>
     </div>
     <!-- <div class="register_cafe_section">
@@ -179,31 +180,19 @@ export default {
 
 
 <style>
-.post_section {
-  position:relative;
-  margin: 0 auto;
-  padding: 5px;
-  font-size: 1.3em;
-  color: white;
-  width: 95%;
-  background-color: #484848;
-  border-radius: 20px;
-  overflow-y: scroll;
-  -ms-overflow-style: none;
-}
-.post_line {
+.register_cafe_list_container .post_line {
   text-align: center;
   display: flex;
   height: 30px;
-  margin-bottom: 10px;
+  margin-bottom: 5px;
 }
-.post_place,
-.post_like,
-.post_comment,
-.post_clicks {
+.register_cafe_list_container .post_place,
+.register_cafe_list_container .post_like,
+.register_cafe_list_container .post_comment,
+.register_cafe_list_container .post_clicks {
   width: 15%;
 }
-.post_title {
+.register_cafe_list_container .post_title {
   width: 40%;
   white-space: nowrap;
   overflow: hidden;
@@ -213,34 +202,52 @@ export default {
   position: relative;
   top: 20px;
   padding-bottom: 20px;
+  padding-top: 10px;
   width: 95%;
   height: 85%;
   margin-bottom: 30px;
   border-radius: 20px;
   background: #5D5D5D;
   margin: 0 auto;
+  color: white;
+  overflow: auto;
 }
 .register_cafe_board_container{
   display: flex;
-  width: 700px;
-  height: 50px;
+  width: 95%;
+  height: 75px;
   white-space: nowrap;
   overflow-x: auto;
+  padding-bottom: 20px;
+  margin: 0 auto;
 }
+
+.register_cafe_board_container::-webkit-scrollbar {
+  display: block;
+  height: 10px;
+  background: none;
+}
+
+.register_cafe_board_container::-webkit-scrollbar-thumb {
+  background: #353535;
+  border-radius: 25px;
+}
+
 .register_cafe_board{
   position: relative;
   top: 15px;
-  left: 20px;
-  width: 140px;
+  /* left: 20px; */
+  width: 120px;
   height: 35px;
   border-radius: 20px;
   text-align: center;
   color: white;
   background: #6A6A6A;
-  padding-top: 5px;
   cursor: pointer;
   margin-right: 10px;
+  padding: 5px 30px 0px 30px;
 }
+
 .register_cafe_container{
   position: relative;
   top: 12%;
@@ -293,10 +300,11 @@ export default {
 }
 .register_img {
   position: relative;
-  width: 112%;
+  width: 100%;
   height: 150px;
   top: 40px;
-  left: -40px;
+  border-radius: 20px;
+  /* left: -40px; */
 }
 .register_content{
     display: flex;
@@ -351,7 +359,7 @@ export default {
   width: 100%;
 }
 
-.post_list{
+.vil_post_list{
     flex: 7;
 }
 .register_notice_box, .register_community_box{
