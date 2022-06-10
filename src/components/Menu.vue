@@ -78,13 +78,13 @@ export default {
     $route(){
       // 버튼클릭 링크 이동시 if문
       let pathLink = (this.$route.path=='/')?'main':this.$route.path.substr(1,7);
-      if(this.link != pathLink && pathLink != 'signin'){
+      if(this.link != pathLink && pathLink != 'signin' && pathLink != 'signup' ){
         this.state = this.link;
         this.link = pathLink;
         document.getElementById(this.state).style.background = "#353535";
         document.getElementById(this.link).style.background = "#2872f9";
       }
-      if(this.state != this.link){
+      if(this.state != this.link && pathLink != 'signup' ){
           document.getElementById(this.state).style.background = "#353535";
         }
         document.getElementById(this.link).style.background = "#2872f9";
