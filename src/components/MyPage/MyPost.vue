@@ -48,7 +48,7 @@ export default {
           console.log('load fail')
         } else {
           console.log(result)
-          this.postData = result.rows
+          this.postData = result.data
           // console.log(this.postData)
         }
       })

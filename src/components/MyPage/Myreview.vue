@@ -46,7 +46,7 @@ export default {
         if(result.data=="err"){
           console.log("리뷰 데이터 불러오기 실패");
         } else {
-          this.reviews = result;
+          this.reviews = result.data;
           console.log(this.reviews)
         }
       })
