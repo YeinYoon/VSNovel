@@ -120,10 +120,6 @@ export default {
 <style>
 /* -------------------------------------------------------------------- */
 
-::-webkit-scrollbar {
-  display: none;
-}
-
 .side_search {
   background-color: white;
   width: 80%;
