@@ -204,7 +204,7 @@ export default {
   padding-bottom: 20px;
   padding-top: 10px;
   width: 95%;
-  height: 85%;
+  height: calc(100% - 120px);
   margin-bottom: 30px;
   border-radius: 20px;
   background: #5D5D5D;
@@ -250,9 +250,9 @@ export default {
 
 .register_cafe_container{
   position: relative;
-  top: 12%;
+  top: 60px;
   width: 100%;
-  height: 80%;
+  height: calc(100% - 250px);
   background: #454545;
   border-radius: 20px;
   overflow-x: auto;
@@ -281,7 +281,7 @@ export default {
 }
 .register_user_info_cont{
   position: absolute;
-  right: 75px;
+  right: 40px;
   width: 300px;
   height: 70px;
   background: #6A6A6A;
@@ -301,10 +301,11 @@ export default {
 .register_img {
   position: relative;
   width: 100%;
-  height: 150px;
+  height: 150px; 
   top: 40px;
   border-radius: 20px;
   /* left: -40px; */
+  object-fit: cover;
 }
 .register_content{
     display: flex;

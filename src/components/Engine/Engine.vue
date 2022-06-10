@@ -400,10 +400,8 @@ export default {
 }
 
 .Promo_Info {
-  text-align: center;
   position: absolute;
   color: white;
-  font-size: 1.5em;
   top: 320px;
   width: 100%;
   height: 1200px;
@@ -468,6 +466,7 @@ export default {
 
 .Promo_Card_Content p{
   text-align: center;
+  font-size: 1em;
 }
 
 .Promo_Book_Frame{

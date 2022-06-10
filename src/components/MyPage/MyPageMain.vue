@@ -19,31 +19,38 @@
           <input id="profilenick" type="text" class="profile-nick-input" v-model="newNickname">
         </div>
 
+
+        <div class="profile-intro-line">
+          <div class="col-one">소개</div>
+          <textarea id="profileintro" class="profile-introduce-input" type="text" maxlength="500" v-model="newIntro"></textarea>
+          <!-- <div class="intro-cont-align"><span>{{newIntro.length}}</span>/500자</div> -->
+        </div>
+
+        <button id="mypage_main-canc" @click="cancelBtn">취소</button>
+        <button v-if="isSave" id="mypage_main-save" @click="editBtn(newNickname, newImage, newIntro)">수정</button>
+        <button v-else id="mypage_main-save" @click="saveBtn()">저장</button>
+
+        <hr>
+
         <div class="profile-image-line">
           <div class="col-one">프로필 이미지</div>
           <div id="profile-image" class="profile-image-input" type="file" :style="`background-image:url()`" value="newProfile"></div>
           <div class="col-three">
             <input @change="upload" type="file" id="input-file" style="display:none" />
             <label class="input-file-button" for="input-file">Browse</label><br>
-            <span>512x512 이상의 이미지가 가장 적합 <br>
-            허용 확장자:png,jpeg,jpg,gif | > 2MB</span>
+            <button class="mypage_main-save_img">업로드</button>
+            <!-- <span>512x512 이상의 이미지가 가장 적합 <br>
+            허용 확장자:png,jpeg,jpg,gif | > 2MB</span> -->
           </div>
         </div>
 
-        <div class="profile-intro-line">
-          <div class="col-one">소개</div>
-          <textarea id="profileintro" class="profile-introduce-input" type="text" maxlength="500" v-model="newIntro"></textarea>
-          <div class="intro-cont-align"><span>{{newIntro.length}}</span>/500자</div>
 
-        </div>
 
       </div>
 
       <!-- 취소,수정 버튼 -->
       <footer>
-        <button id="mypage_main-canc" @click="cancelBtn">취소</button>
-        <button v-if="isSave" id="mypage_main-save" @click="editBtn(newNickname, newImage, newIntro)">수정</button>
-        <button v-else id="mypage_main-save" @click="saveBtn()">저장</button>
+
       </footer>
       
     </div>
@@ -187,10 +194,12 @@ export default {
 }
 /* 한줄씩 정렬 */
 .profile-nick-line,
-.profile-image-line,
-.profile-intro-line
+.profile-image-line
 {
   display: flex;
+}
+.profile-intro-line {
+  position: relative;
 }
 
 /* browse 버튼 */
@@ -198,7 +207,7 @@ export default {
   width: 120px;
   height: 40px;
   padding-top: 10px;
-  margin-bottom: 40%;
+  margin-bottom: 20px;
   background-color:#2872F9;
   color: white;
   cursor: pointer;
@@ -213,8 +222,8 @@ export default {
 /* 제목,부제목을 제외한 모든 태그들 */
 .main-position-container{
   padding: 20px;
-  position: relative;
-  top: 15%;
+  position: absolute;
+  top: 150px;
   width: 95%;
   height: 450px;
   margin: 0 auto;
@@ -228,16 +237,12 @@ export default {
 }
 
 /* 오른쪽 부분에 있는 텍스트 스타일 */
-.col-three{
-  width: 210px;
-  font-size: 0.8em;
-  /* left: 73%; */
-  position: relative;
-}
 
 /* 왼쪽 부분에 있는 텍스트 스타일 */
 .col-one{
+  position: relative;
   vertical-align: top;
+  display: inline-block;
   padding-right: 40px;
   width: 150px;
   font-size: 1.0em;
@@ -245,12 +250,14 @@ export default {
 
 /* 소개 글자용량 표시 */
 .intro-cont-align{
-  margin-top: 80px;
+  display: inline-block;
   font-size: 0.8em;
 }
 
 /* 프로필 이미지가 들어가기전 공간 */
 .profile-image-input{
+  position: relative;
+  display: inline-block;
   height: 160px;
   width: 380px;
   background:#5E5E5E;
@@ -262,6 +269,8 @@ export default {
 
 /* 프로필 이미지가 들어왔을 때 변하는 스타일 */
 .profile-image-change{
+  position: relative;
+  display: inline-block;
   height: 200px;
   width: 30%;
   background: no-repeat;
@@ -276,6 +285,8 @@ export default {
 
 /* 닉네임을 적는 공간 */
 .profile-nick-input{
+  position: relative;
+  display: inline-block;
   width: 380px;
   height: 50px;
   border-radius: 20px;
@@ -292,6 +303,7 @@ export default {
 
 /* 소개 내용이 들어가는 공간 */
 .profile-introduce-input{
+  position: relative;
   width: 380px;
   height: 100px;
   border-radius: 20px;
@@ -302,6 +314,7 @@ export default {
   margin-bottom: 15px;
   margin-right: 15px;
   padding: 15px;
+  border: none;
   outline: none;
 }
 
@@ -321,7 +334,7 @@ export default {
 
 /* 저장 버튼 */
 #mypage_main-save{
-  transform: translate(350%,0%);
+  transform: translateX(350%);
   width: 120px;
   height: 40px;
   border-radius: 15px;
@@ -329,8 +342,23 @@ export default {
   color: white;
   font-size: 1.0em;
   cursor: pointer;
+  transition: 0.2s all ease;
 }
-#mypage_main-save:hover{
+
+.mypage_main-save_img{
+  display: inline-block;
+  vertical-align: top;
+  width: 90px;
+  height: 40px;
+  border-radius: 15px;
+  background-color: #2872F9;
+  color: white;
+  font-size: 1.0em;
+  cursor: pointer;
+  transition: 0.2s all ease;
+}
+
+.mypage_main-save:hover{
   background: #0084ff;
 }
 </style>
