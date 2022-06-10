@@ -54,14 +54,14 @@ export default {
     reviewBtn(REVIEW_CODE) {
       this.$router.push({
         name: "Community",
-        params: { REVIEW_CODE
+        params: { REVIEW_CODE : REVIEW_CODE
                   },
       }
       );
     },
-    reviewEdit(){
-      this.$router.push({name: 'Community', params:{step : '리뷰 & 추천', topicNum : 2}});
-    }
+    // reviewEdit(){
+    //   this.$router.push({name: 'Community', params:{step : '리뷰 & 추천', topicNum : 2}});
+    // }
   }
 }
 </script>
