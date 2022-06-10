@@ -65,7 +65,6 @@
 </template>
 
 <script>
-//import dummy_data from "@/assets/DataJs/commuData.js";
 import commuFree from "@/assets/DataJs/commuFree.js"; //자유커뮤니티데이터
 import commujoin from "@/assets/DataJs/commujoin.js"; //팀원모집커뮤니티데이터
 import commuRe from "@/assets/DataJs/commuRe.js"; //리뷰&추천커뮤니티데이터
@@ -96,24 +95,16 @@ export default {
     TopicWrite,
   },
   mounted() {
-    if(this.$route.params.step != null){
-      console.log(this.$route.params);      
-      this.step = this.$route.params.step; // 부제목 변수 지정
-      this.topicData = this.$route.params.topicNum; // 수정 페이지 이동
-      this.clickNum = 3;  // 사이드바 강조 효과 
-    }
     // 기본 강조 효과
-    if(this.$route.params.topicNum == 2){
-      console.log(this.$route.params);
+    if(this.$route.params.topicNum == 2 && this.$route.params.topicNum != null){
       this.step = this.$route.params.step; // 부제목 변수 변경
       this.topicData = this.$route.params.topicNum; // 수정 페이지 이동
       this.clickNum = 3; // 사이드바 강조효과
     }
-    if(this.$route.params.topicNum == 1){
-      console.log(this.$route.params);
+    else{
       this.step = this.$route.params.step; // 부제목 변수 변경
       this.topicData = this.$route.params.topicNum; // 수정 페이지 이동
-      this.clickNum = 0; // 사이드바 강조효과
+      this.clickNum = 1; // 사이드바 강조효과
     }
 
     this.clickId = document.querySelectorAll("#communityElement");
@@ -144,15 +135,7 @@ export default {
           }
         });
     },
-    // topicadd(event) {
-    //   this.topicData = 1;
-    //   this.topicObject = event;
-    // },
-    // remove(removedata) {
-    //   this.community.splice(removedata, 1);
-    // },
     communityevent(event){
-      //console.log(event);
       //포스트 클릭
       if(event.type == 'first'){
         this.topicData = 1;
@@ -208,7 +191,6 @@ export default {
       }else if(event.type == 'reviewcontent'){ //리뷰 & 추천 저장 작업
         this.community.push(event.content);
         this.community[this.community.length - 1].str = event.strcount;
-        //console.log(this.community);
       }
     },
     clickCommunityEvent(index, event, item) {

@@ -46,7 +46,6 @@ export default {
     id[this.clickNum].style.backgroundColor = "#2872f9"
       // 라우터 이동
     this.$router.push('/mypage/mymain');
-    console.log('asd')
   },
   methods: {
     clickEvent(index, event, item) {
