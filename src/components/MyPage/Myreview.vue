@@ -55,8 +55,8 @@ export default {
       console.log(this.reviews[i].title);
       this.$router.push({
         name: "Community",
-        // params: { REVIEW_CODE : REVIEW_CODE
-        params: { 
+         // params: { REVIEW_CODE : REVIEW_CODE
+        params: {
           title : this.reviews[i].REVIEW_TITLE,
           content : this.reviews[i].REVIEW_COMMENT
                   },

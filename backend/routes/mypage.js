@@ -113,7 +113,8 @@ router.post('/postalarm', async(req, res) => {
 
 // 회원 탈퇴
 router.post('/postconfirm', async(req, res) => {
-    const result = await db.execute(`DELETE FROM tbl_user WHERE user_id = '${req.user.USER_ID}'`)
+    const result = await db.execute(null)
+    // `DELETE FROM tbl_user WHERE user_id = '${req.user.USER_ID}'`
     req.logout();
     req.session.destroy()
     res.send(result)
