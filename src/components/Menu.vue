@@ -57,8 +57,6 @@
 </template>
 
 <script>
-// import axios from '../axios'
-// import storage from '../aws'
 export default {
   name: "vsnmenu",
   data() {

@@ -15,14 +15,16 @@
 import Spinner from './components/Spinner.vue'
 import Menu from './components/Menu';
 import GlobalModal from './components/modal/GlobalModal.vue';
+import axios from './axios';
 import storage from './aws'
 // import vsnside from './components/Side';
 // import Vsncontent from './components/Content';
-import axios from './axios'
 export default {
   name: "App",
-  created() {
-    this.getUserInfo();
+  watch :  {
+    $route() {
+      this.getUserInfo();
+    }
   },
   components: {
     Menu,

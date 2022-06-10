@@ -123,8 +123,21 @@ import SwiperCarouselVue from "./MainCarousel";
 import commuData from "../../assets/DataJs/commuData.js";
 import notice from "../../assets/DataJs/notice.js";
 import store from "../../assets/DataJs/dataHu.js";
+import axios from '../../axios'
+import storage from '../../aws'
 export default {
   name: "MainScreen",
+  created() {
+    axios.get("/api/auth/loginCheck").then(async (result) => {
+      if (result.data != "") {
+        this.$store.commit("userLogin", {
+          nickname: result.data.USER_NICKNAME,
+          id: result.data.USER_ID,
+          profileImg : await storage.getUserProfileImg(result.data.USER_ID)
+        });
+      }
+    });
+  },
   mounted() {
     // 공지사항 날짜 순으로 정렬
     this.noticeData.sort(function (a, b) {
