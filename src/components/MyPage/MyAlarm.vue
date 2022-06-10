@@ -9,18 +9,19 @@
     </div>
 
     <div class="alarm-section">
-      <div v-for="(alarm,i) in alarmdata" :key="i">
+      <div v-for="(alarm,i) in alarmData" :key="i">
         <div class="alarm-flex">
-          <input class="alarm-check" type="checkbox">
-          <span class="cont-title">{{alarmdata[i].title}}</span><br>
+          <input class="alarm-check" type="checkbox" @click="noticeChkBox(i)">
+          <span class="cont-title">{{alarmData[i].title}}</span><br>
         </div>
-          <span class="cont-info">{{alarmdata[i].content}}</span>
+          <span class="cont-info">{{alarmData[i].content}}</span>
       </div>
     </div>
     
     <footer class="button-position">
-        <div id="mypage_alarm-canc">취소</div>
-        <div id="mypage_alarm-save" @click="routerPush('/')">저장</div>
+        <button id="mypage_alarm-canc" @click="cancelBtn()">취소</button>
+        <button id="mypage_alarm-save" @click="saveBtn()">저장</button>
+
     </footer>
 
 </div>
@@ -28,17 +29,56 @@
 
 <script>
 import alarm from '@/assets/DataJs/alarmdata.js'
+import axios from '../../axios'
 
 export default {
+  created() {
+    this.getAlarm();
+  },
   data(){
     return{
-      alarmdata:alarm
+      alarmData:alarm,
+      pastCheck: null,
+      binaryNum: [0,0,0,0,0]
     }
   },
   methods:{
     routerPush(link){
       this.$router.push(link);
-    }
+    },
+    noticeChkBox(i) {
+      this.binaryNum[i] == 0 ? this.binaryNum[i] = 1 : this.binaryNum[i] = 0;
+      console.log(this.binaryNum);
+    },
+    getAlarm() {
+      console.log('getAlarm')
+      axios.get('/api/mypage/getalarm')
+      .then((result) => {
+        if(result.data == 'err') {
+          console.log('load fail')
+        } else {
+          console.log(result)
+          this.binaryNum = result.data;
+        }
+      })
+    },
+    saveBtn() {
+      let data= {
+        noticeChk : this.noticeChk
+      }
+      axios.post('/api/mypage/postalarm', data)
+      .then((result) => {
+        if(result.data == 'err') {
+          console.log('err')
+        } else {
+          console.log(result)
+          this.noticeChkBox
+        }
+      })
+    },
+    cancelBtn() {
+      this.check = this.pastCheck
+    },
   },
 }
 </script>

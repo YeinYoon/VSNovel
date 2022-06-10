@@ -49,14 +49,16 @@ var authRouter = require('./routes/auth');
 var storeRouter = require('./routes/store');
 var communityRouter = require('./routes/community');
 var villageRouter = require('./routes/village');
+var mainRouter = require('./routes/mainPage');
+var mypageRouter = require('./routes/mypage');
 
 app.use('/', indexRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/store', storeRouter);
 app.use('/api/community', communityRouter);
 app.use('/api/village', villageRouter);
-
-
+app.use('/api/main', mainRouter);
+app.use('/api/mypage', mypageRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -7,32 +7,53 @@
 
     <div class="drop-sec-row">
       <div class="exit-info-position">아이디</div>
-      <input type="text" class="drop-input-cont">
+      <input type="text" class="drop-input-cont" v-model="newId">
     </div>
 
     <div class="drop-sec-row">
       <div class="exit-info-position">패스워드</div>
-      <input type="password" class="drop-input-cont">
+      <input type="password" class="drop-input-cont" v-model="newPw">
     </div>
 
     <div class="drop-sec-row">
       <div class="exit-info-position">이름</div>
-      <input type="text" class="drop-input-cont">
+      <input type="text" class="drop-input-cont" v-model="newName">
     </div>
 
     <div class="drop-sec-row">
       <div class="exit-info-position">전화번호</div>
-      <input type="text" class="drop-input-cont">
+      <input type="text" class="drop-input-cont" v-model="newNumber">
     </div>
 
-    <div id="mypage_exit-pass" @click="$emit('end')">PASS 실행</div>
+    <button id="mypage_exit-pass" @click="destroyBtn()">탈퇴</button>
 
 </div>
 </template>
 
 <script>
+import axios from '../../../axios';
 export default {
-
+  data() {
+    return {
+      newId:"",
+      newPw:"",
+      newName:"",
+      newNumber:""
+    };
+  },
+  methods: {
+    destroyBtn() {
+      axios.post('/api/mypage/postconfirm')
+      .then((result) => {
+        if(result.data == 'err') {
+          console.log('err')
+        } else {
+          this.$store.commit("userLogin", null);
+          this.$router.push("/");
+        }
+      })
+    }
+  }
 }
 </script>
 

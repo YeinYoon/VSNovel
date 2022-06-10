@@ -10,34 +10,59 @@
   <div class="review_section">
     <div class="work_list" v-for="(review, i) in reviews" :key="i">
       <div class="img_box"></div>
-      <img class="list_img" :src="`${review.img}`"/>
+      <img class="list_img" :src="`${review.REVIEW_IMG}`"/>
       <div class="work_list_con">
           <div class="list_span">
-              <span class="list_title">{{review.title}}</span>
-              <span class="list_team">{{review.producer}} / {{review.team}}</span>
-              <span class="list_content">{{review.content}}</span>
+              <span class="list_title">{{review.REVIEW_TITLE}}</span>
+              <span class="list_team">{{review.producer}} / {{review.NOVE_TEAMNAME}}</span>
+              <span class="list_content">{{review.REVIEW_COMMENT}}</span>
           </div>
       </div>
-      <div class="review_edit" @click="reviewEdit">리뷰수정</div>
+      <!-- <div class="review_edit">리뷰수정</div> -->
+      <button class="review_edit" @click="reviewBtn(review.REVIEW_CODE)">리뷰수정</button>
     </div>
   </div>
 </div>
 </template>
 
 <script>
-import review from '@/assets/DataJs/review.js';
+import axios from '../../axios';
+import commuRe from '../../assets/DataJs/commuRe.js'
 
 export default {
+  created() {
+    this.getReview()
+  },
   data(){
     return{
-      reviews :review,
+      reviews :null,
+      commuRe : commuRe
     };
   },
-  methods:{
+  methods: {
+    getReview() {
+      axios.get('/api/mypage/getreview')
+      .then((result)=>{
+        if(result.data=="err"){
+          console.log("리뷰 데이터 불러오기 실패");
+        } else {
+          this.reviews = result.data;
+          console.log(this.reviews)
+        }
+      })
+    },
+    reviewBtn(REVIEW_CODE) {
+      this.$router.push({
+        name: "Community",
+        params: { REVIEW_CODE
+                  },
+      }
+      );
+    },
     reviewEdit(){
       this.$router.push({name: 'Community', params:{step : '리뷰 & 추천', topicNum : 2}});
     }
-  },
+  }
 }
 </script>
 

@@ -138,6 +138,7 @@ export default {
       storeData: store,
     };
   },
+
   components: {
     SwiperCarousel: SwiperCarouselVue,
   },
@@ -151,7 +152,8 @@ export default {
                   NOVE_PRICE: data.pay,
                   NOVE_TEAMNAME: data.team,
                   },
-      });
+      }
+      );
     },
     communityView(data) {
       console.log(data.title);

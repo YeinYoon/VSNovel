@@ -73,6 +73,7 @@ import TopicCommu from "../community/topic/TopicCommu";
 import TopicPostView from "../community/topic/TopicPostView";
 import TopicWrite from "../community/topic/TopicWrite";
 import axios from "../../axios";
+
 export default {
   name: "CommunitySide",
   data() {
@@ -116,6 +117,19 @@ export default {
         title: this.$route.params.comm_id,
         content: this.$route.params.comm_content,
       };
+    }
+    else if (this.$route.params.REVIEW_CODE != undefined) {
+      console.log('review')
+      this.step == "리뷰 & 추천";
+      this.update == true;
+      this.community = commuRe;
+      this.topicData = 2;
+      this.topicObject = {
+        title: this.$route.params.comm_id,
+        content: this.$route.params.comm_content,
+      };
+      this.clickId[3].style.backgroundColor = "#2872f9";
+      this.clickId[0].style.backgroundColor = "#2c2c2c";
     }
     this.$router.push('/community');
     this.resVillageList();

@@ -16,14 +16,14 @@
 
         <div class="profile-nick-line">
           <div class="col-one">닉네임</div>
-          <input id="profilenick" type="text" class="profile-nick-input" disabled>
+          <input id="profilenick" type="text" class="profile-nick-input" v-model="newNickname">
         </div>
 
         <div class="profile-image-line">
           <div class="col-one">프로필 이미지</div>
-          <div id="profile-image" class="profile-image-input" type="file" :style="`background-image:url(${uploadimg})`"></div>
+          <div id="profile-image" class="profile-image-input" type="file" :style="`background-image:url(${newImage})`" value="newProfile"></div>
           <div class="col-three">
-            <input @change="upload" type="file" id="input-file" style="display:none" disabled/>
+            <input @change="upload" type="file" id="input-file" style="display:none" />
             <label class="input-file-button" for="input-file">Browse</label><br>
             <span>512x512 이상의 이미지가 가장 적합 <br>
             허용 확장자:png,jpeg,jpg,gif | > 2MB</span>
@@ -32,16 +32,18 @@
 
         <div class="profile-intro-line">
           <div class="col-one">소개</div>
-          <textarea id="profileintro" class="profile-introduce-input contents" type="text"  v-model="areaText" :maxlength="500" disabled></textarea>
-          <div class="intro-cont-align"><span>{{areaText.length}}</span>/500자</div>
+          <textarea id="profileintro" class="profile-introduce-input" type="text" maxlength="500" v-model="newIntro"></textarea>
+          <div class="intro-cont-align"><span>{{newIntro.length}}</span>/500자</div>
+
         </div>
 
       </div>
 
       <!-- 취소,수정 버튼 -->
-      <footer class="mainBtnArea">
-        <div id="mypage_main-canc" @click="cancel">취소</div>
-        <div id="mypage_main-save" @click="profiledit">수정</div>
+      <footer>
+        <button id="mypage_main-canc" @click="cancelBtn">취소</button>
+        <button v-if="isSave" id="mypage_main-save" @click="editBtn(newNickname, newImage, newIntro)">수정</button>
+        <button v-else id="mypage_main-save" @click="saveBtn()">저장</button>
       </footer>
       
     </div>
@@ -51,11 +53,20 @@
 </template>
 
 <script>
+import axios from '../../axios';
 export default {
+  created() {
+    this.getProfile()
+  },
   data(){
     return{
       uploadimg:'',
-      areaText:'',
+
+      newNickname: "",
+      newImage: "",
+      newIntro: "",
+
+      isSave : true,
       maxlength:500
     }
   },
@@ -67,36 +78,66 @@ export default {
       
       let url = URL.createObjectURL(uploadfile[0]);
       console.log(url);
-
-      this.uploadimg=url;
+      this.newImage=url;
+      // this.uploadimg=url;
       this.uploadimgfile();
     },
-
+    saveBtn() {
+      var newContent = {
+        newNickname : this.newNickname,
+        newImage : this.newImage,
+        newIntro : this.newIntro
+      }
+      axios.post('/api/mypage/mypagemain', newContent)
+      .then((result) => {
+        
+        if(result.data.length != 0) {
+          console.log(result.data)
+          console.log('his')
+        }
+      }).catch((err) => {
+        console.log(err);
+      })
+      this.isSave=true
+    },
+    // 데이터 불러오기
+    getProfile() {
+      axios.get('/api/mypage/mypagemain')
+      .then((result)=>{
+        if(result.data=="err"){
+          console.log("프로필 데이터 불러오기 실패");
+        } else {
+          console.log(result.data);
+          this.newImage = result.data[0].USER_IMG
+          this.newNickname = result.data[0].USER_NICKNAME
+          this.newIntro = result.data[0].USER_INTRO
+        }
+      })
+    },
     // 불러온 이미지를 프로필 이미지 상에 출력해주는 함수
     uploadimgfile(){
       document.getElementById('profile-image').classList.replace('profile-image-input','profile-image-change');
       if(document.getElementById('profile-image').style.backgroundImage==null){
-          document.getElementById('profile-image').style.backgroundImage=this.uploadimg;
+          document.getElementById('profile-image').style.backgroundImage=this.newImage;
       }
     },
 
     // 프로필 수정버튼을 눌렀을 때 동작하는 함수
-    // 비활성이었던 입력박스가 활성화상태로 변경
-    profiledit(){
+    editBtn(newNickname,newImage,newIntro){
       const nick = document.getElementById('profilenick');
       const intro = document.getElementById('profileintro');
       const browse = document.getElementById('input-file');
-      const btn = document.querySelector("#mypage_main-save");
-      btn.innerText='저장';
-      nick.disabled = false;
-      intro.disabled = false;
+      this.isSave = false;
+      nick.disabled = true;
+      intro.disabled = true;
       browse.disabled = false;
-      
+      this.newNickname = newNickname;
+      this.newImage = newImage;
+      this.newIntro = newIntro;
     },
 
     // 취소 버튼을 눌렀을 때 동작하는 함수
-    // 기존에 입력되었던 텍스트들을 null값으로 변경하고 입력박스들을 비활성화 상태로 변경
-    cancel(){
+    cancelBtn(){
       const nick = document.getElementById('profilenick');
       const intro = document.getElementById('profileintro');
       const browse = document.getElementById('input-file');
@@ -109,10 +150,12 @@ export default {
       
       nick.value='';
       intro.value='';
-      this.areaText = '';
+      // this.areaText = '';
       
       document.getElementById('profile-image').classList.replace('profile-image-change','profile-image-input');
       document.getElementById('profile-image').style.backgroundImage= "url('')";
+      // document.getElementById('profile-image').classList.remove('profile-image-change');
+      // document.getElementById('profile-image').classList.add('profile-image-input');
       
     },
 

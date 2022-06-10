@@ -400,12 +400,16 @@ export default {
 }
 
 .Promo_Info {
+  text-align: center;
   position: absolute;
+  color: white;
+  font-size: 1.5em;
   top: 320px;
   width: 100%;
   height: 1200px;
   background: rgb(73, 73, 73);
   border-radius: 25px;
+  overflow: auto;
 }
 
 .Promo_Card_Frame {
