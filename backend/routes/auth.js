@@ -6,6 +6,7 @@ const passport = require('passport');
 const {isNotLogin, isLogin} = require('./middlewares/loginCheck');
 
 const db = require('../database/db');
+const storage = require('../aws/aws');
 
 
 router.post('/existIdCheck', async (req, res)=>{
@@ -48,6 +49,7 @@ router.post('/signUp', async (req,res)=>{
   if(insertUser == "err") {
     console.log('DB쿼리 실패');
   } else {
+    await storage.createUserDir(req.body.newId);
     res.send("ok");
   }
 })
