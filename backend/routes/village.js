@@ -49,7 +49,7 @@ router.post('/joinVillageList', async (req,res)=>{
     if(userVillageCheck.rows.length == 0){ // 이미 가입된 카페인지 확인
         var joinVillage = await db.execute(`INSERT INTO tbl_village_join(USER_ID, VILL_CODE, VJOI_STATUS) 
         VALUES ('${req.user.USER_ID}', ${req.body.code},'d')`);
-        //에러가 안뜰대
+        //에러가 안뜰 때
         if(joinVillage!="err") {
             joinVillage = joinVillage.rows;
             var addVillageUnit = await db.execute(`UPDATE tbl_village SET VILL_USER_COUNT = VILL_USER_COUNT+1 WHERE VILL_CODE=${req.body.code}`);
