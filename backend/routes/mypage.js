@@ -164,10 +164,11 @@ router.get('/getpost', async(req, res) => {
 
 // 리뷰 불러오기
 router.get('/getreview', async(req, res) => {
-    var result = await db.execute(`SELECT *
-                                     FROM tbl_novel, tbl_review 
-                                     where tbl_novel.nove_code = tbl_review.nove_code and
-                                     user_id = '${req.user.USER_ID}'`);
+    var result = await db.execute(`SELECT tbl_post.post_title, tbl_novel.nove_title, tbl_post.post_content, tbl_novel.nove_cover
+                                     FROM tbl_novel, tbl_post
+                                     where tbl_post.nove_code = tbl_novel.nove_code and
+                                     tbl_post.cate_code = tbl_novel.cate_code and
+                                     user_id = '${req.user.USER_ID}'`)
     if(result == "err") {
         res.send("fail")
     } else {

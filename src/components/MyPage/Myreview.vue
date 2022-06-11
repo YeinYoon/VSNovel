@@ -10,12 +10,12 @@
   <div class="review_section">
     <div class="work_list" v-for="(review, i) in reviews" :key="i">
       <div class="img_box"></div>
-      <img class="list_img" :src="`${review.REVIEW_IMG}`"/>
+      <img class="list_img" :src="`${review.POST_COVER}`"/>
       <div class="work_list_con">
           <div class="list_span">
-              <span class="list_title">{{review.REVIEW_TITLE}}</span>
-              <span class="list_team">{{review.producer}} / {{review.NOVE_TEAMNAME}}</span>
-              <span class="list_content">{{review.REVIEW_COMMENT}}</span>
+              <span class="list_title">{{review.POST_TITLE}}</span>
+              <span class="list_team">{{review.NOVE_TITLE}}</span>
+              <span class="list_content">{{review.POST_CONTENT}}</span>
           </div>
       </div>
       <!-- <div class="review_edit">리뷰수정</div> -->
@@ -57,8 +57,8 @@ export default {
         name: "Community",
          // params: { REVIEW_CODE : REVIEW_CODE
         params: {
-          title : this.reviews[i].REVIEW_TITLE,
-          content : this.reviews[i].REVIEW_COMMENT
+          title : this.reviews[i].POST_TITLE,
+          content : this.reviews[i].POST_CONTENT
                   },
       });
     },
