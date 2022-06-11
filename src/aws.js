@@ -39,3 +39,30 @@ exports.getUserProfileImg = async (userId) => {
     }
 
 }
+
+
+exports.uploadProfileImg = (userId, file) =>{
+    const params = {
+        Bucket: "vsnovel",
+        Key : `User/${userId}/profile.png`, // 저장되는 파일의 경로 및 이름
+        Body : file // 파일
+    }
+
+    var data = new Promise((resolve, reject)=>{
+      s3.upload(params)
+      .on("httpUploadProgress", evt => {
+          return parseInt((evt.loaded * 100) / evt.total) + "%";
+      })
+      .send((err, data)=>{
+          if(err) {
+              console.log("파일 업로드 실패");
+              console.error(err);
+              reject(err)
+          } else {
+              console.log("파일 업로드 성공", data);
+              resolve("ok");
+          }
+      })
+    })
+  return data
+}

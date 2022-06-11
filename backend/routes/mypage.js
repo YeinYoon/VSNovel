@@ -17,14 +17,12 @@ router.get('/mypagemain', async(req, res) => {
 })
 
 // 마이페이지 프로필 설정
-router.post('/mypagemain', async(req,res)=>{
-
-    const result = await db.execute(`UPDATE tbl_user SET user_nickname = '${req.body.newNickname}', user_img = '${req.body.newImage}', user_intro = '${req.body.newIntro}' WHERE user_id = '${req.user.USER_ID}'`)
+router.post('/updateProfile', async(req,res)=>{
+    const result = await db.execute(`UPDATE tbl_user SET user_nickname = '${req.body.newNickname}', user_intro = '${req.body.newIntro}' WHERE user_id = '${req.user.USER_ID}'`)
     if(result == 'err') {
-        console.log("sry");
+        res.send("err");
     } else {
-        console.log("good");
-        res.send(result.rows);
+        res.send("ok");
     }
 })
 
