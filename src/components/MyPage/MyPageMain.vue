@@ -20,10 +20,10 @@
           <input id="profilenick" type="text" class="profile-nick-input" v-model="newNickname" :disabled="nicknameCng == false">
 
           <div v-if="nicknameCng == false">
-            <button @click="nicknameCng = true; newNickCheck = false;">변경</button>
+            <button class="mypage_main-savebtn" @click="nicknameCng = true; newNickCheck = false;">변경</button>
           </div>
           <div v-else-if="newNickCheck == false">
-            <button @click="newNicknameCheck()">중복검사</button>
+            <button class="mypage_main-savebtn" @click="newNicknameCheck()">중복검사</button>
           </div>
 
         </div>
@@ -44,8 +44,8 @@
         <div class="profile-image-line">
           <div class="col-one">프로필 이미지</div>
 
-          <div v-if="uploadImg == false">
-            프로필 사진을 등록해주세요.
+          <div class="profile-image-input" v-if="uploadImg == false">
+            <img class="profile-image-input" src="@/assets/imgs/noprofile.png">
           </div>
           <div v-else>
             <img id="profile-image" class="profile-image-input" :src="newImage">
@@ -339,7 +339,7 @@ export default {
   position: relative;
   display: inline-block;
   height: 160px;
-  width: 380px;
+  width: 160px;
   background:#5E5E5E;
   border-radius: 20px;
   z-index: 11;
@@ -351,12 +351,9 @@ export default {
 .profile-image-change{
   position: relative;
   display: inline-block;
-  height: 200px;
-  width: 30%;
+  height: 160px;
+  width: 160px;
   background: no-repeat;
-  /* margin-left: 80px;
-  margin-right: 75px;
-  margin-bottom: 15px; */
   margin: 0 75px 15px 80px;
   background-size:cover;
   border-radius: 20px;
@@ -423,6 +420,20 @@ export default {
   font-size: 1.0em;
   cursor: pointer;
   transition: 0.2s all ease;
+}
+
+.mypage_main-savebtn{
+  position: relative;
+  /* width: 120px; */
+  height: 50px;
+  border-radius: 15px;
+  background-color: #2872F9;
+  color: white;
+  font-size: 1.0em;
+  cursor: pointer;
+  transition: 0.2s all ease;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 
 .mypage_main-save_img{
