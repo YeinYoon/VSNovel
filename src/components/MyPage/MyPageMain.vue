@@ -1,4 +1,5 @@
 <template>
+<ConfirmModal ref="confirmModal"></ConfirmModal>
 <!-- 헤더부분(아이콘~부제목) -->
   <div class="tests">
     <div class="header">
@@ -15,8 +16,16 @@
       <div class="profile-container-box">
 
         <div class="profile-nick-line">
-          <div class="col-one">닉네임</div>
-          <input id="profilenick" type="text" class="profile-nick-input" v-model="newNickname">
+          <div class="col-one">닉네임</div> 
+          <input id="profilenick" type="text" class="profile-nick-input" v-model="newNickname" :disabled="nicknameCng == false">
+
+          <div v-if="nicknameCng == false">
+            <button @click="nicknameCng = true; newNickCheck = false;">변경</button>
+          </div>
+          <div v-else-if="newNickCheck == false">
+            <button @click="newNicknameCheck()">중복검사</button>
+          </div>
+
         </div>
 
 
@@ -27,18 +36,25 @@
         </div>
 
         <button id="mypage_main-canc" @click="cancelBtn">취소</button>
-        <button v-if="isSave" id="mypage_main-save" @click="editBtn(newNickname, newImage, newIntro)">수정</button>
+        <button v-if="isSave" id="mypage_main-save" @click="editBtn()">수정</button>
         <button v-else id="mypage_main-save" @click="saveBtn()">저장</button>
 
         <hr>
 
         <div class="profile-image-line">
           <div class="col-one">프로필 이미지</div>
-          <div id="profile-image" class="profile-image-input" type="file" :style="`background-image:url()`" value="newProfile"></div>
+
+          <div v-if="uploadImg == false">
+            프로필 사진을 등록해주세요.
+          </div>
+          <div v-else>
+            <img id="profile-image" class="profile-image-input" :src="newImage">
+          </div>
+          
           <div class="col-three">
             <input @change="upload" type="file" id="input-file" style="display:none" />
             <label class="input-file-button" for="input-file">Browse</label><br>
-            <button class="mypage_main-save_img">업로드</button>
+            <button class="mypage_main-save_img" @click="uploadProfileImg()">업로드</button>
             <!-- <span>512x512 이상의 이미지가 가장 적합 <br>
             허용 확장자:png,jpeg,jpg,gif | > 2MB</span> -->
           </div>
@@ -61,39 +77,64 @@
 
 <script>
 import axios from '../../axios';
+import storage from '../../aws'
+import ConfirmModal from '../modal/ConfirmModal.vue'
 export default {
   created() {
     this.getProfile()
   },
+  watch : {
+    newImage() {
+      if(this.newImage == 'none' || this.newImage == null) {
+        this.uploadImg = false;
+      } else {
+        this.uploadImg = true;
+      }
+    }
+  },
   data(){
     return{
-      uploadimg:'',
+      uploadImg: false,
+      newImage : "",
+      profileImg : '',
 
+      preNickname : "",
       newNickname: "",
-
-      // newImage: "", 프로필 이미지
       newIntro: "",
 
       isSave : true,
-      maxlength:500
+      nicknameCng : false,
+      newNickCheck : false
     }
   },
   methods:{
     // browse버튼을 눌러 이미지를 불러오는 함수
     upload(e){
-      let uploadfile = e.target.files
-      console.log(uploadfile[0].type);
-      
-      let url = URL.createObjectURL(uploadfile[0]);
-      console.log(url);
-      this.newImage=url;
-      // this.uploadimg=url;
-      this.uploadimgfile();
+      this.uploadImg = true;
+
+      this.profileImg = e.target.files[0]
+      var reader = new FileReader();
+      reader.onload = e => {
+        const previewImage = document.getElementById("profile-image")
+        previewImage.src = e.target.result
+      }
+      reader.readAsDataURL(this.profileImg);
     },
+
+    async uploadProfileImg() {
+      var result = await storage.uploadProfileImg(this.$store.state.userId, this.profileImg);
+      if(result == "ok") {
+        this.$store.commit("userLogin", {
+          nickname: this.$store.state.userNickname,
+          id: this.$store.state.userId,
+          profileImg : await storage.getUserProfileImg(this.$store.state.userId)
+        });
+      }
+    },
+
     saveBtn() {
       var newContent = {
         newNickname : this.newNickname,
-        newImage : this.newImage,
         newIntro : this.newIntro
       }
       axios.post('/api/mypage/mypagemain', newContent)
@@ -115,33 +156,69 @@ export default {
         if(result.data=="err"){
           console.log("프로필 데이터 불러오기 실패");
         } else {
-          console.log(result.data);
-          // this.newImage = result.data[0].USER_IMG 프로필 이미지
+          this.newImage = this.$store.state.profileImg;
           this.newNickname = result.data[0].USER_NICKNAME
           this.newIntro = result.data[0].USER_INTRO
+          this.preNickname = result.data[0].USER_NICKNAME;
         }
       })
     },
-    // 불러온 이미지를 프로필 이미지 상에 출력해주는 함수
-    uploadimgfile(){
-      document.getElementById('profile-image').classList.replace('profile-image-input','profile-image-change');
-      if(document.getElementById('profile-image').style.backgroundImage==null){
-          document.getElementById('profile-image').style.backgroundImage=this.uploadimg;
+
+    newNicknameCheck() { // 닉네임 중복검사
+      if(this.newNickname == "") {
+        this.$store.commit('gModalOn', {msg : "닉네임을 입력해주세요.", size : "normal"});
+      } else if(this.newNickname == this.preNickname) {
+        this.$store.commit('gModalOn', {msg : "이전 닉네임과 동일합니다.", size : "normal"});
+      } else {
+
+        axios.post('/api/auth/existNicknameCheck', {newNickname : this.newNickname})
+        .then(async (result)=>{
+          if(result.data == "exist") {
+            this.$store.commit('gModalOn', {msg : "이미 존재하는 닉네임입니다.", size : "normal"});
+            this.newNickCheck = false;
+          } else {
+            var confirm = await this.$refs.confirmModal.show({
+              msg : `닉네임 [${this.newNickname}]을(를) 사용하시겠습니까?`,
+              size : "normal",
+              btn1 : "확인",
+              btn2 : "취소"
+            });
+            if(confirm) {
+              this.newNickCheck = true;
+              this.nicknameCng = false;
+            } else {
+              this.newNickCheck = false;
+              this.nicknameCng = true;
+            }
+          }
+        })
+        .catch((err)=>{
+          console.error(err);
+        })
+
       }
     },
 
     // 프로필 수정버튼을 눌렀을 때 동작하는 함수
-    editBtn(newNickname,newImage,newIntro){
-      const nick = document.getElementById('profilenick');
-      const intro = document.getElementById('profileintro');
-      const browse = document.getElementById('input-file');
-      this.isSave = false;
-      nick.disabled = true;
-      intro.disabled = true;
-      browse.disabled = false;
-      this.newNickname = newNickname;
-      this.newImage = newImage;
-      this.newIntro = newIntro;
+    editBtn(){
+      if(this.newNickname == '' || this.newNickCheck != true) {
+        this.$store.commit('gModalOn', {msg : "닉네임이 비어있거나 중복검사를 진행하지 않았습니다.", size : "normal"});
+      } else {
+        var data = {
+          newNickname : this.newNickname,
+          newIntro : this.newIntro
+        }
+        axios.post('/api/mypage/updateProfile', data)
+        .then((result)=>{
+          if(result.data == "err") {
+            this.$store.commit('gModalOn', {msg : "ERR : 프로필 수정 실패", size : "normal"});
+          } else {
+            this.$store.commit('gModalOn', {msg : "프로필이 수정되었습니다.", size : "normal"});
+            this.newNickCheck = false;
+            this.nicknameCng = false;
+          }
+        })
+      }
     },
 
     // 취소 버튼을 눌렀을 때 동작하는 함수
@@ -169,6 +246,9 @@ export default {
       this.$router.push(link);
     },
     
+  },
+  components : {
+    ConfirmModal
   }
 }
 
