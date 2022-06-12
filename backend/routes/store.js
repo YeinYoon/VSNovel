@@ -18,19 +18,55 @@ router.get('/getCateList', async (req,res)=>{
 //소설 리스트 불러오기
 router.post('/getNovelList', async (req,res)=>{
     if(req.body.contentsType == '' && req.body.category == 0) {
-        var all = await db.execute(`SELECT * FROM tbl_novel`);
-        if(all == "err") {
-            res.send("err");
+
+        if(req.body.priceType == 'on') {
+            var price = await db.execute(`SELECT * FROM tbl_novel WHERE nove_price > 0`);
+            if(price == "err") {
+                res.send("err");
+            } else {
+                res.send(price.rows);
+            }
+        } else if(req.body.priceType == 'off') {
+            var nonPrice = await db.execute(`SELECT * FROM tbl_novel WHERE nove_price = 0`);
+            if(nonPrice == "err") {
+                res.send("err");
+            } else {
+                res.send(nonPrice.rows);
+            }       
         } else {
-            res.send(all.rows);
+            var all = await db.execute(`SELECT * FROM tbl_novel`);
+            if(all == "err") {
+                res.send("err");
+            } else {
+                res.send(all.rows);
+            }
         }
+
     } else if(req.body.contentsType == '' && req.body.category != 0) {
-        var cate = await db.execute(`SELECT * FROM tbl_novel WHERE cate_code = ${req.body.category}`);
-        if(cate == "err") {
-            res.send("err");
+
+        if(req.body.priceType == 'on') {
+            var catePrice = await db.execute(`SELECT * FROM tbl_novel WHERE nove_price > 0 AND cate_code = ${req.body.category}`);
+            if(catePrice == "err") {
+                res.send("err");
+            } else {
+                res.send(catePrice.rows);
+            }
+        } else if(req.body.priceType == 'off') {
+            var nonPriceCate = await db.execute(`SELECT * FROM tbl_novel WHERE nove_price = 0 AND cate_code = ${req.body.category}`);
+            if(nonPriceCate == "err") {
+                res.send("err");
+            } else {
+                res.send(nonPriceCate.rows);
+            }       
         } else {
-            res.send(cate.rows);
+            var cateAll = await db.execute(`SELECT * FROM tbl_novel WHERE cate_code = ${req.body.category}`);
+            if(cateAll == "err") {
+                res.send("err");
+            } else {
+                res.send(cateAll.rows);
+            }
         }
+
     } else {
 
         var existCategory = false;

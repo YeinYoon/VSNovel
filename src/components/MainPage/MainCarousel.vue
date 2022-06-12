@@ -44,13 +44,8 @@ export default {
     }
   },
   created(){
-    console.log('hihihi')
     axios.get('api/main/carousel').then((result)=>{
-        console.log(result);
-        
-        console.log(this.sec)
         this.a31 = result.data;
-        
         console.log(this.a31);
     }).catch(()=>{console.log('hi')}).finally(()=>{console.log('fin')})
   }
