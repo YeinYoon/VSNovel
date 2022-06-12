@@ -35,7 +35,7 @@
           <!-- <div class="intro-cont-align"><span>{{newIntro.length}}</span>/500자</div> -->
         </div>
 
-        <button id="mypage_main-canc" @click="cancelBtn">취소</button>
+        <!-- <button id="mypage_main-canc" @click="cancelBtn">취소</button> -->
         <button v-if="isSave" id="mypage_main-save" @click="editBtn()">수정</button>
         <button v-else id="mypage_main-save" @click="saveBtn()">저장</button>
 
@@ -411,7 +411,7 @@ export default {
 
 /* 저장 버튼 */
 #mypage_main-save{
-  transform: translateX(350%);
+  transform: translateX(455%);
   width: 120px;
   height: 40px;
   border-radius: 15px;
