@@ -117,23 +117,28 @@ router.post('/postconfirm', async(req, res) => {
     req.session.destroy()
     res.send(result)
 })
-// select tbl_board.boar_title, tbl_post.post_title, tbl_post.post_vote, tbl_post.post_view,
+// select tbl_board.boar_title, tbl_post.post_title, tbl_post.post_vote, tbl_post.post_view, 
 // (select count(*) from tbl_comment where vill_code = -1) "조회수"
 // from tbl_post, tbl_board, tbl_village, tbl_novel
 // where tbl_post.nove_code = tbl_novel.nove_code and
 //                                      tbl_post.cate_code = tbl_novel.cate_code and
 //                                      tbl_village.vill_code = tbl_board.vill_code and
-//                                      tbl_board.boar_code = tbl_post.boar_code
-// group by tbl_board.boar_title, tbl_post.post_title, tbl_post.post_vote, tbl_post.post_view;
+//                                      tbl_board.vill_code = tbl_post.vill_code and
+//                                      tbl_board.boar_code = tbl_post.boar_code and
+//                                      tbl_village.vill_code = -1
+// group by tbl_board.boar_title, tbl_post.post_title, tbl_post.post_vote, tbl_post.post_view
 // 게시글 불러오기
 router.get('/getpost', async(req, res) => {
     var result = await db.execute(`SELECT tbl_board.boar_title, tbl_post.post_title, tbl_post.post_vote, tbl_post.post_view,
-                                    (select count(*) from tbl_comment where vill_code = -1) "조회수"
-                                    FROM tbl_post, tbl_board, tbl_village, tbl_novel
+                                    (select count(*) from tbl_comment where vill_code = -1) "댓글수"
                                     WHERE tbl_post.nove_code = tbl_novel.nove_code and
                                     tbl_post.cate_code = tbl_novel.cate_code and
-                                    
-                                    user_id = '${req.user.USER_ID}'`)
+                                    tbl_village.vill_code = tbl_board.vill_code and
+                                    tbl_board.vill_code = tbl_post.vill_code and
+                                    tbl_board.boar_code = tbl_post.boar_code and
+                                    tbl_village.vill_code = -1 and
+                                    user_id = '${req.user.USER_ID}'
+                                    group by tbl_board.boar_title, tbl_post.post_title, tbl_post.post_vote, tbl_post.post_view`)
     if(result == 'err') {
         res.send('fail')
     } else {

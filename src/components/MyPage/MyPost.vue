@@ -21,7 +21,7 @@
       </div>
       <hr class="lines" />
       <div class="post_line" v-for="(post, i) in postData" :key="i" @click="postMove()">
-        <div class="post_place">{{ post.POST_CODE }}</div>
+        <div class="post_place">{{ post.BOAR_TITLE }}</div>
         <div class="post_title" style="cursor:pointer">{{ post.POST_TITLE }}</div>
         <div class="post_like">{{ post.POST_VOTE }}</div>
         <div class="post_comment">{{ post.COMM_NUM }}</div>
