@@ -24,6 +24,13 @@ router.post('/getNovelList', async (req,res)=>{
         } else {
             res.send(all.rows);
         }
+    } else if(req.body.contentsType == '' && req.body.category != 0) {
+        var cate = await db.execute(`SELECT * FROM tbl_novel WHERE cate_code = ${req.body.category}`);
+        if(cate == "err") {
+            res.send("err");
+        } else {
+            res.send(cate.rows);
+        }
     } else {
 
         var existCategory = false;
@@ -90,11 +97,11 @@ router.post('/getNovelList', async (req,res)=>{
                 break;
         }
 
+        console.log(SQL);
         var result = await db.execute(SQL);
         if(result == "err") {
             res.send("err");
         } else {
-            console.log(result);
             res.send(result.rows);
         }
 
