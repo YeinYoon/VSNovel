@@ -160,8 +160,8 @@ export default {
 .commu_section {
   position:relative;
   top:10%;
-  width: 95%;
-  height: 90%;
+  width: 93%;
+  height: 87%;
   margin: 0 auto;
   overflow-y:scroll;
   -ms-overflow-style:none;
