@@ -14,7 +14,7 @@
         <div class="newNovel" id="newNovel" @click="novelEvent($event, 'newNovel', 'release')">
           신작
         </div>
-`        <div class="payNovel" id="payNovel" @click="novelEvent($event, 'payNovel', 'bought')">
+        <div class="payNovel" id="payNovel" @click="novelEvent($event, 'payNovel', 'bought')">
           구매↑
         </div>
         <div class="starNovel" id="starNovel" @click="novelEvent($event, 'starNovel', 'review')">
