@@ -67,13 +67,26 @@ export default {
       priceType: 0,
       modal: false,
       modalData : {},
+
     };
   },
   props:{
     storeDatas : Array,
+    searchData : Object
   },
   components: {
     StoreModal,
+  },
+  watch : {
+    searchData : {
+      deep : true,
+      handler() {
+        this.priceCheck();
+      }
+    },
+    priceType() {
+      this.priceCheck();
+    }
   },
   methods: {
     priceClick() {
@@ -81,6 +94,21 @@ export default {
       this.priceType++;
       if (this.priceType > 2) this.priceType = 0;
     },
+
+    priceCheck() {
+      switch(this.priceType) {
+        case 0 :
+          this.$emit("priceCheck", 'none');
+          break;
+        case 1 :
+          this.$emit("priceCheck", 'on');
+          break;
+        case 2 :
+          this.$emit("priceCheck", 'off');
+          break;
+      }
+    },
+
     modalOpen(data) {
       // 모달 오픈 함수
       this.modalData = data;
