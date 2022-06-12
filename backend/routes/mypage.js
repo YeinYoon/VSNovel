@@ -6,7 +6,7 @@ const db = require('../database/db');
 // 마이페이지 프로필 불러오기
 router.get('/mypagemain', async(req, res) => {
     console.log(req.user.USER_ID)
-    const result = await db.execute(`SELECT user_nickname, user_img, user_intro from tbl_user WHERE user_id = '${req.user.USER_ID}'`)
+    const result = await db.execute(`SELECT user_nickname, user_intro from tbl_user WHERE user_id = '${req.user.USER_ID}'`)
     if(result == 'err') {
         console.log("sry");
     } else {
