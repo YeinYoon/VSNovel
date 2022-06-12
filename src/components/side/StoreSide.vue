@@ -8,13 +8,13 @@
     <div>
       <div class="group"><span>· 컨텐츠 분류</span></div>
       <div class="novel_div">
-        <div class="novel" id="novel" @click="novelEvent($event, 'novel')">
+        <div class="novel" id="novel" @click="novelEvent($event, 'novel', 'default')">
           기본
         </div>
-        <div class="newNovel" id="newNovel" @click="novelEvent($event, 'newNovel')">
+        <div class="newNovel" id="newNovel" @click="novelEvent($event, 'newNovel', 'new')">
           신작
         </div>
-        <div class="payNovel" id="payNovel" @click="novelEvent($event, 'payNovel')">
+        <div class="payNovel" id="payNovel" @click="novelEvent($event, 'payNovel', '')">
           구매↑
         </div>
         <div class="starNovel" id="starNovel" @click="novelEvent($event, 'starNovel')">
@@ -62,7 +62,12 @@ export default {
       clickNovel : 'novel',
 
       storeDatas : [],
-      cateCode : ""
+      cateCode : "",
+
+      search : {
+        contentsType : null,
+        genre : null,
+      }
     };
   },
   methods: {

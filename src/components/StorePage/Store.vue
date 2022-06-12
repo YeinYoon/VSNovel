@@ -37,6 +37,9 @@
             <span class="list_title">{{ novel.NOVE_TITLE }}</span>
             <span class="list_team">{{ novel.writer }} / {{ novel.NOVE_TEAMNAME }}</span>
             <span class="list_content">{{ novel.NOVE_SYNOPSIS }}</span>
+            <span class="list_content">{{ novel.NOVE_RELEASE }}</span>
+            <span class="list_content">{{ novel.NOVE_BOUGHT }}</span>
+            <span class="list_content">{{ novel.NOVE_REVIEW }}</span>
           </div>
         </div>
         <div class="list_price">
