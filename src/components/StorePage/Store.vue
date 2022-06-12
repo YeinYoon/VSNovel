@@ -37,9 +37,9 @@
             <span class="list_title">{{ novel.NOVE_TITLE }}</span>
             <span class="list_team">{{ novel.writer }} / {{ novel.NOVE_TEAMNAME }}</span>
             <span class="list_content">{{ novel.NOVE_SYNOPSIS }}</span>
-            <span class="list_content">{{ novel.NOVE_RELEASE }}</span>
-            <span class="list_content">{{ novel.NOVE_BOUGHT }}</span>
-            <span class="list_content">{{ novel.NOVE_REVIEW }}</span>
+            <span class="list_content_date">{{ novel.NOVE_RELEASE }}</span>
+            <span class="list_content_buy">구매횟수 : {{ novel.NOVE_BOUGHT }}</span>
+            <span class="list_content_review">리뷰수 : {{ novel.NOVE_REVIEW }}</span>
           </div>
         </div>
         <div class="list_price">
@@ -248,6 +248,28 @@ export default {
   overflow: hidden;
   white-space: nowrap;
 }
+
+.list_content_date {
+  position: absolute;
+  top: 98px;
+  /* left: calc(100% - 40px); */
+  font-size: 0.7em;
+}
+
+.list_content_buy {
+  position: absolute;
+  top: 98px;
+  left: 270px;
+  font-size: 0.7em;
+}
+
+.list_content_review {
+  position: absolute;
+  top: 98px;
+  left: 380px;
+  font-size: 0.7em;
+}
+
 .list_price {
   background-color: #2872f9;
   padding: 0 20px;
