@@ -54,7 +54,11 @@
           <div class="col-three">
             <input @change="upload" type="file" id="input-file" style="display:none" />
             <label class="input-file-button" for="input-file">Browse</label><br>
-            <button class="mypage_main-save_img" @click="uploadProfileImg()">업로드</button>
+
+            <div v-if="this.profileImg != ''">
+              <button class="mypage_main-save_img" @click="uploadProfileImg()">업로드</button>
+            </div>
+            
             <!-- <span>512x512 이상의 이미지가 가장 적합 <br>
             허용 확장자:png,jpeg,jpg,gif | > 2MB</span> -->
           </div>
