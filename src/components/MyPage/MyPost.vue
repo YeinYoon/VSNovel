@@ -9,7 +9,7 @@
     </div>
     <div class="post_section">
       <div class="post_line">
-        <div class="post_place">빌리지 이름</div>
+        <div class="post_place">작성위치</div>
         <div class="post_title">제목</div>
         <div class="post_like">추천수</div>
         <div class="post_comment">댓글수</div>

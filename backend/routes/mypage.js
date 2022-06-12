@@ -117,10 +117,23 @@ router.post('/postconfirm', async(req, res) => {
     req.session.destroy()
     res.send(result)
 })
-
+// select tbl_board.boar_title, tbl_post.post_title, tbl_post.post_vote, tbl_post.post_view,
+// (select count(*) from tbl_comment where vill_code = -1) "조회수"
+// from tbl_post, tbl_board, tbl_village, tbl_novel
+// where tbl_post.nove_code = tbl_novel.nove_code and
+//                                      tbl_post.cate_code = tbl_novel.cate_code and
+//                                      tbl_village.vill_code = tbl_board.vill_code and
+//                                      tbl_board.boar_code = tbl_post.boar_code
+// group by tbl_board.boar_title, tbl_post.post_title, tbl_post.post_vote, tbl_post.post_view;
 // 게시글 불러오기
 router.get('/getpost', async(req, res) => {
-    var result = await db.execute(`SELECT tbl_post.post_code, tbl_post.post_title, tbl_post.post_content, tbl_post.post_view, tbl_post.post_vote FROM tbl_post WHERE user_id = '${req.user.USER_ID}'`)
+    var result = await db.execute(`SELECT tbl_board.boar_title, tbl_post.post_title, tbl_post.post_vote, tbl_post.post_view,
+                                    (select count(*) from tbl_comment where vill_code = -1) "조회수"
+                                    FROM tbl_post, tbl_board, tbl_village, tbl_novel
+                                    WHERE tbl_post.nove_code = tbl_novel.nove_code and
+                                    tbl_post.cate_code = tbl_novel.cate_code and
+                                    
+                                    user_id = '${req.user.USER_ID}'`)
     if(result == 'err') {
         res.send('fail')
     } else {
@@ -163,9 +176,12 @@ router.get('/getpost', async(req, res) => {
 // 리뷰 불러오기
 router.get('/getreview', async(req, res) => {
     var result = await db.execute(`SELECT tbl_post.post_title, tbl_novel.nove_title, tbl_post.post_content, tbl_novel.nove_cover
-                                     FROM tbl_novel, tbl_post
+                                     FROM tbl_novel, tbl_post, tbl_village, tbl_board
                                      where tbl_post.nove_code = tbl_novel.nove_code and
                                      tbl_post.cate_code = tbl_novel.cate_code and
+                                     tbl_village.vill_code = tbl_board.vill_code and
+                                     tbl_board.boar_code = tbl_post.boar_code and
+                                     tbl_village.vill_code = -1 and tbl_board.boar_code = 3 and
                                      user_id = '${req.user.USER_ID}'`)
     if(result == "err") {
         res.send("fail")
