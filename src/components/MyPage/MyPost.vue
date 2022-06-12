@@ -6,6 +6,10 @@
         <span class="title">마이페이지</span>
         <span class="my_topic">내가 쓴 게시글</span>
       </div>
+      <div class="PostTabs">
+        <button>일반</button>
+        <button>빌리지</button>
+      </div>
     </div>
     <div class="post_section">
       <div class="post_line">
@@ -85,5 +89,20 @@ export default {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+
+.PostTabs {
+  position: absolute;
+  top: 90px;
+  left: calc(100% - 215px);
+}
+
+.PostTabs button {
+  border-radius: 15px;
+  padding: 9px 20px 9px 20px;
+  margin: 2px;
+  color: white;
+  background: #2872f9;
+  display: inline;
 }
 </style>
