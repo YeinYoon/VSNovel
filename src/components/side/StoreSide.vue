@@ -8,16 +8,16 @@
     <div>
       <div class="group"><span>· 컨텐츠 분류</span></div>
       <div class="novel_div">
-        <div class="novel" id="novel" @click="novelEvent($event, 'novel')">
+        <div class="novel" id="novel" @click="novelEvent($event, 'novel', '')">
           기본
         </div>
-        <div class="newNovel" id="newNovel" @click="novelEvent($event, 'newNovel')">
+        <div class="newNovel" id="newNovel" @click="novelEvent($event, 'newNovel', 'release')">
           신작
         </div>
-        <div class="payNovel" id="payNovel" @click="novelEvent($event, 'payNovel')">
+        <div class="payNovel" id="payNovel" @click="novelEvent($event, 'payNovel', 'bought')">
           구매↑
         </div>
-        <div class="starNovel" id="starNovel" @click="novelEvent($event, 'starNovel')">
+        <div class="starNovel" id="starNovel" @click="novelEvent($event, 'starNovel', 'review')">
           리뷰↑
         </div>
       </div>
@@ -33,7 +33,7 @@
       </div>
     </div>
   </div>
-  <Store :storeDatas = "storeDatas"/>
+  <Store :storeDatas = "storeDatas" :searchData = "search" @priceCheck = "getNovelList"/>
 </div>
 </template>
 
@@ -47,7 +47,7 @@ export default {
   },
   created() {
     this.getCateList();
-    this.getNovelList();
+    this.getNovelListFirst();
     this.$router.push('/store');
   },
   mounted(){
@@ -62,19 +62,26 @@ export default {
       clickNovel : 'novel',
 
       storeDatas : [],
-      cateCode : ""
+      cateCode : "",
+
+      search : {
+        contentsType : '',
+        category : 0,
+        priceType : 'none'
+      }
     };
   },
   methods: {
-    novelEvent(event, className) {
+    novelEvent(event, className, contentsType) {
       // 사이드바 강조효과
       let id = document.getElementById(this.clickNovel);
       if (className != this.clickNovel) {
         id.style.animationName = "defaultAnimation"; // 기본
       }
-        event.target.style.animationName = "newAnimation"; // 바뀌는 것
-        this.clickNovel = className;
-        
+      event.target.style.animationName = "newAnimation"; // 바뀌는 것
+      this.clickNovel = className;
+
+      this.search.contentsType = contentsType;
     },
     hidden() {
     // 장르 열고 닫기
@@ -89,12 +96,30 @@ export default {
       event.target.style.animationName = 'clickBtn';
       this.genreNum = num;
       this.cateCode = cateCode;
-      this.getNovelList();
+      // this.getNovelList();
+
+      this.search.category = cateCode;
     },
 
-    //노벨 리스트 조회
-    getNovelList() {
-      axios.post('/api/store/getNovelList', {cateCode : this.cateCode})
+    getNovelListFirst() {
+      console.log(this.search);
+      axios.post('/api/store/getNovelList', this.search)
+      .then((result)=>{
+        if(result.data == "err") {
+          console.log("스토어 데이터 불러오기 실패");
+        } else {
+          this.storeDatas = result.data;
+        }
+      })
+    },
+
+
+    //노벨 리스트 검색 조회
+    getNovelList(priceTypeData) {
+      this.search.priceType = priceTypeData;
+      console.log(this.search);
+
+      axios.post('/api/store/getNovelList', this.search)
       .then((result)=>{
         if(result.data == "err") {
           console.log("스토어 데이터 불러오기 실패");

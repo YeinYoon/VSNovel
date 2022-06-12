@@ -35,7 +35,7 @@
           <!-- <div class="intro-cont-align"><span>{{newIntro.length}}</span>/500자</div> -->
         </div>
 
-        <button id="mypage_main-canc" @click="cancelBtn">취소</button>
+        <!-- <button id="mypage_main-canc" @click="cancelBtn">취소</button> -->
         <button v-if="isSave" id="mypage_main-save" @click="editBtn()">수정</button>
         <button v-else id="mypage_main-save" @click="saveBtn()">저장</button>
 
@@ -54,7 +54,11 @@
           <div class="col-three">
             <input @change="upload" type="file" id="input-file" style="display:none" />
             <label class="input-file-button" for="input-file">Browse</label><br>
-            <button class="mypage_main-save_img" @click="uploadProfileImg()">업로드</button>
+
+            <div v-if="this.profileImg != ''">
+              <button class="mypage_main-save_img" @click="uploadProfileImg()">업로드</button>
+            </div>
+            
             <!-- <span>512x512 이상의 이미지가 가장 적합 <br>
             허용 확장자:png,jpeg,jpg,gif | > 2MB</span> -->
           </div>
@@ -413,7 +417,7 @@ export default {
 
 /* 저장 버튼 */
 #mypage_main-save{
-  transform: translateX(350%);
+  transform: translateX(455%);
   width: 120px;
   height: 40px;
   border-radius: 15px;

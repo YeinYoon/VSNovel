@@ -17,27 +17,131 @@ router.get('/getCateList', async (req,res)=>{
 
 //소설 리스트 불러오기
 router.post('/getNovelList', async (req,res)=>{
-    if(req.body.cateCode == "") { //조건 없이 전체 조회
-        var allNovel = await db.execute(`SELECT * FROM tbl_novel`);
-        if(allNovel=="err") {
-            res.send("err");
-        } else {
-            allNovel = allNovel.rows;
-            console.log(allNovel);
-            res.send(allNovel);
-        }
-    }else { // 카테고리 타입만 있을 때 
-        var cateNovel = await db.execute(`SELECT * FROM tbl_novel WHERE cate_code = '${req.body.cateCode}'`)
-        if(cateNovel == "err") {
-            res.send("err");
-        } else {
-            cateNovel = cateNovel.rows;
-            console.log(cateNovel);
-            res.send(cateNovel);
-        }
-    }
+    if(req.body.contentsType == '' && req.body.category == 0) {
 
-    
+        if(req.body.priceType == 'on') {
+            var price = await db.execute(`SELECT * FROM tbl_novel WHERE nove_price > 0`);
+            if(price == "err") {
+                res.send("err");
+            } else {
+                res.send(price.rows);
+            }
+        } else if(req.body.priceType == 'off') {
+            var nonPrice = await db.execute(`SELECT * FROM tbl_novel WHERE nove_price = 0`);
+            if(nonPrice == "err") {
+                res.send("err");
+            } else {
+                res.send(nonPrice.rows);
+            }       
+        } else {
+            var all = await db.execute(`SELECT * FROM tbl_novel`);
+            if(all == "err") {
+                res.send("err");
+            } else {
+                res.send(all.rows);
+            }
+        }
+
+    } else if(req.body.contentsType == '' && req.body.category != 0) {
+
+        if(req.body.priceType == 'on') {
+            var catePrice = await db.execute(`SELECT * FROM tbl_novel WHERE nove_price > 0 AND cate_code = ${req.body.category}`);
+            if(catePrice == "err") {
+                res.send("err");
+            } else {
+                res.send(catePrice.rows);
+            }
+        } else if(req.body.priceType == 'off') {
+            var nonPriceCate = await db.execute(`SELECT * FROM tbl_novel WHERE nove_price = 0 AND cate_code = ${req.body.category}`);
+            if(nonPriceCate == "err") {
+                res.send("err");
+            } else {
+                res.send(nonPriceCate.rows);
+            }       
+        } else {
+            var cateAll = await db.execute(`SELECT * FROM tbl_novel WHERE cate_code = ${req.body.category}`);
+            if(cateAll == "err") {
+                res.send("err");
+            } else {
+                res.send(cateAll.rows);
+            }
+        }
+
+    } else {
+
+        var existCategory = false;
+        if(req.body.category != 0) {
+            existCategory = true;
+        }
+
+        var priceSql;
+        switch(req.body.priceType) {
+            case 'none' :
+                priceSql = '';
+                break;
+            case 'on' :
+                priceSql = ' nove_price > 0 ';
+                break;
+            case 'off' :
+                priceSql = ' nove_price = 0 ';
+                break;
+        }
+
+        var SQL; 
+        switch(req.body.contentsType) {
+            case 'release' :
+                if(existCategory == false && priceSql == '') {
+                    SQL = `SELECT * FROM tbl_novel ORDER BY nove_release DESC`;
+                } else if(existCategory == true && priceSql == '') {
+                    SQL = `SELECT * FROM tbl_novel
+                    WHERE cate_code = ${req.body.category}
+                    ORDER BY nove_release DESC`
+                } else {
+                    SQL = `SELECT * FROM tbl_novel
+                    WHERE cate_code = ${req.body.category} AND`
+                    + priceSql +
+                    `ORDER BY nove_release DESC`
+                }
+                break;
+            case 'bought' :
+                if(existCategory == false && priceSql == '') {
+                    SQL = `SELECT * FROM tbl_novel ORDER BY nove_bought DESC`;
+                } else if(existCategory == true && priceSql == '') {
+                    SQL = `SELECT * FROM tbl_novel
+                    WHERE cate_code = ${req.body.category}
+                    ORDER BY nove_bought DESC`
+                } else {
+                    SQL = `SELECT * FROM tbl_novel
+                    WHERE cate_code = ${req.body.category} AND`
+                    + priceSql +
+                    `ORDER BY nove_bought DESC`
+                }
+                break;
+            case 'review' :
+                if(existCategory == false && priceSql == '') {
+                    SQL = `SELECT * FROM tbl_novel ORDER BY nove_review DESC`;
+                } else if(existCategory == true && priceSql == '') {
+                    SQL = `SELECT * FROM tbl_novel
+                    WHERE cate_code = ${req.body.category}
+                    ORDER BY nove_review DESC`
+                } else {
+                    SQL = `SELECT * FROM tbl_novel
+                    WHERE cate_code = ${req.body.category} AND`
+                    + priceSql +
+                    `ORDER BY nove_review DESC`
+                }
+                break;
+        }
+
+        console.log(SQL);
+        var result = await db.execute(SQL);
+        if(result == "err") {
+            res.send("err");
+        } else {
+            res.send(result.rows);
+        }
+
+    }
 })
 
 

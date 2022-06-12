@@ -249,7 +249,7 @@ export default {
 .strong_notice_post {
     /* cursor: pointer; */
     position: relative;
-    width: 90%;
+    width: 93%;
     height: 120px;
     margin-top:10px;
     margin: 20px auto;
@@ -261,7 +261,7 @@ export default {
     background-color:#2872f9;
     position: relative;
     top: -20px;
-    left: 96%;
+    left: 95%;
     z-index: 12;
 }
 

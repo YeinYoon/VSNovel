@@ -51,7 +51,10 @@
               <span>추천</span>
               <div>({{topicObject.likes}})</div>
             </div>
-            <div class="vote_btn_no" @click="postBtn({type:'nolikevote'})"><span>비추천 ({{topicObject.nolike}})</span></div>
+            <div class="vote_btn_no" @click="postBtn({type:'nolikevote'})">
+              <span>비추천</span>
+              <div>({{topicObject.nolike}})</div>
+            </div>
           </div>
         </div>
 
@@ -287,12 +290,12 @@ export default {
     bottom: 20px;
     margin-top: 10px;
     width: 100%;
-    height: 50px;
+    /* height: 50px; */
 }
 .vote_btn_ok {
   display: inline-block;
   width : 100px;
-  line-height: 50px;
+  /* line-height: 50px; */
   text-align: center;
   margin: 0 10px;
   background-color: #2872f9;
@@ -307,7 +310,7 @@ export default {
 .vote_btn_no {
   display: inline-block;
   width : 100px;
-  line-height: 50px;
+  /* line-height: 50px; */
   text-align: center;
   /* height: 100%; */
   margin: 0 10px;

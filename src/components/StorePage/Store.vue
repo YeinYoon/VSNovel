@@ -25,22 +25,32 @@
       </div>
     </div>
     <div class="store_section">
-      <div
-        class="work_list"
-        v-for="novel in storeDatas"
-        :key="novel.NOVE_CODE"
-        @click="modalOpen(novel)"
-      >
-        <img class="list_img" src="@/assets/imgs/noimage.png" alt="소설표지" />
-        <div class="work_list_con">
-          <div class="list_span">
-            <span class="list_title">{{ novel.NOVE_TITLE }}</span>
-            <span class="list_team">{{ novel.writer }} / {{ novel.NOVE_TEAMNAME }}</span>
-            <span class="list_content">{{ novel.NOVE_SYNOPSIS }}</span>
-          </div>
+      <div class="nolist" v-if="storeDatas.length == 0">
+        <div class="nolistResult">
+          <span>대상이 없습니다!</span>
         </div>
-        <div class="list_price">
-          <span> {{ novel.NOVE_PRICE }}&#8361; </span>
+      </div>
+      <div v-else>
+        <div
+          class="work_list"
+          v-for="novel in storeDatas"
+          :key="novel.NOVE_CODE"
+          @click="modalOpen(novel)"
+        >
+          <img class="list_img" src="@/assets/imgs/noimage.png" alt="소설표지" />
+          <div class="work_list_con">
+            <div class="list_span">
+              <span class="list_title">{{ novel.NOVE_TITLE }}</span>
+              <span class="list_team">{{ novel.writer }} / {{ novel.NOVE_TEAMNAME }}</span>
+              <span class="list_content">{{ novel.NOVE_SYNOPSIS }}</span>
+              <span class="list_content_date">{{ novel.NOVE_RELEASE }}</span>
+              <span class="list_content_buy">구매횟수 : {{ novel.NOVE_BOUGHT }}</span>
+              <span class="list_content_review">리뷰수 : {{ novel.NOVE_REVIEW }}</span>
+            </div>
+          </div>
+          <div class="list_price">
+            <span> {{ novel.NOVE_PRICE }}&#8361; </span>
+          </div>
         </div>
       </div>
     </div>
@@ -64,13 +74,26 @@ export default {
       priceType: 0,
       modal: false,
       modalData : {},
+
     };
   },
   props:{
     storeDatas : Array,
+    searchData : Object
   },
   components: {
     StoreModal,
+  },
+  watch : {
+    searchData : {
+      deep : true,
+      handler() {
+        this.priceCheck();
+      }
+    },
+    priceType() {
+      this.priceCheck();
+    }
   },
   methods: {
     priceClick() {
@@ -78,6 +101,21 @@ export default {
       this.priceType++;
       if (this.priceType > 2) this.priceType = 0;
     },
+
+    priceCheck() {
+      switch(this.priceType) {
+        case 0 :
+          this.$emit("priceCheck", 'none');
+          break;
+        case 1 :
+          this.$emit("priceCheck", 'on');
+          break;
+        case 2 :
+          this.$emit("priceCheck", 'off');
+          break;
+      }
+    },
+
     modalOpen(data) {
       // 모달 오픈 함수
       this.modalData = data;
@@ -213,6 +251,32 @@ export default {
   position: relative;
   cursor: pointer;
 }
+
+.nolist {
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+}
+
+.nolistResult {
+  background-color: #444444;
+  width: 300px;
+  height: 150px;
+  border-radius: 50px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.nolistResult span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .list_img {
   width: 100px;
   height: 140px;
@@ -244,6 +308,28 @@ export default {
   overflow: hidden;
   white-space: nowrap;
 }
+
+.list_content_date {
+  position: absolute;
+  top: 98px;
+  /* left: calc(100% - 40px); */
+  font-size: 0.7em;
+}
+
+.list_content_buy {
+  position: absolute;
+  top: 98px;
+  left: 270px;
+  font-size: 0.7em;
+}
+
+.list_content_review {
+  position: absolute;
+  top: 98px;
+  left: 380px;
+  font-size: 0.7em;
+}
+
 .list_price {
   background-color: #2872f9;
   padding: 0 20px;
