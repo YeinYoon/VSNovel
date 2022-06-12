@@ -25,25 +25,30 @@
       </div>
     </div>
     <div class="store_section">
-      <div
-        class="work_list"
-        v-for="novel in storeDatas"
-        :key="novel.NOVE_CODE"
-        @click="modalOpen(novel)"
-      >
-        <img class="list_img" src="@/assets/imgs/noimage.png" alt="소설표지" />
-        <div class="work_list_con">
-          <div class="list_span">
-            <span class="list_title">{{ novel.NOVE_TITLE }}</span>
-            <span class="list_team">{{ novel.writer }} / {{ novel.NOVE_TEAMNAME }}</span>
-            <span class="list_content">{{ novel.NOVE_SYNOPSIS }}</span>
-            <span class="list_content_date">{{ novel.NOVE_RELEASE }}</span>
-            <span class="list_content_buy">구매횟수 : {{ novel.NOVE_BOUGHT }}</span>
-            <span class="list_content_review">리뷰수 : {{ novel.NOVE_REVIEW }}</span>
+      <div v-if="storeDatas.length == 0">
+        12321321321
+      </div>
+      <div v-else>
+        <div
+          class="work_list"
+          v-for="novel in storeDatas"
+          :key="novel.NOVE_CODE"
+          @click="modalOpen(novel)"
+        >
+          <img class="list_img" src="@/assets/imgs/noimage.png" alt="소설표지" />
+          <div class="work_list_con">
+            <div class="list_span">
+              <span class="list_title">{{ novel.NOVE_TITLE }}</span>
+              <span class="list_team">{{ novel.writer }} / {{ novel.NOVE_TEAMNAME }}</span>
+              <span class="list_content">{{ novel.NOVE_SYNOPSIS }}</span>
+              <span class="list_content_date">{{ novel.NOVE_RELEASE }}</span>
+              <span class="list_content_buy">구매횟수 : {{ novel.NOVE_BOUGHT }}</span>
+              <span class="list_content_review">리뷰수 : {{ novel.NOVE_REVIEW }}</span>
+            </div>
           </div>
-        </div>
-        <div class="list_price">
-          <span> {{ novel.NOVE_PRICE }}&#8361; </span>
+          <div class="list_price">
+            <span> {{ novel.NOVE_PRICE }}&#8361; </span>
+          </div>
         </div>
       </div>
     </div>
