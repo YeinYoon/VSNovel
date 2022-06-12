@@ -25,8 +25,10 @@
       </div>
     </div>
     <div class="store_section">
-      <div v-if="storeDatas.length == 0">
-        12321321321
+      <div class="nolist" v-if="storeDatas.length == 0">
+        <div class="nolistResult">
+          <span>대상이 없습니다!</span>
+        </div>
       </div>
       <div v-else>
         <div
@@ -250,6 +252,32 @@ export default {
   position: relative;
   cursor: pointer;
 }
+
+.nolist {
+position: absolute;
+left: 50%;
+top: 50%;
+transform: translate(-50%, -50%);
+}
+
+.nolistResult {
+  background-color: #444444;
+  width: 300px;
+  height: 150px;
+  border-radius: 50px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.nolistResult span {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
 .list_img {
   width: 100px;
   height: 140px;
