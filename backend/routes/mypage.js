@@ -131,6 +131,7 @@ router.post('/postconfirm', async(req, res) => {
 router.get('/getpost', async(req, res) => {
     var result = await db.execute(`SELECT tbl_board.boar_title, tbl_post.post_title, tbl_post.post_vote, tbl_post.post_view,
                                     (select count(*) from tbl_comment where vill_code = -1) "댓글수"
+                                    from tbl_post, tbl_board, tbl_village, tbl_novel
                                     WHERE tbl_post.nove_code = tbl_novel.nove_code and
                                     tbl_post.cate_code = tbl_novel.cate_code and
                                     tbl_village.vill_code = tbl_board.vill_code and
