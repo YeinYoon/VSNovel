@@ -60,25 +60,25 @@ export default {
       disabled: false,
     });
 
-    const onEditorBlur = (quill) => {
-      // console.log("editor blur!", quill);
-    };
-    const onEditorFocus = (quill) => {
-      // console.log("editor focus!", quill);
-    };
-    const onEditorReady = (quill) => {
-      // console.log("editor ready!", quill);
-    };
-    const onEditorChange = ({ quill, html, text }) => {
+    // const onEditorBlur = (quill) => {
+    //   // console.log("editor blur!", quill);
+    // };
+    // const onEditorFocus = (quill) => {
+    //   // console.log("editor focus!", quill);
+    // };
+    // const onEditorReady = (quill) => {
+    //   // console.log("editor ready!", quill);
+    // };
+    const onEditorChange = ({ html }) => {
       // console.log("editor change!", quill, html, text);
       state._content = html;
     };
 
     return {
       state,
-      onEditorBlur,
-      onEditorFocus,
-      onEditorReady,
+      // onEditorBlur,
+      // onEditorFocus,
+      // onEditorReady,
       onEditorChange,
     };
   },

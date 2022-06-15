@@ -205,7 +205,7 @@ export default {
 
     // 프로필 수정버튼을 눌렀을 때 동작하는 함수
     editBtn(){
-      if(this.newNickname == '' || this.newNickCheck != true) {
+      if(this.newNickname == '' || this.nicknameCng == true) {
         this.$store.commit('gModalOn', {msg : "닉네임이 비어있거나 중복검사를 진행하지 않았습니다.", size : "normal"});
       } else {
         var data = {
