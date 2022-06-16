@@ -43,7 +43,13 @@ export default {
   },
   methods: {
     destroyBtn() {
-      axios.post('/api/mypage/postconfirm')
+      var withdrawalData = {
+                newId: this.newId,
+                newPw: this.newPw,
+                newName: this.newName,
+                newNumber: this.newNumber
+            }
+      axios.post('/api/mypage/postconfirm', withdrawalData)
       .then((result) => {
         if(result.data == 'err') {
           console.log('err')

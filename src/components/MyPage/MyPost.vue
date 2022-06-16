@@ -20,38 +20,45 @@
         <div class="post_clicks">조회수</div>
       </div>
       <hr class="lines" />
-      <div class="post_line" v-for="(post, i) in post" :key="i">
-        <div class="post_place">{{ post.position }}</div>
-        <div class="post_title" style="cursor:pointer" @click="postMove">{{ post.title }}</div>
-        <div class="post_like">{{ post.likes }}</div>
-        <div class="post_comment">{{ post.coment }}</div>
-        <div class="post_clicks">{{ post.look }}</div>
+      <div class="post_line" v-for="(post, i) in postData" :key="i" @click="postMove()">
+        <div class="post_place">{{ post.BOAR_TITLE }}</div>
+        <div class="post_title" style="cursor:pointer">{{ post.POST_TITLE }}</div>
+        <div class="post_like">{{ post.POST_VOTE }}</div>
+        <div class="post_comment">{{ post.COMM_NUM }}</div>
+        <div class="post_clicks">{{ post.POST_VIEW }}</div>
       </div>
     </div>
   </div>
 </template>
 
 <script>
-import post from "@/assets/DataJs/post.js";
-import writer from "@/assets/DataJs/commuWriter.js";
-import free from "@/assets/DataJs/commuFree.js";
-import join from "@/assets/DataJs/commujoin.js";
-import re from "@/assets/DataJs/commuRe.js";
-
+import axios from 'axios';
 
 export default {
+  created() {
+    this.getPost()
+  },
   data() {
     return {
-      post: post,
-      writer: writer,
-      free: free,
-      join: join,
-      re: re,
-    };
-  },
-  methods:{
+      postData : []
+    }
+  }, 
+  methods: {
     postMove(){
-      this.$router.push({name:'Community', params:{step:'자유',topicNum:1}})
+      this.$router.push({name:'Community', params:{step:'자유',topicNum:0}})
+    },
+    getPost() {
+      console.log("getPost")
+      axios.get('/api/mypage/getpost')
+      .then((result) => {
+        if(result.data == 'err') {
+          console.log('load fail')
+        } else {
+          console.log(result)
+          this.postData = result.data
+          // console.log(this.postData)
+        }
+      })
     }
   },
 };

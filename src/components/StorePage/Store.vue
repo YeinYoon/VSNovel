@@ -123,7 +123,6 @@ export default {
     },
   },
   created(){
-    // console.log(this.$route.params.nove_id);
     if(this.$route.params.NOVE_TITLE!=undefined){
       this.modalData = {
         NOVE_TITLE : this.$route.params.NOVE_TITLE,

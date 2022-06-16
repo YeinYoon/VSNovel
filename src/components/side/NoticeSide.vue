@@ -118,11 +118,9 @@ export default {
         //강조 갯수 세기
         for(let i = 0; i < this.noticeData.length; i++){
         if(this.noticeData[i].emphasis == 1) this.noticeNum ++;
-        console.log(this.noticeNum);
         }
   },
     created(){
-        // console.log(this.$route)
         if(this.$route.params.noti_id!=undefined){
             this.noticeStep = 2;
             this.clickNotice = { title : this.$route.params.noti_id,
@@ -192,11 +190,6 @@ export default {
             }
             
         },
-        // writePushEvent(data){
-        //     this.noticeData.push(data);
-        //     // console.log(this.noticeData);
-        //     this.noticeStep = 0;
-        // }
   }
 };
 </script>

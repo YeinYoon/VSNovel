@@ -60,6 +60,7 @@ export default {
     if(this.step == "리뷰 & 추천" && this.update == true){
       this.str_draw.width = this.valueUp*10 + '%';
     }
+    console.log(this.topicObject);
   },
   watch: {
     value(val) {

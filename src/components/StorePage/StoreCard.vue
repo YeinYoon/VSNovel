@@ -26,7 +26,7 @@
           </div>
           <div class="card_info_num">
             <span class="card_num">카드번호</span>
-            <input type="text" class="card_box" maxlength="16" @change="console.log(value)">
+            <input type="text" class="card_box" maxlength="16">
           </div>
           <div class="date_info">
             <span class="date_info_id">유효기간</span>
