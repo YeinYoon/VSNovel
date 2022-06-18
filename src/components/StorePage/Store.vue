@@ -162,6 +162,7 @@ export default {
   width: 125px;
   float: right;
   height: 40px;
+  cursor: pointer;
 }
 .price_btn {
   flex: 2;

@@ -1,6 +1,6 @@
 <template>
   <div class="team_box">
-      <div>
+    <div>
       <Modal
         v-if="open == true"
         :openmodal="open"
@@ -11,13 +11,16 @@
       ></Modal>
     </div>
 
-        <div class="commu_btn_area">
-          <div class="commu_btn_red" >
-            <span class="commu_btn_manage" @click="manage=true" v-if="manage==false">관리자 시점</span>
-            <span class="commu_btn_manage" @click="manage=false" v-if="manage==true">관리</span>
-          </div>
-          <div class="commu_btn_blue" v-if="manage==false"><span class="commu_btn_write" @click="communitybtn({type:'third'})">글쓰기</span></div>
-        </div>
+    <!-- 상단 버튼 프레임 -->
+    <div class="commu_btn_area">
+      <!-- 관리자 계정만 노출 -->
+      <div class="commu_btn_red" >
+        <span class="commu_btn_manage" @click="manage=true" v-if="manage==false">관리자 시점</span>
+        <span class="commu_btn_manage" @click="manage=false" v-if="manage==true">관리</span>
+      </div>
+      <!-- 글쓰기 버튼 -->
+      <div class="commu_btn_blue" v-if="manage==false"><span class="commu_btn_write" @click="communitybtn({type:'third'})">글쓰기</span></div>
+    </div>
 
     <section class="commu_section">
       <div
@@ -27,15 +30,22 @@
         @click="communitybtn({manage : manage, index : index , item : a})"
       >
         <img class="commu_thumb" :src="`${a.titleImg}`" @error="replaceimg"/>
+        
         <div class="commu_back">
+          <!-- 글제목 -->
           <div class="commu_back_title">{{ a.title }}</div>
+
+          <!-- (조건) 리뷰 게시판 별점 -->
           <span v-if="step=='리뷰 & 추천'" class="commu_str">★★★★★
             <span class="commu_str_draw" :style="{width : a.str*20 + '%'}">★★★★★</span>
           </span>
+
+          <!-- 글정보 -->
           <div class="commu_back_info">
             {{ a.writer }} | {{ a.date }} | {{ a.likes }} | {{ a.coment }}
           </div>
         </div>
+
       </div>
     </section>
   </div>
@@ -159,17 +169,17 @@ export default {
 }
 .commu_section {
   position:relative;
-  top:10%;
-  width: 93%;
-  height: 87%;
-  margin: 0 auto;
-  overflow-y:scroll;
+  margin-top: 30px;
+  overflow: scroll;
+  width: 100%;
+  height: calc(100vh - 157px);
   -ms-overflow-style:none;
 }
 .commu_post {
   position: relative;
   width: 100%;
   height: 120px;
+  transition: 0.2s all ease;
 }
 .commu_post:hover {
   opacity: 0.7;
@@ -179,19 +189,20 @@ export default {
   height: 80px;
   cursor: pointer;
   position: absolute;
-  z-index: 1;
   top: 10px;
+  left: 21px;
+  z-index: 11;
 }
 .commu_back {
   cursor: pointer;
   display: block;
   position: absolute;
-  width: 100%;
+  width: calc(100% - 50px);
+  left: 30px;
   height: 80px;
   background-color: #262626;
   border-radius: 12px;
   color: white;
-  z-index: 0;
   top: 30px;
 }
 .commu_back_title {
@@ -199,7 +210,7 @@ export default {
   font-size: 20px;
   top: 10px;
   float: left;
-  left: 90px;
+  left: 80px;
 }
 .commu_str {
   position:absolute;

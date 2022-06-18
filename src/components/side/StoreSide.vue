@@ -243,6 +243,9 @@ export default {
   z-index: 11;
   top: -40px;
   font-size: 0.9em;
+  animation-name: groupon;
+  animation-duration: 0.3s;
+  animation-fill-mode: forwards;
 }
 .selecter {
   font-weight: 700;
@@ -281,6 +284,17 @@ export default {
   }
   100%{
     background-color : #2872f9;
+  }
+}
+
+@keyframes groupon {
+  0% {
+    height: auto;
+    opacity: 0;
+  }
+  100% {
+    height: auto;
+    opacity: 1;
   }
 }
 </style>
