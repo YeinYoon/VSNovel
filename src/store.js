@@ -87,6 +87,11 @@ const store = createStore({
         }
 
     },
+    getters: {
+        communityService(state) {
+            return state.communityService;
+        }
+    }
 })
 
 export default store;

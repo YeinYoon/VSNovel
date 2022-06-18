@@ -27,14 +27,14 @@
               </div>
               <!-- 글쓰기 버튼 -->
               <div class="commu_btn_blue" v-if="manage==false">
-                <span class="commu_btn_write" @click="communitybtn({type:'third'})">글쓰기</span>
+                <span class="commu_btn_write" @click="PostClick(2)">글쓰기</span>
               </div>
             </div>
             <!-- 상단 버튼 프레임 -->
 
             <!-- 글 목록 프레임 -->
             <section class="commu_section">
-              <div class="commu_post" v-for="(p, i) in postList" :key="i"> <!-- (반복) 글 DB 데이터 반복문 -->
+              <div class="commu_post" v-for="(p, i) in postList" :key="i" @click="PostClick(1)"> <!-- (반복) 글 DB 데이터 반복문 -->
                 
                 <!-- 글 썸네일 -->
                 <img class="commu_thumb" :src="p.titleImg" @error="'error'"/>
@@ -63,14 +63,170 @@
         </div>
 
 
+        <!-- 본문조회 -->
+
         <div v-if="topicData == 1">
-          <TopicPostView/>
+          <div class="postview_wrap">
+            <div class="postview_section">
+              <div class="postview_title">
+
+                <!-- 제목 -->
+                <div class="postview">
+                  <span class="postview_title_span">글제목</span>
+                </div>
+                
+                <div class="topic_postview_btn_info">
+                  
+                  <div class="topic_postview_thumbimg">
+                    <!-- 작성자 프로필 이미지 -->
+                    <img :src="thumbimg" @error="reimg">
+                  </div>
+
+                  <div>
+                    
+                    <div>
+                      <!-- 작성일자 -->
+                      <span>작성일자 : </span>
+                    </div>
+                    
+                    <div class="topic_postview_detail_info">
+                      
+                      <div>
+                        <!-- 작성자 -->
+                        <span>닉네임</span>
+                      </div>
+
+                      <!-- 조회수, 댓글수, 추천수, 비추천수 -->
+                      <div class="topic_postview_detail_frame">
+                        <div class="topic_postview_detail"><span>조회수</span></div>
+                        <div class="topic_postview_detail"><span>댓글수</span></div>
+                        <div class="topic_postview_detail"><span>추천수</span></div>
+                        <div class="topic_postview_detail"><span>비추천수</span></div>
+                      </div>
+
+                      <!-- 수정, 삭제 버튼 -->
+                      <div class="topic_postview_btn_area">
+                        <div class="topic_postview_btn_red" @click="postBtn({type:'retouch'})"><img src="@/assets/icons/white/editing.png"></div>
+                        <div class="topic_postview_btn_blue" @click="postBtn({type:'deletewrite'})"><img src="@/assets/icons/white/trash_white.png"></div>
+                      </div>
+                    </div>
+                  </div>
+                  
+
+                </div>
+
+              </div>
+              <!-- 본문조회 상단부 끝 -->
+
+              <!-- 내용영역 -->
+              <div class="postview_frame">
+
+                <!-- 본문 -->
+                <div class="postview_content">
+                  <span>123</span>
+                </div>
+
+                <!-- 추천, 비추천 -->
+                <div class="content_vote">
+
+                  <div class="vote_btn_ok">
+                    <span>추천</span>
+                    <div>123</div>
+                  </div>
+                  <div class="vote_btn_no">
+                    <span>비추천</span>
+                    <div>123</div>
+                  </div>
+
+                </div>
+              </div>
+
+              <!-- 댓글 갯수 Comment() -->
+              <div class="postview_comment">
+                <span>Comment(123)</span>
+              </div>
+
+              <!-- 댓글 입력 -->
+              <div class="postview_comment_area">
+                  <!-- 여기에 작성한 글을 해당 게시글의 댓글에 등록 -->
+                  <textarea v-model="writecoment"></textarea> 
+                  <div class="postview_comment_register"><span>작성하기</span></div> <!-- 댓글 등록 버튼 -->
+              </div>
+
+              <!-- 댓글 목록 -->
+              <div class="postview_view_area"> <!-- (반복) 댓글내용들 -->
+                  <div><img class="postview_img" src="" @error="reimg"></div>
+                  <div class="postview_view_content"><span>댓글내용</span></div>
+              </div>
+
+            </div>
+
+            <!-- 목록으로 버튼 -->
+            <div class="postview_btn_area">
+              <div class="postview_btn_list" @click="PostClick(0)">
+                <span>목록으로</span>
+              </div>
+            </div>
+          </div>
         </div>
+
         <div v-if="topicData == 2">
-          <TopicWrite/>
-        </div>    
-      </div>
+          <div class="commu_write_section">
+
+            <!-- 리뷰게시판 -->
+            <div class="commu_review_frame" v-if='this.communityService == "R"'>
+              <div class="commu_novel_choice"><span>작품선택</span></div>
+              <div class="commu_review_title" v-if="update == false"><input type="text"/></div>
+              <div class="commu_review_title" v-if='communityService == R && update == true'><input type="text"/></div>
+
+              <!-- 리뷰 수정 상단부 (제목, 별점) -->
+              <div class="commu_str_back_update" v-if='update == true && this.communityService == "R"'>
+                <span class="str_first">★★★★★
+                <span :style="str_draw">★★★★★</span>
+                <input type="range" class="str_range" @input="draw(value)" v-model="value" step="1" min="0" max="10">
+                </span>
+              </div>
+
+                <!-- 리뷰 작성 상단부 -->
+              <div class="commu_str_back" v-else-if='this.communityService == "R"' @click="stargrade()" id="starBack">
+                <span class="commu_str_grade" v-if="strOpen==false">별점 매기기</span>
+                <span class="str_first" v-if="strOpen==true">★★★★★
+                <span :style="str_draw">★★★★★</span>
+                <input type="range" class="str_range" @input="draw(value)" v-model="value" step="1" min="0" max="10">
+                </span>
+              </div>
+            </div>
+
+            <!-- 글쓰기 자유/작가/팀원모집 상단부 (제목) -->
+            <div class="commu_write_title" v-if="update==false && communityService!= 'R' ">
+              <input type="text"/>
+            </div>
+
+            <!-- 수정 자유/작가/팀원모집 상단부 (제목) -->
+            <div class="commu_write_title" v-if="update==true && communityService!= 'R' ">
+              <input type="text"/>
+            </div>
+
+            <!-- 내용 입력창 -->
+            <div class="commu_write_content">
+              <Editor/>
+            </div>
+          </div>
+          <!-- 게시물 폼 끝 -->
+
+          <!-- 게시물 폼 글쓰기 및 수정버튼 -->
+          <div class="write_btn_area">
+            <div class="write_btn" @click="registerpost">
+              <span v-if="update==false">글쓰기</span>
+              <span v-if="update==true">수정</span>
+            </div>
+            <div class="write_cancle_btn" @click="PostClick(0)"><span>취소</span></div>
+          </div>
+        </div>
+
+      </div>    
     </div>
+    <!-- 커뮤니티 끝 -->
 
     <div v-if="$store.state.currentService == 'V'">
       <div class="RouterView">
@@ -117,6 +273,7 @@
 </template>
 
 <script>
+import Editor from '@/components/community/topic/Editor'
 import axios from '../../axios'
 import TopicCommu from "../community/topic/TopicCommu";
 import TopicPostView from "../community/topic/TopicPostView";
@@ -129,7 +286,9 @@ export default {
     return {
       topicData: 0,
       step : "",
+      manage : false,
       postList : [],
+      update: false,
     };
   },
   components: {
@@ -138,19 +297,26 @@ export default {
     TopicWrite,
     CafeMain,
     InsideCafe,
+    Editor,
+  },
 
-  },
-  mounted() {
-  },
   created() {
     this.$store.commit('sideBarOn');
     this.$store.commit('currentServiceCng', 'C');
     this.getPostList('F');
   },
+
+  computed: {
+    communityService: function() {
+      return this.$store.getters.communityService;
+    }
+  },
+
   watch : {
     communityService(cng) {
       this.getPostList(cng);
     }
+    
   },
   methods: {
     getPostList(selectService) {
@@ -163,6 +329,9 @@ export default {
           console.log(this.postList);
         }
       })
+    },
+    PostClick(val) {
+      this.topicData = val;
     }
   },
 };
