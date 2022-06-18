@@ -1,5 +1,5 @@
 <template>
-  <div class="tests">
+  <div class="RouterView">
     <header class="header">
         <div class="service">
             <img class="icon" src="@/assets/icons/white/megaphone.png" alt="community">

@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-if="$route.path.substr(1) == 'community'">
-      <div class="tests">
+      <div class="RouterView">
         <div class="header">
           <div class="service">
             <img

@@ -71,34 +71,4 @@ export default {
 </script>
 
 <style>
-.group {
-  cursor: pointer;
-}
-/* -------------------------------------------------------------------- */
-.sel div {
-  width: 73%;
-  height: 40px;
-  color: white;
-  padding: 5px 10px 5px 20px;
-  text-align: left;
-  margin: 10px 0 0 50px;
-  border-radius: 30px;
-  font-weight: 600;
-  font-size: 1em;
-  cursor: pointer;
-}
-
-.Temp_LogoutButton {
-  position: absolute;
-  left: 160px;
-  top: 90%;
-}
-
-.mypage_logout {
-  width: 100px;
-  height: 50px;
-  border-radius: 10px;
-  background: #2872f9;
-  color: white;
-}
 </style>

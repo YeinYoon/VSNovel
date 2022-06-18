@@ -75,7 +75,6 @@ body{
 
 .sideBar {
   font-size: 1.2em;
-  display: flex;
   flex-direction: column;
   padding: 50px 10px 0 10px;
   background: #2c2c2c;
@@ -101,6 +100,7 @@ body{
   height: 100vh;
   background: #353535;
   overflow: auto;
+  padding: 35px 40px 30px 40px;
 }
 
 .RouterView_NonSide {

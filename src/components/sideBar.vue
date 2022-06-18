@@ -8,6 +8,15 @@
       <img src="@/assets/icons/magnifier.png" class="side_icon" />
       <input type="text" />
     </div>
+    <div>
+      <div class="group" @click="myStep = '전체'"><span>· 커뮤니티</span></div>
+      <div class="sel">
+        <div id="element">· 자유</div>
+        <div id="element">· 작가</div>
+        <div id="element">· 팀원모집</div>
+        <div id="element">· 리뷰 & 추천</div>
+      </div>
+    </div>
   </div>
 
 
@@ -92,11 +101,13 @@ export default {
       hiddenData: false,
       payDate : '구매일자↑',
       clickNovel : 'novel',
+      genreNum: 0,
     };
   },
 
   created() {
     this.getCateList();
+    let id = document.getElementById('novel');
   },
 
   methods: {
@@ -104,14 +115,12 @@ export default {
       // 사이드바 강조효과
       let id = document.getElementById(this.clickNovel);
       if (className != this.clickNovel) {
-        id.style.animationName = "defaultAnimation";
+        id.style.animationName = "defaultAnimation"; // 기본
       }
-      else if(this.clickNovel == 'payNovel'){
-        if(this.payDate == '구매일자↑') this.payDate = '구매일자↓';
-        else this.payDate = '구매일자↑';
-      }
-        event.target.style.animationName = "newAnimation";
-        this.clickNovel = className;
+      event.target.style.animationName = "newAnimation"; // 바뀌는 것
+      this.clickNovel = className;
+
+      this.search.contentsType = contentsType;
     },
     getCateList() {
       axios.get('/api/store/getCateList')
@@ -127,6 +136,18 @@ export default {
     // 장르 열고 닫기
       if (this.hiddenData) this.hiddenData = false;
       else this.hiddenData = true;
+    },
+    categoryEvent(num, event, cateCode) {
+    // 장르 강조효과
+      let id = document.querySelectorAll(".select_btn");
+      id[this.genreNum].style.color = 'gray';
+      id[this.genreNum].style.animationName = 'null';
+      event.target.style.animationName = 'clickBtn';
+      this.genreNum = num;
+      this.cateCode = cateCode;
+      // this.getNovelList();
+
+      this.search.category = cateCode;
     },
   },
 };
@@ -165,13 +186,39 @@ export default {
     border-radius: 30px;
     font-weight: 700;
     display: table;
-    margin: 20px 0 10px 30px;
+    margin: 10px 0 10px 30px;
+    cursor: pointer;
   }
   .group span {
     display: table-cell;
     vertical-align: middle;
   }
+  .sel div {
+    width: 73%;
+    height: 40px;
+    color: white;
+    padding: 5px 10px 5px 20px;
+    text-align: left;
+    margin: 10px 0 0 50px;
+    border-radius: 30px;
+    font-weight: 600;
+    font-size: 1em;
+    cursor: pointer;
+  }
 
+  .Temp_LogoutButton {
+    position: absolute;
+    left: 160px;
+    top: 90%;
+  }
+
+  .mypage_logout {
+    width: 100px;
+    height: 50px;
+    border-radius: 10px;
+    background: #2872f9;
+    color: white;
+  }
   .novel_div{
     margin: 0 auto;
     display: grid;
