@@ -1,5 +1,5 @@
 <template>
-  <div class="RouterView"> <!--컴포넌트 전체영역-->
+  <div class="RouterView_NonSide"> <!--컴포넌트 전체영역-->
       <div class="Engine_Promo_frame">
         <div class="Promo_title">
           <img class="Promo_title_icon" src="@/assets/icons/vsn_engine.png">
@@ -215,8 +215,15 @@ export default {
       DropDownOn : false,
     }
   },
+
+  created() {
+    this.$store.commit('currentServiceCng', 'E');
+    this.$store.commit('sideBarOff');
+  },
+
   components: {
   },
+
   methods:{
       engineDownloadWin(){
           try {

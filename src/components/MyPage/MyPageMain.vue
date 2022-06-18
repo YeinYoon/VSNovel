@@ -1,7 +1,7 @@
 <template>
 <ConfirmModal ref="confirmModal"></ConfirmModal>
 <!-- 헤더부분(아이콘~부제목) -->
-  <div class="tests">
+  <div class="RouterView">
     <div class="header">
       <div class="service">
         <img class="icon" src="../../assets/icons/white/home.png" alt="logo" />

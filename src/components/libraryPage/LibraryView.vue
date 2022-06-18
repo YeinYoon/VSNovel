@@ -1,5 +1,5 @@
 <template>
-  <div class="tests">
+  <div class="RouterView">
     <div class="header">
       <div class="service">
         <img

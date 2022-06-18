@@ -1,16 +1,16 @@
 import { createWebHistory, createRouter } from "vue-router";
 // 스토어 
-import Store from './components/side/StoreSide.vue';
+import Store from './components/side/Store.vue';
 // 메인페이지
 import Main from './components/mainpage/Main.vue';
 // 커뮤니티
-import Community from './components/side/CommunitySide.vue';
+import Community from './components/side/Community.vue';
 //카페
 import VillageMain from './components/community/cafe/CafeMain.vue';
 import Register from './components/community/cafe/RegisterCafe.vue';
 
 // 마이페이지 링크들
-import MyPage from './components/side/MypageSide.vue';
+import MyPage from './components/side/Mypage.vue';
 import MyPageMain from './components/mypage/MyPageMain.vue';
 import MyCard from "./components/mypage/MyCard";
 import MyPost from "./components/mypage/MyPost";
@@ -19,9 +19,9 @@ import Prefer from "./components/mypage/Prefer";
 import MyAlarm from "./components/mypage/MyAlarm";
 import MyWithdrawal from "./components/mypage/withdrawal/MyWithdrawal";
 // 라이브러리
-import Library from './components/side/LibrarySide.vue';
+import Library from './components/side/Library.vue';
 // 공지사항
-import Notice from './components/side/NoticeSide.vue';
+import Notice from './components/side/Notice.vue';
 
 import Login from './components/auth/Login.vue';
 import SignUp from './components/auth/SignUp.vue';
