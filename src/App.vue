@@ -3,7 +3,7 @@
 <GlobalModal :gModalState="$store.state.gModalState"></GlobalModal>
 <div class="content">
     <Menu v-bind:class="{'vsnmenu':true}"></Menu>
-    <!-- <vsnside v-bind:class="{'vsnside':true}"></vsnside> -->
+    <Side v-bind:class="{'sideBar':true}"></Side>
     <!-- <Vsncontent v-bind:class="{'vsncontent':true}"></Vsncontent> -->
     <!-- <div class="vsncontainer"> -->
       <router-view></router-view>
@@ -14,6 +14,7 @@
 <script>
 import Spinner from './components/Spinner.vue'
 import Menu from './components/Menu';
+import Side from './components/sideBar.vue'
 import GlobalModal from './components/modal/GlobalModal.vue';
 import axios from './axios';
 import storage from './aws'
@@ -70,27 +71,18 @@ body{
   left: 0px;
   overflow: auto;
 }
-/* .vsnside {
-  position:fixed;
-  width: 305px;
-  left: 140px;
+
+.sideBar {
+  font-size: 1.2em;
+  display: flex;
+  flex-direction: column;
+  padding: 50px 10px 0 10px;
+  background: #2c2c2c;
+  width: 300px;
   height: 100vh;
-  overflow: auto;
-}
-.vsncontent {
-  position:fixed;
-  width: calc(100vw - 140px); 
-  left: 140px;
-  height: 100vh;
-  overflow: auto;
-} */
-.vsncontainer{
-  background: #353535;
   position: fixed;
-  width: calc(100vw - 140px);
-  height: 100vh;
+  top: 0px;
   left: 140px;
-  
 }
 
 .FullView {
@@ -103,8 +95,8 @@ body{
 
 .RouterView {
   position: fixed;
-  left: 140px;
-  width: calc(100vw - 140px);
+  left: 440px;
+  width: calc(100vw - 440px);
   height: 100vh;
   background: #353535;
   overflow: auto;

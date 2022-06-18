@@ -256,9 +256,6 @@ export default {
 </script>
 
 <style>
-.sideBar {
-  overflow: auto;
-}
 #communityElement,
 #villageElement {
   width: 73%;

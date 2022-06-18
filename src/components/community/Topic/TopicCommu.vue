@@ -19,7 +19,9 @@
         <span class="commu_btn_manage" @click="manage=false" v-if="manage==true">관리</span>
       </div>
       <!-- 글쓰기 버튼 -->
-      <div class="commu_btn_blue" v-if="manage==false"><span class="commu_btn_write" @click="communitybtn({type:'third'})">글쓰기</span></div>
+      <div class="commu_btn_blue" v-if="manage==false">
+        <span class="commu_btn_write" @click="communitybtn({type:'third'})">글쓰기</span>
+      </div>
     </div>
     <!-- 상단 버튼 프레임 -->
 
@@ -73,11 +75,8 @@ export default {
      Modal,
   },
   props : {
-    datasend:Object,
-    step: String
   },
   created(){
-    this.getcommulist();
   },
   methods : {
     communitybtn(step = {}){
@@ -111,18 +110,6 @@ export default {
     },
     replaceimg(e){
       e.target.src=img
-    },
-    
-    //커뮤 리스트 조회
-    getcommulist() {
-      axios.get('/api/community/getcommulist')
-      .then((result)=>{
-        if(result.data == "err") {
-          console.log("커뮤니티 데이터 불러오기 실패");
-        } else {
-        //  console.log(result.data);
-        }
-      })
     },
   }
 };
