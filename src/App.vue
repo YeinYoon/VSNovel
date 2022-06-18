@@ -3,7 +3,7 @@
 <GlobalModal :gModalState="$store.state.gModalState"></GlobalModal>
 <div class="content">
     <Menu v-bind:class="{'vsnmenu':true}"></Menu>
-    <Side v-bind:class="{'sideBar':true}"></Side>
+    <Side v-bind:class="{'sideBar':true}" v-if="$store.state.sideBarState"></Side>
     <!-- <Vsncontent v-bind:class="{'vsncontent':true}"></Vsncontent> -->
     <!-- <div class="vsncontainer"> -->
       <router-view></router-view>
@@ -30,7 +30,8 @@ export default {
   components: {
     Menu,
     GlobalModal,
-    Spinner
+    Spinner,
+    Side
     // vsnside,
     // Vsncontent,
   },
