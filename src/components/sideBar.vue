@@ -11,16 +11,20 @@
     <div>
       <div class="group" @click="myStep = '전체'"><span>· 커뮤니티</span></div>
       <div class="sel">
-        <div id="element" @click="$store.commit('communityServiceCng', 'F')">· 자유</div>
-        <div id="element" @click="$store.commit('communityServiceCng', 'W')">· 작가</div>
-        <div id="element" @click="$store.commit('communityServiceCng', 'T')">· 팀원모집</div>
-        <div id="element" @click="$store.commit('communityServiceCng', 'R')">· 리뷰 & 추천</div>
+        <div class="sel_menu" @click="$store.commit('communityServiceCng', 'F')">· 자유</div>
+        <div class="sel_menu" @click="$store.commit('communityServiceCng', 'W')">· 작가</div>
+        <div class="sel_menu" @click="$store.commit('communityServiceCng', 'T')">· 팀원모집</div>
+        <div class="sel_menu" @click="$store.commit('communityServiceCng', 'R')">· 리뷰 & 추천</div>
+        <div class="active_comm_Menu_F" v-if="$store.state.communityService == 'F'"></div>
+        <div class="active_comm_Menu_W" v-if="$store.state.communityService == 'W'"></div>
+        <div class="active_comm_Menu_T" v-if="$store.state.communityService == 'T'"></div>
+        <div class="active_comm_Menu_R" v-if="$store.state.communityService == 'R'"></div>
       </div>
       <br>
       <div class="group" @click="myStep = '전체'"><span>· 빌리지</span></div>
       <div class="sel">
-        <div id="element">· 빌리지 메인</div>
-        <div id="element">· 가입카페 목록</div>
+        <div class="sel_menu">· 빌리지 메인</div>
+        <div class="sel_menu">· 가입카페 목록</div>
       </div>
     </div>
   </div>
@@ -37,14 +41,14 @@
         <span>· 마이페이지</span>
       </div>
       <div class="sel">
-        <div id="element">· 프로필 설정</div>
-        <div id="element">· 결제정보 설정</div>
-        <div id="element">· 내가 쓴 게시글</div>
-        <div id="element">· 작성 리뷰 관리</div>
-        <div id="element">· 선호 / 비선호 설정</div>
-        <div id="element">· 결제정보 설정</div>
-        <div id="element">· 내가 쓴 게시글</div>
-        <div id="element">· 작성 리뷰 관리</div>
+        <div class="sel_menu">· 프로필 설정</div>
+        <div class="sel_menu">· 결제정보 설정</div>
+        <div class="sel_menu">· 내가 쓴 게시글</div>
+        <div class="sel_menu">· 작성 리뷰 관리</div>
+        <div class="sel_menu">· 선호 / 비선호 설정</div>
+        <div class="sel_menu">· 결제정보 설정</div>
+        <div class="sel_menu">· 내가 쓴 게시글</div>
+        <div class="sel_menu">· 작성 리뷰 관리</div>
       </div>
     </div>
   </div>
@@ -89,10 +93,10 @@
     <div>
       <div class="group" @click="myStep = '전체'"><span>· TOPIC</span></div>
       <div class="sel">
-        <div id="element">· 전체</div>
-        <div id="element">· 업데이트 내역</div>
-        <div id="element">· 이벤트</div>
-        <div id="element">· 정책</div>
+        <div class="sel_menu">· 전체</div>
+        <div class="sel_menu">· 업데이트 내역</div>
+        <div class="sel_menu">· 이벤트</div>
+        <div class="sel_menu">· 정책</div>
       </div>
     </div>
   </div>
@@ -202,7 +206,9 @@ export default {
     display: table-cell;
     vertical-align: middle;
   }
-  .sel div {
+  .sel_menu {
+    position: relative;
+    z-index: 11;
     width: 73%;
     height: 40px;
     color: white;
@@ -302,6 +308,62 @@ export default {
     animation-duration: 0.5s;
   }
 
+  .active_comm_Menu_F {
+    position: absolute;
+    width: 203px;
+    background: #2872f9;
+    top: 164px;
+    left: 60px;
+    height: 40px;
+    border-radius: 50px;
+    z-index: 10;
+    animation-name: groupon;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+  }
+
+  .active_comm_Menu_W {
+    position: absolute;
+    width: 203px;
+    background: #2872f9;
+    top: 214px;
+    left: 60px;
+    height: 40px;
+    border-radius: 50px;
+    z-index: 10;
+    animation-name: groupon;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+  }
+
+  .active_comm_Menu_T {
+    position: absolute;
+    width: 203px;
+    background: #2872f9;
+    top: 264px;
+    left: 60px;
+    height: 40px;
+    border-radius: 50px;
+    z-index: 10;
+    animation-name: groupon;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+  }
+
+  .active_comm_Menu_R {
+    position: absolute;
+    width: 203px;
+    background: #2872f9;
+    top: 314px;
+    left: 60px;
+    height: 40px;
+    border-radius: 50px;
+    z-index: 10;
+    animation-name: groupon;
+    animation-duration: 0.2s;
+    animation-fill-mode: forwards;
+  }
+
 @keyframes clickBtn {
   0%{
     opacity: 0.7;
@@ -332,11 +394,9 @@ export default {
 
 @keyframes groupon {
   0% {
-    height: auto;
     opacity: 0;
   }
   100% {
-    height: auto;
     opacity: 1;
   }
 }
