@@ -9,14 +9,14 @@
       </div>
       <!-- 글쓰기 버튼 -->
       <div class="commu_btn_blue" v-if="manage==false">
-        <span class="commu_btn_write" @click="communitybtn({type:'third'})">글쓰기</span>
+        <span class="commu_btn_write" @click="goToPosting">글쓰기</span>
       </div>
     </div>
     <!-- 상단 버튼 프레임 -->
 
     <!-- 글 목록 프레임 -->
     <section class="commu_section">
-      <div class="commu_post" v-for="(p, i) in postList" :key="i"> <!-- (반복) 글 DB 데이터 반복문 -->
+      <div class="commu_post" v-for="(p, i) in postList" :key="i" @click="goToPostView(p.POST_CODE)"> <!-- (반복) 글 DB 데이터 반복문 -->
         
         <!-- 글 썸네일 -->
         <img class="commu_thumb" :src="p.titleImg" @error="'error'"/>
@@ -73,6 +73,24 @@ export default {
           console.log(this.postList);
         }
       })
+    },
+    goToPostView(postCode) {
+      var boardCode;
+      switch(this.$store.state.communityService) {
+        case 'F' :
+          boardCode = 1;
+          break;
+        case 'W' :
+          boardCode = 2;
+          break;
+        case 'T' :
+          boardCode = 3;
+          break;
+        case 'R' :
+          boardCode = 4;
+          break;       
+      }
+      this.$router.push(`/community/${boardCode}/${postCode}`);
     }
   },
   props : {
