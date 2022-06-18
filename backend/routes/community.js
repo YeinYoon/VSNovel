@@ -24,4 +24,34 @@ router.get('/getcommulist', async (req,res)=>{
 //       res.send("ok");
 //     }
 // })
+
+
+// 커뮤니티 글 불러오기
+router.post('/getPostList', async(req,res)=>{
+    let boardCode;
+    switch(req.body.select) {
+        case 'F' :
+            boardCode = 1;
+            break;
+        case 'W' :
+            boardCode = 2;
+            break;
+        case 'T' :
+            boardCode = 3;
+            break;        
+        case 'R' :
+            boardCode = 4;
+            break;
+    }
+
+    var postList = await db.execute(`SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = ${boardCode}`);
+    if(postList == "err") {
+        res.send("err");
+    } else {
+        res.send(postList.rows);
+    }
+
+})
+
+
 module.exports = router;

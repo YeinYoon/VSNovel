@@ -11,10 +11,10 @@
     <div>
       <div class="group" @click="myStep = '전체'"><span>· 커뮤니티</span></div>
       <div class="sel">
-        <div id="element">· 자유</div>
-        <div id="element">· 작가</div>
-        <div id="element">· 팀원모집</div>
-        <div id="element">· 리뷰 & 추천</div>
+        <div id="element" @click="$store.commit('communityServiceCng', 'F')">· 자유</div>
+        <div id="element" @click="$store.commit('communityServiceCng', 'W')">· 작가</div>
+        <div id="element" @click="$store.commit('communityServiceCng', 'T')">· 팀원모집</div>
+        <div id="element" @click="$store.commit('communityServiceCng', 'R')">· 리뷰 & 추천</div>
       </div>
       <br>
       <div class="group" @click="myStep = '전체'"><span>· 빌리지</span></div>
@@ -118,7 +118,6 @@ export default {
 
   created() {
     this.getCateList();
-    let id = document.getElementById('novel');
   },
 
   methods: {
@@ -131,7 +130,6 @@ export default {
       event.target.style.animationName = "newAnimation"; // 바뀌는 것
       this.clickNovel = className;
 
-      this.search.contentsType = contentsType;
     },
     getCateList() {
       axios.get('/api/store/getCateList')

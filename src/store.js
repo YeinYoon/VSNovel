@@ -18,11 +18,15 @@ const store = createStore({
 
             // 사이드바 상태
             sideBarState : true, // 상황에 따라 보일지 말지 결정
-            currentService : "M"  
+            currentService : "M",  
             // 커뮤니티 : C , 메인 : M, 
             // 마이페이지 : U , 스토어 : S, 
             // 공지사항 : N , 엔진 : E, 
             // 라이브러리 : L , 빌리지 : V , 빌리지 내부 : VI
+
+            communityService : 'F'
+            // 자유 : F, 작가 : W,
+            // 팀원모집 : T, 리뷰&추천 : R
         }
     },
     mutations : {
@@ -76,6 +80,10 @@ const store = createStore({
         //현재 유저가 선택한 서비스(페이지)
         currentServiceCng(state, val) { 
             state.currentService = val;
+        },
+
+        communityServiceCng(state, val) {
+            state.communityService = val;
         }
 
     },

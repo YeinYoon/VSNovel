@@ -1,16 +1,5 @@
 <template>
   <div class="team_box">
-    <div>
-      <Modal
-        v-if="open == true"
-        :openmodal="open"
-        @closemodal="open = false"
-        :modaldatasend="modaldata"
-        :datasend="datasend"
-        @deletedata="communitybtn({type : 'modal',indexdata : indexdata})"
-      ></Modal>
-    </div>
-
     <!-- 상단 버튼 프레임 -->
     <div class="commu_btn_area">
       <!-- 관리자 계정만 노출 -->
@@ -27,27 +16,24 @@
 
     <!-- 글 목록 프레임 -->
     <section class="commu_section">
-      <div class="commu_post"
-      v-for="(a, index) in datasend"
-      :key="a"
-      @click="communitybtn({manage : manage, index : index , item : a})" > <!-- (반복) 글 DB 데이터 반복문 -->
+      <div class="commu_post" v-for="(p, i) in postList" :key="i"> <!-- (반복) 글 DB 데이터 반복문 -->
         
         <!-- 글 썸네일 -->
-        <img class="commu_thumb" :src="`${a.titleImg}`" @error="replaceimg"/>
+        <img class="commu_thumb" :src="p.titleImg" @error="'error'"/>
         
         <!-- 글 정보 및 제목, 검은 블록 -->
         <div class="commu_back">
           <!-- 글제목 -->
-          <div class="commu_back_title">{{ a.title }}</div>
+          <div class="commu_back_title">{{ p.POST_TITLE }}</div>
 
-          <!-- (조건) 리뷰 게시판 별점 -->
-          <span v-if="step=='리뷰 & 추천'" class="commu_str">★★★★★
-            <span class="commu_str_draw" :style="{width : a.str*20 + '%'}">★★★★★</span>
+          <!-- (조건) 리뷰 게시판일 경우 별점 -->
+          <span v-if="$store.state.communityService=='R'" class="commu_str">★★★★★
+            <span class="commu_str_draw" :style="{width : p.str*20 + '%'}">★★★★★</span>
           </span>
 
           <!-- 글정보 -->
           <div class="commu_back_info">
-            {{ a.writer }} | {{ a.date }} | {{ a.likes }} | {{ a.coment }}
+            {{ p.USER_NICKNAME }} | 생성일 | {{ p.POST_FAVORITE }} | 댓글 수
           </div>
         </div>
         <!-- 글 정보 및 제목, 검은 블록 -->
@@ -59,58 +45,38 @@
 </template>
 
 <script>
-import Modal from "../Modalvue";
 import axios from '../../../axios'
-import img from "@/assets/imgs/noimage.png";
 export default {
+  created() {
+    this.getPostList('F');
+  },
+  watch : {
+    communityService(cng) {
+      this.getPostList(cng);
+    }
+  },
   data() {
     return {
       manage : false,
-      open: false,
-      modaldata : {},
-      indexdata: '',
+
+      postList : [],
     };
   },
-  components: {
-     Modal,
+  methods : {
+    getPostList(selectService) {
+      axios.post('/api/community/getPostList', {select : selectService})
+      .then((result)=>{
+        if(result.data == "err") {
+          this.$store.commit('gModalOn',{size : "normal", msg : "해당 게시판 포스트 불러오기 실패"});
+        } else {
+          this.postList = result.data;
+          console.log(this.postList);
+        }
+      })
+    }
   },
   props : {
-  },
-  created(){
-  },
-  methods : {
-    communitybtn(step = {}){
-      //step의 길이가 3일때, 글쓰기 저장
-      if(Object.keys(step).length == 3) {
-        if(step.manage == false) {
-          const eventBtn = {type:'first', item:step.item , index:step.index};
-          this.$emit('btnEvent', eventBtn)
-        }else {
-          //모달창 인덱스정보와 내용 받아내기
-          this.open = true;
-          this.modaldata = step.item;
-          this.indexdata = step.index;
-          //console.log(this.indexdata);
-        }
-      }
-      //step의 길이가 2일때, 모달창으로 글쓰기 삭제
-      else if(Object.keys(step).length == 2) {
-        if(step.type == 'modal'){
-          const modal = {type: 'deletepost' , index:step.indexdata}
-          //console.log(modal);
-          this.$emit('btnEvent', modal)
-        }
-      }
-      //step의 길이가 1일때, post로 나타내기
-      if(Object.keys(step).length == 1) {
-        if(step.type == 'third') {
-          this.$emit('btnEvent', 'third')
-        }
-      }
-    },
-    replaceimg(e){
-      e.target.src=img
-    },
+    communityService : String
   }
 };
 </script>
