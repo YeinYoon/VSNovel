@@ -1,11 +1,12 @@
 <template>
 <Spinner :loading="$store.state.LoadingStatus"></Spinner>
 <GlobalModal :gModalState="$store.state.gModalState"></GlobalModal>
-  <div class="content">
+<div class="content">
     <Menu v-bind:class="{'vsnmenu':true}"></Menu>
     <Side v-bind:class="{'sideBar':true}" v-if="$store.state.sideBarState == true"></Side>
-  </div>
-  <router-view></router-view>
+    
+    <router-view></router-view>
+</div>
 </template>
 
 <script>
