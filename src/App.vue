@@ -4,8 +4,10 @@
 <div class="content">
     <Menu v-bind:class="{'vsnmenu':true}"></Menu>
     <Side v-bind:class="{'sideBar':true}" v-if="$store.state.sideBarState == true"></Side>
-    
-    <router-view></router-view>
+    <!-- <Vsncontent v-bind:class="{'vsncontent':true}"></Vsncontent> -->
+    <!-- <div class="vsncontainer"> -->
+      <router-view></router-view>
+    <!-- </div> -->
 </div>
 </template>
 
