@@ -96,8 +96,6 @@ export default {
   },
   mounted(){
     // 기본 강조효과
-    let id = document.querySelectorAll("#element");
-    id[this.clickNum].style.backgroundColor = "#2872f9";
     // 공지사항 화면 부분 
         // 공지사항 강조 순으로 정렬
         // this.noticeData.sort(function (a, b) {
@@ -115,6 +113,8 @@ export default {
                                  content : this.$route.params.noti_content};
             this.writeModify = true;
         }
+       this.$store.commit('sideBarOn');
+       this.$store.commit('currentServiceCng', 'N');
     },
   methods:{
     clickEvent(index, event, array) {

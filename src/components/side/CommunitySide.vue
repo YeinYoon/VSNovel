@@ -1,39 +1,5 @@
 <template>
   <div>
-    <div class="sideBar">
-      <div class="side_search">
-        <img src="../../assets/icons/magnifier.png" class="side_icon" />
-        <input type="text" />
-      </div>
-      <div>
-        <div class="group"><span>· TOPIC</span></div>
-        <div v-for="(item, i) in sideArrays" :key="i">
-          <div
-            @click="clickCommunityEvent(i, $event, item)"
-            id="communityElement"
-          >
-            · {{ item }}
-          </div>
-        </div>
-      </div>
-      <div>
-        <div class="group"><span>· Village</span></div>
-          <div
-            @click="clickVillageEvent(0, $event, null)"
-            id="villageElement"
-          >
-          · Village Main
-          </div>
-        <div v-for="(array, i) in sideCafe" :key="i">
-          <div
-            @click="clickVillageEvent(i+1, $event, array.VILL_CODE)"
-            id="villageElement"
-          >
-          · {{ array.VILL_NAME }}
-          </div>
-        </div>
-      </div>
-    </div>
     <div v-if="$route.path.substr(1) == 'community'">
       <div class="tests">
         <div class="header">
@@ -122,11 +88,13 @@ export default {
         content: this.$route.params.comm_content,
       };
     }
-    this.clickId = document.querySelectorAll("#communityElement");
-    this.clickId[this.clickNum].style.backgroundColor = "#2872f9";
 
     this.$router.push('/community');
     this.resVillageList();
+  },
+  created() {
+    this.$store.commit('sideBarOn');
+    this.$store.commit('currentServiceCng', 'C');
   },
   methods: {
     // 가입한 카페 리스트

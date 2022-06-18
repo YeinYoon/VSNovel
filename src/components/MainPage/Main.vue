@@ -1,5 +1,5 @@
 <template>
-  <div class="RouterView">
+  <div class="RouterView_NonSide">
     <div class="test">
       <!-- 헤더 -->
       <div class="header">
@@ -137,6 +137,8 @@ export default {
         });
       }
     });
+    this.$store.commit('sideBarOff');
+    this.$store.commit('currentServiceCng', 'M');
   },
   mounted() {
     // 공지사항 날짜 순으로 정렬
