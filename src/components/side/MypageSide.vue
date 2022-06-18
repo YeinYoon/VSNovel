@@ -1,21 +1,5 @@
 <template>
   <div>
-    <div class="sideBar">
-      <div class="side_search">
-        <img src="../../assets/icons/magnifier.png" class="side_icon" />
-        <input type="text" />
-      </div>
-      <div>
-        <div class="group" id="main">
-          <span>· 마이페이지</span>
-        </div>
-        <div class="sel" v-for="(item, i) in sideArrays" :key="i">
-          <div @click="clickEvent(i, $event, item)" id="element">
-            · {{ item.name }}
-          </div>
-        </div>
-      </div>
-    </div>
     <router-view />
     <div class="Temp_LogoutButton" @click="logout()"><button class="mypage_logout">로그아웃</button></div>
   </div>
@@ -81,18 +65,6 @@ export default {
 </script>
 
 <style>
-.sideBar {
-  font-size: 1.2em;
-  display: flex;
-  flex-direction: column;
-  padding: 50px 10px 0 10px;
-  background: #2c2c2c;
-  width: 300px;
-  height: 100vh;
-  position: fixed;
-  top: 0px;
-  left: 140px;
-}
 .group {
   cursor: pointer;
 }

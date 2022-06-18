@@ -1,17 +1,5 @@
 <template>
 <div>
-  <div class="sideBar">
-    <div class="side_search">
-      <img src="@/assets/icons/magnifier.png" class="side_icon" />
-      <input type="text" />
-    </div>
-    <div>
-      <div class="group" @click="myStep = '전체'"><span>· TOPIC</span></div>
-      <div class="sel" v-for="(array, i) in sideArrays" :key="i">
-        <div @click="clickEvent(i, $event, array)" id="element">· {{array}}</div>
-      </div>
-    </div>
-  </div>
   <!-- 공지사항 메인 -->
   <div class="tests" v-if="noticeStep == 0">
     <header class="header">
