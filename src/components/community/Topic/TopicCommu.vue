@@ -21,16 +21,19 @@
       <!-- 글쓰기 버튼 -->
       <div class="commu_btn_blue" v-if="manage==false"><span class="commu_btn_write" @click="communitybtn({type:'third'})">글쓰기</span></div>
     </div>
+    <!-- 상단 버튼 프레임 -->
 
+    <!-- 글 목록 프레임 -->
     <section class="commu_section">
-      <div
-        class="commu_post"
-        v-for="(a, index) in datasend"
-        :key="a"
-        @click="communitybtn({manage : manage, index : index , item : a})"
-      >
+      <div class="commu_post"
+      v-for="(a, index) in datasend"
+      :key="a"
+      @click="communitybtn({manage : manage, index : index , item : a})" > <!-- (반복) 글 DB 데이터 반복문 -->
+        
+        <!-- 글 썸네일 -->
         <img class="commu_thumb" :src="`${a.titleImg}`" @error="replaceimg"/>
         
+        <!-- 글 정보 및 제목, 검은 블록 -->
         <div class="commu_back">
           <!-- 글제목 -->
           <div class="commu_back_title">{{ a.title }}</div>
@@ -45,9 +48,11 @@
             {{ a.writer }} | {{ a.date }} | {{ a.likes }} | {{ a.coment }}
           </div>
         </div>
-
+        <!-- 글 정보 및 제목, 검은 블록 -->
       </div>
+      <!-- (반복) 글 DB 데이터 반복문 end -->
     </section>
+    <!-- 글 목록 프레임 end -->
   </div>
 </template>
 
