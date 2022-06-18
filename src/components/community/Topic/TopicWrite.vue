@@ -4,15 +4,14 @@
     <div v-if="open==true"><alertmodal :openmodal="open" @closemodal="open = false" :alertcontent="alertcontent"/></div>
     
     <div class="commu_write_section">
-      <!-- 리뷰 & 추천 부분 => 작품선택, 제목, 별점 입력 -->
+
+      <!-- 리뷰게시판 -->
       <div class="commu_review_frame" v-if='step=="리뷰 & 추천"'>
         <div class="commu_novel_choice"><span>작품선택</span></div>
-        <!-- 기본 리뷰 & 추천  -->
         <div class="commu_review_title" v-if="update == false"><input type="text" v-model="writetitle"/></div>
-        <!-- 리뷰 & 추천 + 수정 -->
         <div class="commu_review_title" v-if='step=="리뷰 & 추천" && update == true'><input type="text" :value="`${topicObject.title}`" id="updatetitle"/></div>
 
-        <!-- 수정 리뷰 글쓰기 별점 부분 -->
+        <!-- 리뷰 수정 상단부 (제목, 별점) -->
         <div class="commu_str_back_update" v-if='update == true && this.step == "리뷰 & 추천"'>
           <span class="str_first">★★★★★
             <span :style="str_draw">★★★★★</span>
@@ -20,7 +19,7 @@
           </span>
         </div>
 
-        <!-- 처음 리뷰 글쓰기 별점 부분 -->
+        <!-- 리뷰 작성 상단부 -->
         <div class="commu_str_back" v-else-if='this.step == "리뷰 & 추천"' @click="stargrade()" id="starBack">
           <span class="commu_str_grade" v-if="strOpen==false">별점 매기기</span>
           <span class="str_first" v-if="strOpen==true">★★★★★
@@ -28,19 +27,26 @@
             <input type="range" class="str_range" @input="draw(value)" v-model="value" step="1" min="0" max="10">
           </span>
         </div>
-        
-
       </div>
-      <!-- 기본 글쓰기 제목입력 -->
-      <div class="commu_write_title" v-if="update==false && step!='리뷰 & 추천'"><input type="text" v-model="writetitle"/></div>
-      <!-- 수정 글쓰기 제목입력 -->
-      <div class="commu_write_title" v-if="update==true && step!='리뷰 & 추천'"><input type="text" :value="`${topicObject.title}`" id="updatetitle"/></div>
+
+      <!-- 글쓰기 자유/작가/팀원모집 상단부 (제목) -->
+      <div class="commu_write_title" v-if="update==false && step!='리뷰 & 추천'">
+        <input type="text" v-model="writetitle"/>
+      </div>
+
+      <!-- 수정 자유/작가/팀원모집 상단부 (제목) -->
+      <div class="commu_write_title" v-if="update==true && step!='리뷰 & 추천'">
+        <input type="text" :value="`${topicObject.title}`" id="updatetitle"/>
+      </div>
 
       <!-- 내용 입력창 -->
       <div class="commu_write_content">
         <Editor @registerdata="writecontent = $event" :topicObject="topicObject" :update="update"/>
       </div>
     </div>
+    <!-- 게시물 폼 끝 -->
+
+    <!-- 게시물 폼 글쓰기 및 수정버튼 -->
     <div class="write_btn_area">
       <div class="write_btn" @click="registerpost">
         <span v-if="update==false">글쓰기</span>
@@ -48,6 +54,7 @@
       </div>
       <div class="write_cancle_btn" @click="$emit('add','add')"><span>취소</span></div>
     </div>
+  
   </div>
 </template>
 

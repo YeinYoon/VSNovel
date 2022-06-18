@@ -4,23 +4,35 @@
     <div v-if="open==true"><alertmodal :openmodal="open" @closemodal="open = false" :alertcontent="alertcontent"/></div>
 
     <div class="postview_wrap">
-      
-      <!-- 까만배경:제목과 내용 댓글들을 감싸는 배경 -->
       <div class="postview_section">
-        <!-- 제목을 나타내는 영역-->
         <div class="postview_title">
+
           <!-- 제목 -->
-          <div class="postview"><span>{{topicObject.title}}</span></div>
+          <div class="postview">
+            <span class="postview_title_span">{{topicObject.title}}</span>
+          </div>
           
           <div class="topic_postview_btn_info">
-            <!-- 이미지 -->
-            <div class="topic_postview_thumbimg"><img :src="thumbimg" @error="reimg"></div>
+            
+            <div class="topic_postview_thumbimg">
+              <!-- 작성자 프로필 이미지 -->
+              <img :src="thumbimg" @error="reimg">
+            </div>
+
             <div>
-              <!-- 작성일자 -->
-              <div><span>작성일자 : {{topicObject.date}}</span></div>
+              
+              <div>
+                <!-- 작성일자 -->
+                <span>작성일자 : {{topicObject.date}}</span>
+              </div>
+              
               <div class="topic_postview_detail_info">
-                <!-- 작성자 -->
-                <div><span>{{topicObject.writer}}</span></div>
+                
+                <div>
+                  <!-- 작성자 -->
+                  <span>{{topicObject.writer}}</span>
+                </div>
+
                 <!-- 조회수, 댓글수, 추천수, 비추천수 -->
                 <div class="topic_postview_detail_frame">
                   <div class="topic_postview_detail"><span>조회수</span></div>
@@ -28,25 +40,32 @@
                   <div class="topic_postview_detail"><span>추천수 {{topicObject.likes}}</span></div>
                   <div class="topic_postview_detail"><span>비추천수 {{topicObject.nolike}}</span></div>
                 </div>
-                
+
+                <!-- 수정, 삭제 버튼 -->
+                <div class="topic_postview_btn_area">
+                  <div class="topic_postview_btn_red" @click="postBtn({type:'retouch'})"><img src="@/assets/icons/white/editing.png"></div>
+                  <div class="topic_postview_btn_blue" @click="postBtn({type:'deletewrite'})"><img src="@/assets/icons/white/trash_white.png"></div>
+                </div>
               </div>
             </div>
+            
 
-            <!-- 수정, 삭제 버튼 -->
-            <div class="topic_postview_btn_area">
-              <div class="topic_postview_btn_red" @click="postBtn({type:'retouch'})"><img src="@/assets/icons/white/editing.png"></div>
-              <div class="topic_postview_btn_blue" @click="postBtn({type:'deletewrite'})"><img src="@/assets/icons/white/trash_white.png"></div>
-            </div>
           </div>
 
         </div>
-        
-        <!-- 내용과 추천,비추천을 감싸는 프레임 -->
+        <!-- 본문조회 상단부 끝 -->
+
+        <!-- 내용영역 -->
         <div class="postview_frame">
-          <!-- 내용을 나타내는 영역 -->
-          <div class="postview_content"><span v-html="topicObject.content"></span></div>
-          <!-- 추천, 비추천 영역 -->
+
+          <!-- 본문 -->
+          <div class="postview_content">
+            <span v-html="topicObject.content"></span>
+          </div>
+
+          <!-- 추천, 비추천 -->
           <div class="content_vote">
+
             <div class="vote_btn_ok" @click="postBtn({type: 'likevote'})">
               <span>추천</span>
               <div>({{topicObject.likes}})</div>
@@ -55,27 +74,29 @@
               <span>비추천</span>
               <div>({{topicObject.nolike}})</div>
             </div>
+
           </div>
         </div>
 
-        <!-- 댓글이 몇 개인지 알려주는 영역 -->
+        <!-- 댓글 갯수 Comment() -->
         <div class="postview_comment">
           <span>Comment({{topicObject.coment}})</span>
         </div>
-        <!-- 댓글을 적는 부분 -->
+
+        <!-- 댓글 입력 -->
         <div class="postview_comment_area">
             <textarea v-model="writecoment"></textarea>
             <div class="postview_comment_register"><span @click="postBtn({type:'comentwrite', content: writecoment})">작성하기</span></div>
         </div>
 
-        <!-- 댓글이 달리는 부분 -->
+        <!-- 댓글 목록 -->
         <div class="postview_view_area" v-for="(a,index) in topicObject.comentcontents" :key="index">
             <div><img class="postview_img" src="" @error="reimg"></div>
             <div class="postview_view_content"><span>{{topicObject.comentcontents[index]}}</span></div>
         </div>
       </div>
 
-      <!-- 목록으로 나타내는 부분 -->
+      <!-- 목록으로 버튼 -->
       <div class="postview_btn_area">
         <div class="postview_btn_list" @click="postBtn({type:'second'})">
           <span>목록으로</span>
@@ -164,6 +185,9 @@ export default {
 <style>
 .topic_postview_btn_info{
   display:flex;
+  position: absolute;
+  width: 100%;
+  top: 52px;
   margin:5px 5px;
 }
 .topic_postview_thumbimg{
@@ -185,7 +209,8 @@ export default {
   display:flex;
   position:absolute;
   float:right;
-  right: 30px;
+  right: 62px;
+  top: -15px;
 }
 .topic_postview_btn_red, .topic_postview_btn_blue{
   /* top:40px; */
@@ -221,8 +246,8 @@ export default {
   display:flex;
   position:absolute;
   float: right;
-  right: 30px;
-  margin-top: 10px;
+  right: 60px;
+  top: 22px;
 }
 .topic_postview_detail{
   padding: 3px 10px;
@@ -249,11 +274,15 @@ export default {
   background-color: #494949;
   border-radius: 20px;
   padding: 15px 10px;
-  
+  height: 105px;
 }
-.postview_title span {
+.postview_title_span {
   height: 50px; 
   margin: 0 auto;
+  font-size: 1.3em;
+  position: absolute;
+  top: -7px;
+  font-weight: 600;
 }
 .postview {
   position: relative;
@@ -266,7 +295,7 @@ export default {
 
 .postview_frame {
   color:white;
-  margin: 5px auto;
+  margin: 10px auto;
   width: 100%;
   background-color: #494949;
   border-radius: 20px;
@@ -282,6 +311,7 @@ export default {
 }
 .postview_content span {
   margin: 0 auto;
+
 }
 .content_vote {
     display:flex;
