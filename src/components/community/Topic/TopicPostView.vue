@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <!-- 내용을 입력해주세요 모달창 -->
+  <div class="RouterView">
+    내용을 입력해주세요 모달창
     <div v-if="open==true"><alertmodal :openmodal="open" @closemodal="open = false" :alertcontent="alertcontent"/></div>
 
     <div class="postview_wrap">
@@ -112,8 +112,8 @@
 export default {
   name: "CommunityPostView",
   created() {
-    this.boardCode = this.$router.params.boardCode;
-    this.postCode = this.$router.params.postCode;
+    this.boardCode = this.$route.params.boardCode;
+    this.postCode = this.$route.params.postCode;
     console.log("게시판 코드 : "+ this.boardCode + " 포스트 코드" + this.postCode);
   },
   data() {
