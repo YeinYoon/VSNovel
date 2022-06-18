@@ -30,10 +30,15 @@
       <div class="group" id="main">
         <span>· 마이페이지</span>
       </div>
-      <div class="sel" v-for="(item, i) in sideArrays" :key="i">
-        <div @click="clickEvent(i, $event, item)" id="element">
-          · {{ item.name }}
-        </div>
+      <div class="sel">
+        <div id="element">· 프로필 설정</div>
+        <div id="element">· 결제정보 설정</div>
+        <div id="element">· 내가 쓴 게시글</div>
+        <div id="element">· 작성 리뷰 관리</div>
+        <div id="element">· 선호 / 비선호 설정</div>
+        <div id="element">· 결제정보 설정</div>
+        <div id="element">· 내가 쓴 게시글</div>
+        <div id="element">· 작성 리뷰 관리</div>
       </div>
     </div>
   </div>
