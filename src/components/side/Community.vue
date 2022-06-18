@@ -1,4 +1,5 @@
 <template>
+
     <div v-if="$store.state.currentService == 'C'">
       <div class="RouterView">
         <div class="header">
@@ -12,7 +13,15 @@
             <span class="topic">TOPIC · {{ step }}</span>
           </div>
         </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-        <TopicCommu :communityService="$store.state.communityService"/>
+        <div v-if="topicData == 0">
+          <TopicCommu :communityService="$store.state.communityService"/>
+        </div>
+        <div v-if="topicData == 1">
+          <TopicPostView/>
+        </div>
+        <div v-if="topicData == 2">
+          <TopicWrite/>
+        </div>    
       </div>
     </div>
 
@@ -70,6 +79,7 @@ export default {
   name: "CommunitySide",
   data() {
     return {
+      topicData: 0,
       step : ""
     };
   },

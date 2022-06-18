@@ -5,7 +5,6 @@ import Store from './components/side/Store.vue';
 import Main from './components/mainpage/Main.vue';
 // 커뮤니티
 import Community from './components/side/Community.vue';
-import TopicPostView from './components/community/topic/TopicPostView.vue';
 //카페
 import VillageMain from './components/community/cafe/CafeMain.vue';
 import Register from './components/community/cafe/RegisterCafe.vue';
@@ -91,7 +90,6 @@ const routes = [
     component : Community,
     props:true,
     children:[
-      {path : ':boardCode/:postCode', component : TopicPostView},
       {path : 'villagemain', name:'VillageMain', component : VillageMain},
       {path : 'register/:id', name:'Register', component : Register, props: true}
     ]
