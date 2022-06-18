@@ -1,7 +1,7 @@
 <template>
 <div>
   <!-- 공지사항 메인 -->
-  <div class="tests" v-if="noticeStep == 0">
+  <div class="RouterView" v-if="noticeStep == 0">
     <header class="header">
         <div class="service">
             <img class="icon" src="@/assets/icons/white/megaphone.png" alt="community">
@@ -71,7 +71,6 @@
 </template>
 
 <script>
-import notice from "@/assets/DataJs/notice.js";
 import NoticeWrite from "../notice/NoticeWrite";
 import NoticeRead from "../notice//NoticeRead";
 export default {

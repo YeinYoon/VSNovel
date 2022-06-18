@@ -16,6 +16,12 @@
         <div id="element">· 팀원모집</div>
         <div id="element">· 리뷰 & 추천</div>
       </div>
+      <br>
+      <div class="group" @click="myStep = '전체'"><span>· 빌리지</span></div>
+      <div class="sel">
+        <div id="element">· 빌리지 메인</div>
+        <div id="element">· 가입카페 목록</div>
+      </div>
     </div>
   </div>
 
