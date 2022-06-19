@@ -28,7 +28,7 @@ const store = createStore({
             // 자유 : F, 작가 : W,
             // 팀원모집 : T, 리뷰&추천 : R
 
-            noticeService : 'A',
+            noticeService : 'U',
             // 전체 : A , 업데이트 : U
             // 이벤트 : E , 정책 : P
         }
@@ -91,7 +91,7 @@ const store = createStore({
         },
 
         noticeServiceCng(state, val) {
-            state.NoticeService = val;
+            state.noticeService = val;
         }
 
     },

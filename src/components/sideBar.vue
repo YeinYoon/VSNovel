@@ -93,10 +93,9 @@
     <div>
       <div class="group" @click="myStep = '전체'"><span>· TOPIC</span></div>
       <div class="sel">
-        <div class="sel_menu">· 전체</div>
-        <div class="sel_menu">· 업데이트 내역</div>
-        <div class="sel_menu">· 이벤트</div>
-        <div class="sel_menu">· 정책</div>
+        <div class="sel_menu" @click="$store.commit('noticeServiceCng', 'U')">· 업데이트 내역</div>
+        <div class="sel_menu" @click="$store.commit('noticeServiceCng', 'E')">· 이벤트</div>
+        <div class="sel_menu" @click="$store.commit('noticeServiceCng', 'P')">· 정책</div>
       </div>
     </div>
   </div>

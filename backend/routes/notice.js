@@ -4,81 +4,69 @@ var router = express.Router();
 const db = require('../database/db');
 const timestamp = require('../database/timestamp');
 
-// 커뮤니티 리스트 불러오기
-router.get('/getcommulist', async (req,res)=>{
-    var allNovel = await db.execute(`SELECT * FROM tbl_post`);
-    if(allNovel=="err") {
-        res.send("err");
-    } else {
-        allNovel = allNovel.rows;
-        console.log(allNovel);
-        res.send(allNovel);
-    }
-})
-// 커뮤니티 글쓰기 
-// router.post('/setcommupost', async (req,res)=>{
-//     console.log("req : " + req);
-//     var postInsert = await db.execute(`INSERT INTO tbl_post (user_id, vill_code, boar_code, post_code, post_title, post_content) VALUES ('${req.user.USER_ID}', 0, 0, 0, '${req.title}', '${req.content}')`);
-//     if(postInsert == "err") {
-//       console.log('DB쿼리 실패');
-//     } else {
-//       res.send("ok");
-//     }
-// })
 
-
-// 커뮤니티 글 불러오기
-router.post('/getPostList', async(req,res)=>{
-    let manuelSQL;
+// 공지사항 글 불러오기
+router.post('/getNoticeList', async(req,res)=>{
+    let SQL;
     switch(req.body.select) {
-        case 'A' :
-            manuelSQL = `SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = 5 AND boar_code = 6 AND boar_code = 7`;
-            break;
-        case 'D' :
-            manuelSQL = `SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = 5`;
+        case 'U' :
+            SQL = `SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = 5`;
             break;
         case 'E' :
-            manuelSQL = `SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = 6`;
+            SQL = `SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = 6`;
             break;        
         case 'P' :
-            manuelSQL = `SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = 7`;
+            SQL = `SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = 7`;
             break;
     }
 
-    var postList = await db.execute(manuelSQL);
-    if(postList == "err") {
+    var noticeList = await db.execute(SQL);
+    if(noticeList == "err") {
         res.send("err");
     } else {
-        res.send(postList.rows);
+        res.send(noticeList.rows);
     }
 
 }),
 
-// 커뮤니티 포스트 조회
-router.post('/getPost', async (req,res)=>{
+// 공지사항 포스트 조회
+router.post('/getNotice', async (req,res)=>{
     let boardCode;
     switch(req.body.select) {
-        case 'A' :
-            boardCode = 1;
-            break;
-        case 'D' :
-            boardCode = 2;
+        case 'U' :
+            boardCode = 5;
             break;
         case 'E' :
-            boardCode = 3;
+            boardCode = 6;
             break;        
         case 'P' :
-            boardCode = 4;
+            boardCode = 7;
             break;
     }
 
-    var post = await db.execute(`SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = ${boardCode} AND post_code=${req.body.postCode}`);
-    if(post == "err") {
+    var notice = await db.execute(`SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = ${boardCode} AND post_code = ${req.body.postCode}`);
+    if(notice == "err") {
         res.send("err");
     } else {
-        res.send(post.rows);
+        res.send(notice.rows);
     }
 })
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //커뮤니티 포스팅
 router.post('/posting', async(req, res)=>{

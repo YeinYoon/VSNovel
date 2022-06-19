@@ -31,26 +31,11 @@
                 <!-- 공지사항 목록 -->
                 <section class="notice_section">
                     <div class="strong_notice_post">
-                    <!-- 강조로 등록한 공지사항의 목록 -->
-                        <div v-for="(p, i) in postList" :key="i" @click="PostClick(1, p.POST_CODE)">
+                        <div v-for="(n, i) in noticeList" :key="i" @click="PostClick(1, n.POST_CODE)">
                             <div class="strong_notice">
-                            <div class="strong_notice_mark"><img src="@/assets/icons/white/star.png" class="mark_star_image"></div>
-                                <div class="notice_back_title"><span>{{ p.POST_TITLE }}</span></div>             <!-- 제목 -->
-                                <div class="notice_back_content"><span>공지내용간략</span></div>   <!-- 내용 -->
-                                <div class="notice_back_date"><span>{{p.POST_ESTADATE}}</span></div>               <!-- 날짜 -->
-                            </div>
-                        </div>
-
-                    <!-- 강조 줄 -->
-                        <div v-if="noticeNum > 0" class="notice_line"></div>
-
-
-                    <!-- 강조가 아닌 공지사항의 목록 -->
-                        <div v-for="(p, i) in postList" :key="i" @click="PostClick(1, p.POST_CODE)">
-                            <div class="strong_notice">
-                                <div class="notice_back_title"><span>{{ p.POST_TITLE }}</span></div>            <!-- 제목 -->
-                                <div class="notice_back_content"><span v-html="notice.content"></span></div>  <!-- 내용 -->
-                                <div class="notice_back_date"><span>{{p.POST_ESTADATE}}</span></div>              <!-- 날짜 -->
+                                <div class="notice_back_title"><span>{{ n.POST_TITLE }}</span></div>            <!-- 제목 -->
+                                <div class="notice_back_content"><span v-html="n.POST_CONTENT"></span></div>  <!-- 내용 -->
+                                <div class="notice_back_date"><span>{{n.POST_ESTADATE}}</span></div>              <!-- 날짜 -->
                             </div>
                         </div>
                     </div>
@@ -67,7 +52,7 @@
 
 
 
-    <div v-if="noticeStep == 1">
+    <div v-if="viewState == 1">
         <!-- 쓰기는 전체적인 수정 필요 -->
         <div class="notice_write_section">
         <div class="notice_write_title">
@@ -75,12 +60,6 @@
             <div class="notice_title_info">
             <span>작성일자 : {{createdDate}}</span>
             <div class="notice_title_btn" v-if="writerId == $store.state.userId">
-                <div class="strong_btn" v-if="admin && this.noticeData.emphasis == 1" @click="noticeBtnEvent('notice_cancle')"> <!-- (조건문 변경필요) 이 글을 강조표시로 전환 -->
-                <span>강조 취소</span>
-                </div>
-                <div class="strong_btn" v-if="admin && this.noticeData.emphasis == 0" @click="noticeBtnEvent('updata')"> <!-- (조건문 변경필요) 이 글을 일반 공지로 전환 -->
-                <span>강조 발행</span>
-                </div>
                 <div @click="editPost()" class="notice_update_btn"><img src="@/assets/icons/white/editing.png"></div>
                 <div @click="deletePost()" class="notice_delete_btn"><img src="@/assets/icons/white/trash_white.png"></div>
             </div>
@@ -89,12 +68,12 @@
         </div>
 
         <div class="notice_write_contents">
-            <span v-html="noticeData.content">
+            <span v-html="content">
             </span>
         </div>
         </div>
         <div class="notice_cancle_area">
-        <div class="cancle_btn" @click="this.noticeStep = 0"><span>목록으로</span></div>
+        <div class="cancle_btn" @click="this.viewState = 0"><span>목록으로</span></div>
         </div>
     </div>
 
@@ -107,7 +86,7 @@
 
 
 
-    <div v-if="noticeStep == 2">
+    <div v-if="viewState == 2">
         <div class="write_section">
             <!-- 글제목 입력부, 수정시 글정보 불러오기 -->
         <div class="write_title">
@@ -116,7 +95,7 @@
         </div>
         <div class="write_content">
             <!-- 에디터 수정필요 -->
-            <Editor :noticeData="noticeData" :writeModify="writeModify" @up="content = $event"/>
+            <!-- <Editor :noticeData="noticeData" :writeModify="writeModify" @up="content = $event"/> -->
         </div>
         <div class="editer_info">
             주의! 당신은 현재 공지사항 게시판에서 작성중입니다.
@@ -125,7 +104,6 @@
         </div>
         </div>
         <div class="notice_btn_area">
-        <div class="strong_btn" @click="pushEvent(1)"><span>강조로 발행</span></div> <!-- 작성한 공지를 강조공지로 발행 -->
         <div class="write_btn" @click="pushEvent(0)">
             <span v-if="writeModify == false">글쓰기</span> <!-- 작성한 공지를 일반공지로 발행 -->
             <span v-if="writeModify == true">수정</span> <!-- 수정모드 -->
@@ -141,15 +119,13 @@ import axios from '../../axios'
 import ConfirmModal from '../modal/ConfirmModal.vue'
 export default {
     name: "NoticeSide",
-
     data() {
         return {
             viewState : 0,
             step : "",
             manage : false,
-            postList : [],
+            noticeList : [], // 공지사항 리스트
             update: false,
-            noticeStep: 0,
 
 
             // 포스트 보기
@@ -169,94 +145,86 @@ export default {
             inputTitle : "",
             inputContent : "",
 
-            //댓글 작성(코멘트)
-            inputComment : "",
         };
     },
-
     components:{
         ConfirmModal
     },
-
     mounted(){
 
     },
-
     created(){
-    this.$store.commit('sideBarOn');
-    this.$store.commit('currentServiceCng', 'N');
-    this.getPostList('A');
+        this.$store.commit('sideBarOn');
+        this.$store.commit('currentServiceCng', 'N');
+        this.getNoticeList('U');
     },
-
     computed: {
         noticeService: function() {
-        return this.$store.getters.noticeService;
+            return this.$store.getters.noticeService;
         }
     },
-
     watch : {
         noticeService(cng) {
-        this.postList = [];
-        this.viewState = 0;
-        this.getPostList(cng);
+            console.log(cng);
+            this.postList = [];
+            this.viewState = 0;
+            this.getNoticeList(cng);
         }
         
     },
-
     methods: {
-        getPostList(selectService) {
-        axios.post('/api/notice/getPostList', {select : selectService})
-        .then((result)=>{
-            if(result.data == "err") {
-            this.$store.commit('gModalOn',{size : "normal", msg : "해당 게시판 포스트 불러오기 실패"});
-            } else {
-            this.postList = result.data;
-            }
-        })
+        getNoticeList(selectService) {
+            axios.post('/api/notice/getNoticeList', {select : selectService})
+            .then((result)=>{
+                if(result.data == "err") {
+                    this.$store.commit('gModalOn',{size : "normal", msg : "공지사항 목록 불러오기 실패"});
+                } else {
+                    this.noticeList = result.data;
+                }
+            })
         },
         PostClick(val, postCode) {
-        this.noticeStep = val;
-        this.postCode = postCode;
-        var data = {
-            select : this.$store.state.noticeService,
-            postCode : postCode
-        }
-        axios.post('/api/notice/getPost', data)
-        .then(async (result)=>{
-            if(result.data == "err") {
-            this.$store.commit('gModalOn', {size : "normal", msg : "포스트 데이터 불러오기 실패"});
-            } else {
-            this.title = result.data[0].POST_TITLE;
-            this.content = result.data[0].POST_CONTENT;
-            this.view = result.data[0].POST_VIEW;
-            this.createdDate = result.data[0].POST_ESTADATE;
-            this.writerNickname = result.data[0].USER_NICKNAME;
-            this.writerId = result.data[0].USER_ID;
-
-            this.writerProfileImg = await storage.getUserProfileImg(result.data[0].USER_ID);
+            this.viewState = val;
+            this.postCode = postCode;
+            var data = {
+                select : this.$store.state.noticeService,
+                postCode : this.postCode
             }
-        });
+            console.log(data);
+            axios.post('/api/notice/getNotice', data)
+            .then(async (result)=>{
+                if(result.data == "err") {
+                    this.$store.commit('gModalOn', {size : "normal", msg : "공지사항 데이터 불러오기 실패"});
+                } else {
+                    this.title = result.data[0].POST_TITLE;
+                    this.content = result.data[0].POST_CONTENT;
+                    this.view = result.data[0].POST_VIEW;
+                    this.createdDate = result.data[0].POST_ESTADATE;
+                    this.writerNickname = result.data[0].USER_NICKNAME;
+                    this.writerId = result.data[0].USER_ID;
+                }
+            });
         },
     
         posting() {
-        var data = {
-            title : this.inputTitle,
-            content : this.inputContent,
-            select : this.$store.state.noticeService
-        }
-        axios.post('/api/notice/posting', data)
-        .then((result)=>{
-            if(result.data == "ok") {
-            this.$store.commit('gModalOn', {size : "normal", msg : "새로운 글이 등록되었습니다."});
-            this.noticeStep = 0;
-            this.getPostList(this.$store.state.noticeService);
-
-            this.inputTitle = "";
-            this.inputContent = "";
-            } else {
-            this.$store.commit('gModalOn', {size : "normal", msg : "게시글 등록 실패"});
+            var data = {
+                title : this.inputTitle,
+                content : this.inputContent,
+                select : this.$store.state.noticeService
             }
-        })
+            axios.post('/api/notice/posting', data)
+            .then((result)=>{
+                if(result.data == "ok") {
+                this.$store.commit('gModalOn', {size : "normal", msg : "새로운 글이 등록되었습니다."});
+                this.viewState = 0;
+                this.getPostList(this.$store.state.noticeService);
+
+                this.inputTitle = "";
+                this.inputContent = "";
+                } else {
+                this.$store.commit('gModalOn', {size : "normal", msg : "게시글 등록 실패"});
+                }
+            })
         }
     }
 }

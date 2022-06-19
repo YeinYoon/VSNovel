@@ -51,6 +51,7 @@ var communityRouter = require('./routes/community');
 var villageRouter = require('./routes/village');
 var mainRouter = require('./routes/mainPage');
 var mypageRouter = require('./routes/mypage');
+var noticeRouter = require('./routes/notice');
 
 app.use('/', indexRouter);
 app.use('/api/auth', authRouter);
@@ -59,6 +60,7 @@ app.use('/api/community', communityRouter);
 app.use('/api/village', villageRouter);
 app.use('/api/main', mainRouter);
 app.use('/api/mypage', mypageRouter);
+app.use('/api/notice', noticeRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
