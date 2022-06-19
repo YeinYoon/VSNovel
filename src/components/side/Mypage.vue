@@ -10,7 +10,7 @@
           <span>· 마이페이지</span>
         </div>
         <div class="sel" v-for="(item, i) in sideArrays" :key="i">
-          <div @click="clickEvent(i, $event, item)" id="element">
+          <div @click="clickEvent(i, $event, item)" id="element" class="sel_menu">
             · {{ item.name }}
           </div>
         </div>
@@ -81,16 +81,4 @@ export default {
 </script>
 
 <style>
-.sel div {
-  width: 73%;
-  height: 40px;
-  color: white;
-  padding: 5px 10px 5px 20px;
-  text-align: left;
-  margin: 10px 0 0 50px;
-  border-radius: 30px;
-  font-weight: 600;
-  font-size: 1em;
-  cursor: pointer;
-}
 </style>
