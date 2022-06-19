@@ -25,7 +25,7 @@
               </div>
               <!-- 글쓰기 버튼 -->
               <div class="commu_btn_blue">
-                <span class="commu_btn_write" @click="this.viewState = 2">글쓰기</span>
+                <span class="commu_btn_write" @click="loginCheck()">글쓰기</span>
               </div>
             </div>
             <!-- 상단 버튼 프레임 -->
@@ -338,6 +338,15 @@ export default {
     
   },
   methods: {
+    loginCheck() {
+      if(this.$store.state.userId == null) {
+        this.$store.commit('gModalOn',{size : "normal", msg : "로그인이 필요한 기능입니다."});
+        this.$router.push('/signin');
+      } else {
+        this.viewState = 2;
+      }
+    },
+
     getPostList(selectService) {
       axios.post('/api/community/getPostList', {select : selectService})
       .then((result)=>{
@@ -378,24 +387,29 @@ export default {
       this.inputContent = val;
     },
     posting() {
-      var data = {
-        title : this.inputTitle,
-        content : this.inputContent,
-        select : this.$store.state.communityService
-      }
-      axios.post('/api/community/posting', data)
-      .then((result)=>{
-        if(result.data == "ok") {
-          this.$store.commit('gModalOn', {size : "normal", msg : "새로운 글이 등록되었습니다."});
-          this.viewState = 0;
-          this.getPostList(this.$store.state.communityService);
-
-          this.inputTitle = "";
-          this.inputContent = "";
-        } else {
-          this.$store.commit('gModalOn', {size : "normal", msg : "게시글 등록 실패"});
+      if(this.$store.state.userId == null) {
+        this.$store.commit('gModalOn', {size : "normal", msg : "로그인이 필요한 기능입니다."});
+        this.$router.push('/signin');
+      } else {
+        var data = {
+          title : this.inputTitle,
+          content : this.inputContent,
+          select : this.$store.state.communityService
         }
-      })
+        axios.post('/api/community/posting', data)
+        .then((result)=>{
+          if(result.data == "ok") {
+            this.$store.commit('gModalOn', {size : "normal", msg : "새로운 글이 등록되었습니다."});
+            this.viewState = 0;
+            this.getPostList(this.$store.state.communityService);
+
+            this.inputTitle = "";
+            this.inputContent = "";
+          } else {
+            this.$store.commit('gModalOn', {size : "normal", msg : "게시글 등록 실패"});
+          }
+        })
+      }
     },
 
 
@@ -451,20 +465,25 @@ export default {
     },
 
     commenting() {
-      var data = {
-        select : this.$store.state.communityService,
-        postCode : this.postCode,
-        content : this.inputComment
-      }
-
-      axios.post('/api/community/commenting', data)
-      .then((result)=>{
-        if(result.data == "err") {
-          this.$store.commit('gModalOn', {size : "normal", msg : "댓글 등록을 실패했습니다."});
-        } else {
-          this.getCommentList();
+      if(this.$store.state.userId == null) {
+        this.$store.commit('gModalOn', {size : "normal", msg : "로그인이 필요한 기능입니다."});
+        this.$router.push('/signin');
+      } else {
+        var data = {
+          select : this.$store.state.communityService,
+          postCode : this.postCode,
+          content : this.inputComment
         }
-      })
+
+        axios.post('/api/community/commenting', data)
+        .then((result)=>{
+          if(result.data == "err") {
+            this.$store.commit('gModalOn', {size : "normal", msg : "댓글 등록을 실패했습니다."});
+          } else {
+            this.getCommentList();
+          }
+        })
+      }
     }
   },
 };

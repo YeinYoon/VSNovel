@@ -129,7 +129,7 @@ export default {
   name: "MainScreen",
   created() {
     axios.get("/api/auth/loginCheck").then(async (result) => {
-      if (result.data != "") {
+      if(result.data != "") {
         this.$store.commit("userLogin", {
           nickname: result.data.USER_NICKNAME,
           id: result.data.USER_ID,

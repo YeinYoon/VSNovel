@@ -23,7 +23,7 @@
                     <span class="noticeMain_btn_manage">관리</span>
                 </div>
                 <!-- 글쓰기 버튼 -->
-                <div class="noticeMain_btn_blue">
+                <div class="noticeMain_btn_blue" v-if="$store.state.userId == 'admin'">
                     <span class="noticeMain_btn_write" @click="this.viewState = 2">글쓰기</span>
                 </div>
                 <!-- 상단 버튼 프레임 -->
@@ -165,7 +165,6 @@ export default {
     },
     watch : {
         noticeService(cng) {
-            console.log(cng);
             this.postList = [];
             this.viewState = 0;
             this.getNoticeList(cng);
@@ -186,6 +185,12 @@ export default {
         PostClick(val, postCode) {
             this.viewState = val;
             this.postCode = postCode;
+
+            this.title = "";
+            this.content = "";
+            this.view = "";
+             this.createdDate = "";
+
             var data = {
                 select : this.$store.state.noticeService,
                 postCode : this.postCode

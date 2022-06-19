@@ -63,8 +63,6 @@ export default {
     return {
       state : (this.$route.path=='/')?'main':this.$route.path.substr(1,7),
       link : (this.$route.path=='/')?'main':this.$route.path.substr(1,7),
-
-      userProfileImg : ""
     };
   },
   methods: {
