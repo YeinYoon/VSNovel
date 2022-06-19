@@ -31,7 +31,7 @@
 
 
   <!-- 마이페이지 -->
-  <div v-if="$store.state.currentService == 'U'">
+  <div v-if="$store.state.currentService == 'aaa'">
     <div class="side_search">
       <img src="@/assets/icons/magnifier.png" class="side_icon" />
       <input type="text" />
