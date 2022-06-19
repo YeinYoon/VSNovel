@@ -234,9 +234,11 @@ export default {
 
 /* 공지목록 */
 .notice_section{
-    position:relative;
-    top:10%;
-    width: 100%;
+    position:fixed;
+    top: 100px;
+    left: 440px;
+    width: calc(100% - 440px);
+    padding: 60px;
     height: 87%;
     margin: 0 auto;
     overflow-y:scroll;
@@ -290,7 +292,7 @@ export default {
 .strong_notice_post {
     /* cursor: pointer; */
     position: relative;
-    width: 93%;
+    width: 100%;
     height: 120px;
     margin-top:10px;
     margin: 20px auto;
