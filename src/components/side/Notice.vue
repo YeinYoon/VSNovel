@@ -1,187 +1,270 @@
 <template>
-<div>
-  <!-- 공지사항 메인 -->
-  <div class="RouterView" v-if="noticeStep == 0">
-    <header class="header">
-        <div class="service">
-            <img class="icon" src="@/assets/icons/white/megaphone.png" alt="community">
-            <span class="title" @click="adminEvent">공지사항</span>
-            <span class="topic">TOPIC · {{myStep}}</span>
-            <!-- <div class="noticeMain_btn_area">
-                <button class="btn_red" v-if="admin">관리</button>
-                <button class="btn_blue" v-if="admin" @click="noticeStep++">글쓰기</button>
-            </div> -->
-        </div>
-    </header>  
-    
-    <div class="team_box">
-    <!-- 관리 글쓰기 부분 -->
-    <div class="noticeMain_btn_area">
-        <div class="noticeMain_btn_red">
-            <span @click="admin=true" v-if="admin==false">관리자 시점</span>
-            <span @click="admin=false" v-if="admin==true">관리</span>
-        </div>
-        <div class="noticeMain_btn_blue" v-if="admin==false" @click="noticeStep += 1"><span>글쓰기</span></div>
-     </div>
-    
-    <!-- 공지사항 본문 -->
-    <section class="notice_section">
-        <div class="strong_notice_post">
-            <!-- 공지사항 강조 부분 -->
-            <div v-for="(notice, i) in noticeData" :key="i">
-                <div v-if="noticeData[i].emphasis == 1" @click="noticeEvent(notice, i)">
-                    <div class="strong_notice">
-                    <div class="strong_notice_mark"><img src="@/assets/icons/white/star.png" class="mark_star_image"></div>
-                        <div class="notice_back_title"><span>{{notice.title}}</span></div>             <!-- 제목 -->
-                        <div class="notice_back_content"><span v-html="notice.content"></span></div>   <!-- 내용 -->
-                        <div class="notice_back_date"><span>{{notice.date}}</span></div>               <!-- 날짜 -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- 강조 줄 -->
-            <div v-if="noticeNum > 0" class="notice_line"></div>
-
-            
-            
-            
-
-            <!-- 공지사항 강조 아님 부분 -->
-            <div v-for="(notice, i) in noticeData" :key="i">
-                <div v-if="noticeData[i].emphasis == 0">
-                    <div class="strong_notice" @click="noticeEvent(notice, i)">
-                        <div class="notice_back_title"><span>{{notice.title}}</span></div>            <!-- 제목 -->
-                        <div class="notice_back_content"><span v-html="notice.content"></span></div>  <!-- 내용 -->
-                        <div class="notice_back_date"><span>{{notice.date.substring(0,10)}}</span></div>              <!-- 날짜 -->
-                    </div>
-                </div>
+<ConfirmModal ref="confirmModal"></ConfirmModal>
+    <div class="RouterView">
+        <div class="header">
+            <div class="service">
+                <img
+                class="icon"
+                src="@/assets/icons/white/bubble_chat.png"
+                alt="logo"
+                />
+                <span class="title">공지사항</span>
+                <span class="topic">TOPIC · {{ noticeService }}</span>
             </div>
         </div>
-        
-    </section>
-    </div>
-  </div>
+
+
+        <div v-if="viewState == 0">
+            <div class="team_box">
+                <!-- 상단 버튼 프레임 -->
+                <div class="noticeMain_btn_area">
+                    <!-- 관리자 계정만 노출 -->
+                    <div class="noticeMain_btn_red" v-if="manage == true">
+                    <span class="noticeMain_btn_manage">관리</span>
+                </div>
+                <!-- 글쓰기 버튼 -->
+                <div class="noticeMain_btn_blue">
+                    <span class="noticeMain_btn_write" @click="this.viewState = 2">글쓰기</span>
+                </div>
+                <!-- 상단 버튼 프레임 -->
+    
+                <!-- 공지사항 목록 -->
+                <section class="notice_section">
+                    <div class="strong_notice_post">
+                    <!-- 강조로 등록한 공지사항의 목록 -->
+                        <div v-for="(p, i) in postList" :key="i" @click="PostClick(1, p.POST_CODE)">
+                            <div class="strong_notice">
+                            <div class="strong_notice_mark"><img src="@/assets/icons/white/star.png" class="mark_star_image"></div>
+                                <div class="notice_back_title"><span>{{ p.POST_TITLE }}</span></div>             <!-- 제목 -->
+                                <div class="notice_back_content"><span>공지내용간략</span></div>   <!-- 내용 -->
+                                <div class="notice_back_date"><span>{{p.POST_ESTADATE}}</span></div>               <!-- 날짜 -->
+                            </div>
+                        </div>
+
+                    <!-- 강조 줄 -->
+                        <div v-if="noticeNum > 0" class="notice_line"></div>
+
+
+                    <!-- 강조가 아닌 공지사항의 목록 -->
+                        <div v-for="(p, i) in postList" :key="i" @click="PostClick(1, p.POST_CODE)">
+                            <div class="strong_notice">
+                                <div class="notice_back_title"><span>{{ p.POST_TITLE }}</span></div>            <!-- 제목 -->
+                                <div class="notice_back_content"><span v-html="notice.content"></span></div>  <!-- 내용 -->
+                                <div class="notice_back_date"><span>{{p.POST_ESTADATE}}</span></div>              <!-- 날짜 -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                </div>
+            </div>
+        </div>
+
+
+
+<!---------------------------->
+<!---------------------------->
+<!---------------------------->
+
+
+
     <div v-if="noticeStep == 1">
-        <NoticeWrite :writeModify="writeModify" :noticeData="clickNotice" @writebtn="noticeBtnEvent($event)"/>
+        <!-- 쓰기는 전체적인 수정 필요 -->
+        <div class="notice_write_section">
+        <div class="notice_write_title">
+            <span>{{title}}</span>
+            <div class="notice_title_info">
+            <span>작성일자 : {{createdDate}}</span>
+            <div class="notice_title_btn" v-if="writerId == $store.state.userId">
+                <div class="strong_btn" v-if="admin && this.noticeData.emphasis == 1" @click="noticeBtnEvent('notice_cancle')"> <!-- (조건문 변경필요) 이 글을 강조표시로 전환 -->
+                <span>강조 취소</span>
+                </div>
+                <div class="strong_btn" v-if="admin && this.noticeData.emphasis == 0" @click="noticeBtnEvent('updata')"> <!-- (조건문 변경필요) 이 글을 일반 공지로 전환 -->
+                <span>강조 발행</span>
+                </div>
+                <div @click="editPost()" class="notice_update_btn"><img src="@/assets/icons/white/editing.png"></div>
+                <div @click="deletePost()" class="notice_delete_btn"><img src="@/assets/icons/white/trash_white.png"></div>
+            </div>
+        
+            </div>
+        </div>
+
+        <div class="notice_write_contents">
+            <span v-html="noticeData.content">
+            </span>
+        </div>
+        </div>
+        <div class="notice_cancle_area">
+        <div class="cancle_btn" @click="this.noticeStep = 0"><span>목록으로</span></div>
+        </div>
     </div>
+
+
+
+<!---------------------------->
+<!---------------------------->
+<!---------------------------->
+
+
+
+
     <div v-if="noticeStep == 2">
-        <NoticeRead :admin="admin" :noticeData="clickNotice" @btnEvent="noticeBtnEvent($event)"/>
+        <div class="write_section">
+            <!-- 글제목 입력부, 수정시 글정보 불러오기 -->
+        <div class="write_title">
+            <input id="input" type="text" :value="`${noticeData.title}`" v-if="writeModify == true"/>
+            <input id="input" type="text" v-if="writeModify == false"/>
+        </div>
+        <div class="write_content">
+            <!-- 에디터 수정필요 -->
+            <Editor :noticeData="noticeData" :writeModify="writeModify" @up="content = $event"/>
+        </div>
+        <div class="editer_info">
+            주의! 당신은 현재 공지사항 게시판에서 작성중입니다.
+            <br>강조로 발행 버튼을 누르면 '강조공지'로 상단에 우선 노출됩니다.
+            <br>공지사항의 말머리를 선택하여 '해당 TOPIC' 에 맞게 작성하세요.
+        </div>
+        </div>
+        <div class="notice_btn_area">
+        <div class="strong_btn" @click="pushEvent(1)"><span>강조로 발행</span></div> <!-- 작성한 공지를 강조공지로 발행 -->
+        <div class="write_btn" @click="pushEvent(0)">
+            <span v-if="writeModify == false">글쓰기</span> <!-- 작성한 공지를 일반공지로 발행 -->
+            <span v-if="writeModify == true">수정</span> <!-- 수정모드 -->
+        </div>
+        <div class="cancle_btn" @click="$emit('writebtn', 'cancle')"><span>취소</span></div>
+        </div>
     </div>
 </div>
 </template>
 
 <script>
-import NoticeWrite from "../notice/NoticeWrite";
-import NoticeRead from "../notice//NoticeRead";
+import axios from '../../axios'
+import ConfirmModal from '../modal/ConfirmModal.vue'
 export default {
-  name: "NoticeSide",
-  data() {
-    return {
-        sideArrays : ['전체', '업데이트 내역', '이벤트', '정책'],
-        myStep: '전체',
-        clickNum : 0,
-        // 공지 화면 부분 변수
-            noticeData : notice,
-            noticeNum : 0,
-            noticeStep : 0,
-            clickNotice : {},
-            writeModify : false,
-            admin : false,
-    };
-  },
-  components:{
-        NoticeWrite,
-        NoticeRead,
-  },
-  mounted(){
-    // 기본 강조효과
-    // 공지사항 화면 부분 
-        // 공지사항 강조 순으로 정렬
-        // this.noticeData.sort(function (a, b) {
-        //     return a.emphasis - b.emphasis;
-        // });
-        //강조 갯수 세기
-        for(let i = 0; i < this.noticeData.length; i++){
-        if(this.noticeData[i].emphasis == 1) this.noticeNum ++;
-        }
-  },
+    name: "NoticeSide",
+
+    data() {
+        return {
+            viewState : 0,
+            step : "",
+            manage : false,
+            postList : [],
+            update: false,
+            noticeStep: 0,
+
+
+            // 포스트 보기
+            postCode : "",
+            title : "",
+            content : "",
+            view : "",
+            writerNickname : "",
+            writerId : "",
+            writerProfileImg : "",
+            createdDate : "",
+
+            // 댓글 보기
+            commentList : [],
+
+            // 새글 작성
+            inputTitle : "",
+            inputContent : "",
+
+            //댓글 작성(코멘트)
+            inputComment : "",
+        };
+    },
+
+    components:{
+        ConfirmModal
+    },
+
+    mounted(){
+
+    },
+
     created(){
-        if(this.$route.params.noti_id!=undefined){
-            this.noticeStep = 2;
-            this.clickNotice = { title : this.$route.params.noti_id,
-                                 content : this.$route.params.noti_content};
-            this.writeModify = true;
-        }
-       this.$store.commit('sideBarOn');
-       this.$store.commit('currentServiceCng', 'N');
+    this.$store.commit('sideBarOn');
+    this.$store.commit('currentServiceCng', 'N');
+    this.getPostList('A');
     },
-  methods:{
-    clickEvent(index, event, array) {
-    // 강조효과 및 메인 화면 변경
-      this.myStep = array;
-      let id = document.querySelectorAll("#element");
-      event.target.style.backgroundColor = "#2872f9";
-      if (this.clickNum != null) {
-        if (this.clickNum != index) {
-          id[this.clickNum].style.backgroundColor = "#2c2c2c";
+
+    computed: {
+        noticeService: function() {
+        return this.$store.getters.noticeService;
         }
-      }
-      this.clickNum = index;
     },
-    // 공지사항 메인 함수
-        // adminEvent(){
-        //     if(this.admin) this.admin = false;
-        //     else this.admin = true;
-        // },
-        noticeEvent(data, i){
-        //글보기 화면 이동
-            this.noticeStep = 2;
-            this.clickNotice = data;
-            this.clickNoticeNum = i;
-            this.writeModify = true;
+
+    watch : {
+        noticeService(cng) {
+        this.postList = [];
+        this.viewState = 0;
+        this.getPostList(cng);
+        }
+        
+    },
+
+    methods: {
+        getPostList(selectService) {
+        axios.post('/api/notice/getPostList', {select : selectService})
+        .then((result)=>{
+            if(result.data == "err") {
+            this.$store.commit('gModalOn',{size : "normal", msg : "해당 게시판 포스트 불러오기 실패"});
+            } else {
+            this.postList = result.data;
+            }
+        })
         },
-        noticeBtnEvent(event){
-        // 글 목록 화면 이동
-            //강조 발행일 때
-            if(event == 'updata'){
-                this.clickNotice.emphasis = 1;
-                this.noticeStep = 0;
+        PostClick(val, postCode) {
+        this.noticeStep = val;
+        this.postCode = postCode;
+        var data = {
+            select : this.$store.state.noticeService,
+            postCode : postCode
+        }
+        axios.post('/api/notice/getPost', data)
+        .then(async (result)=>{
+            if(result.data == "err") {
+            this.$store.commit('gModalOn', {size : "normal", msg : "포스트 데이터 불러오기 실패"});
+            } else {
+            this.title = result.data[0].POST_TITLE;
+            this.content = result.data[0].POST_CONTENT;
+            this.view = result.data[0].POST_VIEW;
+            this.createdDate = result.data[0].POST_ESTADATE;
+            this.writerNickname = result.data[0].USER_NICKNAME;
+            this.writerId = result.data[0].USER_ID;
+
+            this.writerProfileImg = await storage.getUserProfileImg(result.data[0].USER_ID);
             }
-            //강조 취소일 때
-            else if(event == 'notice_cancle'){
-                this.clickNotice.emphasis = 0;
-                this.noticeStep = 0;
-            }
-            //삭제일 때
-            else if(event == 'delete'){
-                this.noticeData.splice(this.clickNoticeNum, 1);
-                this.noticeStep = 0;
-            }
-            //수정일 때
-            else if(event == 'modify') {
-                this.noticeStep = 1;
-                this.writeModify = true;
-            }else if(event == 'cancle'){
-            //아닐 때
-            this.writeModify = false;
+        });
+        },
+    
+        posting() {
+        var data = {
+            title : this.inputTitle,
+            content : this.inputContent,
+            select : this.$store.state.noticeService
+        }
+        axios.post('/api/notice/posting', data)
+        .then((result)=>{
+            if(result.data == "ok") {
+            this.$store.commit('gModalOn', {size : "normal", msg : "새로운 글이 등록되었습니다."});
             this.noticeStep = 0;
-            }else if(event.type == 'arrUp'){
-                if(this.writeModify == false){
-                    this.noticeData.push(event.content);
-                    this.noticeStep = 0; 
-                }else {
-                    this.noticeData.splice(this.clickNoticeNum,1,event.content);
-                    this.noticeStep = 0;
-                }
-                
+            this.getPostList(this.$store.state.noticeService);
+
+            this.inputTitle = "";
+            this.inputContent = "";
+            } else {
+            this.$store.commit('gModalOn', {size : "normal", msg : "게시글 등록 실패"});
             }
-            
-        },
-  }
-};
+        })
+        }
+    }
+}
 </script>
 
 <style>
+
+/* 공지목록 */
 .notice_section{
     position:relative;
     top:10%;
@@ -199,12 +282,14 @@ export default {
     -ms-overflow-style: none; */
 }
 .noticeMain_btn_area {
-    display:flex;
-    justify-content: flex-end;
+    position: fixed;
+    left: calc(100% - 280px);
+    width: 300px;
+    display: inline;
 }
 .noticeMain_btn_red {
     top:20px;
-    position:relative;
+    position:absolute;
     cursor: pointer;
     font-size: 0.9em;
     width: 100px;
@@ -216,7 +301,8 @@ export default {
 }
 .noticeMain_btn_blue {
     top:20px;
-    position:relative;
+    left: calc(100% - 180px);
+    position:absolute;
     cursor: pointer;
     font-size: 0.9em;
     margin-left: 20px;
@@ -333,5 +419,215 @@ export default {
     border-radius: 5px;
     background-color:#262626;
     border: 2px solid #262626;
+}
+
+
+/* 공지 읽기 */
+
+.notice_write_section {
+  padding: 10px 15px;
+  background-color: #2c2c2c;
+  border-radius: 20px;
+  position: relative;
+  top: 50px;
+  width: 95%;
+  margin: 0 auto;
+  color:white;
+}
+.notice_write_title {
+  margin: 5px auto;
+  width: 100%;
+  /* height: 7%; */
+  background-color: #5e5e5e;
+  border-radius: 20px;
+  padding: 10px 10px;
+  font-size: 1.2em;
+  /* display:flex; */
+  display: table;
+}
+/* .notice_write_title span{
+  display: table-cell;
+  vertical-align: middle;
+} */
+.notice_title_info{
+  display: flex;
+}
+.notice_title_btn{
+  display: flex;
+  position:absolute;
+  float:right;
+  right:30px;
+}
+.notice_update_btn, .notice_delete_btn{
+  display:flex;
+  justify-content:center;
+  align-items: center;
+  width: 55px;
+  height: 28px;
+  background-color: #2872f9;
+  border-radius: 20px;
+  margin: 0 5px;
+  transition: 0.2s all ease;
+  cursor: pointer;
+}
+.notice_update_btn:hover, .notice_delete_btn:hover{
+  background-color: #0084ff;
+}
+.notice_update_btn img{
+    position:relative;
+    left:1.5px;
+    width:35%; 
+    object-fit: cover;
+}
+.notice_delete_btn img{
+    position:relative;
+    top:0.5px;
+    width:40%; 
+    object-fit:cover;
+}
+.notice_write_contents {
+  margin: 5px auto;
+  width: 100%;
+  min-height: 400px;
+  background-color: #5e5e5e;
+  border-radius: 20px;
+  font-size: 1.4em;
+  padding: 10px 10px;
+  overflow-y: scroll;
+}
+.notice_write_contents span{
+  word-wrap: break-word;
+}
+.editer_info {
+  color: white;
+  margin: 5px 0 0 0;
+  font-size: 0.8em;
+}
+
+.strong_btn {
+  display:flex;
+  /* padding: 5px 10px; */
+  /* display: table; */
+  background-color: red;
+  width: 70px;
+  height: 28px;
+  border-radius: 20px;
+  margin: 0 5px;
+}
+.strong_btn span {
+  font-size: 13px;
+}
+/* .write_btn {
+  padding: 5px 10px;
+  background-color: #2872f9;
+  width: 100px;
+  border-radius: 20px;
+  margin: 0 10px;
+} */
+.notice_cancle_area {
+  /* position:relative; */
+  position:relative;
+  top: 50px;
+  height: 50px;
+  /* width: 97%; */
+  /* left: 10px; */
+  /* display: table-cell; */
+  /* vertical-align: middle; */
+  color:white;
+  /* margin: 0 auto; */
+}
+.cancle_btn {
+  padding: 5px 10px;
+  margin: 0 10px;
+  background-color: #5e5e5e;
+  width: 100px;
+  border-radius: 14px;
+  display: table;
+  
+}
+.cancle_btn span {
+  display:table-cell;
+  text-align: center;
+}
+
+
+/* 공지 쓰기 */
+.write_section {
+  margin: 0 auto;
+  padding: 10px 15px;
+  width: 95%;
+  height: 75%;
+  background-color: #2c2c2c;
+  border-radius: 20px;
+  position: relative;
+  top: 50px;
+}
+.write_title {
+  margin: 5px auto;
+  width: 100%;
+  height: 7%;
+  background-color: #5e5e5e;
+  border-radius: 20px;
+  padding: 0 10px;
+}
+.write_title input {
+  position: relative;
+  left: 5px;
+  width: 99%;
+  height: 100%;
+  border: none;
+  background: none;
+  color: white;
+}
+.write_content {
+  margin: 0 auto;
+  width: 100%;
+  height: 77%;
+  background-color: #5e5e5e;
+  border-radius: 20px;
+}
+.write_content textarea {
+  background: none;
+  border: none;
+  position: relative;
+  top: 5px;
+  resize: none;
+  width: 100%;
+  height: 95%;
+}
+.editer_info{
+  color: white;
+  margin: 5px 0 0 0;
+  font-size: 0.8em;
+}
+.notice_btn_area {
+  width: 100%;
+  text-align: center;
+  color: white;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  top: 70px;
+}
+.strong_btn {
+  padding: 5px 10px;
+  background-color: red;
+  width: 100px;
+  border-radius: 20px;
+  margin: 0 10px;
+}
+.write_btn {
+  padding: 5px 10px;
+  background-color: #2872f9;
+  width: 100px;
+  border-radius: 20px;
+  margin: 0 10px;
+}
+.cancle_btn {
+  padding: 5px 10px;
+  margin: 0 10px;
+  background-color: #5e5e5e;
+  width: 100px;
+  border-radius: 20px;
 }
 </style>

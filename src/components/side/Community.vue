@@ -10,7 +10,7 @@
               alt="logo"
             />
             <span class="title">커뮤니티</span>
-            <span class="topic">TOPIC · {{ step }}</span>
+            <span class="topic">TOPIC · {{ communityService }}</span>
           </div>
         </div>
 
@@ -20,12 +20,11 @@
             <!-- 상단 버튼 프레임 -->
             <div class="commu_btn_area">
               <!-- 관리자 계정만 노출 -->
-              <div class="commu_btn_red" >
-                <span class="commu_btn_manage" @click="manage=true" v-if="manage==false">관리자 시점</span>
-                <span class="commu_btn_manage" @click="manage=false" v-if="manage==true">관리</span>
+              <div class="commu_btn_red" v-if="manage == true">
+                <span class="commu_btn_manage">관리</span>
               </div>
               <!-- 글쓰기 버튼 -->
-              <div class="commu_btn_blue" v-if="manage==false">
+              <div class="commu_btn_blue">
                 <span class="commu_btn_write" @click="this.viewState = 2">글쓰기</span>
               </div>
             </div>
@@ -50,7 +49,8 @@
 
                   <!-- 글정보 -->
                   <div class="commu_back_info">
-                    {{ p.USER_NICKNAME }} | {{p.POST_ESTADATE}} | {{p.POST_VIEW}}
+                    {{ p.USER_NICKNAME }} | {{p.POST_ESTADATE}} 
+                    <!-- | {{p.POST_VIEW}} -->
                   </div>
                 </div>
                 <!-- 글 정보 및 제목, 검은 블록 -->
@@ -101,8 +101,8 @@
 
                       <!-- 조회수, 댓글수, 추천수, 비추천수 -->
                       <div class="topic_postview_detail_frame">
-                        <div class="topic_postview_detail"><span>{{view}}</span></div>
-                        <div class="topic_postview_detail"><span>댓글수</span></div>
+                        <!-- <div class="topic_postview_detail"><span>{{view}}</span></div>
+                        <div class="topic_postview_detail"><span>댓글수</span></div> -->
                       </div>
 
                       <!-- 수정, 삭제 버튼 -->
@@ -128,9 +128,11 @@
                 </div>
               </div>
 
+              <hr>
+
               <!-- 댓글 갯수 Comment() -->
               <div class="postview_comment">
-                <span>Comment(갯수입력할것)</span>
+                <span>Comment</span>
               </div>
 
               <!-- 댓글 입력 -->
@@ -272,9 +274,6 @@
 
 <script>
 import Editor from '@/components/community/topic/Editor'
-import TopicCommu from "../community/topic/TopicCommu";
-import TopicPostView from "../community/topic/TopicPostView";
-import TopicWrite from "../community/topic/TopicWrite";
 import CafeMain from "../community/cafe/CafeMain";
 import InsideCafe from "../community/cafe/RegisterCafe";
 import storage from '../../aws'
@@ -314,9 +313,6 @@ export default {
     };
   },
   components: {
-    TopicCommu,
-    TopicPostView,
-    TopicWrite,
     CafeMain,
     InsideCafe,
     Editor,
@@ -489,6 +485,7 @@ export default {
   cursor: pointer;
 }
 
+/* 목록조회 */
 .team_box {
   height: 80vh;
 }
@@ -602,7 +599,392 @@ export default {
   }
 
 
+/* 본문조회 */
+.topic_postview_btn_info{
+  display:flex;
+  position: absolute;
+  width: 100%;
+  top: 52px;
+  margin:5px 5px;
+}
+.topic_postview_thumbimg{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 55px;
+  height: 55px;
+  border-radius: 15px;
+  margin-right: 10px;
+  background-color:#5e5e5e;
+}
+.topic_postview_thumbimg img{
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+}
+.topic_postview_btn_area{
+  display:flex;
+  position:absolute;
+  float:right;
+  right: 62px;
+  top: -15px;
+}
+.topic_postview_btn_red, .topic_postview_btn_blue{
+  /* top:40px; */
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  position:relative;
+  cursor: pointer;
+  font-size: 0.9em;
+  width: 50px;
+  height: 28px;
+  background: #2872f9;
+  border-radius: 14px;
+  /* display: table; */
+  margin-left: 10px;
+}
+.topic_postview_btn_red img {
+  position:relative;
+    left:1.5px;
+    width:35%; 
+    object-fit: cover;
+}
+.topic_postview_btn_blue img {
+  position:relative;
+  top:0.5px;
+  width:40%; 
+  object-fit: cover;
+}
+.topic_postview_detail_info{
+  display:flex;
+}
+.topic_postview_detail_frame{
+  display:flex;
+  position:absolute;
+  float: right;
+  right: 60px;
+  top: 22px;
+}
+.topic_postview_detail{
+  padding: 3px 10px;
+  background-color: #5e5e5e;
+  border-radius: 20px;
+  margin-left: 5px;
+  
+}
+.postview_wrap {
+  margin: 0 auto;
+  width: 95%;
+}
+.postview_section {
+  padding: 10px 15px;
+  background-color: #2c2c2c;
+  border-radius: 20px;
+  position: relative;
+  top: 50px;
+}
+.postview_title {
+  color:white;
+  margin: 5px auto;
+  width: 100%;
+  background-color: #494949;
+  border-radius: 20px;
+  padding: 15px 10px;
+  height: 105px;
+}
+.postview_title_span {
+  height: 50px; 
+  margin: 0 auto;
+  font-size: 1.3em;
+  position: absolute;
+  top: -7px;
+  font-weight: 600;
+}
+.postview {
+  position: relative;
+  width: 99%;
+  height: 100%;
+  border: none;
+  background: none;
+  margin: 0px 10px;
+}
 
+.postview_frame {
+  color:white;
+  margin: 10px auto;
+  width: 100%;
+  background-color: #494949;
+  border-radius: 20px;
+}
+.postview_content {
+  min-height: 100px;
+  background-color: #494949;
+  border-radius: 20px;
+  padding: 10px 15px;
+  overflow-y:scroll;
+  word-wrap: break-word;
+  
+}
+.postview_content span {
+  margin: 0 auto;
+
+}
+.content_vote {
+    display:flex;
+    justify-content: center;
+    position:relative;
+    bottom: 20px;
+    margin-top: 10px;
+    width: 100%;
+    /* height: 50px; */
+}
+.vote_btn_ok {
+  display: inline-block;
+  width : 100px;
+  /* line-height: 50px; */
+  text-align: center;
+  margin: 0 10px;
+  background-color: #2872f9;
+  border-radius: 20px;
+  color:white;
+  font-size: 1.2em;
+  cursor:pointer;
+}
+.vote_btn_ok:hover {
+  background-color:#0084ff;
+}
+.vote_btn_no {
+  display: inline-block;
+  width : 100px;
+  /* line-height: 50px; */
+  text-align: center;
+  /* height: 100%; */
+  margin: 0 10px;
+  background-color: #ff4c4c;
+  border-radius: 20px;
+  color:white;
+  font-size: 1.2em;
+  cursor:pointer;
+}
+.vote_btn_no:hover {
+  background-color:#f83636;
+}
+.postview_btn_area {
+  position: relative;
+  top: 50px;
+  height: 50px;
+  width: 100px;
+  display: table-cell;
+  vertical-align: middle;
+  color: white;
+}
+.postview_btn_list{
+  text-align: center;
+  padding: 5px 10px;
+  background-color: #2872f9;
+  border-radius: 14px;
+  cursor:pointer;
+}
+.postview_comment {
+  color:white;
+  font-size: 1.2em;
+}
+.postview_comment_area textarea {
+  width: 100%;
+  border-radius: 14px;
+  font-size: 1.0em;
+  background-color:#494949;
+  color:white;
+  border: none;
+  outline: none;
+  padding: 5px 10px;
+  resize: none;
+}
+.postview_comment_register {
+  justify-content: flex-end;
+  display:flex;
+  position:relative;
+  color: white;
+  text-align: center;
+  margin: 3px auto;
+}
+.postview_comment_register span {
+  padding: 5px 10px;
+  background-color: #2872f9;
+  border-radius: 14px;
+  width: 100px;
+  cursor:pointer;
+}
+.postview_view_area{
+  display:flex;
+  margin-top: 10px;
+  margin-bottom : 5px;
+}
+.postview_img{
+  width: 50px;
+  height: 50px;
+  border-radius: 15px;
+  margin-right: 10px;
+}
+.postview_view_content {
+  width: 100%;
+  border-radius: 14px;
+  font-size: 1.0em;
+  background-color:#494949;
+  padding: 5px 10px;
+  color: white;
+}
+
+
+
+/* 글작성 */
+
+.commu_write_section {
+  margin: 0 auto;
+  padding: 10px 15px;
+  width: 95%;
+  height: 65vh;
+  background-color: #2c2c2c;
+  border-radius: 20px;
+  position: relative;
+  top: 50px;
+}
+.commu_review_frame{
+  display:flex;
+  justify-content: space-between;
+  height: 7%;
+  margin: 5px auto;
+}
+.commu_novel_choice {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:1;
+  height: 100%;
+  background-color:#2872f9;
+  border-radius: 20px;
+  padding: 0 10px;
+  margin-right: 10px;
+  cursor: pointer;
+}
+.commu_novel_choice span {
+  color:white;
+  font-size: 1.2vw;
+}
+.commu_review_title {
+  flex: 3;
+  height: 100%;
+  background-color: #5e5e5e;
+  border-radius: 20px;
+  padding: 0 10px;
+}
+.commu_review_title input {
+  position: relative;
+  left: 5px;
+  width: 99%;
+  height: 100%;
+  border: none;
+  background: none;
+  color:white;
+}
+.commu_str_back {
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:1;
+  height: 100%;
+  background-color: #ffe342;
+  border-radius: 20px;
+  padding: 0 10px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.commu_str_back_update{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  flex:1;
+  height: 100%;
+  background-color: #5e5e5e;
+  border-radius: 20px;
+  padding: 0 10px;
+  margin-left: 10px;
+  cursor: pointer;
+}
+.commu_str_grade{
+  font-size: 1.2vw;
+}
+.str_first {
+  border:none;
+  position:relative;
+  font-size: 1.8vw;
+  color: #ddd;
+  bottom: -0.5px;
+  /* margin-left:2px;
+  margin-right:2px; */
+}
+.str_range {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    left: 0;
+    /* top: 10px; */
+    opacity: 0;
+    cursor: pointer;
+}
+.commu_write_title {
+  margin: 5px auto;
+  width: 100%;
+  height: 7%;
+  background-color: #5e5e5e;
+  border-radius: 20px;
+  padding: 0 10px;
+}
+.commu_write_title input {
+  position: relative;
+  left: 5px;
+  width: 99%;
+  height: 100%;
+  border: none;
+  background: none;
+  color:white;
+}
+.commu_write_content {
+  margin: 9px auto;
+  width: 100%;
+  height: 89%;
+  background-color: #5e5e5e;
+  border-radius: 20px;
+  padding: 10px 10px;
+  color:white;
+}
+.write_btn_area {
+  display:flex;
+  justify-content: center;
+  position: relative;
+  top: 70px;
+  width: 100%;
+  text-align: center;
+  color: white;
+}
+.write_btn {
+  padding: 5px 10px;
+  background-color: #2872f9;
+  width: 100px;
+  border-radius: 20px;
+  margin: 0 10px;
+}
+.write_cancle_btn {
+  padding: 5px 10px;
+  margin: 0 10px;
+  background-color: #5e5e5e;
+  width: 100px;
+  border-radius: 20px;
+}
+
+
+/* 본문 에디터 속성값 */
 
 /*들여쓰기, 내어쓰기*/
 .ql-indent-1:not(.ql-direction-rtl) {

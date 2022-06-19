@@ -24,9 +24,13 @@ const store = createStore({
             // 공지사항 : N , 엔진 : E, 
             // 라이브러리 : L , 빌리지 : V , 빌리지 내부 : VI
 
-            communityService : 'F'
+            communityService : 'F',
             // 자유 : F, 작가 : W,
             // 팀원모집 : T, 리뷰&추천 : R
+
+            noticeService : 'A',
+            // 전체 : A , 업데이트 : U
+            // 이벤트 : E , 정책 : P
         }
     },
     mutations : {
@@ -84,12 +88,20 @@ const store = createStore({
 
         communityServiceCng(state, val) {
             state.communityService = val;
+        },
+
+        noticeServiceCng(state, val) {
+            state.NoticeService = val;
         }
 
     },
     getters: {
         communityService(state) {
             return state.communityService;
+        },
+
+        noticeService(state) {
+            return state.noticeService;
         }
     }
 })
