@@ -15,7 +15,7 @@
         </div>
 
         <!-- 글목록 -->
-        <div v-if="topicData == 0">
+        <div v-if="viewState == 0">
           <div class="team_box">
             <!-- 상단 버튼 프레임 -->
             <div class="commu_btn_area">
@@ -33,7 +33,7 @@
 
             <!-- 글 목록 프레임 -->
             <section class="commu_section">
-              <div class="commu_post" v-for="(p, i) in postList" :key="i" @click="PostClick(1)"> <!-- (반복) 글 DB 데이터 반복문 -->
+              <div class="commu_post" v-for="(p, i) in postList" :key="i" @click="PostClick(1, p.POST_CODE)"> <!-- (반복) 글 DB 데이터 반복문 -->
                 
                 <!-- 글 썸네일 -->
                 <img class="commu_thumb" :src="p.titleImg" @error="'error'"/>
@@ -50,7 +50,7 @@
 
                   <!-- 글정보 -->
                   <div class="commu_back_info">
-                    {{ p.USER_NICKNAME }} | 생성일 | {{ p.POST_FAVORITE }} | 댓글 수
+                    {{ p.USER_NICKNAME }} | 생성일 | 댓글 수
                   </div>
                 </div>
                 <!-- 글 정보 및 제목, 검은 블록 -->
@@ -68,43 +68,41 @@
 
 
         <!-- 본문조회 -->
-        <div v-if="topicData == 1">
+        <div v-if="viewState == 1">
           <div class="postview_wrap">
             <div class="postview_section">
               <div class="postview_title">
 
                 <!-- 제목 -->
                 <div class="postview">
-                  <span class="postview_title_span">글제목</span>
+                  <span class="postview_title_span">{{title}}</span>
                 </div>
                 
                 <div class="topic_postview_btn_info">
                   
                   <div class="topic_postview_thumbimg">
                     <!-- 작성자 프로필 이미지 -->
-                    <img :src="thumbimg" @error="reimg">
+                    <img :src="writerProfileImg">
                   </div>
 
                   <div>
                     
                     <div>
                       <!-- 작성일자 -->
-                      <span>작성일자 : </span>
+                      <span>작성일자 : {{createdDate}}</span>
                     </div>
                     
                     <div class="topic_postview_detail_info">
                       
                       <div>
                         <!-- 작성자 -->
-                        <span>닉네임</span>
+                        <span>{{writer}}</span>
                       </div>
 
                       <!-- 조회수, 댓글수, 추천수, 비추천수 -->
                       <div class="topic_postview_detail_frame">
-                        <div class="topic_postview_detail"><span>조회수</span></div>
+                        <div class="topic_postview_detail"><span>{{view}}</span></div>
                         <div class="topic_postview_detail"><span>댓글수</span></div>
-                        <div class="topic_postview_detail"><span>추천수</span></div>
-                        <div class="topic_postview_detail"><span>비추천수</span></div>
                       </div>
 
                       <!-- 수정, 삭제 버튼 -->
@@ -126,21 +124,7 @@
 
                 <!-- 본문 -->
                 <div class="postview_content">
-                  <span>123</span>
-                </div>
-
-                <!-- 추천, 비추천 -->
-                <div class="content_vote">
-
-                  <div class="vote_btn_ok">
-                    <span>추천</span>
-                    <div>123</div>
-                  </div>
-                  <div class="vote_btn_no">
-                    <span>비추천</span>
-                    <div>123</div>
-                  </div>
-
+                  <span>{{content}}</span>
                 </div>
               </div>
 
@@ -152,7 +136,7 @@
               <!-- 댓글 입력 -->
               <div class="postview_comment_area">
                   <!-- 여기에 작성한 글을 해당 게시글의 댓글에 등록 -->
-                  <textarea v-model="writecoment"></textarea> 
+                  <textarea>댓글 입력받을 예정 ;;ㅎㅎ;;ㅎㅎ;씨발</textarea> 
                   <div class="postview_comment_register"><span>작성하기</span></div> <!-- 댓글 등록 버튼 -->
               </div>
 
@@ -166,7 +150,7 @@
 
             <!-- 목록으로 버튼 -->
             <div class="postview_btn_area">
-              <div class="postview_btn_list" @click="PostClick(0)">
+              <div class="postview_btn_list" @click="back(0)">
                 <span>목록으로</span>
               </div>
             </div>
@@ -181,7 +165,7 @@
 
 
 
-        <div v-if="topicData == 2">
+        <div v-if="viewState == 2">
           <div class="commu_write_section">
 
             <!-- 리뷰게시판 -->
@@ -231,7 +215,7 @@
               <span v-if="update==false">글쓰기</span>
               <span v-if="update==true">수정</span>
             </div>
-            <div class="write_cancle_btn" @click="PostClick(0)"><span>취소</span></div>
+            <div class="write_cancle_btn" @click="back(0)"><span>취소</span></div>
           </div>
         </div>
 
@@ -291,15 +275,26 @@ import TopicPostView from "../community/topic/TopicPostView";
 import TopicWrite from "../community/topic/TopicWrite";
 import CafeMain from "../community/cafe/CafeMain";
 import InsideCafe from "../community/cafe/RegisterCafe";
+
+import storage from '../../aws'
 export default {
   name: "CommunitySide",
   data() {
     return {
-      topicData: 0,
+      viewState : 0,
       step : "",
       manage : false,
       postList : [],
       update: false,
+
+
+      // 포스트
+      title : "",
+      content : "",
+      view : "",
+      writer : "",
+      writerProfileImg : "",
+      createdDate : "",
     };
   },
   components: {
@@ -325,6 +320,7 @@ export default {
 
   watch : {
     communityService(cng) {
+      this.viewState = 0;
       this.getPostList(cng);
     }
     
@@ -341,8 +337,31 @@ export default {
         }
       })
     },
-    PostClick(val) {
-      this.topicData = val;
+    PostClick(val, postCode) {
+      this.viewState = val;
+      var data = {
+        select : this.$store.state.communityService,
+        postCode : postCode
+      }
+      axios.post('/api/community/getPost', data)
+      .then(async (result)=>{
+        if(result.data == "err") {
+          this.$store.commit('gModalOn', {size : "normal", msg : "포스트 데이터 불러오기 실패"});
+        } else {
+          this.title = result.data[0].POST_TITLE;
+          this.content = result.data[0].POST_CONTENT;
+          this.view = result.data[0].POST_VIEW;
+          this.createdDate = result.data[0].POST_ESTADATE;
+          this.writer = result.data[0].USER_NICKNAME;
+
+          this.writerProfileImg = await storage.getUserProfileImg(result.data[0].USER_ID);
+        }
+      });
+    },
+
+    
+    back(val) {
+      this.viewState = val;
     }
   },
 };

@@ -51,6 +51,32 @@ router.post('/getPostList', async(req,res)=>{
         res.send(postList.rows);
     }
 
+}),
+
+// 커뮤니티 포스트 조회
+router.post('/getPost', async (req,res)=>{
+    let boardCode;
+    switch(req.body.select) {
+        case 'F' :
+            boardCode = 1;
+            break;
+        case 'W' :
+            boardCode = 2;
+            break;
+        case 'T' :
+            boardCode = 3;
+            break;        
+        case 'R' :
+            boardCode = 4;
+            break;
+    }
+
+    var post = await db.execute(`SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = ${boardCode} AND post_code=${req.body.postCode}`);
+    if(post == "err") {
+        res.send("err");
+    } else {
+        res.send(post.rows);
+    }
 })
 
 
