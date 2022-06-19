@@ -1,108 +1,104 @@
 <template>
-<div class="editor">
+<div>
+<div class="Editor">
   <quill-editor
     v-model:value="state.content"
     :options="state.editorOption"
     :disabled="state.disabled"
-    @blur="$emit('registerdata',state._content)"
-    @focus="onEditorFocus($event)"
-    @ready="onEditorReady($event)"
     @change="onEditorChange($event)"
   />
+</div>
+
 </div>
 </template>
 
 <script>
 import { reactive } from "vue";
 import { quillEditor } from "vue3-quill";
-
 export default {
   name: "App",
-  components: {
-    quillEditor,
-  },
   data() {
     return {
+      
     }
   },
-  mounted() {
-    if(this.update==true)
-      this.state.content = this.topicObject.content;
+  methods : {
+
   },
-  setup() {
+
+  setup(props, {emit}) {
     const state = reactive({
-    //   dynamicComponent: null,
-    //   content: "<p>2333</p>",
-    //   _content: "",
+      content : "",
+      _content: "",
       editorOption: {
         placeholder: "",
         modules: {
           toolbar: [
-            ["bold", "italic", "underline", "strike"],
-            ["blockquote", "code-block"],
-            [{ header: 1 }, { header: 2 }],
-            [{ list: "ordered" }, { list: "bullet" }],
-            [{ script: "sub" }, { script: "super" }],
+            // [],[],[],[],[],[],[],[],[],[],[],[], 메뉴정렬용이라는데 뺐음
+            ["bold", "italic", "underline"],
             [{ indent: "-1" }, { indent: "+1" }],
-            [{ direction: "rtl" }],
-            // [{ size: ["small", false, "large", "huge"] }],
-            [{ header: [1, 2, 3, 4, 5, 6, false] }],
-            [{ color: [] }, { background: [] }],
-            [{ font: [] }],
+            [{ size: [false, "large", "huge"] }],
+            // [{ font: [] }], // 추후 폰트 지원
             [{ align: [] }],
+            ["image"],
             ["clean"],
-            ["link", "image", "video"],
           ],
-          // other moudle options here
         },
-        // more options
       },
       disabled: false,
     });
 
-    // const onEditorBlur = (quill) => {
-    //   // console.log("editor blur!", quill);
-    // };
-    // const onEditorFocus = (quill) => {
-    //   // console.log("editor focus!", quill);
-    // };
-    // const onEditorReady = (quill) => {
-    //   // console.log("editor ready!", quill);
-    // };
     const onEditorChange = ({ html }) => {
-      // console.log("editor change!", quill, html, text);
       state._content = html;
+      emit("commitContent",state._content);
     };
 
     return {
       state,
-      // onEditorBlur,
-      // onEditorFocus,
-      // onEditorReady,
       onEditorChange,
     };
   },
-  methods: {
-  },
-  props: {
-    topicObject : Object,
-    update: Boolean
+
+  components: {
+    quillEditor,
   }
 };
 </script>
 <style>
-.editor{
-    width: 100%;
-     background-color: #868686;
-     border-radius: 18px;
-     height: 100%;
-  
+.Editor {
+  width: 100%;
+}
+
+.ql-toolbar {
+  position: sticky;
+  top: 0px;
+  background: white;
+  z-index: 10;
+  text-align: center;
 }
 .ql-toolbar.ql-snow {
-  border-radius: 18px;
-  border: none;
+  padding: 5px;
+}
+
+.ql-container {
+  overflow-x: auto;
+}
+
+.ql-editor > * {
+  cursor: text;
+  color: black;
+  font-size: 1em;
+  font-family: "RIDIBatang";
 }
 .ql-container.ql-snow {
+  overflow: scroll;
   border: none;
+}
+
+@font-face {
+  font-family: 'RIDIBatang';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.0/RIDIBatang.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
 }
 </style>

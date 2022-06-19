@@ -1,5 +1,5 @@
 <template>
-
+<ConfirmModal ref="confirmModal"></ConfirmModal>
     <div v-if="$store.state.currentService == 'C'">
       <div class="RouterView">
         <div class="header">
@@ -26,7 +26,7 @@
               </div>
               <!-- 글쓰기 버튼 -->
               <div class="commu_btn_blue" v-if="manage==false">
-                <span class="commu_btn_write" @click="PostClick(2)">글쓰기</span>
+                <span class="commu_btn_write" @click="this.viewState = 2">글쓰기</span>
               </div>
             </div>
             <!-- 상단 버튼 프레임 -->
@@ -50,7 +50,7 @@
 
                   <!-- 글정보 -->
                   <div class="commu_back_info">
-                    {{ p.USER_NICKNAME }} | 생성일 | 댓글 수
+                    {{ p.USER_NICKNAME }} | {{p.POST_ESTADATE}} | {{p.POST_VIEW}}
                   </div>
                 </div>
                 <!-- 글 정보 및 제목, 검은 블록 -->
@@ -96,7 +96,7 @@
                       
                       <div>
                         <!-- 작성자 -->
-                        <span>{{writer}}</span>
+                        <span>{{writerNickname}}</span>
                       </div>
 
                       <!-- 조회수, 댓글수, 추천수, 비추천수 -->
@@ -106,9 +106,9 @@
                       </div>
 
                       <!-- 수정, 삭제 버튼 -->
-                      <div class="topic_postview_btn_area">
-                        <div class="topic_postview_btn_red" @click="postBtn({type:'retouch'})"><img src="@/assets/icons/white/editing.png"></div>
-                        <div class="topic_postview_btn_blue" @click="postBtn({type:'deletewrite'})"><img src="@/assets/icons/white/trash_white.png"></div>
+                      <div class="topic_postview_btn_area" v-if="writerId == $store.state.userId">
+                        <div class="topic_postview_btn_red" @click="editPost()"><img src="@/assets/icons/white/editing.png"></div>
+                        <div class="topic_postview_btn_blue" @click="deletePost()"><img src="@/assets/icons/white/trash_white.png"></div>
                       </div>
                     </div>
                   </div>
@@ -124,33 +124,36 @@
 
                 <!-- 본문 -->
                 <div class="postview_content">
-                  <span>{{content}}</span>
+                  <span v-html="content"></span>
                 </div>
               </div>
 
               <!-- 댓글 갯수 Comment() -->
               <div class="postview_comment">
-                <span>Comment(123)</span>
+                <span>Comment(갯수입력할것)</span>
               </div>
 
               <!-- 댓글 입력 -->
               <div class="postview_comment_area">
                   <!-- 여기에 작성한 글을 해당 게시글의 댓글에 등록 -->
-                  <textarea>댓글 입력받을 예정 ;;ㅎㅎ;;ㅎㅎ;씨발</textarea> 
-                  <div class="postview_comment_register"><span>작성하기</span></div> <!-- 댓글 등록 버튼 -->
+                  <textarea v-model="inputComment"></textarea> 
+                  <div class="postview_comment_register"><span @click="commenting()">작성하기</span></div> <!-- 댓글 등록 버튼 -->
               </div>
 
               <!-- 댓글 목록 -->
-              <div class="postview_view_area"> <!-- (반복) 댓글내용들 -->
-                  <div><img class="postview_img" src="" @error="reimg"></div>
-                  <div class="postview_view_content"><span>댓글내용</span></div>
+              <div class="postview_view_area" v-for="(c, i) in commentList" :key="i"> <!-- (반복) 댓글내용들 -->
+                <div><img class="postview_img" :src="c.userImg"></div>
+                <div class="postview_view_content">
+                  <span>{{c.COMM_CONTENT}}</span>
+                  {{c.COMM_ESTADATE}}
+                </div>
               </div>
 
             </div>
 
             <!-- 목록으로 버튼 -->
             <div class="postview_btn_area">
-              <div class="postview_btn_list" @click="back(0)">
+              <div class="postview_btn_list" @click="this.viewState = 0">
                 <span>목록으로</span>
               </div>
             </div>
@@ -194,17 +197,17 @@
 
             <!-- 글쓰기 자유/작가/팀원모집 상단부 (제목) -->
             <div class="commu_write_title" v-if="update==false && communityService!= 'R' ">
-              <input type="text"/>
+              <input type="text" v-model="inputTitle"/>
             </div>
 
             <!-- 수정 자유/작가/팀원모집 상단부 (제목) -->
             <div class="commu_write_title" v-if="update==true && communityService!= 'R' ">
-              <input type="text"/>
+              <input type="text" v-model="inputTitle"/>
             </div>
 
             <!-- 내용 입력창 -->
             <div class="commu_write_content">
-              <Editor/>
+              <Editor @commitContent="editorContent"/>
             </div>
           </div>
           <!-- 게시물 폼 끝 -->
@@ -212,10 +215,10 @@
           <!-- 게시물 폼 글쓰기 및 수정버튼 -->
           <div class="write_btn_area">
             <div class="write_btn" @click="registerpost">
-              <span v-if="update==false">글쓰기</span>
+              <span v-if="update==false" @click="posting()">글쓰기</span>
               <span v-if="update==true">수정</span>
             </div>
-            <div class="write_cancle_btn" @click="back(0)"><span>취소</span></div>
+            <div class="write_cancle_btn" @click="this.viewState = 0"><span>취소</span></div>
           </div>
         </div>
 
@@ -269,14 +272,14 @@
 
 <script>
 import Editor from '@/components/community/topic/Editor'
-import axios from '../../axios'
 import TopicCommu from "../community/topic/TopicCommu";
 import TopicPostView from "../community/topic/TopicPostView";
 import TopicWrite from "../community/topic/TopicWrite";
 import CafeMain from "../community/cafe/CafeMain";
 import InsideCafe from "../community/cafe/RegisterCafe";
-
 import storage from '../../aws'
+import axios from '../../axios'
+import ConfirmModal from '../modal/ConfirmModal.vue'
 export default {
   name: "CommunitySide",
   data() {
@@ -288,13 +291,26 @@ export default {
       update: false,
 
 
-      // 포스트
+      // 포스트 보기
+      postCode : "",
       title : "",
       content : "",
       view : "",
-      writer : "",
+      writerNickname : "",
+      writerId : "",
       writerProfileImg : "",
       createdDate : "",
+
+      // 댓글 보기
+      commentList : [],
+
+      // 새글 작성
+      inputTitle : "",
+      inputContent : "",
+
+      //댓글 작성(코멘트)
+      inputComment : "",
+
     };
   },
   components: {
@@ -304,22 +320,22 @@ export default {
     CafeMain,
     InsideCafe,
     Editor,
-  },
 
+    ConfirmModal
+  },
   created() {
     this.$store.commit('sideBarOn');
     this.$store.commit('currentServiceCng', 'C');
     this.getPostList('F');
   },
-
   computed: {
     communityService: function() {
       return this.$store.getters.communityService;
     }
   },
-
   watch : {
     communityService(cng) {
+      this.postList = [];
       this.viewState = 0;
       this.getPostList(cng);
     }
@@ -333,12 +349,12 @@ export default {
           this.$store.commit('gModalOn',{size : "normal", msg : "해당 게시판 포스트 불러오기 실패"});
         } else {
           this.postList = result.data;
-          console.log(this.postList);
         }
       })
     },
     PostClick(val, postCode) {
       this.viewState = val;
+      this.postCode = postCode;
       var data = {
         select : this.$store.state.communityService,
         postCode : postCode
@@ -352,16 +368,107 @@ export default {
           this.content = result.data[0].POST_CONTENT;
           this.view = result.data[0].POST_VIEW;
           this.createdDate = result.data[0].POST_ESTADATE;
-          this.writer = result.data[0].USER_NICKNAME;
+          this.writerNickname = result.data[0].USER_NICKNAME;
+          this.writerId = result.data[0].USER_ID;
 
           this.writerProfileImg = await storage.getUserProfileImg(result.data[0].USER_ID);
         }
       });
+
+      this.getCommentList();
     },
 
-    
-    back(val) {
-      this.viewState = val;
+    editorContent(val) {
+      this.inputContent = val;
+    },
+    posting() {
+      var data = {
+        title : this.inputTitle,
+        content : this.inputContent,
+        select : this.$store.state.communityService
+      }
+      axios.post('/api/community/posting', data)
+      .then((result)=>{
+        if(result.data == "ok") {
+          this.$store.commit('gModalOn', {size : "normal", msg : "새로운 글이 등록되었습니다."});
+          this.viewState = 0;
+          this.getPostList(this.$store.state.communityService);
+
+          this.inputTitle = "";
+          this.inputContent = "";
+        } else {
+          this.$store.commit('gModalOn', {size : "normal", msg : "게시글 등록 실패"});
+        }
+      })
+    },
+
+
+    async deletePost() {
+      var result = await this.$refs.confirmModal.show({
+        size : "normal",
+        msg : "해당 게시글을 삭제하시겠습니까?",
+        btn1 : "삭제",
+        btn2 : "취소"
+      })
+
+      if(result == true) {
+        console.log(result);
+        var data = {
+          select : this.$store.state.communityService,
+          postCode : this.postCode
+        }
+
+        axios.post('/api/community/deletePost', data)
+        .then((result)=>{
+          if(result.data == "err") {
+            this.$store.commit('gModalOn', {size : "normal", msg : "게시글 삭제 실패"});
+          } else {
+            this.viewState = 0;
+            this.getPostList(this.$store.state.communityService);
+          }
+        })
+      }
+    },
+
+
+    getCommentList() {
+      this.commentList = [];
+      var data = {
+        select : this.$store.state.communityService,
+        postCode : this.postCode
+      }
+
+      axios.post('/api/community/getCommentList', data)
+      .then(async (result)=>{
+        if(result.data == "err") {
+          this.$store.commit('gModalOn', {size : "normal", msg : "댓글 불러오기 실패"});
+        } else {
+          var tempList = [];
+          tempList = result.data;
+          for(var i=0; i < tempList.length; i++) {
+            tempList[i].userImg = await storage.getUserProfileImg(tempList[i].USER_ID);
+          }
+
+          this.commentList = tempList;
+        }
+      })
+    },
+
+    commenting() {
+      var data = {
+        select : this.$store.state.communityService,
+        postCode : this.postCode,
+        content : this.inputComment
+      }
+
+      axios.post('/api/community/commenting', data)
+      .then((result)=>{
+        if(result.data == "err") {
+          this.$store.commit('gModalOn', {size : "normal", msg : "댓글 등록을 실패했습니다."});
+        } else {
+          this.getCommentList();
+        }
+      })
     }
   },
 };
@@ -493,4 +600,82 @@ export default {
   -webkit-text-stroke-width:1.2px;
   -webkit-text-stork-color:#2872f9
   }
+
+
+
+
+/*들여쓰기, 내어쓰기*/
+.ql-indent-1:not(.ql-direction-rtl) {
+  padding-left: 2em;
+}
+.ql-indent-1.ql-direction-rtl.ql-align-right {
+  padding-right: 2em;
+}
+.ql-indent-2:not(.ql-direction-rtl) {
+  padding-left: 4em;
+}
+.ql-indent-2.ql-direction-rtl.ql-align-right {
+  padding-right: 4em;
+}
+.ql-indent-3:not(.ql-direction-rtl) {
+  padding-left: 6em;
+}
+.ql-indent-3.ql-direction-rtl.ql-align-right {
+  padding-right: 6em;
+}
+.ql-indent-4:not(.ql-direction-rtl) {
+  padding-left: 8em;
+}
+.ql-indent-4.ql-direction-rtl.ql-align-right {
+  padding-right: 8em;
+}
+.ql-indent-5:not(.ql-direction-rtl) {
+  padding-left: 10em;
+}
+.ql-indent-5.ql-direction-rtl.ql-align-right {
+  padding-right: 10em;
+}
+.ql-indent-6:not(.ql-direction-rtl) {
+  padding-left: 12em;
+}
+.ql-indent-6.ql-direction-rtl.ql-align-right {
+  padding-right: 12em;
+}
+.ql-indent-7:not(.ql-direction-rtl) {
+  padding-left: 14em;
+}
+.ql-indent-7.ql-direction-rtl.ql-align-right {
+  padding-right: 14em;
+}
+.ql-indent-8:not(.ql-direction-rtl) {
+  padding-left: 16em;
+}
+.ql-indent-8.ql-direction-rtl.ql-align-right {
+  padding-right: 16em;
+}
+.ql-indent-9:not(.ql-direction-rtl) {
+  padding-left: 18em;
+}
+.ql-indent-9.ql-direction-rtl.ql-align-right {
+  padding-right: 18em;
+}
+
+/*글자 크기*/
+.ql-size-large {
+  font-size: 1.9em;
+}
+.ql-size-huge {
+  font-size: 2.3em;
+}
+
+/*문단정렬*/
+.ql-align-center {
+  text-align: center;
+}
+.ql-align-justify {
+  text-align: justify;
+}
+.ql-align-right {
+  text-align: right;
+}  
 </style>
