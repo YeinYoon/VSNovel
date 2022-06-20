@@ -20,12 +20,6 @@
         <div class="active_comm_Menu_T" v-if="$store.state.communityService == 'T'"></div>
         <div class="active_comm_Menu_R" v-if="$store.state.communityService == 'R'"></div>
       </div>
-      <br>
-      <div class="group" @click="myStep = '전체'"><span>· 빌리지</span></div>
-      <div class="sel">
-        <div class="sel_menu">· 빌리지 메인</div>
-        <div class="sel_menu">· 가입카페 목록</div>
-      </div>
     </div>
   </div>
 

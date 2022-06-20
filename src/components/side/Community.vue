@@ -32,7 +32,7 @@
 
             <!-- 글 목록 프레임 -->
             <section class="commu_section">
-              <div class="commu_post" v-for="(p, i) in postList" :key="i" @click="PostClick(1, p.POST_CODE)"> <!-- (반복) 글 DB 데이터 반복문 -->
+              <div class="commu_post" v-for="(p, i) in postList" :key="i" @click="postClick(1, p.POST_CODE)"> <!-- (반복) 글 DB 데이터 반복문 -->
                 
                 <!-- 글 썸네일 -->
                 <img class="commu_thumb" :src="p.titleImg" @error="'error'"/>
@@ -107,7 +107,7 @@
 
                       <!-- 수정, 삭제 버튼 -->
                       <div class="topic_postview_btn_area" v-if="writerId == $store.state.userId">
-                        <div class="topic_postview_btn_red" @click="editPost()"><img src="@/assets/icons/white/editing.png"></div>
+                        <div class="topic_postview_btn_red" @click="getPreContent()"><img src="@/assets/icons/white/editing.png"></div>
                         <div class="topic_postview_btn_blue" @click="deletePost()"><img src="@/assets/icons/white/trash_white.png"></div>
                       </div>
                     </div>
@@ -176,11 +176,11 @@
             <!-- 리뷰게시판 -->
             <div class="commu_review_frame" v-if='this.communityService == "R"'>
               <div class="commu_novel_choice"><span>작품선택</span></div>
-              <div class="commu_review_title" v-if="update == false"><input type="text"/></div>
-              <div class="commu_review_title" v-if='communityService == R && update == true'><input type="text"/></div>
+              <div class="commu_review_title" v-if="editMode == false"><input type="text"/></div>
+              <div class="commu_review_title" v-if='communityService == R && editMode == true'><input type="text"/></div>
 
               <!-- 리뷰 수정 상단부 (제목, 별점) -->
-              <div class="commu_str_back_update" v-if='update == true && this.communityService == "R"'>
+              <div class="commu_str_back_update" v-if='editMode == true && this.communityService == "R"'>
                 <span class="str_first">★★★★★
                 <span :style="str_draw">★★★★★</span>
                 <input type="range" class="str_range" @input="draw(value)" v-model="value" step="1" min="0" max="10">
@@ -198,18 +198,18 @@
             </div>
 
             <!-- 글쓰기 자유/작가/팀원모집 상단부 (제목) -->
-            <div class="commu_write_title" v-if="update==false && communityService!= 'R' ">
+            <div class="commu_write_title" v-if="editMode==false && communityService!= 'R' ">
               <input type="text" v-model="inputTitle"/>
             </div>
 
             <!-- 수정 자유/작가/팀원모집 상단부 (제목) -->
-            <div class="commu_write_title" v-if="update==true && communityService!= 'R' ">
+            <div class="commu_write_title" v-if="editMode==true && communityService!= 'R' ">
               <input type="text" v-model="inputTitle"/>
             </div>
 
             <!-- 내용 입력창 -->
             <div class="commu_write_content">
-              <Editor @commitContent="editorContent"/>
+              <Editor @commitContent="editorContent" ref="editor"/>
             </div>
           </div>
           <!-- 게시물 폼 끝 -->
@@ -217,8 +217,8 @@
           <!-- 게시물 폼 글쓰기 및 수정버튼 -->
           <div class="write_btn_area">
             <div class="write_btn" @click="registerpost">
-              <span v-if="update==false" @click="posting()">글쓰기</span>
-              <span v-if="update==true">수정</span>
+              <span v-if="editMode==false" @click="posting()">글쓰기</span>
+              <span v-if="editMode==true" @click="editPost()">수정</span>
             </div>
             <div class="write_cancle_btn" @click="this.viewState = 0"><span>취소</span></div>
           </div>
@@ -227,55 +227,10 @@
       </div>    
     </div>
     <!-- 커뮤니티 끝 -->
-
-    <div v-if="$store.state.currentService == 'V'">
-      <div class="RouterView">
-        <div class="header">
-          <div class="service">
-            <img
-              class="icon"
-              src="@/assets/icons/white/bubble_chat.png"
-              alt="logo"
-            />
-            <span class="title">커뮤니티</span>
-            <span class="topic">TOPIC · {{ step }}</span>
-          </div>
-        </div>
-          <CafeMain/>  
-      </div>
-    </div>
-
-    <div v-if="$store.state.currentService == 'VI'">
-      <div class="RouterView">
-        <div class="header">
-          <div class="service">
-            <img
-              class="icon"
-              src="@/assets/icons/white/bubble_chat.png"
-              alt="logo"
-            />
-            <span class="title">커뮤니티</span>
-            <span class="topic">TOPIC · {{ step }}</span>
-          </div>
-        </div>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                           
-        <div v-if="topicData == 0">
-          <InsideCafe/>
-        </div>
-        <div v-if="topicData == 1">
-          <TopicPostView/>
-        </div>
-        <div v-if="topicData == 2">
-          <TopicWrite/>
-        </div>   
-      </div>
-    </div>
-    
 </template>
 
 <script>
 import Editor from '@/components/community/topic/Editor'
-import CafeMain from "../community/cafe/CafeMain";
-import InsideCafe from "../community/cafe/RegisterCafe";
 import storage from '../../aws'
 import axios from '../../axios'
 import ConfirmModal from '../modal/ConfirmModal.vue'
@@ -287,8 +242,6 @@ export default {
       step : "",
       manage : false,
       postList : [],
-      update: false,
-
 
       // 포스트 보기
       postCode : "",
@@ -307,14 +260,15 @@ export default {
       inputTitle : "",
       inputContent : "",
 
+      // 수정모드
+      editMode : false,
+
       //댓글 작성(코멘트)
       inputComment : "",
 
     };
   },
   components: {
-    CafeMain,
-    InsideCafe,
     Editor,
 
     ConfirmModal
@@ -357,7 +311,7 @@ export default {
         }
       })
     },
-    PostClick(val, postCode) {
+    postClick(val, postCode) {
       this.viewState = val;
       this.postCode = postCode;
       var data = {
@@ -412,6 +366,38 @@ export default {
       }
     },
 
+    edit() {
+      this.editMode = true;
+      this.viewState = 2;
+      this.inputTitle = this.title;
+    },
+    async getPreContent() {
+      await this.edit();
+      this.$refs.editor.state.content = this.content;
+    },
+
+    editPost() {
+      var data = {
+        postCode : this.postCode,
+        title : this.inputTitle,
+        content : this.inputContent,
+        select : this.$store.state.communityService
+      }
+      console.log(data);
+
+      axios.post('/api/community/editPost', data)
+      .then((result)=>{
+        if(result.data == "ok") {
+          this.$store.commit('gModalOn', {size : "normal", msg : "수정되었습니다."});
+          this.postClick(1, this.postCode);
+
+          this.inputTitle = "";
+          this.inputContent = "";
+        } else {
+          this.$store.commit('gModalOn', {size : "normal", msg : "게시글 수정 실패"});
+        }
+      })            
+    },
 
     async deletePost() {
       var result = await this.$refs.confirmModal.show({

@@ -108,6 +108,38 @@ router.post('/posting', async(req, res)=>{
     }
 })
 
+
+
+// 포스트 수정
+router.post('/editPost', async (req,res)=>{
+    let boardCode;
+    switch(req.body.select) {
+        case 'F' :
+            boardCode = 1;
+            break;
+        case 'W' :
+            boardCode = 2;
+            break;
+        case 'T' :
+            boardCode = 3;
+            break;        
+        case 'R' :
+            boardCode = 4;
+            break;
+    }
+    
+    var result = await db.execute(`UPDATE tbl_post SET post_title = '${req.body.title}', post_content = '${req.body.content}'
+    WHERE vill_code = -1 AND boar_code = ${boardCode} AND post_code = ${req.body.postCode}`);
+    if(result == "err") {
+        res.send("err");
+    } else {
+        res.send("ok");
+    }    
+})
+
+
+
+
 router.post('/deletePost', async(req, res)=>{
     let boardCode;
     switch(req.body.select) {

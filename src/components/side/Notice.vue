@@ -23,15 +23,15 @@
                     <span class="noticeMain_btn_manage">관리</span>
                 </div>
                 <!-- 글쓰기 버튼 -->
-                <div class="noticeMain_btn_blue" v-if="$store.state.userId == 'admin'">
-                    <span class="noticeMain_btn_write" @click="this.viewState = 2">글쓰기</span>
+                <div class="noticeMain_btn_blue" v-if="$store.state.userId == 'admin'"  @click="this.viewState = 2;">
+                    <span class="noticeMain_btn_write">글쓰기</span>
                 </div>
                 <!-- 상단 버튼 프레임 -->
     
                 <!-- 공지사항 목록 -->
                 <section class="notice_section">
                     <div class="strong_notice_post">
-                        <div v-for="(n, i) in noticeList" :key="i" @click="PostClick(1, n.POST_CODE)">
+                        <div v-for="(n, i) in noticeList" :key="i" @click="postClick(1, n.POST_CODE)">
                             <div class="strong_notice">
                                 <div class="notice_back_title"><span>{{ n.POST_TITLE }}</span></div>            <!-- 제목 -->
                                 <div class="notice_back_content"><span v-html="n.POST_CONTENT"></span></div>  <!-- 내용 -->
@@ -53,14 +53,13 @@
 
 
     <div v-if="viewState == 1">
-        <!-- 쓰기는 전체적인 수정 필요 -->
         <div class="notice_write_section">
         <div class="notice_write_title">
             <span>{{title}}</span>
             <div class="notice_title_info">
             <span>작성일자 : {{createdDate}}</span>
             <div class="notice_title_btn" v-if="writerId == $store.state.userId">
-                <div @click="editPost()" class="notice_update_btn"><img src="@/assets/icons/white/editing.png"></div>
+                <div @click="getPreContent()" class="notice_update_btn"><img src="@/assets/icons/white/editing.png"></div>
                 <div @click="deletePost()" class="notice_delete_btn"><img src="@/assets/icons/white/trash_white.png"></div>
             </div>
         
@@ -73,7 +72,7 @@
         </div>
         </div>
         <div class="notice_cancle_area">
-        <div class="cancle_btn" @click="this.viewState = 0"><span>목록으로</span></div>
+        <div class="cancle_btn" @click="back()"><span>목록으로</span></div>
         </div>
     </div>
 
@@ -84,31 +83,31 @@
 <!---------------------------->
 
 
-
-
     <div v-if="viewState == 2">
         <div class="write_section">
             <!-- 글제목 입력부, 수정시 글정보 불러오기 -->
         <div class="write_title">
-            <input id="input" type="text" :value="`${noticeData.title}`" v-if="writeModify == true"/>
-            <input id="input" type="text" v-if="writeModify == false"/>
+            <input id="input" type="text" v-model="inputTitle"/>
         </div>
         <div class="write_content">
             <!-- 에디터 수정필요 -->
-            <!-- <Editor :noticeData="noticeData" :writeModify="writeModify" @up="content = $event"/> -->
+            <Editor @commitContent="editorContent" ref="editor"/>
         </div>
         <div class="editer_info">
             주의! 당신은 현재 공지사항 게시판에서 작성중입니다.
-            <br>강조로 발행 버튼을 누르면 '강조공지'로 상단에 우선 노출됩니다.
-            <br>공지사항의 말머리를 선택하여 '해당 TOPIC' 에 맞게 작성하세요.
         </div>
         </div>
-        <div class="notice_btn_area">
-        <div class="write_btn" @click="pushEvent(0)">
-            <span v-if="writeModify == false">글쓰기</span> <!-- 작성한 공지를 일반공지로 발행 -->
-            <span v-if="writeModify == true">수정</span> <!-- 수정모드 -->
+        <div class="notice_btn_area" v-if="editMode == false">
+            <div class="write_btn" @click="posting()">
+                <span>글쓰기</span> 
+            </div>
+            <div class="cancle_btn" @click="back()"><span>취소</span></div>
         </div>
-        <div class="cancle_btn" @click="$emit('writebtn', 'cancle')"><span>취소</span></div>
+        <div class="notice_btn_area" v-else>
+            <div class="write_btn" @click="editPost()">
+                <span>수정하기</span> 
+            </div>
+            <div class="cancle_btn" @click="back()"><span>취소</span></div>
         </div>
     </div>
 </div>
@@ -117,6 +116,7 @@
 <script>
 import axios from '../../axios'
 import ConfirmModal from '../modal/ConfirmModal.vue'
+import Editor from '../community/topic/Editor.vue'
 export default {
     name: "NoticeSide",
     data() {
@@ -138,20 +138,18 @@ export default {
             writerProfileImg : "",
             createdDate : "",
 
-            // 댓글 보기
-            commentList : [],
-
             // 새글 작성
             inputTitle : "",
             inputContent : "",
 
+            // 수정모드
+            editMode : false
+
         };
     },
     components:{
-        ConfirmModal
-    },
-    mounted(){
-
+        ConfirmModal,
+        Editor
     },
     created(){
         this.$store.commit('sideBarOn');
@@ -169,7 +167,6 @@ export default {
             this.viewState = 0;
             this.getNoticeList(cng);
         }
-        
     },
     methods: {
         getNoticeList(selectService) {
@@ -182,7 +179,7 @@ export default {
                 }
             })
         },
-        PostClick(val, postCode) {
+        postClick(val, postCode) {
             this.viewState = val;
             this.postCode = postCode;
 
@@ -220,16 +217,88 @@ export default {
             axios.post('/api/notice/posting', data)
             .then((result)=>{
                 if(result.data == "ok") {
-                this.$store.commit('gModalOn', {size : "normal", msg : "새로운 글이 등록되었습니다."});
-                this.viewState = 0;
-                this.getPostList(this.$store.state.noticeService);
+                    this.$store.commit('gModalOn', {size : "normal", msg : "새로운 공지사항이 등록되었습니다."});
+                    this.viewState = 0;
+                    this.getNoticeList(this.$store.state.noticeService);
 
-                this.inputTitle = "";
-                this.inputContent = "";
+                    this.inputTitle = "";
+                    this.inputContent = "";
                 } else {
-                this.$store.commit('gModalOn', {size : "normal", msg : "게시글 등록 실패"});
+                    this.$store.commit('gModalOn', {size : "normal", msg : "공지사항 등록 실패"});
                 }
             })
+        },
+
+        async deletePost() {
+            var result = await this.$refs.confirmModal.show({
+                size : "normal",
+                msg : "해당 공지사항을 삭제하시겠습니까?",
+                btn1 : "삭제",
+                btn2 : "취소"
+            })
+
+            if(result == true) {
+                var data = {
+                    select : this.$store.state.noticeService,
+                    postCode : this.postCode
+                }
+
+                axios.post('/api/notice/deletePost', data)
+                .then((result)=>{
+                    if(result.data == "err") {
+                        this.$store.commit('gModalOn', {size : "normal", msg : "공지사항 삭제 실패"});
+                    } else {
+                        this.viewState = 0;
+                        this.getNoticeList(this.$store.state.noticeService);
+                    }
+                })
+            }
+        },
+
+        edit() {
+            this.editMode = true;
+            this.viewState = 2;
+            this.inputTitle = this.title;
+        },
+        async getPreContent() {
+            await this.edit();
+            this.$refs.editor.state.content = this.content;
+        },
+
+        editPost() {
+            var data = {
+                postCode : this.postCode,
+                title : this.inputTitle,
+                content : this.inputContent,
+                select : this.$store.state.noticeService
+            }
+            console.log(data);
+
+            axios.post('/api/notice/editPost', data)
+            .then((result)=>{
+                if(result.data == "ok") {
+                    this.$store.commit('gModalOn', {size : "normal", msg : "수정되었습니다."});
+                    this.postClick(1, this.postCode);
+
+                    this.inputTitle = "";
+                    this.inputContent = "";
+                } else {
+                    this.$store.commit('gModalOn', {size : "normal", msg : "공지사항 수정 실패"});
+                }
+            })            
+        },
+
+
+        editorContent(val) {
+            this.inputContent = val;
+            console.log(this.inputContent);
+        },
+
+        back() {
+            this.inputTitle = "";
+            this.inputContent = "";
+            this.viewState = 0;
+            this.getNoticeList(this.$store.state.noticeService);
         }
     }
 }
@@ -286,6 +355,7 @@ export default {
     background: #2872f9;
     border-radius: 14px;
     display:table;
+    z-index: 99;
 }
 .noticeMain_btn_red span, .noticeMain_btn_blue span {
     display: table-cell;
@@ -605,4 +675,84 @@ export default {
   width: 100px;
   border-radius: 20px;
 }
+
+
+
+
+/* 본문 에디터 속성값 */
+
+/*들여쓰기, 내어쓰기*/
+.ql-indent-1:not(.ql-direction-rtl) {
+  padding-left: 2em;
+}
+.ql-indent-1.ql-direction-rtl.ql-align-right {
+  padding-right: 2em;
+}
+.ql-indent-2:not(.ql-direction-rtl) {
+  padding-left: 4em;
+}
+.ql-indent-2.ql-direction-rtl.ql-align-right {
+  padding-right: 4em;
+}
+.ql-indent-3:not(.ql-direction-rtl) {
+  padding-left: 6em;
+}
+.ql-indent-3.ql-direction-rtl.ql-align-right {
+  padding-right: 6em;
+}
+.ql-indent-4:not(.ql-direction-rtl) {
+  padding-left: 8em;
+}
+.ql-indent-4.ql-direction-rtl.ql-align-right {
+  padding-right: 8em;
+}
+.ql-indent-5:not(.ql-direction-rtl) {
+  padding-left: 10em;
+}
+.ql-indent-5.ql-direction-rtl.ql-align-right {
+  padding-right: 10em;
+}
+.ql-indent-6:not(.ql-direction-rtl) {
+  padding-left: 12em;
+}
+.ql-indent-6.ql-direction-rtl.ql-align-right {
+  padding-right: 12em;
+}
+.ql-indent-7:not(.ql-direction-rtl) {
+  padding-left: 14em;
+}
+.ql-indent-7.ql-direction-rtl.ql-align-right {
+  padding-right: 14em;
+}
+.ql-indent-8:not(.ql-direction-rtl) {
+  padding-left: 16em;
+}
+.ql-indent-8.ql-direction-rtl.ql-align-right {
+  padding-right: 16em;
+}
+.ql-indent-9:not(.ql-direction-rtl) {
+  padding-left: 18em;
+}
+.ql-indent-9.ql-direction-rtl.ql-align-right {
+  padding-right: 18em;
+}
+
+/*글자 크기*/
+.ql-size-large {
+  font-size: 1.9em;
+}
+.ql-size-huge {
+  font-size: 2.3em;
+}
+
+/*문단정렬*/
+.ql-align-center {
+  text-align: center;
+}
+.ql-align-justify {
+  text-align: justify;
+}
+.ql-align-right {
+  text-align: right;
+}  
 </style>

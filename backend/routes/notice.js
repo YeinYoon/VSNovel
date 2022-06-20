@@ -10,13 +10,13 @@ router.post('/getNoticeList', async(req,res)=>{
     let SQL;
     switch(req.body.select) {
         case 'U' :
-            SQL = `SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = 5`;
+            SQL = `SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = 5 ORDER BY post_estadate DESC`;
             break;
         case 'E' :
-            SQL = `SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = 6`;
+            SQL = `SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = 6 ORDER BY post_estadate DESC`;
             break;        
         case 'P' :
-            SQL = `SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = 7`;
+            SQL = `SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = 7 ORDER BY post_estadate DESC`;
             break;
     }
 
@@ -53,37 +53,19 @@ router.post('/getNotice', async (req,res)=>{
 })
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-//커뮤니티 포스팅
+//공지사항 포스팅
 router.post('/posting', async(req, res)=>{
     let boardCode;
     switch(req.body.select) {
-        case 'F' :
-            boardCode = 1;
+        case 'U' :
+            boardCode = 5;
             break;
-        case 'W' :
-            boardCode = 2;
+        case 'E' :
+            boardCode = 6;
             break;
-        case 'T' :
-            boardCode = 3;
+        case 'P' :
+            boardCode = 7;
             break;        
-        case 'R' :
-            boardCode = 4;
-            break;
     }
 
     var newTime = timestamp.getTimestamp();
@@ -94,114 +76,53 @@ router.post('/posting', async(req, res)=>{
     if(posting == "err") {
         res.send("err");
     } else {
-
-        var postCode = await db.execute(`SELECT post_code FROM tbl_post WHERE
-        post_title = '${req.body.title}' AND user_id = '${req.user.USER_ID}' AND
-        vill_code = -1 AND post_estadate = '${newTime}' AND post_retouchdate = '${newTime}'`);
-
-        console.log(postCode.rows);
-        var createCommentSeq = await db.execute(`CREATE SEQUENCE tbl_comment_main_${boardCode}_${postCode.rows[0].POST_CODE}_seq
-        MINVALUE      1
-        MAXVALUE      9999999999
-        INCREMENT BY  1
-        START WITH    1
-        NOCACHE
-        NOORDER
-        NOCYCLE`)
-        if(createCommentSeq == "err") {
-            console.log("새로운 글에 대한 댓글 시퀀스 생성 실패...");
-        } else {
-            console.log("새로운 글에 대한 댓글 시퀀스 생성 성공!")
-        }
-
         res.send("ok");
     }
 })
 
-router.post('/deletePost', async(req, res)=>{
+
+// 공지사항 수정
+router.post('/editPost', async (req,res)=>{
     let boardCode;
     switch(req.body.select) {
-        case 'F' :
-            boardCode = 1;
+        case 'U' :
+            boardCode = 5;
             break;
-        case 'W' :
-            boardCode = 2;
+        case 'E' :
+            boardCode = 6;
             break;
-        case 'T' :
-            boardCode = 3;
+        case 'P' :
+            boardCode = 7;
             break;        
-        case 'R' :
-            boardCode = 4;
-            break;
     }
-
-    var result = await db.execute(`DELETE FROM tbl_post
+    
+    var result = await db.execute(`UPDATE tbl_post SET post_title = '${req.body.title}', post_content = '${req.body.content}'
     WHERE vill_code = -1 AND boar_code = ${boardCode} AND post_code = ${req.body.postCode}`);
     if(result == "err") {
         res.send("err");
     } else {
-        var dropCommentSeq = await db.execute(`DROP SEQUENCE tbl_comment_main_${boardCode}_${req.body.postCode}_seq`);
-        if(dropCommentSeq == "err") {
-            console.log("해당 포스트에 대한 댓글 시퀀스 삭제 실패...");
-        } else {
-            console.log("해당 포스트에 대한 댓글 시퀀스 삭제 성공");
-        }
         res.send("ok");
-    }
+    }    
 })
 
 
 
-router.post('/getCommentList', async(req, res)=>{
+router.post('/deletePost', async(req, res)=>{
     let boardCode;
     switch(req.body.select) {
-        case 'F' :
-            boardCode = 1;
+        case 'U' :
+            boardCode = 5;
             break;
-        case 'W' :
-            boardCode = 2;
+        case 'E' :
+            boardCode = 6;
             break;
-        case 'T' :
-            boardCode = 3;
+        case 'P' :
+            boardCode = 7;
             break;        
-        case 'R' :
-            boardCode = 4;
-            break;
     }
 
-    var result = await db.execute(`SELECT * FROM tbl_comment WHERE vill_code = -1 AND boar_code = ${boardCode} AND post_code = ${req.body.postCode}
-    ORDER BY comm_estadate DESC`);
-    if(result == "err") {
-        res.send("err");
-    } else {
-        res.send(result.rows);
-    }
-})
-
-
-router.post('/commenting', async(req, res)=>{
-    let boardCode;
-    switch(req.body.select) {
-        case 'F' :
-            boardCode = 1;
-            break;
-        case 'W' :
-            boardCode = 2;
-            break;
-        case 'T' :
-            boardCode = 3;
-            break;        
-        case 'R' :
-            boardCode = 4;
-            break;
-    }
-
-    var newTime = timestamp.getTimestamp();
-    var result = await db.execute(`INSERT INTO tbl_comment VALUES(
-        '${req.user.USER_ID}', ${boardCode}, -1, ${req.body.postCode}, tbl_comment_main_${boardCode}_${req.body.postCode}_seq.NEXTVAL,
-        '${req.body.content}', '${newTime}', '${newTime}', null
-    )`);
-
+    var result = await db.execute(`DELETE FROM tbl_post
+    WHERE vill_code = -1 AND boar_code = ${boardCode} AND post_code = ${req.body.postCode}`);
     if(result == "err") {
         res.send("err");
     } else {

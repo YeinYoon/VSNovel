@@ -29,8 +29,7 @@ const store = createStore({
             // 팀원모집 : T, 리뷰&추천 : R
 
             noticeService : 'U',
-            // 전체 : A , 업데이트 : U
-            // 이벤트 : E , 정책 : P
+            // 업데이트 : U, 이벤트 : E , 정책 : P
         }
     },
     mutations : {
