@@ -221,7 +221,7 @@ router.post('/commenting', async(req, res)=>{
     var newTime = timestamp.getTimestamp();
     var result = await db.execute(`INSERT INTO tbl_comment VALUES(
         '${req.user.USER_ID}', ${boardCode}, -1, ${req.body.postCode}, tbl_comment_main_${boardCode}_${req.body.postCode}_seq.NEXTVAL,
-        '${req.body.content}', '${newTime}', '${newTime}', null
+        '${req.body.content}', '${newTime}', '${newTime}', null, '${req.user.USER_NICKNAME}'
     )`);
 
     if(result == "err") {
