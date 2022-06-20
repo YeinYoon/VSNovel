@@ -148,8 +148,9 @@
               <div class="postview_view_area" v-for="(c, i) in commentList" :key="i"> <!-- (반복) 댓글내용들 -->
                 <div><img class="postview_img" :src="c.userImg"></div>
                 <div class="postview_view_content">
-                  <span>{{c.COMM_CONTENT}}</span>
-                  {{c.COMM_ESTADATE}}
+                  <span class="postview_view_nickname">{{c.USER_NICKNAME}}</span>
+                  <p class="postview_view_info">{{c.COMM_CONTENT}}</p>
+                  <span class="postview_view_estadate">{{c.COMM_ESTADATE}}</span>
                 </div>
               </div>
 
@@ -825,7 +826,7 @@ export default {
 }
 .postview_view_area{
   display:flex;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-bottom : 5px;
 }
 .postview_img{
@@ -839,7 +840,6 @@ export default {
   border-radius: 14px;
   font-size: 1.0em;
   background-color:#494949;
-  padding: 5px 10px;
   color: white;
 }
 
@@ -1079,5 +1079,37 @@ export default {
   height: 3px;
   margin-top: 20px;
   margin-bottom: 15px;
+}
+
+.postview_view_nickname {
+  position: relative;
+  padding: 5px 10px 5px 10px;
+  background: #2872f9;
+  border-radius: 10px;
+  top: -8px;
+  left: -7px;
+  width: auto;
+}
+
+.postview_view_estadate {
+  position: relative;
+  border-radius: 10px;
+  top: -5px;
+  left: calc(100% - 135px);
+  font-size: 0.7em;
+  margin: 0;
+}
+
+.postview_view_info {
+  position: relative;
+  border-radius: 10px;
+  /* top: 10px; */
+  left: 15px;
+  white-space: normal;
+  word-break:break-all;
+  width: calc(100% - 30px);
+  font-size: 0.9em;
+  text-align: left;
+  margin: 0;
 }
 </style>

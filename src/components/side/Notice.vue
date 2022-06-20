@@ -57,7 +57,7 @@
         <div class="notice_write_title">
             <span>{{title}}</span>
             <div class="notice_title_info">
-            <span>작성일자 : {{createdDate}}</span>
+            <span>{{createdDate}}</span>
             <div class="notice_title_btn" v-if="writerId == $store.state.userId">
                 <div @click="getPreContent()" class="notice_update_btn"><img src="@/assets/icons/white/editing.png"></div>
                 <div @click="deletePost()" class="notice_delete_btn"><img src="@/assets/icons/white/trash_white.png"></div>
@@ -572,7 +572,7 @@ export default {
 .notice_cancle_area {
   /* position:relative; */
   position:relative;
-  top: 50px;
+  top: 70px;
   height: 50px;
   /* width: 97%; */
   /* left: 10px; */
