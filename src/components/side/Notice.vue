@@ -601,7 +601,7 @@ export default {
   margin: 0 auto;
   padding: 10px 15px;
   width: 95%;
-  height: 75%;
+  height: 65vh;
   background-color: #2c2c2c;
   border-radius: 20px;
   position: relative;
@@ -615,6 +615,7 @@ export default {
   border-radius: 20px;
   padding: 0 10px;
 }
+
 .write_title input {
   position: relative;
   left: 5px;
@@ -624,21 +625,16 @@ export default {
   background: none;
   color: white;
 }
+
 .write_content {
-  margin: 0 auto;
+  margin: 9px auto;
   width: 100%;
-  height: 77%;
+  height: 89%;
   background-color: #5e5e5e;
   border-radius: 20px;
-}
-.write_content textarea {
-  background: none;
-  border: none;
-  position: relative;
-  top: 5px;
-  resize: none;
-  width: 100%;
-  height: 95%;
+  padding: 10px 10px;
+  color:white;
+  overflow: auto;
 }
 .editer_info{
   color: white;

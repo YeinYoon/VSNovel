@@ -35,7 +35,9 @@
               <div class="commu_post" v-for="(p, i) in postList" :key="i" @click="postClick(1, p.POST_CODE)"> <!-- (반복) 글 DB 데이터 반복문 -->
                 
                 <!-- 글 썸네일 -->
-                <img class="commu_thumb" :src="p.titleImg" @error="'error'"/>
+                <img class="commu_thumb" src="@/assets/imgs/noimage.png" @error="'error'"/>
+                <!-- <img class="commu_thumb" src="@/assets/imgs/noimage.png" @error="'error'" v-if="p.titleImg == ''"/> -->
+                <!-- <img class="commu_thumb" :src="p.titleImg" @error="'error'" v-else/> -->
                 
                 <!-- 글 정보 및 제목, 검은 블록 -->
                 <div class="commu_back">
@@ -128,7 +130,7 @@
                 </div>
               </div>
 
-              <hr>
+              <div class="comment_bar"></div>
 
               <!-- 댓글 갯수 Comment() -->
               <div class="postview_comment">
@@ -559,6 +561,7 @@ export default {
   top: 10px;
   left: 21px;
   z-index: 11;
+  object-fit: cover;
 }
 .commu_back {
   cursor: pointer;
@@ -632,7 +635,6 @@ export default {
   position:absolute;
   float:right;
   right: 62px;
-  top: -15px;
 }
 .topic_postview_btn_red, .topic_postview_btn_blue{
   /* top:40px; */
@@ -963,6 +965,7 @@ export default {
   border-radius: 20px;
   padding: 10px 10px;
   color:white;
+  overflow: auto;
 }
 .write_btn_area {
   display:flex;
@@ -1064,5 +1067,17 @@ export default {
 }
 .ql-align-right {
   text-align: right;
-}  
+}
+
+
+/* 석버미의 클래스들 */
+
+.comment_bar {
+  background: #525252;
+  border-radius: 50px;
+  width: 100%;
+  height: 3px;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
 </style>

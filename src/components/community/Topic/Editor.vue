@@ -1,5 +1,4 @@
 <template>
-<div>
 <div class="Editor">
   <quill-editor
     v-model:value="state.content"
@@ -7,8 +6,6 @@
     :disabled="state.disabled"
     @change="onEditorChange($event)"
   />
-</div>
-
 </div>
 </template>
 
@@ -67,6 +64,7 @@ export default {
 <style>
 .Editor {
   width: 100%;
+  height: 100%;
 }
 
 .ql-toolbar {
@@ -75,6 +73,7 @@ export default {
   background: white;
   z-index: 10;
   text-align: center;
+  border-radius: 25px;
 }
 .ql-toolbar.ql-snow {
   padding: 5px;
@@ -84,11 +83,16 @@ export default {
   overflow-x: auto;
 }
 
+.ql-editor {
+  margin-top: 5px;
+  height: 100%;
+}
+
 .ql-editor > * {
   cursor: text;
-  color: black;
+  /* color: black; */
   font-size: 1em;
-  font-family: "RIDIBatang";
+  /* font-family: "RIDIBatang"; */
 }
 .ql-container.ql-snow {
   overflow: scroll;
