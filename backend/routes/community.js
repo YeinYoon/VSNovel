@@ -23,7 +23,7 @@ router.post('/getPostList', async(req,res)=>{
             break;
     }
 
-    var postList = await db.execute(`SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = ${boardCode}`);
+    var postList = await db.execute(`SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = ${boardCode} ORDER BY post_estadate DESC`);
     if(postList == "err") {
         res.send("err");
     } else {

@@ -120,7 +120,7 @@ router.post('/postconfirm', async(req, res) => {
 
 
 router.get('/getPostList', async (req, res)=>{
-    var result = await db.execute(`SELECT * FROM tbl_post WHERE user_id = '${req.user.USER_ID}'`);
+    var result = await db.execute(`SELECT * FROM tbl_post WHERE user_id = '${req.user.USER_ID}' ORDER BY post_estadate DESC`);
     if(result == "err") {
         res.send("err");
     } else {
@@ -130,7 +130,7 @@ router.get('/getPostList', async (req, res)=>{
 
 router.get('/getReviewList', async (req, res)=>{
     var result = await db.execute(`SELECT * FROM tbl_post
-    WHERE user_id = '${req.user.USER_ID}' AND boar_code = 4`);
+    WHERE user_id = '${req.user.USER_ID}' AND boar_code = 4 ORDER BY post_estadate DESC`);
     if(result == "err") {
         res.send("err");
     } else {

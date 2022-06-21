@@ -181,7 +181,7 @@
 
             <!-- 리뷰게시판 -->
             <div class="commu_review_frame" v-if='this.communityService == "R"'>
-              <div class="commu_novel_choice"><input type="text" placeholder="여기에 작품명 입력"></div>
+              <!-- <div class="commu_novel_choice"><input type="text" placeholder="여기에 작품명 입력"></div> -->
               <div class="commu_review_title" v-if="editMode == false"><input type="text" v-model="inputTitle"/></div>
               <div class="commu_review_title" v-if='communityService == R && editMode == true'><input type="text" v-model="inputTitle"/></div>
 
@@ -194,7 +194,7 @@
               </div>
 
                 <!-- 리뷰 작성 상단부 -->
-              <div class="commu_str_back" v-else-if='this.communityService == "R"'>
+              <!-- <div class="commu_str_back" v-else-if='this.communityService == "R"'>
                 <select class="commu_str_temp_sel">
                   <option class="commu_str_temp_star1">★</option>
                   <option class="commu_str_temp_star2">★★</option>
@@ -202,7 +202,7 @@
                   <option class="commu_str_temp_star4">★★★★</option>
                   <option class="commu_str_temp_star5">★★★★★</option>
                 </select>
-              </div>
+              </div> -->
             </div>
 
             <!-- 글쓰기 자유/작가/팀원모집 상단부 (제목) -->
@@ -368,6 +368,8 @@ export default {
       if(this.$store.state.userId == null) {
         this.$store.commit('gModalOn', {size : "normal", msg : "로그인이 필요한 기능입니다."});
         this.$router.push('/signin');
+      } else if(this.inputTitle == '' || this.inputContent == '') {
+        this.$store.commit('gModalOn', {size : "normal", msg : "제목 또는 내용이 비어있습니다."});
       } else {
         var data = {
           title : this.inputTitle,
@@ -479,6 +481,8 @@ export default {
       if(this.$store.state.userId == null) {
         this.$store.commit('gModalOn', {size : "normal", msg : "로그인이 필요한 기능입니다."});
         this.$router.push('/signin');
+      } else if(this.inputComment == '') {
+        this.$store.commit('gModalOn', {size : "normal", msg : "내용이 비어있습니다."});
       } else {
         var data = {
           select : this.$store.state.communityService,

@@ -15,7 +15,7 @@
       <div class="post_line">
         <div class="post_place">게시판</div>
         <div class="post_title">제목</div>
-        <!-- <div class="post_comment">댓글수</div> -->
+        <div class="post_estadate">작성일</div>
         <div class="post_clicks">조회수</div>
       </div>
       <hr class="lines" />
@@ -28,6 +28,7 @@
         <div class="post_place" v-if="p.BOAR_CODE == 6">이벤트</div>
         <div class="post_place" v-if="p.BOAR_CODE == 7">정책</div>
         <div class="post_title" style="cursor:pointer">{{ p.POST_TITLE }}</div>
+        <div class="post_estadate">{{p.POST_ESTADATE.substring(0, 10)}}</div>
         <div class="post_clicks">{{ p.POST_VIEW }}</div>
       </div>
     </div>
