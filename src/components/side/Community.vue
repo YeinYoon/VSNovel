@@ -126,7 +126,6 @@
 
                 <!-- 본문 -->
                 <div class="postview_content" v-if="this.communityService == 'R'">
-                  <span>작품명값</span>
                   <span v-html="content"></span>
                 </div>
                 <div class="postview_content" v-else>
