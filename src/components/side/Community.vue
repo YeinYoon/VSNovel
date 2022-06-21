@@ -10,7 +10,10 @@
               alt="logo"
             />
             <span class="title">커뮤니티</span>
-            <span class="topic">TOPIC · {{ communityService }}</span>
+            <span class="topic" v-if="communityService == 'F'">TOPIC · 자유</span>
+            <span class="topic" v-if="communityService == 'W'">TOPIC · 작가</span>
+            <span class="topic" v-if="communityService == 'T'">TOPIC · 팀원모집</span>
+            <span class="topic" v-if="communityService == 'R'">TOPIC · 리뷰 & 추천</span>
           </div>
         </div>
 
