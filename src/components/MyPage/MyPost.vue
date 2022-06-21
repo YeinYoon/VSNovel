@@ -78,6 +78,7 @@ export default {
   border-radius: 20px;
   overflow-y: scroll;
   -ms-overflow-style: none;
+  padding-top: 10px;
 }
 .post_line {
   text-align: center;
@@ -85,12 +86,23 @@ export default {
   height: 30px;
   margin-bottom: 10px;
 }
+.post_clicks{
+  width: 22%;
+  font-size: 0.9em;
+  overflow: hidden;
+}
 .post_place,
-.post_clicks {
-  width: 20%;
+.post_clicks,
+.post_estadate {
+  font-size: 0.9em;
+  width: 22%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .post_title {
-  width: 60%;
+  font-size: 0.9em;
+  width: 50%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
