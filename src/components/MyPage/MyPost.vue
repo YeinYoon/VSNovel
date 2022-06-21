@@ -6,26 +6,29 @@
         <span class="title">마이페이지</span>
         <span class="my_topic">내가 쓴 게시글</span>
       </div>
-      <div class="PostTabs">
+      <!-- <div class="PostTabs">
         <button>일반</button>
         <button>빌리지</button>
-      </div>
+      </div> -->
     </div>
     <div class="post_section">
       <div class="post_line">
-        <div class="post_place">작성위치</div>
+        <div class="post_place">게시판</div>
         <div class="post_title">제목</div>
-        <div class="post_like">추천수</div>
-        <div class="post_comment">댓글수</div>
+        <!-- <div class="post_comment">댓글수</div> -->
         <div class="post_clicks">조회수</div>
       </div>
       <hr class="lines" />
-      <div class="post_line" v-for="(post, i) in postData" :key="i" @click="postMove()">
-        <div class="post_place">{{ post.BOAR_TITLE }}</div>
-        <div class="post_title" style="cursor:pointer">{{ post.POST_TITLE }}</div>
-        <div class="post_like">{{ post.POST_VOTE }}</div>
-        <div class="post_comment">{{ post.COMM_NUM }}</div>
-        <div class="post_clicks">{{ post.POST_VIEW }}</div>
+      <div class="post_line" v-for="(p, i) in postList" :key="i">
+        <div class="post_place" v-if="p.BOAR_CODE == 1">자유</div>
+        <div class="post_place" v-if="p.BOAR_CODE == 2">작가</div>
+        <div class="post_place" v-if="p.BOAR_CODE == 3">팀원모집</div>
+        <div class="post_place" v-if="p.BOAR_CODE == 4">리뷰 & 추천</div>
+        <div class="post_place" v-if="p.BOAR_CODE == 5">업데이트</div>
+        <div class="post_place" v-if="p.BOAR_CODE == 6">이벤트</div>
+        <div class="post_place" v-if="p.BOAR_CODE == 7">정책</div>
+        <div class="post_title" style="cursor:pointer">{{ p.POST_TITLE }}</div>
+        <div class="post_clicks">{{ p.POST_VIEW }}</div>
       </div>
     </div>
   </div>
@@ -36,27 +39,23 @@ import axios from 'axios';
 
 export default {
   created() {
-    this.getPost()
+    this.getPostList()
   },
   data() {
     return {
-      postData : []
+      postList : []
     }
   }, 
   methods: {
-    postMove(){
-      this.$router.push({name:'Community', params:{step:'자유',topicNum:0}})
-    },
-    getPost() {
+    getPostList() {
       console.log("getPost")
-      axios.get('/api/mypage/getpost')
+      axios.get('/api/mypage/getPostList')
       .then((result) => {
         if(result.data == 'err') {
-          console.log('load fail')
+          this.$store.commit('gModalOn', {size : "normal", msg : "게시글 데이터 불러오기 실패"});
         } else {
-          console.log(result)
-          this.postData = result.data
-          // console.log(this.postData)
+          console.log(result.data);
+          this.postList = result.data;
         }
       })
     }

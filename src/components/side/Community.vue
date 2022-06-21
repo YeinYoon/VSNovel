@@ -139,9 +139,9 @@
 
               <!-- 댓글 입력 -->
               <div class="postview_comment_area">
-                  <!-- 여기에 작성한 글을 해당 게시글의 댓글에 등록 -->
-                  <textarea v-model="inputComment"></textarea> 
-                  <div class="postview_comment_register"><span @click="commenting()">작성하기</span></div> <!-- 댓글 등록 버튼 -->
+                <!-- 여기에 작성한 글을 해당 게시글의 댓글에 등록 -->
+                <textarea v-model="inputComment"></textarea> 
+                <div class="postview_comment_register"><span @click="commenting()">작성하기</span></div> <!-- 댓글 등록 버튼 -->
               </div>
 
               <!-- 댓글 목록 -->
@@ -172,21 +172,20 @@
 <!---------------------------->
 
 
-
         <div v-if="viewState == 2">
           <div class="commu_write_section">
 
             <!-- 리뷰게시판 -->
             <div class="commu_review_frame" v-if='this.communityService == "R"'>
               <div class="commu_novel_choice"><span>작품선택</span></div>
-              <div class="commu_review_title" v-if="editMode == false"><input type="text"/></div>
-              <div class="commu_review_title" v-if='communityService == R && editMode == true'><input type="text"/></div>
+              <div class="commu_review_title" v-if="editMode == false"><input type="text" v-model="inputTitle"/></div>
+              <div class="commu_review_title" v-if='communityService == R && editMode == true'><input type="text" v-model="inputTitle"/></div>
 
               <!-- 리뷰 수정 상단부 (제목, 별점) -->
               <div class="commu_str_back_update" v-if='editMode == true && this.communityService == "R"'>
-                <span class="str_first">★★★★★
-                <span :style="str_draw">★★★★★</span>
-                <input type="range" class="str_range" @input="draw(value)" v-model="value" step="1" min="0" max="10">
+                <span class="str_first">
+                  <span :style="str_draw">★★★★★</span>
+                  <input type="range" class="str_range">
                 </span>
               </div>
 
@@ -195,7 +194,7 @@
                 <span class="commu_str_grade" v-if="strOpen==false">별점 매기기</span>
                 <span class="str_first" v-if="strOpen==true">★★★★★
                 <span :style="str_draw">★★★★★</span>
-                <input type="range" class="str_range" @input="draw(value)" v-model="value" step="1" min="0" max="10">
+                <input type="range" class="str_range" v-model="inputTitle">
                 </span>
               </div>
             </div>
@@ -279,7 +278,23 @@ export default {
   created() {
     this.$store.commit('sideBarOn');
     this.$store.commit('currentServiceCng', 'C');
-    this.getPostList('F');
+
+    this.viewState = 0;
+    switch(this.$store.state.communityService) {
+      case 'F' :
+        this.getPostList('F');
+        break;
+      case 'W' :
+        this.getPostList('W');
+        break;
+      case 'T' :
+        this.getPostList('T');
+        break;
+      case 'R' :
+        this.getPostList('R');
+        break;                
+    }
+    
   },
   computed: {
     communityService: function() {
@@ -396,6 +411,7 @@ export default {
 
           this.inputTitle = "";
           this.inputContent = "";
+          this.editMode = false;
         } else {
           this.$store.commit('gModalOn', {size : "normal", msg : "게시글 수정 실패"});
         }
@@ -469,6 +485,7 @@ export default {
           if(result.data == "err") {
             this.$store.commit('gModalOn', {size : "normal", msg : "댓글 등록을 실패했습니다."});
           } else {
+            this.inputComment = "";
             this.getCommentList();
           }
         })

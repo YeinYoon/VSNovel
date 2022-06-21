@@ -44,6 +44,14 @@ router.post('/getNotice', async (req,res)=>{
             break;
     }
 
+    var viewUp = await db.execute(`UPDATE tbl_post SET post_view = post_view + 1
+    WHERE vill_code = -1 AND boar_code = ${boardCode} AND post_code = ${req.body.postCode}`);
+    if(viewUp == "err") {
+        console.log("조회수 증가 실패...");
+    } else {
+        console.log("해당 포스트에 대한 조회수 증가");
+    }
+
     var notice = await db.execute(`SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = ${boardCode} AND post_code = ${req.body.postCode}`);
     if(notice == "err") {
         res.send("err");

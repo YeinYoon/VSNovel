@@ -8,18 +8,18 @@
       </div>
     </div>
   <div class="review_section">
-    <div class="work_list" v-for="(review, i) in reviews" :key="i">
+    <div class="work_list" v-for="(r, i) in reviewList" :key="i">
       <div class="img_box"></div>
-      <img class="list_img" :src="`${review.POST_COVER}`"/>
+      <!-- <img class="list_img" :src="`${review.POST_COVER}`"/> -->
       <div class="work_list_con">
-          <div class="list_span">
-              <span class="list_title">{{review.POST_TITLE}}</span>
-              <span class="list_team">{{review.NOVE_TITLE}}</span>
-              <span class="list_content">{{review.POST_CONTENT}}</span>
-          </div>
+        <div class="list_span">
+          <span class="list_title">{{r.POST_TITLE}}</span>
+          <!-- <span class="list_team">{{r.NOVE_TITLE}}</span> -->
+          <span class="list_content" v-html="r.POST_CONTENT"></span>
+        </div>
       </div>
       <!-- <div class="review_edit">리뷰수정</div> -->
-      <button class="review_edit" @click="reviewBtn(i)">리뷰수정</button>
+      <!-- <button class="review_edit" @click="reviewBtn(i)">리뷰수정</button> -->
     </div>
   </div>
 </div>
@@ -27,40 +27,25 @@
 
 <script>
 import axios from '../../axios';
-import commuRe from '../../assets/DataJs/commuRe.js'
-
 export default {
   created() {
-    this.getReview()
+    this.getReviewList()
   },
   data(){
     return{
-      reviews :null,
-      commuRe : commuRe
+      reviewList : [],
     };
   },
   methods: {
-    getReview() {
-      axios.get('/api/mypage/getreview')
+    getReviewList() {
+      axios.get('/api/mypage/getReviewList')
       .then((result)=>{
         if(result.data=="err"){
-          console.log("리뷰 데이터 불러오기 실패");
+          this.$store.commit('gModalOn', {size : "normal", msg : "리뷰 데이터 불러오기 실패"});
         } else {
-          this.reviews = result.data;
-          console.log(this.reviews)
+          this.reviewList = result.data;
         }
       })
-    },
-    reviewBtn(i) {
-      console.log(this.reviews[i].title);
-      this.$router.push({
-        name: "Community",
-         // params: { REVIEW_CODE : REVIEW_CODE
-        params: {
-          title : this.reviews[i].POST_TITLE,
-          content : this.reviews[i].POST_CONTENT
-                  },
-      });
     },
   }
 }
