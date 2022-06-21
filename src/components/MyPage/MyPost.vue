@@ -85,13 +85,11 @@ export default {
   margin-bottom: 10px;
 }
 .post_place,
-.post_like,
-.post_comment,
 .post_clicks {
-  width: 15%;
+  width: 20%;
 }
 .post_title {
-  width: 40%;
+  width: 60%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

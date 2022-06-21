@@ -46,7 +46,7 @@
 
                   <!-- (조건) 리뷰 게시판일 경우 별점 -->
                   <span v-if="$store.state.communityService=='R'" class="commu_str">★★★★★
-                    <span class="commu_str_draw" :style="{width : p.str*20 + '%'}">★★★★★</span>
+                    <span class="commu_str_draw">★★★★★</span> <!-- 리뷰 별점 삽입 -->
                   </span>
 
                   <!-- 글정보 -->
@@ -125,7 +125,11 @@
               <div class="postview_frame">
 
                 <!-- 본문 -->
-                <div class="postview_content">
+                <div class="postview_content" v-if="this.communityService == 'R'">
+                  <span>작품명값</span>
+                  <span v-html="content"></span>
+                </div>
+                <div class="postview_content" v-else>
                   <span v-html="content"></span>
                 </div>
               </div>
@@ -177,7 +181,7 @@
 
             <!-- 리뷰게시판 -->
             <div class="commu_review_frame" v-if='this.communityService == "R"'>
-              <div class="commu_novel_choice"><span>작품선택</span></div>
+              <div class="commu_novel_choice"><input type="text" placeholder="여기에 작품명 입력"></div>
               <div class="commu_review_title" v-if="editMode == false"><input type="text" v-model="inputTitle"/></div>
               <div class="commu_review_title" v-if='communityService == R && editMode == true'><input type="text" v-model="inputTitle"/></div>
 
@@ -190,12 +194,14 @@
               </div>
 
                 <!-- 리뷰 작성 상단부 -->
-              <div class="commu_str_back" v-else-if='this.communityService == "R"' @click="stargrade()" id="starBack">
-                <span class="commu_str_grade" v-if="strOpen==false">별점 매기기</span>
-                <span class="str_first" v-if="strOpen==true">★★★★★
-                <span :style="str_draw">★★★★★</span>
-                <input type="range" class="str_range" v-model="inputTitle">
-                </span>
+              <div class="commu_str_back" v-else-if='this.communityService == "R"'>
+                <select class="commu_str_temp_sel">
+                  <option class="commu_str_temp_star1">★</option>
+                  <option class="commu_str_temp_star2">★★</option>
+                  <option class="commu_str_temp_star3">★★★</option>
+                  <option class="commu_str_temp_star4">★★★★</option>
+                  <option class="commu_str_temp_star5">★★★★★</option>
+                </select>
               </div>
             </div>
 
@@ -884,7 +890,7 @@ export default {
   display:flex;
   align-items:center;
   justify-content:center;
-  flex:1;
+  flex:1.2;
   height: 100%;
   background-color:#2872f9;
   border-radius: 20px;
@@ -892,6 +898,17 @@ export default {
   margin-right: 10px;
   cursor: pointer;
 }
+.commu_novel_choice input {
+  width: 100%;
+  background: none;
+  color: white;
+}
+
+.commu_novel_choice input::placeholder {
+  color: white;
+  text-align: center;
+}
+
 .commu_novel_choice span {
   color:white;
   font-size: 1.2vw;
@@ -1128,5 +1145,12 @@ export default {
   font-size: 0.9em;
   text-align: left;
   margin: 0;
+}
+
+.commu_str_temp_sel {
+  width: 100%;
+  background: none;
+  border: none;
+  color: #262626;
 }
 </style>
