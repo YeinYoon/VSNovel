@@ -90,6 +90,9 @@
         <div class="sel_menu" @click="$store.commit('noticeServiceCng', 'U')">· 업데이트 내역</div>
         <div class="sel_menu" @click="$store.commit('noticeServiceCng', 'E')">· 이벤트</div>
         <div class="sel_menu" @click="$store.commit('noticeServiceCng', 'P')">· 정책</div>
+        <div class="active_comm_Menu_F" v-if="$store.state.communityService == 'U'"></div>
+        <div class="active_comm_Menu_W" v-if="$store.state.communityService == 'E'"></div>
+        <div class="active_comm_Menu_T" v-if="$store.state.communityService == 'P'"></div>
       </div>
     </div>
   </div>
