@@ -45,9 +45,9 @@
                   <div class="commu_back_title">{{ p.POST_TITLE }}</div>
 
                   <!-- (조건) 리뷰 게시판일 경우 별점 -->
-                  <span v-if="$store.state.communityService=='R'" class="commu_str">★★★★★
-                    <span class="commu_str_draw">★★★★★</span> <!-- 리뷰 별점 삽입 -->
-                  </span>
+                  <!-- <span v-if="$store.state.communityService=='R'" class="commu_str">★★★★★
+                    <span class="commu_str_draw">★★★★★</span> 
+                  </span> -->
 
                   <!-- 글정보 -->
                   <div class="commu_back_info">
