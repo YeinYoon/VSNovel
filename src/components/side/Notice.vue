@@ -9,7 +9,9 @@
                 alt="logo"
                 />
                 <span class="title">공지사항</span>
-                <span class="topic">TOPIC · {{ noticeService }}</span>
+            <span class="topic" v-if="noticeService == 'U'">TOPIC · 업데이트 내역</span>
+            <span class="topic" v-if="noticeService == 'E'">TOPIC · 이벤트</span>
+            <span class="topic" v-if="noticeService == 'P'">TOPIC · 정책</span>
             </div>
         </div>
 
