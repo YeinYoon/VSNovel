@@ -183,7 +183,13 @@
 
             <!-- 리뷰게시판 -->
             <div class="commu_review_frame" v-if='this.communityService == "R"'>
-              <!-- <div class="commu_novel_choice"><input type="text" placeholder="여기에 작품명 입력"></div> -->
+              <div class="commu_novel_choice" v-if="novelchoice == false" @click="novelpick()">
+                <!-- <input type="text" placeholder="여기에 작품명 입력"> -->
+                <div><span>작품선택</span></div>
+              </div>
+              <div v-if="novelchoice == true">
+                
+              </div>
               <div class="commu_review_title" v-if="editMode == false"><input type="text" v-model="inputTitle"/></div>
               <div class="commu_review_title" v-if='communityService == R && editMode == true'><input type="text" v-model="inputTitle"/></div>
 
@@ -196,7 +202,7 @@
               </div>
 
                 <!-- 리뷰 작성 상단부 -->
-              <!-- <div class="commu_str_back" v-else-if='this.communityService == "R"'>
+              <div class="commu_str_back" v-else-if='this.communityService == "R"'>
                 <select class="commu_str_temp_sel">
                   <option class="commu_str_temp_star1">★</option>
                   <option class="commu_str_temp_star2">★★</option>
@@ -204,7 +210,7 @@
                   <option class="commu_str_temp_star4">★★★★</option>
                   <option class="commu_str_temp_star5">★★★★★</option>
                 </select>
-              </div> -->
+              </div>
             </div>
 
             <!-- 글쓰기 자유/작가/팀원모집 상단부 (제목) -->
@@ -252,6 +258,7 @@ export default {
       step : "",
       manage : false,
       postList : [],
+      novelchoice : false,
 
       // 포스트 보기
       postCode : "",
@@ -392,6 +399,9 @@ export default {
           }
         })
       }
+    },
+    novelpick(){
+      this.novelchoice = true;
     },
 
     edit() {
