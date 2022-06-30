@@ -187,9 +187,14 @@
                 <!-- <input type="text" placeholder="여기에 작품명 입력"> -->
                 <div><span>작품선택</span></div>
               </div>
-              <div v-if="novelchoice == true">
-                
+              <div class="commu_novel_search" v-if="novelchoice == true">
+                <div>
+                  <input type="text">
+                </div>
+                <div class="commu_novel_modal">창</div>
               </div>
+              
+              
               <div class="commu_review_title" v-if="editMode == false"><input type="text" v-model="inputTitle"/></div>
               <div class="commu_review_title" v-if='communityService == R && editMode == true'><input type="text" v-model="inputTitle"/></div>
 
@@ -222,14 +227,14 @@
             <div class="commu_write_title" v-if="editMode==true && communityService!= 'R' ">
               <input type="text" v-model="inputTitle"/>
             </div>
-
             <!-- 내용 입력창 -->
             <div class="commu_write_content">
               <Editor @commitContent="editorContent" ref="editor"/>
             </div>
+
           </div>
           <!-- 게시물 폼 끝 -->
-
+          
           <!-- 게시물 폼 글쓰기 및 수정버튼 -->
           <div class="write_btn_area">
             <div class="write_btn" @click="registerpost">
@@ -254,6 +259,8 @@ export default {
   name: "CommunitySide",
   data() {
     return {
+      //파일업로드 유무 변수
+      fileOn: false,
       viewState : 0,
       step : "",
       manage : false,
@@ -928,6 +935,36 @@ export default {
 .commu_novel_choice span {
   color:white;
   font-size: 1.2vw;
+}
+.commu_novel_search {
+  display:flex;
+  flex: 1.2;
+  align-items:center;
+  justify-content:center;
+  height: 100%;
+  background-color:#ddd;
+  border-radius: 20px;
+  padding: 0 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  /* z-index: 12; */
+}
+.commu_novel_search input{
+  width: 100%;
+  background: none;
+  /* z-index: 12; */
+}
+.commu_novel_modal {
+  position:absolute;
+  float: left;
+  left: 10px;
+  /* display: f; */
+  /* width: 22.5%;
+  height: 100px;
+  left: 15px;
+  top: 32px; */
+  background-color: #ddd;
+  /* z-index: 11; */
 }
 .commu_review_title {
   flex: 3;
