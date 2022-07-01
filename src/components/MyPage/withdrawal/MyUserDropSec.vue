@@ -54,8 +54,13 @@ export default {
         if(result.data == 'err') {
           console.log('err')
         } else {
-          this.$store.commit("userLogin", null);
-          this.$router.push("/");
+          if(result.data == "fail") {
+            this.$store.commit('gModalOn', {msg : "다시 입력하세요.", size : "small"});
+          } else {
+            this.$store.commit('gModalOn', {msg : "삭제되었습니다.", size : "small"});
+            this.$store.commit("userLogin", null);
+            this.$router.push("/");
+          }
         }
       })
     }
