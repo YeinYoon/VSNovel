@@ -111,6 +111,7 @@ body{
   height: 100vh;
   background: #353535;
   overflow: auto;
+  padding: 35px 40px 30px 40px;
 }
 
 .ContentView {
