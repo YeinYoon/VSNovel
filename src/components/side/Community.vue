@@ -176,6 +176,29 @@
 <!---------------------------->
 <!---------------------------->
 <!---------------------------->
+        <!-- 작품선택 모달창 -->
+        <div v-if="novelchoice == true">
+              <!--모달 내 메세지 및 컨텐츠인 modal_inner, 여기에 단순히 메세지만을 표시할수도 
+            작은 컴포넌트를 삽입할수도 있따.-->
+            <div class="commu_novel_modal_opacity"></div>
+              <div class="commu_novel_modal">
+                <div class="commu_novel_modal_cancel" @click="novelchoice = false"><img src="@/assets/icons/white/close.png"></div>
+                <div class="commu_novel_modal_search">
+                  <div class="commu_novel_modal_img"><img src="@/assets/icons/magnifier.png"></div>
+                  <input type="text">
+                </div>
+                <div class="commu_novel_modal_text"><span>작품선택</span></div>
+                <!--메세지를 출력하는 예제-->
+                <div class="commu_novel_modal_article_frame">
+                    <div>
+                      <div class="commu_novel_modal_articles">
+                        <img src="" alt="">
+                      </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
 
         <div v-if="viewState == 2">
@@ -183,18 +206,11 @@
 
             <!-- 리뷰게시판 -->
             <div class="commu_review_frame" v-if='this.communityService == "R"'>
-              <div class="commu_novel_choice" v-if="novelchoice == false" @click="novelpick()">
+              <div class="commu_novel_choice" @click="novelpick()">
                 <!-- <input type="text" placeholder="여기에 작품명 입력"> -->
                 <div><span>작품선택</span></div>
               </div>
-              <div class="commu_novel_search" v-if="novelchoice == true">
-                <div>
-                  <input type="text">
-                </div>
-                <div class="commu_novel_modal">창</div>
-              </div>
-              
-              
+    
               <div class="commu_review_title" v-if="editMode == false"><input type="text" v-model="inputTitle"/></div>
               <div class="commu_review_title" v-if='communityService == R && editMode == true'><input type="text" v-model="inputTitle"/></div>
 
@@ -889,7 +905,116 @@ export default {
   color: white;
 }
 
+/* 커뮤니티 모달 */
+.commu_novel_modal_opacity {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    background: black;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    z-index: 99;
+    position: fixed;
+    animation-duration: 0.3s;
+    animation-name: backgrounding_on;
+    animation-fill-mode: forwards;
+}
+.commu_novel_modal {
+  position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 900px;
+    height: 450px;
+    border-radius: 25px;
+    background: #2c2c2c;
+    -webkit-animation-duration: 0.7s;
+    animation-duration: 0.7s;
+    -webkit-animation-name: opening;
+    animation-name: opening;
+    z-index: 100;
+    opacity: 1;
+}
+.commu_novel_modal_cancel {
+  position: absolute;
+  float: right;
+  right: 10px;
+  top: 5px;
+  width: 20px;
+  height: 20px;
+  margin: 10px;
+  cursor:pointer;
+}
+.commu_novel_modal_cancel img{
+  width: 100%;
+  height: 100%;
+}
+.commu_novel_modal_search{
+  position: absolute;
+  left: 20px;
+  top: 20px;
+  width: 270px;
+  height: 32px;
+  background-color: white;
+  border-radius: 15px;
+  padding-left: 10px;
 
+}
+.commu_novel_modal_img{
+  display: inline-block;
+  position:relative;
+  width: 25px;
+  height: 25px;
+  cursor:pointer;
+}
+.commu_novel_modal_img img{
+  width: 100%;
+  height: 100%;
+}
+.commu_novel_modal_search input{
+  position:relative;
+  display: inline-block;
+  height: 30px;
+  outline: none;
+  color: black;
+}
+.commu_novel_modal_text {
+  position: absolute;
+  float: right;
+  right: 50px;
+  color:white;
+  font-size: 1.5em;
+  top: 50px;
+}
+.commu_novel_modal_article_frame{
+  position: absolute;
+  left: 35px;
+  top: 80px;
+  width: 805px;
+  height: 320px;
+  margin: 10px 10px;
+  overflow:scroll;
+
+}
+.commu_novel_modal_articles{
+  display: inline-block;
+  position: relative;
+  width: 151px;
+  height: 185px;
+   margin-left: 5px;
+  margin-right: 5px; 
+  /* height: 100%; */
+  background-color: #4c4c4c;
+  border-radius: 10px;
+  overflow: hidden;
+  object-fit:cover;
+  cursor:pointer;
+}
+.commu_novel_modal_articles img {
+  width: 100%;
+  height: 100%;
+}
 
 /* 글작성 */
 
@@ -935,36 +1060,6 @@ export default {
 .commu_novel_choice span {
   color:white;
   font-size: 1.2vw;
-}
-.commu_novel_search {
-  display:flex;
-  flex: 1.2;
-  align-items:center;
-  justify-content:center;
-  height: 100%;
-  background-color:#ddd;
-  border-radius: 20px;
-  padding: 0 10px;
-  margin-right: 10px;
-  cursor: pointer;
-  /* z-index: 12; */
-}
-.commu_novel_search input{
-  width: 100%;
-  background: none;
-  /* z-index: 12; */
-}
-.commu_novel_modal {
-  position:absolute;
-  float: left;
-  left: 10px;
-  /* display: f; */
-  /* width: 22.5%;
-  height: 100px;
-  left: 15px;
-  top: 32px; */
-  background-color: #ddd;
-  /* z-index: 11; */
 }
 .commu_review_title {
   flex: 3;
