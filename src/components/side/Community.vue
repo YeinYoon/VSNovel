@@ -493,7 +493,6 @@ export default {
         this.$store.commit('gModalOn', {size : "normal", msg : "내용이 비어있습니다."});
       } else {
         var data = {
-          select : this.$store.state.communityService,
           postCode : this.postCode,
           content : this.inputComment
         }
