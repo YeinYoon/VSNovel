@@ -1,10 +1,23 @@
 <template>
   <div class="RouterView_NonSide">
       <!-- 헤더 -->
+
       <div class="header">
         <div class="service">
           <img src="../../assets/icons/vsn_platform.png" class="icon" />
           <span class="title">Visual Studio Novel</span>
+        </div>
+        <div class="userHeader">
+          <div>
+            <div class="UH_profilebox"><img src="@/assets/imgs/adver.png"></div>
+            <span class="UH_hello">유저닉네임유저닉네임유저닉네임</span>
+            <!-- <span class="UH_recentdate">최근 접속 : 2022-07-02</span> -->
+            <div class="UH_funcBtn">
+              <button>내 정보</button>
+              <!-- <button>뭔가잇음</button> -->
+              <button>관리자 패널</button>
+            </div>
+          </div>
         </div>
       </div>
       <div class="section">
@@ -66,14 +79,6 @@
       </div>
       <hr class="lines" />
       <div class="footer">
-        <span
-          >한국장학재단 콜센터 1599-2000 <br />ARS 기부 (한통화에 2,000원이
-          기부됩니다.) 060-700-1003 평일 09:00 ~ 18:00 <br />(우 41200)
-          대구광역시 동구 신암로 125 (신암동 819-1) <br />본 홈페이지에 게시된
-          이메일 주소가 자동 수집되는 것을 거부하며, 이를 위반시 개인정보
-          보호법에 의해 처벌됨을 유념하시기 바랍니다. <br />Copyright © 2021
-          Korea Student Aid Foundation. All rights reserved.</span
-        >
       </div>
     </div>
 </template>
@@ -152,6 +157,68 @@ export default {
   left: calc(100% - 370px);
   font-size: 1.2em;
 }
+.userHeader {
+  position: absolute;
+  width: 235px;
+  top: 60px;
+  left: calc(100% - 160px);
+  background: #484848;
+  color: white;
+  height: 70px;
+  border-radius: 20px;
+  transform: translate(-50%,-50%);
+  box-shadow: 0 0 10px 1px #2e2e2e;
+}
+
+.UH_profilebox {
+  position: absolute;
+  left: 10px;
+  top: 10px;
+  width: 47px;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.UH_hello {
+  position: absolute;
+  left: 65px;
+  top: 10px;
+  width: 155px;
+  text-overflow: ellipsis;
+  background: #383838;
+  padding-left: 5px;
+  border-radius: 5px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.UH_recentdate {
+  position: absolute;
+  left: 60px;
+  top: 31px;
+  font-size: 0.85em;
+}
+
+.UH_funcBtn {
+  position: absolute;
+  left: 65px;
+  top: 36px;
+  width: 200px;
+}
+
+.UH_funcBtn button {
+  border: none;
+  background: #2872f9;
+  font-size: 0.75em;
+  color: white;
+  border-radius: 7px;
+  margin-right: 3px;
+}
+
+.UH_profilebox img {
+  width: 100%;
+}
+
 button {
   border: none;
   outline: none;
@@ -176,13 +243,15 @@ button {
 .section .banner {
   margin: 0 auto;
   width: 100%;
-  height: 204px;
+  height: 200px;
   border-radius: 25px;
-  border: 2px solid rgb(73, 73, 73);
+  border: 2px solid rgb(52, 52, 52);
   overflow: hidden;
+  box-shadow: 0 0 15px 4px #272727;
 }
 .footer {
   width: 100%;
+  height: 160px;
   color: white;
   padding: 5px 0 0 5px;
 }
@@ -192,7 +261,7 @@ button {
   margin: 20px 0 40px 0;
 }
 .widget .comunity, .widget .notice{
-  width: 48%;
+  width: 49%;
   border-radius: 20px;
   height: 280px;
   overflow: hidden;
