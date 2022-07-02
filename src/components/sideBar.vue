@@ -3,7 +3,7 @@
 
 
   <!-- 커뮤니티 -->
-  <div v-if="$store.state.currentService == 'C'">
+  <div class="SideMenusGroup" v-if="$store.state.currentService == 'C'">
     <div class="side_search">
       <img src="@/assets/icons/magnifier.png" class="side_icon" />
       <input type="text" />
@@ -25,20 +25,35 @@
 
       <div class="group" @click="myStep = '전체'"><span>· 빌리지</span></div>
       <div class="sel">
-        <div class="sel_menu" @click="$store.commit('communityServiceCng', 'V')">· 빌리지 메인</div>
-        <div class="active_comm_Menu_F" v-if="$store.state.communityService == 'V'"></div>
-        <!-- 포문을 돌리는데 32번줄 sel_menu를 포문을 돌리면 됨, 그러나 스토어 커밋을 통해 게시판 내용을 해당 빌리지의 코드로 바꿔야함으로 -->
-        <!-- 해당 빌리지? 소설코드를 특정 Store 값에 넣는게 어떨까함 -->
-        <!-- 그럼 그걸로 게시판 목록 불러오면 되잖음! -->
-        <div class="sel_menu" @click="$store.commit('communityServiceCng', 'F')">· 소속 빌리지1</div>
-        
+        <button class="sel_menu villback" @click="$store.commit('currentServiceCng', 'V')">· 빌리지 이동</button>
       </div>
     </div>
   </div>
 
 
+  <!-- 빌리지 -->
+  <div class="SideMenusGroup" v-if="$store.state.currentService == 'V'">
+    <div class="side_search">
+      <img src="@/assets/icons/magnifier.png" class="side_icon" />
+      <input type="text" />
+    </div>
+    <div>
+      <div class="group" @click="myStep = '전체'"><span>· 빌리지</span></div>
+      <div class="sel">
+        <div class="sel_menu" @click="$store.commit('currentServiceCng', 'V')">· 빌리지 메인</div>
+        <div class="active_comm_Menu_F" v-if="$store.state.communityService == 'V'"></div>
+        <!-- 포문을 돌리는데 32번줄 sel_menu를 포문을 돌리면 됨, 그러나 스토어 커밋을 통해 게시판 내용을 해당 빌리지의 코드로 바꿔야함으로 -->
+        <!-- 해당 빌리지? 소설코드를 특정 Store 값에 넣는게 어떨까함 -->
+        <!-- 그럼 그걸로 게시판 목록 불러오면 되잖음! -->
+        <div class="sel_menu" @click="$store.commit('communityServiceCng', 'F')">· 소속 빌리지1</div>
+        <button class="sel_menu villback" @click="$store.commit('currentServiceCng', 'C')">· 뒤로가기</button>     
+      </div>
+
+    </div>
+  </div>
+
   <!-- 마이페이지 -->
-  <div v-if="$store.state.currentService == 'aaa'">
+  <div class="SideMenusGroup" v-if="$store.state.currentService == 'aaa'">
     <div class="side_search">
       <img src="@/assets/icons/magnifier.png" class="side_icon" />
       <input type="text" />
@@ -62,7 +77,7 @@
 
 
   <!-- 라이브러리 -->
-  <div v-if="$store.state.currentService == 'L'">
+  <div class="SideMenusGroup" v-if="$store.state.currentService == 'L'">
     <div class="side_search">
       <img src="@/assets/icons/magnifier.png" class="side_icon" />
       <input type="text" />
@@ -92,7 +107,7 @@
 
 
   <!-- 공지사항 -->
-  <div v-if="$store.state.currentService == 'N'">
+  <div class="SideMenusGroup" v-if="$store.state.currentService == 'N'">
     <div class="side_search">
       <img src="@/assets/icons/magnifier.png" class="side_icon" />
       <input type="text" />
@@ -373,6 +388,27 @@ export default {
     animation-fill-mode: forwards;
   }
 
+  .villback {
+    position: relative;
+    top: -10px;
+    height: 45px;
+    background: #464646;
+    color: white;
+    border-radius: 20px;
+    transition: 0.2s all ease;
+  }
+
+  .villback:hover {
+    background: #2872f9; 
+  }
+
+  .SideMenusGroup {
+    animation-name: groupon;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+    animation-timing-function: ease;
+  }
+
 @keyframes clickBtn {
   0%{
     opacity: 0.7;
@@ -403,7 +439,7 @@ export default {
 
 @keyframes groupon {
   0% {
-    opacity: 0;
+    opacity: 0.5;
   }
   100% {
     opacity: 1;

@@ -239,6 +239,14 @@
       </div>    
     </div>
     <!-- 커뮤니티 끝 -->
+
+
+    <!-- 빌리지 시작 -->
+    <div v-if="$store.state.currentService == 'V'">
+      <div class="RouterView">
+        123
+      </div>
+    </div>
 </template>
 
 <script>

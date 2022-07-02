@@ -9,7 +9,7 @@
         </div>
         <div class="userHeader">
           <div>
-            <div class="UH_profilebox"><img src="@/assets/imgs/adver.png"></div>
+            <!-- <div class="UH_profilebox"><img :src="this.$store.state.profileImg"></div> -->
             <span class="UH_hello">유저닉네임유저닉네임유저닉네임</span>
             <!-- <span class="UH_recentdate">최근 접속 : 2022-07-02</span> -->
             <div class="UH_funcBtn">
@@ -159,9 +159,9 @@ export default {
 }
 .userHeader {
   position: absolute;
-  width: 235px;
+  width: 175px;
   top: 60px;
-  left: calc(100% - 160px);
+  left: calc(100% - 130px);
   background: #484848;
   color: white;
   height: 70px;
@@ -181,7 +181,7 @@ export default {
 
 .UH_hello {
   position: absolute;
-  left: 65px;
+  left: 10px;
   top: 10px;
   width: 155px;
   text-overflow: ellipsis;
@@ -201,7 +201,7 @@ export default {
 
 .UH_funcBtn {
   position: absolute;
-  left: 65px;
+  left: 10px;
   top: 36px;
   width: 200px;
 }

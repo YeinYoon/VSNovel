@@ -33,7 +33,14 @@
       </div>
       <br />
       <div v-bind:class="{ menubox: true }" id="communi" @click="routerPush('/community')">
+
         <img
+          v-if="$store.state.currentService == 'V'"
+          class="menubox_icon_community"
+          src="@/assets/icons/white/leaf.png"
+        />
+        <img
+          v-else
           class="menubox_icon_community"
           src="@/assets/icons/white/bubble_chat.png"
         />
