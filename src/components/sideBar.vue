@@ -19,6 +19,19 @@
         <div class="active_comm_Menu_W" v-if="$store.state.communityService == 'W'"></div>
         <div class="active_comm_Menu_T" v-if="$store.state.communityService == 'T'"></div>
         <div class="active_comm_Menu_R" v-if="$store.state.communityService == 'R'"></div>
+      </div> 
+
+      <br>
+
+      <div class="group" @click="myStep = '전체'"><span>· 빌리지</span></div>
+      <div class="sel">
+        <div class="sel_menu" @click="$store.commit('communityServiceCng', 'V')">· 빌리지 메인</div>
+        <div class="active_comm_Menu_F" v-if="$store.state.communityService == 'V'"></div>
+        <!-- 포문을 돌리는데 32번줄 sel_menu를 포문을 돌리면 됨, 그러나 스토어 커밋을 통해 게시판 내용을 해당 빌리지의 코드로 바꿔야함으로 -->
+        <!-- 해당 빌리지? 소설코드를 특정 Store 값에 넣는게 어떨까함 -->
+        <!-- 그럼 그걸로 게시판 목록 불러오면 되잖음! -->
+        <div class="sel_menu" @click="$store.commit('communityServiceCng', 'F')">· 소속 빌리지1</div>
+        
       </div>
     </div>
   </div>
