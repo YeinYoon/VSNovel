@@ -1,17 +1,18 @@
 <template>
   <!--  autoplay=2000 -->
 <carousel
-    :items-to-show="1.95"
+    :items-to-show="1"
     :wrap-around="true"
     :autoplay="sec"
     :pauseAutoplayOnHover="status"
   >
     <slide v-for="slide in datas" :key="slide">
-      <img :src="`${slide.link}`" class="main_carousel_img" @click="openSlide(slide.link)"/>
+      <div class="carousel__item"><img :src="slide.link"></div>
     </slide>
+
     <template #addons>
-      <navigation />
       <pagination />
+      <navigation />
     </template>
   </carousel>
   
@@ -30,7 +31,19 @@ export default {
       a31: 'hi',
       status : true, // 마우스 가져다 댔을 경우 사진이 안넘어가요
       sec : 2500, //사진 넘어가는 시간,
-    };
+      breakpoints: {
+        // 700px and up
+        700: {
+          itemsToShow: 3.5,
+          snapAlign: 'center',
+        },
+        // 1024 and up
+        1024: {
+          itemsToShow: 5,
+          snapAlign: 'start',
+        }
+      },
+    }
   },
   components: {
     Carousel,
@@ -52,47 +65,40 @@ export default {
 };
 </script>
 <style>
-/* 메인 carousel */
-.main_carousel_img {
-  width: 110%;
+
+
+.carousel__item {
   height: 200px;
-  transform: scale(1.1);
-  z-index: 11;
-  box-shadow: 0px 0px 18px 10px rgba(0, 0, 0, 0.7);
-}
-/* 메인 페이지를 제외한 carousel img style */
-.carousel_img {
-  position: relative;
-  width: 60%;
-  height: 200px;
+  width: 100%;
+  background-color: var(--vc-clr-primary);
+  color:  var(--vc-clr-white);
+  font-size: 20px;
+  /* border-radius: 8px; */
+  display: flex;
+  justify-content: center;
+  align-items: center;
   object-fit: contain;
 }
-.carousel_imga{
+
+.carousel__item img{
   width: 100%;
-  position: absolute;
-  filter: blur(5px);
+  /* transform: scale(1.1); */
 }
-/* ---------------------------------------- */
-/* 다음 이미지 */
-.carousel__slide--next{
-  transform: scale(0.9) translate(-10px);
-  filter: blur(2px);
+
+.carousel__slide {
+  /* padding: 10px; */
 }
-/* 전 이미지 */
-.carousel__slide--prev {
-  transform: scale(0.9) translate(10px);
-  filter: blur(2px);
-}
-/* ------------------------------------------ */
+
 .carousel__prev {
   transform: translate(25%, -50%);
   background-color: #2872f9;
+  /* border: 2px solid white; */
   /* transform: translate(-120%, -100%); */
 }
 .carousel__next {
   transform: translate(-25%, -50%);
   background-color: #2872f9;
+  /* border: 2px solid white; */
   /* transform: translate(120%, -100%); */
 }
-
 </style>

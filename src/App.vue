@@ -53,6 +53,10 @@ export default {
 
 <style>
 @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+html{
+background: #2c2c2c;
+}
+
 body{
   font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui, Roboto, 'Helvetica Neue', 'Segoe UI', 'Apple SD Gothic Neo', 'Noto Sans KR', 'Malgun Gothic', sans-serif;
   font-weight: 500;
@@ -84,6 +88,9 @@ body{
   top: 0px;
   left: 140px;
   overflow: auto;
+  animation-name: groupon;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
 }
 
 .FullView {
@@ -102,6 +109,9 @@ body{
   background: #353535;
   overflow: auto;
   padding: 35px 40px 30px 40px;
+  animation-name: contentOn;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
 }
 
 .RouterView_NonSide {
@@ -111,9 +121,24 @@ body{
   height: 100vh;
   background: #353535;
   overflow: auto;
+  padding: 35px 40px 30px 40px;
+  animation-name: contentOn;
+  animation-duration: 0.2s;
+  animation-fill-mode: forwards;
 }
 
 .ContentView {
   background: #353535;
+}
+
+
+@keyframes contentOn {
+  0% {
+    opacity: 0.5;
+  }
+  100% {
+    opacity: 1;
+  }
+  
 }
 </style>

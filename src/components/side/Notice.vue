@@ -284,6 +284,7 @@ export default {
 
                     this.inputTitle = "";
                     this.inputContent = "";
+                    this.editMode = false;
                 } else {
                     this.$store.commit('gModalOn', {size : "normal", msg : "공지사항 수정 실패"});
                 }
