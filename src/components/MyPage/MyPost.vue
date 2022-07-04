@@ -19,7 +19,7 @@
         <div class="post_clicks">조회수</div>
       </div>
       <hr class="lines" />
-      <div class="post_line" v-for="(p, i) in postList" :key="i">
+      <div class="post_line" v-for="(p, i) in postList" :key="i" @click="rowBtn(i)">
         <div class="post_place" v-if="p.BOAR_CODE == 1">자유</div>
         <div class="post_place" v-if="p.BOAR_CODE == 2">작가</div>
         <div class="post_place" v-if="p.BOAR_CODE == 3">팀원모집</div>
@@ -59,7 +59,18 @@ export default {
           this.postList = result.data;
         }
       })
-    }
+    },
+    rowBtn(i) {
+      // console.log(this.postList[i].BOAR_CODE.forEach(function(element) {
+      //   console.log(element)
+      // }))
+      console.log(this.postList[i].BOAR_CODE)
+      this.$router.push({
+        name:'Community', params:{step:'작가',topicNum:0},
+      }
+      );
+      
+    },
   },
 };
 </script>
