@@ -33,7 +33,6 @@
                         <div>가입일</div>
                         <div>최근 로그인</div>
                         <div>
-                            <div class="block">차단</div>
                             <div class="delete">삭제</div>
                         </div>
                     </div>
@@ -54,7 +53,6 @@
                         <div>가입일</div>
                         <div>최근 로그인</div>
                         <div>
-                            <div class="block">차단</div>
                             <div class="delete">삭제</div>
                         </div>
                     </div>
