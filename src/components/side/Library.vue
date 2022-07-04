@@ -5,14 +5,12 @@
 </template>
 
 <script>
-import genreData from "../../assets/DataJs/genreData.js";
 import Library from '../librarypage/LibraryView';
 export default {
   name: "StoreSide",
   data() {
     return {
       groupStep: "",
-      data: genreData,
       hiddenData: false,
       genreNum: 0,
       clickNovel : 'novel',

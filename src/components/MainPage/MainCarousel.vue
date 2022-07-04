@@ -85,10 +85,6 @@ export default {
   /* transform: scale(1.1); */
 }
 
-.carousel__slide {
-  /* padding: 10px; */
-}
-
 .carousel__prev {
   transform: translate(25%, -50%);
   background-color: #2872f9;
