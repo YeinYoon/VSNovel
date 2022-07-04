@@ -26,6 +26,17 @@
                         <span>최근 로그인</span>
                         <span>관리메뉴</span>
                     </div>
+                    <!-- 반복문 -->
+                    <div class="admin_unit_list">
+                        <div>ID</div>
+                        <div>NICKNAME</div>
+                        <div>가입일</div>
+                        <div>최근 로그인</div>
+                        <div>
+                            <div class="block">차단</div>
+                            <div class="delete">삭제</div>
+                        </div>
+                    </div>
                 </div>
                 <!-- 전체 게시글 조회 -->
                 <div class="admin_post" v-if="btn_click == 'post'">
@@ -35,6 +46,17 @@
                         <span>작성자</span>
                         <span>작성일자</span>
                         <span>관리 메뉴</span>
+                    </div>
+                    <!-- 반복문 -->
+                    <div class="admin_post_list">
+                        <div>ID</div>
+                        <div>NICKNAME</div>
+                        <div>가입일</div>
+                        <div>최근 로그인</div>
+                        <div>
+                            <div class="block">차단</div>
+                            <div class="delete">삭제</div>
+                        </div>
                     </div>
                 </div>
                 <!-- 작품 관리 -->
@@ -47,6 +69,18 @@
                         <span>판매량</span>
                         <span>관리 메뉴</span>
                     </div>
+                    <!-- 반복문 -->
+                    <div class="admin_novel_list">
+                        <div>작품명</div>
+                        <div>PJCODE</div>
+                        <div>NOVEL CODE</div>
+                        <div>최근업로드</div>
+                        <div>판매량</div>
+                        <div>
+                            <div class="block">차단</div>
+                            <div class="delete">삭제</div>
+                        </div>
+                    </div>
                 </div>
                 <!-- 배너관리 -->
                 <div class="admin_banner" v-if="btn_click == 'banner'">
@@ -57,6 +91,17 @@
                         <span>POST CODE</span>
                         <span>게시일자</span>
                         <span>관리 메뉴</span>
+                    </div>
+                    <!-- 반복문 -->
+                    <div class="admin_banner_list">
+                        <div>종류</div>
+                        <div>이미지 경로</div>
+                        <div>NOVEL CODE</div>
+                        <div>POST CODE</div>
+                        <div>게시일자</div>
+                        <div>
+                            <div class="delete">삭제</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -213,6 +258,7 @@ export default {
     background-color: #484848;
     padding: 20px;
 }
+/* 제목들 */
 .admin_unit_title, .admin_post_title,
 .admin_novel_title, .admin_banner_title{
     width: 100%;
@@ -222,5 +268,27 @@ export default {
 .admin_novel_title span,.admin_banner_title span{
     flex: 1;
     text-align: center;
+}
+/* 반복문 리스트 */
+.admin_unit_list, .admin_post_list, 
+.admin_novel_list, .admin_banner_list{
+    width: 100%;
+    display: flex;
+    height: 40px;
+    line-height: 40px;
+}
+.admin_unit_list div, .admin_post_list div, 
+.admin_novel_list div, .admin_banner_list div{
+    flex: 1;
+    text-align: center;
+}
+.block, .delete{
+    display: inline-block;
+    background-color: #2e2e2e;
+    border-radius: 20px;
+    width: 65px;
+    height: 30px;
+    line-height: 30px;
+    margin: 0 2px;
 }
 </style>
