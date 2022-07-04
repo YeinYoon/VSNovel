@@ -1,4 +1,5 @@
 <template>
+<CompostModal v-if="postModal == true" @close="closePostModal"></CompostModal>
 <ConfirmModal ref="confirmModal"></ConfirmModal>
     <div v-if="$store.state.currentService == 'C'">
       <div class="RouterView">
@@ -23,7 +24,7 @@
             <!-- 상단 버튼 프레임 -->
             <div class="commu_btn_area">
               <!-- 관리자 계정만 노출 -->
-              <div class="commu_btn_red" v-if="manage == true">
+              <div class="commu_btn_red" @click="openPostModal">
                 <span class="commu_btn_manage">관리</span>
               </div>
               <!-- 글쓰기 버튼 -->
@@ -46,7 +47,8 @@
                 <div class="commu_back">
                   <!-- 글제목 -->
                   <div class="commu_back_title">{{ p.POST_TITLE }}</div>
-
+                  
+                  <div class="commu_back_check"><input type="checkbox" v-model="checkedvalues" value="i"></div>
                   <!-- (조건) 리뷰 게시판일 경우 별점 -->
                   <!-- <span v-if="$store.state.communityService=='R'" class="commu_str">★★★★★
                     <span class="commu_str_draw">★★★★★</span> 
@@ -237,6 +239,14 @@
       </div>    
     </div>
     <!-- 커뮤니티 끝 -->
+
+
+    <!-- 빌리지 시작 -->
+    <div v-if="$store.state.currentService == 'V'">
+      <div class="RouterView">
+        123
+      </div>
+    </div>
 </template>
 
 <script>
@@ -244,6 +254,8 @@ import Editor from '@/components/community/topic/Editor'
 import storage from '../../aws'
 import axios from '../../axios'
 import ConfirmModal from '../modal/ConfirmModal.vue'
+import CompostModal from '../modal/CompostModal.vue';
+
 export default {
   name: "CommunitySide",
   data() {
@@ -252,6 +264,8 @@ export default {
       step : "",
       manage : false,
       postList : [],
+      checkedvalues : [],
+      postModal: false,
 
       // 포스트 보기
       postCode : "",
@@ -280,9 +294,9 @@ export default {
   },
   components: {
     Editor,
-
-    ConfirmModal
-  },
+    ConfirmModal,
+    CompostModal
+},
   created() {
     this.$store.commit('sideBarOn');
     this.$store.commit('currentServiceCng', 'C');
@@ -487,7 +501,6 @@ export default {
         this.$store.commit('gModalOn', {size : "normal", msg : "내용이 비어있습니다."});
       } else {
         var data = {
-          select : this.$store.state.communityService,
           postCode : this.postCode,
           content : this.inputComment
         }
@@ -502,6 +515,12 @@ export default {
           }
         })
       }
+    },
+    openPostModal(){
+      this.postModal=true;
+    },
+    closePostModal(val) {
+      this.postModal=val;
     }
   },
 };
@@ -612,6 +631,17 @@ export default {
   float: left;
   left: 80px;
 }
+.commu_back_check {
+  position: relative;
+  top: 10px;
+  float: right;
+  right: 10px;
+}
+.commu_back_check > input[type="checkbox"] {
+  width: 25px;
+  height: 25px; 
+}
+
 .commu_str {
   position:absolute;
   float:right;

@@ -10,13 +10,13 @@ router.post('/getNoticeList', async(req,res)=>{
     let SQL;
     switch(req.body.select) {
         case 'U' :
-            SQL = `SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = 5 ORDER BY post_estadate DESC`;
+            SQL = `SELECT * FROM tbl_post WHERE boar_code = 5 ORDER BY post_estadate DESC`;
             break;
         case 'E' :
-            SQL = `SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = 6 ORDER BY post_estadate DESC`;
+            SQL = `SELECT * FROM tbl_post WHERE boar_code = 6 ORDER BY post_estadate DESC`;
             break;        
         case 'P' :
-            SQL = `SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = 7 ORDER BY post_estadate DESC`;
+            SQL = `SELECT * FROM tbl_post WHERE boar_code = 7 ORDER BY post_estadate DESC`;
             break;
     }
 
@@ -45,14 +45,14 @@ router.post('/getNotice', async (req,res)=>{
     }
 
     var viewUp = await db.execute(`UPDATE tbl_post SET post_view = post_view + 1
-    WHERE vill_code = -1 AND boar_code = ${boardCode} AND post_code = ${req.body.postCode}`);
+    WHERE boar_code = ${boardCode} AND post_code = ${req.body.postCode}`);
     if(viewUp == "err") {
         console.log("조회수 증가 실패...");
     } else {
         console.log("해당 포스트에 대한 조회수 증가");
     }
 
-    var notice = await db.execute(`SELECT * FROM tbl_post WHERE vill_code = -1 AND boar_code = ${boardCode} AND post_code = ${req.body.postCode}`);
+    var notice = await db.execute(`SELECT * FROM tbl_post WHERE boar_code = ${boardCode} AND post_code = ${req.body.postCode}`);
     if(notice == "err") {
         res.send("err");
     } else {
@@ -78,9 +78,8 @@ router.post('/posting', async(req, res)=>{
 
     var newTime = timestamp.getTimestamp();
     var posting = await db.execute(`INSERT INTO tbl_post VALUES(
-        '${req.user.USER_ID}', -1, ${boardCode}, tbl_post_main_${boardCode}_seq.NEXTVAL,
-        '${req.body.title}', '${req.body.content}', 0, 0, '${newTime}', '${newTime}',
-        0, 0, null, null, null, '${req.user.USER_NICKNAME}')`);
+        tbl_post_seq.NEXTVAL, '${req.user.USER_ID}', ${boardCode},
+        '${req.body.title}', '${req.body.content}', 0, null, '${newTime}', '${req.user.USER_NICKNAME}')`);
     if(posting == "err") {
         res.send("err");
     } else {
@@ -105,7 +104,7 @@ router.post('/editPost', async (req,res)=>{
     }
     
     var result = await db.execute(`UPDATE tbl_post SET post_title = '${req.body.title}', post_content = '${req.body.content}'
-    WHERE vill_code = -1 AND boar_code = ${boardCode} AND post_code = ${req.body.postCode}`);
+    WHERE boar_code = ${boardCode} AND post_code = ${req.body.postCode}`);
     if(result == "err") {
         res.send("err");
     } else {
@@ -130,7 +129,7 @@ router.post('/deletePost', async(req, res)=>{
     }
 
     var result = await db.execute(`DELETE FROM tbl_post
-    WHERE vill_code = -1 AND boar_code = ${boardCode} AND post_code = ${req.body.postCode}`);
+    WHERE boar_code = ${boardCode} AND post_code = ${req.body.postCode}`);
     if(result == "err") {
         res.send("err");
     } else {
