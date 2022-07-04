@@ -138,29 +138,32 @@
                 </div>
               </div>
 
-              <div class="comment_bar"></div>
+              <div v-if="this.communityService!='R'">
+                <div class="comment_bar"></div>
 
-              <!-- 댓글 갯수 Comment() -->
-              <div class="postview_comment">
-                <span>Comment</span>
-              </div>
+                <!-- 댓글 갯수 Comment() -->
+                <div class="postview_comment">
+                  <span>Comment</span>
+                </div>
 
-              <!-- 댓글 입력 -->
-              <div class="postview_comment_area">
-                <!-- 여기에 작성한 글을 해당 게시글의 댓글에 등록 -->
-                <textarea v-model="inputComment"></textarea> 
-                <div class="postview_comment_register"><span @click="commenting()">작성하기</span></div> <!-- 댓글 등록 버튼 -->
-              </div>
+                <!-- 댓글 입력 -->
+                <div class="postview_comment_area">
+                  <!-- 여기에 작성한 글을 해당 게시글의 댓글에 등록 -->
+                  <textarea v-model="inputComment"></textarea> 
+                  <div class="postview_comment_register"><span @click="commenting()">작성하기</span></div> <!-- 댓글 등록 버튼 -->
+                </div>
 
-              <!-- 댓글 목록 -->
-              <div class="postview_view_area" v-for="(c, i) in commentList" :key="i"> <!-- (반복) 댓글내용들 -->
-                <div><img class="postview_img" :src="c.userImg"></div>
-                <div class="postview_view_content">
-                  <span class="postview_view_nickname">{{c.USER_NICKNAME}}</span>
-                  <p class="postview_view_info">{{c.COMM_CONTENT}}</p>
-                  <span class="postview_view_estadate">{{c.COMM_ESTADATE}}</span>
+                <!-- 댓글 목록 -->
+                <div class="postview_view_area" v-for="(c, i) in commentList" :key="i"> <!-- (반복) 댓글내용들 -->
+                  <div><img class="postview_img" :src="c.userImg"></div>
+                  <div class="postview_view_content">
+                    <span class="postview_view_nickname">{{c.USER_NICKNAME}}</span>
+                    <p class="postview_view_info">{{c.COMM_CONTENT}}</p>
+                    <span class="postview_view_estadate">{{c.COMM_ESTADATE}}</span>
+                  </div>
                 </div>
               </div>
+              
 
             </div>
 
@@ -190,7 +193,6 @@
                   <input type="text">
                 </div>
                 <div class="commu_novel_modal_text"><span>작품선택</span></div>
-                <!--메세지를 출력하는 예제-->
                 <div class="commu_novel_modal_article_frame">
                     <div>
                       <div class="commu_novel_modal_articles">
@@ -227,11 +229,11 @@
                 <!-- 리뷰 작성 상단부 -->
               <div class="commu_str_back" v-else-if='this.communityService == "R"'>
                 <select class="commu_str_temp_sel">
-                  <option class="commu_str_temp_star1">★</option>
-                  <option class="commu_str_temp_star2">★★</option>
-                  <option class="commu_str_temp_star3">★★★</option>
-                  <option class="commu_str_temp_star4">★★★★</option>
-                  <option class="commu_str_temp_star5">★★★★★</option>
+                  <option class="commu_str_temp_star1" value="1">★</option>
+                  <option class="commu_str_temp_star2" value="2">★★</option>
+                  <option class="commu_str_temp_star3" value="3">★★★</option>
+                  <option class="commu_str_temp_star4" value="4">★★★★</option>
+                  <option class="commu_str_temp_star5" value="5">★★★★★</option>
                 </select>
               </div>
             </div>
