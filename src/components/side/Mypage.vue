@@ -30,11 +30,11 @@ export default {
       myStep: "프로필 설정",
       sideArrays: [
         {name : "프로필 설정",        url:"mymain"},
-        {name : "결제정보 페이지",    url:"mycard"},
+        // {name : "결제정보 페이지",    url:"mycard"},
         {name : "내가 쓴 게시글",     url:"mypost"},
         {name : "작성 리뷰 관리",     url:"myreview"},
         {name : "선호 / 비선호 설정", url:"prefer"},
-        {name : "알림 설정",          url:"myalarm"},
+        // {name : "알림 설정",          url:"myalarm"},
         {name : "회원 탈퇴",          url:"mywithdrawal"},
       ],
       clickNum: 0,
