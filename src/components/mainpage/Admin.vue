@@ -22,16 +22,16 @@
                     <div class="admin_unit_title">
                         <span>ID</span>
                         <span>NICKNAME</span>
-                        <span>가입일</span>
-                        <span>최근 로그인</span>
-                        <span>관리메뉴</span>
+                        <span>이메일</span>
+                        <span>이름</span>
+                        <span>관리 메뉴</span>
                     </div>
                     <!-- 반복문 -->
-                    <div class="admin_unit_list">
-                        <div>ID</div>
-                        <div>NICKNAME</div>
-                        <div>가입일</div>
-                        <div>최근 로그인</div>
+                    <div class="admin_unit_list" v-for="(unit,i) in unitList" :key="i">
+                        <div>{{unit.USER_ID}}</div>
+                        <div>{{unit.USER_NICKNAME}}</div>
+                        <div>{{unit.USER_EMAIL}}</div>
+                        <div>{{unit.USER_NAME}}</div>
                         <div>
                             <div class="delete">삭제</div>
                         </div>
@@ -47,11 +47,11 @@
                         <span>관리 메뉴</span>
                     </div>
                     <!-- 반복문 -->
-                    <div class="admin_post_list">
-                        <div>ID</div>
-                        <div>NICKNAME</div>
-                        <div>가입일</div>
-                        <div>최근 로그인</div>
+                    <div class="admin_post_list" v-for="(post,i) in postList" :key="i">
+                        <div>{{post.USER_ID}}</div>
+                        <div>{{post.POST_TITLE}}</div>
+                        <div>{{post.USER_NICKNAME}}</div>
+                        <div>{{post.POST_ESTADATE.substring(0,10)}}</div>
                         <div>
                             <div class="delete">삭제</div>
                         </div>
@@ -68,12 +68,12 @@
                         <span>관리 메뉴</span>
                     </div>
                     <!-- 반복문 -->
-                    <div class="admin_novel_list">
-                        <div>작품명</div>
-                        <div>PJCODE</div>
-                        <div>NOVEL CODE</div>
-                        <div>최근업로드</div>
-                        <div>판매량</div>
+                    <div class="admin_novel_list" v-for="(novel,i) in novelList" :key="i">
+                        <div>{{novel.NOVE_TITLE}}</div>
+                        <div>{{novel.PROJ_CODE}}</div>
+                        <div>{{novel.NOVE_CODE}}</div>
+                        <div>{{novel.NOVE_UPDATE}}</div>
+                        <div>{{novel.NOVE_BOUGHT}}</div>
                         <div>
                             <div class="block">차단</div>
                             <div class="delete">삭제</div>
@@ -109,6 +109,7 @@
 </template>
 
 <script>
+import axios from '../../axios'
 export default {
     name:'admin',
     data(){
@@ -119,11 +120,16 @@ export default {
             banner : 'default',
 
             //눌렀던 값
-            btn_click : 'unit'
+            btn_click : 'unit',
+
+            //db에서 불러온 값
+            unitList: [],
+            postList: [],
+            novelList: []
         }
     },
     methods:{
-        click_btn(btn){
+        async click_btn(btn){
             // 과거에 눌렀던 값
             switch(this.btn_click) {
                 case 'unit' : 
@@ -144,14 +150,26 @@ export default {
                 case 'unit' : 
                     this.unit = 'bold';
                     this.btn_click = 'unit';
+
+                    // 백 통신
+                    this.unitList = await axios.get('/api/admin/allUnitList')
+                    this.unitList = this.unitList.data;
                     break;
                 case 'post' : 
                     this.post = 'bold';
                     this.btn_click = 'post';
+
+                    // 백 통신
+                    this.postList = await axios.get('/api/admin/allPostList')
+                    this.postList = this.postList.data;
                     break;
                 case 'novel' : 
                     this.novel = 'bold';
                     this.btn_click = 'novel';
+
+                    // 백 통신
+                    this.novelList = await axios.get('/api/admin/allNovelList')
+                    this.novelList = this.novelList.data;
                     break;
                 case 'banner' : 
                     this.banner = 'bold';
@@ -159,6 +177,10 @@ export default {
                     break;
             }
         }
+    },
+    async mounted(){
+        this.unitList = await axios.get('/api/admin/allUnitList')
+        this.unitList = this.unitList.data;
     }
 }
 </script>
@@ -279,6 +301,9 @@ export default {
 .admin_novel_list div, .admin_banner_list div{
     flex: 1;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 .block, .delete{
     display: inline-block;
