@@ -1,5 +1,5 @@
 <template>
-<CompostModal v-if="postModal == true" @close="closePostModal"></CompostModal>
+<CompostModal v-if="postModal == true" @close="closePostModal" :pcode="checkList" :ptitle="checkList"></CompostModal>
 <ConfirmModal ref="confirmModal"></ConfirmModal>
     <div v-if="$store.state.currentService == 'C'">
       <div class="RouterView">
@@ -36,10 +36,10 @@
 
             <!-- 글 목록 프레임 -->
             <section class="commu_section">
-              <div class="commu_post" v-for="(p, i) in postList" :key="i" @click="postClick(1, p.POST_CODE)"> <!-- (반복) 글 DB 데이터 반복문 -->
+              <div class="commu_post" v-for="(p, i) in postList" :key="i"> <!-- (반복) 글 DB 데이터 반복문 -->
                 
                 <!-- 글 썸네일 -->
-                <img class="commu_thumb" src="@/assets/imgs/noimage.png" @error="'error'"/>
+                <img class="commu_thumb" src="@/assets/imgs/noimage.png" @error="'error'" @click="postClick(1, p.POST_CODE)"/>
                 <!-- <img class="commu_thumb" src="@/assets/imgs/noimage.png" @error="'error'" v-if="p.titleImg == ''"/> -->
                 <!-- <img class="commu_thumb" :src="p.titleImg" @error="'error'" v-else/> -->
                 
@@ -48,7 +48,7 @@
                   <!-- 글제목 -->
                   <div class="commu_back_title">{{ p.POST_TITLE }}</div>
                   
-                  <div class="commu_back_check"><input type="checkbox" v-model="checkedvalues" value="i"></div>
+                  <div class="commu_back_check"><input type="checkbox" v-model="p.check" value="i" ></div>
                   <!-- (조건) 리뷰 게시판일 경우 별점 -->
                   <!-- <span v-if="$store.state.communityService=='R'" class="commu_str">★★★★★
                     <span class="commu_str_draw">★★★★★</span> 
@@ -264,7 +264,7 @@ export default {
       step : "",
       manage : false,
       postList : [],
-      checkedvalues : [],
+      checkList : [],
       postModal: false,
 
       // 포스트 보기
@@ -332,6 +332,12 @@ export default {
     
   },
   methods: {
+    checkval(pcode,ptitle,bcode){
+      console.log(this.checkedvalues)
+      console.log(pcode)
+      console.log(bcode)
+      console.log(ptitle)
+    },
     loginCheck() {
       if(this.$store.state.userId == null) {
         this.$store.commit('gModalOn',{size : "normal", msg : "로그인이 필요한 기능입니다."});
@@ -348,6 +354,9 @@ export default {
           this.$store.commit('gModalOn',{size : "normal", msg : "해당 게시판 포스트 불러오기 실패"});
         } else {
           this.postList = result.data;
+          for(let i=0;i<this.postList.length;i++){
+            this.postList[i].check=false;
+          }
         }
       })
     },
@@ -517,6 +526,13 @@ export default {
       }
     },
     openPostModal(){
+      this.checkList = null;
+      this.checkList = [];
+      for(let i=0;i<this.postList.length;i++){
+        if(this.postList[i].check){
+          this.checkList.push(this.postList[i].POST_CODE)
+        }
+      }
       this.postModal=true;
     },
     closePostModal(val) {
@@ -599,9 +615,9 @@ export default {
   height: 120px;
   transition: 0.2s all ease;
 }
-.commu_post:hover {
+/* .commu_post:hover {
   opacity: 0.7;
-}
+} */
 .commu_thumb {
   width: 80px;
   height: 80px;

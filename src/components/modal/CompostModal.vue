@@ -3,63 +3,65 @@
     
     <div v-bind:class="{ cafe_modal_frame_big: true }">
       
-            <div class="comm_post_modal_inner">
-                <div class="comm_post_modal_title_inner"><span class="comm_post_modal_title">선택한 게시물을...</span></div>
-            </div>
-            <!-- <div class="modal_content">내용 출력</div> -->
-        <!--메세지를 출력하는 예제-->
-      
+      <div class="comm_post_modal_inner">
+          <div class="comm_post_modal_title_inner"><span class="comm_post_modal_title">선택한 게시물을...</span></div>
+      </div>
+      <!-- <div class="modal_content">내용 출력</div> -->
+    <!--메세지를 출력하는 예제-->
       
       <!--모달을 닫는 버튼과 버튼내 메세지(확인, 취소 등등)-->
       <div class="comm_post_modal_btn_position">
 
         <!--선택한 포스트 출력-->
         <div class="comm_post_modal_cont_box">
-
-                <input type="checkbox"><span>보노보노</span><br>
-                <input type="checkbox"><span>풀꽃도 꽃이다</span><br>
-                <input type="checkbox"><span>나, 있는 그대로 참 좋다</span><br>
-                <input type="checkbox"><span>곰돌이 푸</span><br>
-                <input type="checkbox"><span>오늘처럼 내가 싫었던 날은 없다</span><br>
-                <input type="checkbox"><span>대한민국에서 이런 학교가 있었어?</span><br>
-                <input type="checkbox"><span>나를 보내지마</span><br>
-                <input type="checkbox"><span>나에게 고맙다</span><br>
-                <input type="checkbox"><span>해커스 토익</span><br>
-                <input type="checkbox"><span>꿈꾸는 다락방</span><br>
-                <input type="checkbox"><span>마지막 강의</span><br>
-            
+          
+          <div class="comm_post_modal_check" v-for="(p, i) in titleList" :key="i"><input type="checkbox"><span>{{p}}</span><br></div>
+          
         </div>
             
-            <button class="comm_post_modal_btn_remo">삭제</button>
-            <button class="comm_post_modal_btn_canc" @click="$emit('close', postModal)">취소</button>
+        <button class="comm_post_modal_btn_remo">삭제</button>
+        <button class="comm_post_modal_btn_canc" @click="$emit('close', postModal)">취소</button>
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import axios from '../../axios'
 export default {
-    data() {
-      return{
-        postModal:false,
-      }
+  data() {
+    return{
+      titleList:[],
+      postModal:false
+    }
+  },
+  created(){
+    console.log(this.titleList)
   },
   props: {
-    // createModal : Boolean,
-    modalData : Object,
-
+    pcode: Object,
+    ptitle: Object
+  },
+  async mounted(){
+    console.log(this.pcode)
+    const pcode =  {
+      pcode:this.pcode
+    }
+      this.titleList = await axios.post('/api/community/communityModal',pcode)
+      this.titleList = this.titleList.data;
+    }
   }
-}
+
 </script>
 
 <style>
-.comm_post_modal_cont_box > input[type="checkbox"]{
+.comm_post_modal_check > input[type="checkbox"]{
     position: relative;
     width: 20px;
     height: 20px;
     top: 4px;
 }
-.comm_post_modal_cont_box > span{
+.comm_post_modal_check > span{
     color: white;
     margin-left: 10px;
 }
