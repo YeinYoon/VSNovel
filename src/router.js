@@ -13,7 +13,7 @@ import Register from './components/community/cafe/RegisterCafe.vue';
 // 마이페이지 링크들
 import MyPage from './components/side/Mypage.vue';
 import MyPageMain from './components/mypage/MyPageMain.vue';
-import MyCard from "./components/mypage/MyCard";
+// import MyCard from "./components/mypage/MyCard";
 import MyPost from "./components/mypage/MyPost";
 import Myreview from "./components/mypage/Myreview";
 import Prefer from "./components/mypage/Prefer";
@@ -58,7 +58,7 @@ const routes = [
     component : MyPage,
     children:  [
       { path : 'mymain',        component : MyPageMain },
-      { path : 'mycard',        component : MyCard },
+      // { path : 'mycard',        component : MyCard },
       { path : 'mypost',        component : MyPost },
       { path : 'myreview',      component : Myreview },
       { path : 'prefer',        component : Prefer },

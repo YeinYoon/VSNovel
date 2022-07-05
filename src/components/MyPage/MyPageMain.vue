@@ -162,7 +162,7 @@ export default {
         } else {
           this.newImage = this.$store.state.profileImg;
           this.newNickname = result.data[0].USER_NICKNAME
-          this.newIntro = result.data[0].USER_INTRO
+          this.newIntro = result.data[0].USER_INTRODUCE
           this.preNickname = result.data[0].USER_NICKNAME;
         }
       })
