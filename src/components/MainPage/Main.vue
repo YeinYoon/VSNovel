@@ -7,7 +7,7 @@
           <img src="../../assets/icons/vsn_platform.png" class="icon" />
           <span class="title">Visual Studio Novel</span>
         </div>
-        <div class="userHeader">
+        <div class="userHeader"  v-if="$store.state.userId != null">
           <div>
             <!-- <div class="UH_profilebox"><img :src="this.$store.state.profileImg"></div> -->
             <span class="UH_hello">{{$store.state.userNickname}} 님 반갑습니다</span>
