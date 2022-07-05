@@ -39,14 +39,18 @@
               <div class="commu_post" v-for="(p, i) in postList" :key="i"> <!-- (반복) 글 DB 데이터 반복문 -->
                 
                 <!-- 글 썸네일 -->
-                <img class="commu_thumb" src="@/assets/imgs/noimage.png" @error="'error'" @click="postClick(1, p.POST_CODE)"/>
+                <img class="commu_thumb" src="@/assets/imgs/noimage.png" @error="'error'" v-if="communityService == 'R'" @click="reviewPostClick(1, p.SCOR_CODE)"/>
+                <img class="commu_thumb" src="@/assets/imgs/noimage.png" @error="'error'" v-else @click="postClick(1, p.POST_CODE)"/>
                 <!-- <img class="commu_thumb" src="@/assets/imgs/noimage.png" @error="'error'" v-if="p.titleImg == ''"/> -->
                 <!-- <img class="commu_thumb" :src="p.titleImg" @error="'error'" v-else/> -->
                 
                 <!-- 글 정보 및 제목, 검은 블록 -->
                 <div class="commu_back">
                   <!-- 글제목 -->
-                  <div class="commu_back_title">{{ p.POST_TITLE }}</div>
+          
+                  <div class="commu_back_title" v-if="communityService == 'R'">{{ p.SCOR_TITLE }}</div>
+                  <div class="commu_back_title" v-else>{{ p.POST_TITLE }}</div>
+
                   
                   <div class="commu_back_check"><input type="checkbox" v-model="p.check" value="i" ></div>
                   <!-- (조건) 리뷰 게시판일 경우 별점 -->
@@ -55,9 +59,11 @@
                   </span> -->
 
                   <!-- 글정보 -->
-                  <div class="commu_back_info">
+                  <div class="commu_back_info" v-if="communityService == 'R'">
+                    {{ p.USER_NICKNAME }} | {{p.SCOR_ESTADATE}} 
+                  </div>
+                  <div class="commu_back_info" v-else>
                     {{ p.USER_NICKNAME }} | {{p.POST_ESTADATE}} 
-                    <!-- | {{p.POST_VIEW}} -->
                   </div>
                 </div>
                 <!-- 글 정보 및 제목, 검은 블록 -->
@@ -190,13 +196,13 @@
                 <div class="commu_novel_modal_cancel" @click="novelchoice = false"><img src="@/assets/icons/white/close.png"></div>
                 <div class="commu_novel_modal_search">
                   <div class="commu_novel_modal_img"><img src="@/assets/icons/magnifier.png"></div>
-                  <input type="text">
+                  <input type="text" v-model="novelSearch">
                 </div>
                 <div class="commu_novel_modal_text"><span>작품선택</span></div>
                 <div class="commu_novel_modal_article_frame">
                     <div>
                       <div class="commu_novel_modal_articles">
-                        <img src="" alt="">
+                        <img src="novelImg" alt="">
                       </div>
                     </div>
 
@@ -228,7 +234,7 @@
 
                 <!-- 리뷰 작성 상단부 -->
               <div class="commu_str_back" v-else-if='this.communityService == "R"'>
-                <select class="commu_str_temp_sel">
+                <select class="commu_str_temp_sel" v-model="selectScore">
                   <option class="commu_str_temp_star1" value="1">★</option>
                   <option class="commu_str_temp_star2" value="2">★★</option>
                   <option class="commu_str_temp_star3" value="3">★★★</option>
@@ -258,7 +264,8 @@
           <!-- 게시물 폼 글쓰기 및 수정버튼 -->
           <div class="write_btn_area">
             <div class="write_btn" @click="registerpost">
-              <span v-if="editMode==false" @click="posting()">글쓰기</span>
+              <span v-if="editMode==false && communityService == 'R'" @click="reviewPosting()">글쓰기</span>
+              <span v-if="editMode==false && communityService != 'R'" @click="posting()">글쓰기</span>
               <span v-if="editMode==true" @click="editPost()">수정</span>
             </div>
             <div class="write_cancle_btn" @click="this.viewState = 0"><span>취소</span></div>
@@ -295,7 +302,10 @@ export default {
       step : "",
       manage : false,
       postList : [],
-      novelchoice : false,
+      novelchoice : false, //작품선택 모달창 띄우는 변수
+      novelSearch : '', //작품선택 키워드 검색 변수
+      novelImg: '', //작품선택 모달창 작품이미지 변수
+
       checkedvalues : [],
       checkList : [],
       postModal: false,
@@ -316,6 +326,8 @@ export default {
       // 새글 작성
       inputTitle : "",
       inputContent : "",
+      selectScore : '', //작품선택 별점
+      selectNovel : 1,
 
       // 수정모드
       editMode : false,
@@ -381,21 +393,37 @@ export default {
     },
 
     getPostList(selectService) {
-      axios.post('/api/community/getPostList', {select : selectService})
-      .then((result)=>{
-        if(result.data == "err") {
-          this.$store.commit('gModalOn',{size : "normal", msg : "해당 게시판 포스트 불러오기 실패"});
-        } else {
-          this.postList = result.data;
-          for(let i=0;i<this.postList.length;i++){
-            this.postList[i].check=false;
+      if(selectService == 'R') {
+        axios.post('/api/community/getReviewList', {select : selectService})
+        .then((result)=>{
+          if(result.data == "err") {
+            this.$store.commit('gModalOn',{size : "normal", msg : "해당 게시판 포스트 불러오기 실패"});
+          } else {
+            this.postList = result.data;
+            for(let i=0;i<this.postList.length;i++){
+              this.postList[i].check=false;
+            }
           }
-        }
-      })
+        })
+      }else {
+        axios.post('/api/community/getPostList', {select : selectService})
+        .then((result)=>{
+          if(result.data == "err") {
+            this.$store.commit('gModalOn',{size : "normal", msg : "해당 게시판 포스트 불러오기 실패"});
+          } else {
+            this.postList = result.data;
+            for(let i=0;i<this.postList.length;i++){
+              this.postList[i].check=false;
+            }
+          }
+        })
+      }
+
     },
     postClick(val, postCode) {
       this.viewState = val;
       this.postCode = postCode;
+      
       var data = {
         select : this.$store.state.communityService,
         postCode : postCode
@@ -417,6 +445,31 @@ export default {
       });
 
       this.getCommentList();
+    },
+
+    reviewPostClick(val, scorCode) {
+      this.viewState = val;
+      this.scorCode = scorCode;
+      
+      var data = {
+        scorCode : scorCode
+      }
+      axios.post('/api/community/getReview', data)
+      .then(async (result)=>{
+        console.log('a');
+        if(result.data == "err") {
+          this.$store.commit('gModalOn', {size : "normal", msg : "포스트 데이터 불러오기 실패"});
+        } else {
+          this.title = result.data[0].SCOR_TITLE;
+          this.content = result.data[0].SCOR_CONTENT;
+          this.view = result.data[0].SCOR_VIEW;
+          this.createdDate = result.data[0].SCOR_ESTADATE;
+          this.writerNickname = result.data[0].USER_NICKNAME;
+          this.writerId = result.data[0].USER_ID;
+
+          this.writerProfileImg = await storage.getUserProfileImg(result.data[0].USER_ID);
+        }
+      });   
     },
 
     editorContent(val) {
@@ -449,7 +502,37 @@ export default {
         })
       }
     },
-    novelpick(){
+    reviewPosting() {
+      if(this.$store.state.userId == null) {
+        this.$store.commit('gModalOn', {size : "normal", msg : "로그인이 필요한 기능입니다."});
+        this.$router.push('/signin');
+      } else if(this.inputTitle == '' || this.inputContent == '') {
+        this.$store.commit('gModalOn', {size : "normal", msg : "제목 또는 내용이 비어있습니다."});
+      } else {
+        var data = {
+          selectNovel : this.selectNovel,
+          score : this.selectScore,
+          title : this.inputTitle,
+          content : this.inputContent,
+        }
+        axios.post('/api/community/reviewPosting', data)
+        .then((result)=>{
+          if(result.data == "ok") {
+            this.$store.commit('gModalOn', {size : "normal", msg : "새로운 글이 등록되었습니다."});
+            this.viewState = 0;
+            this.getPostList('R');
+
+            this.inputTitle = "";
+            this.inputContent = "";
+            //this.selectNovel = "";
+            this.selectScore = "";
+          } else {
+            this.$store.commit('gModalOn', {size : "normal", msg : "게시글 등록 실패"});
+          }
+        })
+      }
+    },
+    novelpick() {
       this.novelchoice = true;
     },
 

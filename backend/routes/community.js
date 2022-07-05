@@ -30,7 +30,7 @@ router.post('/getPostList', async(req,res)=>{
         res.send(postList.rows);
     }
 
-}),
+})
 
 // 커뮤니티 포스트 조회
 router.post('/getPost', async (req,res)=>{
@@ -217,5 +217,54 @@ router.post('/communityModal',async(req,res)=>{
     res.send(list)
   })
 
+
+router.post('/getReviewList', async(req,res)=>{
+
+    var ReviewList = await db.execute(`SELECT * FROM tbl_score ORDER BY scor_estadate DESC`);
+    if(ReviewList == "err") {
+        res.send("err");
+    } else {
+        console.log(ReviewList)
+        res.send(ReviewList.rows);
+    }
+
+})
+
+
+router.post('/getReview', async (req,res)=>{
+
+    // 조회수 증가
+    var ReviewUp = await db.execute(`UPDATE tbl_score SET scor_view = scor_view + 1 WHERE scor_code = ${req.body.scorCode}`); 
+    if(ReviewUp == "err") {
+        console.log("조회수 증가 실패...");
+    } else {
+        console.log("해당 포스트에 대한 조회수 증가");
+    }    
+
+    // 본문조회 리뷰
+    var Reviewpost = await db.execute(`SELECT * FROM tbl_score WHERE scor_code = ${req.body.scorCode}`);
+    if(Reviewpost == "err") {
+        console.log("err");
+        res.send("err");
+    } else {
+        console.log(Reviewpost);
+        res.send(Reviewpost.rows);
+    }
+
+})
+
+
+router.post('/reviewPosting', async(req, res)=>{
+
+    var newTime = timestamp.getTimestamp();
+    var ReviewPosting = await db.execute(`INSERT INTO tbl_score VALUES(
+        tbl_score_seq.NEXTVAL, '${req.user.USER_ID}', ${req.body.selectNovel},
+        '${req.body.content}', '${req.body.score}', '${req.body.title}', 0, '${req.user.USER_NICKNAME}', '${newTime}')`);
+    if(ReviewPosting == "err") {
+        res.send("err");
+    } else {
+        res.send("ok");
+    }
+})
 
 module.exports = router;
