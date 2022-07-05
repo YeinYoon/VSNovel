@@ -53,7 +53,7 @@ const routes = [
     children:  [
       { path : 'mymain',        component : MyPageMain },
       { path : 'mycard',        component : MyCard },
-      { path : 'mypost',        component : MyPost },
+      { path : 'mypost',        component : MyPost, props: true },
       { path : 'myreview',      component : Myreview },
       { path : 'prefer',        component : Prefer },
       { path : 'myalarm',       component : MyAlarm },

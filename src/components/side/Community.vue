@@ -290,6 +290,7 @@ export default {
       //댓글 작성(코멘트)
       inputComment : "",
 
+      postData: Array
     };
   },
   components: {
@@ -316,7 +317,24 @@ export default {
         this.getPostList('R');
         break;                
     }
+          
+      if(this.$route.params.BOAR_CODE!=undefined && this.viewState == 1){
+      this.postData = {
+        BOAR_CODE : this.$route.params.BOAR_CODE,
+        POST_CODE: this.$route.params.POST_CODE,
+        POST_TITLE: this.$route.params.POST_TITLE,
+        POST_DATE: this.$route.params.POST_DATE,
+        POST_VIEW : this.$route.params.POST_VIEW,
+        USER_NAME : this.$route.params.USER_NAME,
+        USER_ID : this.$route.params.USER_ID
+      };
+    }
+    console.log(this.$route)
+    console.log(this.$route.params)
+    console.log(this.postData)
     
+    console.log(this.$route.params.BOAR_CODE)
+    console.log("hi")
   },
   computed: {
     communityService: function() {
@@ -328,8 +346,7 @@ export default {
       this.postList = [];
       this.viewState = 0;
       this.getPostList(cng);
-    }
-    
+    },
   },
   methods: {
     loginCheck() {
