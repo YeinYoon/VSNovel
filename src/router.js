@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 // 스토어 
 import Store from './components/side/Store.vue';
+import Admin from './components/mainpage/Admin.vue';
 // 메인페이지
 import Main from './components/mainpage/Main.vue';
 // 커뮤니티
@@ -12,7 +13,7 @@ import Register from './components/community/cafe/RegisterCafe.vue';
 // 마이페이지 링크들
 import MyPage from './components/side/Mypage.vue';
 import MyPageMain from './components/mypage/MyPageMain.vue';
-import MyCard from "./components/mypage/MyCard";
+// import MyCard from "./components/mypage/MyCard";
 import MyPost from "./components/mypage/MyPost";
 import Myreview from "./components/mypage/Myreview";
 import Prefer from "./components/mypage/Prefer";
@@ -32,7 +33,12 @@ const routes = [
   {
     path:"/",
     name: 'Main',
-    component : Main
+    component : Main,
+  },
+  {
+    path : '/admin',
+    name : 'Admin',
+    component:Admin,
   },
   {
     path : "/signin",
@@ -52,8 +58,8 @@ const routes = [
     component : MyPage,
     children:  [
       { path : 'mymain',        component : MyPageMain },
-      { path : 'mycard',        component : MyCard },
-      { path : 'mypost',        component : MyPost, props: true },
+      // { path : 'mycard',        component : MyCard },
+      { path : 'mypost',        component : MyPost },
       { path : 'myreview',      component : Myreview },
       { path : 'prefer',        component : Prefer },
       { path : 'myalarm',       component : MyAlarm },

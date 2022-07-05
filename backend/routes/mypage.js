@@ -8,7 +8,7 @@ const db = require('../database/db');
 // 마이페이지 프로필 불러오기
 router.get('/mypagemain', async(req, res) => {
     console.log(req.user.USER_ID)
-    const result = await db.execute(`SELECT user_nickname, user_intro from tbl_user WHERE user_id = '${req.user.USER_ID}'`)
+    const result = await db.execute(`SELECT user_nickname, user_introduce from tbl_user WHERE user_id = '${req.user.USER_ID}'`)
     if(result == 'err') {
         console.log("sry");
     } else {
@@ -20,7 +20,7 @@ router.get('/mypagemain', async(req, res) => {
 
 // 마이페이지 프로필 설정
 router.post('/updateProfile', async(req,res)=>{
-    const result = await db.execute(`UPDATE tbl_user SET user_nickname = '${req.body.newNickname}', user_intro = '${req.body.newIntro}' WHERE user_id = '${req.user.USER_ID}'`)
+    const result = await db.execute(`UPDATE tbl_user SET user_nickname = '${req.body.newNickname}', user_introduce = '${req.body.newIntro}' WHERE user_id = '${req.user.USER_ID}'`)
     if(result == 'err') {
         res.send("err");
     } else {
@@ -29,27 +29,27 @@ router.post('/updateProfile', async(req,res)=>{
 })
 
 // 결제정보 불러오기
-router.get('/mycard', async (req,res) => {
-    const result = await db.execute(`SELECT USER_CARDNUM from tbl_user WHERE user_id = '${req.user.USER_ID}'`)
-    if(result == 'err') {
-        console.log('sry');
-    } else {
-        res.send(result);
-        console.log(result);
-    }
-})
+// router.get('/mycard', async (req,res) => {
+//     const result = await db.execute(`SELECT USER_CARDNUM from tbl_user WHERE user_id = '${req.user.USER_ID}'`)
+//     if(result == 'err') {
+//         console.log('sry');
+//     } else {
+//         res.send(result);
+//         console.log(result);
+//     }
+// })
 
 // 결제정보 설정
-router.post('/mycard', async(req,res)=>{
-    const result = await db.execute(`UPDATE tbl_user SET user_cardnum = '${req.body.newCard}' WHERE user_id='${req.user.USER_ID}'`)
-    console.log(req.body.newCard);
-    if(result == 'err') {
-        console.log('sry');
-    } else {
-        console.log('good');
-        res.send(result.rows);
-    }
-})
+// router.post('/mycard', async(req,res)=>{
+//     const result = await db.execute(`UPDATE tbl_user SET user_cardnum = '${req.body.newCard}' WHERE user_id='${req.user.USER_ID}'`)
+//     console.log(req.body.newCard);
+//     if(result == 'err') {
+//         console.log('sry');
+//     } else {
+//         console.log('good');
+//         res.send(result.rows);
+//     }
+// })
 
 // 선호비선호 불러오기
 router.get('/getprefer', async(req, res) => {
@@ -93,17 +93,17 @@ router.get('/genre', async(req, res)=>{
 })
 
 // 알람 (미정)
-router.get('/getalarm', async(req, res) => {
-    const result = await db.execute(`select user_noti from tbl_user where user_id = '${req.user.USER_ID}'`)
-    if(result == 'err') {
-        console.log('sry');
-    } else {
-        console.log('good');
-        this.result = result.rows
-        res.send(this.result)
-        console.log(this.result)
-    }
-})
+// router.get('/getalarm', async(req, res) => {
+//     const result = await db.execute(`select user_noti from tbl_user where user_id = '${req.user.USER_ID}'`)
+//     if(result == 'err') {
+//         console.log('sry');
+//     } else {
+//         console.log('good');
+//         this.result = result.rows
+//         res.send(this.result)
+//         console.log(this.result)
+//     }
+// })
 
 // 알람 (미정)
 router.post('/postalarm', async(req, res) => {
