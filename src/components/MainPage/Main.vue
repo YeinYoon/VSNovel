@@ -30,16 +30,19 @@
           <div class="comunity">
             <div class="title">
               <span>
-                커뮤니티
+                인기 게시글
               </span>
             </div>
             <div class="content">
               <!-- 반복문이 들어올 div 클래스 (list) -->
-              <div class="list">
+              <div class="list" v-for="post in topPost" :key="post">
                 <div class="list_title">
-                리스트 제목
+                 {{post.POST_TITLE}}
                 </div>
-                <div class="list_btn">게시판 이름</div>
+                <div class="list_btn" v-if="post.BOAR_CODE == 1">자유</div>
+                <div class="list_btn" v-if="post.BOAR_CODE == 2">작가</div>
+                <div class="list_btn" v-if="post.BOAR_CODE == 3">팀원모집</div>
+                <div class="list_btn" v-if="post.BOAR_CODE == 4">리뷰&추천</div>
               </div>
             </div>
           </div>
@@ -103,9 +106,16 @@ export default {
     this.$store.commit('currentServiceCng', 'M');
   },
   mounted() {
+    axios.get("/api/main/topPost").then(async (result) => {
+      if(result.data != "") {
+        this.topPost = result.data;
+        console.log(this.topPost);
+      }
+    });
   },
   data() {
     return {
+      topPost : [],
     };
   },
 
@@ -295,6 +305,7 @@ button {
   height: 50px;
   background-color: #2c2c2c;
   border-radius: 10px;
+  margin-bottom: 5px;
 }
 .widget .notice .content .list{
   width: 100%;
