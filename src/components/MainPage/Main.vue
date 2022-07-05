@@ -10,12 +10,12 @@
         <div class="userHeader">
           <div>
             <!-- <div class="UH_profilebox"><img :src="this.$store.state.profileImg"></div> -->
-            <span class="UH_hello">유저닉네임유저닉네임유저닉네임</span>
+            <span class="UH_hello">{{$store.state.userNickname}} 님 반갑습니다</span>
             <!-- <span class="UH_recentdate">최근 접속 : 2022-07-02</span> -->
             <div class="UH_funcBtn">
-              <button>내 정보</button>
+              <button @click="$router.push('/mypage/mymain')">내 정보</button>
               <!-- <button>뭔가잇음</button> -->
-              <button>관리자 패널</button>
+              <button v-if="$store.state.userId == 'admin'" @click="$router.push('/admin')">관리자 패널</button>
             </div>
           </div>
         </div>

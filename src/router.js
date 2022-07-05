@@ -1,6 +1,7 @@
 import { createWebHistory, createRouter } from "vue-router";
 // 스토어 
 import Store from './components/side/Store.vue';
+import Admin from './components/mainpage/Admin.vue';
 // 메인페이지
 import Main from './components/mainpage/Main.vue';
 // 커뮤니티
@@ -32,7 +33,12 @@ const routes = [
   {
     path:"/",
     name: 'Main',
-    component : Main
+    component : Main,
+  },
+  {
+    path : '/admin',
+    name : 'Admin',
+    component:Admin,
   },
   {
     path : "/signin",
