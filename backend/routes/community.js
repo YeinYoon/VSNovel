@@ -206,13 +206,10 @@ router.post('/commenting', async(req, res)=>{
 })
 
 router.post('/communityModal',async(req,res)=>{
-    console.log(req.body.pcode)
-    // console.log(req.query.board_num)
     var list = []
     for(let i = 0; i<req.body.pcode.length; i++){
         var modalpost = await db.execute(`SELECT POST_TITLE FROM tbl_post WHERE post_code=${req.body.pcode[i]}`);
-        list.push(modalpost.rows[i].POST_TITLE)
-        console.log(list)
+        list.push(modalpost.rows[0].POST_TITLE)
     }
     res.send(list)
   })
