@@ -1,6 +1,5 @@
 <template>
   <div>
-    
     <div v-bind:class="{ cafe_modal_frame_big: true }">
       
       <div class="comm_post_modal_inner">
@@ -35,15 +34,11 @@ export default {
       postModal:false
     }
   },
-  created(){
-    console.log(this.titleList)
-  },
   props: {
     pcode: Object,
     ptitle: Object
   },
   async mounted(){
-    console.log(this.pcode)
     const pcode =  {
       pcode:this.pcode
     }
