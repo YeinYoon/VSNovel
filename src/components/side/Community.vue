@@ -316,23 +316,41 @@ export default {
         this.getPostList('R');
         break;                
     }
-    console.log(this.$route.params);
-    if(this.$route.params.data.POST_CODE!=undefined && this.$route.params.data.POST_CODE!=null){
+    // console.log(this.$route.params);
+    // if(this.$route.params.data.POST_CODE!=undefined && this.$route.params.data.POST_CODE!=null){
+    //   this.viewState = 1;
+    //   switch(this.$route.params.data.BOAR_CODE){
+    //     case 1: 
+    //       console.log('1');
+    //       this.$store.commit('communityServiceCng', 'F');
+    //       break;
+    //     case 2:
+    //       console.log('2');
+    //       this.$store.commit('communityServiceCng', 'W');
+    //       break;
+    //     case 3:
+    //       console.log('3');
+    //       this.$store.commit('communityServiceCng', 'F');
+    //       break;
+    //   }
+    if(this.$route.params.boar_code != undefined){
       this.viewState = 1;
-      switch(this.$route.params.data.BOAR_CODE){
-        case 1: 
-          console.log('1');
-          this.$store.commit('communityServiceCng', 'F');
-          break;
-        case 2:
-          console.log('2');
-          this.$store.commit('communityServiceCng', 'W');
-          break;
-        case 3:
-          console.log('3');
-          this.$store.commit('communityServiceCng', 'F');
-          break;
+      switch(this.$route.params.boar_code){
+        case '1' : 
+         this.$store.commit('communityServiceCng', 'F');
+         break;
+        case '2' : 
+         this.$store.commit('communityServiceCng', 'W');
+         break;
+        case '3' : 
+         this.$store.commit('communityServiceCng', 'T');
+         break;
+        case '4' : 
+         this.$store.commit('communityServiceCng', 'R');
+         break;
       }
+      //데이터 변경
+      this.postClick(1, this.$route.params.post_code);
     }
   },
   computed: {
