@@ -30,6 +30,16 @@ router.get('/recentNotice', async (req, res)=>{
   }
 })
 
+router.get('/getBanner', async(req, res) => {
+  var result = await db.execute(`SELECT * FROM tbl_banner`);
+  if(result == "err") {
+    console.log("banner's not exist")
+  } else {
+    console.log(result.rows)
+    res.send(result.rows)
+  }
+})
+
 
 // router.get('/getBannerList', async (req, res) => {
 //   const result = await db.execute(`SELECT * FROM tbl_`)

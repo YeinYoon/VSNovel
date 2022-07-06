@@ -91,8 +91,8 @@
                         <span>관리 메뉴</span>
                     </div>
                     <!-- 반복문 -->
-                    <div class="admin_banner_list">
-                        <div>종류</div>
+                    <div class="admin_banner_list" v-for="(a,i) in bannerData" :key="i">
+                        <div>종류{{}}</div>
                         <div>이미지 경로</div>
                         <div>NOVEL CODE</div>
                         <div>POST CODE</div>
@@ -110,7 +110,12 @@
 </template>
 
 <script>
+import axios from 'axios';
+
 export default {
+    created() {
+        this.getBannerData()
+    },
     name:'admin',
     data(){
         return{
@@ -120,7 +125,9 @@ export default {
             banner : 'default',
 
             //눌렀던 값
-            btn_click : 'unit'
+            btn_click : 'unit',
+
+            bannerData : []
         }
     },
     methods:{
@@ -159,6 +166,16 @@ export default {
                     this.btn_click = 'banner';
                     break;
             }
+        },
+        getBannerData() {
+        axios.get('/api/main/getBanner')
+        .then((result) => {
+            if(result.data == "err") {
+                console.log("fail")
+            } else {
+                this.bannerData = result.data
+            }
+        })
         }
     }
 }
