@@ -350,12 +350,6 @@ export default {
     
   },
   methods: {
-    checkval(pcode,ptitle,bcode){
-      console.log(this.checkedvalues)
-      console.log(pcode)
-      console.log(bcode)
-      console.log(ptitle)
-    },
     loginCheck() {
       if(this.$store.state.userId == null) {
         this.$store.commit('gModalOn',{size : "normal", msg : "로그인이 필요한 기능입니다."});
