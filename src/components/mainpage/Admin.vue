@@ -101,6 +101,7 @@
                             <div class="delete">삭제</div>
                         </div>
                     </div>
+                    <div class="banner_add" @click="console.log(123)">+</div>
                 </div>
             </div>
         </div>
@@ -288,5 +289,15 @@ export default {
     height: 30px;
     line-height: 30px;
     margin: 0 2px;
+}
+.banner_add{
+    text-align: center;
+    border-radius: 20px;
+    width: 100%;
+    background-color: #2872f9;
+    height: 30px;
+    line-height: 26px;
+    font-size: 1.5em;
+    font-weight: 900;
 }
 </style>

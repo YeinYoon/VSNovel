@@ -316,7 +316,24 @@ export default {
         this.getPostList('R');
         break;                
     }
-    
+    console.log(this.$route.params.data.POST_CODE);
+    // if(this.$route.params.data.POST_CODE != undefined){
+    //   this.viewState = 1;
+    //   switch(this.$route.params.data.BOAR_CODE){
+    //     case 5 : 
+    //      this.$store.commit('currentServiceCng', 'F');
+    //      break;
+    //     case 6 : 
+    //      this.$store.commit('currentServiceCng', 'W');
+    //      break;
+    //     case 7 : 
+    //      this.$store.commit('currentServiceCng', 'T');
+    //      break;
+    //     case 8 : 
+    //      this.$store.commit('currentServiceCng', 'R');
+    //      break;
+    //   }
+    // }
   },
   computed: {
     communityService: function() {
