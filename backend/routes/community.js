@@ -267,4 +267,26 @@ router.post('/reviewPosting', async(req, res)=>{
     }
 })
 
+// 포스트 수정
+router.post('/reviewEditPost', async (req,res)=>{
+    
+    var result = await db.execute(`UPDATE tbl_score SET scor_title = '${req.body.title}', scor_content = '${req.body.content}', scor_score = '${req.body.score}' WHERE scor_code = '${req.body.scorCode}'`) ;
+    if(result == "err") {
+        res.send("err");
+    } else {
+        res.send("ok");
+    }    
+})
+
+//포스트 삭제
+router.post('/reviewDeletePost', async(req, res)=>{
+
+    var result = await db.execute(`DELETE FROM tbl_score WHERE scor_code = '${req.body.scorCode}'`);
+    if(result == "err") {
+        res.send("err");
+    } else {
+        res.send("ok");
+    }
+})
+
 module.exports = router;

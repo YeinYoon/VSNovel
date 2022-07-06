@@ -199,6 +199,7 @@
                   <input type="text" v-model="novelSearch">
                 </div>
                 <div class="commu_novel_modal_text"><span>작품선택</span></div>
+                <div class="commu_novel_modal_no"><span>작품이 존재하지 않습니다</span></div>
                 <div class="commu_novel_modal_article_frame">
                     <div>
                       <div class="commu_novel_modal_articles">
@@ -216,20 +217,23 @@
 
             <!-- 리뷰게시판 -->
             <div class="commu_review_frame" v-if='this.communityService == "R"'>
-              <div class="commu_novel_choice" @click="novelpick()">
+              <div class="commu_novel_choice" @click="novelchoice = true">
                 <!-- <input type="text" placeholder="여기에 작품명 입력"> -->
                 <div><span>작품선택</span></div>
               </div>
     
               <div class="commu_review_title" v-if="editMode == false"><input type="text" v-model="inputTitle"/></div>
-              <div class="commu_review_title" v-if='communityService == R && editMode == true'><input type="text" v-model="inputTitle"/></div>
+              <div class="commu_review_title" v-if='editMode == true'><input type="text" v-model="inputTitle"/></div>
 
               <!-- 리뷰 수정 상단부 (제목, 별점) -->
-              <div class="commu_str_back_update" v-if='editMode == true && this.communityService == "R"'>
-                <span class="str_first">
-                  <span :style="str_draw">★★★★★</span>
-                  <input type="range" class="str_range">
-                </span>
+              <div class="commu_str_back" v-if='editMode == true && this.communityService == "R"'>
+                <select class="commu_str_temp_sel" v-model="selectScore">
+                  <option class="commu_str_temp_star1" value="1">★</option>
+                  <option class="commu_str_temp_star2" value="2">★★</option>
+                  <option class="commu_str_temp_star3" value="3">★★★</option>
+                  <option class="commu_str_temp_star4" value="4">★★★★</option>
+                  <option class="commu_str_temp_star5" value="5">★★★★★</option>
+                </select>
               </div>
 
                 <!-- 리뷰 작성 상단부 -->
@@ -319,6 +323,8 @@ export default {
       writerId : "",
       writerProfileImg : "",
       createdDate : "",
+      inputScore : "",
+      inputNovel : "",
 
       // 댓글 보기
       commentList : [],
@@ -326,7 +332,7 @@ export default {
       // 새글 작성
       inputTitle : "",
       inputContent : "",
-      selectScore : '', //작품선택 별점
+      selectScore : "1", //작품선택 별점
       selectNovel : 1,
 
       // 수정모드
@@ -532,14 +538,19 @@ export default {
         })
       }
     },
-    novelpick() {
-      this.novelchoice = true;
-    },
 
     edit() {
-      this.editMode = true;
-      this.viewState = 2;
-      this.inputTitle = this.title;
+      if(this.communityService == 'R'){
+        this.editMode = true;
+        this.viewState = 2;
+        this.inputTitle = this.title;
+        this.inputScore = this.selectScore;
+        this.inputNovel = this.selectNovel;
+      }else {
+        this.editMode = true;
+        this.viewState = 2;
+        this.inputTitle = this.title;
+      }
     },
     async getPreContent() {
       await this.edit();
@@ -547,27 +558,53 @@ export default {
     },
 
     editPost() {
-      var data = {
-        postCode : this.postCode,
-        title : this.inputTitle,
-        content : this.inputContent,
-        select : this.$store.state.communityService
-      }
-      console.log(data);
-
-      axios.post('/api/community/editPost', data)
-      .then((result)=>{
-        if(result.data == "ok") {
-          this.$store.commit('gModalOn', {size : "normal", msg : "수정되었습니다."});
-          this.postClick(1, this.postCode);
-
-          this.inputTitle = "";
-          this.inputContent = "";
-          this.editMode = false;
-        } else {
-          this.$store.commit('gModalOn', {size : "normal", msg : "게시글 수정 실패"});
+      if(this.communityService == 'R'){
+        var data = {
+          scorCode : this.scorCode,
+          title : this.inputTitle,
+          content : this.inputContent,
+          selectNovel : this.selectNovel,
+          score : this.selectScore,
         }
-      })            
+        console.log(data);
+
+        axios.post('/api/community/reviewEditPost', data)
+        .then((result)=>{
+          if(result.data == "ok") {
+            this.$store.commit('gModalOn', {size : "normal", msg : "수정되었습니다."});
+            this.reviewPostClick(1, this.scorCode);
+
+            this.inputTitle = "";
+            this.inputContent = "";
+            this.editMode = false;
+          } else {
+            this.$store.commit('gModalOn', {size : "normal", msg : "게시글 수정 실패"});
+          }
+        })
+      }else {
+        data = {
+          postCode : this.postCode,
+          title : this.inputTitle,
+          content : this.inputContent,
+          select : this.$store.state.communityService
+        }
+        console.log(data);
+
+        axios.post('/api/community/editPost', data)
+        .then((result)=>{
+          if(result.data == "ok") {
+            this.$store.commit('gModalOn', {size : "normal", msg : "수정되었습니다."});
+            this.postClick(1, this.postCode);
+
+            this.inputTitle = "";
+            this.inputContent = "";
+            this.editMode = false;
+          } else {
+            this.$store.commit('gModalOn', {size : "normal", msg : "게시글 수정 실패"});
+          }
+        })
+      }
+            
     },
 
     async deletePost() {
@@ -580,20 +617,37 @@ export default {
 
       if(result == true) {
         console.log(result);
-        var data = {
-          select : this.$store.state.communityService,
-          postCode : this.postCode
+        if(this.communityService == 'R'){
+          var data = {
+            scorCode : this.scorCode
+          }
+
+          axios.post('/api/community/reviewDeletePost', data)
+          .then((result)=>{
+            if(result.data == "err") {
+              this.$store.commit('gModalOn', {size : "normal", msg : "게시글 삭제 실패"});
+            } else {
+              this.viewState = 0;
+              this.getPostList('R');
+            }
+          })
+        }else {
+          data = {
+            select : this.$store.state.communityService,
+            postCode : this.postCode
+          }
+
+          axios.post('/api/community/deletePost', data)
+          .then((result)=>{
+            if(result.data == "err") {
+              this.$store.commit('gModalOn', {size : "normal", msg : "게시글 삭제 실패"});
+            } else {
+              this.viewState = 0;
+              this.getPostList(this.$store.state.communityService);
+            }
+          })          
         }
 
-        axios.post('/api/community/deletePost', data)
-        .then((result)=>{
-          if(result.data == "err") {
-            this.$store.commit('gModalOn', {size : "normal", msg : "게시글 삭제 실패"});
-          } else {
-            this.viewState = 0;
-            this.getPostList(this.$store.state.communityService);
-          }
-        })
       }
     },
 
@@ -939,12 +993,10 @@ export default {
     bottom: 20px;
     margin-top: 10px;
     width: 100%;
-    /* height: 50px; */
 }
 .vote_btn_ok {
   display: inline-block;
   width : 100px;
-  /* line-height: 50px; */
   text-align: center;
   margin: 0 10px;
   background-color: #2872f9;
@@ -1118,6 +1170,14 @@ export default {
   color:white;
   font-size: 1.5em;
   top: 50px;
+}
+.commu_novel_modal_no {
+  color:white;
+  position: absolute;
+  margin-top: 10px;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%);
 }
 .commu_novel_modal_article_frame{
   position: absolute;
