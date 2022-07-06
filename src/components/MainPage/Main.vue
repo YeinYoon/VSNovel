@@ -30,16 +30,19 @@
           <div class="comunity">
             <div class="title">
               <span>
-                커뮤니티
+                인기 게시글
               </span>
             </div>
             <div class="content">
               <!-- 반복문이 들어올 div 클래스 (list) -->
-              <div class="list">
-                <div class="list_title">
-                리스트 제목
-                </div>
-                <div class="list_btn">게시판 이름</div>
+              <div class="list" v-for="post in topPost" :key="post" @click="communityEvent(post)">
+                  <div class="list_title">
+                    {{post.POST_TITLE}}
+                  </div>
+                  <div class="list_btn" v-if="post.BOAR_CODE == 1">자유</div>
+                  <div class="list_btn" v-if="post.BOAR_CODE == 2">작가</div>
+                  <div class="list_btn" v-if="post.BOAR_CODE == 3">팀원모집</div>
+                  <div class="list_btn" v-if="post.BOAR_CODE == 4">리뷰&추천</div>
               </div>
             </div>
           </div>
@@ -52,11 +55,13 @@
             </div>
             <div class="content">
               <!-- 반복문이 들어올 div 클래스 (list) -->
-              <div class="list">
+              <div class="list" v-for="notice in recentNotice" :key="notice">
                 <div class="list_title">
-                리스트 제목
+                 {{notice.POST_TITLE}}
                 </div>
-                <div class="list_btn">게시판 이름</div>
+                <div class="list_btn" v-if="notice.BOAR_CODE == 5">업데이트</div>
+                <div class="list_btn" v-if="notice.BOAR_CODE == 6">이벤트</div>
+                <div class="list_btn" v-if="notice.BOAR_CODE == 7">정책</div>
               </div>
             </div>
           </div>
@@ -101,19 +106,38 @@ export default {
     });
     this.$store.commit('sideBarOff');
     this.$store.commit('currentServiceCng', 'M');
+    // 메인화면 인기 게시글 통신
+    axios.get("/api/main/topPost").then(async (result) => {
+      if(result.data != "") {
+        this.topPost = result.data;
+        console.log(this.topPost);
+      }
+    });
+    // 메인화면 공지사항 통신
+    axios.get("/api/main/recentNotice").then(async (result) => {
+      if(result.data != "") {
+        this.recentNotice = result.data;
+        console.log(this.recentNotice);
+      }
+    });
   },
   mounted() {
   },
+  methods:{
+    communityEvent(post){
+      console.log(post);
+      this.$router.push({name:'Community', params : {data : post}})
+    }
+  },
   data() {
     return {
+      topPost : [],
+      recentNotice : [],
     };
   },
 
   components: {
     SwiperCarousel: SwiperCarouselVue,
-  },
-  methods: {
-    // 스토어 게시물 이동 함수
   },
 };
 </script>
@@ -295,12 +319,14 @@ button {
   height: 50px;
   background-color: #2c2c2c;
   border-radius: 10px;
+  margin-bottom: 5px;
 }
 .widget .notice .content .list{
   width: 100%;
   height: 50px;
   background-color: #2c2c2c;
   border-radius: 10px;
+  margin-bottom: 5px;
 }
 /* 반복문 안의 제목 */
 .widget .comunity .content .list_title,
