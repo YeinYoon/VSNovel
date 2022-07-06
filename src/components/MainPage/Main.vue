@@ -55,7 +55,7 @@
             </div>
             <div class="content">
               <!-- 반복문이 들어올 div 클래스 (list) -->
-              <div class="list" v-for="notice in recentNotice" :key="notice">
+              <div class="list" v-for="notice in recentNotice" :key="notice" @click="noticeEvent(notice)">
                 <div class="list_title">
                  {{notice.POST_TITLE}}
                 </div>
@@ -126,7 +126,17 @@ export default {
   methods:{
     communityEvent(post){
       console.log(post);
-      this.$router.push({name:'Community', params : {data : post}})
+      this.$router.push({name:'Community', params : {
+        boar_code : post.BOAR_CODE,
+        post_code : post.POST_CODE,
+        }})
+    },
+    noticeEvent(post){
+      console.log(post);
+      this.$router.push({name:'Notice', params : {
+        boar_code : post.BOAR_CODE,
+        post_code : post.POST_CODE,
+        }})
     }
   },
   data() {

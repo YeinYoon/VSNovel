@@ -157,6 +157,23 @@ export default {
         this.$store.commit('sideBarOn');
         this.$store.commit('currentServiceCng', 'N');
         this.getNoticeList('U');
+
+      if(this.$route.params.boar_code != undefined){
+      this.viewState = 1;
+      switch(this.$route.params.boar_code){
+        case '5' : 
+         this.$store.commit('noticeServiceCng', 'U');
+         break;
+        case '6' : 
+         this.$store.commit('noticeServiceCng', 'E');
+         break;
+        case '7' : 
+         this.$store.commit('noticeServiceCng', 'P');
+         break;
+      }
+      //데이터 변경
+      this.postClick(1, this.$route.params.post_code);
+    }
     },
     computed: {
         noticeService: function() {
