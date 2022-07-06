@@ -290,7 +290,6 @@ export default {
       //댓글 작성(코멘트)
       inputComment : "",
 
-      postData: Array
     };
   },
   components: {
@@ -317,24 +316,24 @@ export default {
         this.getPostList('R');
         break;                
     }
-          
-      if(this.$route.params.BOAR_CODE!=undefined && this.viewState == 1){
-      this.postData = {
-        BOAR_CODE : this.$route.params.BOAR_CODE,
-        POST_CODE: this.$route.params.POST_CODE,
-        POST_TITLE: this.$route.params.POST_TITLE,
-        POST_DATE: this.$route.params.POST_DATE,
-        POST_VIEW : this.$route.params.POST_VIEW,
-        USER_NAME : this.$route.params.USER_NAME,
-        USER_ID : this.$route.params.USER_ID
-      };
+    console.log(this.$route.params);
+    if(this.$route.params.data.POST_CODE!=undefined && this.$route.params.data.POST_CODE!=null){
+      this.viewState = 1;
+      switch(this.$route.params.data.BOAR_CODE){
+        case 1: 
+          console.log('1');
+          this.$store.commit('communityServiceCng', 'F');
+          break;
+        case 2:
+          console.log('2');
+          this.$store.commit('communityServiceCng', 'W');
+          break;
+        case 3:
+          console.log('3');
+          this.$store.commit('communityServiceCng', 'F');
+          break;
+      }
     }
-    console.log(this.$route)
-    console.log(this.$route.params)
-    console.log(this.postData)
-    
-    console.log(this.$route.params.BOAR_CODE)
-    console.log("hi")
   },
   computed: {
     communityService: function() {

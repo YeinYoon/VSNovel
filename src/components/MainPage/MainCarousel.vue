@@ -6,7 +6,7 @@
     :autoplay="sec"
     :pauseAutoplayOnHover="status"
   >
-    <slide v-for="slide in datas" :key="slide">
+    <slide v-for="slide in bannerData" :key="slide">
       <div class="carousel__item"><img :src="slide.link"></div>
     </slide>
 
@@ -28,7 +28,7 @@ export default {
   data() {
     return {
       datas: data,
-      a31: 'hi',
+      bannerData: null,
       status : true, // 마우스 가져다 댔을 경우 사진이 안넘어가요
       sec : 2500, //사진 넘어가는 시간,
       breakpoints: {
@@ -57,10 +57,15 @@ export default {
     }
   },
   created(){
-    axios.get('api/main/carousel').then((result)=>{
-        this.a31 = result.data;
-        console.log(this.a31);
-    }).catch(()=>{console.log('hi')}).finally(()=>{console.log('fin')})
+    axios.get('/api/main/carousel')
+    .then((result) => {
+      if(result.data == "err") {
+        console.log("fail")
+      } else {
+        this.bannerData = result.data;
+        console.log(this.bannerData)
+      }
+    })
   }
 };
 </script>

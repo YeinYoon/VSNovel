@@ -86,6 +86,7 @@ const store = createStore({
         },
 
         communityServiceCng(state, val) {
+            console.log('스토어 왔음');
             state.communityService = val;
         },
 

@@ -64,12 +64,10 @@ export default {
       // console.log(this.postList[i].BOAR_CODE.forEach(function(element) {
       //   console.log(element)
       // }))
-      console.log(this.postData[i].BOAR_CODE)
-      console.log(this.postData[i].POST_CODE)
       this.$router.push({
           name: 'Community',
           params: {
-            POST_CODE: this.postData[i].POST_CODE
+            data : this.postData[i]
           }
           })
       // if(this.postList[i].BOAR_CODE == 1) {
