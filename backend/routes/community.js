@@ -215,7 +215,18 @@ router.post('/communityModal',async(req,res)=>{
         console.log(list)
     }
     res.send(list)
-  })
+})
+
+router.post('/novelSearch',async(req,res)=>{
+    var result = await db.execute(`SELECT nove_path, nove_title FROM tbl_novel where nove_title like '${req.body.novelSearch}%' 
+    AND nove_code = (SELECT nove_code FROM tbl_possession WHERE USER_ID = '${req.user.USER_ID}')`);
+
+    if(result == "err") {
+        res.send("err");
+    } else {
+        res.send(result.rows);
+    }
+})
 
 
 router.post('/getReviewList', async(req,res)=>{

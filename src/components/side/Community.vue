@@ -193,21 +193,20 @@
             작은 컴포넌트를 삽입할수도 있따.-->
             <div class="commu_novel_modal_opacity"></div>
               <div class="commu_novel_modal">
-                <div class="commu_novel_modal_cancel" @click="novelchoice = false"><img src="@/assets/icons/white/close.png"></div>
+                <div class="commu_novel_modal_cancel" @click="novelCancel()"><img src="@/assets/icons/white/close.png"></div>
                 <div class="commu_novel_modal_search">
                   <div class="commu_novel_modal_img"><img src="@/assets/icons/magnifier.png"></div>
                   <input type="text" v-model="novelSearch">
                 </div>
                 <div class="commu_novel_modal_text"><span>작품선택</span></div>
-                <div class="commu_novel_modal_no"><span>작품이 존재하지 않습니다</span></div>
-                <div class="commu_novel_modal_article_frame">
+                <div class="commu_novel_modal_article_frame" v-if="novelIsON == true">
                     <div>
                       <div class="commu_novel_modal_articles">
                         <img src="novelImg" alt="">
                       </div>
                     </div>
-
                 </div>
+                <div class="commu_novel_modal_no" v-if="novelIsOn == false"><span>작품이 존재하지 않습니다</span></div>
             </div>
         </div>
 
@@ -309,6 +308,8 @@ export default {
       novelchoice : false, //작품선택 모달창 띄우는 변수
       novelSearch : '', //작품선택 키워드 검색 변수
       novelImg: '', //작품선택 모달창 작품이미지 변수
+      novelIsON: false, //모달 검색시 작품이 있는지 없는지 알 수 있는 변수
+      novelSearchList : [], //모달 검색시 나오는 정보 리스트 
 
       checkedvalues : [],
       checkList : [],
@@ -379,6 +380,10 @@ export default {
       this.postList = [];
       this.viewState = 0;
       this.getPostList(cng);
+    },
+
+    novelSearch() {
+      this.novelPick();
     }
     
   },
@@ -481,6 +486,28 @@ export default {
     editorContent(val) {
       this.inputContent = val;
     },
+
+    novelPick() {
+      var data = {
+        novelSearch : this.novelSearch
+      }
+      axios.post('/api/community/novelSearch', data)
+      .then(async (result)=>{
+          if(result.data == "err") {
+            console.log('err');
+          } else {
+            console.log('ok');
+            console.log(result.data);
+            this.novelSearchList = result.data;
+            console.log(this.novelSearchList);
+          }
+        })
+    },
+
+    novelCancel() {
+      this.novelchoice = false;
+    },
+
     posting() {
       if(this.$store.state.userId == null) {
         this.$store.commit('gModalOn', {size : "normal", msg : "로그인이 필요한 기능입니다."});
