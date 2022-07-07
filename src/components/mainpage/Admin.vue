@@ -91,17 +91,17 @@
                         <span>관리 메뉴</span>
                     </div>
                     <!-- 반복문 -->
-                    <div class="admin_banner_list" v-for="(a,i) in bannerData" :key="i">
-                        <div>종류{{}}</div>
-                        <div>이미지 경로</div>
-                        <div>NOVEL CODE</div>
-                        <div>POST CODE</div>
-                        <div>게시일자</div>
+                    <div class="admin_banner_list" v-for="(banner,i) in bannerData" :key="i">
+                        <div><span v-if="banner.NOVE_CODE">소설 </span><span v-if="banner.POST_CODE">이벤트</span></div>
+                        <div style="overflow:hidden">{{banner.BANN_IMG}}</div>
+                        <div v-if="banner.NOVE_CODE">{{banner.NOVE_CODE}}</div><div v-else>null</div>
+                        <div v-if="banner.POST_CODE">{{banner.POST_CODE}}</div><div v-else>null</div>
+                        <div>{{banner.BANN_DATE.substring(0,10)}}</div>
                         <div>
-                            <div class="delete">삭제</div>
+                            <div class="delete" @click="deleteBtn(i)">삭제</div>
                         </div>
                     </div>
-                    <div class="banner_add" @click="console.log(123)">+</div>
+                    <div class="banner_add" @click="addBtn()">+</div>
                 </div>
             </div>
         </div>
@@ -167,6 +167,7 @@ export default {
                     break;
             }
         },
+        
         getBannerData() {
         axios.get('/api/main/getBanner')
         .then((result) => {
@@ -176,6 +177,32 @@ export default {
                 this.bannerData = result.data
             }
         })
+        },
+
+        deleteBtn(i) {
+            var bannData = {
+                BANN_CODE : this.bannerData[i].BANN_CODE,
+            }
+            axios.post('/api/main/deleteBanner', bannData)
+            .then((result) => {
+                if(result.data == "err") {
+                    console.log("fail")
+                } else {
+                    console.log(result)
+                    this.getBannerData()
+                }
+            })
+        },
+
+        addBtn() {
+            axios.post('/api/main/addBanner')
+            .then((result) => {
+                if(result.data == "err") {
+                    console.log("fail")
+                } else {
+                    console.log(result.data)
+                }
+            })
         }
     }
 }

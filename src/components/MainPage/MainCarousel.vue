@@ -7,7 +7,7 @@
     :pauseAutoplayOnHover="status"
   >
     <slide v-for="slide in bannerData" :key="slide">
-      <div class="carousel__item"><img :src="slide.link"></div>
+      <div class="carousel__item"><img :src="slide.BANN_IMG" @click="bannerBtn()"></div>
     </slide>
 
     <template #addons>
@@ -54,7 +54,7 @@ export default {
   methods:{
     openSlide(link){
       this.$store.commit('gModalOn', {msg:"hi", bg : link, size : "ad"});
-    }
+    },
   },
   created(){
     axios.get('/api/main/carousel')
@@ -66,7 +66,7 @@ export default {
         console.log(this.bannerData)
       }
     })
-  }
+  },
 };
 </script>
 <style>
