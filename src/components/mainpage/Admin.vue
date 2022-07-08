@@ -33,7 +33,7 @@
                         <div>{{unit.USER_EMAIL}}</div>
                         <div>{{unit.USER_NAME}}</div>
                         <div>
-                            <div class="delete">삭제</div>
+                            <div class="delete" @click="delUnit(unit.USER_ID)">삭제</div>
                         </div>
                     </div>
                 </div>
@@ -53,7 +53,7 @@
                         <div>{{post.USER_NICKNAME}}</div>
                         <div>{{post.POST_ESTADATE.substring(0,10)}}</div>
                         <div>
-                            <div class="delete">삭제</div>
+                            <div class="delete" @click="delPost(post.POST_CODE)">삭제</div>
                         </div>
                     </div>
                 </div>
@@ -76,7 +76,7 @@
                         <div>{{novel.NOVE_BOUGHT}}</div>
                         <div>
                             <div class="block">차단</div>
-                            <div class="delete">삭제</div>
+                            <div class="delete" @click="delNovel(novel.NOVE_CODE)">삭제</div>
                         </div>
                     </div>
                 </div>
@@ -176,6 +176,26 @@ export default {
                     this.btn_click = 'banner';
                     break;
             }
+        },
+        async delUnit(unitData){
+            const unitDatas = {
+                "unitId":unitData
+            }
+            const result = await axios.post('/api/admin/delUnit', unitDatas)
+            console.log(result)
+        },
+        async delPost(postData){
+            const postDatas = {
+                "postCd":postData
+            }
+            await axios.post('/api/admin/delPost', postDatas)
+            this.$router.go();
+        },
+        async delNovel(novelData){
+            const novelDatas = {
+                "novelCd":novelData
+            }
+            await axios.post('/api/admin/delNovel', novelDatas)
         }
     },
     async mounted(){

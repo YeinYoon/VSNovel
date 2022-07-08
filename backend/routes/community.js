@@ -214,5 +214,4 @@ router.post('/communityModal',async(req,res)=>{
     res.send(list)
   })
 
-
 module.exports = router;

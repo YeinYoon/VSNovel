@@ -38,4 +38,22 @@ router.get('/allNovelList', async (req,res)=>{
     }
 })
 
+router.post('/delUnit', async (req,res)=>{
+    console.log(req.body.unitId)
+    const result = await db.execute(`DELETE FROM tbl_user WHERE USER_ID = ${req.body.unitId}`);
+    res.send(result)
+})
+
+router.post('/delPost', async (req,res)=>{
+    console.log(req.body.postCd)
+    const result = await db.execute(`DELETE FROM tbl_post WHERE POST_CODE = ${req.body.postCd}`);
+    res.send(result)
+})
+
+router.post('/delNovel', async (req,res)=>{
+    console.log(req.body.novelCd)
+    const result = await db.execute(`DELETE FROM tbl_novel WHERE NOVE_CODE = ${req.body.novelCd}`);
+    res.send(result)
+})
+
 module.exports = router;
