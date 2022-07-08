@@ -158,6 +158,22 @@ export default {
         this.$store.commit('currentServiceCng', 'N');
         this.getNoticeList('U');
 
+      if(this.$route.params.BOAR_CODE != undefined) {
+        this.viewState =1;
+        switch(this.$route.params.BOAR_CODE) {
+          case '5' :
+            this.$store.commit('noticeServiceCng', 'U')
+            break;
+          case '6' :
+            this.$store.commit('noticeServiceCng', 'E')
+            break;
+          case '7' :
+            this.$store.commit('noticeServiceCng', 'P')
+            break;
+        }
+        this.postClick(1, this.$route.params.POST_CODE);
+      }
+
       if(this.$route.params.boar_code != undefined){
       this.viewState = 1;
       switch(this.$route.params.boar_code){
