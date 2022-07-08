@@ -101,16 +101,20 @@
                             <div class="delete">삭제</div>
                         </div>
                     </div>
-                    <div class="banner_add" @click="console.log(123)">+</div>
+                    <div class="banner_add" @click="modalOpen()">+</div>
                 </div>
             </div>
+        </div>
+        <div v-if="modal">
+            <AdminModal @modal="modalOpen()"/>
         </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from '../../axios'
+import AdminModal from '../modal/AdminModal'
+import axios from '../../axios.js'
 export default {
     name:'admin',
     data(){
@@ -126,8 +130,14 @@ export default {
             //db에서 불러온 값
             unitList: [],
             postList: [],
-            novelList: []
+            novelList: [],
+
+            // 모달 오픈
+            modal : false,
         }
+    },
+    components:{
+        AdminModal,
     },
     methods:{
         async click_btn(btn){
@@ -177,12 +187,17 @@ export default {
                     this.btn_click = 'banner';
                     break;
             }
+        },
+        modalOpen(){
+            if(this.modal) 
+                this.modal = false;
+            else this.modal = true;
         }
     },
     async mounted(){
         this.unitList = await axios.get('/api/admin/allUnitList')
         this.unitList = this.unitList.data;
-    }
+    },
 }
 </script>
 
@@ -289,6 +304,9 @@ export default {
 .admin_novel_title span,.admin_banner_title span{
     flex: 1;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 /* 반복문 리스트 */
 .admin_unit_list, .admin_post_list, 
