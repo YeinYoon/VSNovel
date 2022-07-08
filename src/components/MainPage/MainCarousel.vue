@@ -7,7 +7,7 @@
     :pauseAutoplayOnHover="status"
   >
     <slide v-for="slide in bannerData" :key="slide">
-      <div class="carousel__item"><img :src="slide.BANN_IMG" @click="bannerBtn()"></div>
+      <div class="carousel__item"><img :src="slide.BANN_IMG" @click="bannerBtn(slide)"></div>
     </slide>
 
     <template #addons>
@@ -21,14 +21,12 @@
 // If you are using PurgeCSS, make sure to whitelist the carousel CSS classes
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
-import data from "../../assets/DataJs/data.js";
 import axios from '../../axios';
 export default {
   name: "App",
   data() {
     return {
-      datas: data,
-      bannerData: null,
+      bannerData: [],
       status : true, // 마우스 가져다 댔을 경우 사진이 안넘어가요
       sec : 2500, //사진 넘어가는 시간,
       breakpoints: {
@@ -51,11 +49,6 @@ export default {
     Pagination,
     Navigation,
   },
-  methods:{
-    openSlide(link){
-      this.$store.commit('gModalOn', {msg:"hi", bg : link, size : "ad"});
-    },
-  },
   created(){
     axios.get('/api/main/carousel')
     .then((result) => {
@@ -67,6 +60,20 @@ export default {
       }
     })
   },
+  methods:{
+    openSlide(link){
+      this.$store.commit('gModalOn', {msg:"hi", bg : link, size : "ad"});
+    },
+    bannerBtn(slide) {
+      if(slide.POST_CODE != null) {
+      this.$router.params({
+        name: 'Notice'
+      })
+      }
+    },
+  },
+  
+  
 };
 </script>
 <style>
