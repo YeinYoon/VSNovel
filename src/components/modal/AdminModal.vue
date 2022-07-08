@@ -13,7 +13,7 @@
         </div>
         <div>
           <div class="cafe_banner">
-            
+            <input type="file" name="file" id="file">
           </div>
         </div>
       </div>
@@ -42,6 +42,12 @@ export default {
   props: {
   },
   methods: {
+    ch(){
+      ("#file").on('change',function(){
+      var fileName = ("#file").val();
+      (".upload-name").val(fileName);
+});
+    }
   },
 };
 </script>
@@ -64,6 +70,19 @@ export default {
   height: 150px;
   width: 95%;
   margin: 20px 2.5% 0px 2.5%; 
+  padding: 15px 5px;
+}
+input[type=file]::file-selector-button {
+  width: 150px;
+  height: 30px;
+  background: #fff;
+  border: 1px solid rgb(77,77,77);
+  border-radius: 10px;
+  cursor: pointer;
+}
+input[type=file]::file-selector-button:hover{
+    background: rgb(77,77,77);
+    color: #fff;
 }
 .cafe_modal_frame_big {
   position: fixed;
