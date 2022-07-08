@@ -33,7 +33,7 @@
                 <!-- 공지사항 목록 -->
                 <section class="notice_section">
                     <div class="strong_notice_post">
-                        <div v-for="(n, i) in noticeList" :key="i" @click="postClick(1, n.POST_CODE)">
+                        <div v-for="(n, i) in noticeList" :key="i" @click="postClick(1, n.POST_CODE,n)">
                             <div class="strong_notice">
                                 <div class="notice_back_title"><span>{{ n.POST_TITLE }}</span></div>            <!-- 제목 -->
                                 <div class="notice_back_content"><span v-html="n.POST_CONTENT"></span></div>  <!-- 내용 -->
