@@ -8,11 +8,11 @@
       </div>
     </div>
   <div class="review_section">
-    <div class="review_work_list" v-for="(r, i) in reviewList" :key="i">
+    <div class="review_work_list" v-for="(r, i) in reviewList" :key="i" >
       <div class="review_work_list_back">
           <img class="review_img_box" src="@/assets/imgs/noimage.png"/>
         <!-- <img class="review_list_img" :src="`${review.POST_COVER}`"/> -->
-        <div class="review_work_list_con">
+        <div class="review_work_list_con" @click="reviewBtn(i)">
             <span class="review_list_title">{{r.POST_TITLE}}</span>
             <!-- <span class="list_team">{{r.NOVE_TITLE}}</span> -->
             <div class="review_list_info">
@@ -50,6 +50,16 @@ export default {
         }
       })
     },
+    reviewBtn(i) {
+      this.$router.push({
+        name: 'Community',
+        params: {
+          REVIEW_CODE : this.reviewList[i].BOAR_CODE,
+          POST_CODE : this.reviewList[i].POST_CODE
+          }
+      })
+      console.log(this.reviewList)
+    }
   }
 }
 </script>

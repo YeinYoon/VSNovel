@@ -317,8 +317,7 @@ export default {
         break;                
     }
 
-    console.log(this.$route.params.BOAR_CODE);
-    if(this.$route.params.BOAR_CODE!=undefined && this.$route.params.BOAR_CODE!=null){
+    if(this.$route.params.BOAR_CODE!=undefined){
       this.viewState = 1;
       switch(this.$route.params.BOAR_CODE){
         case "1": 
@@ -339,6 +338,13 @@ export default {
           break;
       }
       this.postClick(1, this.$route.params.POST_CODE);
+    }
+
+    if(this.$route.params.REVIEW_CODE != undefined) {
+      this.viewState = 1;
+      this.$route.params.REVIEW_CODE = 4
+      this.$store.commit('communityServiceCng', 'R')
+      this.postClick(1, this.$route.params.POST_CODE)
     }
     
     if(this.$route.params.boar_code != undefined){
