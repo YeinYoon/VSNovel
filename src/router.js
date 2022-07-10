@@ -25,6 +25,7 @@ import Library from './components/side/Library.vue';
 import Notice from './components/side/Notice.vue';
 
 import Login from './components/auth/Login.vue';
+import KakaoLogin from './components/auth/KakaoLogin.vue'
 import SignUp from './components/auth/SignUp.vue';
 import FindAcc from './components/auth/FindAcc.vue';
 import Engine from './components/engine/Engine.vue';
@@ -45,6 +46,11 @@ const routes = [
   {
     path : "/signin",
     component : Login,
+    props:true
+  },
+  {
+    path : "/auth/kakao",
+    component : KakaoLogin,
     props:true
   },
   { 
