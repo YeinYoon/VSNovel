@@ -29,19 +29,5 @@ export default {
 </script>
 
 <style>
-.library_view {
-  float: right;
-}
-.library_view .gall_icon {
-  width: 50px;
-  height: 50px;
-  margin: 0 10px;
-  border-radius: 5px;
-}
-.library_view .list_icon {
-  width: 50px;
-  height: 50px;
-  margin: 0 0 0 10px;
-  border-radius: 5px;
-}
+
 </style>
