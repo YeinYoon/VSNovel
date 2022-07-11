@@ -336,7 +336,7 @@ export default {
       inputTitle : "",
       inputContent : "",
       selectScore : "1", //작품선택 별점
-      selectNovel : 1,
+      //selectNovel : 1,
 
       // 수정모드
       editMode : false,
@@ -557,7 +557,7 @@ export default {
         this.$store.commit('gModalOn', {size : "normal", msg : "제목 또는 내용이 비어있습니다."});
       } else {
         var data = {
-          selectNovel : this.selectNovel,
+          selectNovel : this.novelCheckPost,
           score : this.selectScore,
           title : this.inputTitle,
           content : this.inputContent,
@@ -571,7 +571,7 @@ export default {
 
             this.inputTitle = "";
             this.inputContent = "";
-            //this.selectNovel = "";
+            this.novelCheckPost = "";
             this.selectScore = "";
           } else {
             this.$store.commit('gModalOn', {size : "normal", msg : "게시글 등록 실패"});
