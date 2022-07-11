@@ -30,6 +30,11 @@ const store = createStore({
 
             noticeService : 'U',
             // 업데이트 : U, 이벤트 : E , 정책 : P
+
+            // 유저 가이드
+            tutorialState : false, // 튜토리얼 가이드 상태값
+            tutorialType : null
+
         }
     },
     mutations : {
@@ -91,7 +96,17 @@ const store = createStore({
 
         noticeServiceCng(state, val) {
             state.noticeService = val;
-        }
+        },
+
+        // 유저 이용 가이드
+        tutorialOn(state, val) {
+            state.tutorialState = true;
+            state.tutorialType = val;
+        },
+
+        tutorialOff(state) {
+            state.tutorialState = false;
+        },
 
     },
     getters: {

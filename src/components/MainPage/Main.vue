@@ -102,6 +102,8 @@ export default {
           id: result.data.USER_ID,
           profileImg : await storage.getUserProfileImg(result.data.USER_ID)
         });
+        // 유저 이용 가이드 체크 함수 호출
+        this.userTutorialCheck();
       }
     });
     this.$store.commit('sideBarOff');
@@ -137,7 +139,24 @@ export default {
         boar_code : post.BOAR_CODE,
         post_code : post.POST_CODE,
         }})
-    }
+    },
+    // 유저 이용 가이드 체크
+    userTutorialCheck() {
+      axios.get('/api/user/tutorialCheck')
+      .then((result)=>{
+        if(result.data == "err") {
+          console.log("유저 튜토리얼 확인 유무 불러오기 실페");
+        } else {
+          console.log(result.data);
+          if(result.data.USER_PHELP == 'N') {
+            this.$store.commit('tutorialOn', 'index');
+          } else {
+            this.$store.commit('tutorialOff');
+          }
+
+        }
+      })
+    },
   },
   data() {
     return {
