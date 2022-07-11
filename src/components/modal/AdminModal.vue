@@ -17,6 +17,10 @@
             <input type="text" name="url" id="url" placeholder="배너 이미지 경로 입력" v-model="banner_img">
             <img class="url_img" :src="banner_img" v-if="banner_img != ''"/>
             <button @click="banner_img = ''">경로 지우기</button>
+            <select class="select">
+              <option value="">스토어 작품</option>
+              <option value="">이벤트</option>
+            </select>
           </div>
         </div>
       </div>
@@ -152,6 +156,11 @@ input[type=file]::file-selector-button:hover{
 .cafe_qna {
     color:white;
     margin-left: 38%;
+}
+.select{
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
 }
 /* 애니메이션들,*/
 /*열리는 애니메이션 opening*/
