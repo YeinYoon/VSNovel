@@ -30,6 +30,8 @@ import SignUp from './components/auth/SignUp.vue';
 import FindAcc from './components/auth/FindAcc.vue';
 import Engine from './components/engine/Engine.vue';
 
+//Viewer
+import Viewer from './components/viewer/Viewer.vue';
 const routes = [
   {
     path:"/",
@@ -88,7 +90,7 @@ const routes = [
     path : '/library',
     name: 'Library',
     component : Library,
-    props:true,
+    props:true
   },
   {
     path : '/store',
@@ -118,6 +120,12 @@ const routes = [
     component : Engine,
     props:true
   },
+  {
+    path:'/viewer',
+    name: 'Viewer',
+    component : Viewer,
+    props:true
+  }
 ];
 
 const router = createRouter({

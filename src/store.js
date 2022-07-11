@@ -34,8 +34,12 @@ const store = createStore({
 
             // 유저 가이드
             tutorialState : false, // 튜토리얼 가이드 상태값
-            tutorialType : null
+            tutorialType : null,
 
+            //viewer
+            isViewer : false,
+            pjCode : null,
+            ep : null
         }
     },
     mutations : {
