@@ -19,7 +19,7 @@
         <div class="post_clicks">조회수</div>
       </div>
       <hr class="lines" />
-      <div class="post_line" v-for="(p, i) in postList" :key="i">
+      <div class="post_line" v-for="(p, i) in postData" :key="i" @click="postBtn(i)">
         <div class="post_place" v-if="p.BOAR_CODE == 1">자유</div>
         <div class="post_place" v-if="p.BOAR_CODE == 2">작가</div>
         <div class="post_place" v-if="p.BOAR_CODE == 3">팀원모집</div>
@@ -44,7 +44,7 @@ export default {
   },
   data() {
     return {
-      postList : []
+      postData : []
     }
   }, 
   methods: {
@@ -56,12 +56,60 @@ export default {
           this.$store.commit('gModalOn', {size : "normal", msg : "게시글 데이터 불러오기 실패"});
         } else {
           console.log(result.data);
-          this.postList = result.data;
+          this.postData = result.data;
         }
       })
-    }
-  },
-};
+    },
+    postBtn(i) {
+      // console.log(this.postList[i].BOAR_CODE.forEach(function(element) {
+      //   console.log(element)
+      // }))
+      console.log(i)
+      if(this.postData[i].BOAR_CODE == 1 || this.postData[i].BOAR_CODE == 2 || this.postData[i].BOAR_CODE == 3 || this.postData[i].BOAR_CODE == 4) {
+        this.$router.push({
+          name: 'Community',
+          params: {
+            BOAR_CODE : this.postData[i].BOAR_CODE,
+            POST_CODE : this.postData[i].POST_CODE
+          }
+          })
+        } else {
+          this.$router.push({
+            name: 'Notice',
+            params: {
+              BOAR_CODE : this.postData[i].BOAR_CODE,
+              POST_CODE : this.postData[i].POST_CODE
+            }
+          })
+        }
+      // if(this.postList[i].BOAR_CODE == 1) {
+      //   this.$router.push({
+      //     name: "Community"
+      //   });
+      //   this.$store.commit('communityServiceCng', 'F');
+      // }else if(this.postList[i].BOAR_CODE == 2) {
+      //   this.$router.push({
+      //     name: "Community"
+      //   });
+      //   this.$store.commit('communityServiceCng', 'W')
+      // }else if(this.postList[i].BOAR_CODE == 3) {
+      //   this.$router.push({
+      //     name: "Community"
+      //   });
+      //   this.$store.commit('communityServiceCng', 'T')
+      // }
+      }
+      // this.$router.push({
+      //   name: "Community",
+      //   params: { BOAR_CODE: this.postList[i].BOAR_CODE,
+      //             POST_CODE: this.postList[i].POST_CODE,
+      //             communityService: "F"
+      //             },
+      // }
+      // );
+      
+    },
+  }
 </script>
 
 <style>

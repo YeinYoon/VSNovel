@@ -68,11 +68,8 @@ export default {
       this.$router.push(link);
     },
     getGenre(){
-      console.log("getGenre")
       axios.get('/api/mypage/genre')
       .then((result) => {
-        console.log(this.hate)
-        console.log(this.favorite)
         if(result.data=="err") {
           console.log("LOAD GENRE ERR!");
         } else {

@@ -1,6 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
+const bcrypt = require("bcrypt")
+
 const db = require('../database/db');
 
 // 마이페이지 프로필 불러오기
@@ -111,11 +113,32 @@ router.post('/postalarm', async(req, res) => {
 
 // 회원 탈퇴
 router.post('/postconfirm', async(req, res) => {
-    const result = await db.execute(null)
-    // `DELETE FROM tbl_user WHERE user_id = '${req.user.USER_ID}'`
-    req.logout();
-    req.session.destroy()
-    res.send(result)
+    const id = req.body.newId;
+    const strBcrypt = req.body.newPw;
+    const name = req.body.newName;
+    const num = req.body.newNumber
+    const result = await db.execute(`SELECT user_id, user_pwd, user_name, user_phone FROM tbl_user WHERE user_id = '${req.user.USER_ID}'`);
+    if (result == "err") {
+        console.log("fail")
+    } else {
+        if(result.rows.length != 0) {
+            const compareBcrypt = await bcrypt.compare(strBcrypt, result.rows[0].USER_PWD)
+            
+            console.log(result.rows[0].USER_ID)
+            console.log(id)
+            if(compareBcrypt == true && result.rows[0].USER_ID == id && result.rows[0].USER_NAME == name && result.rows[0].USER_PHONE == num) {
+                console.log(compareBcrypt)
+                const result = await db.execute(`DELETE FROM tbl_user WHERE user_id = '${req.user.USER_ID}'`);
+                console.log(result)
+                res.send('ok');
+                req.logout();
+                req.session.destroy()   
+            } else {
+                console.log("fail")
+                res.send("fail")
+            }
+        } 
+    }
 })
 
 
