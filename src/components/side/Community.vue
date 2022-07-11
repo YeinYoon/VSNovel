@@ -199,14 +199,14 @@
                   <input type="text" v-model="novelSearch">
                 </div>
                 <div class="commu_novel_modal_text"><span>작품선택</span></div>
-                <div class="commu_novel_modal_article_frame" v-if="novelIsON == true">
+                <div class="commu_novel_modal_article_frame" v-if="novelIsON == 1 && novelSearch != ''">
                     <div>
-                      <div class="commu_novel_modal_articles">
-                        <img src="novelImg" alt="">
+                      <div class="commu_novel_modal_articles" v-for="(n, i) in novelSearchList" :key="i">
+                        <img :src="n.NOVE_PATH" alt="" @click="novelClick(i)">
                       </div>
                     </div>
                 </div>
-                <div class="commu_novel_modal_no" v-if="novelIsOn == false"><span>작품이 존재하지 않습니다</span></div>
+                <div class="commu_novel_modal_no" v-if="novelIsON == 0"><span>작품이 존재하지 않습니다</span></div>
             </div>
         </div>
 
@@ -218,7 +218,8 @@
             <div class="commu_review_frame" v-if='this.communityService == "R"'>
               <div class="commu_novel_choice" @click="novelchoice = true">
                 <!-- <input type="text" placeholder="여기에 작품명 입력"> -->
-                <div><span>작품선택</span></div>
+                <div v-if="novelPostIsON == false"><span>작품선택</span></div>
+                <div v-if="novelPostIsON == true"><span>{{novelCheckPost}}</span></div>
               </div>
     
               <div class="commu_review_title" v-if="editMode == false"><input type="text" v-model="inputTitle"/></div>
@@ -307,9 +308,10 @@ export default {
       postList : [],
       novelchoice : false, //작품선택 모달창 띄우는 변수
       novelSearch : '', //작품선택 키워드 검색 변수
-      novelImg: '', //작품선택 모달창 작품이미지 변수
-      novelIsON: false, //모달 검색시 작품이 있는지 없는지 알 수 있는 변수
+      novelIsON: null, //모달 검색시 작품이 있는지 없는지 알 수 있는 변수
       novelSearchList : [], //모달 검색시 나오는 정보 리스트 
+      novelCheckPost : '', //작품 선택시 저장되는 작품제목
+      novelPostIsON : false, //최종적으로 작품이 클릭시 작품 제목의 유무를 알 수 있는 변수
 
       checkedvalues : [],
       checkList : [],
@@ -497,15 +499,27 @@ export default {
             console.log('err');
           } else {
             console.log('ok');
-            console.log(result.data);
+            console.log(result.data.length);
             this.novelSearchList = result.data;
             console.log(this.novelSearchList);
+            if(result.data.length > 0) {
+              this.novelIsON = 1;
+            }else {
+              this.novelIsON = 0;
+            }
           }
         })
     },
 
     novelCancel() {
       this.novelchoice = false;
+    },
+
+    novelClick(i) {
+      this.novelCheckPost = this.novelSearchList[i].NOVE_TITLE;
+      //console.log(this.novelCheckPost);
+      this.novelchoice = false;
+      this.novelPostIsON = true;
     },
 
     posting() {
