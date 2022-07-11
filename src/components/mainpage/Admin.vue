@@ -75,7 +75,7 @@
                         <div>{{novel.NOVE_UPDATE}}</div>
                         <div>{{novel.NOVE_BOUGHT}}</div>
                         <div>
-                            <div class="block">차단</div>
+                            <!-- <div class="block">차단</div> -->
                             <div class="delete" @click="delNovel(novel.NOVE_CODE)">삭제</div>
                         </div>
                     </div>
@@ -299,6 +299,7 @@ export default {
     height: 100%;
     background-color: #484848;
     padding: 20px;
+    overflow: auto;
 }
 /* 제목들 */
 .admin_unit_title, .admin_post_title,
@@ -336,6 +337,7 @@ export default {
     line-height: 30px;
     margin: 0 2px;
 }
+.delete{cursor: pointer;}
 .banner_add{
     text-align: center;
     border-radius: 20px;
