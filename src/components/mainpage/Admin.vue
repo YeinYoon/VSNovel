@@ -100,6 +100,7 @@
                         <div>
                             <div class="delete" @click="deleteBtn(i)">삭제</div>
                         </div>
+                        
                     </div>
                     <!-- <div class="banner_add" @click="addBtn()">+</div> -->
                     <div class="banner_add" @click="modalOpen()">+</div>
@@ -214,17 +215,18 @@ export default {
             }
             await axios.post('/api/admin/delNovel', novelDatas)
             this.click_btn('novel')
-        
+        },
+
         getBannerData() {
-        console.log('aaa');
-        axios.get('/api/main/getBanner')
-        .then((result) => {
-            if(result.data == "err") {
-                console.log("fail")
-            } else {
-                this.bannerData = result.data
-            }
-        })
+            console.log('aaa');
+            axios.get('/api/main/getBanner')
+            .then((result) => {
+                if(result.data == "err") {
+                    console.log("fail")
+                } else {
+                    this.bannerData = result.data
+                }
+            })
         },
 
         deleteBtn(i) {

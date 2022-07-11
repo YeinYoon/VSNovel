@@ -333,7 +333,6 @@ export default {
         axios.post('/api/auth/login', loginData)
         .then((result)=>{
           if(result.data=='ok') {
-            this.$store.commit('gModalOn', {msg : "로그인되었습니다.", size : "small"});
             this.$router.push('/');
           } else {
             this.$store.commit('gModalOn', {msg : result.data, size : "normal"});

@@ -66,3 +66,107 @@ exports.uploadProfileImg = (userId, file) =>{
     })
   return data
 }
+
+
+//배너 관련
+exports.uploadBannerImg = (file) =>{
+    const params = {
+        Bucket: "vsnovel",
+        Key : `Main/Banner/${file.name}`, // 저장되는 파일의 경로 및 이름
+        Body : file // 파일
+    }
+
+    var data = new Promise((resolve, reject)=>{
+      s3.upload(params)
+      .on("httpUploadProgress", evt => {
+          return parseInt((evt.loaded * 100) / evt.total) + "%";
+      })
+      .send((err, data)=>{
+          if(err) {
+              console.log("파일 업로드 실패");
+              console.error(err);
+              reject(err)
+          } else {
+              console.log("파일 업로드 성공", data);
+              resolve("ok");
+          }
+      })
+    })
+  return data
+}
+
+
+exports.getBannerUrlList = () => {
+
+    var filePath = "Main/Banner/"
+    const params = {
+        Bucket: "vsnovel",
+        Prefix : filePath,
+    }
+
+    let keyList = [];
+    let urlList = [];
+
+    var data = new Promise(function(resolve, reject){
+        s3.listObjectsV2(params, async(err, data) => {
+            if (err) { 
+                return reject(err);
+            }
+
+            var reqPath = filePath.split('/');
+            reqPath.splice(-1,1);
+
+            let contents = data.Contents;
+            contents.forEach((content) => {
+                keyList.push(content.Key); // "ex) content.Key => assets/images/1.png"
+                
+                var filePath = content.Key.split('/'); // 이름
+                if(filePath[filePath.length-1] == "") {
+                    filePath.splice(-1,1);
+                }
+
+                var temp = filePath[filePath.length-1]; // 확장자
+                var extension = temp.split('.'); // 확장자
+                
+
+                if(reqPath.length+1 == filePath.length) {
+
+                    if(extension.length == 1) { //확장자가 없다면 폴더
+                        urlList.push({
+                            key : content.Key,
+                            name: filePath[filePath.length-1],
+                            ex : 'dir',
+                            url : null
+                        });
+                    } else {
+                        urlList.push({
+                            key : content.Key,
+                            name: filePath[filePath.length-1],
+                            ex : extension[extension.length-1],
+                            url : null
+                        });
+                    }
+
+                }
+                
+            });
+
+            if(keyList[0] == filePath) {
+                keyList.splice(0,1);
+            }
+            for(var i=0; i<urlList.length; i++) {
+                const params = {
+                    Bucket: "vsnovel",
+                    Key : keyList[i],
+                    Expires: 604800 // URL 발급 유효기간 7일
+                }
+                var url = await s3.getSignedUrl("getObject", params);
+                urlList[i].url = url;
+            }
+            
+            resolve(urlList);
+        });
+    });
+      
+    return data;
+}

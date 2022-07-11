@@ -21,3 +21,22 @@ exports.createUserDir = async (userId) => {
     });
     
 }
+
+exports.deleteUserDir = async (userId) => {
+    let params = {
+        Bucket: "vsnovel",
+        Prefix: `User/${userId}/`
+    };
+
+    const listedObjects = await s3.listObjectsV2(params).promise();
+    const deleteParams = {
+        Bucket: params.Bucket,
+        Delete: { Objects: [] }
+    };
+ 
+    listedObjects.Contents.forEach(({ Key }) => {
+        deleteParams.Delete.Objects.push({ Key });
+    });
+ 
+    await s3.deleteObjects(deleteParams).promise(); 
+}
