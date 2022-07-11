@@ -49,29 +49,24 @@
 </template>
 
 <script>
-import Library from '../librarypage/LibraryView';
 export default {
   name: "StoreSide",
   data() {
     return {
-      groupStep: "",
-      hiddenData: false,
-      genreNum: 0,
-      clickNovel : 'novel',
-      payDate : '구매일자↑'
+      novelList : [],
+
     };
   },
-
-  components:{
-    Library,
-  },
-
   created() {
     this.$store.commit('sideBarOn');
     this.$store.commit('currentServiceCng', 'L');
-  },
 
+
+  },
   methods: {
+    getNovelList() {
+      
+    }
   },
 };
 </script>
