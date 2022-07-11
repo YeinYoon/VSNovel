@@ -3,67 +3,64 @@
   <div>
     <div class="header">
       <div class="service">
+
+        <!-- 프로젝트 대표 이미지 가져오기 -->
         <img class="icon" src="@/assets/icons/white/cart.png" alt="logo" />
         <span class="title">상세 페이지</span>
       </div>
     </div>
-    <div class="modal_contents">
-      <!-- 제목이랑 작가 -->
-      <div class="modal_con">
-        <div class="modal_header">
-          <span class="modal_title">{{ modalData.NOVE_TITLE }}</span>
-          <span class="modal_writer">???</span>
-        </div>
-        <!-- 상세 이미지 -->
-        <div class="carousel_div" >
-          <SwiperCarousel />
-        </div>
-        <!-- 상세 내용 -->
-        <div class="modal_explain">
-          <div class="modal_explain_up">
-            <span class="up_con">장르</span>
-            <span class="up_data">{{modalData.CATE_CODE}}</span>
-          </div>
-          <div class="modal_explain_down">
-            <span class="down_con">설명</span>
-            <div class="down_data">
-              <span class="down_data_text">{{ modalData.NOVE_SYNOPSIS }}</span>
-            </div>
-          </div>
+    <div class="Store_Content">
+
+      <div class="Store_Novel_title">{{ modalData.NOVE_TITLE }}</div>
+
+      <div class="Store_Novel_info">
+
+        <!-- 데이터 값 채워주기 -->
+        팀 {{ modalData.NOVE_TEAMNAME }} 제작
+        장르 {{modalData.CATE_CODE}}
+        최근 업데이트 
+        최초 발매일
+        에피소드당 가격
+        총 회차
+      </div>
+
+      <div class="Store_Novel_Img"><img src="@/assets/imgs/adver.png"></div>
+
+      <div class="Store_Novel_Buy" @click="$emit('next')">
+        <div class="Store_Novel_Buy_Content" >
+        <p>1화 소장</p>
+        <p>{{ modalData.NOVE_PRICE }} ₩</p>
         </div>
       </div>
-      <!-- 오른쪽 사진 및, 짧은 내용 -->
-      <div class="add_content">
-        <img class="add_content_img" src="@/assets/imgs/noimage.png" alt="소설표지" />
-        <div class="add_content_box">
-          <div>별점</div>
-          <div class="add_content_data">
-            <span>제목 : {{ modalData.NOVE_TITLE }}</span>
-            <span>제작자 : ???</span>
-            <span>제작팀 : {{ modalData.NOVE_TEAMNAME }}</span>
-            <span>발매년도 : ???</span>
-          </div>
-        </div>
-        <div class="btn_div">
-          <div class="price_btn" @click="$emit('next')">
-            <span> {{ modalData.NOVE_PRICE }}&#8361; </span>
-          </div>
+
+      <div class="Store_Novel_Synop">
+        <div class="Store_Novel_Synop_title">줄거리</div>
+        <div class="Store_Novel_Synop_content">{{ modalData.NOVE_SYNOPSIS }}</div>
+      </div>
+
+      
+      <div class="Store_Novel_EP">
+        <div class="Store_Novel_EP_title">에피소드 목록</div>
+        <div class="Store_Novel_EP_list">
+          <!-- Store_Novel_EP_list_item 반복 -->
+          <div class="Store_Novel_EP_list_item">1</div>
         </div>
       </div>
+
+      <div class="Store_Novel_review">
+        리뷰
+      </div>
+
     </div>
   </div>
 </template>
 
 <script>
 import SwiperCarouselVue from "./SwiperCarousel";
-
-
 export default {
   name: "StoreVue",
   data() {
-    return {
-      
-    };
+    return {};
   },
   props: {
     modalData: Object,
@@ -75,150 +72,162 @@ export default {
 </script>
 
 <style>
-.carousel_div {
-  width: 100%;
-  height: 204px;
-  border-radius: 25px;
-  border: 2px solid rgb(73, 73, 73);
-  overflow: hidden;
+.Store_Novel_info {
+  position: absolute;
+  left: 450px;
+  top: 0px;
+  width: 500px;
+  height: 80px;
+  border-radius: 20px;
+  background: #424242; 
 }
 
-/* 모달 전체 */
-.modal_contents {
+.Store_Novel_title {
+  position: absolute;
+  left: 0px;
+  top: 0px;
   color: white;
-  display: flex;
-  flex-direction: row;
-  padding: 10px 0 0 0;
-  width: calc(100% - 50px);
-  /* height: calc(100% - 200px); */
-  height: 80%;
-  position: absolute;
-  top: 15%;
-}
-.modal_con {
-  padding-right: 15px;
-  width: 100%;
-  position: relative;
-}
-/* 제목이랑 작가 */
-.modal_header {
-  display: flex;
-  width: 100%;
-}
-/* 제목 */
-.modal_title {
-  flex: 2;
-  vertical-align: middle;
-  font-size: 1.2em;
-}
-/* 작가 */
-.modal_writer {
-  flex: 1;
-  vertical-align: middle;
-  font-size: 1.1em;
-  text-align: right;
-}
-/* 설명부분 */
-.modal_explain {
-  display: flex;
-  flex-direction: column;
-  margin: 10px;
-  font-size: 1.1em;
-  position: absolute;
-  width: 100%;
-  height: calc(100% - 200px);
-}
-/* 설명 윗부분 ( 장르 ) */
-.modal_explain_up {
-  width: 50%;
-  margin: 30px 0 0 0;
-  position: absolute;
-}
-/* 윗부분 고정 글 */
-/* .up_con{
-} */
-/* 윗부분 데이터 바인딩 */
-.up_data {
-  display: inline-block;
-  width: 50%;
-  margin: 0 10px;
-  padding: 5px 10px;
-  background-color: gray;
+  font-size: 1.3em;
+  z-index: 1;
+  width: 430px;
+  height: 80px;
+  padding: 4px 12px;
   border-radius: 20px;
+  background: #565656;
+}
+
+.Store_Novel_Buy {
   position: absolute;
-}
-/* 설명 아래 ( 설명 ) */
-.modal_explain_down {
-  width: 100%;
-  position: absolute;
-  top: 90px;
-  height: 80%;
-}
-/* 설명 부분 고정 글 */
-.down_con {
-  vertical-align: top;
-  width: 10%;
-}
-/* 설명 데이터바인딩 */
-.down_data {
-  font-size: 0.9em;
-  flex: 9;
-  margin: 0 10px;
-  width: 93.5%;
-  display: inline-block;
-  padding: 5px 10px;
-  background-color: gray;
-  border-radius: 20px;
-  overflow: auto;
-  -ms-overflow-style: none;
-  position: absolute;
-  height: 50%;
-  
-}
-/* 오른쪽 전체 */
-.add_content {
-  padding: 0 0 0 5px;
-  width: 30%;
-  height: 100%;
-}
-/* 오른쪽 사진 ( 표지 ) */
-.add_content_img {
-  width: 100%;
-  height: 40%;
-  border-radius: 20px;
-  padding: 0 0 5px 2px;
-}
-/* 오른쪽 작은 회색 박스 */
-.add_content_box {
-  background-color: gray;
-  border-radius: 20px;
-  padding: 10px 5px;
-  font-size: 0.8em;
-  margin: 10px 0 0 0;
-  height: 195px;
-}
-/* 데이터 바인딩 부분 */
-.add_content_data {
-  display: flex;
-  flex-direction: column;
-}
-/* 버튼 div */
-.btn_div {
-  margin: 10px 0 0 0;
-  display: flex;
-  align-items: center; /* 수직 정렬 */
-  flex-direction: row; /* default: row */
-  justify-content: center; /* flex direction에 대해서 정렬방식 선택 */
-}
-/* 가격 버튼 */
-.price_btn {
-  background-color: #2872f9;
+  right: 0px;
+  top: 0px;
+  background: #2872f9;
+  width: 220px;
+  height: 80px;
   border-radius: 20px;
   text-align: center;
-  display: table;
+  cursor: pointer;
+  line-height: 5px;
+  padding-top: 25px;
+  color: white;
 }
-.price_btn span {
-  display: table-cell;
-  vertical-align: middle;
+
+.Store_Novel_Img {
+  position: absolute;
+  left: 0px;
+  top: 40px;
+  width: 250px;
+  height: 270px;
+  background: white;
+  border-radius: 20px;
+  object-fit: cover;
+  overflow: hidden;
+  z-index: 2;
 }
+
+.Store_Novel_Synop {
+  position: absolute;
+  left: 210px;
+  top: 40px;
+  width: 220px;
+  height: 270px;
+  z-index: 1;
+  background: #424242;
+  border-radius: 20px;
+  object-fit: cover;
+  overflow: hidden;
+  color: white;
+}
+
+.Store_Novel_Synop_title {
+  position: absolute;
+  top: 10px;
+  left: 50px;
+  font-size: 1.2em;
+}
+
+.Store_Novel_Synop_content {
+  position: absolute;
+  top: 40px;
+  left: 50px;
+  width: calc(100% - 55px);
+  height: calc(100% - 55px);
+  overflow: auto;
+}
+
+.Store_Novel_Img img {
+  width: 100%;
+}
+
+.Store_Novel_EP {
+  position: absolute;
+  left: 450px;
+  top: 90px;
+  height: 220px;
+  width: 735px;
+  background: #424242;
+  border-radius: 20px;
+}
+
+.Store_Novel_EP_title {
+  position: absolute;
+  left: 12px;
+  top: 8px;
+  color: white;
+  font-size: 1.3em;
+  z-index: 1;
+}
+
+.Store_Novel_EP_list {
+  position: absolute;
+  left: 12px;
+  top: 40px;
+  width: calc(100% - 24px);
+  height: 160px;
+  overflow: auto;
+  color: white;
+  font-size: 1.3em;
+  z-index: 1;
+  padding: 5px;
+}
+
+.Store_Novel_EP_list_item {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  background: #565656;
+  border-radius: 10px;
+  padding: 0px 5px 0px 5px;
+  margin-bottom: 4px;
+}
+
+.Store_Novel_EP_list_item_disable {
+  position: relative;
+  width: 100%;
+  display: inline-block;
+  opacity: 0.5;
+  background: #565656;
+  border-radius: 10px;
+  padding: 0px 5px 0px 5px;
+  margin-bottom: 4px;
+}
+
+.Store_Novel_review {
+  position: absolute;
+  left: 0px;
+  top: 330px;
+  width: 800px;
+  height: 180px;
+  border-radius: 20px;
+  background: #565656;
+}
+
+.Store_Content {
+  position: absolute;
+  top: 90px;
+  width: calc(100% - 40px);
+  height: calc(100% - 110px);
+}
+</style>
+
+<style>
 </style>

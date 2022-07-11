@@ -1,5 +1,7 @@
 <template>
+ <div class="Smodal_opacity" v-if="modal"></div>
   <div class="modal_background" v-if="modal">
+    
     <div class="modal_style">
       <div class="close" @click="send_event">X</div>
       <div v-if="modal_step == 0">
@@ -50,6 +52,18 @@ export default {
 </script>
 
 <style>
+.Smodal_opacity {
+  background: black;
+  width: 100vw;
+  height: 100vh;
+  opacity:0;
+  z-index: 100;
+  position: fixed;
+  animation-duration: 0.3s;
+  animation-name: backgrounding_on;
+  animation-fill-mode: forwards;
+}
+
 /* 카러셀 디브 */
 .close {
   color: white;
@@ -69,7 +83,7 @@ div {
 .modal_background {
   width: 100vw;
   height: 100vh;
-  background-color: rgba(255, 255, 255, 0.1);
+  /* background-color: rgba(255, 255, 255, 0.1); */
   position: fixed;
   display: inline-block;
   top: 50%;
@@ -77,10 +91,11 @@ div {
   transform: translate(-50%, -50%);
   padding: 20px 40px;
   overflow: hidden;
+  z-index: 200;
 }
 .modal_style {
-  width: 90vw;
-  height: 90vh;
+  width: 1220px;
+  height: 620px;
   position: absolute;
   top: 50%;
   left: 50%;
@@ -88,7 +103,7 @@ div {
   background-color: #2a2a2a;
   border-radius: 20px;
   padding: 20px;
-  box-shadow: 0 0 100px 50px black;
+  /* box-shadow: 0 0 100px 50px black; */
   animation-duration: 0.7s;
   animation-name: opening;
 }

@@ -1,4 +1,9 @@
 <template>
+<StoreModal
+      @close="modal = false"
+      :modalData="modalData"
+      :modal="modal"
+/>
   <!-- logo  -->
   <div class="tests">
     <div class="header">
@@ -57,11 +62,6 @@
       </div>
     </div>
     <div>
-      <StoreModal
-      @close="modal = false"
-      :modalData="modalData"
-      :modal="modal"
-    />
     </div>
   </div>
 </template>
