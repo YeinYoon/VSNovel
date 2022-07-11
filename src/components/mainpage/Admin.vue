@@ -40,7 +40,7 @@
                 <!-- 전체 게시글 조회 -->
                 <div class="admin_post" v-if="btn_click == 'post'">
                     <div class="admin_post_title">
-                        <span>게시판</span>
+                        <span>ID</span>
                         <span>제목</span>
                         <span>작성자</span>
                         <span>작성일자</span>
@@ -180,23 +180,24 @@ export default {
         },
         async delUnit(unitData){
             const unitDatas = {
-                "unitId":unitData
+                unitId:unitData
             }
-            const result = await axios.post('/api/admin/delUnit', unitDatas)
-            console.log(result)
+            await axios.post('/api/admin/delUnit', unitDatas)
+            this.click_btn('unit')
         },
         async delPost(postData){
             const postDatas = {
                 "postCd":postData
             }
             await axios.post('/api/admin/delPost', postDatas)
-            this.$router.go();
+            this.click_btn('post')
         },
         async delNovel(novelData){
             const novelDatas = {
                 "novelCd":novelData
             }
             await axios.post('/api/admin/delNovel', novelDatas)
+            this.click_btn('novel')
         }
     },
     async mounted(){

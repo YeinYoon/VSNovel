@@ -40,7 +40,7 @@ router.get('/allNovelList', async (req,res)=>{
 
 router.post('/delUnit', async (req,res)=>{
     console.log(req.body.unitId)
-    const result = await db.execute(`DELETE FROM tbl_user WHERE USER_ID = ${req.body.unitId}`);
+    const result = await db.execute(`DELETE FROM tbl_user WHERE USER_ID = '${req.body.unitId}'`);
     res.send(result)
 })
 
