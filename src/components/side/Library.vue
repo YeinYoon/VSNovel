@@ -15,19 +15,19 @@
     <div class="list_section">
 
       <!-- 반복 -->
-      <div class="work_list">
+      <div class="work_list" v-for="(novel, i) in totalList" :key="i">
 
         <!-- 작품 대표이미지 -->
         <img class="list_img" /> 
         <div class="work_list_con">
           <div class="list_span">
             <!-- 제목 -->
-            <span class="list_title">제목</span>
+            <span class="list_title">{{novel.NOVE_TITLE}}</span>
 
             <!-- 총편수 및 소유한 편수 -->
             <span class="list_all_percent">
               <progress value="13" max="35"></progress>
-              <span class="progress_text">시리즈 총 편수 13/35</span>
+              <span class="progress_text">시리즈 총 편수 {{novel.EP_LIST.length}}/??</span>
             </span>
 
             <!-- 최근 플레이날짜 -->
@@ -36,7 +36,7 @@
           <div class="btn_container">
             <div class="sub_btn">이 작품 리뷰 남기기</div>
             <div class="sub_btn">스토어 페이지</div>
-            <div class="sub_btn">에피소드 목록</div>
+            <div class="sub_btn" @click="openEp()">에피소드 목록</div>
             <div class="play_btn">PLAY</div>
           </div>
 
@@ -66,7 +66,7 @@ export default {
     return {
       novelList : [],
       epList : [],
-      totalList : []
+      totalList : [] // 최종적으로 v-for 돌릴 데이터
     };
   },
   created() {
@@ -101,18 +101,25 @@ export default {
     getTotalList() {
       for(var i=0; i<this.novelList.length; i++) {
         this.totalList.push({
-          NOVE_CODE : this.novelList[i].NOVE_CODE,
-          RECENT_EP : null,
-          EP_LIST : []
+          NOVE_CODE : this.novelList[i].NOVE_CODE, // 소설 코드
+          NOVE_TITLE : null, // 소설 제목
+          RECENT_EP : null, // 현재 소설의 회차중 가장 최근에 본 것
+          EP_LIST : [], // 에피소드 목록
+          EP_OPEN : false, // 에피소드 목록을 열었다 닫았다 상태값
         })
         for(var j=0; j<this.epList.length; j++) {
           if(this.totalList[i].NOVE_CODE == this.epList[j].NOVE_CODE) {
+            this.totalList[i].NOVE_TITLE = this.epList[j].NOVE_TITLE;
             this.totalList[i].EP_LIST.push(this.epList[j]);
             this.totalList[i].RECENT_EP = this.epList[j].POSS_RECENTEP;
           }
         }
       }
       console.log(this.totalList);
+    },
+
+    openEp() {
+
     }
   },
 };
