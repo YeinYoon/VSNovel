@@ -21,6 +21,7 @@
               <option value="">스토어 작품</option>
               <option value="">이벤트</option>
             </select>
+            <input class="codeInput" type="number" placeholder="codeNum"/>
           </div>
         </div>
       </div>
@@ -72,7 +73,7 @@ export default {
   margin: 20px 2.5% 0px 2.5%; 
   padding: 15px 5px;
 }
-.admin_cafe_banner > input{
+#file, #url{
   display: inline-block;
   width: 100%;
 }
@@ -161,6 +162,12 @@ input[type=file]::file-selector-button:hover{
   position: absolute;
   bottom: 20px;
   left: 20px;
+}
+.codeInput{
+  width: 100px;
+  position: absolute;
+  bottom: 20px;
+  left: 120px;
 }
 /* 애니메이션들,*/
 /*열리는 애니메이션 opening*/
