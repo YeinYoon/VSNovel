@@ -87,12 +87,12 @@ export default {
         this.state = this.link;
         this.link = pathLink;
         document.getElementById(this.state).style.background = "#353535";
-        document.getElementById(this.link).style.background = "#2872f9";
+        // document.getElementById(this.link).style.background = "#2872f9";
       }
       if(this.state != this.link && pathLink != 'signup' && pathLink != 'admin'){
           document.getElementById(this.state).style.background = "#353535";
         }
-        document.getElementById(this.link).style.background = "#2872f9";
+        // document.getElementById(this.link).style.background = "#2872f9";
     }
   }
 };

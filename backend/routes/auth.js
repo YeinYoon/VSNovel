@@ -54,6 +54,20 @@ router.post('/signUp', async (req,res)=>{
   }
 })
 
+// 카카오 유저 등록
+router.post('/kakaoSignUp', async (req, res)=>{
+  var insertUser = await db.execute(`INSERT INTO tbl_user(user_id, user_pwd, user_email, user_nickname, user_name, user_sex)
+  VALUES('${req.body.newId}', 'KAKAO', '${req.body.newEmail}', '${req.body.newNickname}', '${req.body.newName}', '${req.body.newSex}')`)
+  if(insertUser == "err") {
+    console.log('DB쿼리 실패');
+    res.send("err");
+  } else {
+    await storage.createUserDir(req.body.newId);
+    res.send("ok");
+  }
+  
+})
+
 
 // 로그인
 router.post('/login', isNotLogin, (req,res,next)=>{
