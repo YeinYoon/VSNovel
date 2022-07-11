@@ -131,7 +131,7 @@ export default {
             //눌렀던 값
             btn_click : 'unit',
 
-            // bannerData : []
+            bannerData : [],
 
             //db에서 불러온 값
             unitList: [],
@@ -196,6 +196,7 @@ export default {
         },
         
         getBannerData() {
+        console.log('aaa');
         axios.get('/api/main/getBanner')
         .then((result) => {
             if(result.data == "err") {
@@ -216,7 +217,7 @@ export default {
                     console.log("fail")
                 } else {
                     console.log(result)
-                    this.getBannerData()
+                    this.getBannerData();
                 }
             })
         },
