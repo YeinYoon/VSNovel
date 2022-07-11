@@ -6,8 +6,8 @@
     :autoplay="sec"
     :pauseAutoplayOnHover="status"
   >
-    <slide v-for="slide in datas" :key="slide">
-      <div class="carousel__item"><img :src="slide.link"></div>
+    <slide v-for="(slide,i) in bannerData" :key="i">
+      <div class="carousel__item"><img :src="slide.BANN_IMG" @click="bannerBtn(i)"></div>
     </slide>
 
     <template #addons>
@@ -21,14 +21,12 @@
 // If you are using PurgeCSS, make sure to whitelist the carousel CSS classes
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
-import data from "../../assets/DataJs/data.js";
 import axios from '../../axios';
 export default {
   name: "App",
   data() {
     return {
-      datas: data,
-      a31: 'hi',
+      bannerData: [],
       status : true, // 마우스 가져다 댔을 경우 사진이 안넘어가요
       sec : 2500, //사진 넘어가는 시간,
       breakpoints: {
@@ -51,17 +49,36 @@ export default {
     Pagination,
     Navigation,
   },
+  created(){
+    axios.get('/api/main/carousel')
+    .then((result) => {
+      if(result.data == "err") {
+        console.log("fail")
+      } else {
+        this.bannerData = result.data;
+        console.log(this.bannerData)
+      }
+    })
+  },
   methods:{
     openSlide(link){
       this.$store.commit('gModalOn', {msg:"hi", bg : link, size : "ad"});
-    }
+    },
+    bannerBtn(i) {
+      console.log(this.bannerData)
+      console.log(this.bannerData[i].POST_CODE)
+      if(this.bannerData[i].POST_CODE != null) {
+        this.$router.params({
+          name: 'Notice',
+          params: {
+              POST_CODE : this.bannerData.POST_CODE
+            }
+      })
+      }
+    },
   },
-  created(){
-    axios.get('api/main/carousel').then((result)=>{
-        this.a31 = result.data;
-        console.log(this.a31);
-    }).catch(()=>{console.log('hi')}).finally(()=>{console.log('fin')})
-  }
+  
+  
 };
 </script>
 <style>

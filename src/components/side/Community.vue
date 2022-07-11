@@ -315,6 +315,37 @@ export default {
         this.getPostList('R');
         break;                
     }
+
+    if(this.$route.params.BOAR_CODE!=undefined){
+      this.viewState = 1;
+      switch(this.$route.params.BOAR_CODE){
+        case "1": 
+          console.log('1');
+          this.$store.commit('communityServiceCng', 'F');
+          break;
+        case "2":
+          console.log('2');
+          this.$store.commit('communityServiceCng', 'W');
+          break;
+        case "3":
+          console.log('3');
+          this.$store.commit('communityServiceCng', 'T');
+          break;
+        case "4":
+          console.log('4');
+          this.$store.commit('communityServiceCng', 'R');
+          break;
+      }
+      this.postClick(1, this.$route.params.POST_CODE);
+    }
+
+    if(this.$route.params.REVIEW_CODE != undefined) {
+      this.viewState = 1;
+      this.$route.params.REVIEW_CODE = 4
+      this.$store.commit('communityServiceCng', 'R')
+      this.postClick(1, this.$route.params.POST_CODE)
+    }
+    
     if(this.$route.params.boar_code != undefined){
       this.viewState = 1;
       switch(this.$route.params.boar_code){
@@ -345,8 +376,7 @@ export default {
       this.postList = [];
       this.viewState = 0;
       this.getPostList(cng);
-    }
-    
+    },
   },
   methods: {
     loginCheck() {

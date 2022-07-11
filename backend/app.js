@@ -54,6 +54,7 @@ var mypageRouter = require('./routes/mypage');
 var noticeRouter = require('./routes/notice');
 var adminRouter = require('./routes/admin');
 var paymentRouter = require('./routes/payment');
+var userRouter = require('./routes/user');
 
 app.use('/', indexRouter);
 app.use('/api/auth', authRouter);
@@ -65,6 +66,7 @@ app.use('/api/mypage', mypageRouter);
 app.use('/api/notice', noticeRouter);
 app.use('/api/admin', adminRouter);
 app.use('/api/payment', paymentRouter);
+app.use('/api/user', userRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

@@ -91,27 +91,35 @@
                         <span>관리 메뉴</span>
                     </div>
                     <!-- 반복문 -->
-                    <div class="admin_banner_list">
-                        <div>종류</div>
-                        <div>이미지 경로</div>
-                        <div>NOVEL CODE</div>
-                        <div>POST CODE</div>
-                        <div>게시일자</div>
+                    <div class="admin_banner_list" v-for="(banner,i) in bannerData" :key="i">
+                        <div><span v-if="banner.NOVE_CODE">소설 </span><span v-if="banner.POST_CODE">이벤트</span></div>
+                        <div style="overflow:hidden">{{banner.BANN_IMG}}</div>
+                        <div v-if="banner.NOVE_CODE">{{banner.NOVE_CODE}}</div><div v-else>null</div>
+                        <div v-if="banner.POST_CODE">{{banner.POST_CODE}}</div><div v-else>null</div>
+                        <div>{{banner.BANN_DATE.substring(0,10)}}</div>
                         <div>
-                            <div class="delete">삭제</div>
+                            <div class="delete" @click="deleteBtn(i)">삭제</div>
                         </div>
                     </div>
-                    <div class="banner_add" @click="console.log(123)">+</div>
+                    <!-- <div class="banner_add" @click="addBtn()">+</div> -->
+                    <div class="banner_add" @click="modalOpen()">+</div>
                 </div>
             </div>
+        </div>
+        <div v-if="modal">
+            <AdminModal @modal="modalOpen()"/>
         </div>
     </div>
   </div>
 </template>
 
 <script>
-import axios from '../../axios'
+import AdminModal from '../modal/AdminModal'
+import axios from '../../axios.js'
 export default {
+    created() {
+        this.getBannerData()
+    },
     name:'admin',
     data(){
         return{
@@ -123,11 +131,19 @@ export default {
             //눌렀던 값
             btn_click : 'unit',
 
+            bannerData : [],
+
             //db에서 불러온 값
             unitList: [],
             postList: [],
-            novelList: []
+            novelList: [],
+
+            // 모달 오픈
+            modal : false,
         }
+    },
+    components:{
+        AdminModal,
     },
     methods:{
         async click_btn(btn){
@@ -198,12 +214,55 @@ export default {
             }
             await axios.post('/api/admin/delNovel', novelDatas)
             this.click_btn('novel')
+        
+        getBannerData() {
+        console.log('aaa');
+        axios.get('/api/main/getBanner')
+        .then((result) => {
+            if(result.data == "err") {
+                console.log("fail")
+            } else {
+                this.bannerData = result.data
+            }
+        })
+        },
+
+        deleteBtn(i) {
+            var bannData = {
+                BANN_CODE : this.bannerData[i].BANN_CODE,
+            }
+            axios.post('/api/main/deleteBanner', bannData)
+            .then((result) => {
+                if(result.data == "err") {
+                    console.log("fail")
+                } else {
+                    console.log(result)
+                    this.getBannerData();
+                }
+            })
+        },
+
+        // addBtn() {
+        //     axios.post('/api/main/addBanner')
+        //     .then((result) => {
+        //         if(result.data == "err") {
+        //             console.log("fail")
+        //         } else {
+        //             console.log(result.data)
+        //         }
+        //     })
+
+        modalOpen(){
+            if(this.modal) 
+                this.modal = false;
+            else this.modal = true;
+
         }
     },
     async mounted(){
         this.unitList = await axios.get('/api/admin/allUnitList')
         this.unitList = this.unitList.data;
-    }
+    },
 }
 </script>
 
@@ -311,6 +370,9 @@ export default {
 .admin_novel_title span,.admin_banner_title span{
     flex: 1;
     text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 /* 반복문 리스트 */
 .admin_unit_list, .admin_post_list, 

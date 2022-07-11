@@ -33,7 +33,7 @@
                 <!-- 공지사항 목록 -->
                 <section class="notice_section">
                     <div class="strong_notice_post">
-                        <div v-for="(n, i) in noticeList" :key="i" @click="postClick(1, n.POST_CODE)">
+                        <div v-for="(n, i) in noticeList" :key="i" @click="postClick(1, n.POST_CODE,n)">
                             <div class="strong_notice">
                                 <div class="notice_back_title"><span>{{ n.POST_TITLE }}</span></div>            <!-- 제목 -->
                                 <div class="notice_back_content"><span v-html="n.POST_CONTENT"></span></div>  <!-- 내용 -->
@@ -157,6 +157,22 @@ export default {
         this.$store.commit('sideBarOn');
         this.$store.commit('currentServiceCng', 'N');
         this.getNoticeList('U');
+
+      if(this.$route.params.BOAR_CODE != undefined) {
+        this.viewState =1;
+        switch(this.$route.params.BOAR_CODE) {
+          case '5' :
+            this.$store.commit('noticeServiceCng', 'U')
+            break;
+          case '6' :
+            this.$store.commit('noticeServiceCng', 'E')
+            break;
+          case '7' :
+            this.$store.commit('noticeServiceCng', 'P')
+            break;
+        }
+        this.postClick(1, this.$route.params.POST_CODE);
+      }
 
       if(this.$route.params.boar_code != undefined){
       this.viewState = 1;

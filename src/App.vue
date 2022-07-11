@@ -1,6 +1,7 @@
 <template>
 <Spinner :loading="$store.state.LoadingStatus"></Spinner>
 <GlobalModal :gModalState="$store.state.gModalState"></GlobalModal>
+<TutorialGuide :sideMenuState="$store.state.sideMenuState" :tutorialState="$store.state.tutorialState" :tutorialType="$store.state.tutorialType"></TutorialGuide>
 <div class="content">
     <Menu v-bind:class="{'vsnmenu':true}"></Menu>
     <Side v-bind:class="{'sideBar':true}" v-if="$store.state.sideBarState == true"></Side>
@@ -18,6 +19,7 @@ import Side from './components/sideBar.vue'
 import GlobalModal from './components/modal/GlobalModal.vue';
 import axios from './axios';
 import storage from './aws'
+import TutorialGuide from './components/modal/P_TutorialGuide';
 // import vsnside from './components/Side';
 // import Vsncontent from './components/Content';
 export default {
@@ -31,7 +33,9 @@ export default {
     Menu,
     GlobalModal,
     Spinner,
-    Side
+    Side,
+    TutorialGuide
+
     // vsnside,
     // Vsncontent,
   },
@@ -68,7 +72,12 @@ body{
 ::-webkit-scrollbar{
   display: none;
 }
-
+.Tutorial_View {
+  position: fixed;
+  width: 100vw;
+  height: 100vh;
+  z-index: 200;
+}
 .vsnmenu {
   width: 140px;
   position:fixed;

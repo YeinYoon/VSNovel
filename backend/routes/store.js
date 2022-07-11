@@ -144,5 +144,16 @@ router.post('/getNovelList', async (req,res)=>{
     }
 })
 
+// 스토어 상세페이지 배너 불러오기
+router.get('/getbanner', async(req, res) => {
+    var result = await db.execute(`SELECT * FROM tbl_banner`)
+    if(result == "err") {
+        res.send("err");
+    } else {
+        console.log(result.rows)
+        res.send(result.rows)
+    }
+})
+
 
 module.exports = router;

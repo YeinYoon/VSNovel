@@ -4,12 +4,12 @@ var router = express.Router();
 const db = require('../database/db');
 
 router.get('/carousel', async (req, res)=>{
-  var result = await db.execute(`SELECT * FROM tbl_banner`);
+  var result = await db.execute(`select * from tbl_banner where post_code in (select post_code from tbl_post where boar_code = 6)`);
   if(result == "err") {
     console.log("DB쿼리 실패");
   } else {
-   res.send(result);
- 
+    console.log(result.rows)
+   res.send(result.rows);
   }
 })
 router.get('/topPost', async (req, res)=>{
@@ -31,5 +31,37 @@ router.get('/recentNotice', async (req, res)=>{
   }
 })
 
+// 관리자 배너 조회
+router.get('/getBanner', async(req, res) => {
+  var result = await db.execute(`SELECT * FROM tbl_banner`);
+  if(result == "err") {
+    console.log("banner's not exist")
+  } else {
+    console.log(result.rows)
+    res.send(result.rows)
+  }
+})
+
+router.post('/addBanner', async(req, res) => {
+  var result = await db.execute(`INSERT INTO tbl_banner(bann_code, nove_code, post_code, bann_img, bann_date) VALUES()`)
+  if(result == "err") {
+    console.log("do not function insert banner")
+  } else {
+    res.send("ok")
+  }
+})
+
+router.post('/deleteBanner', async(req, res) => {
+  var result = await db.execute(`DELETE FROM tbl_banner WHERE bann_code = '${req.body.BANN_CODE}'`)
+  if(result == "err") {
+    console.log("delete not function")
+  } else {
+    res.send("ok")
+  }
+})
+
+// router.get('/getBannerList', async (req, res) => {
+//   const result = await db.execute(`SELECT * FROM tbl_`)
+// })
 
 module.exports = router;
