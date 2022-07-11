@@ -36,6 +36,7 @@
           <div class="btn_container">
             <div class="sub_btn">이 작품 리뷰 남기기</div>
             <div class="sub_btn">스토어 페이지</div>
+            <div class="sub_btn">에피소드 목록</div>
             <div class="play_btn">PLAY</div>
           </div>
         </div>
