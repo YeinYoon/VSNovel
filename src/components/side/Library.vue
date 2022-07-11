@@ -39,6 +39,15 @@
             <div class="sub_btn">에피소드 목록</div>
             <div class="play_btn">PLAY</div>
           </div>
+
+          <!-- 에피목록 -->
+          <div class="lib_eplist">
+            <div class="lib_eplist_title">에피소드 목록</div>
+            <div class="lib_eplist_list">
+              <div class="lib_eplist_item">1</div>
+            </div>
+          </div>
+
         </div>
       </div>
       <!-- 반복 END -->
@@ -203,5 +212,34 @@ progress {
 }
 .play_btn:hover{
   background-color: #0084ff;
+}
+
+.lib_eplist {
+  width: calc(300px);
+  height: 300px;
+  background: #525252;
+  border-radius: 10px;
+  z-index: 11;
+  position: relative;
+  left: 240px;
+  top: 10px;
+  padding: 3px 10px 10px 10px;
+}
+
+.lib_eplist_title {
+  font-size: 1em;
+}
+
+.lib_eplist_list {
+  position: absolute;
+  width: calc(100% - 20px);
+  height: calc(100% - 45px);
+  border-radius: 10px;
+  background: #484848;
+  padding: 5px;
+}
+
+.lib_eplist_item {
+
 }
 </style>
