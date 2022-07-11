@@ -1,6 +1,10 @@
 <template>
-<div class="RouterView">
-    카카오 로그인 처리 진행중
+<div class="RouterView_NonSide">
+    <div class="KakaoLogin_Frame">
+        <div class="KakaoLogin_img"><img src="@/assets/imgs/kakao.png"></div>
+      <div class="KaKaoLogin_MSG">카카오 로그인 처리 진행중</div>
+    </div>
+
 </div>
 </template>
 
@@ -139,5 +143,33 @@ export default {
 </script>
 
 <style>
+.KakaoLogin_Frame {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+    height: 500px;
+    background: #f9e000;
+    border-radius: 20px;
+}
 
+.KakaoLogin_img {
+    position: absolute;
+    left: 53%;
+    top: 43%;
+    transform: translate(-50%, -50%);
+}
+
+.KaKaoLogin_MSG {
+    position: absolute;
+    left: 50%;
+    top: 80%;
+    transform: translate(-50%, -50%);
+    color: #624A3D;
+    font-size: 1.5em;
+    width: 300px;
+    text-align: center;
+    font-weight: 900;
+}
 </style>
