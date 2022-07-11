@@ -3,6 +3,8 @@ var router = express.Router();
 
 const db = require('../database/db');
 
+const timestamp = require('../database/timestamp');
+
 //카테고리 불러오기
 router.get('/getCateList', async (req,res)=>{
     var result = await db.execute(`SELECT * FROM tbl_category`);
@@ -155,5 +157,30 @@ router.get('/getbanner', async(req, res) => {
     }
 })
 
+// 이 소설을 유저가 소유했는가
+router.post('/getUserPossession', async (req, res)=>{ 
+    var result = await db.execute(`SELECT * FROM tbl_possession
+    WHERE user_id = '${req.user.USER_ID}' AND nove_code = ${req.body.noveCode}`);
+    if(result == "err") {
+        res.send("err");
+    } else {
+        res.send(result.rows);
+    }
+
+})
+
+router.post('/addUserPossession', async (req, res)=>{
+    var newTime = timestamp.getTimestamp();
+    var result = await db.execute(`INSERT INTO tbl_possession VALUES(
+        ${req.body.ep}, '${req.user.USER_ID}', ${req.body.noveCode},
+        ${req.body.price}, 'B', '${newTime}', null, '${req.body.payCode}', null
+    )`);
+    
+    if(result == "err") {
+        res.send("err");
+    } else {
+        res.send("ok");
+    }
+})
 
 module.exports = router;

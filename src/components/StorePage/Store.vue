@@ -177,9 +177,14 @@ export default {
     },
 
     modalOpen(data) {
-      // 모달 오픈 함수
-      this.modalData = data;
-      this.modal = true;
+      if(this.$store.state.userId == null) {
+        this.$store.commit('gModalOn', {msg : "작품 상세보기 및 구매는 로그인이 필요합니다.", size : "normal"});
+        this.$router.push('/signin');
+      } else {
+        // 모달 오픈 함수
+        this.modalData = data;
+        this.modal = true;
+      }
     },
   },
   created(){

@@ -46,6 +46,7 @@ export default {
           this.$store.commit("userLogin", {
             nickname: result.data.USER_NICKNAME,
             id: result.data.USER_ID,
+            email : result.data.USER_EMAIL,
             profileImg : await storage.getUserProfileImg(result.data.USER_ID)
           });
         }

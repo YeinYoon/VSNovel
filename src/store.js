@@ -6,6 +6,7 @@ const store = createStore({
             // 로그인 및 로딩 관련
             userId : null,
             userNickname : null,
+            userEmail : null,
             profileImg : null,
             LoadingStatus: false,
 
@@ -43,10 +44,12 @@ const store = createStore({
             if(user == null) {
                 state.userNickname = null;
                 state.userId = null;
+                state.userEmail = null;
                 state.profileImg = null;
             } else {
                 state.userNickname = user.nickname;
                 state.userId = user.id;
+                state.userEmail = user.email;
                 state.profileImg = user.profileImg;
             }
             

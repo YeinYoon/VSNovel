@@ -5,12 +5,12 @@
     <div class="modal_style">
       <div class="close" @click="send_event">X</div>
       <div v-if="modal_step == 0">
-        <StoreVue :modalData="modalData" @next="modal_step++" />
+        <StoreVue :modalData="modalData"/>
       </div>
-      <div v-if="modal_step == 1">
+      <!-- <div v-if="modal_step == 1">
         <StoreCard @next="modal_step++" />
-      </div>
-      <div v-if="modal_step == 2">
+      </div> -->
+      <div v-if="modal_step == 1">
         <div class="con">
           <div class="font">결제 완료</div>
           <div class="btn_areas">
@@ -23,7 +23,7 @@
   </div>
 </template>
 <script>
-import StoreCard from "./StoreCard.vue";
+// import StoreCard from "./StoreCard.vue";
 import StoreVue from "./StoreVue.vue";
 
 export default {
@@ -45,7 +45,7 @@ export default {
     },
   },
   components: {
-    StoreCard,
+    // StoreCard,
     StoreVue,
   },
 };
