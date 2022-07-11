@@ -33,14 +33,14 @@
                         <div>{{unit.USER_EMAIL}}</div>
                         <div>{{unit.USER_NAME}}</div>
                         <div>
-                            <div class="delete">삭제</div>
+                            <div class="delete" @click="delUnit(unit.USER_ID)">삭제</div>
                         </div>
                     </div>
                 </div>
                 <!-- 전체 게시글 조회 -->
                 <div class="admin_post" v-if="btn_click == 'post'">
                     <div class="admin_post_title">
-                        <span>게시판</span>
+                        <span>ID</span>
                         <span>제목</span>
                         <span>작성자</span>
                         <span>작성일자</span>
@@ -53,7 +53,7 @@
                         <div>{{post.USER_NICKNAME}}</div>
                         <div>{{post.POST_ESTADATE.substring(0,10)}}</div>
                         <div>
-                            <div class="delete">삭제</div>
+                            <div class="delete" @click="delPost(post.POST_CODE)">삭제</div>
                         </div>
                     </div>
                 </div>
@@ -75,8 +75,8 @@
                         <div>{{novel.NOVE_UPDATE}}</div>
                         <div>{{novel.NOVE_BOUGHT}}</div>
                         <div>
-                            <div class="block">차단</div>
-                            <div class="delete">삭제</div>
+                            <!-- <div class="block">차단</div> -->
+                            <div class="delete" @click="delNovel(novel.NOVE_CODE)">삭제</div>
                         </div>
                     </div>
                 </div>
@@ -177,6 +177,27 @@ export default {
                     this.btn_click = 'banner';
                     break;
             }
+        },
+        async delUnit(unitData){
+            const unitDatas = {
+                unitId:unitData
+            }
+            await axios.post('/api/admin/delUnit', unitDatas)
+            this.click_btn('unit')
+        },
+        async delPost(postData){
+            const postDatas = {
+                "postCd":postData
+            }
+            await axios.post('/api/admin/delPost', postDatas)
+            this.click_btn('post')
+        },
+        async delNovel(novelData){
+            const novelDatas = {
+                "novelCd":novelData
+            }
+            await axios.post('/api/admin/delNovel', novelDatas)
+            this.click_btn('novel')
         }
     },
     async mounted(){
@@ -278,6 +299,7 @@ export default {
     height: 100%;
     background-color: #484848;
     padding: 20px;
+    overflow: auto;
 }
 /* 제목들 */
 .admin_unit_title, .admin_post_title,
@@ -315,6 +337,7 @@ export default {
     line-height: 30px;
     margin: 0 2px;
 }
+.delete{cursor: pointer;}
 .banner_add{
     text-align: center;
     border-radius: 20px;

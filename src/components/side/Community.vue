@@ -24,7 +24,7 @@
             <!-- 상단 버튼 프레임 -->
             <div class="commu_btn_area">
               <!-- 관리자 계정만 노출 -->
-              <div class="commu_btn_red" @click="openPostModal">
+              <div class="commu_btn_red" @click="openPostModal" v-if="$store.state.userId == 'admin'">
                 <span class="commu_btn_manage">관리</span>
               </div>
               <!-- 글쓰기 버튼 -->
@@ -47,8 +47,7 @@
                 <div class="commu_back">
                   <!-- 글제목 -->
                   <div class="commu_back_title">{{ p.POST_TITLE }}</div>
-                  
-                  <div class="commu_back_check"><input type="checkbox" v-model="p.check" value="i" ></div>
+                  <div class="commu_back_check" v-if="$store.state.userId == 'admin'"><input type="checkbox" v-model="p.check" value="i"></div>
                   <!-- (조건) 리뷰 게시판일 경우 별점 -->
                   <!-- <span v-if="$store.state.communityService=='R'" class="commu_str">★★★★★
                     <span class="commu_str_draw">★★★★★</span> 
@@ -550,7 +549,7 @@ export default {
     closePostModal(val) {
       this.postModal=val;
     }
-  },
+  }
 };
 </script>
 
