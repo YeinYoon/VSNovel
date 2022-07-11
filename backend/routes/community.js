@@ -269,7 +269,7 @@ router.post('/reviewPosting', async(req, res)=>{
 
     var newTime = timestamp.getTimestamp();
     var ReviewPosting = await db.execute(`INSERT INTO tbl_score VALUES(
-        tbl_score_seq.NEXTVAL, '${req.user.USER_ID}', ${req.body.selectNovel},
+        tbl_score_seq.NEXTVAL, '${req.user.USER_ID}', (select nove_code from tbl_novel WHERE nove_title = '${req.body.selectNovel}'),
         '${req.body.content}', '${req.body.score}', '${req.body.title}', 0, '${req.user.USER_NICKNAME}', '${newTime}')`);
     if(ReviewPosting == "err") {
         res.send("err");
@@ -281,7 +281,7 @@ router.post('/reviewPosting', async(req, res)=>{
 // 포스트 수정
 router.post('/reviewEditPost', async (req,res)=>{
     
-    var result = await db.execute(`UPDATE tbl_score SET scor_title = '${req.body.title}', scor_content = '${req.body.content}', scor_score = '${req.body.score}' WHERE scor_code = '${req.body.scorCode}'`) ;
+    var result = await db.execute(`UPDATE tbl_score SET nove_code = (select nove_code from tbl_novel WHERE nove_title = '${req.body.selectNovel}') ,scor_title = '${req.body.title}', scor_content = '${req.body.content}', scor_score = '${req.body.score}' WHERE scor_code = '${req.body.scorCode}'`) ;
     if(result == "err") {
         res.send("err");
     } else {

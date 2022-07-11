@@ -310,7 +310,6 @@ export default {
       novelSearch : '', //작품선택 키워드 검색 변수
       novelIsON: null, //모달 검색시 작품이 있는지 없는지 알 수 있는 변수
       novelSearchList : [], //모달 검색시 나오는 정보 리스트 
-      novelCheckPost : '', //작품 선택시 저장되는 작품제목
       novelPostIsON : false, //최종적으로 작품이 클릭시 작품 제목의 유무를 알 수 있는 변수
 
       checkedvalues : [],
@@ -335,8 +334,8 @@ export default {
       // 새글 작성
       inputTitle : "",
       inputContent : "",
-      selectScore : "1", //작품선택 별점
-      //selectNovel : 1,
+      selectScore : "", //작품선택 별점
+      novelCheckPost : "", //작품 선택시 저장되는 작품제목
 
       // 수정모드
       editMode : false,
@@ -402,6 +401,7 @@ export default {
         this.$router.push('/signin');
       } else {
         this.viewState = 2;
+        this.novelPostIsON = false;
       }
     },
 
@@ -624,6 +624,7 @@ export default {
         })
       }else {
         data = {
+          selectNovel : this.novelCheckPost,
           postCode : this.postCode,
           title : this.inputTitle,
           content : this.inputContent,
