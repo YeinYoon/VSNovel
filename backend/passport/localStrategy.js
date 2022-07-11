@@ -16,13 +16,16 @@ module.exports = ()=>{
         } else {
             if(result.rows.length != 0) { //해당 아이디를 찾았을 경우
                 var exUser = result.rows[0];
-                const pwCheck = await bcrypt.compare(pw, exUser.USER_PWD);
-                if(pwCheck) {
+                if(exUser.USER_PWD == 'KAKAO') { // 카카오 계정일 경우 비밀번호 체크가 필요없음
                     done(null, exUser);
                 } else {
-                    done(null, false, {msg : "비밀번호가 일치하지 않습니다."});
+                    const pwCheck = await bcrypt.compare(pw, exUser.USER_PWD);
+                    if(pwCheck) {
+                        done(null, exUser);
+                    } else {
+                        done(null, false, {msg : "비밀번호가 일치하지 않습니다."});
+                    }
                 }
-
             } else {
                 done(null, false, {msg : "가입되지 않은 회원입니다."});
             }

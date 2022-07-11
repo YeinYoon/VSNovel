@@ -25,6 +25,7 @@ import Library from './components/side/Library.vue';
 import Notice from './components/side/Notice.vue';
 
 import Login from './components/auth/Login.vue';
+import KakaoLogin from './components/auth/KakaoLogin.vue'
 import SignUp from './components/auth/SignUp.vue';
 import FindAcc from './components/auth/FindAcc.vue';
 import Engine from './components/engine/Engine.vue';
@@ -34,36 +35,47 @@ const routes = [
     path:"/",
     name: 'Main',
     component : Main,
+    props:true
   },
   {
     path : '/admin',
     name : 'Admin',
     component:Admin,
+    props:true
   },
   {
     path : "/signin",
-    component : Login
+    component : Login,
+    props:true
+  },
+  {
+    path : "/auth/kakao",
+    component : KakaoLogin,
+    props:true
   },
   { 
     path : "/signup",
-    component : SignUp
+    component : SignUp,
+    props:true
   },
   { 
     path : "/findAcc",
-    component : FindAcc
+    component : FindAcc,
+    props:true
   },
   {
     path : '/mypage',
     name: 'MyPage',
     component : MyPage,
+    props:true,
     children:  [
-      { path : 'mymain',        component : MyPageMain },
+      { path : 'mymain',        component : MyPageMain, props:true},
       // { path : 'mycard',        component : MyCard },
-      { path : 'mypost',        component : MyPost },
-      { path : 'myreview',      component : Myreview },
-      { path : 'prefer',        component : Prefer },
-      { path : 'myalarm',       component : MyAlarm },
-      { path : 'mywithdrawal',  component : MyWithdrawal },
+      { path : 'mypost',        component : MyPost, props:true },
+      { path : 'myreview',      component : Myreview, props:true },
+      { path : 'prefer',        component : Prefer, props:true },
+      { path : 'myalarm',       component : MyAlarm, props:true },
+      { path : 'mywithdrawal',  component : MyWithdrawal, props:true },
     ]
   },
   {
@@ -96,7 +108,7 @@ const routes = [
     component : Community,
     props:true,
     children:[
-      {path : 'villagemain', name:'VillageMain', component : VillageMain},
+      {path : 'villagemain', name:'VillageMain', component : VillageMain, props: true},
       {path : 'register/:id', name:'Register', component : Register, props: true}
     ]
   },

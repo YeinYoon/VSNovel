@@ -315,7 +315,25 @@ export default {
         this.getPostList('R');
         break;                
     }
-    
+    if(this.$route.params.boar_code != undefined){
+      this.viewState = 1;
+      switch(this.$route.params.boar_code){
+        case '1' : 
+         this.$store.commit('communityServiceCng', 'F');
+         break;
+        case '2' : 
+         this.$store.commit('communityServiceCng', 'W');
+         break;
+        case '3' : 
+         this.$store.commit('communityServiceCng', 'T');
+         break;
+        case '4' : 
+         this.$store.commit('communityServiceCng', 'R');
+         break;
+      }
+      //데이터 변경
+      this.postClick(1, this.$route.params.post_code);
+    }
   },
   computed: {
     communityService: function() {
