@@ -16,7 +16,7 @@
           </div>
         </div> <!--ID와 패스워드 입력부 끝-->
         <div class="logins"> <!--소셜로그인 버튼들-->
-          <div class="kakao_yellow"><!--카카오 소셜 로그인 박스-->
+          <div class="kakao_yellow" @click="kakaoLogin()"><!--카카오 소셜 로그인 박스-->
             <span class="kakao_label">KAKAO</span> 
           </div>
           <div class="google_red"><!--구글 소셜 로그인 박스-->
@@ -319,30 +319,34 @@ import axios from '../../axios';
 export default {
     name:"Login",
     data(){
-        return {
-          id : "",
-          pw : ""
-        }
+      return {
+        id : "",
+        pw : ""
+      }
     },
     methods : {
-        login() {
-            var loginData = {
-                id : this.id,
-                pw : this.pw
-            }
-            axios.post('/api/auth/login', loginData)
-            .then((result)=>{
-                if(result.data=='ok') {
-                    this.$store.commit('gModalOn', {msg : "로그인되었습니다.", size : "small"});
-                    this.$router.push('/');
-                } else {
-                    this.$store.commit('gModalOn', {msg : result.data, size : "normal"});
-                }
-            })
-            .catch((err)=>{
-                console.error(err);
-            })
+      login() {
+        var loginData = {
+          id : this.id,
+          pw : this.pw
         }
+        axios.post('/api/auth/login', loginData)
+        .then((result)=>{
+          if(result.data=='ok') {
+            this.$store.commit('gModalOn', {msg : "로그인되었습니다.", size : "small"});
+            this.$router.push('/');
+          } else {
+            this.$store.commit('gModalOn', {msg : result.data, size : "normal"});
+          }
+        })
+        .catch((err)=>{
+          console.error(err);
+        })
+      },
+      kakaoLogin() {
+        const params = {redirectUri : 'http://localhost:8080/auth/kakao'};
+        window.Kakao.Auth.authorize(params);
+      } 
     }
 }
 </script>
