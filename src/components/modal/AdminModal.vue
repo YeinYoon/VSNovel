@@ -12,8 +12,10 @@
           <span class="modal_title">추가하기</span>
         </div>
         <div>
-          <div class="cafe_banner">
+          <div class="admin_cafe_banner">
             <input type="file" name="file" id="file">
+            <input type="text" name="url" id="url" placeholder="배너 이미지 경로 입력" v-model="banner_img">
+            <img class="url_img" :src="banner_img" v-if="banner_img != ''"/>
           </div>
         </div>
       </div>
@@ -24,8 +26,8 @@
         <div>
           <span class="cafe_qna">이 배너를 추가하시겠습니까?</span>
         </div>
-        <button  class="cafe_modal_btn" @click="$emit('modal')">확인</button>
-        <button class="cafe_modal_btn" @click="$emit('modal')">취소</button>
+        <button  class="cafe_modal_btn" @click="clickEvent()">확인</button>
+        <button class="cafe_modal_btn" @click="clickEvent()">취소</button>
       </div>
     </div>
   </div>
@@ -37,19 +39,19 @@ export default {
   name: "vsn_modal_universal",
   data() {
     return {
+      banner_img : '',
     };
   },
   props: {
   },
-  methods: {}
+  methods: {
+    clickEvent(){
+      this.$emit('modal');
+    }
+  }
 };
 </script>
 <style>
-.cafe_banner img {
-    width: 100%;
-    height: 150px;
-    border-radius: 15px;
-}
 .cafe_modal_title_inner{
     text-align:left;
 }
@@ -57,13 +59,30 @@ export default {
     color:white;
     font-size: 1.3em;
 }
-.cafe_banner {
+.admin_cafe_banner {
   background-color:gray;
   border-radius: 15px;
   height: 150px;
   width: 95%;
   margin: 20px 2.5% 0px 2.5%; 
   padding: 15px 5px;
+}
+.admin_cafe_banner > input{
+  display: inline-block;
+  width: 100%;
+}
+#url{
+  width: 40%;
+  margin: 20px 0;
+}
+.url_img{
+  display: inline-block;
+  width: 50%;
+  height: 130px;
+  position: absolute;
+  top: 57px;
+  right: 40px;
+  border-radius: 20px;
 }
 input[type=file]::file-selector-button {
   width: 150px;
