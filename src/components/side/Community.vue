@@ -272,7 +272,7 @@
               <span v-if="editMode==false && communityService != 'R'" @click="posting()">글쓰기</span>
               <span v-if="editMode==true" @click="editPost()">수정</span>
             </div>
-            <div class="write_cancle_btn" @click="this.viewState = 0"><span>취소</span></div>
+            <div class="write_cancle_btn" @click="editCancel()"><span>취소</span></div>
           </div>
         </div>
 
@@ -401,7 +401,6 @@ export default {
         this.$router.push('/signin');
       } else {
         this.viewState = 2;
-        this.novelPostIsON = false;
       }
     },
 
@@ -571,7 +570,7 @@ export default {
 
             this.inputTitle = "";
             this.inputContent = "";
-            this.novelCheckPost = "";
+            //this.novelCheckPost = "";
             this.selectScore = "";
           } else {
             this.$store.commit('gModalOn', {size : "normal", msg : "게시글 등록 실패"});
@@ -752,6 +751,14 @@ export default {
     },
     closePostModal(val) {
       this.postModal=val;
+    },
+    editCancel() {
+      this.viewState = 0
+      this.inputTitle = '';
+      this.inputContent = '';
+      this.editMode = false;
+      this.inputScore = '';
+      this.inputNovel = '';
     }
   },
 };
