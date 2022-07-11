@@ -4,7 +4,7 @@ var router = express.Router();
 const db = require('../database/db');
 
 router.get('/carousel', async (req, res)=>{
-  var result = await db.execute(`SELECT * FROM tbl_banner ORDER BY bann_code ASC `);
+  var result = await db.execute(`select * from tbl_banner where post_code in (select post_code from tbl_post where boar_code = 6)`);
   if(result == "err") {
     console.log("DB쿼리 실패");
   } else {

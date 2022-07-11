@@ -15,7 +15,7 @@
           <span class="modal_writer">???</span>
         </div>
         <!-- 상세 이미지 -->
-        <div class="carousel_div">
+        <div class="carousel_div" >
           <SwiperCarousel />
         </div>
         <!-- 상세 내용 -->
@@ -56,10 +56,14 @@
 
 <script>
 import SwiperCarouselVue from "./SwiperCarousel";
+
+
 export default {
   name: "StoreVue",
   data() {
-    return {};
+    return {
+      
+    };
   },
   props: {
     modalData: Object,

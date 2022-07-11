@@ -6,8 +6,8 @@
     :autoplay="sec"
     :pauseAutoplayOnHover="status"
   >
-    <slide v-for="slide in bannerData" :key="slide">
-      <div class="carousel__item"><img :src="slide.BANN_IMG" @click="bannerBtn(slide)"></div>
+    <slide v-for="(slide,i) in bannerData" :key="i">
+      <div class="carousel__item"><img :src="slide.BANN_IMG" @click="bannerBtn(i)"></div>
     </slide>
 
     <template #addons>
@@ -64,10 +64,15 @@ export default {
     openSlide(link){
       this.$store.commit('gModalOn', {msg:"hi", bg : link, size : "ad"});
     },
-    bannerBtn(slide) {
-      if(slide.POST_CODE != null) {
-      this.$router.params({
-        name: 'Notice'
+    bannerBtn(i) {
+      console.log(this.bannerData)
+      console.log(this.bannerData[i].POST_CODE)
+      if(this.bannerData[i].POST_CODE != null) {
+        this.$router.params({
+          name: 'Notice',
+          params: {
+              POST_CODE : this.bannerData.POST_CODE
+            }
       })
       }
     },

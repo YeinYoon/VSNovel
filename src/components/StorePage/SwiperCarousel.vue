@@ -5,8 +5,8 @@
     :autoplay="sec"
     :pauseAutoplayOnHover="true"
   >
-    <slide v-for="slide in datas" :key="slide">
-      <img :src="`${slide.link}`" class="carousel_imga"/>
+    <slide v-for="slide in bannerData" :key="slide" @click="bannerBtn(slide)">
+      <img :src="`${slide.BANN_iMG}`" class="carousel_imga"/>
       <img :src="`${slide.link}`" class="carousel_img"/>
     </slide>
 
@@ -21,15 +21,15 @@
 // If you are using PurgeCSS, make sure to whitelist the carousel CSS classes
 import "vue3-carousel/dist/carousel.css";
 import { Carousel, Slide, Pagination, Navigation } from "vue3-carousel";
-import data from "../../assets/DataJs/data.js";
+import axios from '../../axios';
 
 export default {
   name: "App",
   data() {
     return {
-      datas: data,
       sec: 1500,
       status : true,
+      bannerData : []
     };
   },
   components: {
@@ -38,6 +38,27 @@ export default {
     Pagination,
     Navigation,
   },
+  
+  methods: {
+    getBanner() {
+      axios.get('/api/store/getbanner')
+      .then((result) => {
+        if(result.data == "err") {
+          console.log("banner's not exist")
+        } else {
+          console.log("hihiih")
+          this.bannerData = result.data
+        }
+      })
+    },
+    bannerBtn(data) {
+      console.log(this.bannerData[0].BANN_IMG)
+      console.log(data)
+    }
+  },
+  created() {
+    this.getBanner()
+  }
 };
 </script>
 <style>
