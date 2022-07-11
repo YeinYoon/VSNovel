@@ -16,6 +16,7 @@
             <input type="file" name="file" id="file">
             <input type="text" name="url" id="url" placeholder="배너 이미지 경로 입력" v-model="banner_img">
             <img class="url_img" :src="banner_img" v-if="banner_img != ''"/>
+            <button @click="banner_img = ''">경로 지우기</button>
           </div>
         </div>
       </div>
@@ -72,8 +73,15 @@ export default {
   width: 100%;
 }
 #url{
-  width: 40%;
+  width: 27%;
   margin: 20px 0;
+}
+.admin_cafe_banner > button {
+  margin: 0 0 0 5px;
+  border-radius: 10px;
+  background-color: #2a2a2a;
+  color: white;
+  width: 90px;
 }
 .url_img{
   display: inline-block;
