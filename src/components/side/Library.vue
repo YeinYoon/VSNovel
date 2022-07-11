@@ -49,23 +49,60 @@
 </template>
 
 <script>
+import axios from '../../axios'
 export default {
   name: "StoreSide",
   data() {
     return {
       novelList : [],
-
+      epList : [],
+      totalList : []
     };
   },
   created() {
     this.$store.commit('sideBarOn');
     this.$store.commit('currentServiceCng', 'L');
 
-
+    this.getNovelList();
   },
   methods: {
     getNovelList() {
-      
+      axios.get('/api/library/getNovelList')
+      .then((result)=>{
+        if(result.data == "err") {
+          console.log("유저 소유 소설 데이터 불러오기 실패");
+        } else {
+          this.novelList = result.data;
+          this.getEpList();
+        }
+      })
+    },
+    getEpList() {
+      axios.get('/api/library/getEpList')
+      .then((result)=>{
+        if(result.data == "err") {
+          console.log("유저 소유 소설 에피소드 데이터 불러오기 실패");
+        } else {
+          this.epList = result.data;
+          this.getTotalList();
+        }
+      })
+    },
+    getTotalList() {
+      for(var i=0; i<this.novelList.length; i++) {
+        this.totalList.push({
+          NOVE_CODE : this.novelList[i].NOVE_CODE,
+          RECENT_EP : null,
+          EP_LIST : []
+        })
+        for(var j=0; j<this.epList.length; j++) {
+          if(this.totalList[i].NOVE_CODE == this.epList[j].NOVE_CODE) {
+            this.totalList[i].EP_LIST.push(this.epList[j]);
+            this.totalList[i].RECENT_EP = this.epList[j].POSS_RECENTEP;
+          }
+        }
+      }
+      console.log(this.totalList);
     }
   },
 };
