@@ -41,6 +41,10 @@
       <div class="NavItems" title="저장">
         <img src="@/assets/icons/white/upcloud.png" @click="uploadVN()">
       </div>
+
+      <div class="NavItems" title="저장">
+        <img src="@/assets/icons/white/redo.png" @click="BackToVSN()">
+      </div>
     </div>
     <!-- 좌측 상단 햄버거메뉴 -->
 
@@ -199,6 +203,9 @@ export default {
     noImage(event){
       event.target.src="@/assets/imgs/e_no_image.png"
     },
+    BackToVSN(){
+      this.$router.push('/library')
+    },
     //BGM 관련
     bgmOn() {
       console.log('BGM : ' + this.currentBgm);
@@ -314,6 +321,13 @@ export default {
 label {
   display: block;
 }
+.VEngineCanvas {
+  position: absolute;
+  width: calc(100%);
+  height: 100%;
+  color: white;
+}
+
 .ViewerBackground {
   background: #5e5e5e;
   width: 100%;
