@@ -175,24 +175,27 @@ export default {
       if(this.VN.plotList[this.plot].pages[this.index].type=='n') {
         this.move();
       }else if(this.VN.plotList[this.plot].pages[this.index].type=='e'){
-        this.$emit('changeStatus',"end")
+        this.status="end"
       }else {
         console.log(this.VN.plotList[this.plot].pages[this.index])
         this.s1=this.VN.plotList[this.plot].pages[this.index].select[0];
         this.s2=this.VN.plotList[this.plot].pages[this.index].select[1];
         this.s3=this.VN.plotList[this.plot].pages[this.index].select[2];
-        this.$emit("changeStatus","select")
+        this.status="select"
       }
     },
     move: function(){
-      if(this.VN.plotList[this.plot].pages.length==this.index+1) this.$emit('move',{plot:this.VN.plotList[this.plot].nextPlot,index:0})
-      else this.$emit('move',{plot:this.plot,index:this.index+1})
+      if(this.VN.plotList[this.plot].pages.length==this.index+1){this.plot=this.VN.plotList[this.plot].nextPlot
+      this.index=0
+      }
+      else this.index=this.index+1
     },
     select:function(plot,index){
       if(!this.selectEdit){
-        this.$emit('changeStatus','play')
-        this.$emit('move',{plot,index})
-      }
+        this.status="play"
+        this.plot=plot
+        this.index=index
+        }
     },
     noImage(event){
       event.target.src="@/assets/imgs/e_no_image.png"
