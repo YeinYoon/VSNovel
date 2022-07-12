@@ -78,7 +78,7 @@ export default {
   methods: {
     goToViewer(){
       let pjCode=159
-      let ep=1
+      let ep=12
       console.log("goto")
       this.$router.push({name: "Viewer",
         params: { pjCode: pjCode, ep:ep },})
