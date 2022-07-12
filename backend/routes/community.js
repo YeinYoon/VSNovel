@@ -30,7 +30,7 @@ router.post('/getPostList', async(req,res)=>{
         res.send(postList.rows);
     }
 
-}),
+})
 
 // 커뮤니티 포스트 조회
 router.post('/getPost', async (req,res)=>{
@@ -212,6 +212,89 @@ router.post('/communityModal',async(req,res)=>{
         list.push(modalpost.rows[0].POST_TITLE)
     }
     res.send(list)
-  })
+})
+
+router.post('/novelSearch',async(req,res)=>{
+    var result = await db.execute(`SELECT nove_path, nove_title FROM tbl_novel where nove_title like '${req.body.novelSearch}%' 
+    AND nove_code = (SELECT nove_code FROM tbl_possession WHERE USER_ID = '${req.user.USER_ID}')`);
+
+    if(result == "err") {
+        res.send("err");
+    } else {
+        res.send(result.rows);
+    }
+})
+
+
+router.post('/getReviewList', async(req,res)=>{
+
+    var ReviewList = await db.execute(`SELECT * FROM tbl_score ORDER BY scor_estadate DESC`);
+    if(ReviewList == "err") {
+        res.send("err");
+    } else {
+        console.log(ReviewList)
+        res.send(ReviewList.rows);
+    }
+
+})
+
+
+router.post('/getReview', async (req,res)=>{
+
+    // 조회수 증가
+    var ReviewUp = await db.execute(`UPDATE tbl_score SET scor_view = scor_view + 1 WHERE scor_code = ${req.body.scorCode}`); 
+    if(ReviewUp == "err") {
+        console.log("조회수 증가 실패...");
+    } else {
+        console.log("해당 포스트에 대한 조회수 증가");
+    }    
+
+    // 본문조회 리뷰
+    var Reviewpost = await db.execute(`SELECT * FROM tbl_score WHERE scor_code = ${req.body.scorCode}`);
+    if(Reviewpost == "err") {
+        console.log("err");
+        res.send("err");
+    } else {
+        console.log(Reviewpost);
+        res.send(Reviewpost.rows);
+    }
+
+})
+
+
+router.post('/reviewPosting', async(req, res)=>{
+
+    var newTime = timestamp.getTimestamp();
+    var ReviewPosting = await db.execute(`INSERT INTO tbl_score VALUES(
+        tbl_score_seq.NEXTVAL, '${req.user.USER_ID}', (select nove_code from tbl_novel WHERE nove_title = '${req.body.selectNovel}'),
+        '${req.body.content}', '${req.body.score}', '${req.body.title}', 0, '${req.user.USER_NICKNAME}', '${newTime}')`);
+    if(ReviewPosting == "err") {
+        res.send("err");
+    } else {
+        res.send("ok");
+    }
+})
+
+// 포스트 수정
+router.post('/reviewEditPost', async (req,res)=>{
+    
+    var result = await db.execute(`UPDATE tbl_score SET nove_code = (select nove_code from tbl_novel WHERE nove_title = '${req.body.selectNovel}') ,scor_title = '${req.body.title}', scor_content = '${req.body.content}', scor_score = '${req.body.score}' WHERE scor_code = '${req.body.scorCode}'`) ;
+    if(result == "err") {
+        res.send("err");
+    } else {
+        res.send("ok");
+    }    
+})
+
+//포스트 삭제
+router.post('/reviewDeletePost', async(req, res)=>{
+
+    var result = await db.execute(`DELETE FROM tbl_score WHERE scor_code = '${req.body.scorCode}'`);
+    if(result == "err") {
+        res.send("err");
+    } else {
+        res.send("ok");
+    }
+})
 
 module.exports = router;
