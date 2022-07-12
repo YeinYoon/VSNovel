@@ -15,7 +15,7 @@
     <div class="list_section">
 
       <!-- 반복 -->
-      <div class="work_list" v-for="(novel, i) in totalList" :key="i">
+      <div class="work_list" v-for="(novel, i) in novelList" :key="i">
 
         <!-- 작품 대표이미지 -->
         <img class="list_img" /> 
@@ -27,7 +27,7 @@
             <!-- 총편수 및 소유한 편수 -->
             <span class="list_all_percent">
               <progress value="13" max="35"></progress>
-              <span class="progress_text">시리즈 총 편수 {{novel.EP_LIST.length}}/??</span>
+              <span class="progress_text">시리즈 총 편수 {{novel.ep.length}}/{{novel.LENGTH}}</span>
             </span>
 
             <!-- 최근 플레이날짜 -->
@@ -37,14 +37,15 @@
             <div class="sub_btn">이 작품 리뷰 남기기</div>
             <div class="sub_btn">스토어 페이지</div>
             <div class="sub_btn" @click="openEp()">에피소드 목록</div>
-            <div class="play_btn" @click="goToViewer()">PLAY</div>
+            <!-- <div class="play_btn" @click="goToViewer()">PLAY</div> -->
           </div>
 
           <!-- 에피목록 -->
           <div class="lib_eplist">
             <div class="lib_eplist_title">에피소드 목록</div>
             <div class="lib_eplist_list">
-              <div class="lib_eplist_item">1</div>
+              <div></div>
+              <div v-for="(ep, i) in novel.ep" :key="i" class="lib_eplist_item" @click="goToViewer(novel.PROJ_CODE, ep.POSS_EP)">{{ep.POSS_EP}}</div>
             </div>
           </div>
 
@@ -90,6 +91,11 @@ export default {
           console.log("유저 소유 소설 데이터 불러오기 실패");
         } else {
           this.novelList = result.data;
+          for(let i=0;i<this.novelList.length;i++){
+            this.novelList[i].ep=[]
+            this.novelList[i].select=null
+          }
+          console.log(this.novelList)
           this.getEpList();
         }
       })
@@ -101,28 +107,15 @@ export default {
           console.log("유저 소유 소설 에피소드 데이터 불러오기 실패");
         } else {
           this.epList = result.data;
-          this.getTotalList();
-        }
-      })
-    },
-    getTotalList() {
-      for(var i=0; i<this.novelList.length; i++) {
-        this.totalList.push({
-          NOVE_CODE : this.novelList[i].NOVE_CODE, // 소설 코드
-          NOVE_TITLE : null, // 소설 제목
-          RECENT_EP : null, // 현재 소설의 회차중 가장 최근에 본 것
-          EP_LIST : [], // 에피소드 목록
-          EP_OPEN : false, // 에피소드 목록을 열었다 닫았다 상태값
-        })
-        for(var j=0; j<this.epList.length; j++) {
-          if(this.totalList[i].NOVE_CODE == this.epList[j].NOVE_CODE) {
-            this.totalList[i].NOVE_TITLE = this.epList[j].NOVE_TITLE;
-            this.totalList[i].EP_LIST.push(this.epList[j]);
-            this.totalList[i].RECENT_EP = this.epList[j].POSS_RECENTEP;
+          for(let i=0;i<this.epList.length;i++){
+            for(let j=0;j<this.novelList.length;j++){
+              if(this.epList[i].NOVE_CODE==this.novelList[j].NOVE_CODE){
+                this.novelList[j].ep.push(this.epList[i])
+              }
+            }
           }
         }
-      }
-      console.log(this.totalList);
+      })
     },
 
     openEp() {

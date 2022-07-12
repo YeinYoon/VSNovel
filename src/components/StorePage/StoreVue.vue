@@ -25,7 +25,7 @@
         총 회차 {{this.epList.length}}
       </div>
 
-      <div class="Store_Novel_Img"><img src="@/assets/imgs/adver.png"></div>
+      <div class="Store_Novel_Img"><img src="@/assets/imgs/adver.jpg"></div>
 
       <div class="Store_Novel_Buy" @click="$emit('next')">
 

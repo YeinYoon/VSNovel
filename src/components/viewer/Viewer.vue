@@ -153,7 +153,7 @@ export default {
   methods : {
     async getEP() {
         console.log(`Project/PJ${this.pjCode}/dev/ep${this.ep}.json`)
-      var result = await storage.getVN(`Project/PJ${this.pjCode}/dev/ep${this.ep}.json`); // unit8array(utf16) 형식으로 데이터를 읽어옴
+      var result = await storage.getVN(`Project/PJ${this.pjCode}/episode/ep${this.ep}.json`); // unit8array(utf16) 형식으로 데이터를 읽어옴
       console.log(result)
       if(result != "err") {
         var uint8array = new TextEncoder("utf-8").encode(result); // utf8 형식으로 변환
