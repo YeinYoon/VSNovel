@@ -37,7 +37,7 @@
             <div class="sub_btn">이 작품 리뷰 남기기</div>
             <div class="sub_btn">스토어 페이지</div>
             <div class="sub_btn" @click="openEp()">에피소드 목록</div>
-            <div class="play_btn">PLAY</div>
+            <div class="play_btn" @click="goToViewer()">PLAY</div>
           </div>
 
           <!-- 에피목록 -->
@@ -76,15 +76,14 @@ export default {
     this.getNovelList();
   },
   methods: {
-    getNovelList() {
-      
-    },
     goToViewer(){
       let pjCode=159
       let ep=1
       console.log("goto")
       this.$router.push({name: "Viewer",
         params: { pjCode: pjCode, ep:ep },})
+    },
+    getNovelList(){
       axios.get('/api/library/getNovelList')
       .then((result)=>{
         if(result.data == "err") {
