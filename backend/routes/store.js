@@ -171,9 +171,13 @@ router.post('/getUserPossession', async (req, res)=>{
 
 router.post('/addUserPossession', async (req, res)=>{
     var newTime = timestamp.getTimestamp();
-    var result = await db.execute(`INSERT INTO tbl_possession VALUES(
+    console.log(`INSERT INTO tbl_possession VALUES(
         ${req.body.ep}, '${req.user.USER_ID}', ${req.body.noveCode},
         ${req.body.price}, 'B', '${newTime}', null, '${req.body.payCode}', null
+    )`);
+    var result = await db.execute(`INSERT INTO tbl_possession VALUES(
+        ${req.body.ep}, '${req.user.USER_ID}', ${req.body.noveCode},
+        ${req.body.price}, 'B', '${newTime}', null, '${req.body.payCode}', null, null
     )`);
     
     if(result == "err") {
