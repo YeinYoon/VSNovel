@@ -264,3 +264,47 @@ exports.getBannerUrlList = () => {
       
     return data;
 }
+
+// viewer
+
+
+exports.getVN = async (filePath) => { //단일 JSON 파일 가져오기
+    const params = {
+        Bucket: "vsnovel",
+        Key : filePath,
+    }
+
+    var result = (async () => {
+        try {
+            var data;
+            data = await s3.getObject(params).promise()
+            .then((data)=>{
+                return data.Body
+            })
+        } catch (err) {
+            console.log(err);
+            return "err"
+        }
+        return data
+    })();
+    
+    return result;
+}
+
+
+
+exports.getUrl = async (filePath) => { // 특정 경로의 파일 URL 가져오기 (단일)
+    const params = {
+        Bucket: "vsnovel",
+        Key : filePath,
+        Expires: 604800
+    }
+
+    var url = new Promise((resolve, reject) => {
+        s3.getSignedUrl("getObject", params, function(err, url) {
+         if (err) return reject(err);
+         resolve(url);
+        });
+    });
+    return url;
+}

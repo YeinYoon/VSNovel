@@ -5,10 +5,7 @@
 <div class="content">
     <Menu v-bind:class="{'vsnmenu':true}"></Menu>
     <Side v-bind:class="{'sideBar':true}" v-if="$store.state.sideBarState == true"></Side>
-    <!-- <Vsncontent v-bind:class="{'vsncontent':true}"></Vsncontent> -->
-    <!-- <div class="vsncontainer"> -->
-      <router-view></router-view>
-    <!-- </div> -->
+    <router-view></router-view>
 </div>
 </template>
 
@@ -35,7 +32,6 @@ export default {
     Spinner,
     Side,
     TutorialGuide
-
     // vsnside,
     // Vsncontent,
   },
