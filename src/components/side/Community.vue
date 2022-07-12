@@ -196,7 +196,7 @@
                 <div class="commu_novel_modal_cancel" @click="novelCancel()"><img src="@/assets/icons/white/close.png"></div>
                 <div class="commu_novel_modal_search">
                   <div class="commu_novel_modal_img"><img src="@/assets/icons/magnifier.png"></div>
-                  <input type="text" v-model="novelSearch">
+                  <input type="text" :value="novelSearch" @input="novelSearch=$event.target.value">
                 </div>
                 <div class="commu_novel_modal_text"><span>작품선택</span></div>
                 <div class="commu_novel_modal_article_frame" v-if="novelIsON == 1 && novelSearch != ''">
