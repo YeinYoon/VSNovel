@@ -15,19 +15,19 @@
     <div class="list_section">
 
       <!-- 반복 -->
-      <div class="work_list">
+      <div class="work_list" v-for="(novel, i) in totalList" :key="i">
 
         <!-- 작품 대표이미지 -->
         <img class="list_img" /> 
         <div class="work_list_con">
           <div class="list_span">
             <!-- 제목 -->
-            <span class="list_title">제목</span>
+            <span class="list_title">{{novel.NOVE_TITLE}}</span>
 
             <!-- 총편수 및 소유한 편수 -->
             <span class="list_all_percent">
               <progress value="13" max="35"></progress>
-              <span class="progress_text">시리즈 총 편수 13/35</span>
+              <span class="progress_text">시리즈 총 편수 {{novel.EP_LIST.length}}/??</span>
             </span>
 
             <!-- 최근 플레이날짜 -->
@@ -36,8 +36,18 @@
           <div class="btn_container">
             <div class="sub_btn">이 작품 리뷰 남기기</div>
             <div class="sub_btn">스토어 페이지</div>
-            <div class="play_btn" @click="goToViewer">PLAY</div>
+            <div class="sub_btn" @click="openEp()">에피소드 목록</div>
+            <div class="play_btn">PLAY</div>
           </div>
+
+          <!-- 에피목록 -->
+          <div class="lib_eplist">
+            <div class="lib_eplist_title">에피소드 목록</div>
+            <div class="lib_eplist_list">
+              <div class="lib_eplist_item">1</div>
+            </div>
+          </div>
+
         </div>
       </div>
       <!-- 반복 END -->
@@ -49,19 +59,21 @@
 </template>
 
 <script>
+import axios from '../../axios'
 export default {
   name: "StoreSide",
   data() {
     return {
       novelList : [],
-
+      epList : [],
+      totalList : [] // 최종적으로 v-for 돌릴 데이터
     };
   },
   created() {
     this.$store.commit('sideBarOn');
     this.$store.commit('currentServiceCng', 'L');
 
-
+    this.getNovelList();
   },
   methods: {
     getNovelList() {
@@ -73,6 +85,49 @@ export default {
       console.log("goto")
       this.$router.push({name: "Viewer",
         params: { pjCode: pjCode, ep:ep },})
+      axios.get('/api/library/getNovelList')
+      .then((result)=>{
+        if(result.data == "err") {
+          console.log("유저 소유 소설 데이터 불러오기 실패");
+        } else {
+          this.novelList = result.data;
+          this.getEpList();
+        }
+      })
+    },
+    getEpList() {
+      axios.get('/api/library/getEpList')
+      .then((result)=>{
+        if(result.data == "err") {
+          console.log("유저 소유 소설 에피소드 데이터 불러오기 실패");
+        } else {
+          this.epList = result.data;
+          this.getTotalList();
+        }
+      })
+    },
+    getTotalList() {
+      for(var i=0; i<this.novelList.length; i++) {
+        this.totalList.push({
+          NOVE_CODE : this.novelList[i].NOVE_CODE, // 소설 코드
+          NOVE_TITLE : null, // 소설 제목
+          RECENT_EP : null, // 현재 소설의 회차중 가장 최근에 본 것
+          EP_LIST : [], // 에피소드 목록
+          EP_OPEN : false, // 에피소드 목록을 열었다 닫았다 상태값
+        })
+        for(var j=0; j<this.epList.length; j++) {
+          if(this.totalList[i].NOVE_CODE == this.epList[j].NOVE_CODE) {
+            this.totalList[i].NOVE_TITLE = this.epList[j].NOVE_TITLE;
+            this.totalList[i].EP_LIST.push(this.epList[j]);
+            this.totalList[i].RECENT_EP = this.epList[j].POSS_RECENTEP;
+          }
+        }
+      }
+      console.log(this.totalList);
+    },
+
+    openEp() {
+
     }
   },
 };
@@ -172,5 +227,34 @@ progress {
 }
 .play_btn:hover{
   background-color: #0084ff;
+}
+
+.lib_eplist {
+  width: calc(300px);
+  height: 300px;
+  background: #525252;
+  border-radius: 10px;
+  z-index: 11;
+  position: relative;
+  left: 240px;
+  top: 10px;
+  padding: 3px 10px 10px 10px;
+}
+
+.lib_eplist_title {
+  font-size: 1em;
+}
+
+.lib_eplist_list {
+  position: absolute;
+  width: calc(100% - 20px);
+  height: calc(100% - 45px);
+  border-radius: 10px;
+  background: #484848;
+  padding: 5px;
+}
+
+.lib_eplist_item {
+
 }
 </style>
