@@ -1,4 +1,5 @@
 <template>
+<div class="FullView">
   <div class="ViewerBackground">
 
     <!-- 백그라운드 -->
@@ -100,6 +101,7 @@
     <!-- 대사 끝 -->
 
   </div>
+</div>
 </template>
 
 <script>
@@ -108,11 +110,14 @@ import storage from '../../aws'
 export default {
   name : "Viewer",
     created() {
+        this.$store.commit('currentServiceCng', 'VI');
+        console.log($this.store.state.currentService);
         console.log("hi")
         this.pjCode=this.$route.params.pjCode
         this.ep=this.$route.params.ep
         console.log(this.pjCode, this.ep)
         this.getVN
+
   },
   data() {
     return {

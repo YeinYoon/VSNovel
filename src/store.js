@@ -24,6 +24,7 @@ const store = createStore({
             // 마이페이지 : U , 스토어 : S, 
             // 공지사항 : N , 엔진 : E, 
             // 라이브러리 : L , 빌리지 : V , 빌리지 내부 : VI
+            // 뷰어 : VW
 
             communityService : 'F',
             // 자유 : F, 작가 : W,

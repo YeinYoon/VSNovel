@@ -104,7 +104,7 @@ body{
   top: 0px;
   width: 100vw;
   height: 100vh;
-  z-index: 4;
+  z-index: 100;
 }
 
 .RouterView {
