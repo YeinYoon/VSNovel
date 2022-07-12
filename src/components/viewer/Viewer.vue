@@ -1,4 +1,4 @@
-<template>
+<template v-if="!!VN">
   <div class="ViewerBackground">
 
     <!-- 백그라운드 -->
@@ -37,7 +37,7 @@
     <!-- 좌측 상단 햄버거메뉴 -->
     <div class="ViewerNav">
 
-      <div class="NavItems" title="저장" v-if="isUpload == false">
+      <div class="NavItems" title="저장">
         <img src="@/assets/icons/white/upcloud.png" @click="uploadVN()">
       </div>
     </div>
@@ -112,7 +112,7 @@ export default {
         this.pjCode=this.$route.params.pjCode
         this.ep=this.$route.params.ep
         console.log(this.pjCode, this.ep)
-        this.getVN
+        this.getEP()
   },
   data() {
     return {
@@ -120,7 +120,7 @@ export default {
       ep : 1,
       title : "",
       retouchDate : "",
-      stat : "",
+      status : "play",
       textEdit : false,
       selectEdit : false,
       Now: {},
@@ -145,9 +145,10 @@ export default {
     }
   },
   methods : {
-    async getVN() {
-        console.log("hi")
+    async getEP() {
+        console.log(`Project/PJ${this.pjCode}/dev/ep${this.ep}.json`)
       var result = await storage.getVN(`Project/PJ${this.pjCode}/dev/ep${this.ep}.json`); // unit8array(utf16) 형식으로 데이터를 읽어옴
+      console.log(result)
       if(result != "err") {
         var uint8array = new TextEncoder("utf-8").encode(result); // utf8 형식으로 변환
         var string = new TextDecoder().decode(uint8array);
