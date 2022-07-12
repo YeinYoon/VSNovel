@@ -39,7 +39,7 @@
     <div class="ViewerNav">
 
       <div class="NavItems" title="저장">
-        <img src="@/assets/icons/white/upcloud.png" @click="uploadVN()">
+        <img src="@/assets/icons/white/floppy-disk_two_white.png" @click="uploadVN()">
       </div>
 
       <div class="NavItems" title="저장">
@@ -55,15 +55,9 @@
       </div>
       <div class="NavItems" v-else-if="bgmState == true" @click="bgmOff(),effectOff()">
         <img src="@/assets/icons/white/speaker_white.png">
-      </div>
-      <div class="NavItems" @click="resCtrl = !resCtrl">
-        <img src="@/assets/icons/white/trash_white.png">
-      </div>
+      </div>  
     </div>
     <!-- 우측 상단 햄버거메뉴 --> 
-
-
-  
 
 
 
@@ -134,7 +128,7 @@ export default {
       s2:{},
       s3:{},
       resCtrl: false,
-      bgmState : false,
+      bgmState : true,
       currentBgm : "",
       currentEffect : "",
       bgmId : "",
