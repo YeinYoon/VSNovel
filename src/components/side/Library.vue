@@ -18,7 +18,7 @@
       <div class="work_list" v-for="(novel, i) in novelList" :key="i">
 
         <!-- 작품 대표이미지 -->
-        <img class="list_img" /> 
+        <img class="list_img" src="@/assets/imgs/noimage.png" alt="소설표지" /> 
         <div class="work_list_con">
           <div class="list_span">
             <!-- 제목 -->
