@@ -1,4 +1,6 @@
 import { createWebHistory, createRouter } from "vue-router";
+import axios from 'axios'
+
 // 스토어 
 import Store from './components/side/Store.vue';
 import Admin from './components/mainpage/Admin.vue';

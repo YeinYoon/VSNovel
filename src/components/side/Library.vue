@@ -73,10 +73,20 @@ export default {
   created() {
     this.$store.commit('sideBarOn');
     this.$store.commit('currentServiceCng', 'L');
-
-    this.getNovelList();
+    this.loginCheck();
   },
   methods: {
+    loginCheck() {
+      axios.get("/api/auth/loginCheck")
+      .then((result)=>{
+        if(result.data == "") {
+          this.$router.push('signin');
+        } else {
+          this.getNovelList();
+        }
+      })
+    },
+
     goToViewer(){
       let pjCode=159
       let ep=12
