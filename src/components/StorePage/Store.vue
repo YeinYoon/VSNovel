@@ -10,8 +10,6 @@
       <div class="service">
         <img class="icon" src="@/assets/icons/white/shopping-cart.png" alt="logo"/>
         <span class="title">스토어</span>
-        <button @click="onPay()">결제 테스트</button>
-        <button @click="reqPayResult()">결제내역조회 테스트</button>
       </div>
       <div class="price_div">
         <div @click="priceClick">
@@ -67,7 +65,6 @@
 </template>
 
 <script>
-import axios from '../../axios'
 import StoreModal from "./StoreModal"; 
 export default {
   name: "Store",
@@ -98,64 +95,6 @@ export default {
     }
   },
   methods: {
-
-    // 결제 테스트
-    onPay() {
-      const {IMP} = window;
-      IMP.init('imp56365386');
-
-      const data = {
-        pg: 'html5_inicis',                           // PG사
-        pay_method: 'card',                           // 결제수단
-        merchant_uid: `mid_${new Date().getTime()}`,   // 주문번호
-        amount: 10,                                 // 결제금액
-        name: '아임포트 결제 데이터 분석',                  // 주문명
-        buyer_name: '홍길동',                           // 구매자 이름
-        buyer_tel: '01012341234',                     // 구매자 전화번호
-        buyer_email: 'example@example',               // 구매자 이메일
-        buyer_addr: '신사동 661-16',                    // 구매자 주소
-        buyer_postcode: '06018',                      // 구매자 우편번호
-      }
-      IMP.request_pay(data, this.onPayCallback);
-    },
-    onPayCallback(response) {
-      const {
-        success,
-        imp_uid,
-        merchant_uid,
-        error_msg,
-      } = response;
-
-      if(success) {
-        alert("결제 성공");
-        console.log(`결제번호 : ${imp_uid} ,주문번호 : ${merchant_uid}`);
-      } else {
-        alert(`결제 실패 : ${error_msg}`);
-      }
-    },
-
-    //결제 내역조회 테스트
-    async reqPayResult() {
-      var token;
-
-      await axios.post('/api/payment/getAccessToken', null)
-      .then((result)=>{
-        token = result.data;
-        console.log(token);
-      })
-      .catch((err)=>{
-        console.error(err);
-      })
-
-      axios.post('/api/payment/reqPayResult', {token : token, impKey : 'imp_844829000948'})
-      .then((result)=>{
-        console.log(result.data);
-      })
-      .catch((err)=>{
-        console.error(err);
-      })
-    },
-
     priceClick() {
     // 유무료 버튼 이벤트
       this.priceType++;
