@@ -36,12 +36,12 @@
           <div class="btn_container">
             <div class="sub_btn">이 작품 리뷰 남기기</div>
             <div class="sub_btn">스토어 페이지</div>
-            <div class="sub_btn" @click="openEp()">에피소드 목록</div>
+            <div class="sub_btn" @click="openEp(i)">에피소드 목록</div>
             <!-- <div class="play_btn" @click="goToViewer()">PLAY</div> -->
           </div>
 
           <!-- 에피목록 -->
-          <div class="lib_eplist">
+          <div class="lib_eplist" v-if="epListOpenState[i]">
             <div class="lib_eplist_title">에피소드 목록</div>
             <div class="lib_eplist_list">
               <div></div>
@@ -51,7 +51,7 @@
 
         </div>
       </div>
-      <!-- 반복 END -->
+      <!-- 반복 END -->      
 
     </div>
 
@@ -67,7 +67,9 @@ export default {
     return {
       novelList : [],
       epList : [],
-      totalList : [] // 최종적으로 v-for 돌릴 데이터
+      totalList : [], // 최종적으로 v-for 돌릴 데이터,
+
+      epListOpenState : []
     };
   },
   created() {
@@ -101,11 +103,15 @@ export default {
           console.log("유저 소유 소설 데이터 불러오기 실패");
         } else {
           this.novelList = result.data;
+
           for(let i=0;i<this.novelList.length;i++){
-            this.novelList[i].ep=[]
-            this.novelList[i].select=null
+            this.novelList[i].ep=[];
+            this.novelList[i].select=null;
+            this.epListOpenState.push(false);
           }
+          
           console.log(this.novelList)
+          console.log(this.epListOpenState);
           this.getEpList();
         }
       })
@@ -128,8 +134,12 @@ export default {
       })
     },
 
-    openEp() {
-
+    openEp(i) {
+      if(this.epListOpenState[i] == false) {
+        this.epListOpenState[i] = true;
+      } else {
+        this.epListOpenState[i] = false;
+      }
     }
   },
 };
