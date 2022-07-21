@@ -17,12 +17,12 @@
       <div class="Store_Novel_info">
 
         <!-- 데이터 값 채워주기 -->
-        팀 {{ modalData.NOVE_TEAMNAME }} 제작
-        장르 {{modalData.CATE_CODE}}
-        최근 업데이트 {{modalData.NOVE_UPDATE}}
-        최초 발매일 {{modalData.NOVE_UPDATE}}
-        에피소드당 가격{{modalData.NOVE_PRICE}}
-        총 회차 {{this.epList.length}}
+        <div class="Store_Novel_info_teamname">팀 {{ modalData.NOVE_TEAMNAME }} 111111</div>
+        <div class="Store_Novel_info_genre">장르 {{modalData.CATE_CODE}} 머머머머머</div>
+        <div class="Store_Novel_info_recentupdate">최근 업데이트 {{modalData.NOVE_UPDATE}}</div>
+        <div class="Store_Novel_info_firstrelease">최초 발매 {{modalData.NOVE_UPDATE}}</div>
+        <div class="Store_Novel_info_price">가격 {{modalData.NOVE_PRICE}}</div>
+        <div class="Store_Novel_info_length">총 회차 {{this.epList.length}}</div>
       </div>
 
       <div class="Store_Novel_Img"><img src="@/assets/imgs/adver.jpg"></div>
@@ -53,8 +53,8 @@
         <div class="Store_Novel_EP_list">
           <!-- Store_Novel_EP_list_item 반복 -->
           <div class="Store_Novel_EP_list_item" v-for="(ep, i) in epList" :key="i">
-            <span>{{ep.ep}}화</span>
-            <span>{{ep.title}}</span>
+            <span class="Store_Novel_EP_list_epnum">{{ep.ep}}화</span>
+            <span class="Store_Novel_EP_list_eptitle">{{ep.title}}</span>
 
             <button v-if="ep.poss" disabled>소장중</button>
             <button v-else @click="epBuy(ep)">구매</button>
@@ -350,11 +350,150 @@ export default {
   background: #565656;
 }
 
+.Store_Novel_info_teamname {
+  position: relative;
+  display: inline-block;
+  left: 10px;
+  top: 7px;
+  color: white;
+  border-radius: 10px;
+  height: 30px;
+  max-width: 150px;
+  background: #646464;
+  padding-top: 3px;
+  padding-left: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 8px;
+  text-align: left;
+}
+
+.Store_Novel_info_genre {
+  position: relative;
+  display: inline-block;
+  left: 15px;
+  top: 7px;
+  color: white;
+  border-radius: 10px;
+  height: 30px;
+  max-width: 120px;
+  background: #646464;
+  padding-top: 3px;
+  padding-left: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 8px;
+}
+
+.Store_Novel_info_recentupdate {
+  position: absolute;
+  display: inline-block;
+  left: 10px;
+  top: 43px;
+  color: white;
+  border-radius: 10px;
+  height: 30px;
+  max-width: 275px;
+  background: #646464;
+  padding-top: 3px;
+  padding-left: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 8px;
+}
+
+.Store_Novel_info_firstrelease {
+  position: absolute;
+  display: inline-block;
+  left: 278px;
+  top: 43px;
+  color: white;
+  border-radius: 10px;
+  height: 30px;
+  max-width: 180px;
+  background: #646464;
+  padding-top: 3px;
+  padding-left: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 8px;
+}
+
+.Store_Novel_info_price {
+  position: relative;
+  display: inline-block;
+  left: 20px;
+  top: 7px;
+  color: white;
+  border-radius: 10px;
+  height: 30px;
+  max-width: 110px;
+  background: #646464;
+  padding-top: 3px;
+  padding-left: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 8px;
+}
+
+.Store_Novel_info_length {
+  position: relative;
+  display: inline-block;
+  left: 25px;
+  top: 7px;
+  color: white;
+  border-radius: 10px;
+  height: 30px;
+  max-width: 90px;
+  background: #646464;
+  padding-top: 3px;
+  padding-left: 8px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 8px;
+}
+
 .Store_Content {
   position: absolute;
   top: 90px;
   width: calc(100% - 40px);
   height: calc(100% - 110px);
+}
+
+.Store_Novel_EP_list_epnum {
+  position: relative;
+  display: inline-block;
+  top: 6px;
+  width: 70px;
+  text-align: center;
+  background: #2872f9;
+  border-radius: 15px;
+}
+.Store_Novel_EP_list_eptitle {
+  position: relative;
+  display: inline-block;
+  top: 6px;
+  width: 100px;
+  text-align: center;
+  border-radius: 15px;
+
+}
+
+.Store_Novel_EP_list_item button {
+  width: 80px;
+  height: 35px;
+  margin-top: 5px;
+  margin-block: 5px;
+  border-radius: 10px;
+  padding-bottom: 2px;
+  font-size: 0.9em;
+  float: right;
 }
 </style>
 
