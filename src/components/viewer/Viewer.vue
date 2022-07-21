@@ -15,19 +15,19 @@
 
         <label for="s1" v-if="s1.use">
         <div class="SelectButton" :class="[{SShape_default: VN.shape=='default'},{SShape_linear: VN.shape=='linear'},{SColor_default: VN.color=='default'},{SColor_red: VN.color=='red'}]"  @click="select(s1.plot, s1.index)" id="s1">
-          {{s1.text}}
+          <p>{{s1.text}}</p>
         </div>
         </label>
 
         <label for="s2" v-if="s2.use">
         <div class="SelectButton" :class="[{SShape_default: VN.shape=='default'},{SShape_linear: VN.shape=='linear'},{SColor_default: VN.color=='default'},{SColor_red: VN.color=='red'}]" @click="select(s2.plot, s2.index)" id="s2">
-          {{s2.text}}
+          <p>{{s2.text}}</p>
         </div>
         </label>
 
         <label for="s3" v-if="s3.use">
         <div class="SelectButton" :class="[{SShape_default: VN.shape=='default'},{SShape_linear: VN.shape=='linear'},{SColor_default: VN.color=='default'},{SColor_red: VN.color=='red'}]" @click="select(s3.plot, s3.index)" id="s3">
-          {{s3.text}}
+          <p>{{s3.text}}</p>
         </div>
         </label>
       </div>
@@ -323,6 +323,7 @@ label {
   width: calc(100%);
   height: 100%;
   color: white;
+  overflow: hidden;
 }
 
 .ViewerBackground {
@@ -498,6 +499,15 @@ label {
   margin: 10px 0px 10px 0px;
   cursor: pointer;
   overflow: hidden;
+  /* white-space: nowrap; */
+  word-break: break-all;
+}
+.SelectButton p {
+  position: relative;
+  font-size: 1.2em;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .SShape_default {
   border-radius: 50px;
