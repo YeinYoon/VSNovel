@@ -26,7 +26,7 @@
   width: 100vw;
   height: 100vh;
   opacity:0;
-  z-index: 100;
+  z-index: 900;
   position: fixed;
   animation-duration: 0.3s;
   animation-name: backgrounding_on;
