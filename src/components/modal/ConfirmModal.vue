@@ -67,18 +67,6 @@ export default {
 </script>
 
 <style>
-.modal_opacity{
-  background: black;
-  width: 100vw;
-  height: 100vh;
-  opacity:0;
-  z-index: 99;
-  position: fixed;
-  animation-duration: 0.3s;
-  animation-name: backgrounding_on;
-  animation-fill-mode: forwards;
-  z-index: 99;
-}
 .modal_frame_normal{
   position: fixed;
   top: 50%;
@@ -90,7 +78,7 @@ export default {
   background: #2a2a2a;
   animation-duration: 0.7s;
   animation-name: opening;
-  z-index: 100;
+  z-index: 900;
   opacity: 1;
 }
 .modal_frame_small{
@@ -104,7 +92,7 @@ export default {
   background: #2a2a2a;
   animation-duration: 0.7s;
   animation-name: opening;
-  z-index: 100;
+  z-index: 900;
   opacity: 1;
 }
 .modal_frame_big{
@@ -118,7 +106,7 @@ export default {
   background: #2a2a2a;
   animation-duration: 0.7s;
   animation-name: opening;
-  z-index: 100;
+  z-index: 900;
   opacity: 1;
 }
 .modal_inner{

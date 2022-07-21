@@ -23,17 +23,6 @@
 </template>
 
 <style>
-.modal_opacity{
-  background: black;
-  width: 100vw;
-  height: 100vh;
-  opacity:0;
-  z-index: 100;
-  position: fixed;
-  animation-duration: 0.3s;
-  animation-name: backgrounding_on;
-  animation-fill-mode: forwards;
-}
 .modal_frame_normal{
   position: fixed;
   top: 50%;
