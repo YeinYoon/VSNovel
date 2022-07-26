@@ -58,4 +58,29 @@ router.post('/delNovel', async (req,res)=>{
     res.send(result)
 })
 
+router.post('/addBanner', async(req, res) => {
+    switch(req.body.content.newSel){
+      case 'novelOpt' : 
+      console.log('스토어')
+        var novel = await db.execute(`INSERT INTO tbl_banner(bann_code, nove_code, bann_date) VALUES(tbl_banner_seq.NEXTVAL, ${req.body.content.newNum}, sysdate + 1)`)
+        if(novel == "err") {
+          console.log("do not function insert banner")
+          res.send('err')
+        } else {
+          res.send("ok")
+        }
+        break;
+      case 'eventOpt' :
+        console.log('포스트')
+        var event = await db.execute(`INSERT INTO tbl_banner(bann_code, post_code, bann_date) VALUES(tbl_banner_seq.NEXTVAL, ${req.body.content.newNum}, sysdate + 1)`)
+        if(event == "err") {
+          console.log("do not function insert banner")
+          res.send('err')
+        } else {
+          res.send("ok")
+        }
+        break;
+    }
+  })
+
 module.exports = router;

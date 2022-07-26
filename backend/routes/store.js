@@ -157,6 +157,16 @@ router.get('/getbanner', async(req, res) => {
     }
 })
 
+// 스토어 작품 검색
+router.post('/getStore', async(req, res) => {
+    var result = await db.execute(`SELECT * FROM tbl_novel where nove_code = ${req.body.code}`)
+    if(result == "err") {
+        res.send("err");
+    } else {
+        console.log(result.rows)
+        res.send(result.rows);
+    }
+})
 // 이 소설을 유저가 소유했는가
 router.post('/getUserPossession', async (req, res)=>{ 
     var result = await db.execute(`SELECT * FROM tbl_possession
