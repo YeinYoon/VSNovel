@@ -216,6 +216,7 @@ export default {
                     this.$store.commit('gModalOn',{size : "normal", msg : "공지사항 목록 불러오기 실패"});
                 } else {
                     this.noticeList = result.data;
+                    console.log(this.noticeList)
                 }
             })
         },

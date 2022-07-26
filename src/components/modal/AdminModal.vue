@@ -14,14 +14,14 @@
         <div>
           <div class="admin_cafe_banner">
             <input type="file" name="file" id="file">
-            <input type="text" name="url" id="url" placeholder="배너 이미지 경로 입력" v-model="banner_img">
+            <!-- <input type="text" name="url" id="url" placeholder="배너 이미지 경로 입력" v-model="banner_img">
             <img class="url_img" :src="banner_img" v-if="banner_img != ''"/>
-            <button @click="banner_img = ''">경로 지우기</button>
-            <select class="select">
-              <option value="">스토어 작품</option>
-              <option value="">이벤트</option>
+            <button @click="banner_img = ''">경로 지우기</button> -->
+            <select class="select" v-bind="newSel">
+              <option value="novelOpt">스토어 작품</option>
+              <option value="eventOpt">이벤트</option>
             </select>
-            <input class="codeInput" type="number" placeholder="codeNum"/>
+            <input class="codeInput" type="number" placeholder="codeNum" v-model="banner_num"/>
           </div>
         </div>
       </div>
@@ -46,6 +46,7 @@ export default {
   data() {
     return {
       banner_img : '',
+      banner_num : "",
     };
   },
   props: {
