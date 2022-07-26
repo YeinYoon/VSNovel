@@ -13,11 +13,11 @@
         </div>
         <div>
           <div class="admin_cafe_banner">
-            <input type="file" name="file" id="file">
+            <input @change="fileChoice" type="file" name="file" id="file">
             <!-- <input type="text" name="url" id="url" placeholder="배너 이미지 경로 입력" v-model="banner_img">
             <img class="url_img" :src="banner_img" v-if="banner_img != ''"/>
             <button @click="banner_img = ''">경로 지우기</button> -->
-            <select class="select" v-bind="newSel">
+            <select class="select" v-model="banner_sel">
               <option value="novelOpt">스토어 작품</option>
               <option value="eventOpt">이벤트</option>
             </select>
@@ -32,7 +32,7 @@
         <div>
           <span class="cafe_qna">이 배너를 추가하시겠습니까?</span>
         </div>
-        <button  class="cafe_modal_btn" @click="clickEvent()">확인</button>
+        <button  class="cafe_modal_btn" @click="uploadBannerImg()">확인</button>
         <button class="cafe_modal_btn" @click="clickEvent()">취소</button>
       </div>
     </div>
@@ -40,23 +40,60 @@
 </template>
 
 <script>
-// import axios from "../../axios.js";
+import axios from "../../axios.js";
+import storage from '../../aws'
+
 export default {
   name: "vsn_modal_universal",
   data() {
     return {
-      banner_img : '',
+      banner_file: "",
+      banner_img : "",
       banner_num : "",
     };
   },
   props: {
   },
   methods: {
-    clickEvent(){
-      this.$emit('modal');
-    }
-  }
+    fileChoice(e){
+      let file = e.target.files[0]
+      let url = URL.createObjectURL(file)
+      this.banner_file = url;
+    },
+    async uploadBannerImg() {
+      console.log(this.banner_file)
+      var result = await storage.uploadBannerImg(this.banner_file);
+      console.log(result)
+      if(result == "ok") {
+        console.log("hiii")
+        this.$store.commit("userLogin", {
+          bannerFile : await storage.uploadBannerImg(this.$store.state.banner_file)
+        });
+      }
+    
+      var newContent = {
+        // newFile: this.banner_file,
+        // newImg: this.banner_img,
+        newNum: this.banner_num,
+        newSel: this.banner_sel
+      };
+      console.log(newContent);
+      axios.post("/api/admin/addBanner", {content : newContent})
+      .then((result) => {
+        if (result.data == "err") {
+          alert('작품 또는 이벤트 게시글이 없습니다.');
+        } else {
+          this.clickEvent();
+        }
+      });
+    },
+    // 엑시오스 통신이 성공했을 경우 클릭이벤트 함수 호출 필수
+    clickEvent() {
+      this.$emit("modal");
+    },
+  },
 };
+
 </script>
 <style>
 .cafe_modal_title_inner{
