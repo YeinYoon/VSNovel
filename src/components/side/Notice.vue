@@ -191,8 +191,9 @@ export default {
       this.postClick(1, this.$route.params.post_code);
     }
 
-      if(this.$route.params.POST_CODE != undefined) {
-        this.viewState = 1;
+      if(this.$route.params.EVENT != undefined) {
+        this.$store.commit('noticeServiceCng', 'E')
+        this.postClick(1, this.$route.params.EVENT)
       }
     },
     computed: {

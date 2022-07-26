@@ -65,15 +65,20 @@ export default {
       this.$store.commit('gModalOn', {msg:"hi", bg : link, size : "ad"});
     },
     bannerBtn(i) {
-      console.log(this.bannerData)
-      console.log(this.bannerData[i].POST_CODE)
-      if(this.bannerData[i].POST_CODE != null) {
-        this.$router.params({
+      if(this.bannerData[i].NOVE_CODE == null) {
+        this.$router.push({
           name: 'Notice',
           params: {
-              POST_CODE : this.bannerData[i].POST_CODE
-            }
+            EVENT : this.bannerData[i].POST_CODE
+          }
       })
+      } else if (this.bannerData[i].POST_CODE == null){
+        this.$router.push({
+          name: 'Store',
+          params: {
+            STORE : this.bannerData[i].NOVE_CODE
+          }
+        })
       }
     },
   },

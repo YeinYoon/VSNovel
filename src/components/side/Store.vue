@@ -51,6 +51,11 @@ export default {
     this.$router.push('/store');
     this.$store.commit('sideBarOff');
     this.$store.commit('currentServiceCng', 'S');
+
+    if(this.$route.params.STORE != undefined) {
+        this.$store.commit('currentServiceCng', 'S')
+        console.log("sd")
+      }
   },
   mounted(){
     let id = document.getElementById('novel');
