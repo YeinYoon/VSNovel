@@ -71,7 +71,7 @@ export default {
         this.$router.params({
           name: 'Notice',
           params: {
-              POST_CODE : this.bannerData.POST_CODE
+              POST_CODE : this.bannerData[i].POST_CODE
             }
       })
       }

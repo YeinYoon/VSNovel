@@ -190,6 +190,10 @@ export default {
       //데이터 변경
       this.postClick(1, this.$route.params.post_code);
     }
+
+      if(this.$route.params.POST_CODE != undefined) {
+        this.viewState = 1;
+      }
     },
     computed: {
         noticeService: function() {
