@@ -66,6 +66,7 @@
 
 <script>
 import StoreModal from "./StoreModal"; 
+import axios from "../../axios";
 export default {
   name: "Store",
   data() {
@@ -78,7 +79,8 @@ export default {
   },
   props:{
     storeDatas : Array,
-    searchData : Object
+    searchData : Object,
+    storeCode : Number,
   },
   components: {
     StoreModal,
@@ -114,6 +116,19 @@ export default {
           break;
       }
     },
+    
+    getNoveInfo(){
+      axios.post('/api/store/getStore', {code: this.storeCode})
+      .then((result)=>{
+        if(result.data == "err") {
+          console.log("스토어 데이터 불러오기 실패");
+        } else {
+          this.modalData = result.data[0];
+          this.modalOpen();
+        }
+    })
+
+    },
 
     modalOpen(data) {
       if(this.$store.state.userId == null) {
@@ -136,6 +151,10 @@ export default {
         CATE_CODE : '이 더미엔 장르 데이터 존재 X'
       };
       this.modal = true;
+    }
+    
+    if(this.storeCode != null){
+      this.getNoveInfo();
     }
   }
 };
