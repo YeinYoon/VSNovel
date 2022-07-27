@@ -9,7 +9,7 @@ const store = createStore({
             userEmail : null,
             profileImg : null,
             LoadingStatus: false,
-
+            banner_file : null,
 
             //전역(Global) 모달
             gModalState : false,
@@ -58,6 +58,10 @@ const store = createStore({
                 state.profileImg = user.profileImg;
             }
             
+        },
+
+        wholeBanner(state, data) {
+            state.banner_file = data.bannerFile;
         },
         
         //로딩

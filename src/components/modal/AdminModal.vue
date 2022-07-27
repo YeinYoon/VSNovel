@@ -57,23 +57,18 @@ export default {
   methods: {
     fileChoice(e){
       let file = e.target.files[0]
-      let url = URL.createObjectURL(file)
-      this.banner_file = url;
+      this.banner_file = file;
+      console.log(this.banner_file);
     },
     async uploadBannerImg() {
-      console.log(this.banner_file)
       var result = await storage.uploadBannerImg(this.banner_file);
-      console.log(result)
       if(result == "ok") {
-        console.log("hiii")
-        this.$store.commit("userLogin", {
+        this.$store.commit("wholeBanner", {
           bannerFile : await storage.uploadBannerImg(this.$store.state.banner_file)
         });
       }
     
       var newContent = {
-        // newFile: this.banner_file,
-        // newImg: this.banner_img,
         newNum: this.banner_num,
         newSel: this.banner_sel
       };

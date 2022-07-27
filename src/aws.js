@@ -169,7 +169,7 @@ exports.uploadBannerImg = (file) =>{
         Key : `Main/Banner/${file.name}`, // 저장되는 파일의 경로 및 이름
         Body : file // 파일
     }
-
+    console.log(params)
     var data = new Promise((resolve, reject)=>{
       s3.upload(params)
       .on("httpUploadProgress", evt => {

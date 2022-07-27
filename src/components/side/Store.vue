@@ -34,7 +34,7 @@
     </div>
   </div>
   <Store :storeDatas = "storeDatas" :searchData = "search" @priceCheck = "getNovelList"/>
-</div>
+  </div>
 </template>
 
 <script>
@@ -54,7 +54,6 @@ export default {
 
     if(this.$route.params.STORE != undefined) {
         this.$store.commit('currentServiceCng', 'S')
-        console.log("sd")
       }
   },
   mounted(){
@@ -75,7 +74,7 @@ export default {
         contentsType : '',
         category : 0,
         priceType : 'none'
-      }
+      },
     };
   },
   methods: {
