@@ -87,16 +87,27 @@
                         <span>이미지 경로</span>
                         <span>NOVEL CODE</span>
                         <span>POST CODE</span>
-                        <span>게시일자</span>
                         <span>관리 메뉴</span>
                     </div>
                     <!-- 반복문 -->
                     <div class="admin_banner_list" v-for="(banner,i) in bannerData" :key="i">
-                        <div><span v-if="banner.NOVE_CODE">소설 </span><span v-if="banner.POST_CODE">이벤트</span></div>
+                        <div>
+                            <span v-if="banner.BANN_STATUS == 'N'">소설</span>
+                            <span v-if="banner.BANN_STATUS == 'E'">이벤트</span>
+                        </div>
+                        
                         <div style="overflow:hidden">{{banner.BANN_IMG}}</div>
-                        <div v-if="banner.NOVE_CODE">{{banner.NOVE_CODE}}</div><div v-else>null</div>
-                        <div v-if="banner.POST_CODE">{{banner.POST_CODE}}</div><div v-else>null</div>
-                        <div>{{banner.BANN_DATE.substring(0,10)}}</div>
+
+                        <div v-if="banner.NOVE_CODE != null">
+                            {{banner.NOVE_CODE}}
+                        </div>
+                        <div v-else>null</div>
+                        
+                        <div v-if="banner.POST_CODE != null">
+                            {{banner.POST_CODE}}
+                        </div>
+                        <div v-else>null</div>
+
                         <div>
                             <div class="delete" @click="deleteBtn(i)">삭제</div>
                         </div>
@@ -225,6 +236,7 @@ export default {
                     console.log("fail")
                 } else {
                     this.bannerData = result.data
+                    console.log(this.bannerData);
                 }
             })
         },
