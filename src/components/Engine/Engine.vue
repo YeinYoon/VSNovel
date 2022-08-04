@@ -32,7 +32,7 @@
           </div>
 
           <div class="Promo_Setup_Info">
-            <p>최신 릴리즈 - 2022-04-08</p>
+            <p>최신 릴리즈 - 2022-07-28</p>
             <p>빌드버전 - 0180</p>
           </div>
         </div>
@@ -227,7 +227,7 @@ export default {
   methods:{
       engineDownloadWin(){
           try {
-              let downloadFileLink = '/engine_install/VSNovel-Engine_Setup_0.1.0.exe';//download 경로
+              let downloadFileLink = 'https://vsnovel.s3.ap-northeast-2.amazonaws.com/VSNovel-Engine+Setup+0.1.0.exe';//download 경로
               let element = document.createElement('a');
               element.setAttribute('href', downloadFileLink);
               element.setAttribute('download', '');

@@ -343,14 +343,14 @@ transform: translate(-50%, -50%);
 .list_content_buy {
   position: absolute;
   top: 98px;
-  left: 270px;
+  left: 285px;
   font-size: 0.7em;
 }
 
 .list_content_review {
   position: absolute;
   top: 98px;
-  left: 380px;
+  left: 375px;
   font-size: 0.7em;
 }
 

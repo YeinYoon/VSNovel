@@ -22,11 +22,11 @@
       </div> 
 
       <br>
-
+<!-- 
       <div class="group" @click="myStep = '전체'"><span>· 빌리지</span></div>
       <div class="sel">
         <button class="sel_menu villback" @click="$store.commit('currentServiceCng', 'V')">· 빌리지 이동</button>
-      </div>
+      </div> -->
     </div>
   </div>
 

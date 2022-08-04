@@ -17,15 +17,15 @@
       <div class="Store_Novel_info">
 
         <!-- 데이터 값 채워주기 -->
-        <div class="Store_Novel_info_teamname">팀 {{ modalData.NOVE_TEAMNAME }} 111111</div>
-        <div class="Store_Novel_info_genre">장르 {{modalData.CATE_CODE}} 머머머머머</div>
-        <div class="Store_Novel_info_recentupdate">최근 업데이트 {{modalData.NOVE_UPDATE}}</div>
-        <div class="Store_Novel_info_firstrelease">최초 발매 {{modalData.NOVE_UPDATE}}</div>
+        <div class="Store_Novel_info_teamname">팀 {{ modalData.NOVE_TEAMNAME }}</div>
+        <div class="Store_Novel_info_genre">장르 {{modalData.CATE_CODE}} 스릴러</div>
+        <div class="Store_Novel_info_recentupdate">발매일 {{modalData.NOVE_RELEASE}}</div>
+        <!-- <div class="Store_Novel_info_firstrelease">최초 발매 {{modalData.NOVE_RELEASE}}</div> -->
         <div class="Store_Novel_info_price">가격 {{modalData.NOVE_PRICE}}</div>
         <div class="Store_Novel_info_length">총 회차 {{this.epList.length}}</div>
       </div>
 
-      <div class="Store_Novel_Img"><img src="@/assets/imgs/adver.jpg"></div>
+      <div class="Store_Novel_Img"><img src="@/assets/imgs/noimage.png"></div>
 
       <div class="Store_Novel_Buy" @click="$emit('next')">
 

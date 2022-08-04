@@ -31,7 +31,7 @@
             </span>
 
             <!-- 최근 플레이날짜 -->
-            <span class="list_recent">최근 플레이한 날짜 2022-07-12</span>
+            <span class="list_recent">최근 플레이한 날짜 2022-07-31</span>
           </div>
           <div class="btn_container">
             <div class="sub_btn">이 작품 리뷰 남기기</div>
@@ -44,8 +44,10 @@
           <div class="lib_eplist" v-if="epListOpenState[i]">
             <div class="lib_eplist_title">에피소드 목록</div>
             <div class="lib_eplist_list">
-              <div></div>
-              <div v-for="(ep, i) in novel.ep" :key="i" class="lib_eplist_item" @click="goToViewer(novel.PROJ_CODE, ep.POSS_EP)">{{ep.POSS_EP}}</div>
+              <div v-for="(ep, i) in novel.ep" :key="i" class="lib_eplist_item">
+                <p>{{ep.POSS_EP}}화 길을 잃다</p>
+                <button @click="goToViewer(novel.PROJ_CODE, ep.POSS_EP)">열기</button>
+              </div>
             </div>
           </div>
 
@@ -89,12 +91,10 @@ export default {
       })
     },
 
-    goToViewer(){
-      let pjCode=159
-      let ep=12
+    goToViewer(code, episode){
       console.log("goto")
       this.$router.push({name: "Viewer",
-        params: { pjCode: pjCode, ep:ep },})
+        params: { pjCode: code, ep:episode },})
     },
     getNovelList(){
       axios.get('/api/library/getNovelList')
@@ -267,6 +267,30 @@ progress {
 }
 
 .lib_eplist_item {
+  position: relative;
+  background: #484848;
+  width: 100%;
+  height: 35px;
+  margin-bottom: 5px;
+}
 
+.lib_eplist_item p {
+  display: inline-block;
+  width: 210px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  word-break: break-all;
+  margin: 0px;
+}
+
+.lib_eplist_item button {
+  display: inline-block;
+  background: #2872F9;
+  color: white;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  float: right;
 }
 </style>
