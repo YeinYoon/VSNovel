@@ -74,7 +74,7 @@
             </div>
             <div class="content">
               <!-- 반복문이 들어올 div 클래스 (list) -->
-              <div class="list" v-for="data in 10" :key="data">
+              <div class="list" v-for="data in 8" :key="data">
                 <div class="store_list_img">
                 </div>
               </div>
@@ -410,7 +410,7 @@ button {
   display: inline-block;
 }
 .widget .store .content .list .store_list_img{
-  background-color: #2872f9;
+  background-color : #424242;
   width: 150px;
   height: 200px;
   border-radius: 20px;
