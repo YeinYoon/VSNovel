@@ -91,7 +91,7 @@
       <div class="NextScriptButton" v-if="status!='end'" @click="nextScene">
         <button><span>▶</span></button>
       </div>
-      <div v-else class="NextScriptButton">
+      <div v-else class="NextScriptButton" @click="BackToVSN()">
         <button>End</button>
       </div>
 
@@ -201,7 +201,6 @@ export default {
       event.target.src="@/assets/imgs/e_no_image.png"
     },
     BackToVSN(){
-
       this.$router.push('/library');
     },
     //BGM 관련
