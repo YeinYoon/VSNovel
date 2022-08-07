@@ -108,11 +108,11 @@ import storage from '../../aws'
 export default {
   name : "Viewer",
     created() {
-        console.log("hi")
-        this.pjCode=this.$route.params.pjCode
-        this.ep=this.$route.params.ep
-        console.log(this.pjCode, this.ep)
-        this.getEP()
+      console.log("hi")
+      this.pjCode=this.$route.params.pjCode
+      this.ep=this.$route.params.ep
+      console.log(this.pjCode, this.ep)
+      this.getEP()
   },
   data() {
     return {
@@ -128,7 +128,7 @@ export default {
       s2:{},
       s3:{},
       resCtrl: false,
-      bgmState : true,
+      bgmState : false,
       currentBgm : "",
       currentEffect : "",
       bgmId : "",
@@ -201,7 +201,8 @@ export default {
       event.target.src="@/assets/imgs/e_no_image.png"
     },
     BackToVSN(){
-      this.$router.push('/library')
+
+      this.$router.push('/library');
     },
     //BGM 관련
     bgmOn() {
@@ -220,7 +221,7 @@ export default {
       this.bgmState = false;
       this.bgmController.stop();
     },
-
+  
     //효과음 관련
     effectOn() {
       console.log('effect : ' + this.currentEffect);
