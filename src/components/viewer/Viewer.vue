@@ -83,7 +83,7 @@
       <!-- 대사 -->  
       <label for="text">
         <div class="SceneScript">
-          <span id="text">{{ Now.text }}</span>
+          <span id="text">{{ text }}</span>
         </div>
       </label>
 
@@ -141,7 +141,12 @@ export default {
 
       plot:0,
       index:0,
-      VN:null
+      VN:null,
+
+      text : "",
+      content : "",
+      count : 0,
+      interval : null
     }
   },
   methods : {
@@ -237,7 +242,20 @@ export default {
     effectOff() {
       this.bgmState = false;
       this.effectController.stop();
-    }
+    },
+
+    typing() {
+      console.log("타이핑 On")
+      var char = 0;
+      if(this.count < this.content.length) {
+        char = this.content.charAt(this.count);
+        this.text += char;
+        this.count++;
+      } else {
+        console.log("타이핑 Off");
+        clearInterval(this.interval);
+      }
+    },
   },  
   watch : {
     $route() {
@@ -264,6 +282,12 @@ export default {
     Now : {
       deep:true,
       async handler(){
+
+        this.count = 0;
+        this.text = "";
+        this.content = this.Now.text;
+        this.interval = setInterval(this.typing, 60);
+        
         var checkArr = [{bg : this.Now.bg}, {img : this.Now.img}, {bgm : this.Now.bgm}, {effect : this.Now.effect}];
         var existKey = checkArr.filter(item => item.bg != '' && item.img != '' && item.bgm != '' && item.effect != '');
         if(existKey.length == 0) {
@@ -272,7 +296,6 @@ export default {
           this.currentBgm = ''
           this.currentEffect = ''
         } else {
-
           for(var i=0; i<existKey.length; i++) {
             var x = Object.keys(existKey[i]);
             console.log(x);
