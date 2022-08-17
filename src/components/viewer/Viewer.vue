@@ -38,9 +38,9 @@
     <!-- 좌측 상단 햄버거메뉴 -->
     <div class="ViewerNav">
 
-      <div class="NavItems" title="저장">
+      <!-- <div class="NavItems" title="저장">
         <img src="@/assets/icons/white/floppy-disk_two_white.png" @click="uploadVN()">
-      </div>
+      </div> -->
 
       <div class="NavItems" title="저장">
         <img src="@/assets/icons/white/redo.png" @click="BackToVSN()">
